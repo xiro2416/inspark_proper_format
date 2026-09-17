@@ -1,0 +1,58 @@
+{
+  "group": "rnn_fp8",
+  "plans": {
+    "(64, 1280, 1280, True)": {
+      "bk": 128,
+      "bm": 16,
+      "bn": 128,
+      "schedule": "tiled",
+      "split_k": 1,
+      "stages": 3,
+      "warps": 4
+    },
+    "(8, 1280, 1280, True)": {
+      "bk": 128,
+      "bm": 16,
+      "bn": 128,
+      "schedule": "tiled",
+      "split_k": 1,
+      "stages": 3,
+      "warps": 4
+    },
+    "(8, 1280, 512, False)": {
+      "bk": 128,
+      "bm": 16,
+      "bn": 128,
+      "schedule": "tiled",
+      "split_k": 1,
+      "stages": 3,
+      "warps": 4
+    },
+    "(8, 8194, 256, False)": {
+      "bk": 128,
+      "bm": 16,
+      "bn": 128,
+      "schedule": "tiled",
+      "split_k": 1,
+      "stages": 3,
+      "warps": 4
+    }
+  },
+  "schema": 1,
+  "source_device": {
+    "max_ctas_per_sm": 32,
+    "name": "NVIDIA RTX 6000D",
+    "registers_per_sm": 65536,
+    "shared_per_cta": 101376,
+    "shared_per_sm": 102400,
+    "sm": 120,
+    "sms": 156,
+    "threads_per_sm": 1536
+  },
+  "source_software": {
+    "cuda": "12.8",
+    "torch": "2.8.0+cu128",
+    "triton": "3.5.0"
+  },
+  "student_sha256": "635ab7025fbd4eaa999fcd3e964512df081d5c9cff093a59d383e050c70bcfca"
+}

@@ -1,0 +1,179 @@
+{
+  "identity": {
+    "device": {
+      "name": "NVIDIA RTX 6000D",
+      "sm": 120,
+      "sms": 156,
+      "shared_per_sm": 102400,
+      "shared_per_cta": 101376,
+      "registers_per_sm": 65536,
+      "threads_per_sm": 1536,
+      "max_ctas_per_sm": 32
+    },
+    "torch": "2.8.0+cu128",
+    "triton": "3.5.0",
+    "cuda": "12.8",
+    "sources": {
+      "conv.py": "4161bf1bdff3ee2e1434de5796d1e444b41f9a613a39751b2ecda46f50ff34f8",
+      "ops.py": "3210e6e571031fe2586ace91bf2259177bddc7eadb9534ac13ab72a454451550"
+    },
+    "ar_sources": {
+      "kernels/fp8.py": "ef0b30467cd9124d82d515869d7080d19c9489d08a2acba27e294b0387704ee6",
+      "kernels/stage2_gemm.py": "9b1534815ec8d749e86d25a5fd2864cdfc5848969dbd1b94683826b2f6e9ba1e",
+      "models/precision.py": "e5183a06a8b7dc89c5abd454e401b8636e75c6e2190f4ba88f469d329acb229f",
+      "ar_refine/deploy.py": "872e88ba6261faf64832c79d20e71cd46edd94079fda55819b7260a10f3059ba"
+    },
+    "pipeline_sources": {
+      "gemm.py": "642d33f83b846c0986d569779977c007e7d1c1f2c87eac207093c48b771facfa",
+      "deploy.py": "ddfc5658e1ee05a501d4b9b13d3ac3f859bdd094f5121ccdcf69748b6347031e"
+    }
+  },
+  "target": {
+    "(64, 1280, 5120, True)": {
+      "kind": "explicit",
+      "plan": {
+        "stages": 4,
+        "swizzle": true,
+        "inner": true,
+        "double": false
+      }
+    },
+    "(56, 1280, 5120, True)": {
+      "kind": "explicit",
+      "plan": {
+        "stages": 4,
+        "swizzle": true,
+        "inner": true,
+        "double": false
+      }
+    },
+    "(48, 1280, 5120, True)": {
+      "kind": "explicit",
+      "plan": {
+        "stages": 6,
+        "swizzle": true,
+        "inner": false,
+        "double": false
+      }
+    },
+    "(32, 1280, 5120, True)": {
+      "kind": "explicit",
+      "plan": {
+        "stages": 4,
+        "swizzle": true,
+        "inner": false,
+        "double": false
+      }
+    },
+    "(8, 1280, 5120, True)": {
+      "kind": "explicit",
+      "plan": {
+        "stages": 4,
+        "swizzle": true,
+        "inner": true,
+        "double": false
+      }
+    },
+    "(16, 1280, 5120, True)": {
+      "kind": "explicit",
+      "plan": {
+        "stages": 4,
+        "swizzle": true,
+        "inner": true,
+        "double": false
+      }
+    },
+    "(24, 1280, 5120, True)": {
+      "kind": "explicit",
+      "plan": {
+        "stages": 4,
+        "swizzle": true,
+        "inner": true,
+        "double": false
+      }
+    },
+    "(40, 1280, 5120, True)": {
+      "kind": "explicit",
+      "plan": {
+        "stages": 6,
+        "swizzle": true,
+        "inner": false,
+        "double": false
+      }
+    }
+  },
+  "draft": {
+    "(56, 1280, 5120, True)": {
+      "kind": "explicit",
+      "plan": {
+        "stages": 4,
+        "swizzle": true,
+        "inner": true,
+        "double": false
+      }
+    },
+    "(49, 1280, 5120, True)": {
+      "kind": "explicit",
+      "plan": {
+        "stages": 4,
+        "swizzle": true,
+        "inner": true,
+        "double": false
+      }
+    },
+    "(42, 1280, 5120, True)": {
+      "kind": "explicit",
+      "plan": {
+        "stages": 6,
+        "swizzle": true,
+        "inner": false,
+        "double": false
+      }
+    },
+    "(28, 1280, 5120, True)": {
+      "kind": "explicit",
+      "plan": {
+        "stages": 4,
+        "swizzle": true,
+        "inner": true,
+        "double": false
+      }
+    },
+    "(7, 1280, 5120, True)": {
+      "kind": "explicit",
+      "plan": {
+        "stages": 4,
+        "swizzle": true,
+        "inner": true,
+        "double": false
+      }
+    },
+    "(14, 1280, 5120, True)": {
+      "kind": "explicit",
+      "plan": {
+        "stages": 4,
+        "swizzle": true,
+        "inner": true,
+        "double": false
+      }
+    },
+    "(21, 1280, 5120, True)": {
+      "kind": "explicit",
+      "plan": {
+        "stages": 4,
+        "swizzle": true,
+        "inner": true,
+        "double": false
+      }
+    },
+    "(35, 1280, 5120, True)": {
+      "kind": "explicit",
+      "plan": {
+        "stages": 6,
+        "swizzle": true,
+        "inner": false,
+        "double": false
+      }
+    }
+  }
+}

@@ -1,0 +1,91 @@
+"""Persistent Target KV with direct ragged attention and explicit offline graphs."""
+import torch
+from .batch_target import BatchedTarget,RequestKV
+from acc_infer_clear.kernels.kv_attention import append,attention
+from acc_infer_clear.runtime.graphs import capture
+from acc_infer_clear.runtime.graph_policy import batches,FIRST_KV_LIMITS
+
+class SlotKV(RequestKV):
+    def __init__(self,pool,slot,length,generation):
+        super().__init__(pool.storage[:,:,slot:slot+1],length)
+        self.pool=pool;self.slot=slot;self.generation=generation;self.released=False
+    def check(self):
+        if self.released or self.pool.generations[self.slot]!=self.generation:raise RuntimeError('Stale KV slot')
+    def crop(self,length):self.check();super().crop(length)
+
+class SlotTarget(BatchedTarget):
+    def __init__(self,target,max_batch=8,capacity=2048):
+        super().__init__(target)
+        body=target.model.transformer;param=next(body.parameters());attn=body.h[0].attn
+        assert attn.head_dim==64 and not body.config.add_cross_attention
+        self.capacity=capacity;self.max_batch=max_batch;self.max_slots=2*max_batch
+        # One in-flight tail batch may be suspended while a head batch is served.
+        self.storage=param.new_empty(len(body.h),2,self.max_slots,attn.num_heads,capacity,attn.head_dim)
+        self.keep=torch.zeros(self.max_slots,capacity,device=param.device,dtype=torch.int32)
+        self.free=list(reversed(range(self.max_slots)));self.generations=[0]*self.max_slots
+        self.pool_import=self.import_cache;self.graphs={};self.graph_hits=0;self.graph_sealed=False
+    def import_cache(self,packed,row,length):
+        if not self.free:raise RuntimeError('Target KV slots exhausted')
+        if length+8>self.capacity:raise ValueError('Target KV capacity exceeded')
+        slot=self.free.pop();self.generations[slot]+=1
+        self.storage[:,:,slot,:,:length].copy_(packed[:,:,row,:,:length])
+        return SlotKV(self,slot,length,self.generations[slot])
+    def prefill(self,jobs):
+        outputs=super().prefill(jobs)
+        for output,(_,mask) in zip(outputs,jobs):
+            kv=output[1];self.keep[kv.slot].zero_();self.keep[kv.slot,:kv.length].copy_(mask[0])
+        return outputs
+    def release(self,kv):
+        if isinstance(kv,SlotKV) and not kv.released:
+            kv.check();kv.released=True;self.free.append(kv.slot)
+    def math(self,x,slots,lengths,limit):
+        tm=self.target.model;model=tm.transformer;selected=[];hidden=x
+        # Input already contains original absolute embeddings; this model's wpe is null.
+        for index,block in enumerate(model.h):
+            normalized=block.ln_1(hidden);a=block.attn
+            q,k,v=a.c_attn(normalized).split(a.split_size,dim=2)
+            q=q.view(*q.shape[:-1],a.num_heads,a.head_dim).transpose(1,2)
+            k=k.view(*k.shape[:-1],a.num_heads,a.head_dim).transpose(1,2)
+            v=v.view(*v.shape[:-1],a.num_heads,a.head_dim).transpose(1,2)
+            append(k,v,self.storage[index,0],self.storage[index,1],slots,lengths)
+            out=attention(q,self.storage[index,0],self.storage[index,1],self.keep,slots,lengths,limit)
+            out=out.transpose(1,2).contiguous().view(x.shape[0],8,a.embed_dim)
+            hidden=hidden+a.c_proj(out)
+            hidden=hidden+block.mlp(block.ln_2(hidden))
+            if index in self.target.target_layer_ids:selected.append(hidden)
+        final=model.ln_f(hidden)
+        return tm.lm_head(final),torch.cat(selected,dim=-1),final
+    def prepare_graphs(self):
+        if len(self.free)!=self.max_slots:raise RuntimeError('Capture before admitting requests')
+        if self.graph_sealed:raise RuntimeError('Already captured')
+        self.storage.zero_();self.keep.fill_(1)
+        for b in batches(self.max_batch):
+            slots=torch.arange(b,device=self.storage.device,dtype=torch.int32)
+            x=self.storage.new_zeros(b,8,self.target.model.transformer.embed_dim)
+            for limit in FIRST_KV_LIMITS:
+                lengths=torch.full((b,),limit-8,device=x.device,dtype=torch.int32)
+                self.graphs[b,limit]=capture(lambda xx,ss,ll:self.math(xx,ss,ll,limit),(x,slots,lengths))
+        self.graph_sealed=True
+    def __call__(self,jobs):
+        if not jobs:return []
+        for x,kv,mask,pos in jobs:
+            if not isinstance(kv,SlotKV) or kv.pool is not self:raise ValueError('Foreign KV')
+            kv.check()
+            if x.shape[1]!=8 or kv.length+8>self.capacity:raise ValueError('Invalid verify extent')
+            self.keep[kv.slot,kv.length:kv.length+8].copy_(mask[0,-8:])
+        lengths=[kv.length for x,kv,mask,pos in jobs]
+        limit=next(n for n in (64,128,256,512,1024,2048) if n>=max(lengths)+8)
+        slots=torch.tensor([kv.slot for x,kv,mask,pos in jobs],device=self.storage.device,dtype=torch.int32)
+        lens=torch.tensor(lengths,device=self.storage.device,dtype=torch.int32)
+        x=torch.cat([j[0] for j in jobs]);key=(len(jobs),limit)
+        if self.graph_sealed and key in self.graphs:
+            logits,selected,final=self.graphs[key](x,slots,lens);self.graph_hits+=1
+        else:logits,selected,final=self.math(x,slots,lens,limit)
+        result=[]
+        for i,(_,kv,_,_) in enumerate(jobs):
+            result.append((logits[i:i+1].clone(),SlotKV(self,kv.slot,kv.length+8,kv.generation),selected[i:i+1].clone(),final[i:i+1].clone()))
+        self.calls+=1;self.rows+=len(jobs);self.shapes[str(key)]=self.shapes.get(str(key),0)+1
+        return result
+    def stats(self):
+        return dict(super().stats(),graph_hits=self.graph_hits,graph_keys=[list(k) for k in self.graphs],
+                    persistent_kv=True,history_pack_bytes_per_verify=0)

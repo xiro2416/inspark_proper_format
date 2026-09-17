@@ -1,0 +1,345 @@
+{
+  "identity": {
+    "device": {
+      "name": "NVIDIA RTX 6000D",
+      "sm": 120,
+      "sms": 156,
+      "shared_per_sm": 102400,
+      "shared_per_cta": 101376,
+      "registers_per_sm": 65536,
+      "threads_per_sm": 1536,
+      "max_ctas_per_sm": 32
+    },
+    "torch": "2.8.0+cu128",
+    "triton": "3.5.0",
+    "cuda": "12.8",
+    "sources": {
+      "kernels/stage2_gemm.py": "9b1534815ec8d749e86d25a5fd2864cdfc5848969dbd1b94683826b2f6e9ba1e",
+      "kernels/stage2_bf16_conv.py": "70387a4852dad37f2ca246e5831c8da99c99702417e9346987b4b4630091c15b",
+      "kernels/stage2_fusions.py": "3edcb48550b93917aa127f014113886c024753082786baf5e1c99f767b0c5214",
+      "models/stage2_conv.py": "4ab2cc582d13cbe18e51d8ee13f2ba0a60ad9c4ce731aa9de32e1a25c84a1e33"
+    }
+  },
+  "gemm": {
+    "(310, 1536, 512, False)": {
+      "backend": "col",
+      "tile": {
+        "bm": 32,
+        "bn": 32,
+        "bk": 128,
+        "warps": 4,
+        "stages": 3,
+        "split_k": 1,
+        "schedule": "tiled"
+      }
+    },
+    "(310, 512, 512, False)": {
+      "backend": "col",
+      "tile": {
+        "bm": 16,
+        "bn": 128,
+        "bk": 128,
+        "warps": 4,
+        "stages": 3,
+        "split_k": 1,
+        "schedule": "tiled"
+      }
+    },
+    "(310, 512, 1536, False)": {
+      "backend": "col",
+      "tile": {
+        "bm": 32,
+        "bn": 32,
+        "bk": 128,
+        "warps": 4,
+        "stages": 3,
+        "split_k": 1,
+        "schedule": "tiled"
+      }
+    },
+    "(310, 512, 1024, True)": {
+      "backend": "col",
+      "tile": {
+        "bm": 16,
+        "bn": 128,
+        "bk": 128,
+        "warps": 4,
+        "stages": 3,
+        "split_k": 1,
+        "schedule": "tiled"
+      }
+    },
+    "(2480, 1536, 512, False)": {
+      "backend": "col",
+      "tile": {
+        "bm": 64,
+        "bn": 128,
+        "bk": 64,
+        "warps": 4,
+        "stages": 3,
+        "split_k": 1,
+        "schedule": "tiled"
+      }
+    },
+    "(2480, 512, 512, False)": {
+      "backend": "col",
+      "tile": {
+        "bm": 64,
+        "bn": 32,
+        "bk": 128,
+        "warps": 4,
+        "stages": 2,
+        "split_k": 1,
+        "schedule": "tiled"
+      }
+    },
+    "(2480, 512, 1536, False)": {
+      "backend": "col",
+      "tile": {
+        "bm": 64,
+        "bn": 128,
+        "bk": 128,
+        "warps": 8,
+        "stages": 3,
+        "split_k": 1,
+        "schedule": "tiled"
+      }
+    },
+    "(2480, 512, 1024, True)": {
+      "backend": "col",
+      "tile": {
+        "bm": 64,
+        "bn": 128,
+        "bk": 128,
+        "warps": 8,
+        "stages": 3,
+        "split_k": 1,
+        "schedule": "tiled"
+      }
+    }
+  },
+  "conv": {
+    "(80, 1536, 7, 1, 3, 1, False, 0, 1, 52)": {
+      "backend": "native",
+      "tile": {
+        "bm": 64,
+        "bn": 64,
+        "bk": 64,
+        "warps": 4,
+        "stages": 3,
+        "split_k": 1,
+        "schedule": "tiled"
+      }
+    },
+    "(1536, 768, 8, 4, 2, 1, True, 0, 1, 52)": {
+      "backend": "channels_last"
+    },
+    "(768, 768, 3, 1, 1, 1, False, 0, 1, 208)": {
+      "backend": "native",
+      "tile": {
+        "bm": 64,
+        "bn": 64,
+        "bk": 64,
+        "warps": 4,
+        "stages": 3,
+        "split_k": 1,
+        "schedule": "tiled"
+      }
+    },
+    "(768, 768, 3, 1, 3, 3, False, 0, 1, 208)": {
+      "backend": "channels_last"
+    },
+    "(768, 768, 3, 1, 5, 5, False, 0, 1, 208)": {
+      "backend": "channels_last"
+    },
+    "(768, 768, 7, 1, 3, 1, False, 0, 1, 208)": {
+      "backend": "channels_last"
+    },
+    "(768, 768, 7, 1, 9, 3, False, 0, 1, 208)": {
+      "backend": "channels_last"
+    },
+    "(768, 768, 7, 1, 15, 5, False, 0, 1, 208)": {
+      "backend": "channels_last"
+    },
+    "(768, 768, 11, 1, 5, 1, False, 0, 1, 208)": {
+      "backend": "channels_last"
+    },
+    "(768, 768, 11, 1, 15, 3, False, 0, 1, 208)": {
+      "backend": "channels_last"
+    },
+    "(768, 768, 11, 1, 25, 5, False, 0, 1, 208)": {
+      "backend": "channels_last"
+    },
+    "(768, 384, 8, 4, 2, 1, True, 0, 1, 208)": {
+      "backend": "channels_last"
+    },
+    "(384, 384, 3, 1, 1, 1, False, 0, 1, 832)": {
+      "backend": "native",
+      "tile": {
+        "bm": 64,
+        "bn": 64,
+        "bk": 64,
+        "warps": 4,
+        "stages": 3,
+        "split_k": 1,
+        "schedule": "tiled"
+      }
+    },
+    "(384, 384, 3, 1, 3, 3, False, 0, 1, 832)": {
+      "backend": "channels_last"
+    },
+    "(384, 384, 3, 1, 5, 5, False, 0, 1, 832)": {
+      "backend": "channels_last"
+    },
+    "(384, 384, 7, 1, 3, 1, False, 0, 1, 832)": {
+      "backend": "native",
+      "tile": {
+        "bm": 64,
+        "bn": 64,
+        "bk": 64,
+        "warps": 4,
+        "stages": 3,
+        "split_k": 1,
+        "schedule": "tiled"
+      }
+    },
+    "(384, 384, 7, 1, 9, 3, False, 0, 1, 832)": {
+      "backend": "channels_last"
+    },
+    "(384, 384, 7, 1, 15, 5, False, 0, 1, 832)": {
+      "backend": "channels_last"
+    },
+    "(384, 384, 11, 1, 5, 1, False, 0, 1, 832)": {
+      "backend": "native",
+      "tile": {
+        "bm": 64,
+        "bn": 64,
+        "bk": 64,
+        "warps": 4,
+        "stages": 3,
+        "split_k": 1,
+        "schedule": "tiled"
+      }
+    },
+    "(384, 384, 11, 1, 15, 3, False, 0, 1, 832)": {
+      "backend": "channels_last"
+    },
+    "(384, 384, 11, 1, 25, 5, False, 0, 1, 832)": {
+      "backend": "channels_last"
+    },
+    "(24, 1, 7, 1, 3, 1, False, 0, 1, 13312)": {
+      "backend": "native",
+      "tile": {
+        "bm": 32,
+        "bn": 64,
+        "bk": 64,
+        "warps": 4,
+        "stages": 2,
+        "split_k": 1,
+        "schedule": "tiled"
+      }
+    },
+    "(80, 1536, 7, 1, 3, 1, False, 0, 8, 52)": {
+      "backend": "native",
+      "tile": {
+        "bm": 64,
+        "bn": 128,
+        "bk": 32,
+        "warps": 8,
+        "stages": 3,
+        "split_k": 1,
+        "schedule": "tiled"
+      }
+    },
+    "(1536, 768, 8, 4, 2, 1, True, 0, 8, 52)": {
+      "backend": "channels_last"
+    },
+    "(768, 768, 3, 1, 1, 1, False, 0, 8, 208)": {
+      "backend": "native",
+      "tile": {
+        "bm": 64,
+        "bn": 128,
+        "bk": 32,
+        "warps": 8,
+        "stages": 3,
+        "split_k": 1,
+        "schedule": "tiled"
+      }
+    },
+    "(768, 768, 3, 1, 3, 3, False, 0, 8, 208)": {
+      "backend": "channels_last"
+    },
+    "(768, 768, 7, 1, 3, 1, False, 0, 8, 208)": {
+      "backend": "native",
+      "tile": {
+        "bm": 64,
+        "bn": 128,
+        "bk": 32,
+        "warps": 8,
+        "stages": 3,
+        "split_k": 1,
+        "schedule": "tiled"
+      }
+    },
+    "(768, 768, 11, 1, 5, 1, False, 0, 8, 208)": {
+      "backend": "native",
+      "tile": {
+        "bm": 64,
+        "bn": 128,
+        "bk": 32,
+        "warps": 8,
+        "stages": 3,
+        "split_k": 1,
+        "schedule": "tiled"
+      }
+    },
+    "(384, 384, 3, 1, 1, 1, False, 0, 8, 832)": {
+      "backend": "native",
+      "tile": {
+        "bm": 128,
+        "bn": 64,
+        "bk": 32,
+        "warps": 8,
+        "stages": 3,
+        "split_k": 1,
+        "schedule": "tiled"
+      }
+    },
+    "(384, 384, 7, 1, 3, 1, False, 0, 8, 832)": {
+      "backend": "native",
+      "tile": {
+        "bm": 64,
+        "bn": 128,
+        "bk": 32,
+        "warps": 8,
+        "stages": 3,
+        "split_k": 1,
+        "schedule": "tiled"
+      }
+    },
+    "(384, 384, 11, 1, 5, 1, False, 0, 8, 832)": {
+      "backend": "native",
+      "tile": {
+        "bm": 128,
+        "bn": 64,
+        "bk": 32,
+        "warps": 8,
+        "stages": 3,
+        "split_k": 1,
+        "schedule": "tiled"
+      }
+    },
+    "(24, 1, 7, 1, 3, 1, False, 0, 8, 13312)": {
+      "backend": "native",
+      "tile": {
+        "bm": 64,
+        "bn": 64,
+        "bk": 64,
+        "warps": 4,
+        "stages": 3,
+        "split_k": 1,
+        "schedule": "tiled"
+      }
+    }
+  }
+}
