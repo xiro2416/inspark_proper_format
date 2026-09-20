@@ -40,3 +40,32 @@ def acceptance(groups,temperature,logits,p,tokens,group_draws,accept_draws):
                     q,a,packed,v,groups.token_groups.shape[1],gm,temperature,triton.next_power_of_2(v),
                     triton.next_power_of_2(gm),num_warps=8)
     return q,a,packed
+
+@triton.jit
+def _prefix_plan(PACK,REMAINING,CURRENT,COUNTS,ENDS,CORRECTIONS,RESIDUALS,
+                 K:tl.constexpr,EOS:tl.constexpr,MAX_TOKENS:tl.constexpr):
+    row=tl.program_id(0);j=tl.arange(0,8);valid=(j<K)&(j<tl.load(REMAINING+row))
+    flag=tl.load(PACK+(row*K+j)*5,mask=j<K,other=0.)!=0
+    token=tl.load(PACK+(row*K+j)*5+1,mask=j<K,other=0.).to(tl.int32)
+    stop=valid&((~flag)|(token==EOS));first=tl.min(tl.where(stop,j,K),axis=0)
+    has=first<K;sf=tl.sum(tl.where(j==first,flag.to(tl.int32),0),axis=0)!=0
+    st=tl.sum(tl.where(j==first,token,0),axis=0);end=has&sf&(st==EOS)
+    remaining=tl.load(REMAINING+row);n=tl.where(has,first+end.to(tl.int32),remaining)
+    correction=(~end)&((tl.load(CURRENT+row)+n)<MAX_TOKENS)
+    tl.store(COUNTS+row,n);tl.store(ENDS+row,end)
+    tl.store(CORRECTIONS+row,correction);tl.store(RESIDUALS+row,correction&(n<remaining))
+
+def prefix_plan(packed,remaining,current,eos,max_tokens):
+    """Compact device commit plan; packed acceptance decisions never leave GPU."""
+    if packed.ndim!=3 or packed.shape[1]!=7 or packed.shape[2]!=5:
+        raise ValueError('Expected packed [B,7,5] acceptance decisions')
+    b=packed.shape[0];device=packed.device
+    remaining=remaining.to(device=device,dtype=torch.int32).contiguous()
+    current=current.to(device=device,dtype=torch.int32).contiguous()
+    counts=torch.empty(b,device=device,dtype=torch.int32)
+    ends=torch.empty(b,device=device,dtype=torch.bool)
+    corrections=torch.empty(b,device=device,dtype=torch.bool)
+    residuals=torch.empty(b,device=device,dtype=torch.bool)
+    _prefix_plan[(b,)](packed,remaining,current,counts,ends,corrections,residuals,
+                       7,int(eos),int(max_tokens),num_warps=1)
+    return counts,ends,corrections,residuals

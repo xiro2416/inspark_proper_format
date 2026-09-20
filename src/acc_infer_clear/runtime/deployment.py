@@ -5,7 +5,7 @@ from pathlib import Path
 FIELDS={'schema','status','precision','components','convolutions','rnn_precision',
         'target_graphs','draft_graphs','proposal_graphs','prefix_graphs','head_graphs',
         'slot_draft','overlap_acoustics','fused_acceptance','tail_graphs'}
-OPTIONAL={'draft_qkv_fusion','batched_proposal_rng','batched_proposal_rng_min_batch','full_m_plan','target_norm_quant','target_residual_fusion'}
+OPTIONAL={'draft_qkv_fusion','batched_proposal_rng','batched_proposal_rng_min_batch','full_m_plan','target_norm_quant','target_residual_fusion','context_graphs','context_scatter','device_accept_plan','device_residual','device_round_b8'}
 
 def validate(plan):
     extra={'acoustic_kernels','acoustic_plan','head_batch_barrier'} if plan.get('schema') in (2,3,4,5,6,7,8) else set()
@@ -103,10 +103,38 @@ def prepare(engine,plan):
         if plan.get('full_m_plan'):
             from acc_infer_clear.target_full_m.deploy import prepare_combined
             result['full_m_combined_qkv']=prepare_combined(engine,plan['full_m_plan'])
+        if plan.get('context_graphs'):
+            from acc_infer_clear.runtime.graph_policy import batches as graph_batches
+            selected=graph_batches(engine.config['max_batch']);totals=tuple([b*8 for b in selected])
+            with engine.torch.cuda.stream(engine.model.stream),engine.torch.inference_mode():
+                result['context_graphs']=engine.rt.context.prepare_graphs(
+                    engine.config['max_batch'],scatter=plan.get('context_scatter',False),totals=totals)
         if plan['proposal_graphs']:result['proposal']=engine.prepare_proposal_graphs()
         if plan['draft_graphs']:result['draft']=engine.prepare_draft_graphs()
         if plan['prefix_graphs']:result['prefix']=engine.prepare_prefix_graphs()
         if plan['fused_acceptance']:engine.prepare_acceptance_fusion()
+        device_available=bool(plan.get('device_round_b8'))
+        if plan.get('device_accept_plan') and (not plan.get('device_round_b8') or device_available):
+            if not plan['fused_acceptance']:raise ValueError('Device accept plan requires fused acceptance')
+            with engine.torch.cuda.stream(engine.model.stream),engine.torch.inference_mode():
+                result['device_accept_plan']=engine.rt.accept.prepare_device_plan(
+                    int(engine.rt.engine.target.gpt.stop_mel_token),engine.config['max_speech_tokens'])
+        if plan.get('device_residual') and (not plan.get('device_round_b8') or device_available):
+            with engine.torch.cuda.stream(engine.model.stream),engine.torch.inference_mode():
+                result['device_residual']=engine.rt.residual.prepare_device_normal()
+        if plan.get('device_round_b8'):
+            required=('device_accept_plan','device_residual','context_scatter')
+            if not all(plan.get(k) for k in required):raise ValueError('Device round requires '+','.join(required))
+            engine.rt.accept.device_plan=False;engine.rt.residual.device_normal=False
+            from acc_infer_clear.kernels.device_commit import prepare as prepare_device_commit
+            from acc_infer_clear.runtime.graph_policy import batches as graph_batches
+            selected=graph_batches(engine.config['max_batch'])
+            with engine.torch.cuda.stream(engine.model.stream),engine.torch.inference_mode():
+                compiled=prepare_device_commit(engine.rt.device,int(engine.rt.engine.target.gpt.stop_mel_token),engine.config['max_speech_tokens'],selected)
+            engine.device_round_batches=set(selected);engine.device_round_b8=True
+            result['device_round_b8']=dict(head_only=True,batches=list(selected),kv_limit=128,
+                host_boundary='all_ready/fallback scalar per round',compiled=compiled,
+                parent_graph=False,online_capture=False)
         if plan['head_graphs']:result['acoustics']=engine.prepare_head_graphs()
         if plan['overlap_acoustics']:
             import torch

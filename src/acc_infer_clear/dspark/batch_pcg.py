@@ -21,18 +21,37 @@ class HostDecisions:
     def tolist(self):
         return self.rows
 
+class DeviceAcceptance:
+    """Acceptance tensors and compact prefix decisions remain device resident."""
+    def __init__(self,q,accept,packed,plan):
+        self.q,self.accept,self.packed,self.plan=q,accept,packed,plan
+    def host_plan(self):
+        # Transitional boundary: one compact [B,4] copy replaces [B,7,5].
+        return torch.stack((self.plan[0],self.plan[1].int(),
+                            self.plan[2].int(),self.plan[3].int()),1).cpu().tolist()
+
 class BatchedAcceptance:
 
     def __init__(self, groups, temperature=0.8):
         self.groups = groups
         self.temperature = temperature
         self.fused=False
+        self.device_plan=False
     def prepare_fusion(self):
         from acc_infer_clear.kernels.acceptance import acceptance
         g=self.groups;v=g.token_group_counts.numel();device=g.token_groups.device
         args=(torch.zeros(1,7,v,device=device),torch.ones(1,7,v,device=device)/v,
               torch.zeros(1,7,device=device,dtype=torch.long),torch.full((1,7),.5,device=device),torch.full((1,7),.5,device=device))
         acceptance(g,self.temperature,*args);self.fused=True
+    def prepare_device_plan(self,eos,max_tokens):
+        if not self.fused:raise RuntimeError('Device plan requires fused acceptance')
+        from acc_infer_clear.kernels.acceptance import prefix_plan
+        device=self.groups.token_groups.device
+        packed=torch.zeros(1,7,5,device=device);remaining=torch.full((1,),7,device=device,dtype=torch.int32);current=torch.ones(1,device=device,dtype=torch.int32)
+        prefix_plan(packed,remaining,current,eos,max_tokens)
+        self.device_plan=True;self.device_eos=int(eos);self.device_max_tokens=int(max_tokens)
+        return dict(k=7,compact_host_values_per_row=4,packed_host_values_before=35,
+                    online_compile=False,semantics='accepted_prefix_exact')
 
     def tensor_body(self, logits, p, tokens, group_draws, accept_draws):
         g = self.groups
@@ -71,6 +90,12 @@ class BatchedAcceptance:
             fn=lambda *args:acceptance(self.groups,self.temperature,*args)
         else:fn = self.tensor_body
         q, accept, packed = fn(logits, p, tokens, gd, ad)
+        if self.device_plan:
+            from acc_infer_clear.kernels.acceptance import prefix_plan
+            remaining=torch.tensor([min(k,self.device_max_tokens-len(task.codes)) for task in tasks],device=logits.device,dtype=torch.int32)
+            current=torch.tensor([len(task.codes) for task in tasks],device=logits.device,dtype=torch.int32)
+            return DeviceAcceptance(q,accept,packed,prefix_plan(
+                packed,remaining,current,self.device_eos,self.device_max_tokens))
         packed = packed.cpu().tolist()
         return [(q[i].clone(), accept[i].clone(), HostDecisions(packed[i])) for i in range(b)]
 
@@ -80,6 +105,31 @@ class BatchedResidual:
         self.groups = groups
         self.original = original
         self.fallbacks = 0
+        self.device_normal=False
+        self.device_failures=None
+
+    def prepare_device_normal(self):
+        """Experimental common-path device selection; any fallback rejects run."""
+        device=self.groups.group_members.device
+        self.device_failures=torch.zeros((),device=device,dtype=torch.int32)
+        self.device_normal=True
+        self.batch_generator=torch.Generator(device=device).manual_seed(0x7E517E51)
+        return dict(max_thinning_attempts=64,decision_d2h=False,
+                    fallback_policy='device counter; candidate invalid if nonzero',
+                    final_group_sampling='explicit request-owned uniform',online_compile=False)
+
+    def device_batch(self,q_block,p_block,indices,mask):
+        """Fixed-B common path used by the device-round experiment."""
+        b,k,v=q_block.shape;row=torch.arange(b,device=q_block.device)
+        at=indices.long().clamp(0,k-1);q=q_block[row,at].float();p=p_block[row,at].float()
+        q=q/q.sum(-1,keepdim=True).clamp_min(1e-12);p=p/p.sum(-1,keepdim=True).clamp_min(1e-12)
+        n=64;ids=self.groups.sample_groups(torch.multinomial(q,n,replacement=True,generator=self.batch_generator),generator=self.batch_generator)
+        uniform=torch.rand((b,n),device=q.device,generator=self.batch_generator)
+        conditional,members,decisions=self.tensor_body(q,p,ids,uniform)
+        ok=decisions[:,0].bool()|(~mask);self.device_failures.add_((~ok).sum())
+        draw=torch.rand((b,),device=q.device,generator=self.batch_generator)
+        mass=conditional.sum(-1).clamp_min(1e-12);chosen=(conditional.cumsum(-1)<(draw*mass)[:,None]).sum(-1).clamp_max(conditional.shape[1]-1)
+        return members.gather(1,chosen[:,None]).squeeze(1),decisions
 
     def tensor_body(self, q, p, ids, uniform):
         g = self.groups
@@ -125,6 +175,18 @@ class BatchedResidual:
         uniform_tensor = torch.stack(uniform)
         fn = self.tensor_body
         conditional, selected_members, decisions = fn(q, p, ids, uniform_tensor)
+        if self.device_normal:
+            ok=decisions[:,0].bool();self.device_failures.add_((~ok).sum())
+            # One explicit request-owned uniform per row; padded invalid members
+            # already have zero probability. This is distribution-equivalent to
+            # categorical sampling, not bitwise torch.multinomial equivalence.
+            draws=[]
+            for task,gen in zip(tasks,gens):
+                draws.append(torch.rand((),device=q.device,generator=gen));task.state['cuda_rng']=gen.get_state()
+            draw=torch.stack(draws);mass=conditional.sum(-1).clamp_min(1e-12)
+            index=(conditional.cumsum(-1)<(draw*mass)[:,None]).sum(-1).clamp_max(conditional.shape[1]-1)
+            tokens=selected_members.gather(1,index[:,None]).squeeze(1)
+            return [(tokens[i],decisions[i,2],False,decisions[i,1]+1) for i in range(b)]
         decisions = decisions.cpu().tolist()
         outputs = []
         for i, ((args, kw), task, gen, (ok, index, group, size)) in enumerate(zip(jobs, tasks, gens, decisions)):

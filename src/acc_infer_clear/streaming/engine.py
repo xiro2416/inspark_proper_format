@@ -16,6 +16,8 @@ class Engine(StreamingCore):
         self.deployment_state='raw'
         self.overlap_acoustics=False;self.acoustic_stream=None
         self.head_batch_barrier=False # opt-in experiment: wait for the selected head group
+        self.device_round_b8=False
+        self.device_round_batches=set()
     def prepare_deployment(self,plan):
         from acc_infer_clear.runtime.deployment import prepare
         return prepare(self,plan)
@@ -153,6 +155,15 @@ class Engine(StreamingCore):
                     return row.done or (index==0 and head_ready(len(row.codes),False))
                 barrier=getattr(self,'head_batch_barrier',False) and index==0
                 executed=0
+                use_device=(getattr(self,'device_round_b8',False) and index==0 and
+                            max_rounds is None and len(rows) in self.device_round_batches and
+                            max(r.past_length for r in rows)+8<=128 and
+                            max(r.cache.length for r in rows)+7<=128)
+                if use_device:
+                    from acc_infer_clear.dspark.device_round import DeviceRoundHead
+                    device_runner=DeviceRoundHead(self.rt,rows,self.config['max_speech_tokens']);device_runner.run()
+                    if not device_runner.failed:
+                        for row in rows:owner[id(row)]['rounds']+=len(row.accepted)
                 while not (all if barrier else any)(is_ready(row) for row in rows):
                     active=[row for row in rows if not is_ready(row)]
                     self.phase('draft_verify_accept',len(active),

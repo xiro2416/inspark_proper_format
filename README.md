@@ -24,10 +24,27 @@ incremental text
   -> 44-frame first PCM chunk, then streaming tail
 ```
 
-The default deployment captures batch graphs for B1..B8, B16 and B32. The
+The graph policy supports B1..B8, B16 and B32, while the shipped runtime
+defaults to `max_batch: 8` and therefore prepares B1..B8. Selecting B16/B32
+through the service configuration prepares those additional exact-size graphs. The
 first-packet Prefill and Latent routes use logical 48/80 buckets; overflow and
 variable tails remain explicit fallback paths. The default admission batch is
 8 and can be changed with `--batch`.
+
+For a fixed first-head graph batch with KV no longer than128, the current
+runtime keeps acceptance-prefix decisions, residual sampling, token/length/EOS
+commit and Draft Context slot scatter on the GPU. The host reads one compact
+all-ready/fallback status per AR round; a rare device residual fallback restarts
+that group through the prior exact path. Tail, unsupported intermediate batches
+and longer KV retain the established implementation. The complete parent-round
+CUDA Graph candidate was slower and is not enabled.
+
+The selected device path was validated on256 full streamed utterances against
+the previous release: UTMOS changed by -1.38% and CER by +0.00893. On the
+published RTX6000D setup, sustained B8 first-PCM P50/P95 changed from about
+91.23/100.39ms to73.10/81.14ms. This is a hardware/workload-specific result,
+not a latency guarantee. Roll back only the device-control update with
+`configs/sm120_pre_device_commit.json`.
 
 ## Install
 
@@ -67,8 +84,9 @@ bash scripts/run.sh -m acc_infer_clear.cli \
 
 The reference is VAD-cropped to at most three seconds and cached locally.
 `--emotion` accepts eight floats. For a long-lived service, keep one process
-and model instance alive; initialization loads all weights, compiles the three
-small CUDA extensions and captures the configured graphs.
+and model instance alive; initialization loads all weights, compiles the CUDA
+extensions and selected device-state kernels, then captures the configured
+graphs. Online compilation and capture are forbidden after preparation.
 
 ## Incremental protocol
 
@@ -95,4 +113,3 @@ are in [`configs/model_sources.json`](configs/model_sources.json).
 This is a derivative work and is not endorsed, warranted or guaranteed by the
 original IndexTTS2 right-holder. The original right-holder disclaims liability
 for modifications in this derivative. Read [LICENSE](LICENSE) before use.
-

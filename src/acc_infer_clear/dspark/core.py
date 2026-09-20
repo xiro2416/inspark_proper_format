@@ -3,6 +3,7 @@ import torch
 import torch.nn.functional as F
 from .target import crop_legacy_cache
 from .logic import accepted_prefix
+from .batch_pcg import DeviceAcceptance
 
 @dataclass(eq=False)
 class BatchRow:
@@ -68,14 +69,22 @@ class ARCore:
             accepted = self.accept([(v[0][0, :k], p[1][0], p[0][0]) for v, p in zip(verified, proposed)], rows)
             residual_rows, residual_jobs, decisions = ([], [], [])
             eos = int(self.engine.target.gpt.stop_mel_token)
-            for row, p, v, a in zip(rows, proposed, verified, accepted):
+            device_acceptance=isinstance(accepted,DeviceAcceptance)
+            compact=accepted.host_plan() if device_acceptance else None
+            acceptance_rows=([(accepted.q[i],accepted.accept[i],None) for i in range(len(rows))]
+                             if device_acceptance else accepted)
+            for index,(row, p, v, a) in enumerate(zip(rows, proposed, verified, acceptance_rows)):
                 count = min(k, max_tokens - len(row.codes))
-                n, end = accepted_prefix(a[2].rows, count, eos)
+                if device_acceptance:
+                    n,end,correction,needs_residual=compact[index]
+                    n=int(n);end=bool(end);correction=bool(correction);needs_residual=bool(needs_residual)
+                else:
+                    n, end = accepted_prefix(a[2].rows, count, eos)
                 row.codes.extend((p[0][:, j] for j in range(n)))
                 row.generator.set_state(row.state['cuda_rng'])
-                correction = not end and len(row.codes) < max_tokens
+                if not device_acceptance:correction = not end and len(row.codes) < max_tokens
                 decisions.append((n, end, correction))
-                if correction and n < count:
+                if (needs_residual if device_acceptance else correction and n < count):
                     residual_rows.append(row)
                     residual_jobs.append(((a[0][n], p[1][0, n], self.engine.dense_groups), dict(max_thinning_attempts=self.engine.max_thinning_attempts)))
                 elif correction:
@@ -108,4 +117,3 @@ class ARCore:
             else:
                 raise RuntimeError('GPT latent preparation did not reach get_logits')
         return [x[1][:, :-2] for x in self.latent(jobs)]
-

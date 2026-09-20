@@ -1,6 +1,6 @@
 {
   "schema": 8,
-  "status": "device_multibatch_release_quality256",
+  "status": "inspark_marlin_rollback_before_device_commit",
   "precision": "auto",
   "components": ["target", "draft", "cfm", "vocoder"],
   "convolutions": true,
@@ -17,10 +17,6 @@
   "target_norm_quant": true,
   "target_residual_fusion": true,
   "context_graphs": true,
-  "context_scatter": true,
-  "device_accept_plan": true,
-  "device_residual": true,
-  "device_round_b8": true,
   "overlap_acoustics": true,
   "fused_acceptance": true,
   "tail_graphs": false,
