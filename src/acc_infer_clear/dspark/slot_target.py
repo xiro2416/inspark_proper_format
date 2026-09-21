@@ -1,5 +1,6 @@
 """Persistent Target KV with direct ragged attention and explicit offline graphs."""
 import torch
+from contextlib import nullcontext
 from .batch_target import BatchedTarget,RequestKV
 from acc_infer_clear.kernels.kv_attention import append,attention
 from acc_infer_clear.runtime.graphs import capture
@@ -14,7 +15,7 @@ class SlotKV(RequestKV):
     def crop(self,length):self.check();super().crop(length)
 
 class SlotTarget(BatchedTarget):
-    def __init__(self,target,max_batch=8,capacity=2048):
+    def __init__(self,target,max_batch=8,capacity=2048,consumer_layout=False):
         super().__init__(target)
         body=target.model.transformer;param=next(body.parameters());attn=body.h[0].attn
         assert attn.head_dim==64 and not body.config.add_cross_attention
@@ -24,6 +25,10 @@ class SlotTarget(BatchedTarget):
         self.keep=torch.zeros(self.max_slots,capacity,device=param.device,dtype=torch.int32)
         self.free=list(reversed(range(self.max_slots)));self.generations=[0]*self.max_slots
         self.pool_import=self.import_cache;self.graphs={};self.graph_hits=0;self.graph_sealed=False
+        self.consumer_layout=bool(consumer_layout)
+        self.trace_subcomponents=False
+    def _profile_scope(self,name):
+        return torch.profiler.record_function(name) if self.trace_subcomponents else nullcontext()
     def import_cache(self,packed,row,length):
         if not self.free:raise RuntimeError('Target KV slots exhausted')
         if length+8>self.capacity:raise ValueError('Target KV capacity exceeded')
@@ -43,13 +48,19 @@ class SlotTarget(BatchedTarget):
         # Input already contains original absolute embeddings; this model's wpe is null.
         for index,block in enumerate(model.h):
             normalized=block.ln_1(hidden);a=block.attn
-            q,k,v=a.c_attn(normalized).split(a.split_size,dim=2)
-            q=q.view(*q.shape[:-1],a.num_heads,a.head_dim).transpose(1,2)
-            k=k.view(*k.shape[:-1],a.num_heads,a.head_dim).transpose(1,2)
-            v=v.view(*v.shape[:-1],a.num_heads,a.head_dim).transpose(1,2)
-            append(k,v,self.storage[index,0],self.storage[index,1],slots,lengths)
-            out=attention(q,self.storage[index,0],self.storage[index,1],self.keep,slots,lengths,limit)
-            out=out.transpose(1,2).contiguous().view(x.shape[0],8,a.embed_dim)
+            with self._profile_scope('target/qkv_projection'):
+                qkv=a.c_attn(normalized)
+            with self._profile_scope('target/qkv_output_layout'):
+                q,k,v=qkv.split(a.split_size,dim=2)
+                q=q.view(*q.shape[:-1],a.num_heads,a.head_dim).transpose(1,2)
+                k=k.view(*k.shape[:-1],a.num_heads,a.head_dim).transpose(1,2)
+                v=v.view(*v.shape[:-1],a.num_heads,a.head_dim).transpose(1,2)
+            with self._profile_scope('target/kv_append'):
+                append(k,v,self.storage[index,0],self.storage[index,1],slots,lengths)
+            out=attention(q,self.storage[index,0],self.storage[index,1],self.keep,slots,lengths,limit,self.consumer_layout)
+            with self._profile_scope('target/attention_output_layout'):
+                out=(out.reshape(x.shape[0],8,a.embed_dim) if self.consumer_layout else
+                     out.transpose(1,2).contiguous().view(x.shape[0],8,a.embed_dim))
             hidden=hidden+a.c_proj(out)
             hidden=hidden+block.mlp(block.ln_2(hidden))
             if index in self.target.target_layer_ids:selected.append(hidden)

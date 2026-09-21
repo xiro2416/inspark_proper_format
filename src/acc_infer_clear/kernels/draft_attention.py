@@ -6,7 +6,8 @@ import triton.language as tl
 @triton.jit
 def _draft(Q,K,V,CK,CV,SLOTS,LENGTHS,O,
            S0:tl.constexpr,S1:tl.constexpr,S2:tl.constexpr,S3:tl.constexpr,
-           H:tl.constexpr,D:tl.constexpr,CAP:tl.constexpr,LIMIT:tl.constexpr,BN:tl.constexpr):
+           H:tl.constexpr,D:tl.constexpr,CAP:tl.constexpr,LIMIT:tl.constexpr,BN:tl.constexpr,
+           CONSUMER_LAYOUT:tl.constexpr):
     row=tl.program_id(0);h=tl.program_id(1);slot=tl.load(SLOTS+row);length=tl.load(LENGTHS+row)
     qi=tl.arange(0,16);di=tl.arange(0,D);ki=tl.arange(0,BN)
     q=tl.load(Q+row*S0+h*S1+qi[:,None]*S2+di[None,:]*S3,qi[:,None]<7,0.)
@@ -22,11 +23,13 @@ def _draft(Q,K,V,CK,CV,SLOTS,LENGTHS,O,
         nv=tl.load(V+row*S0+h*S1+(pos[:,None]-length)*S2+di[None,:]*S3,(pos[:,None]>=length)&valid[:,None],0.)
         acc=acc*alpha[:,None]+tl.dot(p,cv+nv,input_precision='tf32x3')
         den=den*alpha+tl.sum(p,1);mx=nxt
-    tl.store(O+((row*H+h)*7+qi[:,None])*D+di[None,:],acc/den[:,None],qi[:,None]<7)
+    if CONSUMER_LAYOUT:offset=((row*7+qi[:,None])*H+h)*D+di[None,:]
+    else:offset=((row*H+h)*7+qi[:,None])*D+di[None,:]
+    tl.store(O+offset,acc/den[:,None],qi[:,None]<7)
 
-def attention(q,k,v,ck,cv,slots,lengths,limit):
+def attention(q,k,v,ck,cv,slots,lengths,limit,consumer_layout=False):
     b,h,n,d=q.shape
     assert n==7 and d==64 and q.stride()==k.stride()==v.stride()
-    out=torch.empty((b,h,n,d),device=q.device,dtype=q.dtype)
-    _draft[(b,h)](q,k,v,ck,cv,slots,lengths,out,*q.stride(),h,d,ck.shape[-2],limit,64,num_warps=4,num_stages=2)
+    out=torch.empty((b,n,h,d) if consumer_layout else (b,h,n,d),device=q.device,dtype=q.dtype)
+    _draft[(b,h)](q,k,v,ck,cv,slots,lengths,out,*q.stride(),h,d,ck.shape[-2],limit,64,consumer_layout,num_warps=4,num_stages=2)
     return out

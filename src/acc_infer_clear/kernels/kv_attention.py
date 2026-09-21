@@ -20,7 +20,7 @@ def _append(K,V,PK,PV,SLOTS,LENGTHS,
 def _attention(QT,PK,PV,KEEP,SLOTS,LENGTHS,OUT,
                Q0:tl.constexpr,Q1:tl.constexpr,Q2:tl.constexpr,Q3:tl.constexpr,
                H:tl.constexpr,Q:tl.constexpr,D:tl.constexpr,CAP:tl.constexpr,
-               LIMIT:tl.constexpr,BN:tl.constexpr):
+               LIMIT:tl.constexpr,BN:tl.constexpr,CONSUMER_LAYOUT:tl.constexpr):
     row=tl.program_id(0);head=tl.program_id(1)
     slot=tl.load(SLOTS+row);length=tl.load(LENGTHS+row)
     qi=tl.arange(0,16);di=tl.arange(0,D);ki=tl.arange(0,BN)
@@ -44,15 +44,18 @@ def _attention(QT,PK,PV,KEEP,SLOTS,LENGTHS,OUT,
         acc=acc*alpha[:,None]+tl.dot(prob.to(value.dtype),value,input_precision='tf32x3')
         den=den*alpha+tl.sum(prob,1);mx=nxt
     result=acc/den[:,None]
-    tl.store(OUT+((row*H+head)*Q+qi[:,None])*D+di[None,:],result,qi[:,None]<Q)
+    if CONSUMER_LAYOUT:
+        offset=((row*Q+qi[:,None])*H+head)*D+di[None,:]
+    else:offset=((row*H+head)*Q+qi[:,None])*D+di[None,:]
+    tl.store(OUT+offset,result,qi[:,None]<Q)
 
 def append(k,v,pk,pv,slots,lengths):
     b,h,q,d=k.shape
     _append[(b,triton.cdiv(h*q*d,256))](k,v,pk,pv,slots,lengths,*k.stride(),*v.stride(),h,q,d,pk.shape[-2],256)
 
-def attention(q,pk,pv,keep,slots,lengths,limit):
+def attention(q,pk,pv,keep,slots,lengths,limit,consumer_layout=False):
     b,h,n,d=q.shape
     if d!=64 or n!=8:raise ValueError('Validated specialization is Q8/head_dim64')
-    out=torch.empty((b,h,n,d),device=q.device,dtype=q.dtype)
-    _attention[(b,h)](q,pk,pv,keep,slots,lengths,out,*q.stride(),h,n,d,pk.shape[-2],limit,64,num_warps=4,num_stages=2)
+    out=torch.empty((b,n,h,d) if consumer_layout else (b,h,n,d),device=q.device,dtype=q.dtype)
+    _attention[(b,h)](q,pk,pv,keep,slots,lengths,out,*q.stride(),h,n,d,pk.shape[-2],limit,64,consumer_layout,num_warps=4,num_stages=2)
     return out

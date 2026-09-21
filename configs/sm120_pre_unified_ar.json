@@ -1,6 +1,6 @@
 {
   "schema": 8,
-  "status": "unified_ar_release_quality256",
+  "status": "rollback_before_unified_ar",
   "precision": "auto",
   "components": ["target", "draft", "cfm", "vocoder"],
   "convolutions": true,
@@ -18,9 +18,6 @@
   "target_residual_fusion": true,
   "context_graphs": true,
   "context_scatter": true,
-  "attention_consumer_layout": true,
-  "context_direct_slot": true,
-  "unified_ar": true,
   "device_accept_plan": true,
   "device_residual": true,
   "device_round_b8": true,

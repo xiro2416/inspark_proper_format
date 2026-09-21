@@ -15,7 +15,7 @@ class OnlineGuard:
             self.originals.append((owner,name,getattr(owner,name)));setattr(owner,name,reject(kind))
         seen=set()
         for name,module in list(sys.modules.items()):
-            if not name.startswith('acc_infer_clear.kernels'):continue
+            if not name.startswith('acc_infer_clear'):continue
             for value in vars(module).values():
                 if isinstance(value,JITFunction) and id(value) not in seen and hasattr(value,'compile'):
                     seen.add(id(value));self.originals.append((value,'compile',value.compile));value.compile=reject('triton_compile')

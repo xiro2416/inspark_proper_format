@@ -17,6 +17,7 @@ class Engine(StreamingCore):
         self.overlap_acoustics=False;self.acoustic_stream=None
         self.head_batch_barrier=False # opt-in experiment: wait for the selected head group
         self.device_round_b8=False
+        self.device_round_bank=None
         self.device_round_batches=set()
     def prepare_deployment(self,plan):
         from acc_infer_clear.runtime.deployment import prepare
@@ -48,7 +49,7 @@ class Engine(StreamingCore):
         if self.sessions:raise RuntimeError('Prepare Target before admitting requests')
         from acc_infer_clear.dspark.slot_target import SlotTarget
         with self.torch.cuda.stream(self.model.stream),self.torch.inference_mode():
-            self.rt.target=SlotTarget(self.rt.engine.target,self.config['max_batch'])
+            self.rt.target=SlotTarget(self.rt.engine.target,self.config['max_batch'],consumer_layout=getattr(self,'attention_consumer_layout',False))
             if graphs:self.rt.target.prepare_graphs()
             return self.rt.target.stats()
     def prepare_target_seven(self,plan_path):
@@ -72,7 +73,7 @@ class Engine(StreamingCore):
         with self.torch.cuda.stream(self.model.stream),self.torch.inference_mode():
             pool=DraftPool(self.rt.engine.draft,self.config['max_batch'])
             self.rt.context.pool=pool;self.rt.context.persistent=True
-            self.rt.backbone=SlotDraft(self.rt.engine.draft,pool);self.rt.proposal.backbone=self.rt.backbone
+            self.rt.backbone=SlotDraft(self.rt.engine.draft,pool,consumer_layout=getattr(self,'attention_consumer_layout',False));self.rt.proposal.backbone=self.rt.backbone
     def _release_row(self,row):
         release=getattr(self.rt.target,'release',None)
         if row is not None and release is not None:release(row.kv)
@@ -160,8 +161,11 @@ class Engine(StreamingCore):
                             max(r.past_length for r in rows)+8<=128 and
                             max(r.cache.length for r in rows)+7<=128)
                 if use_device:
-                    from acc_infer_clear.dspark.device_round import DeviceRoundHead
-                    device_runner=DeviceRoundHead(self.rt,rows,self.config['max_speech_tokens']);device_runner.run()
+                    if self.device_round_bank is not None:
+                        device_runner=self.device_round_bank;device_runner.run(rows)
+                    else:
+                        from acc_infer_clear.dspark.device_round import DeviceRoundHead
+                        device_runner=DeviceRoundHead(self.rt,rows,self.config['max_speech_tokens']);device_runner.run()
                     if not device_runner.failed:
                         for row in rows:owner[id(row)]['rounds']+=len(row.accepted)
                 while not (all if barrier else any)(is_ready(row) for row in rows):

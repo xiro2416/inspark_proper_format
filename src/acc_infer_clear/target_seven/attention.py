@@ -8,13 +8,15 @@ import torch
 from acc_infer_clear.kernels.kv_attention import _attention, attention as fallback
 
 
-def candidate(q, pk, pv, keep, slots, lengths, limit, *, stages=2, warps=4):
+def candidate(q, pk, pv, keep, slots, lengths, limit, *, stages=2, warps=4,
+              consumer_layout=False):
     b, h, n, d = q.shape
     if d != 64 or n != 8:
-        return fallback(q, pk, pv, keep, slots, lengths, limit)
-    out = torch.empty((b, h, n, d), device=q.device, dtype=q.dtype)
+        return fallback(q, pk, pv, keep, slots, lengths, limit, consumer_layout)
+    out = torch.empty((b, n, h, d) if consumer_layout else (b, h, n, d),
+                      device=q.device, dtype=q.dtype)
     _attention[(b, h)](q, pk, pv, keep, slots, lengths, out, *q.stride(),
-                       h, n, d, pk.shape[-2], limit, 64,
+                       h, n, d, pk.shape[-2], limit, 64, consumer_layout,
                        num_warps=warps, num_stages=stages)
     return out
 
@@ -35,9 +37,12 @@ class AttentionPolicy:
             if stages not in range(1, 6) or warps not in (4, 8):
                 raise ValueError('Unsupported offline launch configuration')
 
-    def __call__(self, q, pk, pv, keep, slots, lengths, limit):
+    def __call__(self, q, pk, pv, keep, slots, lengths, limit,
+                 consumer_layout=False):
         choice = self.choices.get((q.shape[0], limit))
         if choice is None:
-            return fallback(q, pk, pv, keep, slots, lengths, limit)
+            return fallback(q, pk, pv, keep, slots, lengths, limit,
+                            consumer_layout)
         return candidate(q, pk, pv, keep, slots, lengths, limit,
-                         stages=choice[0], warps=choice[1])
+                         stages=choice[0], warps=choice[1],
+                         consumer_layout=consumer_layout)

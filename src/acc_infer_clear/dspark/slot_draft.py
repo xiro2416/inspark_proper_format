@@ -1,5 +1,6 @@
 """Persistent Draft context slots; dynamic history length without bulk packing."""
 import torch
+from contextlib import nullcontext
 from .batch_draft import BatchedDraftBackbone
 from acc_infer_clear.kernels.draft_attention import attention
 from acc_infer_clear.runtime.graphs import capture
@@ -27,19 +28,29 @@ class DraftPool:
             self.check(cache);cache.pool_released=True;self.free.append(cache.pool_slot)
 
 class SlotDraft(BatchedDraftBackbone):
-    def __init__(self,model,pool):
+    def __init__(self,model,pool,consumer_layout=False):
         super().__init__(model);self.pool=pool
         assert model.recent_context_window==0 and all(not hasattr(l,'attention_conv') for l in model.layers)
+        self.consumer_layout=bool(consumer_layout)
+        self.trace_subcomponents=False
+    def _profile_scope(self,name):
+        return torch.profiler.record_function(name) if self.trace_subcomponents else nullcontext()
     def math(self,anchors,positions,slots,lengths,limit):
         m=self.model;hidden=m._noise_embeddings(anchors,positions);context_pos=lengths[:,None]+self.step
         for index,layer in enumerate(m.layers):
             norm=layer.input_norm(hidden)
-            if index in getattr(self,'shared_qkv',{}):
-                qq,kk,vv=self.shared_qkv[index](norm);q=layer._heads(qq);k=layer._heads(kk);v=layer._heads(vv)
-            else:q=layer._heads(layer.q_proj(norm));k=layer._heads(layer.k_proj(norm));v=layer._heads(layer.v_proj(norm))
-            if hasattr(layer,'rope_inv_freq'):q=layer.rotate(q,context_pos);k=layer.rotate(k,context_pos)
-            attended=attention(q,k,v,self.pool.storage[index,0],self.pool.storage[index,1],slots,lengths,limit)
-            hidden=hidden+layer.o_proj(attended.transpose(1,2).contiguous().view_as(hidden))
+            with self._profile_scope('draft/qkv_projection'):
+                if index in getattr(self,'shared_qkv',{}):qq,kk,vv=self.shared_qkv[index](norm)
+                else:qq,kk,vv=layer.q_proj(norm),layer.k_proj(norm),layer.v_proj(norm)
+            with self._profile_scope('draft/qkv_output_layout'):
+                q=layer._heads(qq);k=layer._heads(kk);v=layer._heads(vv)
+            if hasattr(layer,'rope_inv_freq'):
+                with self._profile_scope('draft/rope'):
+                    q=layer.rotate(q,context_pos);k=layer.rotate(k,context_pos)
+            attended=attention(q,k,v,self.pool.storage[index,0],self.pool.storage[index,1],slots,lengths,limit,self.consumer_layout)
+            with self._profile_scope('draft/attention_output_layout'):
+                consumer=(attended.reshape_as(hidden) if self.consumer_layout else attended.transpose(1,2).contiguous().view_as(hidden))
+            hidden=hidden+layer.o_proj(consumer)
             hidden=hidden+layer.mlp(layer.post_norm(hidden))
             hidden=m.apply_query_temporal(hidden,index)
         hidden=m.project_output(hidden)

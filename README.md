@@ -24,9 +24,10 @@ incremental text
   -> 44-frame first PCM chunk, then streaming tail
 ```
 
-The graph policy supports B1..B8, B16 and B32, while the shipped runtime
-defaults to `max_batch: 8` and therefore prepares B1..B8. Selecting B16/B32
-through the service configuration prepares those additional exact-size graphs. The
+The graph policy can represent B16/B32 for legacy experiments, while the shipped
+Unified AR deployment is validated and explicitly limited to B1..B8. The runtime
+defaults to `max_batch: 8`; selecting a larger batch with the Unified AR config is
+rejected rather than silently falling back. The
 first-packet Prefill and Latent routes use logical 48/80 buckets; overflow and
 variable tails remain explicit fallback paths. The default admission batch is
 8 and can be changed with `--batch`.
@@ -38,6 +39,32 @@ all-ready/fallback status per AR round; a rare device residual fallback restarts
 that group through the prior exact path. Tail, unsupported intermediate batches
 and longer KV retain the established implementation. The complete parent-round
 CUDA Graph candidate was slower and is not enabled.
+
+### Unified AR
+
+The SM120 default uses one fixed backend per semantic AR role; batch size no
+longer selects cuBLAS, compiler Triton, explicit-pipeline or Full-M backends.
+
+- Target M8..64 and Draft M7..56 share one combined-QKV kernel family with
+  BN32/BK128 and a fixed two-stage shared ring. Draft always performs one QKV
+  GEMM, not three projections.
+- Deep Q/K and persistent K caches use E4M3 with two block32 scales per head.
+  QK uses native FP8 MMA with FP32 accumulation. V cache, Softmax and P×V remain
+  FP32; the protected shallow quarter remains FP32 throughout.
+- Target K and Draft Context K write directly to request slots. Attention writes
+  the Out-GEMM consumer layout directly.
+- Out, Up and Down each use one fixed role-specific backend/schedule across all
+  B1..B8 shapes. Their norm, GELU and residual boundaries remain explicit.
+- Initial Prefix K conversion is one precompiled direct-slot kernel. Serving
+  performs no Triton compilation, CUDA Graph capture or torch.compile call.
+
+Same-process alternating tests on one RTX6000D measured first-PCM P50 changes of
+32.53→31.48ms (B1), 60.91→58.52ms (B4), and 74.74→71.18ms (B8). A 256-stream
+quality gate measured UTMOS -0.31% and CER +0.446 percentage points. Final custom
+kernels passed memcheck; the shared-pipeline Target/Draft replays passed racecheck.
+These measurements are workload-specific, not service guarantees.
+
+Roll back the complete Unified AR update with `configs/sm120_pre_unified_ar.json`.
 
 The selected device path was validated on256 full streamed utterances against
 the previous release: UTMOS changed by -1.38% and CER by +0.00893. On the

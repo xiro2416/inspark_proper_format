@@ -17,6 +17,7 @@ class BatchedContextAppend:
         self.pool=None
         self.graphs={}
         self.graph_scatter=False
+        self.graph_direct=False
     def release(self,cache):
         if self.pool is not None:self.pool.release(cache)
 
@@ -38,7 +39,16 @@ class BatchedContextAppend:
         scatter(keys,values,self.pool.storage,source,lengths,slots,destinations)
         return prepared[:, :1, :1]
 
-    def prepare_graphs(self,max_batch,scatter=False,totals=None):
+    def _project_scatter_direct(self,prepared,positions,source,lengths,slots,destinations):
+        m=self.model;default=None if m.context_fusion_mode=='depth_aligned' else m.project_context(prepared)
+        from acc_infer_clear.kernels.context_scatter import scatter_layer
+        for index,layer in enumerate(m.layers):
+            context=m.project_context(prepared,index) if default is None else default
+            key,value=(layer.context_kv(context,positions) if m.architecture=='official_qwen3' or m.random_rope_draft else layer.context_kv(context))
+            scatter_layer(key,value,self.pool.storage,index,source,lengths,slots,destinations)
+        return prepared[:, :1, :1]
+
+    def prepare_graphs(self,max_batch,scatter=False,totals=None,direct=False):
         """Capture total-committed-token buckets; no lazy capture in inference."""
         if self.graphs:raise RuntimeError('Context graphs already prepared')
         from acc_infer_clear.runtime.graphs import capture
@@ -54,12 +64,14 @@ class BatchedContextAppend:
                       torch.zeros(max_batch,device=device,dtype=torch.int32),
                       torch.zeros(max_batch,device=device,dtype=torch.int32),
                       torch.zeros(max_batch,device=device,dtype=torch.int32))
-                self.graphs[total]=capture(self._project_scatter,(prepared,positions,*meta))
+                fn=self._project_scatter_direct if direct else self._project_scatter
+                self.graphs[total]=capture(fn,(prepared,positions,*meta))
             else:self.graphs[total]=capture(self._project,(prepared,positions))
         self.graph_scatter=bool(scatter)
+        self.graph_direct=bool(direct)
         return dict(total_token_buckets=sorted(self.graphs),online_capture=False,
                     padding='next_multiple_of_8',precision_unchanged=True,
-                    fused_slot_scatter=self.graph_scatter)
+                    fused_slot_scatter=self.graph_scatter,direct_layer_scatter=self.graph_direct)
 
     @torch.inference_mode()
     def __call__(self, jobs):
