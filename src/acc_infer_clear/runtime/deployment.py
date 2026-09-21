@@ -5,7 +5,7 @@ from pathlib import Path
 FIELDS={'schema','status','precision','components','convolutions','rnn_precision',
         'target_graphs','draft_graphs','proposal_graphs','prefix_graphs','head_graphs',
         'slot_draft','overlap_acoustics','fused_acceptance','tail_graphs'}
-OPTIONAL={'draft_qkv_fusion','cublas_bf16_up','batched_proposal_rng','batched_proposal_rng_min_batch','full_m_plan','target_norm_quant','target_residual_fusion','context_graphs','context_scatter','device_accept_plan','device_residual','device_round_b8','device_parent_graph','attention_consumer_layout','context_direct_slot','unified_ar'}
+OPTIONAL={'draft_qkv_fusion','cublas_bf16_up','batched_proposal_rng','batched_proposal_rng_min_batch','full_m_plan','target_norm_quant','target_residual_fusion','context_graphs','context_scatter','device_accept_plan','device_residual','device_round_b8','device_parent_graph','attention_consumer_layout','context_direct_slot','unified_ar','planner_v2_manifest','planner_v2_apply'}
 
 def validate(plan):
     extra={'acoustic_kernels','acoustic_plan','head_batch_barrier'} if plan.get('schema') in (2,3,4,5,6,7,8) else set()
@@ -42,10 +42,12 @@ def validate(plan):
     if len(set(plan['components']))!=len(plan['components']):raise ValueError('Duplicate components')
     for key in FIELDS-{'schema','status','precision','components','rnn_precision'}:
         if not isinstance(plan[key],bool):raise ValueError('Expected bool for '+key)
-    for key in optional-{'batched_proposal_rng_min_batch','full_m_plan'}:
+    for key in optional-{'batched_proposal_rng_min_batch','full_m_plan','planner_v2_manifest'}:
         if not isinstance(plan[key],bool):raise ValueError('Expected bool for '+key)
     if 'full_m_plan' in optional and (not isinstance(plan['full_m_plan'],str) or not plan['full_m_plan']):raise ValueError('Expected validated full-M plan path')
     if 'batched_proposal_rng_min_batch' in optional and plan['batched_proposal_rng_min_batch'] not in (1,2,3,4,5,6,7,8,16,32):raise ValueError('Invalid batched Proposal RNG threshold')
+    if 'planner_v2_manifest' in optional and (not isinstance(plan['planner_v2_manifest'],str) or not plan['planner_v2_manifest']):raise ValueError('Expected Planner V2 manifest path')
+    if plan.get('planner_v2_apply') and not plan.get('planner_v2_manifest'):raise ValueError('Planner V2 apply requires a manifest')
     if plan['tail_graphs']:raise ValueError('Variable-tail acoustic graphs are not implemented')
     return dict(plan)
 
@@ -61,6 +63,7 @@ def load(path):
     if plan.get('prefix_plan') and not Path(plan['prefix_plan']).is_absolute():plan['prefix_plan']=str((path.parent/plan['prefix_plan']).resolve())
     if plan.get('prefix_padding_plan') and not Path(plan['prefix_padding_plan']).is_absolute():plan['prefix_padding_plan']=str((path.parent/plan['prefix_padding_plan']).resolve())
     if plan.get('full_m_plan') and not Path(plan['full_m_plan']).is_absolute():plan['full_m_plan']=str((path.parent/plan['full_m_plan']).resolve())
+    if plan.get('planner_v2_manifest') and not Path(plan['planner_v2_manifest']).is_absolute():plan['planner_v2_manifest']=str((path.parent/plan['planner_v2_manifest']).resolve())
     return plan
 
 def prepare(engine,plan):
@@ -77,6 +80,9 @@ def prepare(engine,plan):
                 hardware_validation='RTX6000D SM120 tested; other device models require validation',online_learning=False,tail_graphs=False)
     engine.deployment_state='preparing'
     try:
+        if plan.get('planner_v2_manifest'):
+            from acc_infer_clear.planner_v2.deploy import prepare as prepare_planner_v2
+            result['planner_v2']=prepare_planner_v2(engine,plan['planner_v2_manifest'],apply=plan.get('planner_v2_apply',False))
         if result['resolved_precision']!='fp32':
             result['precision']=engine.prepare_precision(result['resolved_precision'],plan['components'],plan['convolutions'])
         if result['resolved_rnn_precision']!='fp32':result['rnn']=engine.prepare_rnn_precision(result['resolved_rnn_precision'])

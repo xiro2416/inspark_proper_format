@@ -4,6 +4,10 @@ The committed plan is an RTX 6000D/SM120 deployment, not a universal GPU plan.
 For another GPU, reuse the structure and validation method—not the selected
 tiles or FP8 assumptions.
 
+Use [PLANNER_V2.md](PLANNER_V2.md) for the executable hardware/operator model,
+candidate formulae, manifest lifecycle and the strict offline calibration
+contract. This document remains the concise operational checklist.
+
 ## What the SM120 path does
 
 - Keeps the shallow quarter of each serial model in BF16/FP32 where required;
@@ -43,4 +47,3 @@ tiles or FP8 assumptions.
 Do not assume that higher occupancy, fewer bank conflicts, more stages or a
 larger BM is automatically faster. Component and first-packet latency are the
 final selectors.
-

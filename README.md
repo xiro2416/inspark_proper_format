@@ -9,6 +9,12 @@ The published execution plans are validated only for NVIDIA RTX 6000D
 (SM120, 156 SMs), CUDA 12.8, PyTorch 2.8.0+cu128 and Triton 3.5.0. Do not copy
 the SM120 tile plans to SM80/86; see [PORTING.md](PORTING.md).
 
+The repository also includes an offline, manifest-driven
+[Planner V2](PLANNER_V2.md). It derives legal tile/layout/stage candidates from
+device resources, then requires target-GPU calibration and hard performance and
+quality gates. The current SM120 release remains the default; analytic or shadow
+manifests cannot change runtime schedules.
+
 ## Pipeline
 
 ```text
