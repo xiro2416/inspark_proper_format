@@ -26,8 +26,8 @@ intermediate milestone, not completion of the overall goal.
 - [x] Fix request RNG/cache/buffer isolation and test cancellation/reuse/fallback (long soak remains separate).
 - [x] Run per-stage numerical and 256-case quality audits with honest statuses (numerical failed; relative quality gates passed).
 - [x] Measure operators and end-to-end paths on GPU 6 (experimental results; numerical failures retained).
-- [ ] Run concurrency 1/4/8/16, ten minutes each; record and skip 16 on OOM.
-- [ ] Publish SM89-specific reports and README; verify final remote commit.
+- [x] Run concurrency 1/4/8/16, ten minutes each; retain B4 one-wave RSS failure and separate fully warmed control. No 16-concurrency OOM occurred.
+- [x] Publish SM89-specific reports and README; verify remote commit (main implementation verified at `8256ede`; final supplemental evidence accompanies this update).
 
 FP32 tolerances: atol=1e-5, rtol=1e-4. BF16 arithmetic tolerances:
 atol=1e-2, rtol=1e-2. Reduction-order differences within tolerance are allowed.
@@ -168,3 +168,21 @@ has known numerical failures, retained as evidence.
   B8 engine profile; they do not certify the original shared-RNG profile or
   legacy engine checkpoint provenance. B4's separate 128-wave warmup control
   has started, with unchanged 600-second measurement and memory thresholds.
+- 2026-09-22 18:52 UTC: B4's separately warmed control passed 601.78 measured
+  seconds, 939 EOS requests and 93 cancellations. Setup was 42.59 seconds and
+  corpus warmup 319.26 seconds, both excluded. Drained CUDA growth was zero;
+  RSS growth 9.52 MiB and late slope 0.353 MiB/min passed unchanged budgets.
+  The original one-wave B4 +287.71 MiB RSS failure remains published, and its
+  exact cause is not claimed resolved. No additional GPU jobs remain; GPU6
+  returned to the original 21,854 MiB external allocation at 0% utilization.
+
+## Final outcome
+
+Both implementation stages and required audits are complete within the six-hour
+target. Completion means implementation, measurement and publication, **not**
+that every candidate gate passed: strict TRT/most compile numerical gates fail,
+the original B8 engine provenance remains unverified, and B4 needs the explicit
+RSS/warmup qualification above. FP32 eager remains the default. All failed
+reports and original metadata are retained; no weight, engine or audio binaries
+are published. The final remote SHA is verified after publication and reported
+in the handoff rather than embedded as a self-referential commit hash.

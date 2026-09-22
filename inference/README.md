@@ -39,6 +39,14 @@ This does not waive the failed numerical gates or certify high subjective
 quality: FP32 baseline automatic UTMOS is about 1.64. See the
 [quality table and provenance limits](../reports/sm89/stage2/README.md#complete-eos-paired-quality-256-cases-per-arm).
 
+Ten-minute request-isolated soaks passed at 1/8/16 admitted concurrency
+(maximum model batch 8). B4 with one warmup wave **failed** the RSS growth budget
+(287.71 >256 MiB). A separate B4 run passed after 319.26 seconds of corpus
+warmup, with 9.52 MiB measured RSS growth; it does not erase the original failure.
+No 32/64-concurrency or indefinite-stability claim is made. Full evidence,
+memory budgets and the mixed outcome are in the
+[stability report](../reports/sm89/stage2/README.md#initial-ten-minute-soak-b1-passed-b4-rss-budget-failed).
+
 ## Run
 
 Linux/CUDA, local pinned model assets and one visible GPU are required. From the

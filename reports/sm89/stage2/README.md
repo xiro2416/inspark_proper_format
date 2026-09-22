@@ -323,10 +323,22 @@ from live allocation; its growth is not silently substituted for the live-memory
 gate. Every measurement includes admission, inference, receive, cleanup and
 monitoring/reporting overhead and drains its last wave fully.
 
-A separately labeled B4 fully warmed control is in progress. It will not replace
-or erase the one-wave RSS growth failure; preparation cost, warmup count and
-measured window must be reported explicitly. These are bounded stability
-observations, not numerical, quality or indefinite leak-free certification.
+The separate [B4 warmed control](runtime/soak_600_c4_warmed128.json)
+([original log](runtime/soak_600_c4_warmed128.log)) passed after **128 warmup
+waves / 512 requests**. Setup took 42.59 seconds, the RNG probe 0.11 seconds,
+and warmup **319.26 seconds**; none counts toward the **601.78-second** measured
+window. That window completed **939 EOS requests and 93 cancellations**, with
+maximum observed KV 596. Peak drained CUDA growth was **0.00 MiB**, RSS growth
+**9.52 MiB**, and late RSS slope **0.353 MiB/min**, under the unchanged budgets.
+
+This establishes only the separately prepared, bounded steady-state window.
+It **does not repair or erase the original B4 +287.71 MiB one-wave growth
+failure**, eliminate the substantial warmup cost, or prove its underlying cause.
+The application inference code and memory thresholds were unchanged between
+these runs. Only the diagnostic-label fix separates the predicates correctly.
+The appropriate conclusion is: one-wave B1/8/16 passed; one-wave B4 failed RSS;
+explicitly warmed B4 passed. It is not an unconditional all-tier stability pass,
+numerical/quality certification or an indefinite leak-free guarantee.
 
 ## Complete-EOS paired quality: 256 cases per arm
 
@@ -394,11 +406,12 @@ mirror. This is a clean dependency-solver check, **not** a fresh environment
 installation or GPU execution. The running environments were left unchanged;
 unused historical installed packages were not silently removed.
 
-## Subsequent evidence
+## Reproduction and scope
 
-The B4 warmed control will be indexed separately when completed. Nothing here
-claims that outstanding gate passed.
-Reproduction commands and external asset
-requirements are in [SM89_AUDIT.md](../../../inference/docs/SM89_AUDIT.md). Preserve the
-directories above and their original JSON; append later runs under distinct
-names, retain failures and verify copied-file hashes before publication.
+The two-stage implementation and the listed audits are complete; their gates
+are not all passed. Reproduction commands and external asset requirements are
+in [SM89_AUDIT.md](../../../inference/docs/SM89_AUDIT.md), with stability policy and
+the warmed-control command in [SOAK.md](../../../inference/benchmarks/SOAK.md).
+Preserve original reports, including failures. New hardware, engines, weights,
+shapes, corpus, precision or backend settings require new validation; these
+SM89 observations do not recertify historical SM120 results.
