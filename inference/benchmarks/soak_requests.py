@@ -242,8 +242,10 @@ def memory_gate(before,snapshots,args):
             growth_limit_mib=growth_limit,growth_passed=max(growth)<=growth_limit,
             late_slope_mib_per_min=slope,slope_limit_mib_per_min=slope_limit,
             trend_passed=(slope is not None and slope<=slope_limit) if sufficient else None)
-    return dict(passed=all(value['growth_passed'] and value['trend_passed'] is True for value in results.values()),
-        absolute_passed=all(value['growth_passed'] for value in results.values()),
+    absolute_passed=all(value['growth_passed'] for value in results.values())
+    trend_passed=sufficient and all(value['trend_passed'] is True for value in results.values())
+    return dict(passed=absolute_passed and trend_passed,
+        absolute_passed=absolute_passed,trend_passed=trend_passed,
         trend_sufficient=sufficient,late_samples=len(late),late_span_seconds=span,
         min_samples=args.memory_min_samples,min_span_seconds=args.memory_min_span_seconds,
         metrics=results,scope='Post-wave fully drained live CUDA/RSS memory; reserved allocator cache is recorded but not treated as a leak')
@@ -269,7 +271,7 @@ def pass_gate(result,args):
             all(count>=0 for count in target_delta.values()),
         per_request_legacy_rng=result['after']['rng_policy']=='legacy_per_request',
         rng_boundaries=result['rng_boundary_checks']['passed'],empty_input_error_recovery=len(result['expected_error_checks'])==2,
-        memory_absolute=memory['absolute_passed'],memory_trend=(memory['passed'] if soak else True))
+        memory_absolute=memory['absolute_passed'],memory_trend=(memory['trend_passed'] if soak else True))
     passed=all(checks.values())
     return dict(passed=passed,validation_level='soak' if soak else 'smoke',soak_qualified=passed and soak,
         checks=checks,failed_checks=[name for name,value in checks.items() if not value],

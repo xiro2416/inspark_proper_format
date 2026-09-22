@@ -16,7 +16,7 @@ The archive paths have distinct scopes:
 - `builds/{cfm,vocoder}/`: new B1/B4 export, engine-build and plan metadata, kept separate from the legacy capture.
 - `real_safe_b{1,4}_audited/`: source-attested real AR/acoustic captures and their independent FP32/BF16 replays, including failures.
 - `real_legacy_b8/`: original shared-device-RNG B8 capture/replays, with unverified legacy engine origins.
-- `runtime/`: controlled-input CUDA RNG/acceptance checks, a short functional soak smoke and an original GPU-busy rejection log, not a completed long-duration soak.
+- `runtime/`: controlled-input CUDA RNG/acceptance checks, functional smoke, formal soak attempts including failures, regression logs and the original GPU-busy rejection.
 - `quality/`: paired complete-EOS quality reports and the original per-arm generation summaries/JSONL; generated audio is not published.
 - `environment/`: dependency-resolution inputs/output and packaging/CLI checks; no fresh-environment GPU certification is implied.
 
@@ -267,6 +267,43 @@ execution, not numerical acceptance. The log does not establish whether the
 23% utilization came from another process or residual activity of prior work;
 no such attribution is made. Both the rejection and later result are retained.
 
+## Initial ten-minute soak: B1 passed, B4 RSS budget failed
+
+The [initial formal run](runtime/soak_600_initial.json) used the TF32-disabled
+reference runtime, one warmup wave per tier and the unchanged memory budgets.
+The [original execution log](runtime/soak_600_initial.log) records its nonzero
+exit after B4. Both completed tiers are retained; **this run failed overall**
+and did not reach 8/16 concurrency.
+
+| Concurrency / model batch | Measured seconds | Complete EOS / cancelled | Maximum observed KV | Peak drained CUDA growth, MiB | Peak drained RSS growth, MiB | Late RSS slope, MiB/min | Result |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | --- |
+| 1 / B1 | 600.77 | 489 / 48 | 607 | 0.00 | 138.21 | 1.377 | Passed |
+| 4 / B4 | 601.34 | 866 / 86 | 596 | 0.00 | 287.71 | 1.106 | Failed: RSS growth >256 MiB |
+
+Both tiers passed actual concurrency, complete EOS, long KV, microbatch limits,
+per-request RNG boundary checks, error recovery and fully drained slot ownership.
+B4's post-warmup RSS rose from 3,513.63 to 3,801.34 MiB, exceeding the fixed
+256 MiB growth budget. About 93.2% of that growth occurred in the first 91 seconds;
+the last 300 seconds added approximately 5.38 MiB. The late slope passed the
+16 MiB/min limit. This supports investigating initialization, shape/text caches
+or allocator high-water retention, **not** a proven root cause or a guarantee
+that there is no slow leak. Parent-side report history cannot explain the metric:
+RSS is measured in the model worker. No thresholds were relaxed.
+
+The original top-level B4 `failed_checks` lists both `memory_absolute` and
+`memory_trend`: its diagnostic combined the absolute and trend predicates.
+The underlying `memory.metrics.*.trend_passed` fields correctly remain true.
+Subsequent code separates those diagnostic labels while keeping the same
+overall conjunction and thresholds. [Regression tests](runtime/soak_diagnostic_labels_tests.log)
+cover both an over-budget early allocation with flat late RSS and an excessive
+late slope with a below-budget peak. The original JSON was not rewritten.
+
+Independent 8/16-concurrency runs and a separately labeled B4 fully warmed
+control are in progress. A warmed control will not replace or erase this cold
+growth failure; its preparation cost, warmup count and measured window must be
+reported explicitly. These are bounded stability observations, not numerical,
+quality, isolated-device performance or indefinite leak-free certification.
+
 ## Complete-EOS paired quality: 256 cases per arm
 
 All five generation arms completed exactly 256 requests through EOS. The four
@@ -314,7 +351,8 @@ reproduction commands are in [SM89_AUDIT.md](../../../inference/docs/SM89_AUDIT.
 
 ## Packaging and dependency checks
 
-The final [CPU suite](runtime/stage2_cpu_tests_final.log) passed 211 tests; four
+The latest [CPU suite](runtime/stage2_cpu_tests_soak_labels.log) passed 212 tests;
+the [earlier 211-test run](runtime/stage2_cpu_tests_final.log) is retained. Four
 GPU-only tests were skipped there and [passed separately on GPU6](runtime/gpu_boundary_tests_v2.log).
 The [CLI help check](environment/cli_help_final.log) and
 [offline wheel build](environment/wheel_final_build.log) completed. The checked
@@ -334,8 +372,9 @@ unused historical installed packages were not silently removed.
 
 ## Subsequent evidence
 
-Full 600-second concurrency tiers will be indexed separately when completed.
-Nothing here claims those outstanding gates passed. Reproduction commands and external asset
+Remaining 600-second concurrency tiers and the B4 warmed control will be indexed
+separately when completed. Nothing here claims those outstanding gates passed.
+Reproduction commands and external asset
 requirements are in [SM89_AUDIT.md](../../../inference/docs/SM89_AUDIT.md). Preserve the
 directories above and their original JSON; append later runs under distinct
 names, retain failures and verify copied-file hashes before publication.

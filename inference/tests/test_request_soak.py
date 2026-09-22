@@ -160,6 +160,29 @@ class RequestSoak(unittest.TestCase):
         self.assertFalse(gate['absolute_passed'])
         self.assertEqual(gate['metrics']['cuda_allocated_bytes']['final_growth_mib'],0)
 
+    def test_absolute_and_trend_failures_have_independent_diagnostics(self):
+        case=dict(id='case',text='真实测试句子。',seed=7,emotion=[0.]*8);clock=Clock()
+        factory=lambda config,gpu,workers:FakePool(config,gpu,workers,clock=clock)
+        with redirect_stdout(io.StringIO()):
+            result=soak.run_tier(args(seconds=600),{}, {},[case],4,factory,clock=clock)
+        baseline=result['before']['memory']['rss_bytes']
+        # An early retained allocation exceeds the absolute budget but is flat
+        # throughout the late window. Overall failure must still be retained.
+        for snapshot in result['snapshots']:
+            snapshot['memory']['rss_bytes']=baseline+300*1024**2
+        gate=soak.pass_gate(result,args(seconds=600))
+        self.assertFalse(gate['passed'])
+        self.assertEqual(gate['failed_checks'],['memory_absolute'])
+        self.assertTrue(gate['checks']['memory_trend'])
+        # A persistent 6 MiB/min trend can instead fail under the 64 MiB peak.
+        for snapshot in result['snapshots']:
+            snapshot['memory']['rss_bytes']=baseline
+            snapshot['memory']['cuda_allocated_bytes']=int(snapshot['elapsed_s']*.1*1024**2)
+        gate=soak.pass_gate(result,args(seconds=600))
+        self.assertFalse(gate['passed'])
+        self.assertEqual(gate['failed_checks'],['memory_trend'])
+        self.assertTrue(gate['checks']['memory_absolute'])
+
     def test_smoke_excludes_setup_warmup_and_does_not_qualify_as_soak(self):
         case=dict(id='case',text='真实测试句子。',seed=7,emotion=[0.]*8);clock=Clock()
         factory=lambda config,gpu,workers:FakePool(config,gpu,workers,clock=clock)

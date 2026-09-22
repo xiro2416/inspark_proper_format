@@ -153,3 +153,12 @@ has known numerical failures, retained as evidence.
   BF16 eager B1 against FP32 eager. Baseline UTMOS 1.643671675 / CER 144/4093;
   these are relative automatic gates, not high subjective quality or numerical
   equivalence. The original B8 engine provenance remains unverified.
+- 2026-09-22 18:10 UTC: the first formal soak passed B1 (489 EOS, 48 cancelled)
+  but failed B4's absolute RSS budget: +287.71 MiB versus the fixed 256 MiB
+  limit, after 866 EOS and 86 cancellations. CUDA live growth was zero; the
+  actual late RSS slope passed at 1.106 MiB/min. Original failure evidence is
+  preserved. A diagnostic label incorrectly coupled absolute and trend checks;
+  it is now separated without changing the overall gate or any threshold.
+  Full CPU regression after that diagnostic-only change: 212 passed, four GPU
+  tests skipped. Independent 8/16 tiers are running; a clearly separate warmed
+  B4 control is planned to test the observed early-growth/late-plateau behavior.
