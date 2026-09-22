@@ -15,10 +15,20 @@ def _worker(gpu,config,pipe):
             cmd,args,kwargs=pipe.recv()
             if cmd=='close':break
             try:
-                if cmd=='stats':result=dict(sessions=len(engine.sessions),draft_calls=engine.rt.proposal.calls,target_calls=engine.rt.target.calls)
+                if cmd=='stats':result=dict(sessions=len(engine.sessions),draft_calls=engine.rt.proposal.calls,target_calls=engine.rt.target.calls,
+                    device_round_attempts=engine.device_round_attempts,device_round_successes=engine.device_round_successes,
+                    device_round_fallbacks=engine.device_round_fallbacks,
+                    native_target_steps=getattr(engine.rt,'native_target_steps',0),
+                    native_draft_steps=getattr(engine.rt.backbone,'native_full_steps',0),
+                    native_draft_compare=list(getattr(engine.rt.backbone,'native_compare',())),
+                    native_cfm_backend=getattr(getattr(engine,'student',None),'identity',{}).get('backend'),
+                    native_cfm_calls=getattr(getattr(engine,'student',None),'calls',0),
+                    native_cfm_fallbacks=getattr(getattr(engine,'student',None),'fallbacks',0))
                 elif cmd=='result':
                     s=engine.sessions[args[0]]
-                    result=dict(id=args[0],text=s['text'],parts=s['parts'],codes=s['codes'],complete=s['complete'],error=s['error'],chunks=s['chunks'],arrival=s['arrival'])
+                    result=dict(id=args[0],text=s['text'],parts=s['parts'],codes=s['codes'],complete=s['complete'],error=s['error'],chunks=s['chunks'],arrival=s['arrival'],
+                                rounds=s.get('rounds'),accepted=list(s.get('accepted') or []),
+                                kv_head_lengths=s.get('kv_head_lengths'),eos=s.get('eos'))
                 elif cmd in ('run_ready','tick'):
                     getattr(engine,cmd)(on_chunk=lambda event:pipe.send(dict(ok=True,kind='chunk',event=event)))
                     result=[]
@@ -57,6 +67,10 @@ class Pool:
     def prepare_deployment(self,plan):
         # Sequential preparation; there are no admitted requests at this point.
         return [self._call(w,'prepare_deployment',plan) for w in range(len(self.pipes))]
+    def configure_profiling(self,enabled=True,trace_ranges=False):
+        return [self._call(w,'configure_profiling',enabled,trace_ranges) for w in range(len(self.pipes))]
+    def take_profile(self):
+        return [self._call(w,'take_profile') for w in range(len(self.pipes))]
     def create_session(self,request_id,voice_id,seed=0,emotion=None,arrival=None):
         if request_id in self.owners:raise ValueError('Duplicate request id')
         w=len(self.owners)%len(self.pipes)
@@ -91,6 +105,7 @@ class Pool:
                 events.extend(rows)
         return events
     def result(self,request_id):return self._call(self.owners[request_id],'result',request_id)
+    def stats(self):return [self._call(w,'stats') for w in range(len(self.pipes))]
     def release(self,request_id):
         self._call(self.owners[request_id],'release',request_id);self.owners.pop(request_id)
     def cancel(self,request_id):

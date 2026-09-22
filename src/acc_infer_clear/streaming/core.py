@@ -13,6 +13,9 @@ class AcousticOp:
 class StreamingCore:
 
     def phase(self, name, batch, fn, **metadata):
+        cuda_start=cuda_end=None
+        if getattr(self,'profile_cuda',False):
+            cuda_start=self.torch.cuda.Event(enable_timing=True);cuda_end=self.torch.cuda.Event(enable_timing=True);cuda_start.record()
         start = time.perf_counter()
         if getattr(self,'trace_ranges',False):
             with self.torch.profiler.record_function(name):
@@ -21,6 +24,8 @@ class StreamingCore:
                 finally:self.torch.cuda.nvtx.range_pop()
         else:out = fn()
         end = time.perf_counter()
+        if cuda_end is not None:
+            cuda_end.record();self.profile_spans.append(dict(name=name,batch=batch,start=cuda_start,end=cuda_end,host_ms=(end-start)*1000,metadata=metadata))
         self.stages.append(dict(stage=name, batch=batch, start=start, end=end, host_ms=(end - start) * 1000, **metadata))
         return out
 

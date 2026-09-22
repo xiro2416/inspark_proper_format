@@ -73,15 +73,21 @@ class ProjectionRope(torch.nn.Module):
         return out[0],out[1],out[2]
 
 def install(model,parts=('norm','gate','rope')):
-    changed=[]
+    requested=set(parts)
+    if not requested or not requested<= {'norm','gate','rope'}:
+        raise ValueError('parts must be a non-empty subset of norm/gate/rope')
+    changed=[];installed=set()
     def walk(module,prefix):
         for name,child in list(module.named_children()):
             path=prefix+'.'+name
             if 'norm' in parts and type(child).__name__=='AdaptiveLayerNorm' and type(child.norm).__name__=='RMSNorm':
-                module.add_module(name,AdaptiveRMS(child));changed.append(path)
-            elif 'gate' in parts and type(child).__name__=='FeedForward':module.add_module(name,GatedFFN(child));changed.append(path)
+                module.add_module(name,AdaptiveRMS(child));changed.append(path);installed.add('norm')
+            elif 'gate' in parts and type(child).__name__=='FeedForward':module.add_module(name,GatedFFN(child));changed.append(path);installed.add('gate')
             elif 'rope' in parts and type(child).__name__=='Attention' and hasattr(child,'wqkv') and child.n_head==child.n_local_heads:
                 if getattr(child,'_acc_qkv_rope',None) is not None:raise RuntimeError('Existing QKV hook must not be overwritten')
-                child._acc_qkv_rope=ProjectionRope(child.wqkv,child.n_head,child.head_dim);changed.append(path+'._acc_qkv_rope')
+                child._acc_qkv_rope=ProjectionRope(child.wqkv,child.n_head,child.head_dim);changed.append(path+'._acc_qkv_rope');installed.add('rope')
             else:walk(child,path)
-    walk(model,'cfm');return changed
+    walk(model,'cfm')
+    missing=requested-installed
+    if missing:raise RuntimeError('Requested CFM fusion parts were not installed: '+','.join(sorted(missing)))
+    return changed

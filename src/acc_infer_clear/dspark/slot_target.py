@@ -27,6 +27,7 @@ class SlotTarget(BatchedTarget):
         self.pool_import=self.import_cache;self.graphs={};self.graph_hits=0;self.graph_sealed=False
         self.consumer_layout=bool(consumer_layout)
         self.trace_subcomponents=False
+        self.native_attention=None;self.native_graphs={};self.native_graph_hits=0;self.native_full_bank=None
     def _profile_scope(self,name):
         return torch.profiler.record_function(name) if self.trace_subcomponents else nullcontext()
     def import_cache(self,packed,row,length):
@@ -34,6 +35,10 @@ class SlotTarget(BatchedTarget):
         if length+8>self.capacity:raise ValueError('Target KV capacity exceeded')
         slot=self.free.pop();self.generations[slot]+=1
         self.storage[:,:,slot,:,:length].copy_(packed[:,:,row,:,:length])
+        if self.native_attention is not None:
+            self.native_attention.import_slot(packed,row,slot,length)
+        if self.native_full_bank is not None:
+            self.native_full_bank.import_slot(packed,row,slot,length)
         return SlotKV(self,slot,length,self.generations[slot])
     def prefill(self,jobs):
         outputs=super().prefill(jobs)
@@ -42,7 +47,7 @@ class SlotTarget(BatchedTarget):
         return outputs
     def release(self,kv):
         if isinstance(kv,SlotKV) and not kv.released:
-            kv.check();kv.released=True;self.free.append(kv.slot)
+            kv.check();kv.released=True;self.free.append(kv.slot);self.free.sort(reverse=True)
     def math(self,x,slots,lengths,limit):
         tm=self.target.model;model=tm.transformer;selected=[];hidden=x
         # Input already contains original absolute embeddings; this model's wpe is null.
@@ -77,6 +82,35 @@ class SlotTarget(BatchedTarget):
                 lengths=torch.full((b,),limit-8,device=x.device,dtype=torch.int32)
                 self.graphs[b,limit]=capture(lambda xx,ss,ll:self.math(xx,ss,ll,limit),(x,slots,lengths))
         self.graph_sealed=True
+    def attach_native_attention(self,backend):
+        if self.graph_sealed:raise RuntimeError('Attach native attention before graph capture')
+        self.native_attention=backend
+    def attach_native_full_bank(self,bank):
+        self.native_full_bank=bank
+    def native_math(self,x,slots,lengths,limit):
+        if limit!=128:raise ValueError('TRT 11.3 first-head attention is K=128 only')
+        tm=self.target.model;model=tm.transformer;selected=[];hidden=x
+        for index,block in enumerate(model.h):
+            normalized=block.ln_1(hidden);a=block.attn;qkv=a.c_attn(normalized)
+            out=self.native_attention.run(index,qkv,self.keep,slots,lengths)
+            consumer=(out.reshape(x.shape[0],8,a.embed_dim) if self.consumer_layout else
+                      out.transpose(1,2).contiguous().view(x.shape[0],8,a.embed_dim))
+            hidden=hidden+a.c_proj(consumer)
+            hidden=hidden+block.mlp(block.ln_2(hidden))
+            if index in self.target.target_layer_ids:selected.append(hidden)
+        final=model.ln_f(hidden)
+        return tm.lm_head(final),torch.cat(selected,dim=-1),final
+    def prepare_native_graphs(self,batch_values):
+        if self.native_attention is None:raise RuntimeError('Native attention is not attached')
+        if len(self.free)!=self.max_slots:raise RuntimeError('Capture before admitting requests')
+        param=next(self.target.model.parameters())
+        for b in batch_values:
+            if b not in self.native_attention.engines:continue
+            slots=torch.arange(b,device=param.device,dtype=torch.int32)
+            lengths=torch.full((b,),120,device=param.device,dtype=torch.int32)
+            x=param.new_zeros(b,8,self.target.model.transformer.embed_dim)
+            self.native_graphs[b,128]=capture(lambda xx,ss,ll:self.native_math(xx,ss,ll,128),(x,slots,lengths))
+        return dict(keys=[list(k) for k in self.native_graphs],backend='TensorRT 11.3 native attention')
     def __call__(self,jobs):
         if not jobs:return []
         for x,kv,mask,pos in jobs:

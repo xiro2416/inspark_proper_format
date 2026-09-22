@@ -27,20 +27,26 @@ def emit(value, output):
         print(text)
 
 
+def inventory(args, p):
+    return canonical_inventory(p, batches=tuple(args.batches), matrix_dtype=args.matrix_dtype)
+
+
 def command_inventory(args):
-    p = profile(args); signatures = canonical_inventory(p, batches=tuple(args.batches))
+    p = profile(args); signatures = inventory(args, p)
     emit(dict(hardware=p.as_dict(), signatures={k: v.as_dict() for k, v in keyed(signatures).items()},
               performance_claim=p.rates is not None), args.output)
 
 
 def command_candidates(args):
-    p = profile(args); signatures = canonical_inventory(p, batches=tuple(args.batches))
+    p = profile(args); signatures = inventory(args, p)
     selected = [s for s in signatures if tunable(s) and (not args.role or s.role_key == args.role)]
     rows = {}
     for signature in selected:
         key = f'{signature.role_key}:{signature.shape_key}'
         rows[key] = [dict(schedule=s.as_dict(), estimate=e) for s, e in generate_candidates(p, signature, limit=args.limit)]
-    emit(dict(hardware=p.as_dict(), candidates=rows, analytic_only=p.rates is None), args.output)
+    emit(dict(hardware=p.as_dict(), matrix_dtype=args.matrix_dtype or p.preferred_matrix_dtype,
+              batches=sorted(set(args.batches)), candidates=rows,
+              analytic_only=p.rates is None), args.output)
 
 
 def command_shadow(args):
@@ -52,7 +58,7 @@ def command_shadow(args):
         from acc_infer_clear.planner_v2.deploy import model_hash as hash_model, source_hash as hash_source, toolchain as current_toolchain
         config=load_config(args.current_config);model_hash=hash_model(config);source_hash=hash_source(ROOT);toolchain=current_toolchain()
     if not model_hash or not source_hash:raise ValueError('Provide hashes or --current-config')
-    signatures = canonical_inventory(p, batches=tuple(args.batches)); mapped = keyed(signatures)
+    signatures = inventory(args, p); mapped = keyed(signatures)
     policies = {}
     tunable_signatures = [signature for signature in signatures if tunable(signature)]
     for role in sorted({signature.role_key for signature in tunable_signatures}):
@@ -71,6 +77,7 @@ def command_shadow(args):
     manifest = DeploymentManifest(
         hardware=p, model_hash=model_hash, source_hash=source_hash,
         toolchain=toolchain, policies=policies, signatures=mapped,
+        supported_batches=tuple(sorted(set(args.batches))),
         calibration=dict(kind='analytic-shadow', budget_seconds=7200,
                          performance_claim=False, regression_limit=.05), status='shadow',
     )
@@ -85,7 +92,8 @@ def command_shadow(args):
 def command_validate(args):
     manifest = load(args.manifest)
     print(json.dumps(dict(valid=True, status=manifest.status, manifest_hash=manifest.manifest_hash,
-                          roles=len(manifest.policies), signatures=len(manifest.signatures)), indent=2))
+                          roles=len(manifest.policies), signatures=len(manifest.signatures),
+                          supported_batches=list(manifest.supported_batches)), indent=2))
 
 
 def main():
@@ -94,7 +102,8 @@ def main():
     def common(command):
         command.add_argument('--sm', type=int, choices=(80, 86, 89, 90, 120))
         command.add_argument('--sms', type=int, default=80)
-        command.add_argument('--batches', type=int, nargs='+', default=[1,2,3,4,5,6,7,8,16,32])
+        command.add_argument('--batches', type=int, nargs='+', default=[1,2,3,4,5,6,7,8,16])
+        command.add_argument('--matrix-dtype', choices=('bf16', 'fp8'))
         command.add_argument('--output')
     p = sub.add_parser('inventory'); common(p); p.set_defaults(fn=command_inventory)
     p = sub.add_parser('candidates'); common(p); p.add_argument('--role'); p.add_argument('--limit', type=int, default=8); p.set_defaults(fn=command_candidates)

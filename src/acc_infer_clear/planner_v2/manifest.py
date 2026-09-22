@@ -26,8 +26,10 @@ class RolePolicy:
     remove_when: str = ''
 
     def __post_init__(self):
-        if not self.backend or not self.schedules:
-            raise ValueError('RolePolicy requires a backend and schedules')
+        if not self.backend:
+            raise ValueError('RolePolicy requires a backend')
+        if not self.schedules and not self.legacy_exception:
+            raise ValueError('A non-legacy RolePolicy requires schedules')
         if self.legacy_exception and (not self.exception_reason or not self.remove_when):
             raise ValueError('Legacy exceptions require reason and removal criterion')
         if any(schedule.backend != self.backend for schedule in self.schedules.values()):
@@ -50,6 +52,7 @@ class DeploymentManifest:
     toolchain: dict[str, str]
     policies: dict[str, RolePolicy]
     signatures: dict[str, OperatorSignature]
+    supported_batches: tuple[int, ...] = tuple(range(1, 9)) + (16,)
     calibration: dict = field(default_factory=dict)
     status: str = 'shadow'
     schema: int = SCHEMA_VERSION
@@ -59,6 +62,9 @@ class DeploymentManifest:
             raise ValueError('Unknown Planner V2 schema')
         if self.status not in ('shadow', 'candidate', 'validated'):
             raise ValueError('Invalid manifest status')
+        if (not self.supported_batches or tuple(sorted(set(self.supported_batches))) != self.supported_batches
+                or any(batch <= 0 for batch in self.supported_batches)):
+            raise ValueError('supported_batches must be positive, unique and sorted')
         for role, policy in self.policies.items():
             if role not in {signature.role_key for signature in self.signatures.values()}:
                 raise ValueError(f'Policy without signature role: {role}')
@@ -81,6 +87,7 @@ class DeploymentManifest:
             schema=self.schema, status=self.status,
             hardware=self.hardware.as_dict(), device_fingerprint=self.device_fingerprint,
             model_hash=self.model_hash, source_hash=self.source_hash, toolchain=self.toolchain,
+            supported_batches=list(self.supported_batches),
             policies={key: value.as_dict() for key, value in self.policies.items()},
             signatures={key: value.as_dict() for key, value in self.signatures.items()},
             calibration=self.calibration,
@@ -97,7 +104,7 @@ class DeploymentManifest:
         runtime = DeploymentManifest(
             hardware=hardware, model_hash=model_hash, source_hash=source_hash,
             toolchain=toolchain, policies=self.policies, signatures=self.signatures,
-            calibration=self.calibration, status=self.status,
+            supported_batches=self.supported_batches, calibration=self.calibration, status=self.status,
         )
         if runtime.device_fingerprint != self.device_fingerprint:
             raise ValueError('Planner manifest device mismatch')
@@ -123,6 +130,7 @@ def signature_from_dict(value: dict) -> OperatorSignature:
 def load(path: str | Path) -> DeploymentManifest:
     data = json.loads(Path(path).read_text())
     expected = {'schema', 'status', 'hardware', 'device_fingerprint', 'model_hash', 'source_hash',
+                'supported_batches',
                 'toolchain', 'policies', 'signatures', 'calibration', 'manifest_hash'}
     if set(data) != expected:
         raise ValueError(f'Planner manifest fields mismatch: {set(data) ^ expected}')
@@ -146,7 +154,8 @@ def load(path: str | Path) -> DeploymentManifest:
     result = DeploymentManifest(
         hardware=hardware, model_hash=data['model_hash'], source_hash=data['source_hash'],
         toolchain=data['toolchain'], policies=policies, signatures=signatures,
-        calibration=data['calibration'], status=data['status'], schema=data['schema'],
+        supported_batches=tuple(data['supported_batches']), calibration=data['calibration'],
+        status=data['status'], schema=data['schema'],
     )
     if result.device_fingerprint != data['device_fingerprint']:
         raise ValueError('Planner manifest fingerprint mismatch')

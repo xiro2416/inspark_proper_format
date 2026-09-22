@@ -37,6 +37,9 @@ class BatchedContextAppend:
         keys,values=self._project(prepared,positions)
         from acc_infer_clear.kernels.context_scatter import scatter
         scatter(keys,values,self.pool.storage,source,lengths,slots,destinations)
+        bank=getattr(self.pool,'native_bank',None)
+        if bank is not None and bank.enabled_for_total(prepared.shape[1]):
+            scatter(keys,values,bank.cache,source,lengths,slots,destinations)
         return prepared[:, :1, :1]
 
     def _project_scatter_direct(self,prepared,positions,source,lengths,slots,destinations):
@@ -114,6 +117,7 @@ class BatchedContextAppend:
                 pairs.append(layer.context_kv(context,positions)
                              if m.architecture=='official_qwen3' or m.random_rope_draft
                              else layer.context_kv(context))
+        mirrored_fallback = pairs is not None and self.pool is not None and getattr(self.pool,'native_bank',None) is not None
         if pairs is not None:
          for index, (key,value) in enumerate(pairs):
             offset = 0
@@ -144,6 +148,13 @@ class BatchedContextAppend:
                     cache.values[index]=cache.storage_values[index][:,:,:end]
         for job, n in zip(normalized, lengths):
             job['cache'].length += n
+            # Captured scatter graphs write both the canonical pool and the
+            # compact TensorRT mirror.  The variable-total fallback above used
+            # to update only the canonical pool, leaving the initial prompt
+            # context absent from TensorRT's cache.  Synchronize only this
+            # fallback path; graph hits already mirror their incremental rows.
+            if mirrored_fallback:
+                self.pool.native_bank.import_slot(job['cache'],job['cache'].pool_slot)
         self.calls += 1
         self.rows += len(jobs)
         return [None] * len(jobs)

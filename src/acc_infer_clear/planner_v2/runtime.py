@@ -13,6 +13,7 @@ class ScheduleRegistry:
         self.apply = bool(apply)
         self.hits = 0
         self.generic_hits = 0
+        self.legacy_hits = 0
         self.misses = 0
 
     @classmethod
@@ -28,6 +29,9 @@ class ScheduleRegistry:
         if policy is None:
             self.misses += 1
             return None
+        if policy.legacy_exception:
+            self.legacy_hits += 1
+            return None
         shape = f'b{batch}_m{m}_n{n}_k{k}'
         schedule = policy.schedules.get(shape)
         if schedule is not None:
@@ -42,4 +46,5 @@ class ScheduleRegistry:
 
     def stats(self) -> dict:
         return dict(apply=self.apply, hits=self.hits, generic_hits=self.generic_hits,
+                    legacy_hits=self.legacy_hits,
                     misses=self.misses, manifest_hash=self.manifest.manifest_hash)

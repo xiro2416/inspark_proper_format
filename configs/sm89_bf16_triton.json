@@ -1,0 +1,19 @@
+{
+  "schema": 1,
+  "status": "inspark_marlin_sm89_bf16_triton_fusions",
+  "precision": "bf16",
+  "components": ["target", "draft", "cfm", "vocoder"],
+  "convolutions": true,
+  "rnn_precision": "bf16",
+  "target_graphs": true,
+  "draft_graphs": true,
+  "proposal_graphs": true,
+  "prefix_graphs": true,
+  "head_graphs": true,
+  "slot_draft": true,
+  "overlap_acoustics": false,
+  "fused_acceptance": false,
+  "tail_graphs": false,
+  "head_batch_barrier": true,
+  "cfm_triton_fusions": ["norm", "rope"]
+}

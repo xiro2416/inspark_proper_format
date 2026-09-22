@@ -47,6 +47,9 @@ def prepare(engine, path: str | Path, *, apply: bool = False) -> dict:
     if engine.sessions or engine.head_graphs is not None:
         raise RuntimeError('Planner shadow must attach before capture/admission')
     manifest = load(path)
+    maximum = int(engine.config['max_batch'])
+    if maximum not in manifest.supported_batches:
+        raise ValueError(f'Planner manifest does not support configured max_batch={maximum}')
     identity = runtime_identity(engine)
     manifest.validate_runtime(**identity)
     exceptions = {
@@ -56,11 +59,13 @@ def prepare(engine, path: str | Path, *, apply: bool = False) -> dict:
     from .runtime import ScheduleRegistry
     registry = ScheduleRegistry(manifest, apply=apply)
     engine.planner_v2_registry = registry
+    changes_schedules = any(not policy.legacy_exception for policy in manifest.policies.values())
     return dict(
         status='apply' if apply else 'shadow', manifest=str(Path(path).resolve()),
         manifest_hash=manifest.manifest_hash, roles=len(manifest.policies),
         signatures=len(manifest.signatures), exceptions=exceptions,
-        mutates_runtime=bool(apply), online_tuning=False,
+        supported_batches=list(manifest.supported_batches), max_batch=maximum,
+        mutates_runtime=bool(apply and changes_schedules), online_tuning=False,
     )
 
 

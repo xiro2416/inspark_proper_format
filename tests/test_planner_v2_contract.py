@@ -44,6 +44,18 @@ class PlannerV2ContractTest(unittest.TestCase):
         self.assertEqual(restored.manifest_hash,manifest.manifest_hash)
         with self.assertRaises(ValueError):ScheduleRegistry(restored,apply=True)
 
+    def test_legacy_policy_and_batch_inventory(self):
+        profile=self.signature();hardware=HardwareProfile.synthetic(89)
+        legacy=RolePolicy('cublas_bf16','mk_nk',{},legacy_exception=True,
+                          exception_reason='No custom backend passed every shape',
+                          remove_when='A fixed backend passes the component and service gates')
+        manifest=DeploymentManifest(hardware,'model','source',{}, {'target:qkv':legacy},
+                                    {'q':profile},supported_batches=(1,4,8,16))
+        self.assertIsNone(ScheduleRegistry(manifest,apply=False).resolve(
+            'target','qkv',batch=8,m=64,n=3840,k=1280))
+        with self.assertRaises(ValueError):
+            RolePolicy('explicit','mk_nk',{})
+
     def test_deployment_requires_manifest_for_apply(self):
         root=Path(__file__).resolve().parents[1];plan=json.loads((root/'configs/sm120.json').read_text())
         plan['planner_v2_apply']=True

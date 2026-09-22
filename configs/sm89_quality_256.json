@@ -1,0 +1,5161 @@
+{
+  "schema": 1,
+  "purpose": "SM89 paired quality gate; identical cases for baseline and candidate",
+  "seed": 20260921,
+  "source": "/workspace/index-tts/data/emotion_data_curated_emotext_clean.txt",
+  "source_sha256": "cd4db4b5ba1f76ea7a54a62a951b8e2820116ec5378e993802a2f234361c3852",
+  "selection": "max-min unique allocation by dominant emotion; stratified across four length quartiles",
+  "target_emotion_counts": {
+    "happy": 47,
+    "angry": 47,
+    "sad": 36,
+    "fear": 47,
+    "disgust": 22,
+    "melancholy": 2,
+    "surprise": 46,
+    "calm": 9
+  },
+  "emotion_counts": {
+    "happy": 47,
+    "angry": 47,
+    "sad": 36,
+    "fear": 47,
+    "disgust": 22,
+    "melancholy": 2,
+    "surprise": 46,
+    "calm": 9
+  },
+  "reference_counts": {
+    "huge_final.wav": 29,
+    "mingxiang_gao.wav": 29,
+    "positive_denoised.wav": 29,
+    "xiaoyuan_gao.wav": 29,
+    "yangying_final_denoised.wav": 28,
+    "zhangjingyi_final.wav": 28,
+    "zhoujielun_final_denoised.wav": 28,
+    "女新闻.wav": 28,
+    "男新闻.wav": 28
+  },
+  "cases": [
+    {
+      "source_line": 1213,
+      "text": "你今天穿这条裙子超好看！在哪买的？我也要冲！",
+      "emotion_label": "给我链接！现在！立刻！",
+      "emotion": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.99,
+        0.01
+      ],
+      "dominant_emotion": "surprise",
+      "dominant_index": 6,
+      "id": "sm89-q000",
+      "seed": 236950053,
+      "reference_audio": "/workspace/index-tts/data/audio/old/mingxiang_gao.wav"
+    },
+    {
+      "source_line": 453,
+      "text": "她送我的那束花，美到我眼眶都红了。",
+      "emotion_label": "你太好了！我感动得不行了！",
+      "emotion": [
+        0.95,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.03,
+        0.02
+      ],
+      "dominant_emotion": "happy",
+      "dominant_index": 0,
+      "id": "sm89-q001",
+      "seed": 370077989,
+      "reference_audio": "/workspace/index-tts/data/audio/old/男新闻.wav"
+    },
+    {
+      "source_line": 243,
+      "text": "天哪那家甜品店今天居然半价，必须冲！",
+      "emotion_label": "啊啊啊啊！我中大奖了！",
+      "emotion": [
+        0.9,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.09,
+        0.01
+      ],
+      "dominant_emotion": "happy",
+      "dominant_index": 0,
+      "id": "sm89-q002",
+      "seed": 18640084,
+      "reference_audio": "/workspace/index-tts/data/audio/old/yangying_final_denoised.wav"
+    },
+    {
+      "source_line": 39,
+      "text": "我刚买了那条裙子，简直绝了！",
+      "emotion_label": "绝了！太棒了！我中彩票了！",
+      "emotion": [
+        0.95,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.04,
+        0.01
+      ],
+      "dominant_emotion": "happy",
+      "dominant_index": 0,
+      "id": "sm89-q003",
+      "seed": 1897214542,
+      "reference_audio": "/workspace/index-tts/data/audio/old/xiaoyuan_gao.wav"
+    },
+    {
+      "source_line": 1458,
+      "text": "他居然记得我生日，我感动得差点哭出来。",
+      "emotion_label": "你对我太好了！我受不了了！",
+      "emotion": [
+        0.0,
+        0.3,
+        0.4,
+        0.0,
+        0.2,
+        0.05,
+        0.0,
+        0.05
+      ],
+      "dominant_emotion": "sad",
+      "dominant_index": 2,
+      "id": "sm89-q004",
+      "seed": 1666779786,
+      "reference_audio": "/workspace/index-tts/data/audio/old/男新闻.wav"
+    },
+    {
+      "source_line": 970,
+      "text": "约会对象居然穿皮裤，我当场想走人。",
+      "emotion_label": "我的天！这也太土了吧！简直辣眼睛！",
+      "emotion": [
+        0.0,
+        0.3,
+        0.0,
+        0.1,
+        0.5,
+        0.05,
+        0.05,
+        0.0
+      ],
+      "dominant_emotion": "disgust",
+      "dominant_index": 4,
+      "id": "sm89-q005",
+      "seed": 430478590,
+      "reference_audio": "/workspace/index-tts/data/audio/old/huge_final.wav"
+    },
+    {
+      "source_line": 465,
+      "text": "你新发型也太好看了吧，羡慕嫉妒恨！",
+      "emotion_label": "天哪！你怎么这么好看！我要跟你绝交！",
+      "emotion": [
+        0.0,
+        0.3,
+        0.0,
+        0.1,
+        0.5,
+        0.0,
+        0.1,
+        0.0
+      ],
+      "dominant_emotion": "disgust",
+      "dominant_index": 4,
+      "id": "sm89-q006",
+      "seed": 227822043,
+      "reference_audio": "/workspace/index-tts/data/audio/old/huge_final.wav"
+    },
+    {
+      "source_line": 922,
+      "text": "我妈又催我相亲，烦得我直接挂电话了。",
+      "emotion_label": "烦死了！能不能别管我！",
+      "emotion": [
+        0.0,
+        0.85,
+        0.02,
+        0.05,
+        0.05,
+        0.02,
+        0.0,
+        0.01
+      ],
+      "dominant_emotion": "angry",
+      "dominant_index": 1,
+      "id": "sm89-q007",
+      "seed": 1701417580,
+      "reference_audio": "/workspace/index-tts/data/audio/old/xiaoyuan_gao.wav"
+    },
+    {
+      "source_line": 11,
+      "text": "今天逛街看到一双超美的鞋，买不起好气哦。",
+      "emotion_label": "气死我了！你给我闭嘴！",
+      "emotion": [
+        0.0,
+        0.85,
+        0.02,
+        0.05,
+        0.05,
+        0.01,
+        0.01,
+        0.01
+      ],
+      "dominant_emotion": "angry",
+      "dominant_index": 1,
+      "id": "sm89-q008",
+      "seed": 1417967647,
+      "reference_audio": "/workspace/index-tts/data/audio/old/mingxiang_gao.wav"
+    },
+    {
+      "source_line": 1050,
+      "text": "又买了两双鞋，这个月信用卡要爆了，后悔死。",
+      "emotion_label": "我剁手！再也不买了！",
+      "emotion": [
+        0.0,
+        0.3,
+        0.0,
+        0.0,
+        0.5,
+        0.0,
+        0.1,
+        0.0
+      ],
+      "dominant_emotion": "disgust",
+      "dominant_index": 4,
+      "id": "sm89-q009",
+      "seed": 160758062,
+      "reference_audio": "/workspace/index-tts/data/audio/old/positive_denoised.wav"
+    },
+    {
+      "source_line": 986,
+      "text": "你猜我在健身房看到谁了？简直不敢相信！",
+      "emotion_label": "我的天！怎么可能！",
+      "emotion": [
+        0.0,
+        0.85,
+        0.01,
+        0.05,
+        0.05,
+        0.01,
+        0.02,
+        0.01
+      ],
+      "dominant_emotion": "angry",
+      "dominant_index": 1,
+      "id": "sm89-q010",
+      "seed": 1543354576,
+      "reference_audio": "/workspace/index-tts/data/audio/old/女新闻.wav"
+    },
+    {
+      "source_line": 1245,
+      "text": "这鬼天气闷得我喘不过气，烦死了。",
+      "emotion_label": "我今天心情真的很差！别烦我！",
+      "emotion": [
+        0.0,
+        0.3,
+        0.4,
+        0.1,
+        0.2,
+        0.05,
+        0.0,
+        0.05
+      ],
+      "dominant_emotion": "sad",
+      "dominant_index": 2,
+      "id": "sm89-q011",
+      "seed": 1555148913,
+      "reference_audio": "/workspace/index-tts/data/audio/old/huge_final.wav"
+    },
+    {
+      "source_line": 887,
+      "text": "天哪！那个明星居然偷偷结婚了！",
+      "emotion_label": "什么？你不是说你死了吗！",
+      "emotion": [
+        0.0,
+        0.1,
+        0.0,
+        0.8,
+        0.0,
+        0.0,
+        0.1,
+        0.0
+      ],
+      "dominant_emotion": "fear",
+      "dominant_index": 3,
+      "id": "sm89-q012",
+      "seed": 535314958,
+      "reference_audio": "/workspace/index-tts/data/audio/old/zhangjingyi_final.wav"
+    },
+    {
+      "source_line": 764,
+      "text": "气死我了，他说好一起看电影又放鸽子。",
+      "emotion_label": "你给我滚！再也不想看到你！",
+      "emotion": [
+        0.0,
+        0.85,
+        0.02,
+        0.05,
+        0.05,
+        0.01,
+        0.01,
+        0.01
+      ],
+      "dominant_emotion": "angry",
+      "dominant_index": 1,
+      "id": "sm89-q013",
+      "seed": 281948003,
+      "reference_audio": "/workspace/index-tts/data/audio/old/女新闻.wav"
+    },
+    {
+      "source_line": 12,
+      "text": "刚喝到一杯咖啡苦到怀疑人生，你赶紧来救我。",
+      "emotion_label": "救命啊！我要死了！",
+      "emotion": [
+        0.0,
+        0.1,
+        0.0,
+        0.8,
+        0.0,
+        0.0,
+        0.1,
+        0.0
+      ],
+      "dominant_emotion": "fear",
+      "dominant_index": 3,
+      "id": "sm89-q014",
+      "seed": 591957930,
+      "reference_audio": "/workspace/index-tts/data/audio/old/mingxiang_gao.wav"
+    },
+    {
+      "source_line": 256,
+      "text": "我昨晚失眠到三点，现在眼皮都在打架，撑不住了。",
+      "emotion_label": "滚开！别烦我！我困死了！",
+      "emotion": [
+        0.0,
+        0.85,
+        0.0,
+        0.05,
+        0.05,
+        0.02,
+        0.02,
+        0.01
+      ],
+      "dominant_emotion": "angry",
+      "dominant_index": 1,
+      "id": "sm89-q015",
+      "seed": 2003668703,
+      "reference_audio": "/workspace/index-tts/data/audio/old/positive_denoised.wav"
+    },
+    {
+      "source_line": 325,
+      "text": "你知不知道我刚才差点踩到一坨狗屎，吓死我了。",
+      "emotion_label": "快跑啊！有炸弹！",
+      "emotion": [
+        0.0,
+        0.01,
+        0.01,
+        0.9,
+        0.01,
+        0.01,
+        0.05,
+        0.01
+      ],
+      "dominant_emotion": "fear",
+      "dominant_index": 3,
+      "id": "sm89-q016",
+      "seed": 1950042013,
+      "reference_audio": "/workspace/index-tts/data/audio/old/positive_denoised.wav"
+    },
+    {
+      "source_line": 1512,
+      "text": "甜品店那个草莓蛋糕，我简直想冲进去抢啊！",
+      "emotion_label": "天哪！我忍不住了！",
+      "emotion": [
+        0.0,
+        0.85,
+        0.0,
+        0.05,
+        0.05,
+        0.0,
+        0.05,
+        0.0
+      ],
+      "dominant_emotion": "angry",
+      "dominant_index": 1,
+      "id": "sm89-q017",
+      "seed": 1792065110,
+      "reference_audio": "/workspace/index-tts/data/audio/old/zhangjingyi_final.wav"
+    },
+    {
+      "source_line": 1285,
+      "text": "他说他遇到大麻烦了，我心脏都快跳出来了。",
+      "emotion_label": "天哪！这可怎么办！",
+      "emotion": [
+        0.0,
+        0.1,
+        0.0,
+        0.8,
+        0.0,
+        0.0,
+        0.1,
+        0.0
+      ],
+      "dominant_emotion": "fear",
+      "dominant_index": 3,
+      "id": "sm89-q018",
+      "seed": 383794928,
+      "reference_audio": "/workspace/index-tts/data/audio/old/positive_denoised.wav"
+    },
+    {
+      "source_line": 1448,
+      "text": "包裹到了！新裙子绝美，我真的爱了。",
+      "emotion_label": "哇！这是什么神仙日子！我太幸福了！",
+      "emotion": [
+        0.95,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.03,
+        0.02
+      ],
+      "dominant_emotion": "happy",
+      "dominant_index": 0,
+      "id": "sm89-q019",
+      "seed": 1895048611,
+      "reference_audio": "/workspace/index-tts/data/audio/old/yangying_final_denoised.wav"
+    },
+    {
+      "source_line": 728,
+      "text": "我妈居然催我相亲，我笑到肚子痛。",
+      "emotion_label": "哈哈哈笑死我了！这什么操作啊！",
+      "emotion": [
+        0.0,
+        0.3,
+        0.0,
+        0.1,
+        0.2,
+        0.0,
+        0.5,
+        0.0
+      ],
+      "dominant_emotion": "surprise",
+      "dominant_index": 6,
+      "id": "sm89-q020",
+      "seed": 24518143,
+      "reference_audio": "/workspace/index-tts/data/audio/old/zhoujielun_final_denoised.wav"
+    },
+    {
+      "source_line": 731,
+      "text": "逛街看到你前男友了，他居然胖了一圈，笑死。",
+      "emotion_label": "哈哈哈哈！活该！报应啊！",
+      "emotion": [
+        0.0,
+        0.3,
+        0.0,
+        0.1,
+        0.5,
+        0.0,
+        0.1,
+        0.0
+      ],
+      "dominant_emotion": "disgust",
+      "dominant_index": 4,
+      "id": "sm89-q021",
+      "seed": 1771607984,
+      "reference_audio": "/workspace/index-tts/data/audio/old/zhangjingyi_final.wav"
+    },
+    {
+      "source_line": 864,
+      "text": "我刚刚一口气看完那部剧，哭得稀里哗啦。",
+      "emotion_label": "太难受了！我真的受不了！",
+      "emotion": [
+        0.0,
+        0.1,
+        0.5,
+        0.1,
+        0.1,
+        0.15,
+        0.05,
+        0.0
+      ],
+      "dominant_emotion": "sad",
+      "dominant_index": 2,
+      "id": "sm89-q022",
+      "seed": 227093849,
+      "reference_audio": "/workspace/index-tts/data/audio/old/huge_final.wav"
+    },
+    {
+      "source_line": 989,
+      "text": "昨晚梦到被追，吓得我直接醒过来。",
+      "emotion_label": "救命啊！你别过来！",
+      "emotion": [
+        0.0,
+        0.1,
+        0.0,
+        0.8,
+        0.0,
+        0.0,
+        0.1,
+        0.0
+      ],
+      "dominant_emotion": "fear",
+      "dominant_index": 3,
+      "id": "sm89-q023",
+      "seed": 492750443,
+      "reference_audio": "/workspace/index-tts/data/audio/old/mingxiang_gao.wav"
+    },
+    {
+      "source_line": 677,
+      "text": "今天地铁上有人踩我脚还不道歉，气死我了，真没素质。",
+      "emotion_label": "你眼睛瞎了是吧！",
+      "emotion": [
+        0.0,
+        0.1,
+        0.1,
+        0.2,
+        0.1,
+        0.1,
+        0.35,
+        0.05
+      ],
+      "dominant_emotion": "surprise",
+      "dominant_index": 6,
+      "id": "sm89-q024",
+      "seed": 1012070960,
+      "reference_audio": "/workspace/index-tts/data/audio/old/mingxiang_gao.wav"
+    },
+    {
+      "source_line": 1441,
+      "text": "你上次说的那部电影我看了，哭得稀里哗啦，推荐！",
+      "emotion_label": "太好哭了！你一定要看！",
+      "emotion": [
+        0.0,
+        0.0,
+        0.95,
+        0.0,
+        0.0,
+        0.02,
+        0.02,
+        0.0
+      ],
+      "dominant_emotion": "sad",
+      "dominant_index": 2,
+      "id": "sm89-q025",
+      "seed": 1013324567,
+      "reference_audio": "/workspace/index-tts/data/audio/old/mingxiang_gao.wav"
+    },
+    {
+      "source_line": 570,
+      "text": "刚看到那个包包打折，我心跳都漏了一拍，太绝了！",
+      "emotion_label": "这也太划算了吧！我马上去抢！",
+      "emotion": [
+        0.9,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.05,
+        0.05
+      ],
+      "dominant_emotion": "happy",
+      "dominant_index": 0,
+      "id": "sm89-q026",
+      "seed": 199844853,
+      "reference_audio": "/workspace/index-tts/data/audio/old/zhangjingyi_final.wav"
+    },
+    {
+      "source_line": 1276,
+      "text": "那家火锅店居然关门了，我哭了好吗？",
+      "emotion_label": "别说了！我伤心死了！",
+      "emotion": [
+        0.0,
+        0.1,
+        0.8,
+        0.0,
+        0.05,
+        0.03,
+        0.01,
+        0.01
+      ],
+      "dominant_emotion": "sad",
+      "dominant_index": 2,
+      "id": "sm89-q027",
+      "seed": 1794316196,
+      "reference_audio": "/workspace/index-tts/data/audio/old/女新闻.wav"
+    },
+    {
+      "source_line": 1152,
+      "text": "天气预报说今天下雨，结果阳光超好哎。",
+      "emotion_label": "这天气预报是故意整我吧！太离谱了！",
+      "emotion": [
+        0.0,
+        0.8,
+        0.0,
+        0.05,
+        0.1,
+        0.0,
+        0.05,
+        0.0
+      ],
+      "dominant_emotion": "angry",
+      "dominant_index": 1,
+      "id": "sm89-q028",
+      "seed": 1172043746,
+      "reference_audio": "/workspace/index-tts/data/audio/old/xiaoyuan_gao.wav"
+    },
+    {
+      "source_line": 210,
+      "text": "我照镜子发现额头爆了三颗痘，这日子没法过了。",
+      "emotion_label": "我不活了！毁容了！",
+      "emotion": [
+        0.0,
+        0.1,
+        0.5,
+        0.2,
+        0.05,
+        0.1,
+        0.05,
+        0.0
+      ],
+      "dominant_emotion": "sad",
+      "dominant_index": 2,
+      "id": "sm89-q029",
+      "seed": 1933723714,
+      "reference_audio": "/workspace/index-tts/data/audio/old/zhoujielun_final_denoised.wav"
+    },
+    {
+      "source_line": 97,
+      "text": "你今天中午吃什么呀？我纠结死了，啥都不想动。",
+      "emotion_label": "饿死算了！什么都不想吃！",
+      "emotion": [
+        0.0,
+        0.3,
+        0.05,
+        0.1,
+        0.5,
+        0.03,
+        0.01,
+        0.01
+      ],
+      "dominant_emotion": "disgust",
+      "dominant_index": 4,
+      "id": "sm89-q030",
+      "seed": 101343347,
+      "reference_audio": "/workspace/index-tts/data/audio/old/男新闻.wav"
+    },
+    {
+      "source_line": 590,
+      "text": "我怀疑我老板在偷偷看我朋友圈，他点赞了！",
+      "emotion_label": "吓死我了！他居然在监视我！",
+      "emotion": [
+        0.0,
+        0.3,
+        0.0,
+        0.5,
+        0.1,
+        0.0,
+        0.1,
+        0.0
+      ],
+      "dominant_emotion": "fear",
+      "dominant_index": 3,
+      "id": "sm89-q031",
+      "seed": 705633569,
+      "reference_audio": "/workspace/index-tts/data/audio/old/zhangjingyi_final.wav"
+    },
+    {
+      "source_line": 852,
+      "text": "你别走嘛！再陪我聊五分钟，就五分钟。",
+      "emotion_label": "你别走！我舍不得你！",
+      "emotion": [
+        0.0,
+        0.1,
+        0.7,
+        0.1,
+        0.05,
+        0.03,
+        0.01,
+        0.01
+      ],
+      "dominant_emotion": "sad",
+      "dominant_index": 2,
+      "id": "sm89-q032",
+      "seed": 1258181305,
+      "reference_audio": "/workspace/index-tts/data/audio/old/女新闻.wav"
+    },
+    {
+      "source_line": 1494,
+      "text": "那个展览排队两小时，气死我了，转身就走了。",
+      "emotion_label": "我呸！什么破玩意儿！浪费我时间！",
+      "emotion": [
+        0.0,
+        0.85,
+        0.0,
+        0.05,
+        0.05,
+        0.0,
+        0.03,
+        0.02
+      ],
+      "dominant_emotion": "angry",
+      "dominant_index": 1,
+      "id": "sm89-q033",
+      "seed": 1324371892,
+      "reference_audio": "/workspace/index-tts/data/audio/old/男新闻.wav"
+    },
+    {
+      "source_line": 941,
+      "text": "周末那个音乐节入场券抢到了，我尖叫了！",
+      "emotion_label": "太好了！我做到了！",
+      "emotion": [
+        0.9,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.05,
+        0.05
+      ],
+      "dominant_emotion": "happy",
+      "dominant_index": 0,
+      "id": "sm89-q034",
+      "seed": 1668097446,
+      "reference_audio": "/workspace/index-tts/data/audio/old/xiaoyuan_gao.wav"
+    },
+    {
+      "source_line": 261,
+      "text": "你升职啦？今晚我请客不醉不归！",
+      "emotion_label": "天呐！怎么会这样！太可怜了！",
+      "emotion": [
+        0.0,
+        0.0,
+        0.95,
+        0.0,
+        0.0,
+        0.03,
+        0.01,
+        0.01
+      ],
+      "dominant_emotion": "sad",
+      "dominant_index": 2,
+      "id": "sm89-q035",
+      "seed": 641428070,
+      "reference_audio": "/workspace/index-tts/data/audio/old/huge_final.wav"
+    },
+    {
+      "source_line": 193,
+      "text": "今天心情烂到爆，你说我该怎么办？",
+      "emotion_label": "烦死了！别理我！",
+      "emotion": [
+        0.0,
+        0.85,
+        0.02,
+        0.05,
+        0.05,
+        0.02,
+        0.01,
+        0.0
+      ],
+      "dominant_emotion": "angry",
+      "dominant_index": 1,
+      "id": "sm89-q036",
+      "seed": 855209280,
+      "reference_audio": "/workspace/index-tts/data/audio/old/huge_final.wav"
+    },
+    {
+      "source_line": 1507,
+      "text": "你怎么又加班，我都无聊到数羊了！",
+      "emotion_label": "无聊死了！我快疯了！",
+      "emotion": [
+        0.0,
+        0.3,
+        0.05,
+        0.1,
+        0.5,
+        0.03,
+        0.01,
+        0.01
+      ],
+      "dominant_emotion": "disgust",
+      "dominant_index": 4,
+      "id": "sm89-q037",
+      "seed": 1370493555,
+      "reference_audio": "/workspace/index-tts/data/audio/old/男新闻.wav"
+    },
+    {
+      "source_line": 966,
+      "text": "闺蜜你休息没？我失恋了，需要你肩膀靠一下。",
+      "emotion_label": "我不活了呜呜呜！你快点过来陪我！",
+      "emotion": [
+        0.0,
+        0.0,
+        0.99,
+        0.0,
+        0.0,
+        0.0,
+        0.01,
+        0.01
+      ],
+      "dominant_emotion": "sad",
+      "dominant_index": 2,
+      "id": "sm89-q038",
+      "seed": 1408553251,
+      "reference_audio": "/workspace/index-tts/data/audio/old/huge_final.wav"
+    },
+    {
+      "source_line": 185,
+      "text": "这雨下得没完没了，衣服都晒不干！",
+      "emotion_label": "烦死了！别烦我！",
+      "emotion": [
+        0.0,
+        0.85,
+        0.02,
+        0.05,
+        0.05,
+        0.02,
+        0.01,
+        0.0
+      ],
+      "dominant_emotion": "angry",
+      "dominant_index": 1,
+      "id": "sm89-q039",
+      "seed": 1132102909,
+      "reference_audio": "/workspace/index-tts/data/audio/old/positive_denoised.wav"
+    },
+    {
+      "source_line": 1486,
+      "text": "真的假的？她俩居然在一起了？好意外！",
+      "emotion_label": "我的天！我完全没想到！",
+      "emotion": [
+        0.01,
+        0.01,
+        0.01,
+        0.01,
+        0.01,
+        0.01,
+        0.93,
+        0.01
+      ],
+      "dominant_emotion": "surprise",
+      "dominant_index": 6,
+      "id": "sm89-q040",
+      "seed": 286812021,
+      "reference_audio": "/workspace/index-tts/data/audio/old/zhangjingyi_final.wav"
+    },
+    {
+      "source_line": 910,
+      "text": "闺蜜你昨天那顿火锅我还在回味呢。",
+      "emotion_label": "馋死我了！再来一顿！",
+      "emotion": [
+        0.0,
+        0.3,
+        0.0,
+        0.1,
+        0.5,
+        0.0,
+        0.1,
+        0.0
+      ],
+      "dominant_emotion": "disgust",
+      "dominant_index": 4,
+      "id": "sm89-q041",
+      "seed": 666415531,
+      "reference_audio": "/workspace/index-tts/data/audio/old/mingxiang_gao.wav"
+    },
+    {
+      "source_line": 202,
+      "text": "昨天看了那部电影，哭得我眼睛都肿了。",
+      "emotion_label": "太虐了！我的心都碎了！",
+      "emotion": [
+        0.0,
+        0.3,
+        0.4,
+        0.1,
+        0.2,
+        0.05,
+        0.0,
+        0.05
+      ],
+      "dominant_emotion": "sad",
+      "dominant_index": 2,
+      "id": "sm89-q042",
+      "seed": 1578789536,
+      "reference_audio": "/workspace/index-tts/data/audio/old/xiaoyuan_gao.wav"
+    },
+    {
+      "source_line": 1521,
+      "text": "我都等了半小时了，他是不是忘了啊？",
+      "emotion_label": "你真是个混蛋！我再也不想理你了！",
+      "emotion": [
+        0.0,
+        0.9,
+        0.01,
+        0.02,
+        0.05,
+        0.01,
+        0.0,
+        0.01
+      ],
+      "dominant_emotion": "angry",
+      "dominant_index": 1,
+      "id": "sm89-q043",
+      "seed": 766055938,
+      "reference_audio": "/workspace/index-tts/data/audio/old/yangying_final_denoised.wav"
+    },
+    {
+      "source_line": 409,
+      "text": "人家好想你嘛，快出来陪我喝杯咖啡。",
+      "emotion_label": "我好想你！你想不想我！",
+      "emotion": [
+        0.0,
+        0.0,
+        0.95,
+        0.0,
+        0.0,
+        0.0,
+        0.03,
+        0.02
+      ],
+      "dominant_emotion": "sad",
+      "dominant_index": 2,
+      "id": "sm89-q044",
+      "seed": 1937219676,
+      "reference_audio": "/workspace/index-tts/data/audio/old/xiaoyuan_gao.wav"
+    },
+    {
+      "source_line": 48,
+      "text": "决赛紧张？天哪，我手里咖啡都洒了。",
+      "emotion_label": "你上场之前能不能别这么吓人！",
+      "emotion": [
+        0.0,
+        0.01,
+        0.01,
+        0.9,
+        0.01,
+        0.01,
+        0.05,
+        0.02
+      ],
+      "dominant_emotion": "fear",
+      "dominant_index": 3,
+      "id": "sm89-q045",
+      "seed": 673549140,
+      "reference_audio": "/workspace/index-tts/data/audio/old/mingxiang_gao.wav"
+    },
+    {
+      "source_line": 63,
+      "text": "表妹婚礼？下个月16号，我裙子还没买呢！",
+      "emotion_label": "天塌了！我怎么办啊！",
+      "emotion": [
+        0.0,
+        0.1,
+        0.05,
+        0.8,
+        0.0,
+        0.0,
+        0.05,
+        0.0
+      ],
+      "dominant_emotion": "fear",
+      "dominant_index": 3,
+      "id": "sm89-q046",
+      "seed": 1772956917,
+      "reference_audio": "/workspace/index-tts/data/audio/old/xiaoyuan_gao.wav"
+    },
+    {
+      "source_line": 432,
+      "text": "听说隔壁小王和前台小姐姐好上了？真劲爆！",
+      "emotion_label": "哇塞！太刺激了！",
+      "emotion": [
+        0.3,
+        0.0,
+        0.0,
+        0.1,
+        0.0,
+        0.0,
+        0.6,
+        0.0
+      ],
+      "dominant_emotion": "surprise",
+      "dominant_index": 6,
+      "id": "sm89-q047",
+      "seed": 640214393,
+      "reference_audio": "/workspace/index-tts/data/audio/old/yangying_final_denoised.wav"
+    },
+    {
+      "source_line": 820,
+      "text": "那家火锅店排队一小时，味道居然一般般。",
+      "emotion_label": "你做的什么饭！难吃死了！",
+      "emotion": [
+        0.0,
+        0.3,
+        0.0,
+        0.0,
+        0.65,
+        0.0,
+        0.05,
+        0.0
+      ],
+      "dominant_emotion": "disgust",
+      "dominant_index": 4,
+      "id": "sm89-q048",
+      "seed": 111278421,
+      "reference_audio": "/workspace/index-tts/data/audio/old/huge_final.wav"
+    },
+    {
+      "source_line": 913,
+      "text": "刚那奶茶店小哥居然夸我裙子好看，开心得要命。",
+      "emotion_label": "啊啊啊！我飘了！",
+      "emotion": [
+        0.01,
+        0.01,
+        0.01,
+        0.8,
+        0.01,
+        0.01,
+        0.14,
+        0.01
+      ],
+      "dominant_emotion": "fear",
+      "dominant_index": 3,
+      "id": "sm89-q049",
+      "seed": 326451216,
+      "reference_audio": "/workspace/index-tts/data/audio/old/zhoujielun_final_denoised.wav"
+    },
+    {
+      "source_line": 1112,
+      "text": "天哪，那家新开的咖啡馆居然有我最爱的提拉米苏！",
+      "emotion_label": "我的天！我太爱这个世界了！",
+      "emotion": [
+        0.9,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.05,
+        0.05
+      ],
+      "dominant_emotion": "happy",
+      "dominant_index": 0,
+      "id": "sm89-q050",
+      "seed": 1671245604,
+      "reference_audio": "/workspace/index-tts/data/audio/old/positive_denoised.wav"
+    },
+    {
+      "source_line": 81,
+      "text": "这个猫把狗吓得跳起来，笑死我了。",
+      "emotion_label": "哈哈哈！你笑死我了！肚子疼死了！",
+      "emotion": [
+        0.0,
+        0.3,
+        0.0,
+        0.1,
+        0.5,
+        0.0,
+        0.1,
+        0.0
+      ],
+      "dominant_emotion": "disgust",
+      "dominant_index": 4,
+      "id": "sm89-q051",
+      "seed": 1355563918,
+      "reference_audio": "/workspace/index-tts/data/audio/old/zhangjingyi_final.wav"
+    },
+    {
+      "source_line": 605,
+      "text": "我穿这条裙子简直无敌了！",
+      "emotion_label": "我太牛了！谁都比不上！",
+      "emotion": [
+        0.9,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.05,
+        0.05
+      ],
+      "dominant_emotion": "happy",
+      "dominant_index": 0,
+      "id": "sm89-q052",
+      "seed": 943947205,
+      "reference_audio": "/workspace/index-tts/data/audio/old/huge_final.wav"
+    },
+    {
+      "source_line": 1171,
+      "text": "你陪我去染个粉色头发吧，就今天！",
+      "emotion_label": "快陪我去！我一个人不敢！",
+      "emotion": [
+        0.0,
+        0.0,
+        0.0,
+        0.9,
+        0.0,
+        0.0,
+        0.09,
+        0.01
+      ],
+      "dominant_emotion": "fear",
+      "dominant_index": 3,
+      "id": "sm89-q053",
+      "seed": 1440464631,
+      "reference_audio": "/workspace/index-tts/data/audio/old/男新闻.wav"
+    },
+    {
+      "source_line": 685,
+      "text": "你猜怎么着，我竟然在地铁上碰到吴彦祖了！",
+      "emotion_label": "天哪！我是不是在做梦！",
+      "emotion": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.95,
+        0.0
+      ],
+      "dominant_emotion": "surprise",
+      "dominant_index": 6,
+      "id": "sm89-q054",
+      "seed": 1907109167,
+      "reference_audio": "/workspace/index-tts/data/audio/old/男新闻.wav"
+    },
+    {
+      "source_line": 1035,
+      "text": "你猜我看到谁了，前男友居然在便利店买泡面，太惨了吧！",
+      "emotion_label": "哈哈哈哈！笑死我了！活该！",
+      "emotion": [
+        0.0,
+        0.3,
+        0.0,
+        0.0,
+        0.2,
+        0.0,
+        0.5,
+        0.0
+      ],
+      "dominant_emotion": "surprise",
+      "dominant_index": 6,
+      "id": "sm89-q055",
+      "seed": 336264489,
+      "reference_audio": "/workspace/index-tts/data/audio/old/zhoujielun_final_denoised.wav"
+    },
+    {
+      "source_line": 825,
+      "text": "邻居的狗叫了一下午，我脑袋快炸了。",
+      "emotion_label": "你送错地方了！我根本没买这个！",
+      "emotion": [
+        0.0,
+        0.85,
+        0.0,
+        0.05,
+        0.05,
+        0.0,
+        0.05,
+        0.0
+      ],
+      "dominant_emotion": "angry",
+      "dominant_index": 1,
+      "id": "sm89-q056",
+      "seed": 897973538,
+      "reference_audio": "/workspace/index-tts/data/audio/old/女新闻.wav"
+    },
+    {
+      "source_line": 515,
+      "text": "刚才地铁站那个男生好帅啊！",
+      "emotion_label": "天哪！我恋爱了！快给我他联系方式！",
+      "emotion": [
+        0.9,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.09,
+        0.01
+      ],
+      "dominant_emotion": "happy",
+      "dominant_index": 0,
+      "id": "sm89-q057",
+      "seed": 1999430721,
+      "reference_audio": "/workspace/index-tts/data/audio/old/xiaoyuan_gao.wav"
+    },
+    {
+      "source_line": 1185,
+      "text": "一个人吃蛋糕，蜡烛都没人吹……",
+      "emotion_label": "谁来陪陪我啊！好孤单！",
+      "emotion": [
+        0.0,
+        0.1,
+        0.5,
+        0.1,
+        0.1,
+        0.15,
+        0.05,
+        0.0
+      ],
+      "dominant_emotion": "sad",
+      "dominant_index": 2,
+      "id": "sm89-q058",
+      "seed": 1225875713,
+      "reference_audio": "/workspace/index-tts/data/audio/old/女新闻.wav"
+    },
+    {
+      "source_line": 120,
+      "text": "你男朋友昨天穿得好像圣诞树。",
+      "emotion_label": "你眼瞎啊！穿得像个傻子！",
+      "emotion": [
+        0.0,
+        0.1,
+        0.1,
+        0.1,
+        0.1,
+        0.1,
+        0.5,
+        0.0
+      ],
+      "dominant_emotion": "surprise",
+      "dominant_index": 6,
+      "id": "sm89-q059",
+      "seed": 892998130,
+      "reference_audio": "/workspace/index-tts/data/audio/old/mingxiang_gao.wav"
+    },
+    {
+      "source_line": 1229,
+      "text": "天哪！我们下午就在那钓鱼？！这也太吓人了吧。",
+      "emotion_label": "那是吃人的地方啊！我们差点送命了！",
+      "emotion": [
+        0.0,
+        0.3,
+        0.0,
+        0.5,
+        0.1,
+        0.05,
+        0.05,
+        0.0
+      ],
+      "dominant_emotion": "fear",
+      "dominant_index": 3,
+      "id": "sm89-q060",
+      "seed": 916320254,
+      "reference_audio": "/workspace/index-tts/data/audio/old/huge_final.wav"
+    },
+    {
+      "source_line": 965,
+      "text": "最近地铁上总能闻到好奇怪的香水味，好恶心。",
+      "emotion_label": "谁这么缺德！熏得我头都晕了！",
+      "emotion": [
+        0.0,
+        0.85,
+        0.01,
+        0.05,
+        0.08,
+        0.0,
+        0.0,
+        0.01
+      ],
+      "dominant_emotion": "angry",
+      "dominant_index": 1,
+      "id": "sm89-q061",
+      "seed": 1867051706,
+      "reference_audio": "/workspace/index-tts/data/audio/old/zhangjingyi_final.wav"
+    },
+    {
+      "source_line": 724,
+      "text": "那个渣男又给我发消息，我直接拉黑。",
+      "emotion_label": "你恶心到我了！滚开！",
+      "emotion": [
+        0.0,
+        0.3,
+        0.0,
+        0.1,
+        0.5,
+        0.0,
+        0.05,
+        0.05
+      ],
+      "dominant_emotion": "disgust",
+      "dominant_index": 4,
+      "id": "sm89-q062",
+      "seed": 930665825,
+      "reference_audio": "/workspace/index-tts/data/audio/old/zhangjingyi_final.wav"
+    },
+    {
+      "source_line": 861,
+      "text": "天哪，我昨天居然梦到我们一起去了南极！",
+      "emotion_label": "哇！太疯狂了！",
+      "emotion": [
+        0.3,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.7,
+        0.0
+      ],
+      "dominant_emotion": "surprise",
+      "dominant_index": 6,
+      "id": "sm89-q063",
+      "seed": 2022196319,
+      "reference_audio": "/workspace/index-tts/data/audio/old/mingxiang_gao.wav"
+    },
+    {
+      "source_line": 1325,
+      "text": "刚才那个鬼片镜头吓得我手机都扔了。",
+      "emotion_label": "啊啊啊！救命！太吓人了！",
+      "emotion": [
+        0.0,
+        0.0,
+        0.0,
+        0.9,
+        0.0,
+        0.0,
+        0.09,
+        0.01
+      ],
+      "dominant_emotion": "fear",
+      "dominant_index": 3,
+      "id": "sm89-q064",
+      "seed": 680474975,
+      "reference_audio": "/workspace/index-tts/data/audio/old/positive_denoised.wav"
+    },
+    {
+      "source_line": 1074,
+      "text": "你送我的耳环太漂亮了感动哭。",
+      "emotion_label": "天哪！你太懂我了！",
+      "emotion": [
+        0.9,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.09,
+        0.01
+      ],
+      "dominant_emotion": "happy",
+      "dominant_index": 0,
+      "id": "sm89-q065",
+      "seed": 1076432167,
+      "reference_audio": "/workspace/index-tts/data/audio/old/zhoujielun_final_denoised.wav"
+    },
+    {
+      "source_line": 259,
+      "text": "他居然忘了我们纪念日，气死我了。",
+      "emotion_label": "这日子没法过了！我要离家出走！",
+      "emotion": [
+        0.0,
+        0.3,
+        0.4,
+        0.2,
+        0.1,
+        0.05,
+        0.0,
+        0.05
+      ],
+      "dominant_emotion": "sad",
+      "dominant_index": 2,
+      "id": "sm89-q066",
+      "seed": 1502760131,
+      "reference_audio": "/workspace/index-tts/data/audio/old/yangying_final_denoised.wav"
+    },
+    {
+      "source_line": 255,
+      "text": "你猜我在酒吧碰到谁了？前男友！他胖了一圈。",
+      "emotion_label": "卧槽！你还有脸出现！",
+      "emotion": [
+        0.0,
+        0.85,
+        0.0,
+        0.05,
+        0.05,
+        0.0,
+        0.05,
+        0.0
+      ],
+      "dominant_emotion": "angry",
+      "dominant_index": 1,
+      "id": "sm89-q067",
+      "seed": 101685791,
+      "reference_audio": "/workspace/index-tts/data/audio/old/mingxiang_gao.wav"
+    },
+    {
+      "source_line": 490,
+      "text": "刚才地铁上有个男生对我笑了，好心动！",
+      "emotion_label": "别笑了！我心要跳出来了！",
+      "emotion": [
+        0.2,
+        0.01,
+        0.01,
+        0.1,
+        0.01,
+        0.01,
+        0.65,
+        0.01
+      ],
+      "dominant_emotion": "surprise",
+      "dominant_index": 6,
+      "id": "sm89-q068",
+      "seed": 1311741505,
+      "reference_audio": "/workspace/index-tts/data/audio/old/yangying_final_denoised.wav"
+    },
+    {
+      "source_line": 572,
+      "text": "楼下咖啡馆的蛋糕也太好吃了，我差点把盘子舔干净。",
+      "emotion_label": "太爽了！再来一次！",
+      "emotion": [
+        0.95,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.03,
+        0.02
+      ],
+      "dominant_emotion": "happy",
+      "dominant_index": 0,
+      "id": "sm89-q069",
+      "seed": 454736838,
+      "reference_audio": "/workspace/index-tts/data/audio/old/女新闻.wav"
+    },
+    {
+      "source_line": 847,
+      "text": "快看！我拍卖会上抢到的复古胸针，才花了五十块，赚翻了！",
+      "emotion_label": "哇塞你也太会捡漏了吧！",
+      "emotion": [
+        0.9,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.05,
+        0.05
+      ],
+      "dominant_emotion": "happy",
+      "dominant_index": 0,
+      "id": "sm89-q070",
+      "seed": 1784695761,
+      "reference_audio": "/workspace/index-tts/data/audio/old/xiaoyuan_gao.wav"
+    },
+    {
+      "source_line": 897,
+      "text": "那部电影我刷了三遍，每次看都哭得不行。",
+      "emotion_label": "你知不知道我有多在乎你！别丢下我！",
+      "emotion": [
+        0.0,
+        0.1,
+        0.5,
+        0.1,
+        0.05,
+        0.2,
+        0.05,
+        0.0
+      ],
+      "dominant_emotion": "sad",
+      "dominant_index": 2,
+      "id": "sm89-q071",
+      "seed": 1358461103,
+      "reference_audio": "/workspace/index-tts/data/audio/old/男新闻.wav"
+    },
+    {
+      "source_line": 990,
+      "text": "那条裙子打折居然没我的码，太崩溃了。",
+      "emotion_label": "完了完了！全完了！",
+      "emotion": [
+        0.0,
+        0.1,
+        0.1,
+        0.1,
+        0.05,
+        0.1,
+        0.4,
+        0.15
+      ],
+      "dominant_emotion": "surprise",
+      "dominant_index": 6,
+      "id": "sm89-q072",
+      "seed": 355893406,
+      "reference_audio": "/workspace/index-tts/data/audio/old/yangying_final_denoised.wav"
+    },
+    {
+      "source_line": 443,
+      "text": "突然好想你啊，明天出来喝咖啡好不好？",
+      "emotion_label": "我好想你！现在就要见你！",
+      "emotion": [
+        0.0,
+        0.0,
+        0.99,
+        0.0,
+        0.0,
+        0.0,
+        0.01,
+        0.01
+      ],
+      "dominant_emotion": "sad",
+      "dominant_index": 2,
+      "id": "sm89-q073",
+      "seed": 2091047419,
+      "reference_audio": "/workspace/index-tts/data/audio/old/mingxiang_gao.wav"
+    },
+    {
+      "source_line": 258,
+      "text": "天哪那条裙子打折了我必须拿下！",
+      "emotion_label": "你给我滚！我再也不想见到你！",
+      "emotion": [
+        0.0,
+        0.85,
+        0.02,
+        0.05,
+        0.05,
+        0.01,
+        0.01,
+        0.01
+      ],
+      "dominant_emotion": "angry",
+      "dominant_index": 1,
+      "id": "sm89-q074",
+      "seed": 900555718,
+      "reference_audio": "/workspace/index-tts/data/audio/old/zhangjingyi_final.wav"
+    },
+    {
+      "source_line": 1364,
+      "text": "快看那个限量款包，五折诶，我的天！",
+      "emotion_label": "我的天！立刻拿下！",
+      "emotion": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.99,
+        0.01
+      ],
+      "dominant_emotion": "surprise",
+      "dominant_index": 6,
+      "id": "sm89-q075",
+      "seed": 1164372357,
+      "reference_audio": "/workspace/index-tts/data/audio/old/女新闻.wav"
+    },
+    {
+      "source_line": 1132,
+      "text": "你知道吗，他居然给我送花了！我吓一跳！",
+      "emotion_label": "我的天！太阳打西边出来了！",
+      "emotion": [
+        0.0,
+        0.0,
+        0.0,
+        0.9,
+        0.0,
+        0.0,
+        0.1,
+        0.0
+      ],
+      "dominant_emotion": "fear",
+      "dominant_index": 3,
+      "id": "sm89-q076",
+      "seed": 630510862,
+      "reference_audio": "/workspace/index-tts/data/audio/old/positive_denoised.wav"
+    },
+    {
+      "source_line": 549,
+      "text": "我妈又催我相亲，烦得我想连夜买票去西藏。",
+      "emotion_label": "别逼我！我真的要跑了！",
+      "emotion": [
+        0.0,
+        0.85,
+        0.0,
+        0.05,
+        0.05,
+        0.0,
+        0.05,
+        0.0
+      ],
+      "dominant_emotion": "angry",
+      "dominant_index": 1,
+      "id": "sm89-q077",
+      "seed": 1362392679,
+      "reference_audio": "/workspace/index-tts/data/audio/old/xiaoyuan_gao.wav"
+    },
+    {
+      "source_line": 1361,
+      "text": "刚做完脸，皮肤好到发光。",
+      "emotion_label": "天哪！我美翻了！",
+      "emotion": [
+        0.9,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.09,
+        0.01
+      ],
+      "dominant_emotion": "happy",
+      "dominant_index": 0,
+      "id": "sm89-q078",
+      "seed": 788885793,
+      "reference_audio": "/workspace/index-tts/data/audio/old/zhoujielun_final_denoised.wav"
+    },
+    {
+      "source_line": 544,
+      "text": "新开的咖啡店装修好美，但拿铁甜得我直皱眉。",
+      "emotion_label": "装修美有什么用！难喝得想摔杯子！",
+      "emotion": [
+        0.0,
+        0.3,
+        0.0,
+        0.1,
+        0.5,
+        0.05,
+        0.05,
+        0.0
+      ],
+      "dominant_emotion": "disgust",
+      "dominant_index": 4,
+      "id": "sm89-q079",
+      "seed": 148785691,
+      "reference_audio": "/workspace/index-tts/data/audio/old/positive_denoised.wav"
+    },
+    {
+      "source_line": 879,
+      "text": "我在地铁上看到一只超可爱的柯基，心都化了。",
+      "emotion_label": "啊啊啊！萌死我了！我要被融化了！",
+      "emotion": [
+        0.0,
+        0.0,
+        0.0,
+        0.9,
+        0.05,
+        0.0,
+        0.05,
+        0.0
+      ],
+      "dominant_emotion": "fear",
+      "dominant_index": 3,
+      "id": "sm89-q080",
+      "seed": 1679371307,
+      "reference_audio": "/workspace/index-tts/data/audio/old/positive_denoised.wav"
+    },
+    {
+      "source_line": 1123,
+      "text": "下雨天好烦，想窝在被子里一整天。",
+      "emotion_label": "哈哈哈哈！笑到肚子疼！",
+      "emotion": [
+        0.3,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.1,
+        0.6
+      ],
+      "dominant_emotion": "calm",
+      "dominant_index": 7,
+      "id": "sm89-q081",
+      "seed": 680600271,
+      "reference_audio": "/workspace/index-tts/data/audio/old/xiaoyuan_gao.wav"
+    },
+    {
+      "source_line": 1303,
+      "text": "你猜我刚才遇到谁了？简直不敢相信！",
+      "emotion_label": "天哪！我遇到鬼了吗！",
+      "emotion": [
+        0.0,
+        0.0,
+        0.0,
+        0.9,
+        0.0,
+        0.0,
+        0.09,
+        0.01
+      ],
+      "dominant_emotion": "fear",
+      "dominant_index": 3,
+      "id": "sm89-q082",
+      "seed": 748517763,
+      "reference_audio": "/workspace/index-tts/data/audio/old/yangying_final_denoised.wav"
+    },
+    {
+      "source_line": 399,
+      "text": "今天逛街看到那条裙子，美得我直接尖叫出声。",
+      "emotion_label": "天哪太美了！我要死了！",
+      "emotion": [
+        0.3,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.65,
+        0.05
+      ],
+      "dominant_emotion": "surprise",
+      "dominant_index": 6,
+      "id": "sm89-q083",
+      "seed": 1046179808,
+      "reference_audio": "/workspace/index-tts/data/audio/old/mingxiang_gao.wav"
+    },
+    {
+      "source_line": 216,
+      "text": "刚发现新买的裙子打折，亏了三百块，气死我了！",
+      "emotion_label": "凭什么！我花钱买罪受吗！",
+      "emotion": [
+        0.0,
+        0.85,
+        0.02,
+        0.05,
+        0.05,
+        0.02,
+        0.0,
+        0.01
+      ],
+      "dominant_emotion": "angry",
+      "dominant_index": 1,
+      "id": "sm89-q084",
+      "seed": 901215916,
+      "reference_audio": "/workspace/index-tts/data/audio/old/yangying_final_denoised.wav"
+    },
+    {
+      "source_line": 99,
+      "text": "我的天，这衬衫打折打到骨折，必须拿下！",
+      "emotion_label": "快看快看！天上掉馅饼了！",
+      "emotion": [
+        0.9,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.09,
+        0.01
+      ],
+      "dominant_emotion": "happy",
+      "dominant_index": 0,
+      "id": "sm89-q085",
+      "seed": 1896114645,
+      "reference_audio": "/workspace/index-tts/data/audio/old/zhoujielun_final_denoised.wav"
+    },
+    {
+      "source_line": 927,
+      "text": "那个明星塌房了？我昨晚还刷到他帅照呢。",
+      "emotion_label": "不是吧！他居然是这种人！",
+      "emotion": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.99,
+        0.01
+      ],
+      "dominant_emotion": "surprise",
+      "dominant_index": 6,
+      "id": "sm89-q086",
+      "seed": 1504186218,
+      "reference_audio": "/workspace/index-tts/data/audio/old/yangying_final_denoised.wav"
+    },
+    {
+      "source_line": 788,
+      "text": "我突然好想吃麻辣烫，现在立刻马上！",
+      "emotion_label": "快点！我要饿死了！",
+      "emotion": [
+        0.0,
+        0.1,
+        0.0,
+        0.1,
+        0.1,
+        0.1,
+        0.1,
+        0.5
+      ],
+      "dominant_emotion": "calm",
+      "dominant_index": 7,
+      "id": "sm89-q087",
+      "seed": 1970520679,
+      "reference_audio": "/workspace/index-tts/data/audio/old/xiaoyuan_gao.wav"
+    },
+    {
+      "source_line": 1138,
+      "text": "我昨天遇到一个超级讨厌的男生。",
+      "emotion_label": "你给我滚！",
+      "emotion": [
+        0.0,
+        0.85,
+        0.01,
+        0.05,
+        0.05,
+        0.01,
+        0.02,
+        0.01
+      ],
+      "dominant_emotion": "angry",
+      "dominant_index": 1,
+      "id": "sm89-q088",
+      "seed": 2034798121,
+      "reference_audio": "/workspace/index-tts/data/audio/old/xiaoyuan_gao.wav"
+    },
+    {
+      "source_line": 195,
+      "text": "她那条朋友圈发得也太绿茶了，受不了。",
+      "emotion_label": "恶心死了！赶紧给我删了！",
+      "emotion": [
+        0.0,
+        0.3,
+        0.0,
+        0.2,
+        0.4,
+        0.05,
+        0.05,
+        0.0
+      ],
+      "dominant_emotion": "disgust",
+      "dominant_index": 4,
+      "id": "sm89-q089",
+      "seed": 1919643849,
+      "reference_audio": "/workspace/index-tts/data/audio/old/女新闻.wav"
+    },
+    {
+      "source_line": 1299,
+      "text": "快看路边那只柯基，屁股扭得我心情超好！",
+      "emotion_label": "啊啊啊！可爱到炸裂！",
+      "emotion": [
+        0.95,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.04,
+        0.01
+      ],
+      "dominant_emotion": "happy",
+      "dominant_index": 0,
+      "id": "sm89-q090",
+      "seed": 948721868,
+      "reference_audio": "/workspace/index-tts/data/audio/old/zhangjingyi_final.wav"
+    },
+    {
+      "source_line": 276,
+      "text": "健身房刚办卡就懒得动，钱白花了后悔死。",
+      "emotion_label": "我真是个大傻X！",
+      "emotion": [
+        0.0,
+        0.3,
+        0.2,
+        0.2,
+        0.1,
+        0.15,
+        0.1,
+        0.05
+      ],
+      "dominant_emotion": "angry",
+      "dominant_index": 1,
+      "id": "sm89-q091",
+      "seed": 593859157,
+      "reference_audio": "/workspace/index-tts/data/audio/old/mingxiang_gao.wav"
+    },
+    {
+      "source_line": 1461,
+      "text": "健身房那个教练身材好到让人流鼻血。",
+      "emotion_label": "救命！这也太帅了吧！",
+      "emotion": [
+        0.9,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.05,
+        0.05
+      ],
+      "dominant_emotion": "happy",
+      "dominant_index": 0,
+      "id": "sm89-q092",
+      "seed": 1076995853,
+      "reference_audio": "/workspace/index-tts/data/audio/old/huge_final.wav"
+    },
+    {
+      "source_line": 1143,
+      "text": "你上次送我的礼物我好感动！",
+      "emotion_label": "你真好，我要哭了！",
+      "emotion": [
+        0.0,
+        0.1,
+        0.8,
+        0.0,
+        0.0,
+        0.1,
+        0.0,
+        0.0
+      ],
+      "dominant_emotion": "sad",
+      "dominant_index": 2,
+      "id": "sm89-q093",
+      "seed": 1309500211,
+      "reference_audio": "/workspace/index-tts/data/audio/old/男新闻.wav"
+    },
+    {
+      "source_line": 23,
+      "text": "那边有只超萌的柯基，我们快过去看看！",
+      "emotion_label": "哇塞！快跑！错过我要哭死了！",
+      "emotion": [
+        0.0,
+        0.0,
+        0.05,
+        0.9,
+        0.0,
+        0.0,
+        0.05,
+        0.0
+      ],
+      "dominant_emotion": "fear",
+      "dominant_index": 3,
+      "id": "sm89-q094",
+      "seed": 1665568610,
+      "reference_audio": "/workspace/index-tts/data/audio/old/mingxiang_gao.wav"
+    },
+    {
+      "source_line": 1304,
+      "text": "这个月又超支了，我要剁手！",
+      "emotion_label": "我恨我自己！怎么就管不住手呢！",
+      "emotion": [
+        0.0,
+        0.85,
+        0.02,
+        0.05,
+        0.05,
+        0.02,
+        0.0,
+        0.01
+      ],
+      "dominant_emotion": "angry",
+      "dominant_index": 1,
+      "id": "sm89-q095",
+      "seed": 1377601995,
+      "reference_audio": "/workspace/index-tts/data/audio/old/mingxiang_gao.wav"
+    },
+    {
+      "source_line": 356,
+      "text": "我刚做了个超棒的蛋糕，你快来尝尝嘛，保证好吃！",
+      "emotion_label": "快来！保证让你惊艳！",
+      "emotion": [
+        0.95,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.04,
+        0.01
+      ],
+      "dominant_emotion": "happy",
+      "dominant_index": 0,
+      "id": "sm89-q096",
+      "seed": 476944692,
+      "reference_audio": "/workspace/index-tts/data/audio/old/yangying_final_denoised.wav"
+    },
+    {
+      "source_line": 353,
+      "text": "今天天气好好啊，你请假陪我去野餐好不好嘛？",
+      "emotion_label": "求求你了！一起去吧！",
+      "emotion": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "dominant_emotion": "calm",
+      "dominant_index": 7,
+      "id": "sm89-q097",
+      "seed": 719213443,
+      "reference_audio": "/workspace/index-tts/data/audio/old/yangying_final_denoised.wav"
+    },
+    {
+      "source_line": 1432,
+      "text": "今天被同事莫名其妙怼了，气死我了。",
+      "emotion_label": "你给我闭嘴！你算什么东西！",
+      "emotion": [
+        0.0,
+        0.85,
+        0.02,
+        0.05,
+        0.05,
+        0.01,
+        0.01,
+        0.01
+      ],
+      "dominant_emotion": "angry",
+      "dominant_index": 1,
+      "id": "sm89-q098",
+      "seed": 1822388316,
+      "reference_audio": "/workspace/index-tts/data/audio/old/huge_final.wav"
+    },
+    {
+      "source_line": 756,
+      "text": "口红试色翻车了，涂上去像刚吃了小孩。",
+      "emotion_label": "什么鬼东西！我的眼睛！",
+      "emotion": [
+        0.0,
+        0.05,
+        0.0,
+        0.8,
+        0.05,
+        0.0,
+        0.1,
+        0.0
+      ],
+      "dominant_emotion": "fear",
+      "dominant_index": 3,
+      "id": "sm89-q099",
+      "seed": 792831952,
+      "reference_audio": "/workspace/index-tts/data/audio/old/zhoujielun_final_denoised.wav"
+    },
+    {
+      "source_line": 833,
+      "text": "天哪你这条裙子也太绝了吧！",
+      "emotion_label": "我的天！这也太好看了吧！我要哭了你懂吗！",
+      "emotion": [
+        0.9,
+        0.0,
+        0.05,
+        0.0,
+        0.0,
+        0.0,
+        0.04,
+        0.01
+      ],
+      "dominant_emotion": "happy",
+      "dominant_index": 0,
+      "id": "sm89-q100",
+      "seed": 981629424,
+      "reference_audio": "/workspace/index-tts/data/audio/old/男新闻.wav"
+    },
+    {
+      "source_line": 1033,
+      "text": "楼下那家奶茶店居然关门了，我的快乐源泉没了！",
+      "emotion_label": "不要啊！我的命都没了！",
+      "emotion": [
+        0.0,
+        0.1,
+        0.05,
+        0.8,
+        0.0,
+        0.0,
+        0.05,
+        0.0
+      ],
+      "dominant_emotion": "fear",
+      "dominant_index": 3,
+      "id": "sm89-q101",
+      "seed": 677180744,
+      "reference_audio": "/workspace/index-tts/data/audio/old/yangying_final_denoised.wav"
+    },
+    {
+      "source_line": 1230,
+      "text": "我膝盖都软了，你赶紧扶我一下。",
+      "emotion_label": "救命啊！我眼前一片黑了！",
+      "emotion": [
+        0.0,
+        0.1,
+        0.0,
+        0.8,
+        0.0,
+        0.0,
+        0.1,
+        0.0
+      ],
+      "dominant_emotion": "fear",
+      "dominant_index": 3,
+      "id": "sm89-q102",
+      "seed": 1098911555,
+      "reference_audio": "/workspace/index-tts/data/audio/old/positive_denoised.wav"
+    },
+    {
+      "source_line": 1216,
+      "text": "你猜我刚刚在电梯里遇到谁了，说出来吓你一跳。",
+      "emotion_label": "你猜我发现了什么大秘密！",
+      "emotion": [
+        0.01,
+        0.01,
+        0.01,
+        0.01,
+        0.01,
+        0.01,
+        0.94,
+        0.01
+      ],
+      "dominant_emotion": "surprise",
+      "dominant_index": 6,
+      "id": "sm89-q103",
+      "seed": 245860355,
+      "reference_audio": "/workspace/index-tts/data/audio/old/女新闻.wav"
+    },
+    {
+      "source_line": 1190,
+      "text": "你这件裙子也太好看了吧，哪里买的快告诉我！",
+      "emotion_label": "急死我了！快跑啊！",
+      "emotion": [
+        0.0,
+        0.01,
+        0.01,
+        0.9,
+        0.01,
+        0.01,
+        0.05,
+        0.01
+      ],
+      "dominant_emotion": "fear",
+      "dominant_index": 3,
+      "id": "sm89-q104",
+      "seed": 1149549600,
+      "reference_audio": "/workspace/index-tts/data/audio/old/xiaoyuan_gao.wav"
+    },
+    {
+      "source_line": 735,
+      "text": "加班又没赶上末班车，这破班我是一秒都不想上了。",
+      "emotion_label": "去死吧！这破公司！",
+      "emotion": [
+        0.0,
+        0.85,
+        0.02,
+        0.05,
+        0.05,
+        0.02,
+        0.0,
+        0.01
+      ],
+      "dominant_emotion": "angry",
+      "dominant_index": 1,
+      "id": "sm89-q105",
+      "seed": 738421789,
+      "reference_audio": "/workspace/index-tts/data/audio/old/zhoujielun_final_denoised.wav"
+    },
+    {
+      "source_line": 34,
+      "text": "地铁那男的踩我脚还不道歉，真想骂人。",
+      "emotion_label": "你是不是瞎了！",
+      "emotion": [
+        0.0,
+        0.85,
+        0.0,
+        0.05,
+        0.05,
+        0.0,
+        0.05,
+        0.0
+      ],
+      "dominant_emotion": "angry",
+      "dominant_index": 1,
+      "id": "sm89-q106",
+      "seed": 1646170497,
+      "reference_audio": "/workspace/index-tts/data/audio/old/positive_denoised.wav"
+    },
+    {
+      "source_line": 543,
+      "text": "那个渣男又发朋友圈秀恩爱，看得我血压都飙了。",
+      "emotion_label": "他还有脸秀！我诅咒他三天就分手！",
+      "emotion": [
+        0.0,
+        0.9,
+        0.01,
+        0.02,
+        0.05,
+        0.01,
+        0.0,
+        0.01
+      ],
+      "dominant_emotion": "angry",
+      "dominant_index": 1,
+      "id": "sm89-q107",
+      "seed": 477570502,
+      "reference_audio": "/workspace/index-tts/data/audio/old/男新闻.wav"
+    },
+    {
+      "source_line": 753,
+      "text": "你今天穿那件风衣绝对炸街，别犹豫了！",
+      "emotion_label": "你疯啦！穿这么帅给谁看！",
+      "emotion": [
+        0.9,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.05,
+        0.05
+      ],
+      "dominant_emotion": "happy",
+      "dominant_index": 0,
+      "id": "sm89-q108",
+      "seed": 1514342641,
+      "reference_audio": "/workspace/index-tts/data/audio/old/mingxiang_gao.wav"
+    },
+    {
+      "source_line": 1264,
+      "text": "天哪，这家咖啡厅的蛋糕也太好吃了吧！",
+      "emotion_label": "我的天啊！这味道绝了！",
+      "emotion": [
+        0.0,
+        0.1,
+        0.0,
+        0.1,
+        0.7,
+        0.05,
+        0.05,
+        0.0
+      ],
+      "dominant_emotion": "disgust",
+      "dominant_index": 4,
+      "id": "sm89-q109",
+      "seed": 1068191250,
+      "reference_audio": "/workspace/index-tts/data/audio/old/mingxiang_gao.wav"
+    },
+    {
+      "source_line": 686,
+      "text": "好烦啊，我新买的耳环又不知道丢哪儿去了。",
+      "emotion_label": "我真服了！每次都这样！",
+      "emotion": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.99,
+        0.01
+      ],
+      "dominant_emotion": "surprise",
+      "dominant_index": 6,
+      "id": "sm89-q110",
+      "seed": 1262801234,
+      "reference_audio": "/workspace/index-tts/data/audio/old/zhoujielun_final_denoised.wav"
+    },
+    {
+      "source_line": 136,
+      "text": "我刚刚看到那个咖啡馆新开张！必须去试试。",
+      "emotion_label": "太棒了！我今天就要吃个够！",
+      "emotion": [
+        0.95,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.03,
+        0.02
+      ],
+      "dominant_emotion": "happy",
+      "dominant_index": 0,
+      "id": "sm89-q111",
+      "seed": 74119294,
+      "reference_audio": "/workspace/index-tts/data/audio/old/zhangjingyi_final.wav"
+    },
+    {
+      "source_line": 953,
+      "text": "你昨天爽约我真的好难过啊。",
+      "emotion_label": "你知不知道我等你多久！",
+      "emotion": [
+        0.0,
+        0.85,
+        0.01,
+        0.05,
+        0.05,
+        0.01,
+        0.02,
+        0.01
+      ],
+      "dominant_emotion": "angry",
+      "dominant_index": 1,
+      "id": "sm89-q112",
+      "seed": 1904163554,
+      "reference_audio": "/workspace/index-tts/data/audio/old/positive_denoised.wav"
+    },
+    {
+      "source_line": 657,
+      "text": "你竟然偷偷给我买了这个！太爱你了！",
+      "emotion_label": "妈妈我永远爱你！你是最好的！",
+      "emotion": [
+        0.9,
+        0.0,
+        0.05,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.05
+      ],
+      "dominant_emotion": "happy",
+      "dominant_index": 0,
+      "id": "sm89-q113",
+      "seed": 90522140,
+      "reference_audio": "/workspace/index-tts/data/audio/old/男新闻.wav"
+    },
+    {
+      "source_line": 93,
+      "text": "啊？你居然加班到现在？太过分了吧。",
+      "emotion_label": "公司是吸血鬼吗！你辞职算了！",
+      "emotion": [
+        0.0,
+        0.85,
+        0.02,
+        0.05,
+        0.05,
+        0.02,
+        0.01,
+        0.0
+      ],
+      "dominant_emotion": "angry",
+      "dominant_index": 1,
+      "id": "sm89-q114",
+      "seed": 644295220,
+      "reference_audio": "/workspace/index-tts/data/audio/old/女新闻.wav"
+    },
+    {
+      "source_line": 804,
+      "text": "收到一条前任的消息，真烦。",
+      "emotion_label": "滚远点！别来恶心我！",
+      "emotion": [
+        0.0,
+        0.85,
+        0.0,
+        0.05,
+        0.05,
+        0.0,
+        0.03,
+        0.02
+      ],
+      "dominant_emotion": "angry",
+      "dominant_index": 1,
+      "id": "sm89-q115",
+      "seed": 1897103013,
+      "reference_audio": "/workspace/index-tts/data/audio/old/yangying_final_denoised.wav"
+    },
+    {
+      "source_line": 995,
+      "text": "他居然忘记我生日了，气死我了！",
+      "emotion_label": "你心里还有我吗！分手！",
+      "emotion": [
+        0.0,
+        0.3,
+        0.4,
+        0.1,
+        0.2,
+        0.05,
+        0.0,
+        0.05
+      ],
+      "dominant_emotion": "sad",
+      "dominant_index": 2,
+      "id": "sm89-q116",
+      "seed": 2103007517,
+      "reference_audio": "/workspace/index-tts/data/audio/old/男新闻.wav"
+    },
+    {
+      "source_line": 1128,
+      "text": "明明不是我的错，为什么都怪我。",
+      "emotion_label": "都给我滚！凭什么要我背锅！",
+      "emotion": [
+        0.0,
+        0.85,
+        0.02,
+        0.05,
+        0.05,
+        0.01,
+        0.01,
+        0.01
+      ],
+      "dominant_emotion": "angry",
+      "dominant_index": 1,
+      "id": "sm89-q117",
+      "seed": 894679872,
+      "reference_audio": "/workspace/index-tts/data/audio/old/mingxiang_gao.wav"
+    },
+    {
+      "source_line": 217,
+      "text": "你猜怎么着，我养的猫居然学会开冰箱了，太离谱了！",
+      "emotion_label": "天哪！你成精了是吧！",
+      "emotion": [
+        0.0,
+        0.0,
+        0.0,
+        0.9,
+        0.0,
+        0.0,
+        0.09,
+        0.01
+      ],
+      "dominant_emotion": "fear",
+      "dominant_index": 3,
+      "id": "sm89-q118",
+      "seed": 1781699115,
+      "reference_audio": "/workspace/index-tts/data/audio/old/女新闻.wav"
+    },
+    {
+      "source_line": 1261,
+      "text": "这节普拉提课简直要了我的老命。",
+      "emotion_label": "我不行了！我要死了！",
+      "emotion": [
+        0.0,
+        0.1,
+        0.1,
+        0.7,
+        0.05,
+        0.03,
+        0.01,
+        0.01
+      ],
+      "dominant_emotion": "fear",
+      "dominant_index": 3,
+      "id": "sm89-q119",
+      "seed": 613232121,
+      "reference_audio": "/workspace/index-tts/data/audio/old/zhangjingyi_final.wav"
+    },
+    {
+      "source_line": 757,
+      "text": "我刚看到那件限量款裙子，简直美炸了！",
+      "emotion_label": "我的天！我不管我就要！",
+      "emotion": [
+        0.0,
+        0.95,
+        0.01,
+        0.01,
+        0.01,
+        0.01,
+        0.01,
+        0.0
+      ],
+      "dominant_emotion": "angry",
+      "dominant_index": 1,
+      "id": "sm89-q120",
+      "seed": 930705623,
+      "reference_audio": "/workspace/index-tts/data/audio/old/xiaoyuan_gao.wav"
+    },
+    {
+      "source_line": 9,
+      "text": "你妈又催你相亲？哎我懂，咱俩抱头痛哭。",
+      "emotion_label": "我们两个真命苦啊！",
+      "emotion": [
+        0.01,
+        0.01,
+        0.9,
+        0.01,
+        0.01,
+        0.04,
+        0.0,
+        0.01
+      ],
+      "dominant_emotion": "sad",
+      "dominant_index": 2,
+      "id": "sm89-q121",
+      "seed": 1166905871,
+      "reference_audio": "/workspace/index-tts/data/audio/old/zhangjingyi_final.wav"
+    },
+    {
+      "source_line": 1278,
+      "text": "我刚睡醒，眼睛都睁不开，好烦啊。",
+      "emotion_label": "我不想活了！别烦我！",
+      "emotion": [
+        0.0,
+        0.3,
+        0.4,
+        0.2,
+        0.1,
+        0.05,
+        0.0,
+        0.05
+      ],
+      "dominant_emotion": "sad",
+      "dominant_index": 2,
+      "id": "sm89-q122",
+      "seed": 2146702328,
+      "reference_audio": "/workspace/index-tts/data/audio/old/男新闻.wav"
+    },
+    {
+      "source_line": 1346,
+      "text": "这家奶茶也太好喝了吧，我明天必须再来一杯！",
+      "emotion_label": "太好喝了！我就要喝这个！",
+      "emotion": [
+        0.95,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.02,
+        0.03
+      ],
+      "dominant_emotion": "happy",
+      "dominant_index": 0,
+      "id": "sm89-q123",
+      "seed": 108167690,
+      "reference_audio": "/workspace/index-tts/data/audio/old/zhoujielun_final_denoised.wav"
+    },
+    {
+      "source_line": 587,
+      "text": "我刚看到一只流浪猫，腿断了，好可怜啊。",
+      "emotion_label": "天啊！太惨了！谁来救救它！",
+      "emotion": [
+        0.0,
+        0.1,
+        0.3,
+        0.2,
+        0.05,
+        0.15,
+        0.2,
+        0.0
+      ],
+      "dominant_emotion": "sad",
+      "dominant_index": 2,
+      "id": "sm89-q124",
+      "seed": 375530851,
+      "reference_audio": "/workspace/index-tts/data/audio/old/huge_final.wav"
+    },
+    {
+      "source_line": 200,
+      "text": "这家新开的甜品店绝了，下次带你去！",
+      "emotion_label": "太好吃了吧！我直接原地升天！",
+      "emotion": [
+        0.95,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.03,
+        0.02
+      ],
+      "dominant_emotion": "happy",
+      "dominant_index": 0,
+      "id": "sm89-q125",
+      "seed": 993452057,
+      "reference_audio": "/workspace/index-tts/data/audio/old/mingxiang_gao.wav"
+    },
+    {
+      "source_line": 245,
+      "text": "看到前任朋友圈秀恩爱，心里酸酸的怎么回事。",
+      "emotion_label": "凭什么！我恨死了！",
+      "emotion": [
+        0.0,
+        0.9,
+        0.01,
+        0.02,
+        0.05,
+        0.01,
+        0.0,
+        0.01
+      ],
+      "dominant_emotion": "angry",
+      "dominant_index": 1,
+      "id": "sm89-q126",
+      "seed": 2012142392,
+      "reference_audio": "/workspace/index-tts/data/audio/old/女新闻.wav"
+    },
+    {
+      "source_line": 1515,
+      "text": "那个韩剧男主最后死了，我哭得眼睛都肿了。",
+      "emotion_label": "呜呜呜！太虐了！我不活了！",
+      "emotion": [
+        0.0,
+        0.1,
+        0.5,
+        0.1,
+        0.1,
+        0.15,
+        0.05,
+        0.0
+      ],
+      "dominant_emotion": "sad",
+      "dominant_index": 2,
+      "id": "sm89-q127",
+      "seed": 1776063980,
+      "reference_audio": "/workspace/index-tts/data/audio/old/女新闻.wav"
+    },
+    {
+      "source_line": 1091,
+      "text": "你居然记得我生日，太感动了！",
+      "emotion_label": "天哪！我要哭了！",
+      "emotion": [
+        0.0,
+        0.1,
+        0.7,
+        0.1,
+        0.05,
+        0.05,
+        0.0,
+        0.0
+      ],
+      "dominant_emotion": "sad",
+      "dominant_index": 2,
+      "id": "sm89-q128",
+      "seed": 2100914644,
+      "reference_audio": "/workspace/index-tts/data/audio/old/zhangjingyi_final.wav"
+    },
+    {
+      "source_line": 145,
+      "text": "前任又发自拍，真受不了，太装了。",
+      "emotion_label": "删了删了！看着就恶心！",
+      "emotion": [
+        0.0,
+        0.3,
+        0.0,
+        0.1,
+        0.5,
+        0.05,
+        0.05,
+        0.0
+      ],
+      "dominant_emotion": "disgust",
+      "dominant_index": 4,
+      "id": "sm89-q129",
+      "seed": 35790023,
+      "reference_audio": "/workspace/index-tts/data/audio/old/huge_final.wav"
+    },
+    {
+      "source_line": 238,
+      "text": "我刚刷到个超好笑的视频，你快看快看！",
+      "emotion_label": "笑死我了！快来看这个笨蛋！",
+      "emotion": [
+        0.0,
+        0.3,
+        0.0,
+        0.1,
+        0.5,
+        0.0,
+        0.1,
+        0.0
+      ],
+      "dominant_emotion": "disgust",
+      "dominant_index": 4,
+      "id": "sm89-q130",
+      "seed": 1645395928,
+      "reference_audio": "/workspace/index-tts/data/audio/old/mingxiang_gao.wav"
+    },
+    {
+      "source_line": 1492,
+      "text": "楼下新开的咖啡馆，居然搞到凌晨三点打烊！",
+      "emotion_label": "什么鬼！这也太离谱了吧！我要住那儿！",
+      "emotion": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.99,
+        0.01
+      ],
+      "dominant_emotion": "surprise",
+      "dominant_index": 6,
+      "id": "sm89-q131",
+      "seed": 1115595098,
+      "reference_audio": "/workspace/index-tts/data/audio/old/zhangjingyi_final.wav"
+    },
+    {
+      "source_line": 670,
+      "text": "你那个新包好好看，在哪买的？",
+      "emotion_label": "哇！你也太会买了吧！",
+      "emotion": [
+        0.9,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.09,
+        0.01
+      ],
+      "dominant_emotion": "happy",
+      "dominant_index": 0,
+      "id": "sm89-q132",
+      "seed": 2056204002,
+      "reference_audio": "/workspace/index-tts/data/audio/old/zhoujielun_final_denoised.wav"
+    },
+    {
+      "source_line": 1375,
+      "text": "我家猫又生病了，我好担心它啊。",
+      "emotion_label": "怎么办！我好怕！救救我！",
+      "emotion": [
+        0.0,
+        0.1,
+        0.0,
+        0.9,
+        0.0,
+        0.0,
+        0.05,
+        0.05
+      ],
+      "dominant_emotion": "fear",
+      "dominant_index": 3,
+      "id": "sm89-q133",
+      "seed": 136322000,
+      "reference_audio": "/workspace/index-tts/data/audio/old/positive_denoised.wav"
+    },
+    {
+      "source_line": 25,
+      "text": "你知道那个谁和谁在一起了吗？巨劲爆！",
+      "emotion_label": "什么？快给我从头到尾讲清楚！",
+      "emotion": [
+        0.0,
+        0.1,
+        0.1,
+        0.1,
+        0.05,
+        0.1,
+        0.5,
+        0.05
+      ],
+      "dominant_emotion": "surprise",
+      "dominant_index": 6,
+      "id": "sm89-q134",
+      "seed": 1443057963,
+      "reference_audio": "/workspace/index-tts/data/audio/old/女新闻.wav"
+    },
+    {
+      "source_line": 671,
+      "text": "晚上一起蹦迪吧，我请客！",
+      "emotion_label": "走啊走啊！今晚必须嗨起来！",
+      "emotion": [
+        0.95,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.03,
+        0.02
+      ],
+      "dominant_emotion": "happy",
+      "dominant_index": 0,
+      "id": "sm89-q135",
+      "seed": 5308955,
+      "reference_audio": "/workspace/index-tts/data/audio/old/男新闻.wav"
+    },
+    {
+      "source_line": 492,
+      "text": "你知不知道我昨晚失眠到三点，烦死了。",
+      "emotion_label": "别烦我了！滚远点！",
+      "emotion": [
+        0.0,
+        0.85,
+        0.0,
+        0.05,
+        0.05,
+        0.0,
+        0.03,
+        0.02
+      ],
+      "dominant_emotion": "angry",
+      "dominant_index": 1,
+      "id": "sm89-q136",
+      "seed": 431021173,
+      "reference_audio": "/workspace/index-tts/data/audio/old/xiaoyuan_gao.wav"
+    },
+    {
+      "source_line": 1178,
+      "text": "闺蜜你老板又发疯，快跳槽来跟我混！",
+      "emotion_label": "气死我了！那破公司早该倒闭！",
+      "emotion": [
+        0.0,
+        0.85,
+        0.02,
+        0.05,
+        0.05,
+        0.02,
+        0.01,
+        0.0
+      ],
+      "dominant_emotion": "angry",
+      "dominant_index": 1,
+      "id": "sm89-q137",
+      "seed": 1161597152,
+      "reference_audio": "/workspace/index-tts/data/audio/old/huge_final.wav"
+    },
+    {
+      "source_line": 438,
+      "text": "昨晚做梦梦到我们中彩票了，吓醒我了。",
+      "emotion_label": "别吓我！我胆子小！",
+      "emotion": [
+        0.0,
+        0.0,
+        0.0,
+        0.9,
+        0.0,
+        0.0,
+        0.09,
+        0.01
+      ],
+      "dominant_emotion": "fear",
+      "dominant_index": 3,
+      "id": "sm89-q138",
+      "seed": 608458193,
+      "reference_audio": "/workspace/index-tts/data/audio/old/xiaoyuan_gao.wav"
+    },
+    {
+      "source_line": 775,
+      "text": "下雨天我居然没带伞，淋成落汤鸡了，太惨了。",
+      "emotion_label": "烦死了！这破天气跟我有仇是吧！",
+      "emotion": [
+        0.0,
+        0.85,
+        0.02,
+        0.05,
+        0.05,
+        0.02,
+        0.0,
+        0.01
+      ],
+      "dominant_emotion": "angry",
+      "dominant_index": 1,
+      "id": "sm89-q139",
+      "seed": 771544883,
+      "reference_audio": "/workspace/index-tts/data/audio/old/huge_final.wav"
+    },
+    {
+      "source_line": 806,
+      "text": "今天咖啡店那个小哥，帅得我把糖都加错了。",
+      "emotion_label": "救命！帅到我当场去世！",
+      "emotion": [
+        0.0,
+        0.0,
+        0.0,
+        0.9,
+        0.0,
+        0.0,
+        0.09,
+        0.01
+      ],
+      "dominant_emotion": "fear",
+      "dominant_index": 3,
+      "id": "sm89-q140",
+      "seed": 1282504645,
+      "reference_audio": "/workspace/index-tts/data/audio/old/zhangjingyi_final.wav"
+    },
+    {
+      "source_line": 1255,
+      "text": "天啊这条裙子也太显身材了吧！",
+      "emotion_label": "我的天！这也太绝了！",
+      "emotion": [
+        0.01,
+        0.01,
+        0.01,
+        0.01,
+        0.01,
+        0.01,
+        0.94,
+        0.01
+      ],
+      "dominant_emotion": "surprise",
+      "dominant_index": 6,
+      "id": "sm89-q141",
+      "seed": 2025289516,
+      "reference_audio": "/workspace/index-tts/data/audio/old/huge_final.wav"
+    },
+    {
+      "source_line": 561,
+      "text": "天哪我新买的裙子被咖啡泼了，这可是限量款啊我要哭了！",
+      "emotion_label": "我不活了！我的宝贝啊！",
+      "emotion": [
+        0.0,
+        0.01,
+        0.95,
+        0.01,
+        0.01,
+        0.01,
+        0.0,
+        0.01
+      ],
+      "dominant_emotion": "sad",
+      "dominant_index": 2,
+      "id": "sm89-q142",
+      "seed": 701045188,
+      "reference_audio": "/workspace/index-tts/data/audio/old/zhangjingyi_final.wav"
+    },
+    {
+      "source_line": 1122,
+      "text": "他居然忘记我生日，我真的无语死了。",
+      "emotion_label": "刚刷到一个超搞笑的视频，差点在电梯里笑出声来。",
+      "emotion": [
+        0.3,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.65,
+        0.05
+      ],
+      "dominant_emotion": "surprise",
+      "dominant_index": 6,
+      "id": "sm89-q143",
+      "seed": 753771540,
+      "reference_audio": "/workspace/index-tts/data/audio/old/女新闻.wav"
+    },
+    {
+      "source_line": 1042,
+      "text": "雨下三天了，我都要发霉了，好烦躁啊！",
+      "emotion_label": "别烦我！我想一个人静静！",
+      "emotion": [
+        0.0,
+        0.1,
+        0.2,
+        0.1,
+        0.1,
+        0.3,
+        0.05,
+        0.1
+      ],
+      "dominant_emotion": "melancholy",
+      "dominant_index": 5,
+      "id": "sm89-q144",
+      "seed": 1373290582,
+      "reference_audio": "/workspace/index-tts/data/audio/old/mingxiang_gao.wav"
+    },
+    {
+      "source_line": 1136,
+      "text": "我手机掉厕所里了，天哪我要疯了。",
+      "emotion_label": "你干了什么好事！",
+      "emotion": [
+        0.0,
+        0.85,
+        0.02,
+        0.05,
+        0.05,
+        0.02,
+        0.01,
+        0.0
+      ],
+      "dominant_emotion": "angry",
+      "dominant_index": 1,
+      "id": "sm89-q145",
+      "seed": 971362368,
+      "reference_audio": "/workspace/index-tts/data/audio/old/女新闻.wav"
+    },
+    {
+      "source_line": 445,
+      "text": "这家店新出的提拉米苏，吃一口幸福感爆棚。",
+      "emotion_label": "太好吃了！我要幸福死了！",
+      "emotion": [
+        0.95,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.03,
+        0.02
+      ],
+      "dominant_emotion": "happy",
+      "dominant_index": 0,
+      "id": "sm89-q146",
+      "seed": 1048783851,
+      "reference_audio": "/workspace/index-tts/data/audio/old/男新闻.wav"
+    },
+    {
+      "source_line": 937,
+      "text": "你猜我昨天在酒吧碰到谁了？简直不敢相信！",
+      "emotion_label": "天啊！你猜我看到了什么！太震惊了！",
+      "emotion": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.99,
+        0.01
+      ],
+      "dominant_emotion": "surprise",
+      "dominant_index": 6,
+      "id": "sm89-q147",
+      "seed": 1900286609,
+      "reference_audio": "/workspace/index-tts/data/audio/old/男新闻.wav"
+    },
+    {
+      "source_line": 15,
+      "text": "闺蜜你居然忘了我的生日，心碎成渣了。",
+      "emotion_label": "你怎么能这样！我伤心透了！",
+      "emotion": [
+        0.0,
+        0.1,
+        0.7,
+        0.1,
+        0.05,
+        0.05,
+        0.0,
+        0.0
+      ],
+      "dominant_emotion": "sad",
+      "dominant_index": 2,
+      "id": "sm89-q148",
+      "seed": 1711745831,
+      "reference_audio": "/workspace/index-tts/data/audio/old/mingxiang_gao.wav"
+    },
+    {
+      "source_line": 1319,
+      "text": "前男友发新照了，他居然还单着，笑死我了。",
+      "emotion_label": "你也有今天！哈哈哈！",
+      "emotion": [
+        0.95,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.04,
+        0.01
+      ],
+      "dominant_emotion": "happy",
+      "dominant_index": 0,
+      "id": "sm89-q149",
+      "seed": 1199678121,
+      "reference_audio": "/workspace/index-tts/data/audio/old/positive_denoised.wav"
+    },
+    {
+      "source_line": 885,
+      "text": "我昨天还泡吧呢，今天吓得赶紧戴口罩。",
+      "emotion_label": "着火啦！救命！",
+      "emotion": [
+        0.0,
+        0.01,
+        0.01,
+        0.9,
+        0.01,
+        0.01,
+        0.05,
+        0.01
+      ],
+      "dominant_emotion": "fear",
+      "dominant_index": 3,
+      "id": "sm89-q150",
+      "seed": 203048607,
+      "reference_audio": "/workspace/index-tts/data/audio/old/zhoujielun_final_denoised.wav"
+    },
+    {
+      "source_line": 213,
+      "text": "刷到一个猫猫跳舞视频，笑到肚子疼，你赶紧看。",
+      "emotion_label": "哈哈哈我要笑断气了！这猫成精了！",
+      "emotion": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.99,
+        0.01
+      ],
+      "dominant_emotion": "surprise",
+      "dominant_index": 6,
+      "id": "sm89-q151",
+      "seed": 830725984,
+      "reference_audio": "/workspace/index-tts/data/audio/old/yangying_final_denoised.wav"
+    },
+    {
+      "source_line": 429,
+      "text": "你都不知道，我在地铁上被人踩了一脚，疼死。了。",
+      "emotion_label": "疼死我了！救命啊！",
+      "emotion": [
+        0.0,
+        0.1,
+        0.02,
+        0.8,
+        0.05,
+        0.01,
+        0.01,
+        0.01
+      ],
+      "dominant_emotion": "fear",
+      "dominant_index": 3,
+      "id": "sm89-q152",
+      "seed": 1564541233,
+      "reference_audio": "/workspace/index-tts/data/audio/old/huge_final.wav"
+    },
+    {
+      "source_line": 827,
+      "text": "健身房镜子里的我胖了三圈，真的崩溃。",
+      "emotion_label": "什么破考试！我复习了这么久！",
+      "emotion": [
+        0.01,
+        0.01,
+        0.01,
+        0.01,
+        0.01,
+        0.01,
+        0.01,
+        0.93
+      ],
+      "dominant_emotion": "calm",
+      "dominant_index": 7,
+      "id": "sm89-q153",
+      "seed": 1451658041,
+      "reference_audio": "/workspace/index-tts/data/audio/old/yangying_final_denoised.wav"
+    },
+    {
+      "source_line": 1337,
+      "text": "那只小猫好可怜，我们带它回家好不好。",
+      "emotion_label": "太让人心疼了！我一定要帮它！",
+      "emotion": [
+        0.0,
+        0.0,
+        0.99,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.01
+      ],
+      "dominant_emotion": "sad",
+      "dominant_index": 2,
+      "id": "sm89-q154",
+      "seed": 260732170,
+      "reference_audio": "/workspace/index-tts/data/audio/old/positive_denoised.wav"
+    },
+    {
+      "source_line": 800,
+      "text": "你猜我刚刚在商场看见谁了？天哪。",
+      "emotion_label": "哇塞！简直不敢相信！",
+      "emotion": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.99,
+        0.01
+      ],
+      "dominant_emotion": "surprise",
+      "dominant_index": 6,
+      "id": "sm89-q155",
+      "seed": 1782852574,
+      "reference_audio": "/workspace/index-tts/data/audio/old/zhangjingyi_final.wav"
+    },
+    {
+      "source_line": 692,
+      "text": "哇塞，这家甜品店的提拉米苏也太好吃了吧。",
+      "emotion_label": "天哪！这是人间的味道吗！",
+      "emotion": [
+        0.3,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.65,
+        0.05
+      ],
+      "dominant_emotion": "surprise",
+      "dominant_index": 6,
+      "id": "sm89-q156",
+      "seed": 1556862969,
+      "reference_audio": "/workspace/index-tts/data/audio/old/huge_final.wav"
+    },
+    {
+      "source_line": 1320,
+      "text": "天哪，街角那个男生简直是我的理想型！",
+      "emotion_label": "啊啊啊！我死了！",
+      "emotion": [
+        0.0,
+        0.1,
+        0.5,
+        0.2,
+        0.05,
+        0.1,
+        0.05,
+        0.0
+      ],
+      "dominant_emotion": "sad",
+      "dominant_index": 2,
+      "id": "sm89-q157",
+      "seed": 940285686,
+      "reference_audio": "/workspace/index-tts/data/audio/old/mingxiang_gao.wav"
+    },
+    {
+      "source_line": 803,
+      "text": "家里水管突然爆了，救命啊。",
+      "emotion_label": "完了完了！救命啊要淹了！",
+      "emotion": [
+        0.0,
+        0.0,
+        0.0,
+        0.9,
+        0.0,
+        0.0,
+        0.09,
+        0.01
+      ],
+      "dominant_emotion": "fear",
+      "dominant_index": 3,
+      "id": "sm89-q158",
+      "seed": 650140221,
+      "reference_audio": "/workspace/index-tts/data/audio/old/yangying_final_denoised.wav"
+    },
+    {
+      "source_line": 1369,
+      "text": "我家猫咪不吃不喝，急死我了怎么办。",
+      "emotion_label": "快帮忙啊！你是木头吗！",
+      "emotion": [
+        0.01,
+        0.01,
+        0.01,
+        0.01,
+        0.01,
+        0.01,
+        0.95,
+        0.01
+      ],
+      "dominant_emotion": "surprise",
+      "dominant_index": 6,
+      "id": "sm89-q159",
+      "seed": 1501878235,
+      "reference_audio": "/workspace/index-tts/data/audio/old/zhoujielun_final_denoised.wav"
+    },
+    {
+      "source_line": 103,
+      "text": "你猜我刚才在咖啡厅看见谁了？前任！尴尬死。",
+      "emotion_label": "啊啊啊好尴尬啊！我要钻地缝！",
+      "emotion": [
+        0.0,
+        0.0,
+        0.0,
+        0.9,
+        0.05,
+        0.0,
+        0.05,
+        0.0
+      ],
+      "dominant_emotion": "fear",
+      "dominant_index": 3,
+      "id": "sm89-q160",
+      "seed": 1048381268,
+      "reference_audio": "/workspace/index-tts/data/audio/old/女新闻.wav"
+    },
+    {
+      "source_line": 552,
+      "text": "这西瓜甜得我撑死了但真的好幸福。",
+      "emotion_label": "幸福死了！谁也别拦我！",
+      "emotion": [
+        0.0,
+        0.1,
+        0.7,
+        0.1,
+        0.05,
+        0.0,
+        0.05,
+        0.0
+      ],
+      "dominant_emotion": "sad",
+      "dominant_index": 2,
+      "id": "sm89-q161",
+      "seed": 1224154049,
+      "reference_audio": "/workspace/index-tts/data/audio/old/positive_denoised.wav"
+    },
+    {
+      "source_line": 1068,
+      "text": "凭什么她就能买那么贵的包啊好气。",
+      "emotion_label": "你凭什么！我恨死你了！",
+      "emotion": [
+        0.0,
+        0.9,
+        0.01,
+        0.02,
+        0.05,
+        0.01,
+        0.0,
+        0.01
+      ],
+      "dominant_emotion": "angry",
+      "dominant_index": 1,
+      "id": "sm89-q162",
+      "seed": 1653376900,
+      "reference_audio": "/workspace/index-tts/data/audio/old/positive_denoised.wav"
+    },
+    {
+      "source_line": 362,
+      "text": "刚跑步机上摔了一跤，膝盖破皮了，我是不是很蠢？",
+      "emotion_label": "我笨死了！连跑步机都跟我作对！",
+      "emotion": [
+        0.0,
+        0.3,
+        0.0,
+        0.2,
+        0.5,
+        0.05,
+        0.05,
+        0.0
+      ],
+      "dominant_emotion": "disgust",
+      "dominant_index": 4,
+      "id": "sm89-q163",
+      "seed": 502726720,
+      "reference_audio": "/workspace/index-tts/data/audio/old/yangying_final_denoised.wav"
+    },
+    {
+      "source_line": 328,
+      "text": "我昨天梦到我们一起去海边，醒来好失落啊。",
+      "emotion_label": "你滚开！别再来找我！",
+      "emotion": [
+        0.0,
+        0.85,
+        0.0,
+        0.05,
+        0.05,
+        0.0,
+        0.03,
+        0.02
+      ],
+      "dominant_emotion": "angry",
+      "dominant_index": 1,
+      "id": "sm89-q164",
+      "seed": 546099688,
+      "reference_audio": "/workspace/index-tts/data/audio/old/yangying_final_denoised.wav"
+    },
+    {
+      "source_line": 1371,
+      "text": "你居然偷偷给我买了这个手链，感动哭。",
+      "emotion_label": "你太好了！我永远爱你！",
+      "emotion": [
+        0.95,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.03,
+        0.02
+      ],
+      "dominant_emotion": "happy",
+      "dominant_index": 0,
+      "id": "sm89-q165",
+      "seed": 1029867851,
+      "reference_audio": "/workspace/index-tts/data/audio/old/positive_denoised.wav"
+    },
+    {
+      "source_line": 1434,
+      "text": "那个老朋友？我早删微信了，谁还记得呀！",
+      "emotion_label": "滚吧！谁稀罕你！",
+      "emotion": [
+        0.01,
+        0.85,
+        0.01,
+        0.05,
+        0.03,
+        0.02,
+        0.02,
+        0.01
+      ],
+      "dominant_emotion": "angry",
+      "dominant_index": 1,
+      "id": "sm89-q166",
+      "seed": 502509308,
+      "reference_audio": "/workspace/index-tts/data/audio/old/positive_denoised.wav"
+    },
+    {
+      "source_line": 415,
+      "text": "隔壁新开的咖啡馆太绝了，你赶紧来尝尝。",
+      "emotion_label": "你快点行不行！磨蹭死了！",
+      "emotion": [
+        0.0,
+        0.85,
+        0.0,
+        0.05,
+        0.05,
+        0.0,
+        0.03,
+        0.02
+      ],
+      "dominant_emotion": "angry",
+      "dominant_index": 1,
+      "id": "sm89-q167",
+      "seed": 778949225,
+      "reference_audio": "/workspace/index-tts/data/audio/old/zhoujielun_final_denoised.wav"
+    },
+    {
+      "source_line": 336,
+      "text": "累死了，爬个楼梯喘得跟狗一样。",
+      "emotion_label": "我快不行了！谁来扶我一把！",
+      "emotion": [
+        0.0,
+        0.1,
+        0.5,
+        0.2,
+        0.0,
+        0.15,
+        0.05,
+        0.0
+      ],
+      "dominant_emotion": "sad",
+      "dominant_index": 2,
+      "id": "sm89-q168",
+      "seed": 206008554,
+      "reference_audio": "/workspace/index-tts/data/audio/old/男新闻.wav"
+    },
+    {
+      "source_line": 1499,
+      "text": "哎你昨晚没看新闻吗，吓死我了！",
+      "emotion_label": "救命啊！有鬼！",
+      "emotion": [
+        0.0,
+        0.0,
+        0.0,
+        0.9,
+        0.0,
+        0.0,
+        0.09,
+        0.01
+      ],
+      "dominant_emotion": "fear",
+      "dominant_index": 3,
+      "id": "sm89-q169",
+      "seed": 872286432,
+      "reference_audio": "/workspace/index-tts/data/audio/old/huge_final.wav"
+    },
+    {
+      "source_line": 267,
+      "text": "今天太阳超好，我们去公园野餐吧。",
+      "emotion_label": "太棒了！今天不出去玩就是浪费生命！",
+      "emotion": [
+        0.9,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.05,
+        0.05
+      ],
+      "dominant_emotion": "happy",
+      "dominant_index": 0,
+      "id": "sm89-q170",
+      "seed": 1162702316,
+      "reference_audio": "/workspace/index-tts/data/audio/old/positive_denoised.wav"
+    },
+    {
+      "source_line": 1465,
+      "text": "刚才路过花店，那束玫瑰香得我走不动路。",
+      "emotion_label": "太香了！我要窒息了！",
+      "emotion": [
+        0.3,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.1,
+        0.6
+      ],
+      "dominant_emotion": "calm",
+      "dominant_index": 7,
+      "id": "sm89-q171",
+      "seed": 1006329611,
+      "reference_audio": "/workspace/index-tts/data/audio/old/yangying_final_denoised.wav"
+    },
+    {
+      "source_line": 1472,
+      "text": "刚在超市碰到前男友，他胖得像气球笑死我。",
+      "emotion_label": "哈哈哈哈！猪头三！丑得我笑掉大牙！",
+      "emotion": [
+        0.0,
+        0.2,
+        0.0,
+        0.0,
+        0.7,
+        0.0,
+        0.05,
+        0.05
+      ],
+      "dominant_emotion": "disgust",
+      "dominant_index": 4,
+      "id": "sm89-q172",
+      "seed": 723224490,
+      "reference_audio": "/workspace/index-tts/data/audio/old/yangying_final_denoised.wav"
+    },
+    {
+      "source_line": 44,
+      "text": "这个鬼天气，热得我妆都花了。",
+      "emotion_label": "热死了！我不想活了！",
+      "emotion": [
+        0.0,
+        0.1,
+        0.5,
+        0.2,
+        0.05,
+        0.1,
+        0.05,
+        0.0
+      ],
+      "dominant_emotion": "sad",
+      "dominant_index": 2,
+      "id": "sm89-q173",
+      "seed": 367810546,
+      "reference_audio": "/workspace/index-tts/data/audio/old/男新闻.wav"
+    },
+    {
+      "source_line": 794,
+      "text": "那个男人今天又没回消息，他是什么意思啊？",
+      "emotion_label": "你到底想怎样！给个痛快话！",
+      "emotion": [
+        0.0,
+        0.85,
+        0.0,
+        0.05,
+        0.05,
+        0.0,
+        0.05,
+        0.0
+      ],
+      "dominant_emotion": "angry",
+      "dominant_index": 1,
+      "id": "sm89-q174",
+      "seed": 2049549777,
+      "reference_audio": "/workspace/index-tts/data/audio/old/yangying_final_denoised.wav"
+    },
+    {
+      "source_line": 1300,
+      "text": "今天这个妆封神了，我忍不住自拍一百张。",
+      "emotion_label": "我太美了！谁都不许跟我比！",
+      "emotion": [
+        0.95,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.03,
+        0.02
+      ],
+      "dominant_emotion": "happy",
+      "dominant_index": 0,
+      "id": "sm89-q175",
+      "seed": 1008291134,
+      "reference_audio": "/workspace/index-tts/data/audio/old/女新闻.wav"
+    },
+    {
+      "source_line": 876,
+      "text": "那个奶茶店的新品也太好喝了吧，我上瘾了。",
+      "emotion_label": "妈呀！这也太好喝了！我原地升天！",
+      "emotion": [
+        0.95,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.04,
+        0.01
+      ],
+      "dominant_emotion": "happy",
+      "dominant_index": 0,
+      "id": "sm89-q176",
+      "seed": 2041957110,
+      "reference_audio": "/workspace/index-tts/data/audio/old/zhangjingyi_final.wav"
+    },
+    {
+      "source_line": 573,
+      "text": "昨晚梦见咱俩去蹦极，吓醒发现枕头都湿了，真离谱。",
+      "emotion_label": "吓死我了！这什么鬼啊！",
+      "emotion": [
+        0.0,
+        0.3,
+        0.05,
+        0.5,
+        0.1,
+        0.0,
+        0.05,
+        0.0
+      ],
+      "dominant_emotion": "fear",
+      "dominant_index": 3,
+      "id": "sm89-q177",
+      "seed": 1974489797,
+      "reference_audio": "/workspace/index-tts/data/audio/old/xiaoyuan_gao.wav"
+    },
+    {
+      "source_line": 1002,
+      "text": "突然好想吃火锅，现在立刻马上！",
+      "emotion_label": "我现在就要吃！",
+      "emotion": [
+        0.05,
+        0.1,
+        0.05,
+        0.1,
+        0.1,
+        0.05,
+        0.5,
+        0.05
+      ],
+      "dominant_emotion": "surprise",
+      "dominant_index": 6,
+      "id": "sm89-q178",
+      "seed": 818832727,
+      "reference_audio": "/workspace/index-tts/data/audio/old/huge_final.wav"
+    },
+    {
+      "source_line": 875,
+      "text": "天哪！我新买的耳环居然掉了一只！",
+      "emotion_label": "我去！我的耳朵都要气掉了！",
+      "emotion": [
+        0.01,
+        0.01,
+        0.01,
+        0.01,
+        0.01,
+        0.01,
+        0.93,
+        0.01
+      ],
+      "dominant_emotion": "surprise",
+      "dominant_index": 6,
+      "id": "sm89-q179",
+      "seed": 1087581181,
+      "reference_audio": "/workspace/index-tts/data/audio/old/zhangjingyi_final.wav"
+    },
+    {
+      "source_line": 768,
+      "text": "楼下新开的甜品店，提拉米苏绝了！",
+      "emotion_label": "太绝了！我原地起飞！",
+      "emotion": [
+        0.01,
+        0.01,
+        0.01,
+        0.9,
+        0.01,
+        0.01,
+        0.04,
+        0.01
+      ],
+      "dominant_emotion": "fear",
+      "dominant_index": 3,
+      "id": "sm89-q180",
+      "seed": 580185265,
+      "reference_audio": "/workspace/index-tts/data/audio/old/mingxiang_gao.wav"
+    },
+    {
+      "source_line": 297,
+      "text": "闺蜜你居然背着我吃独食，太过分了。",
+      "emotion_label": "你心里还有我吗！",
+      "emotion": [
+        0.01,
+        0.01,
+        0.9,
+        0.01,
+        0.01,
+        0.04,
+        0.0,
+        0.01
+      ],
+      "dominant_emotion": "sad",
+      "dominant_index": 2,
+      "id": "sm89-q181",
+      "seed": 153870768,
+      "reference_audio": "/workspace/index-tts/data/audio/old/女新闻.wav"
+    },
+    {
+      "source_line": 1462,
+      "text": "我追的剧今晚大结局，紧张得手都在抖。",
+      "emotion_label": "啊啊啊！我快呼吸不过来了！",
+      "emotion": [
+        0.0,
+        0.1,
+        0.05,
+        0.7,
+        0.05,
+        0.05,
+        0.05,
+        0.0
+      ],
+      "dominant_emotion": "fear",
+      "dominant_index": 3,
+      "id": "sm89-q182",
+      "seed": 1781871336,
+      "reference_audio": "/workspace/index-tts/data/audio/old/xiaoyuan_gao.wav"
+    },
+    {
+      "source_line": 637,
+      "text": "刚看完一部电影，哭得我妆都花了，太感动了。",
+      "emotion_label": "你知不知道我眼睛都快哭瞎了！",
+      "emotion": [
+        0.0,
+        0.1,
+        0.7,
+        0.1,
+        0.05,
+        0.03,
+        0.01,
+        0.01
+      ],
+      "dominant_emotion": "sad",
+      "dominant_index": 2,
+      "id": "sm89-q183",
+      "seed": 384013856,
+      "reference_audio": "/workspace/index-tts/data/audio/old/男新闻.wav"
+    },
+    {
+      "source_line": 1446,
+      "text": "右边那个男生好帅，你快看一眼。",
+      "emotion_label": "救命！我心跳好快！我要死了！",
+      "emotion": [
+        0.0,
+        0.0,
+        0.0,
+        0.9,
+        0.0,
+        0.0,
+        0.09,
+        0.01
+      ],
+      "dominant_emotion": "fear",
+      "dominant_index": 3,
+      "id": "sm89-q184",
+      "seed": 439786652,
+      "reference_audio": "/workspace/index-tts/data/audio/old/男新闻.wav"
+    },
+    {
+      "source_line": 1510,
+      "text": "你猜我刚才看到谁了？天哪，竟然是他！",
+      "emotion_label": "天哪！真是不可思议！",
+      "emotion": [
+        0.2,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.8,
+        0.0
+      ],
+      "dominant_emotion": "surprise",
+      "dominant_index": 6,
+      "id": "sm89-q185",
+      "seed": 1935329725,
+      "reference_audio": "/workspace/index-tts/data/audio/old/zhangjingyi_final.wav"
+    },
+    {
+      "source_line": 579,
+      "text": "你看这件裙子，太衬我了吧，必须买！",
+      "emotion_label": "好看得我想尖叫！谁也拦不住我！",
+      "emotion": [
+        0.0,
+        0.85,
+        0.01,
+        0.05,
+        0.02,
+        0.01,
+        0.05,
+        0.01
+      ],
+      "dominant_emotion": "angry",
+      "dominant_index": 1,
+      "id": "sm89-q186",
+      "seed": 1727402611,
+      "reference_audio": "/workspace/index-tts/data/audio/old/yangying_final_denoised.wav"
+    },
+    {
+      "source_line": 763,
+      "text": "天哪！这件大衣打五折，快陪我去抢！",
+      "emotion_label": "冲啊！今天谁也别拦我！",
+      "emotion": [
+        0.01,
+        0.95,
+        0.0,
+        0.01,
+        0.01,
+        0.0,
+        0.01,
+        0.01
+      ],
+      "dominant_emotion": "angry",
+      "dominant_index": 1,
+      "id": "sm89-q187",
+      "seed": 1296964988,
+      "reference_audio": "/workspace/index-tts/data/audio/old/zhangjingyi_final.wav"
+    },
+    {
+      "source_line": 783,
+      "text": "那个渣男居然在朋友圈秀恩爱，恶心透顶。",
+      "emotion_label": "呸！脏了我的眼睛！给我消失！",
+      "emotion": [
+        0.0,
+        0.3,
+        0.0,
+        0.2,
+        0.4,
+        0.0,
+        0.1,
+        0.0
+      ],
+      "dominant_emotion": "disgust",
+      "dominant_index": 4,
+      "id": "sm89-q188",
+      "seed": 946379882,
+      "reference_audio": "/workspace/index-tts/data/audio/old/zhoujielun_final_denoised.wav"
+    },
+    {
+      "source_line": 829,
+      "text": "你猜我昨晚熬到几点，追完那部剧了。",
+      "emotion_label": "我赢了！我第一！",
+      "emotion": [
+        0.95,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.04,
+        0.01
+      ],
+      "dominant_emotion": "happy",
+      "dominant_index": 0,
+      "id": "sm89-q189",
+      "seed": 93884537,
+      "reference_audio": "/workspace/index-tts/data/audio/old/男新闻.wav"
+    },
+    {
+      "source_line": 1,
+      "text": "那家新开的火锅店也太好看了吧！",
+      "emotion_label": "太绝了你！",
+      "emotion": [
+        0.01,
+        0.01,
+        0.01,
+        0.01,
+        0.01,
+        0.01,
+        0.94,
+        0.01
+      ],
+      "dominant_emotion": "surprise",
+      "dominant_index": 6,
+      "id": "sm89-q190",
+      "seed": 1390640075,
+      "reference_audio": "/workspace/index-tts/data/audio/old/positive_denoised.wav"
+    },
+    {
+      "source_line": 315,
+      "text": "刚在电梯里碰到个奇葩，一直盯着我看。",
+      "emotion_label": "看什么看！没见过美女啊！",
+      "emotion": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.98,
+        0.02
+      ],
+      "dominant_emotion": "surprise",
+      "dominant_index": 6,
+      "id": "sm89-q191",
+      "seed": 21965307,
+      "reference_audio": "/workspace/index-tts/data/audio/old/positive_denoised.wav"
+    },
+    {
+      "source_line": 701,
+      "text": "下雨天窝在家刷剧，这种日子也太幸福了吧！",
+      "emotion_label": "啊！太舒服了！我爱死这种感觉了！",
+      "emotion": [
+        0.95,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.02,
+        0.03
+      ],
+      "dominant_emotion": "happy",
+      "dominant_index": 0,
+      "id": "sm89-q192",
+      "seed": 1669363967,
+      "reference_audio": "/workspace/index-tts/data/audio/old/zhoujielun_final_denoised.wav"
+    },
+    {
+      "source_line": 1162,
+      "text": "这家火锅店太绝了，辣得我头皮发麻还要吃。",
+      "emotion_label": "这辣劲儿上来我要疯了！再来一口！",
+      "emotion": [
+        0.0,
+        0.3,
+        0.0,
+        0.2,
+        0.4,
+        0.0,
+        0.1,
+        0.0
+      ],
+      "dominant_emotion": "disgust",
+      "dominant_index": 4,
+      "id": "sm89-q193",
+      "seed": 1892087889,
+      "reference_audio": "/workspace/index-tts/data/audio/old/zhoujielun_final_denoised.wav"
+    },
+    {
+      "source_line": 147,
+      "text": "今天地铁上被人踩了一脚，疼死了！",
+      "emotion_label": "你没长眼睛啊！",
+      "emotion": [
+        0.0,
+        0.1,
+        0.1,
+        0.2,
+        0.1,
+        0.1,
+        0.3,
+        0.1
+      ],
+      "dominant_emotion": "surprise",
+      "dominant_index": 6,
+      "id": "sm89-q194",
+      "seed": 813523903,
+      "reference_audio": "/workspace/index-tts/data/audio/old/mingxiang_gao.wav"
+    },
+    {
+      "source_line": 1259,
+      "text": "今晚的音乐太带感，我要跳到天亮！",
+      "emotion_label": "太疯狂了！我爽飞了！",
+      "emotion": [
+        0.95,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.04,
+        0.01
+      ],
+      "dominant_emotion": "happy",
+      "dominant_index": 0,
+      "id": "sm89-q195",
+      "seed": 585743053,
+      "reference_audio": "/workspace/index-tts/data/audio/old/女新闻.wav"
+    },
+    {
+      "source_line": 1051,
+      "text": "我刚看到朋友圈，你居然去巴黎了？",
+      "emotion_label": "你太牛了！带上我啊！",
+      "emotion": [
+        0.95,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.04,
+        0.01
+      ],
+      "dominant_emotion": "happy",
+      "dominant_index": 0,
+      "id": "sm89-q196",
+      "seed": 1313337889,
+      "reference_audio": "/workspace/index-tts/data/audio/old/zhoujielun_final_denoised.wav"
+    },
+    {
+      "source_line": 220,
+      "text": "这件裙子也太好看了吧！必须拿下！",
+      "emotion_label": "啊啊啊！我恋爱了！",
+      "emotion": [
+        0.9,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.05,
+        0.05
+      ],
+      "dominant_emotion": "happy",
+      "dominant_index": 0,
+      "id": "sm89-q197",
+      "seed": 882095037,
+      "reference_audio": "/workspace/index-tts/data/audio/old/huge_final.wav"
+    },
+    {
+      "source_line": 1106,
+      "text": "刚才地铁上有个帅哥对我笑诶！",
+      "emotion_label": "啊啊啊！我恋爱了！你太甜了！",
+      "emotion": [
+        0.95,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.04,
+        0.01
+      ],
+      "dominant_emotion": "happy",
+      "dominant_index": 0,
+      "id": "sm89-q198",
+      "seed": 894597264,
+      "reference_audio": "/workspace/index-tts/data/audio/old/zhoujielun_final_denoised.wav"
+    },
+    {
+      "source_line": 114,
+      "text": "听说小李劈腿了？我的八卦雷达响了！",
+      "emotion_label": "快告诉我！我太好奇了！",
+      "emotion": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.95,
+        0.05
+      ],
+      "dominant_emotion": "surprise",
+      "dominant_index": 6,
+      "id": "sm89-q199",
+      "seed": 1356793104,
+      "reference_audio": "/workspace/index-tts/data/audio/old/yangying_final_denoised.wav"
+    },
+    {
+      "source_line": 1355,
+      "text": "那个老板有病吧，凭什么这样对你！",
+      "emotion_label": "滚！别让我再看到你！",
+      "emotion": [
+        0.0,
+        0.85,
+        0.0,
+        0.05,
+        0.05,
+        0.0,
+        0.05,
+        0.0
+      ],
+      "dominant_emotion": "angry",
+      "dominant_index": 1,
+      "id": "sm89-q200",
+      "seed": 1558443369,
+      "reference_audio": "/workspace/index-tts/data/audio/old/positive_denoised.wav"
+    },
+    {
+      "source_line": 1327,
+      "text": "我刚在咖啡店遇到一个超帅的男生！",
+      "emotion_label": "我的天！我彻底沦陷了！",
+      "emotion": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.99,
+        0.01
+      ],
+      "dominant_emotion": "surprise",
+      "dominant_index": 6,
+      "id": "sm89-q201",
+      "seed": 1986490490,
+      "reference_audio": "/workspace/index-tts/data/audio/old/zhangjingyi_final.wav"
+    },
+    {
+      "source_line": 1295,
+      "text": "他照片里笑那么开心，真让人不爽。",
+      "emotion_label": "恶心！别在我眼前晃！",
+      "emotion": [
+        0.0,
+        0.1,
+        0.0,
+        0.8,
+        0.05,
+        0.0,
+        0.05,
+        0.0
+      ],
+      "dominant_emotion": "fear",
+      "dominant_index": 3,
+      "id": "sm89-q202",
+      "seed": 2123122860,
+      "reference_audio": "/workspace/index-tts/data/audio/old/zhoujielun_final_denoised.wav"
+    },
+    {
+      "source_line": 1205,
+      "text": "刚才那部电影也太绝了，我眼泪根本停不下来！",
+      "emotion_label": "天哪！太震撼了！我整个人都炸了！",
+      "emotion": [
+        0.3,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.65,
+        0.05
+      ],
+      "dominant_emotion": "surprise",
+      "dominant_index": 6,
+      "id": "sm89-q203",
+      "seed": 883155252,
+      "reference_audio": "/workspace/index-tts/data/audio/old/女新闻.wav"
+    },
+    {
+      "source_line": 944,
+      "text": "他给我送花了，红色玫瑰，我超感动。",
+      "emotion_label": "我爱你！你是最棒的！",
+      "emotion": [
+        0.9,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.05,
+        0.05
+      ],
+      "dominant_emotion": "happy",
+      "dominant_index": 0,
+      "id": "sm89-q204",
+      "seed": 970764871,
+      "reference_audio": "/workspace/index-tts/data/audio/old/zhoujielun_final_denoised.wav"
+    },
+    {
+      "source_line": 1057,
+      "text": "这雨下得没完没了，衣服都晾不干。",
+      "emotion_label": "烦死了！这破天气没完没了！",
+      "emotion": [
+        0.0,
+        0.3,
+        0.0,
+        0.1,
+        0.5,
+        0.05,
+        0.05,
+        0.0
+      ],
+      "dominant_emotion": "disgust",
+      "dominant_index": 4,
+      "id": "sm89-q205",
+      "seed": 595826974,
+      "reference_audio": "/workspace/index-tts/data/audio/old/mingxiang_gao.wav"
+    },
+    {
+      "source_line": 83,
+      "text": "这日落美得我手机都差点扔海里。",
+      "emotion_label": "太震撼了！我灵魂出窍了！",
+      "emotion": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.98,
+        0.02
+      ],
+      "dominant_emotion": "surprise",
+      "dominant_index": 6,
+      "id": "sm89-q206",
+      "seed": 39920787,
+      "reference_audio": "/workspace/index-tts/data/audio/old/xiaoyuan_gao.wav"
+    },
+    {
+      "source_line": 1219,
+      "text": "你上次说的那个口红颜色，我试了，简直是死亡芭比粉我哭了。",
+      "emotion_label": "你别再推荐这个颜色了！太难看了！",
+      "emotion": [
+        0.0,
+        0.3,
+        0.05,
+        0.1,
+        0.5,
+        0.03,
+        0.01,
+        0.01
+      ],
+      "dominant_emotion": "disgust",
+      "dominant_index": 4,
+      "id": "sm89-q207",
+      "seed": 1443349810,
+      "reference_audio": "/workspace/index-tts/data/audio/old/positive_denoised.wav"
+    },
+    {
+      "source_line": 376,
+      "text": "你猜怎么着，我收到一封匿名情书，害怕。",
+      "emotion_label": "太可怕了！快扔掉它！",
+      "emotion": [
+        0.0,
+        0.3,
+        0.05,
+        0.5,
+        0.1,
+        0.0,
+        0.05,
+        0.0
+      ],
+      "dominant_emotion": "fear",
+      "dominant_index": 3,
+      "id": "sm89-q208",
+      "seed": 821472271,
+      "reference_audio": "/workspace/index-tts/data/audio/old/zhoujielun_final_denoised.wav"
+    },
+    {
+      "source_line": 712,
+      "text": "刚收到花，心情好到飞起来，今晚必须庆祝一下。",
+      "emotion_label": "天哪太开心了！我要跳起来！",
+      "emotion": [
+        0.95,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.04,
+        0.01
+      ],
+      "dominant_emotion": "happy",
+      "dominant_index": 0,
+      "id": "sm89-q209",
+      "seed": 1926776299,
+      "reference_audio": "/workspace/index-tts/data/audio/old/xiaoyuan_gao.wav"
+    },
+    {
+      "source_line": 650,
+      "text": "今天被老板骂了一顿，真想辞职去环游世界。",
+      "emotion_label": "你给我滚！我不想再忍了！",
+      "emotion": [
+        0.0,
+        0.85,
+        0.02,
+        0.05,
+        0.05,
+        0.02,
+        0.0,
+        0.01
+      ],
+      "dominant_emotion": "angry",
+      "dominant_index": 1,
+      "id": "sm89-q210",
+      "seed": 208199177,
+      "reference_audio": "/workspace/index-tts/data/audio/old/huge_final.wav"
+    },
+    {
+      "source_line": 805,
+      "text": "我新买的那个包包，简直美到我心坎里了！",
+      "emotion_label": "天哪！这也太绝了吧！",
+      "emotion": [
+        0.01,
+        0.01,
+        0.01,
+        0.01,
+        0.01,
+        0.01,
+        0.93,
+        0.01
+      ],
+      "dominant_emotion": "surprise",
+      "dominant_index": 6,
+      "id": "sm89-q211",
+      "seed": 669807096,
+      "reference_audio": "/workspace/index-tts/data/audio/old/女新闻.wav"
+    },
+    {
+      "source_line": 662,
+      "text": "那个老板简直过分，气到我胃疼！",
+      "emotion_label": "你给我闭嘴！不要在我面前提他！",
+      "emotion": [
+        0.0,
+        0.85,
+        0.02,
+        0.05,
+        0.05,
+        0.01,
+        0.01,
+        0.01
+      ],
+      "dominant_emotion": "angry",
+      "dominant_index": 1,
+      "id": "sm89-q212",
+      "seed": 127301074,
+      "reference_audio": "/workspace/index-tts/data/audio/old/zhangjingyi_final.wav"
+    },
+    {
+      "source_line": 283,
+      "text": "天哪，市长要来我们这片视察了！",
+      "emotion_label": "天哪！我忘带钥匙了！",
+      "emotion": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.98,
+        0.02
+      ],
+      "dominant_emotion": "surprise",
+      "dominant_index": 6,
+      "id": "sm89-q213",
+      "seed": 295364666,
+      "reference_audio": "/workspace/index-tts/data/audio/old/xiaoyuan_gao.wav"
+    },
+    {
+      "source_line": 947,
+      "text": "闺蜜说我胖了，这绝对是在开玩笑吧？",
+      "emotion_label": "你再说一遍试试！",
+      "emotion": [
+        0.05,
+        0.1,
+        0.1,
+        0.1,
+        0.1,
+        0.1,
+        0.15,
+        0.35
+      ],
+      "dominant_emotion": "calm",
+      "dominant_index": 7,
+      "id": "sm89-q214",
+      "seed": 1313972551,
+      "reference_audio": "/workspace/index-tts/data/audio/old/女新闻.wav"
+    },
+    {
+      "source_line": 795,
+      "text": "我刚发现一家超棒的甜品店，明天必须去！",
+      "emotion_label": "太棒了！我开心疯了！",
+      "emotion": [
+        0.95,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.03,
+        0.02
+      ],
+      "dominant_emotion": "happy",
+      "dominant_index": 0,
+      "id": "sm89-q215",
+      "seed": 1176039139,
+      "reference_audio": "/workspace/index-tts/data/audio/old/yangying_final_denoised.wav"
+    },
+    {
+      "source_line": 508,
+      "text": "这条裙子绝了，穿上我就是仙女本人好不好！",
+      "emotion_label": "看我看我！我美不美！",
+      "emotion": [
+        0.9,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.09,
+        0.01
+      ],
+      "dominant_emotion": "happy",
+      "dominant_index": 0,
+      "id": "sm89-q216",
+      "seed": 1213723186,
+      "reference_audio": "/workspace/index-tts/data/audio/old/xiaoyuan_gao.wav"
+    },
+    {
+      "source_line": 1188,
+      "text": "聊到这么晚，眼皮打架但就是不困。",
+      "emotion_label": "烦死了！我明天还要见人呢！",
+      "emotion": [
+        0.0,
+        0.1,
+        0.1,
+        0.2,
+        0.05,
+        0.3,
+        0.15,
+        0.05
+      ],
+      "dominant_emotion": "melancholy",
+      "dominant_index": 5,
+      "id": "sm89-q217",
+      "seed": 1983023248,
+      "reference_audio": "/workspace/index-tts/data/audio/old/zhoujielun_final_denoised.wav"
+    },
+    {
+      "source_line": 403,
+      "text": "我刚刚在公园喂鸽子，居然被一只追着啄，吓死我了。",
+      "emotion_label": "救命啊！别追我！",
+      "emotion": [
+        0.0,
+        0.1,
+        0.0,
+        0.8,
+        0.0,
+        0.0,
+        0.1,
+        0.0
+      ],
+      "dominant_emotion": "fear",
+      "dominant_index": 3,
+      "id": "sm89-q218",
+      "seed": 1196887429,
+      "reference_audio": "/workspace/index-tts/data/audio/old/男新闻.wav"
+    },
+    {
+      "source_line": 76,
+      "text": "当初要听你的，也不至于这样。",
+      "emotion_label": "我错了！你满意了吧！",
+      "emotion": [
+        0.05,
+        0.1,
+        0.1,
+        0.05,
+        0.1,
+        0.1,
+        0.4,
+        0.05
+      ],
+      "dominant_emotion": "surprise",
+      "dominant_index": 6,
+      "id": "sm89-q219",
+      "seed": 218790756,
+      "reference_audio": "/workspace/index-tts/data/audio/old/xiaoyuan_gao.wav"
+    },
+    {
+      "source_line": 50,
+      "text": "那个男生居然约我看电影？太意外了。",
+      "emotion_label": "我的天啊！太阳打西边出来了！",
+      "emotion": [
+        0.0,
+        0.0,
+        0.0,
+        0.9,
+        0.0,
+        0.0,
+        0.09,
+        0.01
+      ],
+      "dominant_emotion": "fear",
+      "dominant_index": 3,
+      "id": "sm89-q220",
+      "seed": 667516070,
+      "reference_audio": "/workspace/index-tts/data/audio/old/xiaoyuan_gao.wav"
+    },
+    {
+      "source_line": 679,
+      "text": "那个渣男又放我鸽子，我绝饶不了他。",
+      "emotion_label": "你让我好伤心啊！",
+      "emotion": [
+        0.0,
+        0.1,
+        0.7,
+        0.05,
+        0.05,
+        0.05,
+        0.0,
+        0.0
+      ],
+      "dominant_emotion": "sad",
+      "dominant_index": 2,
+      "id": "sm89-q221",
+      "seed": 472766563,
+      "reference_audio": "/workspace/index-tts/data/audio/old/zhangjingyi_final.wav"
+    },
+    {
+      "source_line": 1172,
+      "text": "天哪，我刚睡醒发现手机自动关机了！",
+      "emotion_label": "啊！我的闹钟！要迟到了！",
+      "emotion": [
+        0.0,
+        0.01,
+        0.01,
+        0.01,
+        0.01,
+        0.01,
+        0.95,
+        0.01
+      ],
+      "dominant_emotion": "surprise",
+      "dominant_index": 6,
+      "id": "sm89-q222",
+      "seed": 423002604,
+      "reference_audio": "/workspace/index-tts/data/audio/old/男新闻.wav"
+    },
+    {
+      "source_line": 636,
+      "text": "你昨天说的那个男生加我了，他主动约我喝咖啡哦！",
+      "emotion_label": "啊啊啊！他他他他终于来了！",
+      "emotion": [
+        0.01,
+        0.01,
+        0.01,
+        0.01,
+        0.01,
+        0.01,
+        0.94,
+        0.01
+      ],
+      "dominant_emotion": "surprise",
+      "dominant_index": 6,
+      "id": "sm89-q223",
+      "seed": 1452855644,
+      "reference_audio": "/workspace/index-tts/data/audio/old/zhoujielun_final_denoised.wav"
+    },
+    {
+      "source_line": 1072,
+      "text": "这件裙子超好看我必须立刻拿下！",
+      "emotion_label": "我就要这个！谁也别跟我抢！",
+      "emotion": [
+        0.0,
+        0.95,
+        0.0,
+        0.01,
+        0.02,
+        0.0,
+        0.01,
+        0.01
+      ],
+      "dominant_emotion": "angry",
+      "dominant_index": 1,
+      "id": "sm89-q224",
+      "seed": 336357938,
+      "reference_audio": "/workspace/index-tts/data/audio/old/huge_final.wav"
+    },
+    {
+      "source_line": 747,
+      "text": "我新买的裙子简直绝了，明天聚会必须穿它。",
+      "emotion_label": "太美了！我简直是个女神！",
+      "emotion": [
+        0.95,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.03,
+        0.02
+      ],
+      "dominant_emotion": "happy",
+      "dominant_index": 0,
+      "id": "sm89-q225",
+      "seed": 710650084,
+      "reference_audio": "/workspace/index-tts/data/audio/old/huge_final.wav"
+    },
+    {
+      "source_line": 1417,
+      "text": "天哪她那条裙子闪得我眼睛疼！",
+      "emotion_label": "太离谱了！",
+      "emotion": [
+        0.0,
+        0.01,
+        0.01,
+        0.01,
+        0.01,
+        0.01,
+        0.94,
+        0.0
+      ],
+      "dominant_emotion": "surprise",
+      "dominant_index": 6,
+      "id": "sm89-q226",
+      "seed": 916377451,
+      "reference_audio": "/workspace/index-tts/data/audio/old/zhoujielun_final_denoised.wav"
+    },
+    {
+      "source_line": 1357,
+      "text": "他居然真的走了，我好难过啊。",
+      "emotion_label": "你不要离开我！我害怕！",
+      "emotion": [
+        0.0,
+        0.0,
+        0.0,
+        0.9,
+        0.0,
+        0.0,
+        0.09,
+        0.01
+      ],
+      "dominant_emotion": "fear",
+      "dominant_index": 3,
+      "id": "sm89-q227",
+      "seed": 1759751039,
+      "reference_audio": "/workspace/index-tts/data/audio/old/女新闻.wav"
+    },
+    {
+      "source_line": 900,
+      "text": "还记得大学时我们半夜翻墙出去吃烧烤吗？",
+      "emotion_label": "你太牛了！我崇拜你到五体投地！",
+      "emotion": [
+        0.95,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.04,
+        0.01
+      ],
+      "dominant_emotion": "happy",
+      "dominant_index": 0,
+      "id": "sm89-q228",
+      "seed": 1547652655,
+      "reference_audio": "/workspace/index-tts/data/audio/old/男新闻.wav"
+    },
+    {
+      "source_line": 205,
+      "text": "今天地铁上有人大声外放视频，烦。",
+      "emotion_label": "能不能安静点！吵死了！",
+      "emotion": [
+        0.0,
+        0.1,
+        0.1,
+        0.05,
+        0.1,
+        0.1,
+        0.1,
+        0.45
+      ],
+      "dominant_emotion": "calm",
+      "dominant_index": 7,
+      "id": "sm89-q229",
+      "seed": 1367722954,
+      "reference_audio": "/workspace/index-tts/data/audio/old/mingxiang_gao.wav"
+    },
+    {
+      "source_line": 1231,
+      "text": "你有没有听到什么动静？我总觉得背后发凉。",
+      "emotion_label": "鬼啊！救命！",
+      "emotion": [
+        0.0,
+        0.0,
+        0.0,
+        0.9,
+        0.0,
+        0.0,
+        0.09,
+        0.01
+      ],
+      "dominant_emotion": "fear",
+      "dominant_index": 3,
+      "id": "sm89-q230",
+      "seed": 2144576171,
+      "reference_audio": "/workspace/index-tts/data/audio/old/女新闻.wav"
+    },
+    {
+      "source_line": 1182,
+      "text": "这破雨下得我心情都湿透了！",
+      "emotion_label": "烦透了！这鬼天气！",
+      "emotion": [
+        0.0,
+        0.3,
+        0.0,
+        0.2,
+        0.4,
+        0.05,
+        0.05,
+        0.0
+      ],
+      "dominant_emotion": "disgust",
+      "dominant_index": 4,
+      "id": "sm89-q231",
+      "seed": 1735959149,
+      "reference_audio": "/workspace/index-tts/data/audio/old/zhoujielun_final_denoised.wav"
+    },
+    {
+      "source_line": 130,
+      "text": "昨晚梦到我在巴黎铁塔下喝香槟，好浪漫。",
+      "emotion_label": "别叫醒我！我正梦着呢！",
+      "emotion": [
+        0.0,
+        0.0,
+        0.0,
+        0.9,
+        0.0,
+        0.0,
+        0.05,
+        0.05
+      ],
+      "dominant_emotion": "fear",
+      "dominant_index": 3,
+      "id": "sm89-q232",
+      "seed": 378999487,
+      "reference_audio": "/workspace/index-tts/data/audio/old/yangying_final_denoised.wav"
+    },
+    {
+      "source_line": 1342,
+      "text": "今天逛街看到一条裙子，美得我腿软。",
+      "emotion_label": "你看到了吗！我眼睛都直了！",
+      "emotion": [
+        0.01,
+        0.01,
+        0.01,
+        0.9,
+        0.01,
+        0.01,
+        0.04,
+        0.01
+      ],
+      "dominant_emotion": "fear",
+      "dominant_index": 3,
+      "id": "sm89-q233",
+      "seed": 63550425,
+      "reference_audio": "/workspace/index-tts/data/audio/old/yangying_final_denoised.wav"
+    },
+    {
+      "source_line": 1207,
+      "text": "你居然偷偷给我买了这个，我超爱你的！",
+      "emotion_label": "你太让我感动了！我都要哭了！",
+      "emotion": [
+        0.3,
+        0.0,
+        0.1,
+        0.0,
+        0.0,
+        0.0,
+        0.5,
+        0.05
+      ],
+      "dominant_emotion": "surprise",
+      "dominant_index": 6,
+      "id": "sm89-q234",
+      "seed": 303337218,
+      "reference_audio": "/workspace/index-tts/data/audio/old/huge_final.wav"
+    },
+    {
+      "source_line": 705,
+      "text": "你听说了吗？小美居然辞职去创业了，我整个人都震惊了。",
+      "emotion_label": "天哪！我简直不敢相信我的耳朵！",
+      "emotion": [
+        0.0,
+        0.0,
+        0.0,
+        0.9,
+        0.0,
+        0.0,
+        0.09,
+        0.01
+      ],
+      "dominant_emotion": "fear",
+      "dominant_index": 3,
+      "id": "sm89-q235",
+      "seed": 1321568649,
+      "reference_audio": "/workspace/index-tts/data/audio/old/男新闻.wav"
+    },
+    {
+      "source_line": 949,
+      "text": "昨晚梦到前任，醒来心情直接跌到谷底。",
+      "emotion_label": "为什么还要出现在我梦里！",
+      "emotion": [
+        0.0,
+        0.1,
+        0.0,
+        0.8,
+        0.0,
+        0.05,
+        0.05,
+        0.0
+      ],
+      "dominant_emotion": "fear",
+      "dominant_index": 3,
+      "id": "sm89-q236",
+      "seed": 572822154,
+      "reference_audio": "/workspace/index-tts/data/audio/old/男新闻.wav"
+    },
+    {
+      "source_line": 551,
+      "text": "天哪警察局门口那一排车出大事了吧？",
+      "emotion_label": "出大事了！快跑啊！",
+      "emotion": [
+        0.0,
+        0.01,
+        0.01,
+        0.9,
+        0.01,
+        0.01,
+        0.05,
+        0.01
+      ],
+      "dominant_emotion": "fear",
+      "dominant_index": 3,
+      "id": "sm89-q237",
+      "seed": 288771459,
+      "reference_audio": "/workspace/index-tts/data/audio/old/xiaoyuan_gao.wav"
+    },
+    {
+      "source_line": 1224,
+      "text": "你送的手链太美了，我今晚就要戴着去派对！",
+      "emotion_label": "你是天使吗！我感动到要哭了！",
+      "emotion": [
+        0.3,
+        0.0,
+        0.1,
+        0.0,
+        0.0,
+        0.0,
+        0.5,
+        0.05
+      ],
+      "dominant_emotion": "surprise",
+      "dominant_index": 6,
+      "id": "sm89-q238",
+      "seed": 1230561732,
+      "reference_audio": "/workspace/index-tts/data/audio/old/女新闻.wav"
+    },
+    {
+      "source_line": 1243,
+      "text": "还记得毕业旅行那晚的星空吗，好想哭。",
+      "emotion_label": "我真的好想你啊！",
+      "emotion": [
+        0.0,
+        0.0,
+        0.95,
+        0.0,
+        0.0,
+        0.0,
+        0.03,
+        0.02
+      ],
+      "dominant_emotion": "sad",
+      "dominant_index": 2,
+      "id": "sm89-q239",
+      "seed": 1995999014,
+      "reference_audio": "/workspace/index-tts/data/audio/old/huge_final.wav"
+    },
+    {
+      "source_line": 943,
+      "text": "那家奶茶店居然关门了，我的快乐没了！",
+      "emotion_label": "完了完了！全完了！",
+      "emotion": [
+        0.0,
+        0.1,
+        0.1,
+        0.1,
+        0.05,
+        0.1,
+        0.4,
+        0.15
+      ],
+      "dominant_emotion": "surprise",
+      "dominant_index": 6,
+      "id": "sm89-q240",
+      "seed": 752665844,
+      "reference_audio": "/workspace/index-tts/data/audio/old/mingxiang_gao.wav"
+    },
+    {
+      "source_line": 1147,
+      "text": "你别催了，我的口红涂歪了好几次！",
+      "emotion_label": "能不能安静一会儿！",
+      "emotion": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "dominant_emotion": "calm",
+      "dominant_index": 7,
+      "id": "sm89-q241",
+      "seed": 785476063,
+      "reference_audio": "/workspace/index-tts/data/audio/old/xiaoyuan_gao.wav"
+    },
+    {
+      "source_line": 224,
+      "text": "这剧太虐了，我哭得不行了。",
+      "emotion_label": "呜呜呜！我的心好痛！",
+      "emotion": [
+        0.0,
+        0.0,
+        0.95,
+        0.0,
+        0.0,
+        0.02,
+        0.01,
+        0.02
+      ],
+      "dominant_emotion": "sad",
+      "dominant_index": 2,
+      "id": "sm89-q242",
+      "seed": 982458326,
+      "reference_audio": "/workspace/index-tts/data/audio/old/xiaoyuan_gao.wav"
+    },
+    {
+      "source_line": 18,
+      "text": "养的绿萝死掉了，我是不是连草都养不活。",
+      "emotion_label": "我真是个失败者！",
+      "emotion": [
+        0.0,
+        0.3,
+        0.4,
+        0.1,
+        0.2,
+        0.05,
+        0.0,
+        0.05
+      ],
+      "dominant_emotion": "sad",
+      "dominant_index": 2,
+      "id": "sm89-q243",
+      "seed": 1897884036,
+      "reference_audio": "/workspace/index-tts/data/audio/old/huge_final.wav"
+    },
+    {
+      "source_line": 790,
+      "text": "我新买的裙子被咖啡溅到，气死我了！",
+      "emotion_label": "这可是新买的啊！",
+      "emotion": [
+        0.2,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.8,
+        0.0
+      ],
+      "dominant_emotion": "surprise",
+      "dominant_index": 6,
+      "id": "sm89-q244",
+      "seed": 21456296,
+      "reference_audio": "/workspace/index-tts/data/audio/old/男新闻.wav"
+    },
+    {
+      "source_line": 1293,
+      "text": "姐妹！新店咖啡超好喝，你快来！",
+      "emotion_label": "冲啊！现在就去！",
+      "emotion": [
+        0.0,
+        0.85,
+        0.01,
+        0.05,
+        0.02,
+        0.01,
+        0.05,
+        0.01
+      ],
+      "dominant_emotion": "angry",
+      "dominant_index": 1,
+      "id": "sm89-q245",
+      "seed": 2078931911,
+      "reference_audio": "/workspace/index-tts/data/audio/old/女新闻.wav"
+    },
+    {
+      "source_line": 1516,
+      "text": "你送我耳环太惊喜了，我转了好几圈原地蹦。",
+      "emotion_label": "天哪！你是我见过最懂我的人！",
+      "emotion": [
+        0.9,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.05,
+        0.05
+      ],
+      "dominant_emotion": "happy",
+      "dominant_index": 0,
+      "id": "sm89-q246",
+      "seed": 1793371851,
+      "reference_audio": "/workspace/index-tts/data/audio/old/zhangjingyi_final.wav"
+    },
+    {
+      "source_line": 744,
+      "text": "天哪我刚刷到那个限量包包补货了！",
+      "emotion_label": "天啊！我中彩票了吗！",
+      "emotion": [
+        0.9,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.09,
+        0.01
+      ],
+      "dominant_emotion": "happy",
+      "dominant_index": 0,
+      "id": "sm89-q247",
+      "seed": 102280105,
+      "reference_audio": "/workspace/index-tts/data/audio/old/positive_denoised.wav"
+    },
+    {
+      "source_line": 1421,
+      "text": "快看！那只小狗在跳舞，萌翻我了！",
+      "emotion_label": "啊！你吓我一跳！",
+      "emotion": [
+        0.0,
+        0.1,
+        0.0,
+        0.8,
+        0.05,
+        0.0,
+        0.05,
+        0.0
+      ],
+      "dominant_emotion": "fear",
+      "dominant_index": 3,
+      "id": "sm89-q248",
+      "seed": 877181519,
+      "reference_audio": "/workspace/index-tts/data/audio/old/positive_denoised.wav"
+    },
+    {
+      "source_line": 1087,
+      "text": "那个人真是太过分了，气死我了！",
+      "emotion_label": "我跟你拼了！",
+      "emotion": [
+        0.0,
+        0.95,
+        0.01,
+        0.01,
+        0.01,
+        0.01,
+        0.01,
+        0.0
+      ],
+      "dominant_emotion": "angry",
+      "dominant_index": 1,
+      "id": "sm89-q249",
+      "seed": 1193282912,
+      "reference_audio": "/workspace/index-tts/data/audio/old/xiaoyuan_gao.wav"
+    },
+    {
+      "source_line": 1247,
+      "text": "今天阳光好得离谱，咱们去野餐吧！",
+      "emotion_label": "这么好的天气不出来玩会后悔的！",
+      "emotion": [
+        0.9,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.05,
+        0.05
+      ],
+      "dominant_emotion": "happy",
+      "dominant_index": 0,
+      "id": "sm89-q250",
+      "seed": 1266699572,
+      "reference_audio": "/workspace/index-tts/data/audio/old/zhoujielun_final_denoised.wav"
+    },
+    {
+      "source_line": 148,
+      "text": "突然觉得好孤独，你说人为什么要长大？",
+      "emotion_label": "我不想长大！太痛苦了！",
+      "emotion": [
+        0.0,
+        0.1,
+        0.5,
+        0.2,
+        0.05,
+        0.1,
+        0.0,
+        0.05
+      ],
+      "dominant_emotion": "sad",
+      "dominant_index": 2,
+      "id": "sm89-q251",
+      "seed": 1541459788,
+      "reference_audio": "/workspace/index-tts/data/audio/old/zhangjingyi_final.wav"
+    },
+    {
+      "source_line": 1444,
+      "text": "趁他没走，今晚必须拉他喝到天亮。",
+      "emotion_label": "今晚不醉不归！",
+      "emotion": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "dominant_emotion": "calm",
+      "dominant_index": 7,
+      "id": "sm89-q252",
+      "seed": 850117011,
+      "reference_audio": "/workspace/index-tts/data/audio/old/positive_denoised.wav"
+    },
+    {
+      "source_line": 645,
+      "text": "你居然会做饭？我天，太阳打西边出来了！",
+      "emotion_label": "哇！你真行啊！",
+      "emotion": [
+        0.9,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.05,
+        0.05
+      ],
+      "dominant_emotion": "happy",
+      "dominant_index": 0,
+      "id": "sm89-q253",
+      "seed": 1601956711,
+      "reference_audio": "/workspace/index-tts/data/audio/old/yangying_final_denoised.wav"
+    },
+    {
+      "source_line": 609,
+      "text": "那个咖啡师今天居然认出我了！超惊喜！",
+      "emotion_label": "天哪！你吓我一跳！",
+      "emotion": [
+        0.0,
+        0.1,
+        0.0,
+        0.8,
+        0.05,
+        0.0,
+        0.05,
+        0.0
+      ],
+      "dominant_emotion": "fear",
+      "dominant_index": 3,
+      "id": "sm89-q254",
+      "seed": 252659258,
+      "reference_audio": "/workspace/index-tts/data/audio/old/positive_denoised.wav"
+    },
+    {
+      "source_line": 996,
+      "text": "喂，你猜我刚在咖啡店碰到谁了？",
+      "emotion_label": "哇塞！你绝对想不到！快说快说！",
+      "emotion": [
+        0.01,
+        0.01,
+        0.01,
+        0.01,
+        0.01,
+        0.01,
+        0.93,
+        0.01
+      ],
+      "dominant_emotion": "surprise",
+      "dominant_index": 6,
+      "id": "sm89-q255",
+      "seed": 1772182241,
+      "reference_audio": "/workspace/index-tts/data/audio/old/huge_final.wav"
+    }
+  ]
+}

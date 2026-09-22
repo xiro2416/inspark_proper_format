@@ -14,7 +14,11 @@ class GPULease:
         try:
             fcntl.flock(self.handle,fcntl.LOCK_EX|fcntl.LOCK_NB)
             used,util=map(int,subprocess.check_output(['nvidia-smi','-i',self.index,'--query-gpu=memory.used,utilization.gpu','--format=csv,noheader,nounits'],text=True).strip().split(','))
-            if used>1024 or util>10:raise RuntimeError(f'GPU{self.index} is busy ({used}MiB,{util}%)')
+            # Diagnostic escape hatch for a known orphaned CUDA context.  The
+            # default remains strict; callers must explicitly bound how much
+            # pre-existing memory they have already identified as their own.
+            memory_limit=int(os.environ.get('ACC_GPU_EXISTING_MEMORY_LIMIT_MIB','1024'))
+            if used>memory_limit or util>10:raise RuntimeError(f'GPU{self.index} is busy ({used}MiB,{util}%)')
         except BaseException:self.__exit__();raise
         return self
     def __exit__(self,*args):

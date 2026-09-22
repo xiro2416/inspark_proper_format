@@ -19,9 +19,28 @@ class Engine(StreamingCore):
         self.device_round_b8=False
         self.device_round_bank=None
         self.device_round_batches=set()
+        self.device_round_attempts=0
+        self.device_round_successes=0
+        self.device_round_fallbacks=0
+        self.profile_cuda=False;self.profile_spans=[]
     def prepare_deployment(self,plan):
         from acc_infer_clear.runtime.deployment import prepare
         return prepare(self,plan)
+    def configure_profiling(self,enabled=True,trace_ranges=False):
+        """Enable explicit post-capture observation; never alters deployment choices."""
+        if getattr(self,'deployment_state','raw')!='ready':raise RuntimeError('Configure profiling after deployment preparation')
+        self.profile_cuda=bool(enabled);self.trace_ranges=bool(trace_ranges)
+        self.rt.profile_cuda=bool(enabled);self.rt.trace_ranges=bool(trace_ranges)
+        self.profile_spans=[];self.rt.profile_spans=[]
+        return dict(cuda_events=self.profile_cuda,trace_ranges=self.trace_ranges)
+    def take_profile(self):
+        self.torch.cuda.synchronize()
+        def resolve(rows):
+            return [dict(name=row['name'],batch=row['batch'],gpu_ms=row['start'].elapsed_time(row['end']),
+                         host_ms=row['host_ms'],metadata=row['metadata']) for row in rows]
+        result=dict(stages=resolve(self.profile_spans),ar_spans=resolve(getattr(self.rt,'profile_spans',[])))
+        self.profile_spans=[];self.rt.profile_spans=[]
+        return result
     def prepare_precision(self,mode,components,convolutions=False):
         from acc_infer_clear.models.precision import prepare
         with self.torch.cuda.stream(self.model.stream),self.torch.inference_mode():
@@ -143,6 +162,7 @@ class Engine(StreamingCore):
         index=len((ongoing or pool)[0]['chunks'])
         group=sorted((s for s in pool if len(s['chunks'])==index),key=lambda s:'_row' not in s)[:self.config['max_batch']]
         self.stages=[];self.failures=[]
+        self.profile_spans=[];self.rt.profile_spans=[]
         with self.torch.cuda.stream(self.model.stream),self.torch.inference_mode():
             self.model._acquire('streaming')
             try:
@@ -161,12 +181,15 @@ class Engine(StreamingCore):
                             max(r.past_length for r in rows)+8<=128 and
                             max(r.cache.length for r in rows)+7<=128)
                 if use_device:
+                    self.device_round_attempts+=1
                     if self.device_round_bank is not None:
                         device_runner=self.device_round_bank;device_runner.run(rows)
                     else:
                         from acc_infer_clear.dspark.device_round import DeviceRoundHead
                         device_runner=DeviceRoundHead(self.rt,rows,self.config['max_speech_tokens']);device_runner.run()
-                    if not device_runner.failed:
+                    if device_runner.failed:self.device_round_fallbacks+=1
+                    else:
+                        self.device_round_successes+=1
                         for row in rows:owner[id(row)]['rounds']+=len(row.accepted)
                 while not (all if barrier else any)(is_ready(row) for row in rows):
                     active=[row for row in rows if not is_ready(row)]

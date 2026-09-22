@@ -1,4 +1,5 @@
 from contextlib import contextmanager
+import time
 from .core import ARCore
 from .target import sample_logits
 from .batch_target import BatchedTarget
@@ -22,8 +23,14 @@ class Runtime(ARCore):
         self.accept=BatchedAcceptance(self.engine.dense_groups,.8)
         self.residual=BatchedResidual(self.engine.dense_groups,sample_pcg_residual_vectorized)
         self.events=[]
+        self.profile_cuda=False;self.profile_spans=[]
+        self.native_target_steps=0
     @contextmanager
     def span(self,name,rows):
+        start_host=time.perf_counter();cuda_start=cuda_end=None
+        if getattr(self,'profile_cuda',False):
+            import torch
+            cuda_start=torch.cuda.Event(enable_timing=True);cuda_end=torch.cuda.Event(enable_timing=True);cuda_start.record()
         if getattr(self,'trace_ranges',False):
             import torch
             with torch.profiler.record_function(name):
@@ -31,6 +38,9 @@ class Runtime(ARCore):
                 try:yield
                 finally:torch.cuda.nvtx.range_pop()
         else:yield
+        if cuda_end is not None:
+            cuda_end.record();self.profile_spans.append(dict(name=name,batch=len(rows),start=cuda_start,end=cuda_end,
+                host_ms=(time.perf_counter()-start_host)*1000,metadata={}))
     def sample(self,row,logits):
         token,_=sample_logits(logits,.8,generator=row.generator)
         row.state['cuda_rng']=row.generator.get_state();return token.reshape(1).clone()

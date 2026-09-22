@@ -205,7 +205,9 @@ class Attention(nn.Module):
             q, k, v = projection_rope(x, freqs_cis)
             selected_mask = None if getattr(self, '_acc_full_mask_elision', False) else mask
             y = F.scaled_dot_product_attention(q, k, v, attn_mask=selected_mask, dropout_p=0.0)
-            return self.wo(y.transpose(1, 2).contiguous().view(bsz, seqlen, self.head_dim * self.n_head))
+            # reshape preserves the eager contiguous-copy semantics while also
+            # making the layout transition explicit to torch.export/TensorRT.
+            return self.wo(y.transpose(1, 2).reshape(bsz, seqlen, self.head_dim * self.n_head))
         kv_size = self.n_local_heads * self.head_dim
         if context is None:
             q, k, v = self.wqkv(x).split([kv_size, kv_size, kv_size], dim=-1)
@@ -226,7 +228,7 @@ class Attention(nn.Module):
         v = v.repeat_interleave(self.n_head // self.n_local_heads, dim=1)
         attention_mask = None if getattr(self, '_acc_full_mask_elision', False) else mask
         y = F.scaled_dot_product_attention(q, k, v, attn_mask=attention_mask, dropout_p=0.0)
-        y = y.transpose(1, 2).contiguous().view(bsz, seqlen, self.head_dim * self.n_head)
+        y = y.transpose(1, 2).reshape(bsz, seqlen, self.head_dim * self.n_head)
         y = self.wo(y)
         return y
 
@@ -269,4 +271,3 @@ def apply_rotary_emb(x: Tensor, freqs_cis: Tensor) -> Tensor:
     x_out2 = torch.stack([xshaped[..., 0] * freqs_cis[..., 0] - xshaped[..., 1] * freqs_cis[..., 1], xshaped[..., 1] * freqs_cis[..., 0] + xshaped[..., 0] * freqs_cis[..., 1]], -1)
     x_out2 = x_out2.flatten(3)
     return x_out2.type_as(x)
-

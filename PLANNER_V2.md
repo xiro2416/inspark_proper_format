@@ -79,7 +79,8 @@ Generate a source- and hardware-matched shadow manifest on the target machine:
 ```bash
 ACC_CLEAR_TRITON=native bash scripts/run.sh scripts/planner_v2.py shadow \
   --current-config configs/runtime.yaml \
-  --batches 1 2 3 4 5 6 7 8 16 32 \
+  --batches 1 2 3 4 5 6 7 8 16 \
+  --matrix-dtype bf16 \
   --output /tmp/planner-v2-shadow.json
 ```
 
@@ -94,7 +95,9 @@ and dependency latency incomplete until Nsight Compute evidence supplies them.
 3. Generate no more than eight legal candidates per role/shape.
 4. Calibrate candidates sequentially on one GPU, outside serving.
 5. Check numerical output, then whole-component CUDA Graph latency.
-6. Run B1/B8 first-packet P50/P95 and B8/B16/B32 throughput gates.
+6. Run the manifest's supported batch gates. The current SM89 manifest uses
+   B1--B8/B16; B32 is excluded because the full head graph does not fit and an
+   eager fallback would not be a fair comparison.
 7. Run the fixed 256-case UTMOS/CER gate.
 8. Mark the manifest validated only after all gates pass.
 

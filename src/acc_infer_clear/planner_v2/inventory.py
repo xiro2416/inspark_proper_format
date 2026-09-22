@@ -35,9 +35,12 @@ def _gemm(model: str, role: str, batch: int, m: int, n: int, k: int, dtype: str,
     )
 
 
-def canonical_inventory(profile: HardwareProfile, *, batches: tuple[int, ...] = tuple(range(1, 9)) + (16, 32),
-                        spec: PipelineModelSpec = PipelineModelSpec()) -> list[OperatorSignature]:
-    matrix_dtype = profile.preferred_matrix_dtype
+def canonical_inventory(profile: HardwareProfile, *, batches: tuple[int, ...] = tuple(range(1, 9)) + (16,),
+                        spec: PipelineModelSpec = PipelineModelSpec(),
+                        matrix_dtype: str | None = None) -> list[OperatorSignature]:
+    matrix_dtype = profile.preferred_matrix_dtype if matrix_dtype is None else matrix_dtype
+    if matrix_dtype not in ('bf16', 'fp8'):
+        raise ValueError('matrix_dtype must be bf16 or fp8')
     result = []
     for batch in batches:
         for model, qlen, hidden, ffn, qkv, deep_layers in (
