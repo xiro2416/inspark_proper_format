@@ -24,8 +24,8 @@ intermediate milestone, not completion of the overall goal.
 - [x] Preserve CLI, model semantics, resource identities and packaging.
 - [x] Establish true same-weight FP32/BF16 eager and torch.compile baselines (failed numerical trials retained).
 - [x] Fix request RNG/cache/buffer isolation and test cancellation/reuse/fallback (long soak remains separate).
-- [ ] Run per-stage numerical and 256-case quality audits with honest statuses.
-- [ ] Measure operators and end-to-end paths on GPU 6.
+- [x] Run per-stage numerical and 256-case quality audits with honest statuses (numerical failed; relative quality gates passed).
+- [x] Measure operators and end-to-end paths on GPU 6 (experimental results; numerical failures retained).
 - [ ] Run concurrency 1/4/8/16, ten minutes each; record and skip 16 on OOM.
 - [ ] Publish SM89-specific reports and README; verify final remote commit.
 
@@ -134,3 +134,22 @@ has known numerical failures, retained as evidence.
 - Latest CPU regression: 211 passed, four GPU-only tests skipped there and
   passed separately. The 256-case B1 quality corpus is complete; B4, legacy B8,
   BF16 eager generation and independent CPU quality scoring are in progress.
+- All five 256-case complete-EOS generation arms finished: FP32/BF16 eager B1,
+  request-isolated TRT B1/B4 and original shared-RNG TRT B8. Paired B1/B4/B8
+  quality gates passed; the BF16 eager control is still being evaluated. These
+  automatic quality results do not waive the failed floating-point audits.
+- 2026-09-22 17:48 UTC: started formal TF32-disabled 600-second concurrency
+  tiers 1/4/8/16, with maximum model microbatch 8, on shared physical GPU6.
+  CPU-only quality evaluation overlaps the initial tier and is recorded.
+- Final packaging review found an unused historical audiotools/protobuf
+  dependency conflict. Removed that unused dependency and explicitly declared
+  the model utilities' existing Matplotlib/SciPy imports. The combined primary
+  inference/ONNX build dependencies resolved as 100 packages on the Tsinghua
+  mirror; no running environment was installed into or modified. The wheel
+  builds offline, includes CUDA resources/notices and excludes model artifacts.
+- 2026-09-22 17:54 UTC: all four paired quality evaluations completed with
+  exactly 256 full-EOS pairs and no CUDA initialization in the evaluator.
+  Relative quality gates passed for isolated TRT B1/B4, original TRT B8 and
+  BF16 eager B1 against FP32 eager. Baseline UTMOS 1.643671675 / CER 144/4093;
+  these are relative automatic gates, not high subjective quality or numerical
+  equivalence. The original B8 engine provenance remains unverified.

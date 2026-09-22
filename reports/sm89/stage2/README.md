@@ -3,8 +3,8 @@
 This directory archives completed RTX 4090 / SM89 observations. It is separate
 from historical SM120 results and from the
 [stage-one build and preliminary audits](../trt113_b1_b4_stage1/README.md).
-The files are byte-for-byte copies of existing local JSON and one original
-preflight-failure text log, not regenerated
+The files are byte-for-byte copies of existing local JSON/JSONL reports and
+original test, build, dependency-resolution and failure logs, not regenerated
 results: [COPY_MANIFEST.json](COPY_MANIFEST.json) records their source paths,
 SHA256 hashes and sizes. Original absolute paths, source identities, errors and
 provenance fields are retained without alteration.
@@ -17,6 +17,8 @@ The archive paths have distinct scopes:
 - `real_safe_b{1,4}_audited/`: source-attested real AR/acoustic captures and their independent FP32/BF16 replays, including failures.
 - `real_legacy_b8/`: original shared-device-RNG B8 capture/replays, with unverified legacy engine origins.
 - `runtime/`: controlled-input CUDA RNG/acceptance checks, a short functional soak smoke and an original GPU-busy rejection log, not a completed long-duration soak.
+- `quality/`: paired complete-EOS quality reports and the original per-arm generation summaries/JSONL; generated audio is not published.
+- `environment/`: dependency-resolution inputs/output and packaging/CLI checks; no fresh-environment GPU certification is implied.
 
 No tensors, audio, ONNX graphs, engines or checkpoints are included. References
 to local `.pt` files in the JSON identify withheld replay evidence by hash; this
@@ -265,11 +267,75 @@ execution, not numerical acceptance. The log does not establish whether the
 23% utilization came from another process or residual activity of prior work;
 no such attribution is made. Both the rejection and later result are retained.
 
+## Complete-EOS paired quality: 256 cases per arm
+
+All five generation arms completed exactly 256 requests through EOS. The four
+paired evaluations below each compare their complete PCM16 audio against the
+same FP32 eager B1 corpus, text, request seeds and nine generation-time
+reference-audio identities. No first-packet crop substitutes for full audio.
+The original `generation_summary.json` and 256-row `generation.jsonl` for each
+arm are archived under `quality/<arm>/`; audio remains local.
+
+The fixed gates are mean UTMOS relative decrease <=3% and **corpus character
+CER** absolute increase <=0.02 (two percentage points), not WER or mean
+utterance CER. The baseline is UTMOS **1.643671675**, CER **144/4093 = 3.5182%**.
+Negative UTMOS drop means an observed increase, not a reduction.
+
+| Candidate / report | Mean UTMOS | Relative UTMOS drop | Character CER | CER increase, percentage points | Quality gate |
+| --- | ---: | ---: | ---: | ---: | --- |
+| [Request-isolated TRT B1](quality/quality_safe_b1.json) | 1.635844096 | +0.4762% | 159/4093 = 3.8847% | +0.3665 | Passed |
+| [Request-isolated TRT B4](quality/quality_safe_b4.json) | 1.645488889 | -0.1106% | 167/4093 = 4.0801% | +0.5619 | Passed |
+| [Original shared-RNG TRT B8](quality/quality_legacy_b8.json) | 1.644750395 | -0.0656% | 162/4093 = 3.9580% | +0.4398 | Passed |
+| [BF16 eager B1 control](quality/quality_eager_bf16_b1.json) | 1.664038122 | -1.2391% | 147/4093 = 3.5915% | +0.0733 | Passed |
+
+These are **relative automatic-quality gates on this corpus**, not high absolute
+quality, a listening test, or floating-point equivalence. The approximately 1.64
+baseline UTMOS is explicitly retained; a small relative decline does not imply
+high subjective quality. All TRT numerical failures above remain failures.
+The legacy B8 result measures that observed artifact's quality; its engine
+checkpoint provenance remains unverified, and it is not the isolated B8 profile.
+
+Evaluation used one CPU-only process with four Torch CPU threads, offline local
+UTMOS and Paraformer models; all reports record `cuda_initialized=false`.
+They include evaluator source/model hashes, software versions, full-wave
+resampling/normalization policy, per-case scores and character edit counts.
+Generated wave hashes, sample counts, PCM16 encoding, EOS and exact case
+coverage were checked. CER sums S+D+I over all 4,093 reference characters;
+an independent Levenshtein calculation cross-checks the character counts.
+
+Paired reference identity compares the original generation-time SHA256 and byte
+records; the evaluator does not reopen the original reference audio. Matching
+loader hashes do not extract or independently prove old engine constants.
+The old FP32 generation JSONL has no per-row emotion field: its emotion is bound
+by the corpus hash only, not retroactively marked as observed. The corpus's
+embedded original-text-source hash is a declaration, not an independent source
+dataset verification. External reference audio/evaluator prerequisites and
+reproduction commands are in [SM89_AUDIT.md](../../../inference/docs/SM89_AUDIT.md).
+
+## Packaging and dependency checks
+
+The final [CPU suite](runtime/stage2_cpu_tests_final.log) passed 211 tests; four
+GPU-only tests were skipped there and [passed separately on GPU6](runtime/gpu_boundary_tests_v2.log).
+The [CLI help check](environment/cli_help_final.log) and
+[offline wheel build](environment/wheel_final_build.log) completed. The checked
+wheel contains 215 members, including two CUDA source files and attribution;
+it contains no model weights, engines, ONNX, audio, tests or benchmark scripts.
+
+The unused historical `descript-audiotools==0.7.2` dependency required
+`protobuf<3.20`, which conflicts with the current ONNX exporter. There are no
+runtime imports of audiotools in this source tree. The package now directly
+declares the existing model utilities' Matplotlib 3.11.2 and SciPy 1.17.1 imports.
+The [combined inference/export dependency input](environment/trt113_main_build_requirements.in)
+and [resolver output](environment/trt113_main_clean_resolved.txt) record a
+successful 100-package Python 3.11/Linux x86_64 resolution using the Tsinghua
+mirror. This is a clean dependency-solver check, **not** a fresh environment
+installation or GPU execution. The running environments were left unchanged;
+unused historical installed packages were not silently removed.
+
 ## Subsequent evidence
 
-Paired 256-case quality evaluation, additional batches and full 600-second
-concurrency tiers will be indexed separately when completed. Nothing here claims
-those outstanding gates passed. Reproduction commands and external asset
+Full 600-second concurrency tiers will be indexed separately when completed.
+Nothing here claims those outstanding gates passed. Reproduction commands and external asset
 requirements are in [SM89_AUDIT.md](../../../inference/docs/SM89_AUDIT.md). Preserve the
 directories above and their original JSON; append later runs under distinct
 names, retain failures and verify copied-file hashes before publication.

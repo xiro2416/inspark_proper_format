@@ -25,10 +25,19 @@ All-four compile and the B4 Draft/Vocoder subset fail sampled numerical gates;
 only the measured B1 subset passed those boundary checks, not a general release
 gate. The default remains pure FP32 eager. See [audit/reproduction commands](docs/SM89_AUDIT.md).
 
-Five measured waves after two warmups on the task's shared GPU6 gave all-first-PCM
-P50 **41.55 / 74.26 / 115.78 ms** for B1/B4/B8. This measures the legacy device-RNG
-first-head route, not complete-EOS latency, an isolated-device guarantee, or the
-new request-isolated route. Numerical failure is not waived by speed.
+Five measured complete-EOS waves after two warmups on shared GPU6 gave the
+request-isolated B1/B4 candidates all-first-PCM P50 **54.99 / 106.15 ms** and full
+EOS P50 **330.84 / 839.20 ms** for the measured short input. Admission, cache
+copies and launches are included; preparation is excluded. Different AR lengths
+prevent treating these observations as matched-work eager speedup ratios.
+The historical fast B1/B4/B8 first-head medians **41.55 / 74.26 / 115.78 ms**
+use the legacy shared-device-RNG route and are a separate measurement.
+
+All four 256-case full-EOS paired quality evaluations (isolated TRT B1/B4,
+original TRT B8, BF16 eager control) passed the fixed relative UTMOS/CER gates.
+This does not waive the failed numerical gates or certify high subjective
+quality: FP32 baseline automatic UTMOS is about 1.64. See the
+[quality table and provenance limits](../reports/sm89/stage2/README.md#complete-eos-paired-quality-256-cases-per-arm).
 
 ## Run
 
@@ -38,6 +47,12 @@ repository root, `bash scripts/bootstrap.sh` sets up the primary environment;
 `scripts/bootstrap_trt113.sh` for the isolated TensorRT 11.3 build environment.
 Weights, ONNX/engines, audio and environments are local artifacts outside the
 package, never included in Git.
+
+The package declares the SciPy/Matplotlib imports used by the existing model
+utilities directly. The unused historical `descript-audiotools` dependency was
+removed because its protobuf constraint conflicts with the ONNX exporter.
+Combined inference/export dependencies resolve on Python 3.11 / Linux x86_64;
+this dependency check and wheel build do not claim a fresh-environment GPU run.
 
 Build source-attested independent acoustic engines with
 `bash inference/scripts/build_trt113_acoustic.sh 6 1 audited_source` (repeat with

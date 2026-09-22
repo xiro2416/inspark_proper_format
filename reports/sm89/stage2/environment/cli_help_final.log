@@ -1,0 +1,19 @@
+usage: cli.py [-h] [--config CONFIG] [--gpu GPU] [--workers WORKERS] [--batch BATCH] [--deployment DEPLOYMENT] --ref-audio REF_AUDIO
+              [--voice-id VOICE_ID] (--text TEXT | --stdin-stream) [--output OUTPUT] [--seed SEED]
+              [--emotion EMOTION EMOTION EMOTION EMOTION EMOTION EMOTION EMOTION EMOTION]
+
+options:
+  -h, --help            show this help message and exit
+  --config CONFIG
+  --gpu GPU
+  --workers WORKERS
+  --batch BATCH
+  --deployment DEPLOYMENT
+                        Offline deployment JSON; default is same-weight pure FP32 eager
+  --ref-audio REF_AUDIO
+  --voice-id VOICE_ID
+  --text TEXT
+  --stdin-stream
+  --output OUTPUT
+  --seed SEED
+  --emotion EMOTION EMOTION EMOTION EMOTION EMOTION EMOTION EMOTION EMOTION
