@@ -1,0 +1,56 @@
+{
+  "format": 1,
+  "backend": "TensorRT 11.3 native BigVGAN with alias-free plugin",
+  "batch": 4,
+  "frames": 52,
+  "engine": "/workspace/A_inspark_marlin/artifacts/trt113_vocoder/vocoder_b4_nativeconv_strong.engine",
+  "shape_source": "TensorRT engine IO",
+  "onnx": "/workspace/A_inspark_marlin/artifacts/trt113_vocoder/vocoder_b4_nativeconv.onnx",
+  "onnx_sha256": "374e04ab1786e4a0b956ce6a69c9eaa393e03b7b2a50f38d4874be7b60e124dc",
+  "bytes": 307873860,
+  "sha256": "cb052c69b7a70477fc3cbd2e74f7a99fc31e8b327c66e5437ddce120b791aa43",
+  "build_seconds": 120.6338517665863,
+  "trt": "11.3.0.99",
+  "torch": "2.8.0+cu128",
+  "cuda": "12.8",
+  "numpy": "2.2.6",
+  "gpu_name": "NVIDIA GeForce RTX 4090",
+  "sm": 89,
+  "optimization_level": 5,
+  "workspace_bytes": 8589934592,
+  "strongly_typed": true,
+  "tf32": false,
+  "regular_conv": "native",
+  "plugins": [
+    "inspark::alias_free",
+    "inspark::deconv1d"
+  ],
+  "export_rewrite_validation": {
+    "max_abs": 0.0,
+    "mean_abs": 0.0,
+    "cosine": 1.0000001192092896
+  },
+  "precision": "BF16 learned convolutions; FP32 alias-free plugin and interfaces",
+  "tensors": [
+    {
+      "name": "mel",
+      "mode": "TensorIOMode.INPUT",
+      "dtype": "DataType.FLOAT",
+      "shape": [
+        4,
+        80,
+        52
+      ]
+    },
+    {
+      "name": "pcm",
+      "mode": "TensorIOMode.OUTPUT",
+      "dtype": "DataType.FLOAT",
+      "shape": [
+        4,
+        1,
+        13312
+      ]
+    }
+  ]
+}

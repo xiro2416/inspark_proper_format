@@ -1,0 +1,205 @@
+{
+  "format": 1,
+  "backend": "TensorRT 11.3 native full Draft",
+  "batch": 1,
+  "engine": "/workspace/A_inspark_marlin/artifacts/trt113_draft_full/audited_source/draft_full_b1.engine",
+  "bytes": 175458636,
+  "sha256": "5e5dc406beb1f0364db8bab64cd5eede050ef39868b3e9d987263fba9b9e8435",
+  "build_seconds": 38.35346484184265,
+  "trt": "11.3.0.99",
+  "torch": "2.8.0+cu128",
+  "cuda": "12.8",
+  "gpu_name": "NVIDIA GeForce RTX 4090",
+  "sm": 89,
+  "provenance": {
+    "schema": 1,
+    "status": "recorded_not_audited",
+    "component": "draft",
+    "model_sources": [
+      {
+        "role": "draft_checkpoint",
+        "path": "/workspace/A_inspark_marlin/models/draft_onpolicy100/model.safetensors",
+        "sha256": "289f4d856d9214a6df8de8ab6eba0327b9ab6cf315f11247b87b9af2c446a9c6",
+        "bytes": 215704384
+      },
+      {
+        "role": "draft_config",
+        "path": "/workspace/A_inspark_marlin/models/draft_onpolicy100/config.json",
+        "sha256": "e3baa07bbf1017a0db7f2cd40fcd9995ddc6254065dadf0c33e798cb4cf732ad",
+        "bytes": 1069
+      }
+    ],
+    "configuration": [
+      {
+        "role": "runtime_config",
+        "path": "/workspace/A_inspark_marlin/configs/runtime.yaml",
+        "sha256": "00065c8feb636c79070cce1bb516789bc8d8493e111855fe75f610bb8205131a",
+        "bytes": 304
+      },
+      {
+        "role": "deployment_config",
+        "path": "/workspace/A_inspark_marlin/configs/sm89_bf16_target_trt113_lab.json",
+        "sha256": "1bde8e89378fd645f2b41272d3a1454ec9d4822ee5d22747de3c2e189f5f8d8e",
+        "bytes": 463
+      }
+    ],
+    "source": {
+      "git_sha": "813eb3d13798ada4fce9c4f304e847bb6376c1c2",
+      "dirty": true,
+      "scope": [
+        "src",
+        "scripts",
+        "configs",
+        "pyproject.toml"
+      ],
+      "files": 266,
+      "source_sha256": "b8c7482848e282a2c148551f6873abbda6ab308b290dbf317a39503be0141982",
+      "dirty_fingerprint": "d8b916ccbf24444f5844358f7dc901012ac03cb99b302ee56ac410c53a509f43",
+      "snapshot": "local source files before TensorRT network construction"
+    },
+    "software": {
+      "torch": "2.8.0+cu128",
+      "cuda": "12.8",
+      "triton": "3.5.0",
+      "numpy": "2.2.6",
+      "tensorrt": "11.3.0.99"
+    },
+    "hardware": {
+      "gpu_name": "NVIDIA GeForce RTX 4090",
+      "sm": 89
+    },
+    "constant_data_sha256": "04ea4a29ef81be251f0e62dd5f8c9bc61fe03f3d7aec1df7225bf1bb2f26dae4"
+  },
+  "builder_settings": {
+    "optimization_level": 5,
+    "workspace_bytes": 8589934592,
+    "strongly_typed": true,
+    "tf32": false,
+    "batch": 1,
+    "query_tokens": 7,
+    "kv_limit": 128,
+    "layers": 3,
+    "attention_decomposable": true,
+    "debug_outputs": false,
+    "stable_block_linears": false,
+    "qkv": "three eager-origin projections"
+  },
+  "optimization_level": 5,
+  "workspace_bytes": 8589934592,
+  "precision": "BF16 block Linear with FP32 attention/KV/norms/residuals/lm_head/interfaces",
+  "tf32": false,
+  "strongly_typed": true,
+  "kv_limit": 128,
+  "tensors": [
+    {
+      "name": "x",
+      "mode": "TensorIOMode.INPUT",
+      "dtype": "DataType.FLOAT",
+      "shape": [
+        1,
+        7,
+        1280
+      ]
+    },
+    {
+      "name": "mask",
+      "mode": "TensorIOMode.INPUT",
+      "dtype": "DataType.BOOL",
+      "shape": [
+        1,
+        1,
+        7,
+        135
+      ]
+    },
+    {
+      "name": "k_cache_0",
+      "mode": "TensorIOMode.INPUT",
+      "dtype": "DataType.FLOAT",
+      "shape": [
+        1,
+        20,
+        128,
+        64
+      ]
+    },
+    {
+      "name": "v_cache_0",
+      "mode": "TensorIOMode.INPUT",
+      "dtype": "DataType.FLOAT",
+      "shape": [
+        1,
+        20,
+        128,
+        64
+      ]
+    },
+    {
+      "name": "k_cache_1",
+      "mode": "TensorIOMode.INPUT",
+      "dtype": "DataType.FLOAT",
+      "shape": [
+        1,
+        20,
+        128,
+        64
+      ]
+    },
+    {
+      "name": "v_cache_1",
+      "mode": "TensorIOMode.INPUT",
+      "dtype": "DataType.FLOAT",
+      "shape": [
+        1,
+        20,
+        128,
+        64
+      ]
+    },
+    {
+      "name": "k_cache_2",
+      "mode": "TensorIOMode.INPUT",
+      "dtype": "DataType.FLOAT",
+      "shape": [
+        1,
+        20,
+        128,
+        64
+      ]
+    },
+    {
+      "name": "v_cache_2",
+      "mode": "TensorIOMode.INPUT",
+      "dtype": "DataType.FLOAT",
+      "shape": [
+        1,
+        20,
+        128,
+        64
+      ]
+    },
+    {
+      "name": "hidden",
+      "mode": "TensorIOMode.OUTPUT",
+      "dtype": "DataType.FLOAT",
+      "shape": [
+        1,
+        7,
+        1280
+      ]
+    },
+    {
+      "name": "base",
+      "mode": "TensorIOMode.OUTPUT",
+      "dtype": "DataType.FLOAT",
+      "shape": [
+        1,
+        7,
+        8194
+      ]
+    }
+  ],
+  "debug_outputs": false,
+  "stable_block_linears": false,
+  "qkv": "three eager-origin projections"
+}

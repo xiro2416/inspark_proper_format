@@ -1,0 +1,1306 @@
+{
+  "schema": 1,
+  "status": "passed",
+  "scope": "first_chunk_only",
+  "full_eos_verified": false,
+  "numerical_parity_verified": false,
+  "concurrency_verified": [
+    4
+  ],
+  "soak_verified": false,
+  "full_trt_scope": [
+    "target_verify",
+    "draft_backbone",
+    "cfm_solver",
+    "vocoder"
+  ],
+  "excluded_from_full_trt_claim": [
+    "prefill",
+    "proposal_rnn",
+    "context_append",
+    "conditioning",
+    "latent",
+    "streaming_tail"
+  ],
+  "gpu": 6,
+  "batch": 4,
+  "workers": 1,
+  "text": "他正在整理文件。",
+  "request_seed_policy": "row index, unchanged across waves",
+  "warmups": 2,
+  "repeats": 5,
+  "reference": "/workspace/index-tts/data/audio/old/mingxiang_gao.wav",
+  "deployment": "/workspace/A_inspark_marlin/configs/sm89_bf16_trt113_full_b4.json",
+  "timing": "per-request enqueue to host-received first PCM; includes admission and copies",
+  "warmup_results": [
+    {
+      "audit": {
+        "passed": true,
+        "errors": [],
+        "counter_delta": {
+          "target_calls": 0,
+          "device_target_steps": 11,
+          "draft_backbone_calls": 0,
+          "device_draft_steps": 11,
+          "native_target_steps": 11,
+          "native_draft_steps": 11,
+          "device_round_fallbacks": 0
+        },
+        "components": {
+          "target": {
+            "total": 11,
+            "native": 11,
+            "non_trt": 0
+          },
+          "draft": {
+            "total": 11,
+            "native": 11,
+            "non_trt": 0
+          },
+          "cfm": {
+            "total": 1,
+            "native": 1,
+            "non_trt": 0,
+            "fallback": 0,
+            "direct": 0,
+            "replay": 1,
+            "routes": [
+              {
+                "route": {
+                  "kind": "tensorrt",
+                  "backend": "tensorrt113",
+                  "candidate_backend": "tensorrt113",
+                  "component": "cfm",
+                  "batch": 4,
+                  "frames": 310,
+                  "engine_batch": 4,
+                  "engine_frames": 310,
+                  "plan": "/workspace/A_inspark_marlin/artifacts/trt113_cfm/plan_b4.json",
+                  "sha256": "062556b07b777002bf8c22fe71a78dc6e9feda0740a11bfc348afa6e39dbf781",
+                  "reason": null,
+                  "plugins": [],
+                  "fallback": false
+                },
+                "prepare": 0,
+                "direct": 0,
+                "replay": 1,
+                "fallback": 0
+              }
+            ],
+            "wrapper_direct": {
+              "calls": 0,
+              "fallbacks": 0
+            }
+          },
+          "vocoder": {
+            "total": 1,
+            "native": 1,
+            "non_trt": 0,
+            "fallback": 0,
+            "direct": 0,
+            "replay": 1,
+            "routes": [
+              {
+                "route": {
+                  "kind": "tensorrt",
+                  "backend": "tensorrt113",
+                  "candidate_backend": "tensorrt113",
+                  "component": "vocoder",
+                  "batch": 4,
+                  "frames": 52,
+                  "engine_batch": 4,
+                  "engine_frames": 52,
+                  "plan": "/workspace/A_inspark_marlin/artifacts/trt113_vocoder/plan_b4_nativeconv_strong.json",
+                  "sha256": "cb052c69b7a70477fc3cbd2e74f7a99fc31e8b327c66e5437ddce120b791aa43",
+                  "reason": null,
+                  "plugins": [
+                    "inspark::alias_free",
+                    "inspark::deconv1d"
+                  ],
+                  "fallback": false
+                },
+                "prepare": 0,
+                "direct": 0,
+                "replay": 1,
+                "fallback": 0
+              }
+            ],
+            "wrapper_direct": {
+              "calls": 0,
+              "fallbacks": 0
+            }
+          }
+        }
+      },
+      "all_first_chunks_ms": 236.52119748294353
+    },
+    {
+      "audit": {
+        "passed": true,
+        "errors": [],
+        "counter_delta": {
+          "target_calls": 0,
+          "device_target_steps": 9,
+          "draft_backbone_calls": 0,
+          "device_draft_steps": 9,
+          "native_target_steps": 9,
+          "native_draft_steps": 9,
+          "device_round_fallbacks": 0
+        },
+        "components": {
+          "target": {
+            "total": 9,
+            "native": 9,
+            "non_trt": 0
+          },
+          "draft": {
+            "total": 9,
+            "native": 9,
+            "non_trt": 0
+          },
+          "cfm": {
+            "total": 1,
+            "native": 1,
+            "non_trt": 0,
+            "fallback": 0,
+            "direct": 0,
+            "replay": 1,
+            "routes": [
+              {
+                "route": {
+                  "kind": "tensorrt",
+                  "backend": "tensorrt113",
+                  "candidate_backend": "tensorrt113",
+                  "component": "cfm",
+                  "batch": 4,
+                  "frames": 310,
+                  "engine_batch": 4,
+                  "engine_frames": 310,
+                  "plan": "/workspace/A_inspark_marlin/artifacts/trt113_cfm/plan_b4.json",
+                  "sha256": "062556b07b777002bf8c22fe71a78dc6e9feda0740a11bfc348afa6e39dbf781",
+                  "reason": null,
+                  "plugins": [],
+                  "fallback": false
+                },
+                "prepare": 0,
+                "direct": 0,
+                "replay": 1,
+                "fallback": 0
+              }
+            ],
+            "wrapper_direct": {
+              "calls": 0,
+              "fallbacks": 0
+            }
+          },
+          "vocoder": {
+            "total": 1,
+            "native": 1,
+            "non_trt": 0,
+            "fallback": 0,
+            "direct": 0,
+            "replay": 1,
+            "routes": [
+              {
+                "route": {
+                  "kind": "tensorrt",
+                  "backend": "tensorrt113",
+                  "candidate_backend": "tensorrt113",
+                  "component": "vocoder",
+                  "batch": 4,
+                  "frames": 52,
+                  "engine_batch": 4,
+                  "engine_frames": 52,
+                  "plan": "/workspace/A_inspark_marlin/artifacts/trt113_vocoder/plan_b4_nativeconv_strong.json",
+                  "sha256": "cb052c69b7a70477fc3cbd2e74f7a99fc31e8b327c66e5437ddce120b791aa43",
+                  "reason": null,
+                  "plugins": [
+                    "inspark::alias_free",
+                    "inspark::deconv1d"
+                  ],
+                  "fallback": false
+                },
+                "prepare": 0,
+                "direct": 0,
+                "replay": 1,
+                "fallback": 0
+              }
+            ],
+            "wrapper_direct": {
+              "calls": 0,
+              "fallbacks": 0
+            }
+          }
+        }
+      },
+      "all_first_chunks_ms": 79.87471483647823
+    }
+  ],
+  "runs": [
+    {
+      "requests": [
+        {
+          "id": "run-0-0",
+          "first_chunk_ms": 73.75609688460827,
+          "sample_count": 11264,
+          "frame_count": 44,
+          "eos": false,
+          "complete": false,
+          "chunk_count": 1,
+          "code_count": 34,
+          "rounds": 11,
+          "accepted_counts": [
+            1,
+            0,
+            0,
+            3,
+            2,
+            4,
+            2,
+            1,
+            6,
+            0,
+            3
+          ],
+          "kv_head_length": 74,
+          "cfm_batch": 4,
+          "vocoder_batch": 4
+        },
+        {
+          "id": "run-0-1",
+          "first_chunk_ms": 73.60701635479927,
+          "sample_count": 11264,
+          "frame_count": 44,
+          "eos": false,
+          "complete": false,
+          "chunk_count": 1,
+          "code_count": 31,
+          "rounds": 9,
+          "accepted_counts": [
+            1,
+            0,
+            2,
+            0,
+            0,
+            4,
+            5,
+            7,
+            2
+          ],
+          "kv_head_length": 71,
+          "cfm_batch": 4,
+          "vocoder_batch": 4
+        },
+        {
+          "id": "run-0-2",
+          "first_chunk_ms": 73.50465096533298,
+          "sample_count": 11264,
+          "frame_count": 44,
+          "eos": false,
+          "complete": false,
+          "chunk_count": 1,
+          "code_count": 33,
+          "rounds": 7,
+          "accepted_counts": [
+            2,
+            1,
+            6,
+            3,
+            3,
+            3,
+            7
+          ],
+          "kv_head_length": 73,
+          "cfm_batch": 4,
+          "vocoder_batch": 4
+        },
+        {
+          "id": "run-0-3",
+          "first_chunk_ms": 73.41441884636879,
+          "sample_count": 11264,
+          "frame_count": 44,
+          "eos": false,
+          "complete": false,
+          "chunk_count": 1,
+          "code_count": 34,
+          "rounds": 10,
+          "accepted_counts": [
+            2,
+            2,
+            2,
+            0,
+            4,
+            2,
+            0,
+            0,
+            4,
+            7
+          ],
+          "kv_head_length": 74,
+          "cfm_batch": 4,
+          "vocoder_batch": 4
+        }
+      ],
+      "all_first_chunks_ms": 74.2363203316927,
+      "requests_per_s": 53.88198097814844,
+      "audit": {
+        "passed": true,
+        "errors": [],
+        "counter_delta": {
+          "target_calls": 0,
+          "device_target_steps": 11,
+          "draft_backbone_calls": 0,
+          "device_draft_steps": 11,
+          "native_target_steps": 11,
+          "native_draft_steps": 11,
+          "device_round_fallbacks": 0
+        },
+        "components": {
+          "target": {
+            "total": 11,
+            "native": 11,
+            "non_trt": 0
+          },
+          "draft": {
+            "total": 11,
+            "native": 11,
+            "non_trt": 0
+          },
+          "cfm": {
+            "total": 1,
+            "native": 1,
+            "non_trt": 0,
+            "fallback": 0,
+            "direct": 0,
+            "replay": 1,
+            "routes": [
+              {
+                "route": {
+                  "kind": "tensorrt",
+                  "backend": "tensorrt113",
+                  "candidate_backend": "tensorrt113",
+                  "component": "cfm",
+                  "batch": 4,
+                  "frames": 310,
+                  "engine_batch": 4,
+                  "engine_frames": 310,
+                  "plan": "/workspace/A_inspark_marlin/artifacts/trt113_cfm/plan_b4.json",
+                  "sha256": "062556b07b777002bf8c22fe71a78dc6e9feda0740a11bfc348afa6e39dbf781",
+                  "reason": null,
+                  "plugins": [],
+                  "fallback": false
+                },
+                "prepare": 0,
+                "direct": 0,
+                "replay": 1,
+                "fallback": 0
+              }
+            ],
+            "wrapper_direct": {
+              "calls": 0,
+              "fallbacks": 0
+            }
+          },
+          "vocoder": {
+            "total": 1,
+            "native": 1,
+            "non_trt": 0,
+            "fallback": 0,
+            "direct": 0,
+            "replay": 1,
+            "routes": [
+              {
+                "route": {
+                  "kind": "tensorrt",
+                  "backend": "tensorrt113",
+                  "candidate_backend": "tensorrt113",
+                  "component": "vocoder",
+                  "batch": 4,
+                  "frames": 52,
+                  "engine_batch": 4,
+                  "engine_frames": 52,
+                  "plan": "/workspace/A_inspark_marlin/artifacts/trt113_vocoder/plan_b4_nativeconv_strong.json",
+                  "sha256": "cb052c69b7a70477fc3cbd2e74f7a99fc31e8b327c66e5437ddce120b791aa43",
+                  "reason": null,
+                  "plugins": [
+                    "inspark::alias_free",
+                    "inspark::deconv1d"
+                  ],
+                  "fallback": false
+                },
+                "prepare": 0,
+                "direct": 0,
+                "replay": 1,
+                "fallback": 0
+              }
+            ],
+            "wrapper_direct": {
+              "calls": 0,
+              "fallbacks": 0
+            }
+          }
+        }
+      },
+      "repeat": 0
+    },
+    {
+      "requests": [
+        {
+          "id": "run-1-0",
+          "first_chunk_ms": 75.55138692259789,
+          "sample_count": 11264,
+          "frame_count": 44,
+          "eos": false,
+          "complete": false,
+          "chunk_count": 1,
+          "code_count": 35,
+          "rounds": 8,
+          "accepted_counts": [
+            3,
+            4,
+            0,
+            3,
+            2,
+            7,
+            2,
+            5
+          ],
+          "kv_head_length": 75,
+          "cfm_batch": 4,
+          "vocoder_batch": 4
+        },
+        {
+          "id": "run-1-1",
+          "first_chunk_ms": 75.32804645597935,
+          "sample_count": 11264,
+          "frame_count": 44,
+          "eos": false,
+          "complete": false,
+          "chunk_count": 1,
+          "code_count": 35,
+          "rounds": 6,
+          "accepted_counts": [
+            7,
+            4,
+            3,
+            7,
+            0,
+            7
+          ],
+          "kv_head_length": 75,
+          "cfm_batch": 4,
+          "vocoder_batch": 4
+        },
+        {
+          "id": "run-1-2",
+          "first_chunk_ms": 75.26124641299248,
+          "sample_count": 11264,
+          "frame_count": 44,
+          "eos": false,
+          "complete": false,
+          "chunk_count": 1,
+          "code_count": 33,
+          "rounds": 9,
+          "accepted_counts": [
+            0,
+            1,
+            2,
+            4,
+            5,
+            2,
+            3,
+            1,
+            5
+          ],
+          "kv_head_length": 73,
+          "cfm_batch": 4,
+          "vocoder_batch": 4
+        },
+        {
+          "id": "run-1-3",
+          "first_chunk_ms": 75.1835536211729,
+          "sample_count": 11264,
+          "frame_count": 44,
+          "eos": false,
+          "complete": false,
+          "chunk_count": 1,
+          "code_count": 32,
+          "rounds": 11,
+          "accepted_counts": [
+            2,
+            2,
+            2,
+            0,
+            0,
+            2,
+            3,
+            2,
+            0,
+            3,
+            4
+          ],
+          "kv_head_length": 72,
+          "cfm_batch": 4,
+          "vocoder_batch": 4
+        }
+      ],
+      "all_first_chunks_ms": 76.01439021527767,
+      "requests_per_s": 52.62161531088707,
+      "audit": {
+        "passed": true,
+        "errors": [],
+        "counter_delta": {
+          "target_calls": 0,
+          "device_target_steps": 11,
+          "draft_backbone_calls": 0,
+          "device_draft_steps": 11,
+          "native_target_steps": 11,
+          "native_draft_steps": 11,
+          "device_round_fallbacks": 0
+        },
+        "components": {
+          "target": {
+            "total": 11,
+            "native": 11,
+            "non_trt": 0
+          },
+          "draft": {
+            "total": 11,
+            "native": 11,
+            "non_trt": 0
+          },
+          "cfm": {
+            "total": 1,
+            "native": 1,
+            "non_trt": 0,
+            "fallback": 0,
+            "direct": 0,
+            "replay": 1,
+            "routes": [
+              {
+                "route": {
+                  "kind": "tensorrt",
+                  "backend": "tensorrt113",
+                  "candidate_backend": "tensorrt113",
+                  "component": "cfm",
+                  "batch": 4,
+                  "frames": 310,
+                  "engine_batch": 4,
+                  "engine_frames": 310,
+                  "plan": "/workspace/A_inspark_marlin/artifacts/trt113_cfm/plan_b4.json",
+                  "sha256": "062556b07b777002bf8c22fe71a78dc6e9feda0740a11bfc348afa6e39dbf781",
+                  "reason": null,
+                  "plugins": [],
+                  "fallback": false
+                },
+                "prepare": 0,
+                "direct": 0,
+                "replay": 1,
+                "fallback": 0
+              }
+            ],
+            "wrapper_direct": {
+              "calls": 0,
+              "fallbacks": 0
+            }
+          },
+          "vocoder": {
+            "total": 1,
+            "native": 1,
+            "non_trt": 0,
+            "fallback": 0,
+            "direct": 0,
+            "replay": 1,
+            "routes": [
+              {
+                "route": {
+                  "kind": "tensorrt",
+                  "backend": "tensorrt113",
+                  "candidate_backend": "tensorrt113",
+                  "component": "vocoder",
+                  "batch": 4,
+                  "frames": 52,
+                  "engine_batch": 4,
+                  "engine_frames": 52,
+                  "plan": "/workspace/A_inspark_marlin/artifacts/trt113_vocoder/plan_b4_nativeconv_strong.json",
+                  "sha256": "cb052c69b7a70477fc3cbd2e74f7a99fc31e8b327c66e5437ddce120b791aa43",
+                  "reason": null,
+                  "plugins": [
+                    "inspark::alias_free",
+                    "inspark::deconv1d"
+                  ],
+                  "fallback": false
+                },
+                "prepare": 0,
+                "direct": 0,
+                "replay": 1,
+                "fallback": 0
+              }
+            ],
+            "wrapper_direct": {
+              "calls": 0,
+              "fallbacks": 0
+            }
+          }
+        }
+      },
+      "repeat": 1
+    },
+    {
+      "requests": [
+        {
+          "id": "run-2-0",
+          "first_chunk_ms": 78.37063632905483,
+          "sample_count": 11264,
+          "frame_count": 44,
+          "eos": false,
+          "complete": false,
+          "chunk_count": 1,
+          "code_count": 32,
+          "rounds": 10,
+          "accepted_counts": [
+            3,
+            0,
+            0,
+            1,
+            7,
+            2,
+            2,
+            1,
+            3,
+            2
+          ],
+          "kv_head_length": 72,
+          "cfm_batch": 4,
+          "vocoder_batch": 4
+        },
+        {
+          "id": "run-2-1",
+          "first_chunk_ms": 78.16274091601372,
+          "sample_count": 11264,
+          "frame_count": 44,
+          "eos": false,
+          "complete": false,
+          "chunk_count": 1,
+          "code_count": 37,
+          "rounds": 9,
+          "accepted_counts": [
+            3,
+            5,
+            1,
+            1,
+            0,
+            4,
+            1,
+            5,
+            7
+          ],
+          "kv_head_length": 77,
+          "cfm_batch": 4,
+          "vocoder_batch": 4
+        },
+        {
+          "id": "run-2-2",
+          "first_chunk_ms": 78.03685404360294,
+          "sample_count": 11264,
+          "frame_count": 44,
+          "eos": true,
+          "complete": false,
+          "chunk_count": 1,
+          "code_count": 29,
+          "rounds": 7,
+          "accepted_counts": [
+            7,
+            3,
+            2,
+            2,
+            4,
+            3,
+            1
+          ],
+          "kv_head_length": 70,
+          "cfm_batch": 4,
+          "vocoder_batch": 4
+        },
+        {
+          "id": "run-2-3",
+          "first_chunk_ms": 77.94426381587982,
+          "sample_count": 11264,
+          "frame_count": 44,
+          "eos": true,
+          "complete": false,
+          "chunk_count": 1,
+          "code_count": 32,
+          "rounds": 10,
+          "accepted_counts": [
+            0,
+            4,
+            1,
+            4,
+            0,
+            7,
+            1,
+            0,
+            0,
+            6
+          ],
+          "kv_head_length": 74,
+          "cfm_batch": 4,
+          "vocoder_batch": 4
+        }
+      ],
+      "all_first_chunks_ms": 78.76434922218323,
+      "requests_per_s": 50.784397249529206,
+      "audit": {
+        "passed": true,
+        "errors": [],
+        "counter_delta": {
+          "target_calls": 0,
+          "device_target_steps": 10,
+          "draft_backbone_calls": 0,
+          "device_draft_steps": 10,
+          "native_target_steps": 10,
+          "native_draft_steps": 10,
+          "device_round_fallbacks": 0
+        },
+        "components": {
+          "target": {
+            "total": 10,
+            "native": 10,
+            "non_trt": 0
+          },
+          "draft": {
+            "total": 10,
+            "native": 10,
+            "non_trt": 0
+          },
+          "cfm": {
+            "total": 1,
+            "native": 1,
+            "non_trt": 0,
+            "fallback": 0,
+            "direct": 0,
+            "replay": 1,
+            "routes": [
+              {
+                "route": {
+                  "kind": "tensorrt",
+                  "backend": "tensorrt113",
+                  "candidate_backend": "tensorrt113",
+                  "component": "cfm",
+                  "batch": 4,
+                  "frames": 310,
+                  "engine_batch": 4,
+                  "engine_frames": 310,
+                  "plan": "/workspace/A_inspark_marlin/artifacts/trt113_cfm/plan_b4.json",
+                  "sha256": "062556b07b777002bf8c22fe71a78dc6e9feda0740a11bfc348afa6e39dbf781",
+                  "reason": null,
+                  "plugins": [],
+                  "fallback": false
+                },
+                "prepare": 0,
+                "direct": 0,
+                "replay": 1,
+                "fallback": 0
+              }
+            ],
+            "wrapper_direct": {
+              "calls": 0,
+              "fallbacks": 0
+            }
+          },
+          "vocoder": {
+            "total": 1,
+            "native": 1,
+            "non_trt": 0,
+            "fallback": 0,
+            "direct": 0,
+            "replay": 1,
+            "routes": [
+              {
+                "route": {
+                  "kind": "tensorrt",
+                  "backend": "tensorrt113",
+                  "candidate_backend": "tensorrt113",
+                  "component": "vocoder",
+                  "batch": 4,
+                  "frames": 52,
+                  "engine_batch": 4,
+                  "engine_frames": 52,
+                  "plan": "/workspace/A_inspark_marlin/artifacts/trt113_vocoder/plan_b4_nativeconv_strong.json",
+                  "sha256": "cb052c69b7a70477fc3cbd2e74f7a99fc31e8b327c66e5437ddce120b791aa43",
+                  "reason": null,
+                  "plugins": [
+                    "inspark::alias_free",
+                    "inspark::deconv1d"
+                  ],
+                  "fallback": false
+                },
+                "prepare": 0,
+                "direct": 0,
+                "replay": 1,
+                "fallback": 0
+              }
+            ],
+            "wrapper_direct": {
+              "calls": 0,
+              "fallbacks": 0
+            }
+          }
+        }
+      },
+      "repeat": 2
+    },
+    {
+      "requests": [
+        {
+          "id": "run-3-0",
+          "first_chunk_ms": 69.8910839855671,
+          "sample_count": 11264,
+          "frame_count": 44,
+          "eos": false,
+          "complete": false,
+          "chunk_count": 1,
+          "code_count": 32,
+          "rounds": 8,
+          "accepted_counts": [
+            1,
+            4,
+            0,
+            4,
+            2,
+            7,
+            2,
+            3
+          ],
+          "kv_head_length": 72,
+          "cfm_batch": 4,
+          "vocoder_batch": 4
+        },
+        {
+          "id": "run-3-1",
+          "first_chunk_ms": 69.50823217630386,
+          "sample_count": 11264,
+          "frame_count": 44,
+          "eos": false,
+          "complete": false,
+          "chunk_count": 1,
+          "code_count": 32,
+          "rounds": 7,
+          "accepted_counts": [
+            1,
+            4,
+            6,
+            0,
+            5,
+            7,
+            1
+          ],
+          "kv_head_length": 72,
+          "cfm_batch": 4,
+          "vocoder_batch": 4
+        },
+        {
+          "id": "run-3-2",
+          "first_chunk_ms": 69.30055283010006,
+          "sample_count": 11264,
+          "frame_count": 44,
+          "eos": false,
+          "complete": false,
+          "chunk_count": 1,
+          "code_count": 35,
+          "rounds": 9,
+          "accepted_counts": [
+            4,
+            1,
+            5,
+            6,
+            0,
+            3,
+            1,
+            1,
+            4
+          ],
+          "kv_head_length": 75,
+          "cfm_batch": 4,
+          "vocoder_batch": 4
+        },
+        {
+          "id": "run-3-3",
+          "first_chunk_ms": 69.1242627799511,
+          "sample_count": 11264,
+          "frame_count": 44,
+          "eos": false,
+          "complete": false,
+          "chunk_count": 1,
+          "code_count": 31,
+          "rounds": 10,
+          "accepted_counts": [
+            2,
+            4,
+            2,
+            1,
+            0,
+            2,
+            1,
+            3,
+            0,
+            5
+          ],
+          "kv_head_length": 71,
+          "cfm_batch": 4,
+          "vocoder_batch": 4
+        }
+      ],
+      "all_first_chunks_ms": 70.28385810554028,
+      "requests_per_s": 56.912072100445656,
+      "audit": {
+        "passed": true,
+        "errors": [],
+        "counter_delta": {
+          "target_calls": 0,
+          "device_target_steps": 10,
+          "draft_backbone_calls": 0,
+          "device_draft_steps": 10,
+          "native_target_steps": 10,
+          "native_draft_steps": 10,
+          "device_round_fallbacks": 0
+        },
+        "components": {
+          "target": {
+            "total": 10,
+            "native": 10,
+            "non_trt": 0
+          },
+          "draft": {
+            "total": 10,
+            "native": 10,
+            "non_trt": 0
+          },
+          "cfm": {
+            "total": 1,
+            "native": 1,
+            "non_trt": 0,
+            "fallback": 0,
+            "direct": 0,
+            "replay": 1,
+            "routes": [
+              {
+                "route": {
+                  "kind": "tensorrt",
+                  "backend": "tensorrt113",
+                  "candidate_backend": "tensorrt113",
+                  "component": "cfm",
+                  "batch": 4,
+                  "frames": 310,
+                  "engine_batch": 4,
+                  "engine_frames": 310,
+                  "plan": "/workspace/A_inspark_marlin/artifacts/trt113_cfm/plan_b4.json",
+                  "sha256": "062556b07b777002bf8c22fe71a78dc6e9feda0740a11bfc348afa6e39dbf781",
+                  "reason": null,
+                  "plugins": [],
+                  "fallback": false
+                },
+                "prepare": 0,
+                "direct": 0,
+                "replay": 1,
+                "fallback": 0
+              }
+            ],
+            "wrapper_direct": {
+              "calls": 0,
+              "fallbacks": 0
+            }
+          },
+          "vocoder": {
+            "total": 1,
+            "native": 1,
+            "non_trt": 0,
+            "fallback": 0,
+            "direct": 0,
+            "replay": 1,
+            "routes": [
+              {
+                "route": {
+                  "kind": "tensorrt",
+                  "backend": "tensorrt113",
+                  "candidate_backend": "tensorrt113",
+                  "component": "vocoder",
+                  "batch": 4,
+                  "frames": 52,
+                  "engine_batch": 4,
+                  "engine_frames": 52,
+                  "plan": "/workspace/A_inspark_marlin/artifacts/trt113_vocoder/plan_b4_nativeconv_strong.json",
+                  "sha256": "cb052c69b7a70477fc3cbd2e74f7a99fc31e8b327c66e5437ddce120b791aa43",
+                  "reason": null,
+                  "plugins": [
+                    "inspark::alias_free",
+                    "inspark::deconv1d"
+                  ],
+                  "fallback": false
+                },
+                "prepare": 0,
+                "direct": 0,
+                "replay": 1,
+                "fallback": 0
+              }
+            ],
+            "wrapper_direct": {
+              "calls": 0,
+              "fallbacks": 0
+            }
+          }
+        }
+      },
+      "repeat": 3
+    },
+    {
+      "requests": [
+        {
+          "id": "run-4-0",
+          "first_chunk_ms": 69.88677196204662,
+          "sample_count": 11264,
+          "frame_count": 44,
+          "eos": false,
+          "complete": false,
+          "chunk_count": 1,
+          "code_count": 34,
+          "rounds": 8,
+          "accepted_counts": [
+            1,
+            1,
+            3,
+            4,
+            5,
+            6,
+            2,
+            3
+          ],
+          "kv_head_length": 74,
+          "cfm_batch": 4,
+          "vocoder_batch": 4
+        },
+        {
+          "id": "run-4-1",
+          "first_chunk_ms": 69.45953331887722,
+          "sample_count": 11264,
+          "frame_count": 44,
+          "eos": false,
+          "complete": false,
+          "chunk_count": 1,
+          "code_count": 33,
+          "rounds": 9,
+          "accepted_counts": [
+            1,
+            5,
+            4,
+            3,
+            5,
+            2,
+            0,
+            1,
+            2
+          ],
+          "kv_head_length": 73,
+          "cfm_batch": 4,
+          "vocoder_batch": 4
+        },
+        {
+          "id": "run-4-2",
+          "first_chunk_ms": 69.28354874253273,
+          "sample_count": 11264,
+          "frame_count": 44,
+          "eos": false,
+          "complete": false,
+          "chunk_count": 1,
+          "code_count": 32,
+          "rounds": 10,
+          "accepted_counts": [
+            4,
+            1,
+            2,
+            2,
+            0,
+            2,
+            2,
+            1,
+            3,
+            4
+          ],
+          "kv_head_length": 72,
+          "cfm_batch": 4,
+          "vocoder_batch": 4
+        },
+        {
+          "id": "run-4-3",
+          "first_chunk_ms": 69.10957396030426,
+          "sample_count": 11264,
+          "frame_count": 44,
+          "eos": false,
+          "complete": false,
+          "chunk_count": 1,
+          "code_count": 33,
+          "rounds": 7,
+          "accepted_counts": [
+            2,
+            3,
+            4,
+            4,
+            3,
+            7,
+            2
+          ],
+          "kv_head_length": 73,
+          "cfm_batch": 4,
+          "vocoder_batch": 4
+        }
+      ],
+      "all_first_chunks_ms": 70.28744742274284,
+      "requests_per_s": 56.90916581366311,
+      "audit": {
+        "passed": true,
+        "errors": [],
+        "counter_delta": {
+          "target_calls": 0,
+          "device_target_steps": 10,
+          "draft_backbone_calls": 0,
+          "device_draft_steps": 10,
+          "native_target_steps": 10,
+          "native_draft_steps": 10,
+          "device_round_fallbacks": 0
+        },
+        "components": {
+          "target": {
+            "total": 10,
+            "native": 10,
+            "non_trt": 0
+          },
+          "draft": {
+            "total": 10,
+            "native": 10,
+            "non_trt": 0
+          },
+          "cfm": {
+            "total": 1,
+            "native": 1,
+            "non_trt": 0,
+            "fallback": 0,
+            "direct": 0,
+            "replay": 1,
+            "routes": [
+              {
+                "route": {
+                  "kind": "tensorrt",
+                  "backend": "tensorrt113",
+                  "candidate_backend": "tensorrt113",
+                  "component": "cfm",
+                  "batch": 4,
+                  "frames": 310,
+                  "engine_batch": 4,
+                  "engine_frames": 310,
+                  "plan": "/workspace/A_inspark_marlin/artifacts/trt113_cfm/plan_b4.json",
+                  "sha256": "062556b07b777002bf8c22fe71a78dc6e9feda0740a11bfc348afa6e39dbf781",
+                  "reason": null,
+                  "plugins": [],
+                  "fallback": false
+                },
+                "prepare": 0,
+                "direct": 0,
+                "replay": 1,
+                "fallback": 0
+              }
+            ],
+            "wrapper_direct": {
+              "calls": 0,
+              "fallbacks": 0
+            }
+          },
+          "vocoder": {
+            "total": 1,
+            "native": 1,
+            "non_trt": 0,
+            "fallback": 0,
+            "direct": 0,
+            "replay": 1,
+            "routes": [
+              {
+                "route": {
+                  "kind": "tensorrt",
+                  "backend": "tensorrt113",
+                  "candidate_backend": "tensorrt113",
+                  "component": "vocoder",
+                  "batch": 4,
+                  "frames": 52,
+                  "engine_batch": 4,
+                  "engine_frames": 52,
+                  "plan": "/workspace/A_inspark_marlin/artifacts/trt113_vocoder/plan_b4_nativeconv_strong.json",
+                  "sha256": "cb052c69b7a70477fc3cbd2e74f7a99fc31e8b327c66e5437ddce120b791aa43",
+                  "reason": null,
+                  "plugins": [
+                    "inspark::alias_free",
+                    "inspark::deconv1d"
+                  ],
+                  "fallback": false
+                },
+                "prepare": 0,
+                "direct": 0,
+                "replay": 1,
+                "fallback": 0
+              }
+            ],
+            "wrapper_direct": {
+              "calls": 0,
+              "fallbacks": 0
+            }
+          }
+        }
+      },
+      "repeat": 4
+    }
+  ],
+  "deployment_sha256": "d75d945bcb3b22de1133a844103289362b7cbd4c9fd7553598869bfa4670e2f1",
+  "reference_sha256": "fa482cdaed99bc3c14c5ee2af8d25363a66e7e8778891a6b37c3d60973873793",
+  "source_revision": "813eb3d13798ada4fce9c4f304e847bb6376c1c2",
+  "source_dirty": true,
+  "profile": {
+    "resolved_precision": "bf16",
+    "resolved_rnn_precision": "bf16",
+    "sm": 89,
+    "status": "sm89_bf16_trt113_target_draft_cfm_vocoder_b4_experimental"
+  },
+  "hardware": {
+    "name": "NVIDIA GeForce RTX 4090",
+    "uuid": "GPU-0df25f49-5262-7eea-a3bc-68c7f6eb8cc9",
+    "driver_version": "595.71.05",
+    "memory_mib": "49140"
+  },
+  "summary": {
+    "all_first_chunks_ms": {
+      "n": 5,
+      "min": 70.28385810554028,
+      "mean": 73.91727305948734,
+      "p50": 74.2363203316927,
+      "p95": 78.21435742080212,
+      "p99": 78.654350861907,
+      "max": 78.76434922218323
+    },
+    "request_first_chunk_ms": {
+      "n": 20,
+      "min": 69.10957396030426,
+      "mean": 73.18422356620431,
+      "p50": 73.55583366006613,
+      "p95": 78.17313568666577,
+      "p99": 78.33113620057702,
+      "max": 78.37063632905483
+    },
+    "requests_per_s": {
+      "n": 5,
+      "min": 50.784397249529206,
+      "mean": 54.2218462905347,
+      "p50": 53.88198097814844,
+      "p95": 56.91149084308915,
+      "p99": 56.91195584897435,
+      "max": 56.912072100445656
+    }
+  }
+}

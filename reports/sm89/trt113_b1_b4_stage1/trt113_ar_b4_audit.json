@@ -1,0 +1,4769 @@
+{
+  "schema": 1,
+  "batch": 4,
+  "physical_gpu": 6,
+  "stage": "complete",
+  "pass_gate": false,
+  "scope": "SM89 same-input diagnostic component audit, not whole-trajectory equivalence or audio quality",
+  "pass_gate_scope": "Numerical and cache checks only; engine weight provenance reported separately",
+  "tolerances": {
+    "fp32": {
+      "atol": 1e-05,
+      "rtol": 0.0001
+    },
+    "bf16": {
+      "atol": 0.01,
+      "rtol": 0.01
+    }
+  },
+  "command_arguments": {
+    "gpu": 6,
+    "batch": 4,
+    "config": "/workspace/A_inspark_marlin/configs/runtime.yaml",
+    "reference": "/workspace/index-tts/data/audio/old/mingxiang_gao.wav",
+    "target_engine": "artifacts/trt113_target_full/audited_source/target_full_b4.engine",
+    "draft_engine": "artifacts/trt113_draft_full/audited_source/draft_full_b4.engine",
+    "output": "outputs/trt113_ar_b4_audit.json",
+    "iterations": 20,
+    "seed": 113,
+    "text": "他正在整理文件。"
+  },
+  "script_sha256": "73f2723b9cfd3455cf1aa72d639510ff01792bb6500b5abf89ce5521d6f5875c",
+  "metrics_sha256": "e8d4cb8efcea5feb63c310cd5ea4d9a658f984a52d783bc28563ac915f7d4bdc",
+  "source": {
+    "git_sha": "813eb3d13798ada4fce9c4f304e847bb6376c1c2",
+    "dirty": true,
+    "scope": [
+      "src",
+      "scripts",
+      "configs",
+      "pyproject.toml"
+    ],
+    "files": 267,
+    "source_sha256": "cf16ddaf7dfade8883b133ad41de5b99d70d87184647ac9c2f035b120bc1041c",
+    "dirty_fingerprint": "9b0c0c9c39564a4239176354698f3a4d45656177ca51d1d72e26cf263828d133",
+    "snapshot": "local source files before AR audit, including current scripts and untracked source files"
+  },
+  "provenance_helper_sha256": "74853b7fe57a2b45caef5e94a9bd5e5e1cb7429beb27713c72da382ebbfd8834",
+  "hardware": {
+    "device": "NVIDIA GeForce RTX 4090",
+    "sm": [
+      8,
+      9
+    ],
+    "torch": "2.8.0+cu128",
+    "cuda": "12.8",
+    "tensorrt": "11.3.0.99"
+  },
+  "checkpoints": {
+    "target": {
+      "path": "/workspace/A_inspark_marlin/models/index_tts2/gpt.pth",
+      "sha256": "baaaeb8b56328da81731dc540a85a7dee32eca9da28f174b05757cb651c602a4"
+    },
+    "draft": {
+      "path": "/workspace/A_inspark_marlin/models/draft_onpolicy100/model.safetensors",
+      "sha256": "289f4d856d9214a6df8de8ab6eba0327b9ab6cf315f11247b87b9af2c446a9c6"
+    }
+  },
+  "engines": {
+    "target": {
+      "path": "/workspace/A_inspark_marlin/artifacts/trt113_target_full/audited_source/target_full_b4.engine",
+      "sha256": "f0866984bb341871be7638519385f997c517182c88bfcb3efa55a14221138d2c",
+      "build_metadata_path": "/workspace/A_inspark_marlin/artifacts/trt113_target_full/audited_source/target_full_b4.json",
+      "build_metadata_sha256": "7afbae3b16407dc52ac9e709c23892d19a9fec08aa4ba30f2a770693665f1f05",
+      "build_metadata": {
+        "format": 1,
+        "backend": "TensorRT 11.3 native full Target",
+        "precision": "BF16 Linear/KV with FP32 interfaces, norms, residuals and lm_head",
+        "batch": 4,
+        "engine": "/workspace/A_inspark_marlin/artifacts/trt113_target_full/audited_source/target_full_b4.engine",
+        "bytes": 993908244,
+        "sha256": "f0866984bb341871be7638519385f997c517182c88bfcb3efa55a14221138d2c",
+        "build_seconds": 27.00613522529602,
+        "trt": "11.3.0.99",
+        "torch": "2.8.0+cu128",
+        "cuda": "12.8",
+        "gpu_name": "NVIDIA GeForce RTX 4090",
+        "sm": 89,
+        "provenance": {
+          "schema": 1,
+          "status": "recorded_not_audited",
+          "component": "target",
+          "model_sources": [
+            {
+              "role": "target_checkpoint",
+              "path": "/workspace/A_inspark_marlin/models/index_tts2/gpt.pth",
+              "sha256": "baaaeb8b56328da81731dc540a85a7dee32eca9da28f174b05757cb651c602a4",
+              "bytes": 3484663079
+            },
+            {
+              "role": "target_config",
+              "path": "/workspace/A_inspark_marlin/models/index_tts2/config.yaml",
+              "sha256": "ea9c2815ecc3874577c7ac158b97248c027250e5b05972fbbb1216b6d6539081",
+              "bytes": 2882
+            }
+          ],
+          "configuration": [
+            {
+              "role": "runtime_config",
+              "path": "/workspace/A_inspark_marlin/configs/runtime.yaml",
+              "sha256": "00065c8feb636c79070cce1bb516789bc8d8493e111855fe75f610bb8205131a",
+              "bytes": 304
+            },
+            {
+              "role": "deployment_config",
+              "path": "/workspace/A_inspark_marlin/configs/sm89_bf16_target_trt113_lab.json",
+              "sha256": "1bde8e89378fd645f2b41272d3a1454ec9d4822ee5d22747de3c2e189f5f8d8e",
+              "bytes": 463
+            }
+          ],
+          "source": {
+            "git_sha": "813eb3d13798ada4fce9c4f304e847bb6376c1c2",
+            "dirty": true,
+            "scope": [
+              "src",
+              "scripts",
+              "configs",
+              "pyproject.toml"
+            ],
+            "files": 266,
+            "source_sha256": "a7d61d2fc14b2c6bcdf226f90373e96bed725bedce0bde99272a529aa49e4d43",
+            "dirty_fingerprint": "6b8821c1b3b29eef480c2e6c6af91767fd55ce161c24cb5ec74ff5e4d3399739",
+            "snapshot": "local source files before TensorRT network construction"
+          },
+          "software": {
+            "torch": "2.8.0+cu128",
+            "cuda": "12.8",
+            "triton": "3.5.0",
+            "numpy": "2.2.6",
+            "tensorrt": "11.3.0.99"
+          },
+          "hardware": {
+            "gpu_name": "NVIDIA GeForce RTX 4090",
+            "sm": 89
+          },
+          "constant_data_sha256": "526f351b6eeb33697eee3dfd4ec9efb0bd3991e6af453e5f64f9a3bff994b2fc"
+        },
+        "builder_settings": {
+          "optimization_level": 3,
+          "workspace_bytes": 8589934592,
+          "strongly_typed": true,
+          "tf32": false,
+          "batch": 4,
+          "query_tokens": 8,
+          "kv_limit": 128,
+          "attention_decomposable": true,
+          "layers": 24
+        },
+        "tf32": false,
+        "strongly_typed": true,
+        "kv_limit": 128,
+        "optimization_level": 3,
+        "workspace_bytes": 8589934592,
+        "tensors": [
+          {
+            "name": "x",
+            "mode": "TensorIOMode.INPUT",
+            "dtype": "DataType.FLOAT",
+            "shape": [
+              4,
+              8,
+              1280
+            ]
+          },
+          {
+            "name": "mask",
+            "mode": "TensorIOMode.INPUT",
+            "dtype": "DataType.BOOL",
+            "shape": [
+              4,
+              1,
+              8,
+              128
+            ]
+          },
+          {
+            "name": "write_indices",
+            "mode": "TensorIOMode.INPUT",
+            "dtype": "DataType.INT32",
+            "shape": [
+              4
+            ]
+          },
+          {
+            "name": "k_cache_in_0",
+            "mode": "TensorIOMode.INPUT",
+            "dtype": "DataType.BF16",
+            "shape": [
+              4,
+              20,
+              128,
+              64
+            ]
+          },
+          {
+            "name": "v_cache_in_0",
+            "mode": "TensorIOMode.INPUT",
+            "dtype": "DataType.BF16",
+            "shape": [
+              4,
+              20,
+              128,
+              64
+            ]
+          },
+          {
+            "name": "k_cache_in_1",
+            "mode": "TensorIOMode.INPUT",
+            "dtype": "DataType.BF16",
+            "shape": [
+              4,
+              20,
+              128,
+              64
+            ]
+          },
+          {
+            "name": "v_cache_in_1",
+            "mode": "TensorIOMode.INPUT",
+            "dtype": "DataType.BF16",
+            "shape": [
+              4,
+              20,
+              128,
+              64
+            ]
+          },
+          {
+            "name": "k_cache_in_2",
+            "mode": "TensorIOMode.INPUT",
+            "dtype": "DataType.BF16",
+            "shape": [
+              4,
+              20,
+              128,
+              64
+            ]
+          },
+          {
+            "name": "v_cache_in_2",
+            "mode": "TensorIOMode.INPUT",
+            "dtype": "DataType.BF16",
+            "shape": [
+              4,
+              20,
+              128,
+              64
+            ]
+          },
+          {
+            "name": "k_cache_in_3",
+            "mode": "TensorIOMode.INPUT",
+            "dtype": "DataType.BF16",
+            "shape": [
+              4,
+              20,
+              128,
+              64
+            ]
+          },
+          {
+            "name": "v_cache_in_3",
+            "mode": "TensorIOMode.INPUT",
+            "dtype": "DataType.BF16",
+            "shape": [
+              4,
+              20,
+              128,
+              64
+            ]
+          },
+          {
+            "name": "k_cache_in_4",
+            "mode": "TensorIOMode.INPUT",
+            "dtype": "DataType.BF16",
+            "shape": [
+              4,
+              20,
+              128,
+              64
+            ]
+          },
+          {
+            "name": "v_cache_in_4",
+            "mode": "TensorIOMode.INPUT",
+            "dtype": "DataType.BF16",
+            "shape": [
+              4,
+              20,
+              128,
+              64
+            ]
+          },
+          {
+            "name": "k_cache_in_5",
+            "mode": "TensorIOMode.INPUT",
+            "dtype": "DataType.BF16",
+            "shape": [
+              4,
+              20,
+              128,
+              64
+            ]
+          },
+          {
+            "name": "v_cache_in_5",
+            "mode": "TensorIOMode.INPUT",
+            "dtype": "DataType.BF16",
+            "shape": [
+              4,
+              20,
+              128,
+              64
+            ]
+          },
+          {
+            "name": "k_cache_in_6",
+            "mode": "TensorIOMode.INPUT",
+            "dtype": "DataType.BF16",
+            "shape": [
+              4,
+              20,
+              128,
+              64
+            ]
+          },
+          {
+            "name": "v_cache_in_6",
+            "mode": "TensorIOMode.INPUT",
+            "dtype": "DataType.BF16",
+            "shape": [
+              4,
+              20,
+              128,
+              64
+            ]
+          },
+          {
+            "name": "k_cache_in_7",
+            "mode": "TensorIOMode.INPUT",
+            "dtype": "DataType.BF16",
+            "shape": [
+              4,
+              20,
+              128,
+              64
+            ]
+          },
+          {
+            "name": "v_cache_in_7",
+            "mode": "TensorIOMode.INPUT",
+            "dtype": "DataType.BF16",
+            "shape": [
+              4,
+              20,
+              128,
+              64
+            ]
+          },
+          {
+            "name": "k_cache_in_8",
+            "mode": "TensorIOMode.INPUT",
+            "dtype": "DataType.BF16",
+            "shape": [
+              4,
+              20,
+              128,
+              64
+            ]
+          },
+          {
+            "name": "v_cache_in_8",
+            "mode": "TensorIOMode.INPUT",
+            "dtype": "DataType.BF16",
+            "shape": [
+              4,
+              20,
+              128,
+              64
+            ]
+          },
+          {
+            "name": "k_cache_in_9",
+            "mode": "TensorIOMode.INPUT",
+            "dtype": "DataType.BF16",
+            "shape": [
+              4,
+              20,
+              128,
+              64
+            ]
+          },
+          {
+            "name": "v_cache_in_9",
+            "mode": "TensorIOMode.INPUT",
+            "dtype": "DataType.BF16",
+            "shape": [
+              4,
+              20,
+              128,
+              64
+            ]
+          },
+          {
+            "name": "k_cache_in_10",
+            "mode": "TensorIOMode.INPUT",
+            "dtype": "DataType.BF16",
+            "shape": [
+              4,
+              20,
+              128,
+              64
+            ]
+          },
+          {
+            "name": "v_cache_in_10",
+            "mode": "TensorIOMode.INPUT",
+            "dtype": "DataType.BF16",
+            "shape": [
+              4,
+              20,
+              128,
+              64
+            ]
+          },
+          {
+            "name": "k_cache_in_11",
+            "mode": "TensorIOMode.INPUT",
+            "dtype": "DataType.BF16",
+            "shape": [
+              4,
+              20,
+              128,
+              64
+            ]
+          },
+          {
+            "name": "v_cache_in_11",
+            "mode": "TensorIOMode.INPUT",
+            "dtype": "DataType.BF16",
+            "shape": [
+              4,
+              20,
+              128,
+              64
+            ]
+          },
+          {
+            "name": "k_cache_in_12",
+            "mode": "TensorIOMode.INPUT",
+            "dtype": "DataType.BF16",
+            "shape": [
+              4,
+              20,
+              128,
+              64
+            ]
+          },
+          {
+            "name": "v_cache_in_12",
+            "mode": "TensorIOMode.INPUT",
+            "dtype": "DataType.BF16",
+            "shape": [
+              4,
+              20,
+              128,
+              64
+            ]
+          },
+          {
+            "name": "k_cache_in_13",
+            "mode": "TensorIOMode.INPUT",
+            "dtype": "DataType.BF16",
+            "shape": [
+              4,
+              20,
+              128,
+              64
+            ]
+          },
+          {
+            "name": "v_cache_in_13",
+            "mode": "TensorIOMode.INPUT",
+            "dtype": "DataType.BF16",
+            "shape": [
+              4,
+              20,
+              128,
+              64
+            ]
+          },
+          {
+            "name": "k_cache_in_14",
+            "mode": "TensorIOMode.INPUT",
+            "dtype": "DataType.BF16",
+            "shape": [
+              4,
+              20,
+              128,
+              64
+            ]
+          },
+          {
+            "name": "v_cache_in_14",
+            "mode": "TensorIOMode.INPUT",
+            "dtype": "DataType.BF16",
+            "shape": [
+              4,
+              20,
+              128,
+              64
+            ]
+          },
+          {
+            "name": "k_cache_in_15",
+            "mode": "TensorIOMode.INPUT",
+            "dtype": "DataType.BF16",
+            "shape": [
+              4,
+              20,
+              128,
+              64
+            ]
+          },
+          {
+            "name": "v_cache_in_15",
+            "mode": "TensorIOMode.INPUT",
+            "dtype": "DataType.BF16",
+            "shape": [
+              4,
+              20,
+              128,
+              64
+            ]
+          },
+          {
+            "name": "k_cache_in_16",
+            "mode": "TensorIOMode.INPUT",
+            "dtype": "DataType.BF16",
+            "shape": [
+              4,
+              20,
+              128,
+              64
+            ]
+          },
+          {
+            "name": "v_cache_in_16",
+            "mode": "TensorIOMode.INPUT",
+            "dtype": "DataType.BF16",
+            "shape": [
+              4,
+              20,
+              128,
+              64
+            ]
+          },
+          {
+            "name": "k_cache_in_17",
+            "mode": "TensorIOMode.INPUT",
+            "dtype": "DataType.BF16",
+            "shape": [
+              4,
+              20,
+              128,
+              64
+            ]
+          },
+          {
+            "name": "v_cache_in_17",
+            "mode": "TensorIOMode.INPUT",
+            "dtype": "DataType.BF16",
+            "shape": [
+              4,
+              20,
+              128,
+              64
+            ]
+          },
+          {
+            "name": "k_cache_in_18",
+            "mode": "TensorIOMode.INPUT",
+            "dtype": "DataType.BF16",
+            "shape": [
+              4,
+              20,
+              128,
+              64
+            ]
+          },
+          {
+            "name": "v_cache_in_18",
+            "mode": "TensorIOMode.INPUT",
+            "dtype": "DataType.BF16",
+            "shape": [
+              4,
+              20,
+              128,
+              64
+            ]
+          },
+          {
+            "name": "k_cache_in_19",
+            "mode": "TensorIOMode.INPUT",
+            "dtype": "DataType.BF16",
+            "shape": [
+              4,
+              20,
+              128,
+              64
+            ]
+          },
+          {
+            "name": "v_cache_in_19",
+            "mode": "TensorIOMode.INPUT",
+            "dtype": "DataType.BF16",
+            "shape": [
+              4,
+              20,
+              128,
+              64
+            ]
+          },
+          {
+            "name": "k_cache_in_20",
+            "mode": "TensorIOMode.INPUT",
+            "dtype": "DataType.BF16",
+            "shape": [
+              4,
+              20,
+              128,
+              64
+            ]
+          },
+          {
+            "name": "v_cache_in_20",
+            "mode": "TensorIOMode.INPUT",
+            "dtype": "DataType.BF16",
+            "shape": [
+              4,
+              20,
+              128,
+              64
+            ]
+          },
+          {
+            "name": "k_cache_in_21",
+            "mode": "TensorIOMode.INPUT",
+            "dtype": "DataType.BF16",
+            "shape": [
+              4,
+              20,
+              128,
+              64
+            ]
+          },
+          {
+            "name": "v_cache_in_21",
+            "mode": "TensorIOMode.INPUT",
+            "dtype": "DataType.BF16",
+            "shape": [
+              4,
+              20,
+              128,
+              64
+            ]
+          },
+          {
+            "name": "k_cache_in_22",
+            "mode": "TensorIOMode.INPUT",
+            "dtype": "DataType.BF16",
+            "shape": [
+              4,
+              20,
+              128,
+              64
+            ]
+          },
+          {
+            "name": "v_cache_in_22",
+            "mode": "TensorIOMode.INPUT",
+            "dtype": "DataType.BF16",
+            "shape": [
+              4,
+              20,
+              128,
+              64
+            ]
+          },
+          {
+            "name": "k_cache_in_23",
+            "mode": "TensorIOMode.INPUT",
+            "dtype": "DataType.BF16",
+            "shape": [
+              4,
+              20,
+              128,
+              64
+            ]
+          },
+          {
+            "name": "v_cache_in_23",
+            "mode": "TensorIOMode.INPUT",
+            "dtype": "DataType.BF16",
+            "shape": [
+              4,
+              20,
+              128,
+              64
+            ]
+          },
+          {
+            "name": "k_cache_out_0",
+            "mode": "TensorIOMode.OUTPUT",
+            "dtype": "DataType.BF16",
+            "shape": [
+              4,
+              20,
+              128,
+              64
+            ]
+          },
+          {
+            "name": "v_cache_out_0",
+            "mode": "TensorIOMode.OUTPUT",
+            "dtype": "DataType.BF16",
+            "shape": [
+              4,
+              20,
+              128,
+              64
+            ]
+          },
+          {
+            "name": "k_cache_out_1",
+            "mode": "TensorIOMode.OUTPUT",
+            "dtype": "DataType.BF16",
+            "shape": [
+              4,
+              20,
+              128,
+              64
+            ]
+          },
+          {
+            "name": "v_cache_out_1",
+            "mode": "TensorIOMode.OUTPUT",
+            "dtype": "DataType.BF16",
+            "shape": [
+              4,
+              20,
+              128,
+              64
+            ]
+          },
+          {
+            "name": "k_cache_out_2",
+            "mode": "TensorIOMode.OUTPUT",
+            "dtype": "DataType.BF16",
+            "shape": [
+              4,
+              20,
+              128,
+              64
+            ]
+          },
+          {
+            "name": "v_cache_out_2",
+            "mode": "TensorIOMode.OUTPUT",
+            "dtype": "DataType.BF16",
+            "shape": [
+              4,
+              20,
+              128,
+              64
+            ]
+          },
+          {
+            "name": "k_cache_out_3",
+            "mode": "TensorIOMode.OUTPUT",
+            "dtype": "DataType.BF16",
+            "shape": [
+              4,
+              20,
+              128,
+              64
+            ]
+          },
+          {
+            "name": "v_cache_out_3",
+            "mode": "TensorIOMode.OUTPUT",
+            "dtype": "DataType.BF16",
+            "shape": [
+              4,
+              20,
+              128,
+              64
+            ]
+          },
+          {
+            "name": "k_cache_out_4",
+            "mode": "TensorIOMode.OUTPUT",
+            "dtype": "DataType.BF16",
+            "shape": [
+              4,
+              20,
+              128,
+              64
+            ]
+          },
+          {
+            "name": "v_cache_out_4",
+            "mode": "TensorIOMode.OUTPUT",
+            "dtype": "DataType.BF16",
+            "shape": [
+              4,
+              20,
+              128,
+              64
+            ]
+          },
+          {
+            "name": "k_cache_out_5",
+            "mode": "TensorIOMode.OUTPUT",
+            "dtype": "DataType.BF16",
+            "shape": [
+              4,
+              20,
+              128,
+              64
+            ]
+          },
+          {
+            "name": "v_cache_out_5",
+            "mode": "TensorIOMode.OUTPUT",
+            "dtype": "DataType.BF16",
+            "shape": [
+              4,
+              20,
+              128,
+              64
+            ]
+          },
+          {
+            "name": "k_cache_out_6",
+            "mode": "TensorIOMode.OUTPUT",
+            "dtype": "DataType.BF16",
+            "shape": [
+              4,
+              20,
+              128,
+              64
+            ]
+          },
+          {
+            "name": "v_cache_out_6",
+            "mode": "TensorIOMode.OUTPUT",
+            "dtype": "DataType.BF16",
+            "shape": [
+              4,
+              20,
+              128,
+              64
+            ]
+          },
+          {
+            "name": "k_cache_out_7",
+            "mode": "TensorIOMode.OUTPUT",
+            "dtype": "DataType.BF16",
+            "shape": [
+              4,
+              20,
+              128,
+              64
+            ]
+          },
+          {
+            "name": "v_cache_out_7",
+            "mode": "TensorIOMode.OUTPUT",
+            "dtype": "DataType.BF16",
+            "shape": [
+              4,
+              20,
+              128,
+              64
+            ]
+          },
+          {
+            "name": "k_cache_out_8",
+            "mode": "TensorIOMode.OUTPUT",
+            "dtype": "DataType.BF16",
+            "shape": [
+              4,
+              20,
+              128,
+              64
+            ]
+          },
+          {
+            "name": "v_cache_out_8",
+            "mode": "TensorIOMode.OUTPUT",
+            "dtype": "DataType.BF16",
+            "shape": [
+              4,
+              20,
+              128,
+              64
+            ]
+          },
+          {
+            "name": "k_cache_out_9",
+            "mode": "TensorIOMode.OUTPUT",
+            "dtype": "DataType.BF16",
+            "shape": [
+              4,
+              20,
+              128,
+              64
+            ]
+          },
+          {
+            "name": "v_cache_out_9",
+            "mode": "TensorIOMode.OUTPUT",
+            "dtype": "DataType.BF16",
+            "shape": [
+              4,
+              20,
+              128,
+              64
+            ]
+          },
+          {
+            "name": "k_cache_out_10",
+            "mode": "TensorIOMode.OUTPUT",
+            "dtype": "DataType.BF16",
+            "shape": [
+              4,
+              20,
+              128,
+              64
+            ]
+          },
+          {
+            "name": "v_cache_out_10",
+            "mode": "TensorIOMode.OUTPUT",
+            "dtype": "DataType.BF16",
+            "shape": [
+              4,
+              20,
+              128,
+              64
+            ]
+          },
+          {
+            "name": "k_cache_out_11",
+            "mode": "TensorIOMode.OUTPUT",
+            "dtype": "DataType.BF16",
+            "shape": [
+              4,
+              20,
+              128,
+              64
+            ]
+          },
+          {
+            "name": "v_cache_out_11",
+            "mode": "TensorIOMode.OUTPUT",
+            "dtype": "DataType.BF16",
+            "shape": [
+              4,
+              20,
+              128,
+              64
+            ]
+          },
+          {
+            "name": "k_cache_out_12",
+            "mode": "TensorIOMode.OUTPUT",
+            "dtype": "DataType.BF16",
+            "shape": [
+              4,
+              20,
+              128,
+              64
+            ]
+          },
+          {
+            "name": "v_cache_out_12",
+            "mode": "TensorIOMode.OUTPUT",
+            "dtype": "DataType.BF16",
+            "shape": [
+              4,
+              20,
+              128,
+              64
+            ]
+          },
+          {
+            "name": "k_cache_out_13",
+            "mode": "TensorIOMode.OUTPUT",
+            "dtype": "DataType.BF16",
+            "shape": [
+              4,
+              20,
+              128,
+              64
+            ]
+          },
+          {
+            "name": "v_cache_out_13",
+            "mode": "TensorIOMode.OUTPUT",
+            "dtype": "DataType.BF16",
+            "shape": [
+              4,
+              20,
+              128,
+              64
+            ]
+          },
+          {
+            "name": "k_cache_out_14",
+            "mode": "TensorIOMode.OUTPUT",
+            "dtype": "DataType.BF16",
+            "shape": [
+              4,
+              20,
+              128,
+              64
+            ]
+          },
+          {
+            "name": "v_cache_out_14",
+            "mode": "TensorIOMode.OUTPUT",
+            "dtype": "DataType.BF16",
+            "shape": [
+              4,
+              20,
+              128,
+              64
+            ]
+          },
+          {
+            "name": "k_cache_out_15",
+            "mode": "TensorIOMode.OUTPUT",
+            "dtype": "DataType.BF16",
+            "shape": [
+              4,
+              20,
+              128,
+              64
+            ]
+          },
+          {
+            "name": "v_cache_out_15",
+            "mode": "TensorIOMode.OUTPUT",
+            "dtype": "DataType.BF16",
+            "shape": [
+              4,
+              20,
+              128,
+              64
+            ]
+          },
+          {
+            "name": "k_cache_out_16",
+            "mode": "TensorIOMode.OUTPUT",
+            "dtype": "DataType.BF16",
+            "shape": [
+              4,
+              20,
+              128,
+              64
+            ]
+          },
+          {
+            "name": "v_cache_out_16",
+            "mode": "TensorIOMode.OUTPUT",
+            "dtype": "DataType.BF16",
+            "shape": [
+              4,
+              20,
+              128,
+              64
+            ]
+          },
+          {
+            "name": "k_cache_out_17",
+            "mode": "TensorIOMode.OUTPUT",
+            "dtype": "DataType.BF16",
+            "shape": [
+              4,
+              20,
+              128,
+              64
+            ]
+          },
+          {
+            "name": "v_cache_out_17",
+            "mode": "TensorIOMode.OUTPUT",
+            "dtype": "DataType.BF16",
+            "shape": [
+              4,
+              20,
+              128,
+              64
+            ]
+          },
+          {
+            "name": "k_cache_out_18",
+            "mode": "TensorIOMode.OUTPUT",
+            "dtype": "DataType.BF16",
+            "shape": [
+              4,
+              20,
+              128,
+              64
+            ]
+          },
+          {
+            "name": "v_cache_out_18",
+            "mode": "TensorIOMode.OUTPUT",
+            "dtype": "DataType.BF16",
+            "shape": [
+              4,
+              20,
+              128,
+              64
+            ]
+          },
+          {
+            "name": "k_cache_out_19",
+            "mode": "TensorIOMode.OUTPUT",
+            "dtype": "DataType.BF16",
+            "shape": [
+              4,
+              20,
+              128,
+              64
+            ]
+          },
+          {
+            "name": "v_cache_out_19",
+            "mode": "TensorIOMode.OUTPUT",
+            "dtype": "DataType.BF16",
+            "shape": [
+              4,
+              20,
+              128,
+              64
+            ]
+          },
+          {
+            "name": "k_cache_out_20",
+            "mode": "TensorIOMode.OUTPUT",
+            "dtype": "DataType.BF16",
+            "shape": [
+              4,
+              20,
+              128,
+              64
+            ]
+          },
+          {
+            "name": "v_cache_out_20",
+            "mode": "TensorIOMode.OUTPUT",
+            "dtype": "DataType.BF16",
+            "shape": [
+              4,
+              20,
+              128,
+              64
+            ]
+          },
+          {
+            "name": "k_cache_out_21",
+            "mode": "TensorIOMode.OUTPUT",
+            "dtype": "DataType.BF16",
+            "shape": [
+              4,
+              20,
+              128,
+              64
+            ]
+          },
+          {
+            "name": "v_cache_out_21",
+            "mode": "TensorIOMode.OUTPUT",
+            "dtype": "DataType.BF16",
+            "shape": [
+              4,
+              20,
+              128,
+              64
+            ]
+          },
+          {
+            "name": "k_cache_out_22",
+            "mode": "TensorIOMode.OUTPUT",
+            "dtype": "DataType.BF16",
+            "shape": [
+              4,
+              20,
+              128,
+              64
+            ]
+          },
+          {
+            "name": "v_cache_out_22",
+            "mode": "TensorIOMode.OUTPUT",
+            "dtype": "DataType.BF16",
+            "shape": [
+              4,
+              20,
+              128,
+              64
+            ]
+          },
+          {
+            "name": "k_cache_out_23",
+            "mode": "TensorIOMode.OUTPUT",
+            "dtype": "DataType.BF16",
+            "shape": [
+              4,
+              20,
+              128,
+              64
+            ]
+          },
+          {
+            "name": "v_cache_out_23",
+            "mode": "TensorIOMode.OUTPUT",
+            "dtype": "DataType.BF16",
+            "shape": [
+              4,
+              20,
+              128,
+              64
+            ]
+          },
+          {
+            "name": "final",
+            "mode": "TensorIOMode.OUTPUT",
+            "dtype": "DataType.FLOAT",
+            "shape": [
+              4,
+              8,
+              1280
+            ]
+          },
+          {
+            "name": "selected",
+            "mode": "TensorIOMode.OUTPUT",
+            "dtype": "DataType.FLOAT",
+            "shape": [
+              4,
+              8,
+              6400
+            ]
+          },
+          {
+            "name": "logits",
+            "mode": "TensorIOMode.OUTPUT",
+            "dtype": "DataType.FLOAT",
+            "shape": [
+              4,
+              8,
+              8194
+            ]
+          }
+        ],
+        "cache_outputs": [
+          "k_cache_out_0",
+          "v_cache_out_0",
+          "k_cache_out_1",
+          "v_cache_out_1",
+          "k_cache_out_2",
+          "v_cache_out_2",
+          "k_cache_out_3",
+          "v_cache_out_3",
+          "k_cache_out_4",
+          "v_cache_out_4",
+          "k_cache_out_5",
+          "v_cache_out_5",
+          "k_cache_out_6",
+          "v_cache_out_6",
+          "k_cache_out_7",
+          "v_cache_out_7",
+          "k_cache_out_8",
+          "v_cache_out_8",
+          "k_cache_out_9",
+          "v_cache_out_9",
+          "k_cache_out_10",
+          "v_cache_out_10",
+          "k_cache_out_11",
+          "v_cache_out_11",
+          "k_cache_out_12",
+          "v_cache_out_12",
+          "k_cache_out_13",
+          "v_cache_out_13",
+          "k_cache_out_14",
+          "v_cache_out_14",
+          "k_cache_out_15",
+          "v_cache_out_15",
+          "k_cache_out_16",
+          "v_cache_out_16",
+          "k_cache_out_17",
+          "v_cache_out_17",
+          "k_cache_out_18",
+          "v_cache_out_18",
+          "k_cache_out_19",
+          "v_cache_out_19",
+          "k_cache_out_20",
+          "v_cache_out_20",
+          "k_cache_out_21",
+          "v_cache_out_21",
+          "k_cache_out_22",
+          "v_cache_out_22",
+          "k_cache_out_23",
+          "v_cache_out_23"
+        ]
+      },
+      "reference_checkpoint_sha256": "baaaeb8b56328da81731dc540a85a7dee32eca9da28f174b05757cb651c602a4",
+      "actual_model_sources": [
+        {
+          "role": "target_checkpoint",
+          "path": "/workspace/A_inspark_marlin/models/index_tts2/gpt.pth",
+          "sha256": "baaaeb8b56328da81731dc540a85a7dee32eca9da28f174b05757cb651c602a4",
+          "bytes": 3484663079
+        },
+        {
+          "role": "target_config",
+          "path": "/workspace/A_inspark_marlin/models/index_tts2/config.yaml",
+          "sha256": "ea9c2815ecc3874577c7ac158b97248c027250e5b05972fbbb1216b6d6539081",
+          "bytes": 2882
+        }
+      ],
+      "model_source_checks": [
+        {
+          "role": "target_checkpoint",
+          "current": {
+            "role": "target_checkpoint",
+            "path": "/workspace/A_inspark_marlin/models/index_tts2/gpt.pth",
+            "sha256": "baaaeb8b56328da81731dc540a85a7dee32eca9da28f174b05757cb651c602a4",
+            "bytes": 3484663079
+          },
+          "build": {
+            "role": "target_checkpoint",
+            "path": "/workspace/A_inspark_marlin/models/index_tts2/gpt.pth",
+            "sha256": "baaaeb8b56328da81731dc540a85a7dee32eca9da28f174b05757cb651c602a4",
+            "bytes": 3484663079
+          },
+          "sha256_matches": true,
+          "path_matches": true
+        },
+        {
+          "role": "target_config",
+          "current": {
+            "role": "target_config",
+            "path": "/workspace/A_inspark_marlin/models/index_tts2/config.yaml",
+            "sha256": "ea9c2815ecc3874577c7ac158b97248c027250e5b05972fbbb1216b6d6539081",
+            "bytes": 2882
+          },
+          "build": {
+            "role": "target_config",
+            "path": "/workspace/A_inspark_marlin/models/index_tts2/config.yaml",
+            "sha256": "ea9c2815ecc3874577c7ac158b97248c027250e5b05972fbbb1216b6d6539081",
+            "bytes": 2882
+          },
+          "sha256_matches": true,
+          "path_matches": true
+        }
+      ],
+      "constant_data_sha256": "526f351b6eeb33697eee3dfd4ec9efb0bd3991e6af453e5f64f9a3bff994b2fc",
+      "constant_data_independently_verified": false,
+      "weight_identity_verified": true,
+      "weight_identity_note": "Actual loader checkpoint/config hashes match every build model_sources role; engine hash binding verified. Constant hash is a build attestation, not independently extracted from the engine."
+    },
+    "draft": {
+      "path": "/workspace/A_inspark_marlin/artifacts/trt113_draft_full/audited_source/draft_full_b4.engine",
+      "sha256": "7db5de8ac47c0aaf6fc1b139bd8b5acec2678bb85bbc14462350bfd4ec4cd587",
+      "build_metadata_path": "/workspace/A_inspark_marlin/artifacts/trt113_draft_full/audited_source/draft_full_b4.json",
+      "build_metadata_sha256": "21e65db7042262cc420bf188062c876d39d0ea7496d1b9ac485c0110e8a87e8f",
+      "build_metadata": {
+        "format": 1,
+        "backend": "TensorRT 11.3 native full Draft",
+        "batch": 4,
+        "engine": "/workspace/A_inspark_marlin/artifacts/trt113_draft_full/audited_source/draft_full_b4.engine",
+        "bytes": 172391340,
+        "sha256": "7db5de8ac47c0aaf6fc1b139bd8b5acec2678bb85bbc14462350bfd4ec4cd587",
+        "build_seconds": 27.369374990463257,
+        "trt": "11.3.0.99",
+        "torch": "2.8.0+cu128",
+        "cuda": "12.8",
+        "gpu_name": "NVIDIA GeForce RTX 4090",
+        "sm": 89,
+        "provenance": {
+          "schema": 1,
+          "status": "recorded_not_audited",
+          "component": "draft",
+          "model_sources": [
+            {
+              "role": "draft_checkpoint",
+              "path": "/workspace/A_inspark_marlin/models/draft_onpolicy100/model.safetensors",
+              "sha256": "289f4d856d9214a6df8de8ab6eba0327b9ab6cf315f11247b87b9af2c446a9c6",
+              "bytes": 215704384
+            },
+            {
+              "role": "draft_config",
+              "path": "/workspace/A_inspark_marlin/models/draft_onpolicy100/config.json",
+              "sha256": "e3baa07bbf1017a0db7f2cd40fcd9995ddc6254065dadf0c33e798cb4cf732ad",
+              "bytes": 1069
+            }
+          ],
+          "configuration": [
+            {
+              "role": "runtime_config",
+              "path": "/workspace/A_inspark_marlin/configs/runtime.yaml",
+              "sha256": "00065c8feb636c79070cce1bb516789bc8d8493e111855fe75f610bb8205131a",
+              "bytes": 304
+            },
+            {
+              "role": "deployment_config",
+              "path": "/workspace/A_inspark_marlin/configs/sm89_bf16_target_trt113_lab.json",
+              "sha256": "1bde8e89378fd645f2b41272d3a1454ec9d4822ee5d22747de3c2e189f5f8d8e",
+              "bytes": 463
+            }
+          ],
+          "source": {
+            "git_sha": "813eb3d13798ada4fce9c4f304e847bb6376c1c2",
+            "dirty": true,
+            "scope": [
+              "src",
+              "scripts",
+              "configs",
+              "pyproject.toml"
+            ],
+            "files": 266,
+            "source_sha256": "42746925d4059a01ac816cdc5759667414791b4ae6bbbde179cf9c53299e2468",
+            "dirty_fingerprint": "0c8916ef1e23b8a500bb75545ab69bc27d9037953fb3471601c9c786eab3a43d",
+            "snapshot": "local source files before TensorRT network construction"
+          },
+          "software": {
+            "torch": "2.8.0+cu128",
+            "cuda": "12.8",
+            "triton": "3.5.0",
+            "numpy": "2.2.6",
+            "tensorrt": "11.3.0.99"
+          },
+          "hardware": {
+            "gpu_name": "NVIDIA GeForce RTX 4090",
+            "sm": 89
+          },
+          "constant_data_sha256": "04ea4a29ef81be251f0e62dd5f8c9bc61fe03f3d7aec1df7225bf1bb2f26dae4"
+        },
+        "builder_settings": {
+          "optimization_level": 5,
+          "workspace_bytes": 8589934592,
+          "strongly_typed": true,
+          "tf32": false,
+          "batch": 4,
+          "query_tokens": 7,
+          "kv_limit": 128,
+          "layers": 3,
+          "attention_decomposable": true,
+          "debug_outputs": false,
+          "stable_block_linears": false,
+          "qkv": "three eager-origin projections"
+        },
+        "optimization_level": 5,
+        "workspace_bytes": 8589934592,
+        "precision": "BF16 block Linear with FP32 attention/KV/norms/residuals/lm_head/interfaces",
+        "tf32": false,
+        "strongly_typed": true,
+        "kv_limit": 128,
+        "tensors": [
+          {
+            "name": "x",
+            "mode": "TensorIOMode.INPUT",
+            "dtype": "DataType.FLOAT",
+            "shape": [
+              4,
+              7,
+              1280
+            ]
+          },
+          {
+            "name": "mask",
+            "mode": "TensorIOMode.INPUT",
+            "dtype": "DataType.BOOL",
+            "shape": [
+              4,
+              1,
+              7,
+              135
+            ]
+          },
+          {
+            "name": "k_cache_0",
+            "mode": "TensorIOMode.INPUT",
+            "dtype": "DataType.FLOAT",
+            "shape": [
+              4,
+              20,
+              128,
+              64
+            ]
+          },
+          {
+            "name": "v_cache_0",
+            "mode": "TensorIOMode.INPUT",
+            "dtype": "DataType.FLOAT",
+            "shape": [
+              4,
+              20,
+              128,
+              64
+            ]
+          },
+          {
+            "name": "k_cache_1",
+            "mode": "TensorIOMode.INPUT",
+            "dtype": "DataType.FLOAT",
+            "shape": [
+              4,
+              20,
+              128,
+              64
+            ]
+          },
+          {
+            "name": "v_cache_1",
+            "mode": "TensorIOMode.INPUT",
+            "dtype": "DataType.FLOAT",
+            "shape": [
+              4,
+              20,
+              128,
+              64
+            ]
+          },
+          {
+            "name": "k_cache_2",
+            "mode": "TensorIOMode.INPUT",
+            "dtype": "DataType.FLOAT",
+            "shape": [
+              4,
+              20,
+              128,
+              64
+            ]
+          },
+          {
+            "name": "v_cache_2",
+            "mode": "TensorIOMode.INPUT",
+            "dtype": "DataType.FLOAT",
+            "shape": [
+              4,
+              20,
+              128,
+              64
+            ]
+          },
+          {
+            "name": "hidden",
+            "mode": "TensorIOMode.OUTPUT",
+            "dtype": "DataType.FLOAT",
+            "shape": [
+              4,
+              7,
+              1280
+            ]
+          },
+          {
+            "name": "base",
+            "mode": "TensorIOMode.OUTPUT",
+            "dtype": "DataType.FLOAT",
+            "shape": [
+              4,
+              7,
+              8194
+            ]
+          }
+        ],
+        "debug_outputs": false,
+        "stable_block_linears": false,
+        "qkv": "three eager-origin projections"
+      },
+      "reference_checkpoint_sha256": "289f4d856d9214a6df8de8ab6eba0327b9ab6cf315f11247b87b9af2c446a9c6",
+      "actual_model_sources": [
+        {
+          "role": "draft_checkpoint",
+          "path": "/workspace/A_inspark_marlin/models/draft_onpolicy100/model.safetensors",
+          "sha256": "289f4d856d9214a6df8de8ab6eba0327b9ab6cf315f11247b87b9af2c446a9c6",
+          "bytes": 215704384
+        },
+        {
+          "role": "draft_config",
+          "path": "/workspace/A_inspark_marlin/models/draft_onpolicy100/config.json",
+          "sha256": "e3baa07bbf1017a0db7f2cd40fcd9995ddc6254065dadf0c33e798cb4cf732ad",
+          "bytes": 1069
+        }
+      ],
+      "model_source_checks": [
+        {
+          "role": "draft_checkpoint",
+          "current": {
+            "role": "draft_checkpoint",
+            "path": "/workspace/A_inspark_marlin/models/draft_onpolicy100/model.safetensors",
+            "sha256": "289f4d856d9214a6df8de8ab6eba0327b9ab6cf315f11247b87b9af2c446a9c6",
+            "bytes": 215704384
+          },
+          "build": {
+            "role": "draft_checkpoint",
+            "path": "/workspace/A_inspark_marlin/models/draft_onpolicy100/model.safetensors",
+            "sha256": "289f4d856d9214a6df8de8ab6eba0327b9ab6cf315f11247b87b9af2c446a9c6",
+            "bytes": 215704384
+          },
+          "sha256_matches": true,
+          "path_matches": true
+        },
+        {
+          "role": "draft_config",
+          "current": {
+            "role": "draft_config",
+            "path": "/workspace/A_inspark_marlin/models/draft_onpolicy100/config.json",
+            "sha256": "e3baa07bbf1017a0db7f2cd40fcd9995ddc6254065dadf0c33e798cb4cf732ad",
+            "bytes": 1069
+          },
+          "build": {
+            "role": "draft_config",
+            "path": "/workspace/A_inspark_marlin/models/draft_onpolicy100/config.json",
+            "sha256": "e3baa07bbf1017a0db7f2cd40fcd9995ddc6254065dadf0c33e798cb4cf732ad",
+            "bytes": 1069
+          },
+          "sha256_matches": true,
+          "path_matches": true
+        }
+      ],
+      "constant_data_sha256": "04ea4a29ef81be251f0e62dd5f8c9bc61fe03f3d7aec1df7225bf1bb2f26dae4",
+      "constant_data_independently_verified": false,
+      "weight_identity_verified": true,
+      "weight_identity_note": "Actual loader checkpoint/config hashes match every build model_sources role; engine hash binding verified. Constant hash is a build attestation, not independently extracted from the engine."
+    }
+  },
+  "weight_identity_verified": true,
+  "inputs": {
+    "text": "他正在整理文件。",
+    "reference": "/workspace/index-tts/data/audio/old/mingxiang_gao.wav",
+    "reference_sha256": "fa482cdaed99bc3c14c5ee2af8d25363a66e7e8778891a6b37c3d60973873793",
+    "seed": 113,
+    "target_prefix": 41,
+    "draft_prefix": 41,
+    "diagnostic_tokens": [
+      [
+        5289,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      [
+        6337,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      [
+        862,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      [
+        4809,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ]
+    ],
+    "draft_positions": [
+      [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ]
+    ],
+    "cache_source": "Real FP32 PyTorch frontend/Target/Draft-context prefill; snapshots survive cancellation"
+  },
+  "input_precision_boundaries": {
+    "target_raw_cache_dtype": "torch.float32",
+    "target_native_cache_storage_dtype": "torch.bfloat16",
+    "target_matched_reference_cache_dtype": "torch.float32",
+    "target_matched_cache_conversion": "raw FP32 -> BF16 rounding -> FP32 reference storage",
+    "target_embeddings_dtype": "torch.float32",
+    "draft_cache_dtype": "torch.float32",
+    "snapshots": "Cloned real prefill caches and cloned eager outputs; no request cache views retained"
+  },
+  "precision_preparation": {
+    "mode": "bf16",
+    "components": [
+      "target",
+      "draft"
+    ],
+    "matrices": [
+      {
+        "path": "target.blocks.0.attn.c_attn",
+        "precision": "bf16",
+        "original_shape": [
+          1280,
+          3840
+        ]
+      },
+      {
+        "path": "target.blocks.0.attn.c_proj",
+        "precision": "bf16",
+        "original_shape": [
+          1280,
+          1280
+        ]
+      },
+      {
+        "path": "target.blocks.0.mlp.c_fc",
+        "precision": "bf16",
+        "original_shape": [
+          1280,
+          5120
+        ]
+      },
+      {
+        "path": "target.blocks.0.mlp.c_proj",
+        "precision": "bf16",
+        "original_shape": [
+          5120,
+          1280
+        ]
+      },
+      {
+        "path": "target.blocks.1.attn.c_attn",
+        "precision": "bf16",
+        "original_shape": [
+          1280,
+          3840
+        ]
+      },
+      {
+        "path": "target.blocks.1.attn.c_proj",
+        "precision": "bf16",
+        "original_shape": [
+          1280,
+          1280
+        ]
+      },
+      {
+        "path": "target.blocks.1.mlp.c_fc",
+        "precision": "bf16",
+        "original_shape": [
+          1280,
+          5120
+        ]
+      },
+      {
+        "path": "target.blocks.1.mlp.c_proj",
+        "precision": "bf16",
+        "original_shape": [
+          5120,
+          1280
+        ]
+      },
+      {
+        "path": "target.blocks.2.attn.c_attn",
+        "precision": "bf16",
+        "original_shape": [
+          1280,
+          3840
+        ]
+      },
+      {
+        "path": "target.blocks.2.attn.c_proj",
+        "precision": "bf16",
+        "original_shape": [
+          1280,
+          1280
+        ]
+      },
+      {
+        "path": "target.blocks.2.mlp.c_fc",
+        "precision": "bf16",
+        "original_shape": [
+          1280,
+          5120
+        ]
+      },
+      {
+        "path": "target.blocks.2.mlp.c_proj",
+        "precision": "bf16",
+        "original_shape": [
+          5120,
+          1280
+        ]
+      },
+      {
+        "path": "target.blocks.3.attn.c_attn",
+        "precision": "bf16",
+        "original_shape": [
+          1280,
+          3840
+        ]
+      },
+      {
+        "path": "target.blocks.3.attn.c_proj",
+        "precision": "bf16",
+        "original_shape": [
+          1280,
+          1280
+        ]
+      },
+      {
+        "path": "target.blocks.3.mlp.c_fc",
+        "precision": "bf16",
+        "original_shape": [
+          1280,
+          5120
+        ]
+      },
+      {
+        "path": "target.blocks.3.mlp.c_proj",
+        "precision": "bf16",
+        "original_shape": [
+          5120,
+          1280
+        ]
+      },
+      {
+        "path": "target.blocks.4.attn.c_attn",
+        "precision": "bf16",
+        "original_shape": [
+          1280,
+          3840
+        ]
+      },
+      {
+        "path": "target.blocks.4.attn.c_proj",
+        "precision": "bf16",
+        "original_shape": [
+          1280,
+          1280
+        ]
+      },
+      {
+        "path": "target.blocks.4.mlp.c_fc",
+        "precision": "bf16",
+        "original_shape": [
+          1280,
+          5120
+        ]
+      },
+      {
+        "path": "target.blocks.4.mlp.c_proj",
+        "precision": "bf16",
+        "original_shape": [
+          5120,
+          1280
+        ]
+      },
+      {
+        "path": "target.blocks.5.attn.c_attn",
+        "precision": "bf16",
+        "original_shape": [
+          1280,
+          3840
+        ]
+      },
+      {
+        "path": "target.blocks.5.attn.c_proj",
+        "precision": "bf16",
+        "original_shape": [
+          1280,
+          1280
+        ]
+      },
+      {
+        "path": "target.blocks.5.mlp.c_fc",
+        "precision": "bf16",
+        "original_shape": [
+          1280,
+          5120
+        ]
+      },
+      {
+        "path": "target.blocks.5.mlp.c_proj",
+        "precision": "bf16",
+        "original_shape": [
+          5120,
+          1280
+        ]
+      },
+      {
+        "path": "target.blocks.6.attn.c_attn",
+        "precision": "bf16",
+        "original_shape": [
+          1280,
+          3840
+        ]
+      },
+      {
+        "path": "target.blocks.6.attn.c_proj",
+        "precision": "bf16",
+        "original_shape": [
+          1280,
+          1280
+        ]
+      },
+      {
+        "path": "target.blocks.6.mlp.c_fc",
+        "precision": "bf16",
+        "original_shape": [
+          1280,
+          5120
+        ]
+      },
+      {
+        "path": "target.blocks.6.mlp.c_proj",
+        "precision": "bf16",
+        "original_shape": [
+          5120,
+          1280
+        ]
+      },
+      {
+        "path": "target.blocks.7.attn.c_attn",
+        "precision": "bf16",
+        "original_shape": [
+          1280,
+          3840
+        ]
+      },
+      {
+        "path": "target.blocks.7.attn.c_proj",
+        "precision": "bf16",
+        "original_shape": [
+          1280,
+          1280
+        ]
+      },
+      {
+        "path": "target.blocks.7.mlp.c_fc",
+        "precision": "bf16",
+        "original_shape": [
+          1280,
+          5120
+        ]
+      },
+      {
+        "path": "target.blocks.7.mlp.c_proj",
+        "precision": "bf16",
+        "original_shape": [
+          5120,
+          1280
+        ]
+      },
+      {
+        "path": "target.blocks.8.attn.c_attn",
+        "precision": "bf16",
+        "original_shape": [
+          1280,
+          3840
+        ]
+      },
+      {
+        "path": "target.blocks.8.attn.c_proj",
+        "precision": "bf16",
+        "original_shape": [
+          1280,
+          1280
+        ]
+      },
+      {
+        "path": "target.blocks.8.mlp.c_fc",
+        "precision": "bf16",
+        "original_shape": [
+          1280,
+          5120
+        ]
+      },
+      {
+        "path": "target.blocks.8.mlp.c_proj",
+        "precision": "bf16",
+        "original_shape": [
+          5120,
+          1280
+        ]
+      },
+      {
+        "path": "target.blocks.9.attn.c_attn",
+        "precision": "bf16",
+        "original_shape": [
+          1280,
+          3840
+        ]
+      },
+      {
+        "path": "target.blocks.9.attn.c_proj",
+        "precision": "bf16",
+        "original_shape": [
+          1280,
+          1280
+        ]
+      },
+      {
+        "path": "target.blocks.9.mlp.c_fc",
+        "precision": "bf16",
+        "original_shape": [
+          1280,
+          5120
+        ]
+      },
+      {
+        "path": "target.blocks.9.mlp.c_proj",
+        "precision": "bf16",
+        "original_shape": [
+          5120,
+          1280
+        ]
+      },
+      {
+        "path": "target.blocks.10.attn.c_attn",
+        "precision": "bf16",
+        "original_shape": [
+          1280,
+          3840
+        ]
+      },
+      {
+        "path": "target.blocks.10.attn.c_proj",
+        "precision": "bf16",
+        "original_shape": [
+          1280,
+          1280
+        ]
+      },
+      {
+        "path": "target.blocks.10.mlp.c_fc",
+        "precision": "bf16",
+        "original_shape": [
+          1280,
+          5120
+        ]
+      },
+      {
+        "path": "target.blocks.10.mlp.c_proj",
+        "precision": "bf16",
+        "original_shape": [
+          5120,
+          1280
+        ]
+      },
+      {
+        "path": "target.blocks.11.attn.c_attn",
+        "precision": "bf16",
+        "original_shape": [
+          1280,
+          3840
+        ]
+      },
+      {
+        "path": "target.blocks.11.attn.c_proj",
+        "precision": "bf16",
+        "original_shape": [
+          1280,
+          1280
+        ]
+      },
+      {
+        "path": "target.blocks.11.mlp.c_fc",
+        "precision": "bf16",
+        "original_shape": [
+          1280,
+          5120
+        ]
+      },
+      {
+        "path": "target.blocks.11.mlp.c_proj",
+        "precision": "bf16",
+        "original_shape": [
+          5120,
+          1280
+        ]
+      },
+      {
+        "path": "target.blocks.12.attn.c_attn",
+        "precision": "bf16",
+        "original_shape": [
+          1280,
+          3840
+        ]
+      },
+      {
+        "path": "target.blocks.12.attn.c_proj",
+        "precision": "bf16",
+        "original_shape": [
+          1280,
+          1280
+        ]
+      },
+      {
+        "path": "target.blocks.12.mlp.c_fc",
+        "precision": "bf16",
+        "original_shape": [
+          1280,
+          5120
+        ]
+      },
+      {
+        "path": "target.blocks.12.mlp.c_proj",
+        "precision": "bf16",
+        "original_shape": [
+          5120,
+          1280
+        ]
+      },
+      {
+        "path": "target.blocks.13.attn.c_attn",
+        "precision": "bf16",
+        "original_shape": [
+          1280,
+          3840
+        ]
+      },
+      {
+        "path": "target.blocks.13.attn.c_proj",
+        "precision": "bf16",
+        "original_shape": [
+          1280,
+          1280
+        ]
+      },
+      {
+        "path": "target.blocks.13.mlp.c_fc",
+        "precision": "bf16",
+        "original_shape": [
+          1280,
+          5120
+        ]
+      },
+      {
+        "path": "target.blocks.13.mlp.c_proj",
+        "precision": "bf16",
+        "original_shape": [
+          5120,
+          1280
+        ]
+      },
+      {
+        "path": "target.blocks.14.attn.c_attn",
+        "precision": "bf16",
+        "original_shape": [
+          1280,
+          3840
+        ]
+      },
+      {
+        "path": "target.blocks.14.attn.c_proj",
+        "precision": "bf16",
+        "original_shape": [
+          1280,
+          1280
+        ]
+      },
+      {
+        "path": "target.blocks.14.mlp.c_fc",
+        "precision": "bf16",
+        "original_shape": [
+          1280,
+          5120
+        ]
+      },
+      {
+        "path": "target.blocks.14.mlp.c_proj",
+        "precision": "bf16",
+        "original_shape": [
+          5120,
+          1280
+        ]
+      },
+      {
+        "path": "target.blocks.15.attn.c_attn",
+        "precision": "bf16",
+        "original_shape": [
+          1280,
+          3840
+        ]
+      },
+      {
+        "path": "target.blocks.15.attn.c_proj",
+        "precision": "bf16",
+        "original_shape": [
+          1280,
+          1280
+        ]
+      },
+      {
+        "path": "target.blocks.15.mlp.c_fc",
+        "precision": "bf16",
+        "original_shape": [
+          1280,
+          5120
+        ]
+      },
+      {
+        "path": "target.blocks.15.mlp.c_proj",
+        "precision": "bf16",
+        "original_shape": [
+          5120,
+          1280
+        ]
+      },
+      {
+        "path": "target.blocks.16.attn.c_attn",
+        "precision": "bf16",
+        "original_shape": [
+          1280,
+          3840
+        ]
+      },
+      {
+        "path": "target.blocks.16.attn.c_proj",
+        "precision": "bf16",
+        "original_shape": [
+          1280,
+          1280
+        ]
+      },
+      {
+        "path": "target.blocks.16.mlp.c_fc",
+        "precision": "bf16",
+        "original_shape": [
+          1280,
+          5120
+        ]
+      },
+      {
+        "path": "target.blocks.16.mlp.c_proj",
+        "precision": "bf16",
+        "original_shape": [
+          5120,
+          1280
+        ]
+      },
+      {
+        "path": "target.blocks.17.attn.c_attn",
+        "precision": "bf16",
+        "original_shape": [
+          1280,
+          3840
+        ]
+      },
+      {
+        "path": "target.blocks.17.attn.c_proj",
+        "precision": "bf16",
+        "original_shape": [
+          1280,
+          1280
+        ]
+      },
+      {
+        "path": "target.blocks.17.mlp.c_fc",
+        "precision": "bf16",
+        "original_shape": [
+          1280,
+          5120
+        ]
+      },
+      {
+        "path": "target.blocks.17.mlp.c_proj",
+        "precision": "bf16",
+        "original_shape": [
+          5120,
+          1280
+        ]
+      },
+      {
+        "path": "target.blocks.18.attn.c_attn",
+        "precision": "bf16",
+        "original_shape": [
+          1280,
+          3840
+        ]
+      },
+      {
+        "path": "target.blocks.18.attn.c_proj",
+        "precision": "bf16",
+        "original_shape": [
+          1280,
+          1280
+        ]
+      },
+      {
+        "path": "target.blocks.18.mlp.c_fc",
+        "precision": "bf16",
+        "original_shape": [
+          1280,
+          5120
+        ]
+      },
+      {
+        "path": "target.blocks.18.mlp.c_proj",
+        "precision": "bf16",
+        "original_shape": [
+          5120,
+          1280
+        ]
+      },
+      {
+        "path": "target.blocks.19.attn.c_attn",
+        "precision": "bf16",
+        "original_shape": [
+          1280,
+          3840
+        ]
+      },
+      {
+        "path": "target.blocks.19.attn.c_proj",
+        "precision": "bf16",
+        "original_shape": [
+          1280,
+          1280
+        ]
+      },
+      {
+        "path": "target.blocks.19.mlp.c_fc",
+        "precision": "bf16",
+        "original_shape": [
+          1280,
+          5120
+        ]
+      },
+      {
+        "path": "target.blocks.19.mlp.c_proj",
+        "precision": "bf16",
+        "original_shape": [
+          5120,
+          1280
+        ]
+      },
+      {
+        "path": "target.blocks.20.attn.c_attn",
+        "precision": "bf16",
+        "original_shape": [
+          1280,
+          3840
+        ]
+      },
+      {
+        "path": "target.blocks.20.attn.c_proj",
+        "precision": "bf16",
+        "original_shape": [
+          1280,
+          1280
+        ]
+      },
+      {
+        "path": "target.blocks.20.mlp.c_fc",
+        "precision": "bf16",
+        "original_shape": [
+          1280,
+          5120
+        ]
+      },
+      {
+        "path": "target.blocks.20.mlp.c_proj",
+        "precision": "bf16",
+        "original_shape": [
+          5120,
+          1280
+        ]
+      },
+      {
+        "path": "target.blocks.21.attn.c_attn",
+        "precision": "bf16",
+        "original_shape": [
+          1280,
+          3840
+        ]
+      },
+      {
+        "path": "target.blocks.21.attn.c_proj",
+        "precision": "bf16",
+        "original_shape": [
+          1280,
+          1280
+        ]
+      },
+      {
+        "path": "target.blocks.21.mlp.c_fc",
+        "precision": "bf16",
+        "original_shape": [
+          1280,
+          5120
+        ]
+      },
+      {
+        "path": "target.blocks.21.mlp.c_proj",
+        "precision": "bf16",
+        "original_shape": [
+          5120,
+          1280
+        ]
+      },
+      {
+        "path": "target.blocks.22.attn.c_attn",
+        "precision": "bf16",
+        "original_shape": [
+          1280,
+          3840
+        ]
+      },
+      {
+        "path": "target.blocks.22.attn.c_proj",
+        "precision": "bf16",
+        "original_shape": [
+          1280,
+          1280
+        ]
+      },
+      {
+        "path": "target.blocks.22.mlp.c_fc",
+        "precision": "bf16",
+        "original_shape": [
+          1280,
+          5120
+        ]
+      },
+      {
+        "path": "target.blocks.22.mlp.c_proj",
+        "precision": "bf16",
+        "original_shape": [
+          5120,
+          1280
+        ]
+      },
+      {
+        "path": "target.blocks.23.attn.c_attn",
+        "precision": "bf16",
+        "original_shape": [
+          1280,
+          3840
+        ]
+      },
+      {
+        "path": "target.blocks.23.attn.c_proj",
+        "precision": "bf16",
+        "original_shape": [
+          1280,
+          1280
+        ]
+      },
+      {
+        "path": "target.blocks.23.mlp.c_fc",
+        "precision": "bf16",
+        "original_shape": [
+          1280,
+          5120
+        ]
+      },
+      {
+        "path": "target.blocks.23.mlp.c_proj",
+        "precision": "bf16",
+        "original_shape": [
+          5120,
+          1280
+        ]
+      },
+      {
+        "path": "draft.blocks.0.q_proj",
+        "precision": "bf16",
+        "original_shape": [
+          1280,
+          1280
+        ]
+      },
+      {
+        "path": "draft.blocks.0.k_proj",
+        "precision": "bf16",
+        "original_shape": [
+          1280,
+          1280
+        ]
+      },
+      {
+        "path": "draft.blocks.0.v_proj",
+        "precision": "bf16",
+        "original_shape": [
+          1280,
+          1280
+        ]
+      },
+      {
+        "path": "draft.blocks.0.o_proj",
+        "precision": "bf16",
+        "original_shape": [
+          1280,
+          1280
+        ]
+      },
+      {
+        "path": "draft.blocks.0.mlp.0",
+        "precision": "bf16",
+        "original_shape": [
+          5120,
+          1280
+        ]
+      },
+      {
+        "path": "draft.blocks.0.mlp.2",
+        "precision": "bf16",
+        "original_shape": [
+          1280,
+          5120
+        ]
+      },
+      {
+        "path": "draft.blocks.1.q_proj",
+        "precision": "bf16",
+        "original_shape": [
+          1280,
+          1280
+        ]
+      },
+      {
+        "path": "draft.blocks.1.k_proj",
+        "precision": "bf16",
+        "original_shape": [
+          1280,
+          1280
+        ]
+      },
+      {
+        "path": "draft.blocks.1.v_proj",
+        "precision": "bf16",
+        "original_shape": [
+          1280,
+          1280
+        ]
+      },
+      {
+        "path": "draft.blocks.1.o_proj",
+        "precision": "bf16",
+        "original_shape": [
+          1280,
+          1280
+        ]
+      },
+      {
+        "path": "draft.blocks.1.mlp.0",
+        "precision": "bf16",
+        "original_shape": [
+          5120,
+          1280
+        ]
+      },
+      {
+        "path": "draft.blocks.1.mlp.2",
+        "precision": "bf16",
+        "original_shape": [
+          1280,
+          5120
+        ]
+      },
+      {
+        "path": "draft.blocks.2.q_proj",
+        "precision": "bf16",
+        "original_shape": [
+          1280,
+          1280
+        ]
+      },
+      {
+        "path": "draft.blocks.2.k_proj",
+        "precision": "bf16",
+        "original_shape": [
+          1280,
+          1280
+        ]
+      },
+      {
+        "path": "draft.blocks.2.v_proj",
+        "precision": "bf16",
+        "original_shape": [
+          1280,
+          1280
+        ]
+      },
+      {
+        "path": "draft.blocks.2.o_proj",
+        "precision": "bf16",
+        "original_shape": [
+          1280,
+          1280
+        ]
+      },
+      {
+        "path": "draft.blocks.2.mlp.0",
+        "precision": "bf16",
+        "original_shape": [
+          5120,
+          1280
+        ]
+      },
+      {
+        "path": "draft.blocks.2.mlp.2",
+        "precision": "bf16",
+        "original_shape": [
+          1280,
+          5120
+        ]
+      }
+    ],
+    "device": {
+      "name": "NVIDIA GeForce RTX 4090",
+      "sm": 89,
+      "sms": 128,
+      "shared_per_sm": 102400,
+      "shared_per_cta": 101376,
+      "registers_per_sm": 65536,
+      "threads_per_sm": 1536,
+      "max_ctas_per_sm": 32
+    },
+    "cache": {
+      "path": "/workspace/A_inspark_marlin/.cache/kernel_plans/e0b2e4e7313cd72b83392657f75916448cdc62029fea7046d34c9c00cb331095.json",
+      "key": "e0b2e4e7313cd72b83392657f75916448cdc62029fea7046d34c9c00cb331095",
+      "loaded": 0,
+      "total": 0,
+      "online_tuning": false
+    },
+    "plans": {},
+    "interface_precision": "FP32",
+    "observed_head_shape_extents": {
+      "target": [
+        8,
+        16,
+        24,
+        32,
+        64,
+        128,
+        192,
+        256,
+        384,
+        512,
+        768,
+        1024,
+        4096
+      ],
+      "cfm": [
+        310,
+        620,
+        930,
+        1240,
+        4096
+      ],
+      "draft": [
+        7,
+        14,
+        21,
+        28,
+        64,
+        256,
+        512,
+        1024,
+        4096
+      ]
+    },
+    "convolution_quantized": false,
+    "rnn_quantized": false,
+    "kv_quantized": false,
+    "calibrated_quality": false,
+    "online_tuning": false
+  },
+  "precision_comparisons": {
+    "target_bf16_vs_fp32_raw": {
+      "pass_gate": false,
+      "outputs": {
+        "logits": {
+          "candidate_precision": "bf16",
+          "atol": 0.01,
+          "rtol": 0.01,
+          "expected_shape": [
+            4,
+            8,
+            8194
+          ],
+          "actual_shape": [
+            4,
+            8,
+            8194
+          ],
+          "reference_dtype": "torch.float32",
+          "candidate_dtype": "torch.float32",
+          "storage_dtypes_match": true,
+          "total_elements": 262208,
+          "candidate_elements": 262208,
+          "tolerance_provenance": {
+            "source": "scripts/trt113_validation.py:TOLERANCES",
+            "selection": "declared candidate arithmetic precision",
+            "empirically_calibrated": false,
+            "storage_dtype_equality_required": false,
+            "comparison_dtype": "torch.float64",
+            "rule": "abs(actual-reference) <= atol + rtol * abs(reference)"
+          },
+          "finite_reference": true,
+          "finite_actual": true,
+          "pass_gate": false,
+          "max_abs": 0.05538499355316162,
+          "mean_abs": 0.007488715376388745,
+          "relative_l2": 0.004342641615624515,
+          "cosine": 0.9999907682939121,
+          "snr_db": 47.244920201974445,
+          "mismatched_elements": 14387,
+          "reason": "tolerance exceeded"
+        },
+        "selected": {
+          "candidate_precision": "bf16",
+          "atol": 0.01,
+          "rtol": 0.01,
+          "expected_shape": [
+            4,
+            8,
+            6400
+          ],
+          "actual_shape": [
+            4,
+            8,
+            6400
+          ],
+          "reference_dtype": "torch.float32",
+          "candidate_dtype": "torch.float32",
+          "storage_dtypes_match": true,
+          "total_elements": 204800,
+          "candidate_elements": 204800,
+          "tolerance_provenance": {
+            "source": "scripts/trt113_validation.py:TOLERANCES",
+            "selection": "declared candidate arithmetic precision",
+            "empirically_calibrated": false,
+            "storage_dtype_equality_required": false,
+            "comparison_dtype": "torch.float64",
+            "rule": "abs(actual-reference) <= atol + rtol * abs(reference)"
+          },
+          "finite_reference": true,
+          "finite_actual": true,
+          "pass_gate": false,
+          "max_abs": 0.30629730224609375,
+          "mean_abs": 0.00888395421274481,
+          "relative_l2": 0.0037016931723170216,
+          "cosine": 0.9999931525857411,
+          "snr_db": 48.63199164192729,
+          "mismatched_elements": 14625,
+          "reason": "tolerance exceeded"
+        },
+        "final": {
+          "candidate_precision": "bf16",
+          "atol": 0.01,
+          "rtol": 0.01,
+          "expected_shape": [
+            4,
+            8,
+            1280
+          ],
+          "actual_shape": [
+            4,
+            8,
+            1280
+          ],
+          "reference_dtype": "torch.float32",
+          "candidate_dtype": "torch.float32",
+          "storage_dtypes_match": true,
+          "total_elements": 40960,
+          "candidate_elements": 40960,
+          "tolerance_provenance": {
+            "source": "scripts/trt113_validation.py:TOLERANCES",
+            "selection": "declared candidate arithmetic precision",
+            "empirically_calibrated": false,
+            "storage_dtype_equality_required": false,
+            "comparison_dtype": "torch.float64",
+            "rule": "abs(actual-reference) <= atol + rtol * abs(reference)"
+          },
+          "finite_reference": true,
+          "finite_actual": true,
+          "pass_gate": true,
+          "max_abs": 0.01221466064453125,
+          "mean_abs": 0.0010854578690569384,
+          "relative_l2": 0.0035340642050162427,
+          "cosine": 0.9999937560910348,
+          "snr_db": 49.03451129448564,
+          "mismatched_elements": 0
+        },
+        "new_kv": {
+          "candidate_precision": "bf16",
+          "atol": 0.01,
+          "rtol": 0.01,
+          "expected_shape": [
+            24,
+            2,
+            4,
+            20,
+            8,
+            64
+          ],
+          "actual_shape": [
+            24,
+            2,
+            4,
+            20,
+            8,
+            64
+          ],
+          "reference_dtype": "torch.float32",
+          "candidate_dtype": "torch.float32",
+          "storage_dtypes_match": true,
+          "total_elements": 1966080,
+          "candidate_elements": 1966080,
+          "tolerance_provenance": {
+            "source": "scripts/trt113_validation.py:TOLERANCES",
+            "selection": "declared candidate arithmetic precision",
+            "empirically_calibrated": false,
+            "storage_dtype_equality_required": false,
+            "comparison_dtype": "torch.float64",
+            "rule": "abs(actual-reference) <= atol + rtol * abs(reference)"
+          },
+          "finite_reference": true,
+          "finite_actual": true,
+          "pass_gate": false,
+          "max_abs": 0.048015594482421875,
+          "mean_abs": 0.003266054721051903,
+          "relative_l2": 0.005140313906262238,
+          "cosine": 0.9999867903242421,
+          "snr_db": 45.78020717809122,
+          "mismatched_elements": 4670,
+          "reason": "tolerance exceeded"
+        }
+      }
+    },
+    "target_fp32_bf16cache_vs_fp32_raw": {
+      "pass_gate": false,
+      "outputs": {
+        "logits": {
+          "candidate_precision": "bf16",
+          "atol": 0.01,
+          "rtol": 0.01,
+          "expected_shape": [
+            4,
+            8,
+            8194
+          ],
+          "actual_shape": [
+            4,
+            8,
+            8194
+          ],
+          "reference_dtype": "torch.float32",
+          "candidate_dtype": "torch.float32",
+          "storage_dtypes_match": true,
+          "total_elements": 262208,
+          "candidate_elements": 262208,
+          "tolerance_provenance": {
+            "source": "scripts/trt113_validation.py:TOLERANCES",
+            "selection": "declared candidate arithmetic precision",
+            "empirically_calibrated": false,
+            "storage_dtype_equality_required": false,
+            "comparison_dtype": "torch.float64",
+            "rule": "abs(actual-reference) <= atol + rtol * abs(reference)"
+          },
+          "finite_reference": true,
+          "finite_actual": true,
+          "pass_gate": true,
+          "max_abs": 0.00922536849975586,
+          "mean_abs": 0.0011908021778196623,
+          "relative_l2": 0.0007338065278238705,
+          "cosine": 0.9999997478047697,
+          "snr_db": 62.6883685829921,
+          "mismatched_elements": 0
+        },
+        "selected": {
+          "candidate_precision": "bf16",
+          "atol": 0.01,
+          "rtol": 0.01,
+          "expected_shape": [
+            4,
+            8,
+            6400
+          ],
+          "actual_shape": [
+            4,
+            8,
+            6400
+          ],
+          "reference_dtype": "torch.float32",
+          "candidate_dtype": "torch.float32",
+          "storage_dtypes_match": true,
+          "total_elements": 204800,
+          "candidate_elements": 204800,
+          "tolerance_provenance": {
+            "source": "scripts/trt113_validation.py:TOLERANCES",
+            "selection": "declared candidate arithmetic precision",
+            "empirically_calibrated": false,
+            "storage_dtype_equality_required": false,
+            "comparison_dtype": "torch.float64",
+            "rule": "abs(actual-reference) <= atol + rtol * abs(reference)"
+          },
+          "finite_reference": true,
+          "finite_actual": true,
+          "pass_gate": false,
+          "max_abs": 0.0204010009765625,
+          "mean_abs": 0.0012368401976209499,
+          "relative_l2": 0.0005365552311051783,
+          "cosine": 0.9999998572674266,
+          "snr_db": 65.40771133306146,
+          "mismatched_elements": 8,
+          "reason": "tolerance exceeded"
+        },
+        "final": {
+          "candidate_precision": "bf16",
+          "atol": 0.01,
+          "rtol": 0.01,
+          "expected_shape": [
+            4,
+            8,
+            1280
+          ],
+          "actual_shape": [
+            4,
+            8,
+            1280
+          ],
+          "reference_dtype": "torch.float32",
+          "candidate_dtype": "torch.float32",
+          "storage_dtypes_match": true,
+          "total_elements": 40960,
+          "candidate_elements": 40960,
+          "tolerance_provenance": {
+            "source": "scripts/trt113_validation.py:TOLERANCES",
+            "selection": "declared candidate arithmetic precision",
+            "empirically_calibrated": false,
+            "storage_dtype_equality_required": false,
+            "comparison_dtype": "torch.float64",
+            "rule": "abs(actual-reference) <= atol + rtol * abs(reference)"
+          },
+          "finite_reference": true,
+          "finite_actual": true,
+          "pass_gate": true,
+          "max_abs": 0.0023288726806640625,
+          "mean_abs": 0.00016090424381554614,
+          "relative_l2": 0.0005369558003446519,
+          "cosine": 0.9999998560034842,
+          "snr_db": 65.40122923783184,
+          "mismatched_elements": 0
+        },
+        "new_kv": {
+          "candidate_precision": "bf16",
+          "atol": 0.01,
+          "rtol": 0.01,
+          "expected_shape": [
+            24,
+            2,
+            4,
+            20,
+            8,
+            64
+          ],
+          "actual_shape": [
+            24,
+            2,
+            4,
+            20,
+            8,
+            64
+          ],
+          "reference_dtype": "torch.float32",
+          "candidate_dtype": "torch.float32",
+          "storage_dtypes_match": true,
+          "total_elements": 1966080,
+          "candidate_elements": 1966080,
+          "tolerance_provenance": {
+            "source": "scripts/trt113_validation.py:TOLERANCES",
+            "selection": "declared candidate arithmetic precision",
+            "empirically_calibrated": false,
+            "storage_dtype_equality_required": false,
+            "comparison_dtype": "torch.float64",
+            "rule": "abs(actual-reference) <= atol + rtol * abs(reference)"
+          },
+          "finite_reference": true,
+          "finite_actual": true,
+          "pass_gate": true,
+          "max_abs": 0.0043939948081970215,
+          "mean_abs": 0.00032281587518707315,
+          "relative_l2": 0.0005282628188483533,
+          "cosine": 0.9999998610892183,
+          "snr_db": 65.54299911078294,
+          "mismatched_elements": 0
+        }
+      }
+    },
+    "draft_bf16_vs_fp32_raw": {
+      "pass_gate": false,
+      "outputs": {
+        "hidden": {
+          "candidate_precision": "bf16",
+          "atol": 0.01,
+          "rtol": 0.01,
+          "expected_shape": [
+            4,
+            7,
+            1280
+          ],
+          "actual_shape": [
+            4,
+            7,
+            1280
+          ],
+          "reference_dtype": "torch.float32",
+          "candidate_dtype": "torch.float32",
+          "storage_dtypes_match": true,
+          "total_elements": 35840,
+          "candidate_elements": 35840,
+          "tolerance_provenance": {
+            "source": "scripts/trt113_validation.py:TOLERANCES",
+            "selection": "declared candidate arithmetic precision",
+            "empirically_calibrated": false,
+            "storage_dtype_equality_required": false,
+            "comparison_dtype": "torch.float64",
+            "rule": "abs(actual-reference) <= atol + rtol * abs(reference)"
+          },
+          "finite_reference": true,
+          "finite_actual": true,
+          "pass_gate": true,
+          "max_abs": 0.01049959659576416,
+          "mean_abs": 0.0005674273433460909,
+          "relative_l2": 0.007743122576766357,
+          "cosine": 0.9999706511640398,
+          "snr_db": 42.22167731249024,
+          "mismatched_elements": 0
+        },
+        "base": {
+          "candidate_precision": "bf16",
+          "atol": 0.01,
+          "rtol": 0.01,
+          "expected_shape": [
+            4,
+            7,
+            8194
+          ],
+          "actual_shape": [
+            4,
+            7,
+            8194
+          ],
+          "reference_dtype": "torch.float32",
+          "candidate_dtype": "torch.float32",
+          "storage_dtypes_match": true,
+          "total_elements": 229432,
+          "candidate_elements": 229432,
+          "tolerance_provenance": {
+            "source": "scripts/trt113_validation.py:TOLERANCES",
+            "selection": "declared candidate arithmetic precision",
+            "empirically_calibrated": false,
+            "storage_dtype_equality_required": false,
+            "comparison_dtype": "torch.float64",
+            "rule": "abs(actual-reference) <= atol + rtol * abs(reference)"
+          },
+          "finite_reference": true,
+          "finite_actual": true,
+          "pass_gate": false,
+          "max_abs": 0.06910550594329834,
+          "mean_abs": 0.007580044391567006,
+          "relative_l2": 0.008651697486493875,
+          "cosine": 0.9999629672146122,
+          "snr_db": 41.257973488411324,
+          "mismatched_elements": 21981,
+          "reason": "tolerance exceeded"
+        }
+      }
+    }
+  },
+  "reference": {
+    "implementation": "Raw Engine; TargetEngine._block_forward_with_hidden_states; BatchedDraftBackbone.forward",
+    "precision": "FP32 outputs saved before BF16-only Target/Draft linear wrappers; FP32 norms/residuals/heads",
+    "target_cache": "Native stores BF16; same-input PyTorch references receive BF16-rounded cache values promoted to FP32",
+    "target_attention": "PyTorch reference attention computes from FP32 Q/K/V tensors carrying BF16-rounded linear/cache values; TensorRT attention has BF16 I/O and engine-selected reduction tactics. This is a reference comparison, not identical arithmetic.",
+    "draft_cache": "Native and all reference arms use identical FP32 K128 padded real-prefix cache",
+    "prefill_scope": "Fixed FP32 reference producer state; this diagnostic does not audit deployed prefill or whole-trajectory cache production",
+    "tf32": false,
+    "deployment_prepared": false,
+    "reference_cuda_graphs": false,
+    "reference_custom_kernels": false,
+    "reference_torch_compile": false
+  },
+  "target": {
+    "comparisons": {
+      "direct_vs_fp32_raw": {
+        "pass_gate": false,
+        "outputs": {
+          "logits": {
+            "candidate_precision": "bf16",
+            "atol": 0.01,
+            "rtol": 0.01,
+            "expected_shape": [
+              4,
+              8,
+              8194
+            ],
+            "actual_shape": [
+              4,
+              8,
+              8194
+            ],
+            "reference_dtype": "torch.float32",
+            "candidate_dtype": "torch.float32",
+            "storage_dtypes_match": true,
+            "total_elements": 262208,
+            "candidate_elements": 262208,
+            "tolerance_provenance": {
+              "source": "scripts/trt113_validation.py:TOLERANCES",
+              "selection": "declared candidate arithmetic precision",
+              "empirically_calibrated": false,
+              "storage_dtype_equality_required": false,
+              "comparison_dtype": "torch.float64",
+              "rule": "abs(actual-reference) <= atol + rtol * abs(reference)"
+            },
+            "finite_reference": true,
+            "finite_actual": true,
+            "pass_gate": false,
+            "max_abs": 0.0688028335571289,
+            "mean_abs": 0.007993753970731371,
+            "relative_l2": 0.004842509644663206,
+            "cosine": 0.9999884994224738,
+            "snr_db": 46.29859011276623,
+            "mismatched_elements": 18074,
+            "reason": "tolerance exceeded"
+          },
+          "selected": {
+            "candidate_precision": "bf16",
+            "atol": 0.01,
+            "rtol": 0.01,
+            "expected_shape": [
+              4,
+              8,
+              6400
+            ],
+            "actual_shape": [
+              4,
+              8,
+              6400
+            ],
+            "reference_dtype": "torch.float32",
+            "candidate_dtype": "torch.float32",
+            "storage_dtypes_match": true,
+            "total_elements": 204800,
+            "candidate_elements": 204800,
+            "tolerance_provenance": {
+              "source": "scripts/trt113_validation.py:TOLERANCES",
+              "selection": "declared candidate arithmetic precision",
+              "empirically_calibrated": false,
+              "storage_dtype_equality_required": false,
+              "comparison_dtype": "torch.float64",
+              "rule": "abs(actual-reference) <= atol + rtol * abs(reference)"
+            },
+            "finite_reference": true,
+            "finite_actual": true,
+            "pass_gate": false,
+            "max_abs": 0.29319000244140625,
+            "mean_abs": 0.009374307498067082,
+            "relative_l2": 0.004014826652403753,
+            "cosine": 0.9999919511656632,
+            "snr_db": 47.92666402902476,
+            "mismatched_elements": 15921,
+            "reason": "tolerance exceeded"
+          },
+          "final": {
+            "candidate_precision": "bf16",
+            "atol": 0.01,
+            "rtol": 0.01,
+            "expected_shape": [
+              4,
+              8,
+              1280
+            ],
+            "actual_shape": [
+              4,
+              8,
+              1280
+            ],
+            "reference_dtype": "torch.float32",
+            "candidate_dtype": "torch.float32",
+            "storage_dtypes_match": true,
+            "total_elements": 40960,
+            "candidate_elements": 40960,
+            "tolerance_provenance": {
+              "source": "scripts/trt113_validation.py:TOLERANCES",
+              "selection": "declared candidate arithmetic precision",
+              "empirically_calibrated": false,
+              "storage_dtype_equality_required": false,
+              "comparison_dtype": "torch.float64",
+              "rule": "abs(actual-reference) <= atol + rtol * abs(reference)"
+            },
+            "finite_reference": true,
+            "finite_actual": true,
+            "pass_gate": false,
+            "max_abs": 0.017440319061279297,
+            "mean_abs": 0.0011497119148042635,
+            "relative_l2": 0.0038264057495812523,
+            "cosine": 0.9999926792827989,
+            "snr_db": 48.34417959123985,
+            "mismatched_elements": 1,
+            "reason": "tolerance exceeded"
+          },
+          "new_kv": {
+            "candidate_precision": "bf16",
+            "atol": 0.01,
+            "rtol": 0.01,
+            "expected_shape": [
+              24,
+              2,
+              4,
+              20,
+              8,
+              64
+            ],
+            "actual_shape": [
+              24,
+              2,
+              4,
+              20,
+              8,
+              64
+            ],
+            "reference_dtype": "torch.float32",
+            "candidate_dtype": "torch.bfloat16",
+            "storage_dtypes_match": false,
+            "total_elements": 1966080,
+            "candidate_elements": 1966080,
+            "tolerance_provenance": {
+              "source": "scripts/trt113_validation.py:TOLERANCES",
+              "selection": "declared candidate arithmetic precision",
+              "empirically_calibrated": false,
+              "storage_dtype_equality_required": false,
+              "comparison_dtype": "torch.float64",
+              "rule": "abs(actual-reference) <= atol + rtol * abs(reference)"
+            },
+            "finite_reference": true,
+            "finite_actual": true,
+            "pass_gate": false,
+            "max_abs": 0.04394245147705078,
+            "mean_abs": 0.0030278124913754034,
+            "relative_l2": 0.004761363258360999,
+            "cosine": 0.9999886701331206,
+            "snr_db": 46.445373673246586,
+            "mismatched_elements": 7143,
+            "reason": "tolerance exceeded"
+          }
+        }
+      },
+      "graph_vs_fp32_raw": {
+        "pass_gate": false,
+        "outputs": {
+          "logits": {
+            "candidate_precision": "bf16",
+            "atol": 0.01,
+            "rtol": 0.01,
+            "expected_shape": [
+              4,
+              8,
+              8194
+            ],
+            "actual_shape": [
+              4,
+              8,
+              8194
+            ],
+            "reference_dtype": "torch.float32",
+            "candidate_dtype": "torch.float32",
+            "storage_dtypes_match": true,
+            "total_elements": 262208,
+            "candidate_elements": 262208,
+            "tolerance_provenance": {
+              "source": "scripts/trt113_validation.py:TOLERANCES",
+              "selection": "declared candidate arithmetic precision",
+              "empirically_calibrated": false,
+              "storage_dtype_equality_required": false,
+              "comparison_dtype": "torch.float64",
+              "rule": "abs(actual-reference) <= atol + rtol * abs(reference)"
+            },
+            "finite_reference": true,
+            "finite_actual": true,
+            "pass_gate": false,
+            "max_abs": 0.0688028335571289,
+            "mean_abs": 0.007993753970731371,
+            "relative_l2": 0.004842509644663206,
+            "cosine": 0.9999884994224738,
+            "snr_db": 46.29859011276623,
+            "mismatched_elements": 18074,
+            "reason": "tolerance exceeded"
+          },
+          "selected": {
+            "candidate_precision": "bf16",
+            "atol": 0.01,
+            "rtol": 0.01,
+            "expected_shape": [
+              4,
+              8,
+              6400
+            ],
+            "actual_shape": [
+              4,
+              8,
+              6400
+            ],
+            "reference_dtype": "torch.float32",
+            "candidate_dtype": "torch.float32",
+            "storage_dtypes_match": true,
+            "total_elements": 204800,
+            "candidate_elements": 204800,
+            "tolerance_provenance": {
+              "source": "scripts/trt113_validation.py:TOLERANCES",
+              "selection": "declared candidate arithmetic precision",
+              "empirically_calibrated": false,
+              "storage_dtype_equality_required": false,
+              "comparison_dtype": "torch.float64",
+              "rule": "abs(actual-reference) <= atol + rtol * abs(reference)"
+            },
+            "finite_reference": true,
+            "finite_actual": true,
+            "pass_gate": false,
+            "max_abs": 0.29319000244140625,
+            "mean_abs": 0.009374307498067082,
+            "relative_l2": 0.004014826652403753,
+            "cosine": 0.9999919511656632,
+            "snr_db": 47.92666402902476,
+            "mismatched_elements": 15921,
+            "reason": "tolerance exceeded"
+          },
+          "final": {
+            "candidate_precision": "bf16",
+            "atol": 0.01,
+            "rtol": 0.01,
+            "expected_shape": [
+              4,
+              8,
+              1280
+            ],
+            "actual_shape": [
+              4,
+              8,
+              1280
+            ],
+            "reference_dtype": "torch.float32",
+            "candidate_dtype": "torch.float32",
+            "storage_dtypes_match": true,
+            "total_elements": 40960,
+            "candidate_elements": 40960,
+            "tolerance_provenance": {
+              "source": "scripts/trt113_validation.py:TOLERANCES",
+              "selection": "declared candidate arithmetic precision",
+              "empirically_calibrated": false,
+              "storage_dtype_equality_required": false,
+              "comparison_dtype": "torch.float64",
+              "rule": "abs(actual-reference) <= atol + rtol * abs(reference)"
+            },
+            "finite_reference": true,
+            "finite_actual": true,
+            "pass_gate": false,
+            "max_abs": 0.017440319061279297,
+            "mean_abs": 0.0011497119148042635,
+            "relative_l2": 0.0038264057495812523,
+            "cosine": 0.9999926792827989,
+            "snr_db": 48.34417959123985,
+            "mismatched_elements": 1,
+            "reason": "tolerance exceeded"
+          },
+          "new_kv": {
+            "candidate_precision": "bf16",
+            "atol": 0.01,
+            "rtol": 0.01,
+            "expected_shape": [
+              24,
+              2,
+              4,
+              20,
+              8,
+              64
+            ],
+            "actual_shape": [
+              24,
+              2,
+              4,
+              20,
+              8,
+              64
+            ],
+            "reference_dtype": "torch.float32",
+            "candidate_dtype": "torch.bfloat16",
+            "storage_dtypes_match": false,
+            "total_elements": 1966080,
+            "candidate_elements": 1966080,
+            "tolerance_provenance": {
+              "source": "scripts/trt113_validation.py:TOLERANCES",
+              "selection": "declared candidate arithmetic precision",
+              "empirically_calibrated": false,
+              "storage_dtype_equality_required": false,
+              "comparison_dtype": "torch.float64",
+              "rule": "abs(actual-reference) <= atol + rtol * abs(reference)"
+            },
+            "finite_reference": true,
+            "finite_actual": true,
+            "pass_gate": false,
+            "max_abs": 0.04394245147705078,
+            "mean_abs": 0.0030278124913754034,
+            "relative_l2": 0.004761363258360999,
+            "cosine": 0.9999886701331206,
+            "snr_db": 46.445373673246586,
+            "mismatched_elements": 7143,
+            "reason": "tolerance exceeded"
+          }
+        }
+      },
+      "direct_vs_fp32_same_cache": {
+        "pass_gate": false,
+        "outputs": {
+          "logits": {
+            "candidate_precision": "bf16",
+            "atol": 0.01,
+            "rtol": 0.01,
+            "expected_shape": [
+              4,
+              8,
+              8194
+            ],
+            "actual_shape": [
+              4,
+              8,
+              8194
+            ],
+            "reference_dtype": "torch.float32",
+            "candidate_dtype": "torch.float32",
+            "storage_dtypes_match": true,
+            "total_elements": 262208,
+            "candidate_elements": 262208,
+            "tolerance_provenance": {
+              "source": "scripts/trt113_validation.py:TOLERANCES",
+              "selection": "declared candidate arithmetic precision",
+              "empirically_calibrated": false,
+              "storage_dtype_equality_required": false,
+              "comparison_dtype": "torch.float64",
+              "rule": "abs(actual-reference) <= atol + rtol * abs(reference)"
+            },
+            "finite_reference": true,
+            "finite_actual": true,
+            "pass_gate": false,
+            "max_abs": 0.06302356719970703,
+            "mean_abs": 0.007702652635444614,
+            "relative_l2": 0.004649464058280361,
+            "cosine": 0.9999893086645819,
+            "snr_db": 46.65194210325821,
+            "mismatched_elements": 16766,
+            "reason": "tolerance exceeded"
+          },
+          "selected": {
+            "candidate_precision": "bf16",
+            "atol": 0.01,
+            "rtol": 0.01,
+            "expected_shape": [
+              4,
+              8,
+              6400
+            ],
+            "actual_shape": [
+              4,
+              8,
+              6400
+            ],
+            "reference_dtype": "torch.float32",
+            "candidate_dtype": "torch.float32",
+            "storage_dtypes_match": true,
+            "total_elements": 204800,
+            "candidate_elements": 204800,
+            "tolerance_provenance": {
+              "source": "scripts/trt113_validation.py:TOLERANCES",
+              "selection": "declared candidate arithmetic precision",
+              "empirically_calibrated": false,
+              "storage_dtype_equality_required": false,
+              "comparison_dtype": "torch.float64",
+              "rule": "abs(actual-reference) <= atol + rtol * abs(reference)"
+            },
+            "finite_reference": true,
+            "finite_actual": true,
+            "pass_gate": false,
+            "max_abs": 0.2766571044921875,
+            "mean_abs": 0.009147157438158048,
+            "relative_l2": 0.0038976299798952024,
+            "cosine": 0.9999924232787268,
+            "snr_db": 48.183987857048066,
+            "mismatched_elements": 15145,
+            "reason": "tolerance exceeded"
+          },
+          "final": {
+            "candidate_precision": "bf16",
+            "atol": 0.01,
+            "rtol": 0.01,
+            "expected_shape": [
+              4,
+              8,
+              1280
+            ],
+            "actual_shape": [
+              4,
+              8,
+              1280
+            ],
+            "reference_dtype": "torch.float32",
+            "candidate_dtype": "torch.float32",
+            "storage_dtypes_match": true,
+            "total_elements": 40960,
+            "candidate_elements": 40960,
+            "tolerance_provenance": {
+              "source": "scripts/trt113_validation.py:TOLERANCES",
+              "selection": "declared candidate arithmetic precision",
+              "empirically_calibrated": false,
+              "storage_dtype_equality_required": false,
+              "comparison_dtype": "torch.float64",
+              "rule": "abs(actual-reference) <= atol + rtol * abs(reference)"
+            },
+            "finite_reference": true,
+            "finite_actual": true,
+            "pass_gate": true,
+            "max_abs": 0.017269134521484375,
+            "mean_abs": 0.001118924909270419,
+            "relative_l2": 0.0037114561021034317,
+            "cosine": 0.9999931126998634,
+            "snr_db": 48.609113435498145,
+            "mismatched_elements": 0
+          },
+          "new_kv": {
+            "candidate_precision": "bf16",
+            "atol": 0.01,
+            "rtol": 0.01,
+            "expected_shape": [
+              24,
+              2,
+              4,
+              20,
+              8,
+              64
+            ],
+            "actual_shape": [
+              24,
+              2,
+              4,
+              20,
+              8,
+              64
+            ],
+            "reference_dtype": "torch.float32",
+            "candidate_dtype": "torch.bfloat16",
+            "storage_dtypes_match": false,
+            "total_elements": 1966080,
+            "candidate_elements": 1966080,
+            "tolerance_provenance": {
+              "source": "scripts/trt113_validation.py:TOLERANCES",
+              "selection": "declared candidate arithmetic precision",
+              "empirically_calibrated": false,
+              "storage_dtype_equality_required": false,
+              "comparison_dtype": "torch.float64",
+              "rule": "abs(actual-reference) <= atol + rtol * abs(reference)"
+            },
+            "finite_reference": true,
+            "finite_actual": true,
+            "pass_gate": false,
+            "max_abs": 0.04036855697631836,
+            "mean_abs": 0.0029806059617165682,
+            "relative_l2": 0.004677242954939793,
+            "cosine": 0.999989064039826,
+            "snr_db": 46.60020140982973,
+            "mismatched_elements": 6213,
+            "reason": "tolerance exceeded"
+          }
+        }
+      },
+      "graph_vs_fp32_same_cache": {
+        "pass_gate": false,
+        "outputs": {
+          "logits": {
+            "candidate_precision": "bf16",
+            "atol": 0.01,
+            "rtol": 0.01,
+            "expected_shape": [
+              4,
+              8,
+              8194
+            ],
+            "actual_shape": [
+              4,
+              8,
+              8194
+            ],
+            "reference_dtype": "torch.float32",
+            "candidate_dtype": "torch.float32",
+            "storage_dtypes_match": true,
+            "total_elements": 262208,
+            "candidate_elements": 262208,
+            "tolerance_provenance": {
+              "source": "scripts/trt113_validation.py:TOLERANCES",
+              "selection": "declared candidate arithmetic precision",
+              "empirically_calibrated": false,
+              "storage_dtype_equality_required": false,
+              "comparison_dtype": "torch.float64",
+              "rule": "abs(actual-reference) <= atol + rtol * abs(reference)"
+            },
+            "finite_reference": true,
+            "finite_actual": true,
+            "pass_gate": false,
+            "max_abs": 0.06302356719970703,
+            "mean_abs": 0.007702652635444614,
+            "relative_l2": 0.004649464058280361,
+            "cosine": 0.9999893086645819,
+            "snr_db": 46.65194210325821,
+            "mismatched_elements": 16766,
+            "reason": "tolerance exceeded"
+          },
+          "selected": {
+            "candidate_precision": "bf16",
+            "atol": 0.01,
+            "rtol": 0.01,
+            "expected_shape": [
+              4,
+              8,
+              6400
+            ],
+            "actual_shape": [
+              4,
+              8,
+              6400
+            ],
+            "reference_dtype": "torch.float32",
+            "candidate_dtype": "torch.float32",
+            "storage_dtypes_match": true,
+            "total_elements": 204800,
+            "candidate_elements": 204800,
+            "tolerance_provenance": {
+              "source": "scripts/trt113_validation.py:TOLERANCES",
+              "selection": "declared candidate arithmetic precision",
+              "empirically_calibrated": false,
+              "storage_dtype_equality_required": false,
+              "comparison_dtype": "torch.float64",
+              "rule": "abs(actual-reference) <= atol + rtol * abs(reference)"
+            },
+            "finite_reference": true,
+            "finite_actual": true,
+            "pass_gate": false,
+            "max_abs": 0.2766571044921875,
+            "mean_abs": 0.009147157438158048,
+            "relative_l2": 0.0038976299798952024,
+            "cosine": 0.9999924232787268,
+            "snr_db": 48.183987857048066,
+            "mismatched_elements": 15145,
+            "reason": "tolerance exceeded"
+          },
+          "final": {
+            "candidate_precision": "bf16",
+            "atol": 0.01,
+            "rtol": 0.01,
+            "expected_shape": [
+              4,
+              8,
+              1280
+            ],
+            "actual_shape": [
+              4,
+              8,
+              1280
+            ],
+            "reference_dtype": "torch.float32",
+            "candidate_dtype": "torch.float32",
+            "storage_dtypes_match": true,
+            "total_elements": 40960,
+            "candidate_elements": 40960,
+            "tolerance_provenance": {
+              "source": "scripts/trt113_validation.py:TOLERANCES",
+              "selection": "declared candidate arithmetic precision",
+              "empirically_calibrated": false,
+              "storage_dtype_equality_required": false,
+              "comparison_dtype": "torch.float64",
+              "rule": "abs(actual-reference) <= atol + rtol * abs(reference)"
+            },
+            "finite_reference": true,
+            "finite_actual": true,
+            "pass_gate": true,
+            "max_abs": 0.017269134521484375,
+            "mean_abs": 0.001118924909270419,
+            "relative_l2": 0.0037114561021034317,
+            "cosine": 0.9999931126998634,
+            "snr_db": 48.609113435498145,
+            "mismatched_elements": 0
+          },
+          "new_kv": {
+            "candidate_precision": "bf16",
+            "atol": 0.01,
+            "rtol": 0.01,
+            "expected_shape": [
+              24,
+              2,
+              4,
+              20,
+              8,
+              64
+            ],
+            "actual_shape": [
+              24,
+              2,
+              4,
+              20,
+              8,
+              64
+            ],
+            "reference_dtype": "torch.float32",
+            "candidate_dtype": "torch.bfloat16",
+            "storage_dtypes_match": false,
+            "total_elements": 1966080,
+            "candidate_elements": 1966080,
+            "tolerance_provenance": {
+              "source": "scripts/trt113_validation.py:TOLERANCES",
+              "selection": "declared candidate arithmetic precision",
+              "empirically_calibrated": false,
+              "storage_dtype_equality_required": false,
+              "comparison_dtype": "torch.float64",
+              "rule": "abs(actual-reference) <= atol + rtol * abs(reference)"
+            },
+            "finite_reference": true,
+            "finite_actual": true,
+            "pass_gate": false,
+            "max_abs": 0.04036855697631836,
+            "mean_abs": 0.0029806059617165682,
+            "relative_l2": 0.004677242954939793,
+            "cosine": 0.999989064039826,
+            "snr_db": 46.60020140982973,
+            "mismatched_elements": 6213,
+            "reason": "tolerance exceeded"
+          }
+        }
+      },
+      "direct_vs_bf16_same_cache": {
+        "pass_gate": false,
+        "outputs": {
+          "logits": {
+            "candidate_precision": "bf16",
+            "atol": 0.01,
+            "rtol": 0.01,
+            "expected_shape": [
+              4,
+              8,
+              8194
+            ],
+            "actual_shape": [
+              4,
+              8,
+              8194
+            ],
+            "reference_dtype": "torch.float32",
+            "candidate_dtype": "torch.float32",
+            "storage_dtypes_match": true,
+            "total_elements": 262208,
+            "candidate_elements": 262208,
+            "tolerance_provenance": {
+              "source": "scripts/trt113_validation.py:TOLERANCES",
+              "selection": "declared candidate arithmetic precision",
+              "empirically_calibrated": false,
+              "storage_dtype_equality_required": false,
+              "comparison_dtype": "torch.float64",
+              "rule": "abs(actual-reference) <= atol + rtol * abs(reference)"
+            },
+            "finite_reference": true,
+            "finite_actual": true,
+            "pass_gate": false,
+            "max_abs": 0.07025423645973206,
+            "mean_abs": 0.00818661691463126,
+            "relative_l2": 0.004893745756804893,
+            "cosine": 0.9999880268553684,
+            "snr_db": 46.20717194318628,
+            "mismatched_elements": 18639,
+            "reason": "tolerance exceeded"
+          },
+          "selected": {
+            "candidate_precision": "bf16",
+            "atol": 0.01,
+            "rtol": 0.01,
+            "expected_shape": [
+              4,
+              8,
+              6400
+            ],
+            "actual_shape": [
+              4,
+              8,
+              6400
+            ],
+            "reference_dtype": "torch.float32",
+            "candidate_dtype": "torch.float32",
+            "storage_dtypes_match": true,
+            "total_elements": 204800,
+            "candidate_elements": 204800,
+            "tolerance_provenance": {
+              "source": "scripts/trt113_validation.py:TOLERANCES",
+              "selection": "declared candidate arithmetic precision",
+              "empirically_calibrated": false,
+              "storage_dtype_equality_required": false,
+              "comparison_dtype": "torch.float64",
+              "rule": "abs(actual-reference) <= atol + rtol * abs(reference)"
+            },
+            "finite_reference": true,
+            "finite_actual": true,
+            "pass_gate": false,
+            "max_abs": 0.4033203125,
+            "mean_abs": 0.009887440847114704,
+            "relative_l2": 0.004130865583980039,
+            "cosine": 0.9999914692054535,
+            "snr_db": 47.67917872978564,
+            "mismatched_elements": 17829,
+            "reason": "tolerance exceeded"
+          },
+          "final": {
+            "candidate_precision": "bf16",
+            "atol": 0.01,
+            "rtol": 0.01,
+            "expected_shape": [
+              4,
+              8,
+              1280
+            ],
+            "actual_shape": [
+              4,
+              8,
+              1280
+            ],
+            "reference_dtype": "torch.float32",
+            "candidate_dtype": "torch.float32",
+            "storage_dtypes_match": true,
+            "total_elements": 40960,
+            "candidate_elements": 40960,
+            "tolerance_provenance": {
+              "source": "scripts/trt113_validation.py:TOLERANCES",
+              "selection": "declared candidate arithmetic precision",
+              "empirically_calibrated": false,
+              "storage_dtype_equality_required": false,
+              "comparison_dtype": "torch.float64",
+              "rule": "abs(actual-reference) <= atol + rtol * abs(reference)"
+            },
+            "finite_reference": true,
+            "finite_actual": true,
+            "pass_gate": false,
+            "max_abs": 0.01714414358139038,
+            "mean_abs": 0.0011907560577131939,
+            "relative_l2": 0.003936055574507237,
+            "cosine": 0.9999922543696479,
+            "snr_db": 48.09877556491841,
+            "mismatched_elements": 2,
+            "reason": "tolerance exceeded"
+          },
+          "new_kv": {
+            "candidate_precision": "bf16",
+            "atol": 0.01,
+            "rtol": 0.01,
+            "expected_shape": [
+              24,
+              2,
+              4,
+              20,
+              8,
+              64
+            ],
+            "actual_shape": [
+              24,
+              2,
+              4,
+              20,
+              8,
+              64
+            ],
+            "reference_dtype": "torch.float32",
+            "candidate_dtype": "torch.bfloat16",
+            "storage_dtypes_match": false,
+            "total_elements": 1966080,
+            "candidate_elements": 1966080,
+            "tolerance_provenance": {
+              "source": "scripts/trt113_validation.py:TOLERANCES",
+              "selection": "declared candidate arithmetic precision",
+              "empirically_calibrated": false,
+              "storage_dtype_equality_required": false,
+              "comparison_dtype": "torch.float64",
+              "rule": "abs(actual-reference) <= atol + rtol * abs(reference)"
+            },
+            "finite_reference": true,
+            "finite_actual": true,
+            "pass_gate": false,
+            "max_abs": 0.0625,
+            "mean_abs": 0.0033390681512268355,
+            "relative_l2": 0.005748784909274414,
+            "cosine": 0.9999834775679854,
+            "snr_db": 44.808478803468496,
+            "mismatched_elements": 10146,
+            "reason": "tolerance exceeded"
+          }
+        }
+      },
+      "graph_vs_bf16_same_cache": {
+        "pass_gate": false,
+        "outputs": {
+          "logits": {
+            "candidate_precision": "bf16",
+            "atol": 0.01,
+            "rtol": 0.01,
+            "expected_shape": [
+              4,
+              8,
+              8194
+            ],
+            "actual_shape": [
+              4,
+              8,
+              8194
+            ],
+            "reference_dtype": "torch.float32",
+            "candidate_dtype": "torch.float32",
+            "storage_dtypes_match": true,
+            "total_elements": 262208,
+            "candidate_elements": 262208,
+            "tolerance_provenance": {
+              "source": "scripts/trt113_validation.py:TOLERANCES",
+              "selection": "declared candidate arithmetic precision",
+              "empirically_calibrated": false,
+              "storage_dtype_equality_required": false,
+              "comparison_dtype": "torch.float64",
+              "rule": "abs(actual-reference) <= atol + rtol * abs(reference)"
+            },
+            "finite_reference": true,
+            "finite_actual": true,
+            "pass_gate": false,
+            "max_abs": 0.07025423645973206,
+            "mean_abs": 0.00818661691463126,
+            "relative_l2": 0.004893745756804893,
+            "cosine": 0.9999880268553684,
+            "snr_db": 46.20717194318628,
+            "mismatched_elements": 18639,
+            "reason": "tolerance exceeded"
+          },
+          "selected": {
+            "candidate_precision": "bf16",
+            "atol": 0.01,
+            "rtol": 0.01,
+            "expected_shape": [
+              4,
+              8,
+              6400
+            ],
+            "actual_shape": [
+              4,
+              8,
+              6400
+            ],
+            "reference_dtype": "torch.float32",
+            "candidate_dtype": "torch.float32",
+            "storage_dtypes_match": true,
+            "total_elements": 204800,
+            "candidate_elements": 204800,
+            "tolerance_provenance": {
+              "source": "scripts/trt113_validation.py:TOLERANCES",
+              "selection": "declared candidate arithmetic precision",
+              "empirically_calibrated": false,
+              "storage_dtype_equality_required": false,
+              "comparison_dtype": "torch.float64",
+              "rule": "abs(actual-reference) <= atol + rtol * abs(reference)"
+            },
+            "finite_reference": true,
+            "finite_actual": true,
+            "pass_gate": false,
+            "max_abs": 0.4033203125,
+            "mean_abs": 0.009887440847114704,
+            "relative_l2": 0.004130865583980039,
+            "cosine": 0.9999914692054535,
+            "snr_db": 47.67917872978564,
+            "mismatched_elements": 17829,
+            "reason": "tolerance exceeded"
+          },
+          "final": {
+            "candidate_precision": "bf16",
+            "atol": 0.01,
+            "rtol": 0.01,
+            "expected_shape": [
+              4,
+              8,
+              1280
+            ],
+            "actual_shape": [
+              4,
+              8,
+              1280
+            ],
+            "reference_dtype": "torch.float32",
+            "candidate_dtype": "torch.float32",
+            "storage_dtypes_match": true,
+            "total_elements": 40960,
+            "candidate_elements": 40960,
+            "tolerance_provenance": {
+              "source": "scripts/trt113_validation.py:TOLERANCES",
+              "selection": "declared candidate arithmetic precision",
+              "empirically_calibrated": false,
+              "storage_dtype_equality_required": false,
+              "comparison_dtype": "torch.float64",
+              "rule": "abs(actual-reference) <= atol + rtol * abs(reference)"
+            },
+            "finite_reference": true,
+            "finite_actual": true,
+            "pass_gate": false,
+            "max_abs": 0.01714414358139038,
+            "mean_abs": 0.0011907560577131939,
+            "relative_l2": 0.003936055574507237,
+            "cosine": 0.9999922543696479,
+            "snr_db": 48.09877556491841,
+            "mismatched_elements": 2,
+            "reason": "tolerance exceeded"
+          },
+          "new_kv": {
+            "candidate_precision": "bf16",
+            "atol": 0.01,
+            "rtol": 0.01,
+            "expected_shape": [
+              24,
+              2,
+              4,
+              20,
+              8,
+              64
+            ],
+            "actual_shape": [
+              24,
+              2,
+              4,
+              20,
+              8,
+              64
+            ],
+            "reference_dtype": "torch.float32",
+            "candidate_dtype": "torch.bfloat16",
+            "storage_dtypes_match": false,
+            "total_elements": 1966080,
+            "candidate_elements": 1966080,
+            "tolerance_provenance": {
+              "source": "scripts/trt113_validation.py:TOLERANCES",
+              "selection": "declared candidate arithmetic precision",
+              "empirically_calibrated": false,
+              "storage_dtype_equality_required": false,
+              "comparison_dtype": "torch.float64",
+              "rule": "abs(actual-reference) <= atol + rtol * abs(reference)"
+            },
+            "finite_reference": true,
+            "finite_actual": true,
+            "pass_gate": false,
+            "max_abs": 0.0625,
+            "mean_abs": 0.0033390681512268355,
+            "relative_l2": 0.005748784909274414,
+            "cosine": 0.9999834775679854,
+            "snr_db": 44.808478803468496,
+            "mismatched_elements": 10146,
+            "reason": "tolerance exceeded"
+          }
+        }
+      },
+      "graph_vs_direct": {
+        "pass_gate": true,
+        "outputs": {
+          "logits": {
+            "candidate_precision": "fp32",
+            "atol": 1e-05,
+            "rtol": 0.0001,
+            "expected_shape": [
+              4,
+              8,
+              8194
+            ],
+            "actual_shape": [
+              4,
+              8,
+              8194
+            ],
+            "reference_dtype": "torch.float32",
+            "candidate_dtype": "torch.float32",
+            "storage_dtypes_match": true,
+            "total_elements": 262208,
+            "candidate_elements": 262208,
+            "tolerance_provenance": {
+              "source": "scripts/trt113_validation.py:TOLERANCES",
+              "selection": "declared candidate arithmetic precision",
+              "empirically_calibrated": false,
+              "storage_dtype_equality_required": false,
+              "comparison_dtype": "torch.float64",
+              "rule": "abs(actual-reference) <= atol + rtol * abs(reference)"
+            },
+            "finite_reference": true,
+            "finite_actual": true,
+            "pass_gate": true,
+            "max_abs": 0.0,
+            "mean_abs": 0.0,
+            "relative_l2": 0.0,
+            "cosine": 0.9999999999999999,
+            "snr_db": 306.88417437676486,
+            "mismatched_elements": 0
+          },
+          "selected": {
+            "candidate_precision": "fp32",
+            "atol": 1e-05,
+            "rtol": 0.0001,
+            "expected_shape": [
+              4,
+              8,
+              6400
+            ],
+            "actual_shape": [
+              4,
+              8,
+              6400
+            ],
+            "reference_dtype": "torch.float32",
+            "candidate_dtype": "torch.float32",
+            "storage_dtypes_match": true,
+            "total_elements": 204800,
+            "candidate_elements": 204800,
+            "tolerance_provenance": {
+              "source": "scripts/trt113_validation.py:TOLERANCES",
+              "selection": "declared candidate arithmetic precision",
+              "empirically_calibrated": false,
+              "storage_dtype_equality_required": false,
+              "comparison_dtype": "torch.float64",
+              "rule": "abs(actual-reference) <= atol + rtol * abs(reference)"
+            },
+            "finite_reference": true,
+            "finite_actual": true,
+            "pass_gate": true,
+            "max_abs": 0.0,
+            "mean_abs": 0.0,
+            "relative_l2": 0.0,
+            "cosine": 0.9999999999999999,
+            "snr_db": 311.4604131268733,
+            "mismatched_elements": 0
+          },
+          "final": {
+            "candidate_precision": "fp32",
+            "atol": 1e-05,
+            "rtol": 0.0001,
+            "expected_shape": [
+              4,
+              8,
+              1280
+            ],
+            "actual_shape": [
+              4,
+              8,
+              1280
+            ],
+            "reference_dtype": "torch.float32",
+            "candidate_dtype": "torch.float32",
+            "storage_dtypes_match": true,
+            "total_elements": 40960,
+            "candidate_elements": 40960,
+            "tolerance_provenance": {
+              "source": "scripts/trt113_validation.py:TOLERANCES",
+              "selection": "declared candidate arithmetic precision",
+              "empirically_calibrated": false,
+              "storage_dtype_equality_required": false,
+              "comparison_dtype": "torch.float64",
+              "rule": "abs(actual-reference) <= atol + rtol * abs(reference)"
+            },
+            "finite_reference": true,
+            "finite_actual": true,
+            "pass_gate": true,
+            "max_abs": 0.0,
+            "mean_abs": 0.0,
+            "relative_l2": 0.0,
+            "cosine": 0.9999999999999999,
+            "snr_db": 292.21367945338557,
+            "mismatched_elements": 0
+          },
+          "new_kv": {
+            "candidate_precision": "fp32",
+            "atol": 1e-05,
+            "rtol": 0.0001,
+            "expected_shape": [
+              24,
+              2,
+              4,
+              20,
+              8,
+              64
+            ],
+            "actual_shape": [
+              24,
+              2,
+              4,
+              20,
+              8,
+              64
+            ],
+            "reference_dtype": "torch.bfloat16",
+            "candidate_dtype": "torch.bfloat16",
+            "storage_dtypes_match": true,
+            "total_elements": 1966080,
+            "candidate_elements": 1966080,
+            "tolerance_provenance": {
+              "source": "scripts/trt113_validation.py:TOLERANCES",
+              "selection": "declared candidate arithmetic precision",
+              "empirically_calibrated": false,
+              "storage_dtype_equality_required": false,
+              "comparison_dtype": "torch.float64",
+              "rule": "abs(actual-reference) <= atol + rtol * abs(reference)"
+            },
+            "finite_reference": true,
+            "finite_actual": true,
+            "pass_gate": true,
+            "max_abs": 0.0,
+            "mean_abs": 0.0,
+            "relative_l2": 0.0,
+            "cosine": 1.0000000000000002,
+            "snr_db": 298.68823047258365,
+            "mismatched_elements": 0
+          }
+        }
+      }
+    },
+    "cache_invariants": {
+      "direct": {
+        "prefix_unchanged": true,
+        "unused_tail_unchanged": true
+      },
+      "graph": {
+        "prefix_unchanged": true,
+        "unused_tail_unchanged": true
+      }
+    },
+    "timing": {
+      "native": {
+        "gpu_ms": 1.991423988342285,
+        "wall_ms": 1.993336621671915,
+        "iterations": 20,
+        "warmups": 3
+      },
+      "graph": {
+        "gpu_ms": 1.8123647689819335,
+        "wall_ms": 1.8136130645871162,
+        "iterations": 20,
+        "warmups": 3
+      },
+      "eager_bf16": {
+        "gpu_ms": 11.102873229980469,
+        "wall_ms": 11.105183698236942,
+        "iterations": 20,
+        "warmups": 3
+      }
+    },
+    "execution": {
+      "direct_validation_calls": 1,
+      "capture_wrapper_calls": 4,
+      "graph_validation_replays": 1,
+      "graph_timing_replays": 23,
+      "wrapper_calls_total": 28,
+      "fallback_supported": false
+    },
+    "pass_gate": false
+  },
+  "draft": {
+    "comparisons": {
+      "direct_vs_fp32": {
+        "pass_gate": false,
+        "outputs": {
+          "hidden": {
+            "candidate_precision": "bf16",
+            "atol": 0.01,
+            "rtol": 0.01,
+            "expected_shape": [
+              4,
+              7,
+              1280
+            ],
+            "actual_shape": [
+              4,
+              7,
+              1280
+            ],
+            "reference_dtype": "torch.float32",
+            "candidate_dtype": "torch.float32",
+            "storage_dtypes_match": true,
+            "total_elements": 35840,
+            "candidate_elements": 35840,
+            "tolerance_provenance": {
+              "source": "scripts/trt113_validation.py:TOLERANCES",
+              "selection": "declared candidate arithmetic precision",
+              "empirically_calibrated": false,
+              "storage_dtype_equality_required": false,
+              "comparison_dtype": "torch.float64",
+              "rule": "abs(actual-reference) <= atol + rtol * abs(reference)"
+            },
+            "finite_reference": true,
+            "finite_actual": true,
+            "pass_gate": true,
+            "max_abs": 0.00721210241317749,
+            "mean_abs": 0.0003852925806940664,
+            "relative_l2": 0.005211768907400856,
+            "cosine": 0.9999864261753142,
+            "snr_db": 45.66029698760672,
+            "mismatched_elements": 0
+          },
+          "base": {
+            "candidate_precision": "bf16",
+            "atol": 0.01,
+            "rtol": 0.01,
+            "expected_shape": [
+              4,
+              7,
+              8194
+            ],
+            "actual_shape": [
+              4,
+              7,
+              8194
+            ],
+            "reference_dtype": "torch.float32",
+            "candidate_dtype": "torch.float32",
+            "storage_dtypes_match": true,
+            "total_elements": 229432,
+            "candidate_elements": 229432,
+            "tolerance_provenance": {
+              "source": "scripts/trt113_validation.py:TOLERANCES",
+              "selection": "declared candidate arithmetic precision",
+              "empirically_calibrated": false,
+              "storage_dtype_equality_required": false,
+              "comparison_dtype": "torch.float64",
+              "rule": "abs(actual-reference) <= atol + rtol * abs(reference)"
+            },
+            "finite_reference": true,
+            "finite_actual": true,
+            "pass_gate": false,
+            "max_abs": 0.04148244857788086,
+            "mean_abs": 0.005418172214490309,
+            "relative_l2": 0.00613990266727526,
+            "cosine": 0.999981151601676,
+            "snr_db": 44.236770269034345,
+            "mismatched_elements": 7842,
+            "reason": "tolerance exceeded"
+          }
+        }
+      },
+      "graph_vs_fp32": {
+        "pass_gate": false,
+        "outputs": {
+          "hidden": {
+            "candidate_precision": "bf16",
+            "atol": 0.01,
+            "rtol": 0.01,
+            "expected_shape": [
+              4,
+              7,
+              1280
+            ],
+            "actual_shape": [
+              4,
+              7,
+              1280
+            ],
+            "reference_dtype": "torch.float32",
+            "candidate_dtype": "torch.float32",
+            "storage_dtypes_match": true,
+            "total_elements": 35840,
+            "candidate_elements": 35840,
+            "tolerance_provenance": {
+              "source": "scripts/trt113_validation.py:TOLERANCES",
+              "selection": "declared candidate arithmetic precision",
+              "empirically_calibrated": false,
+              "storage_dtype_equality_required": false,
+              "comparison_dtype": "torch.float64",
+              "rule": "abs(actual-reference) <= atol + rtol * abs(reference)"
+            },
+            "finite_reference": true,
+            "finite_actual": true,
+            "pass_gate": true,
+            "max_abs": 0.00721210241317749,
+            "mean_abs": 0.0003852925806940664,
+            "relative_l2": 0.005211768907400856,
+            "cosine": 0.9999864261753142,
+            "snr_db": 45.66029698760672,
+            "mismatched_elements": 0
+          },
+          "base": {
+            "candidate_precision": "bf16",
+            "atol": 0.01,
+            "rtol": 0.01,
+            "expected_shape": [
+              4,
+              7,
+              8194
+            ],
+            "actual_shape": [
+              4,
+              7,
+              8194
+            ],
+            "reference_dtype": "torch.float32",
+            "candidate_dtype": "torch.float32",
+            "storage_dtypes_match": true,
+            "total_elements": 229432,
+            "candidate_elements": 229432,
+            "tolerance_provenance": {
+              "source": "scripts/trt113_validation.py:TOLERANCES",
+              "selection": "declared candidate arithmetic precision",
+              "empirically_calibrated": false,
+              "storage_dtype_equality_required": false,
+              "comparison_dtype": "torch.float64",
+              "rule": "abs(actual-reference) <= atol + rtol * abs(reference)"
+            },
+            "finite_reference": true,
+            "finite_actual": true,
+            "pass_gate": false,
+            "max_abs": 0.04148244857788086,
+            "mean_abs": 0.005418172214490309,
+            "relative_l2": 0.00613990266727526,
+            "cosine": 0.999981151601676,
+            "snr_db": 44.236770269034345,
+            "mismatched_elements": 7842,
+            "reason": "tolerance exceeded"
+          }
+        }
+      },
+      "direct_vs_bf16": {
+        "pass_gate": false,
+        "outputs": {
+          "hidden": {
+            "candidate_precision": "bf16",
+            "atol": 0.01,
+            "rtol": 0.01,
+            "expected_shape": [
+              4,
+              7,
+              1280
+            ],
+            "actual_shape": [
+              4,
+              7,
+              1280
+            ],
+            "reference_dtype": "torch.float32",
+            "candidate_dtype": "torch.float32",
+            "storage_dtypes_match": true,
+            "total_elements": 35840,
+            "candidate_elements": 35840,
+            "tolerance_provenance": {
+              "source": "scripts/trt113_validation.py:TOLERANCES",
+              "selection": "declared candidate arithmetic precision",
+              "empirically_calibrated": false,
+              "storage_dtype_equality_required": false,
+              "comparison_dtype": "torch.float64",
+              "rule": "abs(actual-reference) <= atol + rtol * abs(reference)"
+            },
+            "finite_reference": true,
+            "finite_actual": true,
+            "pass_gate": true,
+            "max_abs": 0.011627197265625,
+            "mean_abs": 0.0006770945597821732,
+            "relative_l2": 0.009200628553622555,
+            "cosine": 0.9999582330953495,
+            "snr_db": 40.72365004429492,
+            "mismatched_elements": 0
+          },
+          "base": {
+            "candidate_precision": "bf16",
+            "atol": 0.01,
+            "rtol": 0.01,
+            "expected_shape": [
+              4,
+              7,
+              8194
+            ],
+            "actual_shape": [
+              4,
+              7,
+              8194
+            ],
+            "reference_dtype": "torch.float32",
+            "candidate_dtype": "torch.float32",
+            "storage_dtypes_match": true,
+            "total_elements": 229432,
+            "candidate_elements": 229432,
+            "tolerance_provenance": {
+              "source": "scripts/trt113_validation.py:TOLERANCES",
+              "selection": "declared candidate arithmetic precision",
+              "empirically_calibrated": false,
+              "storage_dtype_equality_required": false,
+              "comparison_dtype": "torch.float64",
+              "rule": "abs(actual-reference) <= atol + rtol * abs(reference)"
+            },
+            "finite_reference": true,
+            "finite_actual": true,
+            "pass_gate": false,
+            "max_abs": 0.06983232498168945,
+            "mean_abs": 0.009161430630445446,
+            "relative_l2": 0.010426837341419895,
+            "cosine": 0.9999461438299875,
+            "snr_db": 39.63694802793461,
+            "mismatched_elements": 33122,
+            "reason": "tolerance exceeded"
+          }
+        }
+      },
+      "graph_vs_bf16": {
+        "pass_gate": false,
+        "outputs": {
+          "hidden": {
+            "candidate_precision": "bf16",
+            "atol": 0.01,
+            "rtol": 0.01,
+            "expected_shape": [
+              4,
+              7,
+              1280
+            ],
+            "actual_shape": [
+              4,
+              7,
+              1280
+            ],
+            "reference_dtype": "torch.float32",
+            "candidate_dtype": "torch.float32",
+            "storage_dtypes_match": true,
+            "total_elements": 35840,
+            "candidate_elements": 35840,
+            "tolerance_provenance": {
+              "source": "scripts/trt113_validation.py:TOLERANCES",
+              "selection": "declared candidate arithmetic precision",
+              "empirically_calibrated": false,
+              "storage_dtype_equality_required": false,
+              "comparison_dtype": "torch.float64",
+              "rule": "abs(actual-reference) <= atol + rtol * abs(reference)"
+            },
+            "finite_reference": true,
+            "finite_actual": true,
+            "pass_gate": true,
+            "max_abs": 0.011627197265625,
+            "mean_abs": 0.0006770945597821732,
+            "relative_l2": 0.009200628553622555,
+            "cosine": 0.9999582330953495,
+            "snr_db": 40.72365004429492,
+            "mismatched_elements": 0
+          },
+          "base": {
+            "candidate_precision": "bf16",
+            "atol": 0.01,
+            "rtol": 0.01,
+            "expected_shape": [
+              4,
+              7,
+              8194
+            ],
+            "actual_shape": [
+              4,
+              7,
+              8194
+            ],
+            "reference_dtype": "torch.float32",
+            "candidate_dtype": "torch.float32",
+            "storage_dtypes_match": true,
+            "total_elements": 229432,
+            "candidate_elements": 229432,
+            "tolerance_provenance": {
+              "source": "scripts/trt113_validation.py:TOLERANCES",
+              "selection": "declared candidate arithmetic precision",
+              "empirically_calibrated": false,
+              "storage_dtype_equality_required": false,
+              "comparison_dtype": "torch.float64",
+              "rule": "abs(actual-reference) <= atol + rtol * abs(reference)"
+            },
+            "finite_reference": true,
+            "finite_actual": true,
+            "pass_gate": false,
+            "max_abs": 0.06983232498168945,
+            "mean_abs": 0.009161430630445446,
+            "relative_l2": 0.010426837341419895,
+            "cosine": 0.9999461438299875,
+            "snr_db": 39.63694802793461,
+            "mismatched_elements": 33122,
+            "reason": "tolerance exceeded"
+          }
+        }
+      },
+      "graph_vs_direct": {
+        "pass_gate": true,
+        "outputs": {
+          "hidden": {
+            "candidate_precision": "fp32",
+            "atol": 1e-05,
+            "rtol": 0.0001,
+            "expected_shape": [
+              4,
+              7,
+              1280
+            ],
+            "actual_shape": [
+              4,
+              7,
+              1280
+            ],
+            "reference_dtype": "torch.float32",
+            "candidate_dtype": "torch.float32",
+            "storage_dtypes_match": true,
+            "total_elements": 35840,
+            "candidate_elements": 35840,
+            "tolerance_provenance": {
+              "source": "scripts/trt113_validation.py:TOLERANCES",
+              "selection": "declared candidate arithmetic precision",
+              "empirically_calibrated": false,
+              "storage_dtype_equality_required": false,
+              "comparison_dtype": "torch.float64",
+              "rule": "abs(actual-reference) <= atol + rtol * abs(reference)"
+            },
+            "finite_reference": true,
+            "finite_actual": true,
+            "pass_gate": true,
+            "max_abs": 0.0,
+            "mean_abs": 0.0,
+            "relative_l2": 0.0,
+            "cosine": 1.0,
+            "snr_db": 279.82755250964084,
+            "mismatched_elements": 0
+          },
+          "base": {
+            "candidate_precision": "fp32",
+            "atol": 1e-05,
+            "rtol": 0.0001,
+            "expected_shape": [
+              4,
+              7,
+              8194
+            ],
+            "actual_shape": [
+              4,
+              7,
+              8194
+            ],
+            "reference_dtype": "torch.float32",
+            "candidate_dtype": "torch.float32",
+            "storage_dtypes_match": true,
+            "total_elements": 229432,
+            "candidate_elements": 229432,
+            "tolerance_provenance": {
+              "source": "scripts/trt113_validation.py:TOLERANCES",
+              "selection": "declared candidate arithmetic precision",
+              "empirically_calibrated": false,
+              "storage_dtype_equality_required": false,
+              "comparison_dtype": "torch.float64",
+              "rule": "abs(actual-reference) <= atol + rtol * abs(reference)"
+            },
+            "finite_reference": true,
+            "finite_actual": true,
+            "pass_gate": true,
+            "max_abs": 0.0,
+            "mean_abs": 0.0,
+            "relative_l2": 0.0,
+            "cosine": 0.9999999999999997,
+            "snr_db": 301.2406671947181,
+            "mismatched_elements": 0
+          }
+        }
+      }
+    },
+    "cache_invariants": {
+      "direct": {
+        "context_unchanged": true
+      },
+      "graph": {
+        "context_unchanged": true
+      }
+    },
+    "timing": {
+      "native": {
+        "gpu_ms": 0.45204482078552244,
+        "wall_ms": 0.45370208099484444,
+        "iterations": 20,
+        "warmups": 3
+      },
+      "graph": {
+        "gpu_ms": 0.3946432113647461,
+        "wall_ms": 0.3955754451453686,
+        "iterations": 20,
+        "warmups": 3
+      },
+      "eager_bf16": {
+        "gpu_ms": 1.731171226501465,
+        "wall_ms": 1.73258688300848,
+        "iterations": 20,
+        "warmups": 3
+      }
+    },
+    "execution": {
+      "direct_validation_calls": 1,
+      "capture_wrapper_calls": 4,
+      "graph_validation_replays": 1,
+      "graph_timing_replays": 23,
+      "wrapper_calls_total": 28,
+      "fallback_supported": false
+    },
+    "pass_gate": false
+  },
+  "timing_scope": "Diagnostic component calls; candidate timing includes cache reset and graph input copies; eager includes its native allocations/padding; excludes model load, reference prefill, engine creation, capture, report metrics and D2H snapshots. Not end-to-end service performance."
+}

@@ -1,0 +1,51 @@
+{
+  "format": 1,
+  "backend": "TensorRT 11.3 native BigVGAN with alias-free plugin",
+  "batch": 1,
+  "frames": 52,
+  "engine": "/workspace/A_inspark_marlin/artifacts/trt113_vocoder/vocoder_b1_nativeconv_strong.engine",
+  "shape_source": "TensorRT engine IO",
+  "onnx": "/workspace/A_inspark_marlin/artifacts/trt113_vocoder/vocoder_b1_nativeconv.onnx",
+  "onnx_sha256": "8a23d217d8ca034b5f2d8ce2a9625ba067121f9e659468b58b2868533054cc4e",
+  "bytes": 252005684,
+  "sha256": "9e850e09634eb7dce0dafb053063fd5f1137bac285fa94210c0dc0d62fae0960",
+  "build_seconds": 113.62765312194824,
+  "trt": "11.3.0.99",
+  "optimization_level": 5,
+  "workspace_bytes": 8589934592,
+  "strongly_typed": true,
+  "tf32": false,
+  "regular_conv": "native",
+  "plugins": [
+    "inspark::alias_free",
+    "inspark::deconv1d"
+  ],
+  "export_rewrite_validation": {
+    "max_abs": 0.0,
+    "mean_abs": 0.0,
+    "cosine": 1.0
+  },
+  "precision": "BF16 learned convolutions; FP32 alias-free plugin and interfaces",
+  "tensors": [
+    {
+      "name": "mel",
+      "mode": "TensorIOMode.INPUT",
+      "dtype": "DataType.FLOAT",
+      "shape": [
+        1,
+        80,
+        52
+      ]
+    },
+    {
+      "name": "pcm",
+      "mode": "TensorIOMode.OUTPUT",
+      "dtype": "DataType.FLOAT",
+      "shape": [
+        1,
+        1,
+        13312
+      ]
+    }
+  ]
+}

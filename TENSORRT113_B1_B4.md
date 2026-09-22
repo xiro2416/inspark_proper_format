@@ -72,6 +72,25 @@ P50 74.236 ms (five four-request waves), with all four TRT routes and no fallbac
 These are preliminary routing results before source-attested AR rebuilds, not
 numerical or quality passes. The subsequent reports supersede these timings.
 
+With source-attested AR rebuilds, the same five-wave routing test passed at
+B1 P50 41.554 ms and B4 all-ready P50 74.262 ms. See the complete
+[SM89 stage-one evidence](reports/sm89/trt113_b1_b4_stage1/README.md).
+
+| Numerical diagnostic | B1 | B4 |
+| --- | --- | --- |
+| Target versus same-input eager | **Failed** | **Failed** |
+| Draft versus same-input eager | **Failed** | **Failed** |
+| CFM, fixed noise and reference conditioning | Passed this diagnostic | **Failed** |
+| Vocoder, random Gaussian mel | **Failed** | **Failed** |
+| AR direct versus graph; preserved cache regions | Passed | Passed |
+
+The current BF16 candidate is **not numerically equivalent to eager under the
+declared tolerances**. Failed diagnostics are published, not waived. In
+particular, random-mel Vocoder error is not a real-audio quality result, and the
+CFM whole-tensor average includes 258 masked prompt frames. The next stage must
+audit actual generation inputs and quality. The legacy device-loop shared RNG
+is still present in this milestone; request isolation and soak are not claimed.
+
 The new builders record actual checkpoint/config and converted-constant hashes.
 Old acoustic artifacts without export provenance remain `legacy_unverified`;
 later hashing current weights does not retroactively attest their origin.

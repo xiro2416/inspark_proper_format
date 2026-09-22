@@ -1,0 +1,90 @@
+{
+  "format": 1,
+  "backend": "TensorRT 11.3 native full two-step CFM Solver",
+  "batch": 1,
+  "frames": 310,
+  "prompt_frames": 258,
+  "shape_source": "TensorRT engine IO",
+  "prompt_frames_source": "export metadata and first-head F-52",
+  "onnx": "/workspace/A_inspark_marlin/artifacts/trt113_cfm/cfm_solver_b1.onnx",
+  "onnx_sha256": "6ff0d3dd90cddbad6d3c5240975713563905b53e900adebec730a163f00c916d",
+  "engine": "/workspace/A_inspark_marlin/artifacts/trt113_cfm/cfm_solver_b1.engine",
+  "bytes": 246293148,
+  "sha256": "df6662ee84387f9982856a2e171e7a087dd829467b0f461d6e9f7bdd646420a0",
+  "build_seconds": 236.72976112365723,
+  "trt": "11.3.0.99",
+  "optimization_level": 5,
+  "workspace_bytes": 8589934592,
+  "strongly_typed": true,
+  "tf32": false,
+  "precision": "BF16 weights/linears with FP32 interfaces and two-step accumulation",
+  "tensors": [
+    {
+      "name": "x",
+      "mode": "TensorIOMode.INPUT",
+      "dtype": "DataType.FLOAT",
+      "shape": [
+        1,
+        80,
+        310
+      ]
+    },
+    {
+      "name": "prompt",
+      "mode": "TensorIOMode.INPUT",
+      "dtype": "DataType.FLOAT",
+      "shape": [
+        1,
+        80,
+        310
+      ]
+    },
+    {
+      "name": "lengths",
+      "mode": "TensorIOMode.INPUT",
+      "dtype": "DataType.INT64",
+      "shape": [
+        1
+      ]
+    },
+    {
+      "name": "style",
+      "mode": "TensorIOMode.INPUT",
+      "dtype": "DataType.FLOAT",
+      "shape": [
+        1,
+        192
+      ]
+    },
+    {
+      "name": "mu",
+      "mode": "TensorIOMode.INPUT",
+      "dtype": "DataType.FLOAT",
+      "shape": [
+        1,
+        310,
+        512
+      ]
+    },
+    {
+      "name": "mask",
+      "mode": "TensorIOMode.INPUT",
+      "dtype": "DataType.BOOL",
+      "shape": [
+        1,
+        1,
+        310
+      ]
+    },
+    {
+      "name": "output",
+      "mode": "TensorIOMode.OUTPUT",
+      "dtype": "DataType.FLOAT",
+      "shape": [
+        1,
+        80,
+        310
+      ]
+    }
+  ]
+}

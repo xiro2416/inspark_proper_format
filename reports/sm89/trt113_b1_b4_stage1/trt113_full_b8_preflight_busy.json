@@ -1,0 +1,56 @@
+{
+  "schema": 1,
+  "status": "failed",
+  "scope": "first_chunk_only",
+  "full_eos_verified": false,
+  "numerical_parity_verified": false,
+  "concurrency_verified": [
+    8
+  ],
+  "soak_verified": false,
+  "full_trt_scope": [
+    "target_verify",
+    "draft_backbone",
+    "cfm_solver",
+    "vocoder"
+  ],
+  "excluded_from_full_trt_claim": [
+    "prefill",
+    "proposal_rnn",
+    "context_append",
+    "conditioning",
+    "latent",
+    "streaming_tail"
+  ],
+  "gpu": 6,
+  "batch": 8,
+  "workers": 1,
+  "text": "他正在整理文件。",
+  "request_seed_policy": "row index, unchanged across waves",
+  "warmups": 2,
+  "repeats": 5,
+  "reference": "/workspace/index-tts/data/audio/old/mingxiang_gao.wav",
+  "deployment": "/workspace/A_inspark_marlin/configs/sm89_bf16_trt113_full_b8.json",
+  "timing": "per-request enqueue to host-received first PCM; includes admission and copies",
+  "warmup_results": [],
+  "runs": [],
+  "deployment_sha256": "e511e5dc0093eacb7e844a83d00ec652b5be065127f1d42b2dedf7e17748c3f9",
+  "reference_sha256": "fa482cdaed99bc3c14c5ee2af8d25363a66e7e8778891a6b37c3d60973873793",
+  "source_revision": "d646331049dc202d5f3d1eac54e66d1b3e325ad5",
+  "source_dirty": false,
+  "source_identity": {
+    "git_sha": "d646331049dc202d5f3d1eac54e66d1b3e325ad5",
+    "dirty": false,
+    "scope": [
+      "src",
+      "scripts",
+      "configs",
+      "pyproject.toml"
+    ],
+    "files": 267,
+    "source_sha256": "cf16ddaf7dfade8883b133ad41de5b99d70d87184647ac9c2f035b120bc1041c",
+    "dirty_fingerprint": null,
+    "snapshot": "local source files before TensorRT network construction"
+  },
+  "error": "RuntimeError: GPU6 is busy (21854MiB,61%)"
+}

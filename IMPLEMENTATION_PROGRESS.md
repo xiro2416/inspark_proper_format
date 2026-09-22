@@ -9,7 +9,7 @@ Six-hour target: 2026-09-22 21:32:34 UTC. Completion takes priority over this ta
 - [x] Parameterize CFM/Vocoder runtime, builders and validators; verify engine I/O.
 - [x] Build independent B1/B4 acoustic engines, retaining Target/Draft and B8.
 - [x] Add trustworthy graph replay routing evidence and cache/shape safety checks.
-- [ ] Verify direct execution, graph replay and real first chunks on GPU 6.
+- [x] Execute direct/graph numerical audits and verify real first-chunk routing on GPU 6 (numerical failures retained).
 - [ ] Publish original snapshot and B1/B4 implementation to inspark_proper_format.
 
 Coverage matches existing B8: Target verify8/K128, Draft backbone7/K128,
@@ -83,3 +83,10 @@ has known numerical failures, retained as evidence.
   Source-attested AR B1/B4 also fails strict numerical comparisons, while the
   measured cache preservation and native-direct/graph invariants pass. Keep the
   candidate experimental; publish failures without relaxing tolerances.
+- Final stage-one routing with rebuilt AR engines passed B1/B4; the retained B8
+  regression also passed. Five-wave all-ready P50: 41.554/74.262/115.784 ms for
+  B1/B4/B8. One B8 preflight-busy attempt is retained; the next idle check and run
+  succeeded without touching other GPU processes.
+- Stage-one code committed as `d646331`; full reports are under
+  `reports/sm89/trt113_b1_b4_stage1/`. Overall numerical parity is FAILED, not
+  implied by successful routing. Stage two remains mandatory.

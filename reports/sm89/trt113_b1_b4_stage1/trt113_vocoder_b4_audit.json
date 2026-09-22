@@ -1,0 +1,316 @@
+{
+  "batch": 4,
+  "frames": 52,
+  "seed": 113,
+  "device": "NVIDIA GeForce RTX 4090",
+  "sm": [
+    8,
+    9
+  ],
+  "torch": "2.8.0+cu128",
+  "tolerances": {
+    "fp32": {
+      "atol": 1e-05,
+      "rtol": 0.0001
+    },
+    "bf16": {
+      "atol": 0.01,
+      "rtol": 0.01
+    }
+  },
+  "reference": "same-input pure PyTorch BigVGAN; original PyTorch alias-free activation; TF32 disabled",
+  "comparisons": {
+    "native_vs_fp32": {
+      "candidate_precision": "bf16",
+      "atol": 0.01,
+      "rtol": 0.01,
+      "expected_shape": [
+        4,
+        1,
+        13312
+      ],
+      "actual_shape": [
+        4,
+        1,
+        13312
+      ],
+      "reference_dtype": "torch.float32",
+      "candidate_dtype": "torch.float32",
+      "storage_dtypes_match": true,
+      "total_elements": 53248,
+      "candidate_elements": 53248,
+      "tolerance_provenance": {
+        "source": "scripts/trt113_validation.py:TOLERANCES",
+        "selection": "declared candidate arithmetic precision",
+        "empirically_calibrated": false,
+        "storage_dtype_equality_required": false,
+        "comparison_dtype": "torch.float64",
+        "rule": "abs(actual-reference) <= atol + rtol * abs(reference)"
+      },
+      "finite_reference": true,
+      "finite_actual": true,
+      "pass_gate": false,
+      "max_abs": 0.1752219796180725,
+      "mean_abs": 0.015637320943696853,
+      "relative_l2": 0.048109463821274484,
+      "cosine": 0.9988435936818842,
+      "snr_db": 26.35538966542384,
+      "mismatched_elements": 24467,
+      "reason": "tolerance exceeded"
+    },
+    "native_vs_bf16": {
+      "candidate_precision": "bf16",
+      "atol": 0.01,
+      "rtol": 0.01,
+      "expected_shape": [
+        4,
+        1,
+        13312
+      ],
+      "actual_shape": [
+        4,
+        1,
+        13312
+      ],
+      "reference_dtype": "torch.float32",
+      "candidate_dtype": "torch.float32",
+      "storage_dtypes_match": true,
+      "total_elements": 53248,
+      "candidate_elements": 53248,
+      "tolerance_provenance": {
+        "source": "scripts/trt113_validation.py:TOLERANCES",
+        "selection": "declared candidate arithmetic precision",
+        "empirically_calibrated": false,
+        "storage_dtype_equality_required": false,
+        "comparison_dtype": "torch.float64",
+        "rule": "abs(actual-reference) <= atol + rtol * abs(reference)"
+      },
+      "finite_reference": true,
+      "finite_actual": true,
+      "pass_gate": false,
+      "max_abs": 0.1875,
+      "mean_abs": 0.020930130947118205,
+      "relative_l2": 0.06417766582751129,
+      "cosine": 0.9979427047185003,
+      "snr_db": 23.852321649037826,
+      "mismatched_elements": 30173,
+      "reason": "tolerance exceeded"
+    },
+    "bf16_vs_fp32": {
+      "candidate_precision": "bf16",
+      "atol": 0.01,
+      "rtol": 0.01,
+      "expected_shape": [
+        4,
+        1,
+        13312
+      ],
+      "actual_shape": [
+        4,
+        1,
+        13312
+      ],
+      "reference_dtype": "torch.float32",
+      "candidate_dtype": "torch.float32",
+      "storage_dtypes_match": true,
+      "total_elements": 53248,
+      "candidate_elements": 53248,
+      "tolerance_provenance": {
+        "source": "scripts/trt113_validation.py:TOLERANCES",
+        "selection": "declared candidate arithmetic precision",
+        "empirically_calibrated": false,
+        "storage_dtype_equality_required": false,
+        "comparison_dtype": "torch.float64",
+        "rule": "abs(actual-reference) <= atol + rtol * abs(reference)"
+      },
+      "finite_reference": true,
+      "finite_actual": true,
+      "pass_gate": false,
+      "max_abs": 0.285381942987442,
+      "mean_abs": 0.020502894031983167,
+      "relative_l2": 0.0655542955029035,
+      "cosine": 0.9978508022633965,
+      "snr_db": 23.667976910267576,
+      "mismatched_elements": 28896,
+      "reason": "tolerance exceeded"
+    },
+    "graph_vs_fp32": {
+      "candidate_precision": "bf16",
+      "atol": 0.01,
+      "rtol": 0.01,
+      "expected_shape": [
+        4,
+        1,
+        13312
+      ],
+      "actual_shape": [
+        4,
+        1,
+        13312
+      ],
+      "reference_dtype": "torch.float32",
+      "candidate_dtype": "torch.float32",
+      "storage_dtypes_match": true,
+      "total_elements": 53248,
+      "candidate_elements": 53248,
+      "tolerance_provenance": {
+        "source": "scripts/trt113_validation.py:TOLERANCES",
+        "selection": "declared candidate arithmetic precision",
+        "empirically_calibrated": false,
+        "storage_dtype_equality_required": false,
+        "comparison_dtype": "torch.float64",
+        "rule": "abs(actual-reference) <= atol + rtol * abs(reference)"
+      },
+      "finite_reference": true,
+      "finite_actual": true,
+      "pass_gate": false,
+      "max_abs": 0.1752219796180725,
+      "mean_abs": 0.015637320943696853,
+      "relative_l2": 0.048109463821274484,
+      "cosine": 0.9988435936818842,
+      "snr_db": 26.35538966542384,
+      "mismatched_elements": 24467,
+      "reason": "tolerance exceeded"
+    },
+    "graph_vs_bf16": {
+      "candidate_precision": "bf16",
+      "atol": 0.01,
+      "rtol": 0.01,
+      "expected_shape": [
+        4,
+        1,
+        13312
+      ],
+      "actual_shape": [
+        4,
+        1,
+        13312
+      ],
+      "reference_dtype": "torch.float32",
+      "candidate_dtype": "torch.float32",
+      "storage_dtypes_match": true,
+      "total_elements": 53248,
+      "candidate_elements": 53248,
+      "tolerance_provenance": {
+        "source": "scripts/trt113_validation.py:TOLERANCES",
+        "selection": "declared candidate arithmetic precision",
+        "empirically_calibrated": false,
+        "storage_dtype_equality_required": false,
+        "comparison_dtype": "torch.float64",
+        "rule": "abs(actual-reference) <= atol + rtol * abs(reference)"
+      },
+      "finite_reference": true,
+      "finite_actual": true,
+      "pass_gate": false,
+      "max_abs": 0.1875,
+      "mean_abs": 0.020930130947118205,
+      "relative_l2": 0.06417766582751129,
+      "cosine": 0.9979427047185003,
+      "snr_db": 23.852321649037826,
+      "mismatched_elements": 30173,
+      "reason": "tolerance exceeded"
+    }
+  },
+  "random": {
+    "candidate_precision": "bf16",
+    "atol": 0.01,
+    "rtol": 0.01,
+    "expected_shape": [
+      4,
+      1,
+      13312
+    ],
+    "actual_shape": [
+      4,
+      1,
+      13312
+    ],
+    "reference_dtype": "torch.float32",
+    "candidate_dtype": "torch.float32",
+    "storage_dtypes_match": true,
+    "total_elements": 53248,
+    "candidate_elements": 53248,
+    "tolerance_provenance": {
+      "source": "scripts/trt113_validation.py:TOLERANCES",
+      "selection": "declared candidate arithmetic precision",
+      "empirically_calibrated": false,
+      "storage_dtype_equality_required": false,
+      "comparison_dtype": "torch.float64",
+      "rule": "abs(actual-reference) <= atol + rtol * abs(reference)"
+    },
+    "finite_reference": true,
+    "finite_actual": true,
+    "pass_gate": false,
+    "max_abs": 0.1875,
+    "mean_abs": 0.020930130947118205,
+    "relative_l2": 0.06417766582751129,
+    "cosine": 0.9979427047185003,
+    "snr_db": 23.852321649037826,
+    "mismatched_elements": 30173,
+    "reason": "tolerance exceeded"
+  },
+  "graph": {
+    "candidate_precision": "bf16",
+    "atol": 0.01,
+    "rtol": 0.01,
+    "expected_shape": [
+      4,
+      1,
+      13312
+    ],
+    "actual_shape": [
+      4,
+      1,
+      13312
+    ],
+    "reference_dtype": "torch.float32",
+    "candidate_dtype": "torch.float32",
+    "storage_dtypes_match": true,
+    "total_elements": 53248,
+    "candidate_elements": 53248,
+    "tolerance_provenance": {
+      "source": "scripts/trt113_validation.py:TOLERANCES",
+      "selection": "declared candidate arithmetic precision",
+      "empirically_calibrated": false,
+      "storage_dtype_equality_required": false,
+      "comparison_dtype": "torch.float64",
+      "rule": "abs(actual-reference) <= atol + rtol * abs(reference)"
+    },
+    "finite_reference": true,
+    "finite_actual": true,
+    "pass_gate": false,
+    "max_abs": 0.1875,
+    "mean_abs": 0.020930130947118205,
+    "relative_l2": 0.06417766582751129,
+    "cosine": 0.9979427047185003,
+    "snr_db": 23.852321649037826,
+    "mismatched_elements": 30173,
+    "reason": "tolerance exceeded"
+  },
+  "legacy_gate": {
+    "cosine_min": 0.9999,
+    "mean_abs_max": 0.005,
+    "pass_gate": false
+  },
+  "eager_ms": 26.536602783203126,
+  "native_ms": 81.73930053710937,
+  "graph_ms": 6.151628875732422,
+  "native_stats": {
+    "backend": "TensorRT 11.3 BigVGAN with in-engine Quick Plugins",
+    "batch": 4,
+    "frames": 52,
+    "calls": 30,
+    "fallbacks": 0,
+    "fallback_reasons": {},
+    "plan": "/workspace/A_inspark_marlin/artifacts/trt113_vocoder/plan_b4_nativeconv_strong.json",
+    "sha256": "cb052c69b7a70477fc3cbd2e74f7a99fc31e8b327c66e5437ddce120b791aa43",
+    "plugins": [
+      "inspark::alias_free",
+      "inspark::deconv1d"
+    ],
+    "precision": "BF16 learned convolutions; FP32 alias-free plugin and interfaces",
+    "interface_precision": "FP32"
+  },
+  "native_executed": true,
+  "pass_gate": false
+}

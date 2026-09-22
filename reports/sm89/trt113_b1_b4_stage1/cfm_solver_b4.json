@@ -1,0 +1,95 @@
+{
+  "format": 1,
+  "backend": "TensorRT 11.3 native full two-step CFM Solver",
+  "batch": 4,
+  "frames": 310,
+  "prompt_frames": 258,
+  "shape_source": "TensorRT engine IO",
+  "prompt_frames_source": "export metadata and first-head F-52",
+  "onnx": "/workspace/A_inspark_marlin/artifacts/trt113_cfm/cfm_solver_b4.onnx",
+  "onnx_sha256": "21399def3750e1597e66fff09c159c267bc00bb845062bc3ffd05ec8239ac36d",
+  "engine": "/workspace/A_inspark_marlin/artifacts/trt113_cfm/cfm_solver_b4.engine",
+  "bytes": 243170572,
+  "sha256": "062556b07b777002bf8c22fe71a78dc6e9feda0740a11bfc348afa6e39dbf781",
+  "build_seconds": 195.70812392234802,
+  "trt": "11.3.0.99",
+  "torch": "2.8.0+cu128",
+  "cuda": "12.8",
+  "numpy": "2.2.6",
+  "gpu_name": "NVIDIA GeForce RTX 4090",
+  "sm": 89,
+  "optimization_level": 5,
+  "workspace_bytes": 8589934592,
+  "strongly_typed": true,
+  "tf32": false,
+  "precision": "BF16 weights/linears with FP32 interfaces and two-step accumulation",
+  "tensors": [
+    {
+      "name": "x",
+      "mode": "TensorIOMode.INPUT",
+      "dtype": "DataType.FLOAT",
+      "shape": [
+        4,
+        80,
+        310
+      ]
+    },
+    {
+      "name": "prompt",
+      "mode": "TensorIOMode.INPUT",
+      "dtype": "DataType.FLOAT",
+      "shape": [
+        4,
+        80,
+        310
+      ]
+    },
+    {
+      "name": "lengths",
+      "mode": "TensorIOMode.INPUT",
+      "dtype": "DataType.INT64",
+      "shape": [
+        4
+      ]
+    },
+    {
+      "name": "style",
+      "mode": "TensorIOMode.INPUT",
+      "dtype": "DataType.FLOAT",
+      "shape": [
+        4,
+        192
+      ]
+    },
+    {
+      "name": "mu",
+      "mode": "TensorIOMode.INPUT",
+      "dtype": "DataType.FLOAT",
+      "shape": [
+        4,
+        310,
+        512
+      ]
+    },
+    {
+      "name": "mask",
+      "mode": "TensorIOMode.INPUT",
+      "dtype": "DataType.BOOL",
+      "shape": [
+        4,
+        1,
+        310
+      ]
+    },
+    {
+      "name": "output",
+      "mode": "TensorIOMode.OUTPUT",
+      "dtype": "DataType.FLOAT",
+      "shape": [
+        4,
+        80,
+        310
+      ]
+    }
+  ]
+}
