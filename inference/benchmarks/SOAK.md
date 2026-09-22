@@ -13,6 +13,11 @@ PYTHONPATH=inference/src .venv/bin/python inference/benchmarks/soak_requests.py 
 
 The full default tiers are 1/4/8/16 admitted concurrent requests for at least 600 measured seconds each. `--batch 8` caps model execution at microbatch 8: 16 requests do not mean a B16 TensorRT engine. Matching `configs/sm89_trt113_safe_b{1,4,8}.json` files are selected automatically. An explicit `--deployment` overrides that selection, including for eager/compile/BF16 comparisons.
 
+The default runtime configuration is `runtime_reference.yaml` (TF32 disabled).
+Each report records source/configuration hashes, effective tier configuration,
+physical GPU and pre-existing shared-device allocation. These are execution
+provenance, not a replacement for checkpoint-bound numerical/quality reports.
+
 ```bash
 PYTHONPATH=inference/src .venv/bin/python inference/benchmarks/soak_requests.py \
   --gpu 6 --reference /workspace/index-tts/data/audio/old/mingxiang_gao.wav \

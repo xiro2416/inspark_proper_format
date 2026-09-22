@@ -12,6 +12,7 @@ import json
 import math
 from pathlib import Path
 import statistics
+import sys
 import time
 
 ROOT=Path(__file__).resolve().parents[1]
@@ -289,7 +290,8 @@ def run_tier(args,config,plan,cases,concurrency,pool_type,result=None,checkpoint
     result={} if result is None else result
     result.update(concurrency=concurrency,model_max_batch=config['max_batch'],
                 scheduling='bounded_waves_with_complete_eos_drain',requested_seconds=args.seconds,
-                status='running',requests=[],snapshots=[],warmups=args.warmups)
+                status='running',requests=[],snapshots=[],warmups=args.warmups,
+                effective_runtime_config=config)
     setup_started=clock()
     with pool_type(config,args.gpu,1) as pool:
         pool.prepare_reference('reference',str(args.reference))
@@ -353,7 +355,7 @@ def main():
     parser.add_argument('--deployment',type=workspace_path,default=None,
                         help='Default: matching configs/sm89_trt113_safe_b{1,4,8}.json per concurrency tier')
     parser.add_argument('--reference',type=workspace_path,required=True)
-    parser.add_argument('--config',type=workspace_path,default=ROOT/'configs/runtime.yaml')
+    parser.add_argument('--config',type=workspace_path,default=ROOT/'configs/runtime_reference.yaml')
     parser.add_argument('--corpus',type=workspace_path,default=ROOT/'configs/sm89_quality_256.json')
     parser.add_argument('--concurrency',nargs='+',type=int,choices=(1,4,8,16,32,64),default=[1,4,8,16])
     parser.add_argument('--batch',type=int,choices=(1,4,8),default=8,help='Maximum model microbatch, not request concurrency')
@@ -385,6 +387,8 @@ def main():
     from acc_infer_clear.runtime.deployment import load as load_deployment
     from acc_infer_clear.runtime.device import GPULease
     from acc_infer_clear.runtime.pool import Pool
+    sys.path.insert(0,str(ROOT))
+    from scripts.trt113_provenance import source_identity,file_record
     config=load(args.config)
     corpus=json.loads(args.corpus.read_text());cases=corpus['cases']
     if not cases or any(not case.get('text') or len(case.get('emotion',[]))!=8 for case in cases):
@@ -394,13 +398,17 @@ def main():
         memory_claim='Explicit post-warmup live CUDA/RSS growth and late-trend budgets; not an unbounded leak-free guarantee',
         corpus=dict(path=str(args.corpus),sha256=hashlib.sha256(args.corpus.read_bytes()).hexdigest()),
         reference=dict(path=str(args.reference),sha256=hashlib.sha256(args.reference.read_bytes()).hexdigest()),
+        source=source_identity(),runtime_file=file_record(args.config,'runtime_config'),
         tiers=[])
     try:
-        with GPULease(args.gpu):
+        with GPULease(args.gpu) as lease:
+            report['gpu_preflight']=dict(physical_gpu=args.gpu,external_memory_mib=lease.initial_memory_mib,
+                                        initial_utilization_percent=lease.initial_utilization,shared=lease.shared)
             for concurrency in args.concurrency:
                 deployment_path=args.deployment or ROOT/f'configs/sm89_trt113_safe_b{min(concurrency,args.batch)}.json'
                 plan,overrides=strict_plan(load_deployment(deployment_path),args.strict_isolation)
-                tier=dict(concurrency=concurrency,deployment_path=str(deployment_path),strict_overrides=overrides)
+                tier=dict(concurrency=concurrency,deployment_path=str(deployment_path),strict_overrides=overrides,
+                          deployment_file=file_record(deployment_path,'deployment'))
                 report['tiers'].append(tier)
                 try:
                     run_tier(args,config,plan,cases,concurrency,Pool,result=tier,

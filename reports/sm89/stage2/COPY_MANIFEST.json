@@ -1,0 +1,150 @@
+{
+  "schema": 1,
+  "scope": "byte-for-byte archive of completed local JSON reports; no re-audit or provenance upgrade",
+  "files": [
+    {
+      "source": "inference/outputs/stage2/eager_fp32_b1.json",
+      "archive": "baselines/eager_fp32_b1.json",
+      "sha256": "ee2fe01e5ba5c53ee10fafac6ca7fd6392c6b30490db13dc5fbbb61f138549e1",
+      "bytes": 8731
+    },
+    {
+      "source": "inference/outputs/stage2/eager_bf16_b1.json",
+      "archive": "baselines/eager_bf16_b1.json",
+      "sha256": "faae4318e75a7e545f998c15220718b251fdacea637b26ad1a7f56ee48c4562a",
+      "bytes": 74704
+    },
+    {
+      "source": "inference/outputs/stage2/compile_bf16_b1.json",
+      "archive": "baselines/compile_bf16_b1.json",
+      "sha256": "9c9fbf5058267658850902fd4cb62fe7ae7236b970290c6af6c3f42fa089ebb2",
+      "bytes": 123010
+    },
+    {
+      "source": "inference/outputs/stage2/compile_bf16_b1_casts.json",
+      "archive": "baselines/compile_bf16_b1_casts.json",
+      "sha256": "8ddc1a24c2ffea1d386f382dbf96856e5c1929666cb5baeda0fbff912f77400c",
+      "bytes": 159622
+    },
+    {
+      "source": "inference/outputs/stage2/compile_bf16_b1_no_rewrite.json",
+      "archive": "baselines/compile_bf16_b1_no_rewrite.json",
+      "sha256": "57afbac684ce3c76f4cf4cb76b36b6ed7069296f9a1e649539e78204acbb1363",
+      "bytes": 159314
+    },
+    {
+      "source": "outputs/stage2/real_acoustic_b1/capture.json",
+      "archive": "legacy_real_acoustic_b1/capture.json",
+      "sha256": "48772a0766c250d8b07b30113ea74ecf619b990a415e7baa02de1b51f3c7d630",
+      "bytes": 139092
+    },
+    {
+      "source": "outputs/stage2/real_acoustic_b1/reference_fp32/report.json",
+      "archive": "legacy_real_acoustic_b1/reference_fp32/report.json",
+      "sha256": "a27e48ccd678e91c2e1f1d73853f9e609a0982bb2260d5b9729acf6188d6df17",
+      "bytes": 36269
+    },
+    {
+      "source": "outputs/stage2/real_acoustic_b1/reference_bf16/report.json",
+      "archive": "legacy_real_acoustic_b1/reference_bf16/report.json",
+      "sha256": "1633a0055358b79b1439fa6dd2906d6da8d8403a3b3d9f13fef924876ae59fe6",
+      "bytes": 53535
+    },
+    {
+      "source": "artifacts/trt113_cfm/audited_source/cfm_solver_b1.export.json",
+      "archive": "builds/cfm/cfm_solver_b1.export.json",
+      "sha256": "53b7229ce1d877e6ceea5ca50a814379dfed0458fa1227c3f5cf1fa057c119da",
+      "bytes": 3863
+    },
+    {
+      "source": "artifacts/trt113_cfm/audited_source/cfm_solver_b1.json",
+      "archive": "builds/cfm/cfm_solver_b1.json",
+      "sha256": "dcd8fc1fca18dc2c6e12e418310d425143df575a1890ad00aa9ac4dc8e090a08",
+      "bytes": 5172
+    },
+    {
+      "source": "artifacts/trt113_cfm/plan_b1_audited_source.json",
+      "archive": "builds/cfm/plan_b1_audited_source.json",
+      "sha256": "4a88fca80c009d6bb51136e69fed85eea827f9ab8642e455cb36f93ac12d3ce8",
+      "bytes": 5123
+    },
+    {
+      "source": "artifacts/trt113_vocoder/audited_source/vocoder_b1_nativeconv.export.json",
+      "archive": "builds/vocoder/vocoder_b1_nativeconv.export.json",
+      "sha256": "04b70cf6f7e5639ae39f4293270ce328206a1329b1cf739f41924cbbbf91cc7b",
+      "bytes": 7809
+    },
+    {
+      "source": "artifacts/trt113_vocoder/audited_source/vocoder_b1_nativeconv_strong.json",
+      "archive": "builds/vocoder/vocoder_b1_nativeconv_strong.json",
+      "sha256": "c0ca183ede6038e8bcaefcbc756a1955422f330070acfa767dc4d18039d4ab32",
+      "bytes": 4362
+    },
+    {
+      "source": "artifacts/trt113_vocoder/plan_b1_nativeconv_strong_audited_source.json",
+      "archive": "builds/vocoder/plan_b1_nativeconv_strong_audited_source.json",
+      "sha256": "35701dde70dc39230dfd354c871b360109c70ba069f695c76d9bfd2ee7f01f2c",
+      "bytes": 4309
+    },
+    {
+      "source": "artifacts/trt113_cfm/audited_source/cfm_solver_b4.export.json",
+      "archive": "builds/cfm/cfm_solver_b4.export.json",
+      "sha256": "d1511994b386016a2ccf5d7ecdf55b053f628d60a24cb8c996c4423cf3401134",
+      "bytes": 3863
+    },
+    {
+      "source": "artifacts/trt113_cfm/audited_source/cfm_solver_b4.json",
+      "archive": "builds/cfm/cfm_solver_b4.json",
+      "sha256": "4ba875c7da1ea8c71e476ae9b55d3aeb271314281a58ff0ef6c2738d85268f8b",
+      "bytes": 5172
+    },
+    {
+      "source": "artifacts/trt113_cfm/plan_b4_audited_source.json",
+      "archive": "builds/cfm/plan_b4_audited_source.json",
+      "sha256": "2ad8f1f4ef24e0d916c3ffefb14d34c399cbc98ba229a617780daeec50588ba4",
+      "bytes": 5123
+    },
+    {
+      "source": "artifacts/trt113_vocoder/audited_source/vocoder_b4_nativeconv.export.json",
+      "archive": "builds/vocoder/vocoder_b4_nativeconv.export.json",
+      "sha256": "dbd9952c7b7cc0e3531f9b30a4733820d0a5816651894071ccdf257a3a271cf5",
+      "bytes": 7824
+    },
+    {
+      "source": "artifacts/trt113_vocoder/audited_source/vocoder_b4_nativeconv_strong.json",
+      "archive": "builds/vocoder/vocoder_b4_nativeconv_strong.json",
+      "sha256": "50842a2805e6772f8fbba6ec02cd11164a2cf2b880dc0838f9c97e134f38dd1a",
+      "bytes": 4377
+    },
+    {
+      "source": "artifacts/trt113_vocoder/plan_b4_nativeconv_strong_audited_source.json",
+      "archive": "builds/vocoder/plan_b4_nativeconv_strong_audited_source.json",
+      "sha256": "dbe47ace9544312c297cd44718453b7c11dcf75b732e998248753efc333a6d09",
+      "bytes": 4324
+    },
+    {
+      "source": "inference/outputs/stage2/compile_bf16_b1_subset.json",
+      "archive": "baselines/compile_bf16_b1_subset.json",
+      "sha256": "10f8d657471a8c8e982b3dae3f82e5ce9350c0f4588ed23e545f1b9733313fdd",
+      "bytes": 91226
+    },
+    {
+      "source": "inference/outputs/stage2/eager_fp32_b4.json",
+      "archive": "baselines/eager_fp32_b4.json",
+      "sha256": "a25d7a0da493fcbef591aafe80394f4f31694540b21d98f3824b6eab9ea5a25e",
+      "bytes": 26452
+    },
+    {
+      "source": "inference/outputs/stage2/eager_bf16_b4.json",
+      "archive": "baselines/eager_bf16_b4.json",
+      "sha256": "d597f3d1919ca7573afb6d57969d389dd02384eff50a9d3743ac586919624f2d",
+      "bytes": 92923
+    },
+    {
+      "source": "inference/outputs/stage2/compile_bf16_draft_vocoder_b4.json",
+      "archive": "baselines/compile_bf16_draft_vocoder_b4.json",
+      "sha256": "c01bc77a9e39de8652d57bbd8f3a5454721657fe489bbe6a3309496e6e9be264",
+      "bytes": 101149
+    }
+  ]
+}

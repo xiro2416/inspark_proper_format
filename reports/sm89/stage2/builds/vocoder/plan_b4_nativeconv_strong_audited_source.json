@@ -1,0 +1,142 @@
+{
+  "format": 1,
+  "backend": "TensorRT 11.3 native BigVGAN with alias-free plugin",
+  "batch": 4,
+  "frames": 52,
+  "engine": "audited_source/vocoder_b4_nativeconv_strong.engine",
+  "shape_source": "TensorRT engine IO",
+  "onnx": "/workspace/A_inspark_marlin/artifacts/trt113_vocoder/audited_source/vocoder_b4_nativeconv.onnx",
+  "onnx_sha256": "374e04ab1786e4a0b956ce6a69c9eaa393e03b7b2a50f38d4874be7b60e124dc",
+  "provenance": {
+    "schema": 1,
+    "status": "recorded_not_audited",
+    "component": "vocoder",
+    "model_sources": [
+      {
+        "role": "vocoder_checkpoint",
+        "path": "/workspace/A_inspark_marlin/models/index_tts2/hf_cache/bigvgan/bigvgan_generator.pt",
+        "sha256": "e95ba25972d3de0628d99cd156e9315a9c018899bf739988959ebe3544080ced",
+        "bytes": 449228171
+      },
+      {
+        "role": "vocoder_config",
+        "path": "/workspace/A_inspark_marlin/models/index_tts2/hf_cache/bigvgan/config.json",
+        "sha256": "88a1f47acf747db0b21e97a389d838566147f7a5464583ff5c8d819d870f03ee",
+        "bytes": 1405
+      }
+    ],
+    "configuration": [
+      {
+        "role": "runtime_config",
+        "path": "/workspace/A_inspark_marlin/inference/configs/runtime_reference.yaml",
+        "sha256": "68893e67fe29392acaa5f40ceef955f33e4b19bcde06bc86f170abfa17bc9d52",
+        "bytes": 313
+      }
+    ],
+    "source": {
+      "git_sha": "a68bac6ae7af45136416a237e3a1def74a5cc717",
+      "dirty": true,
+      "scope": [
+        "src",
+        "scripts",
+        "benchmarks",
+        "configs",
+        "pyproject.toml"
+      ],
+      "files": 338,
+      "source_sha256": "9bba1679f67b8f200a9476e7e836f38a8c08bf2f07be3b3d5f46eaed34062bcd",
+      "dirty_fingerprint": "8cb02cd55e9b85a00e9a70614bab565830f77a39b087bbbcb03b487f40a93e26",
+      "snapshot": "local source files before ONNX export"
+    },
+    "software": {
+      "torch": "2.8.0+cu128",
+      "cuda": "12.8",
+      "triton": "3.5.0",
+      "numpy": "2.2.6",
+      "tensorrt": null
+    },
+    "hardware": {
+      "gpu_name": "NVIDIA GeForce RTX 4090",
+      "sm": 89
+    },
+    "onnx_binding": {
+      "onnx": {
+        "role": "onnx",
+        "path": "/workspace/A_inspark_marlin/artifacts/trt113_vocoder/audited_source/vocoder_b4_nativeconv.onnx",
+        "sha256": "374e04ab1786e4a0b956ce6a69c9eaa393e03b7b2a50f38d4874be7b60e124dc",
+        "bytes": 249113811
+      },
+      "external_data": [],
+      "export_metadata": {
+        "role": "onnx_export_metadata",
+        "path": "/workspace/A_inspark_marlin/artifacts/trt113_vocoder/audited_source/vocoder_b4_nativeconv.export.json",
+        "sha256": "dbd9952c7b7cc0e3531f9b30a4733820d0a5816651894071ccdf257a3a271cf5",
+        "bytes": 7824
+      }
+    }
+  },
+  "provenance_status": "recorded_not_audited",
+  "build_source": {
+    "git_sha": "a68bac6ae7af45136416a237e3a1def74a5cc717",
+    "dirty": true,
+    "scope": [
+      "src",
+      "scripts",
+      "benchmarks",
+      "configs",
+      "pyproject.toml"
+    ],
+    "files": 338,
+    "source_sha256": "9bba1679f67b8f200a9476e7e836f38a8c08bf2f07be3b3d5f46eaed34062bcd",
+    "dirty_fingerprint": "8cb02cd55e9b85a00e9a70614bab565830f77a39b087bbbcb03b487f40a93e26",
+    "snapshot": "local source files before TensorRT network construction"
+  },
+  "physical_gpu": 6,
+  "external_memory_mib": 21854,
+  "bytes": 252190628,
+  "sha256": "53b3ca19dbdc68b48244bbed78027e46efad54253ab322f272cfb0c7ac09316c",
+  "build_seconds": 101.92900276184082,
+  "trt": "11.3.0.99",
+  "torch": "2.8.0+cu128",
+  "cuda": "12.8",
+  "numpy": "2.2.6",
+  "gpu_name": "NVIDIA GeForce RTX 4090",
+  "sm": 89,
+  "optimization_level": 5,
+  "workspace_bytes": 8589934592,
+  "strongly_typed": true,
+  "tf32": false,
+  "regular_conv": "native",
+  "plugins": [
+    "inspark::alias_free",
+    "inspark::deconv1d"
+  ],
+  "export_rewrite_validation": {
+    "max_abs": 0.0,
+    "mean_abs": 0.0,
+    "cosine": 1.0000001192092896
+  },
+  "precision": "BF16 learned convolutions; FP32 alias-free plugin and interfaces",
+  "tensors": [
+    {
+      "name": "mel",
+      "mode": "TensorIOMode.INPUT",
+      "dtype": "DataType.FLOAT",
+      "shape": [
+        4,
+        80,
+        52
+      ]
+    },
+    {
+      "name": "pcm",
+      "mode": "TensorIOMode.OUTPUT",
+      "dtype": "DataType.FLOAT",
+      "shape": [
+        4,
+        1,
+        13312
+      ]
+    }
+  ]
+}

@@ -250,6 +250,31 @@ def all_acoustic_weights_verified(evidence):
     return bool(native) and all(row["weight_identity_verified"] for row in native)
 
 
+def direct_graph_gate(row):
+    if row["route"].get("execution") != "graph":
+        return {"required": False, "pass_gate": True, "reason": "actual direct route; no graph invoked"}
+    check = row.get("graph_vs_direct")
+    return {"required": True, "pass_gate": isinstance(check, dict)
+            and check.get("exact_gate") is True and check.get("pass_gate") is True,
+            "reason": "requires recorded finite bitwise-exact direct/graph evidence"}
+
+
+def acoustic_coverage(manifest):
+    result = {}
+    for component in ("cfm", "vocoder"):
+        rows = [row for row in manifest["calls"] if row["component"] == component]
+        native = [row for row in rows if row["route"].get("backend") == "tensorrt113"]
+        declared = manifest.get("acoustic_engines", {}).get(component)
+        native_required = (declared.get("has_native_engine", False) if declared is not None else
+                           any(row["route"].get("candidate_backend") == "tensorrt113" for row in rows))
+        result[component] = {"observed_calls": len(rows), "native_calls": len(native),
+                             "other_calls": len(rows) - len(native), "native_required": native_required,
+                             "actual_native_batches": sorted({row["route"]["batch"] for row in native}),
+                             "pass_gate": bool(rows) and (not native_required or bool(native))}
+    return {"components": result, "pass_gate": all(row["pass_gate"] for row in result.values()),
+            "scope": "installed native components require at least one observed native execution; fallbacks remain separately audited"}
+
+
 def capture_run(args):
     import numpy as np
     import soundfile as sf
@@ -314,6 +339,7 @@ def capture_run(args):
         if not manifest["calls"]:
             raise RuntimeError("No actual acoustic invocations were observed")
         manifest["head_routes"] = engine.head_graphs.stats() if engine.head_graphs else None
+        manifest["acoustic_capture_coverage"] = acoustic_coverage(manifest)
         manifest["status"] = "captured"
         manifest["direct_graph_exact"] = all(row["graph_vs_direct"]["exact_gate"]
             for row in manifest["calls"] if row["graph_vs_direct"] is not None)
@@ -387,12 +413,16 @@ def replay_reference(args):
                             raise ValueError("FP32 reference was not generated from the same capture")
                         fp = load_bundle(args.capture_dir / "reference_fp32" / "bundles", fp_row["evidence"])["output"]
                         checks["bf16_reference_vs_fp32_reference"] = compare_regions(fp, expected, "bf16", mask)
+                exact_graph = direct_graph_gate(row)
                 report["calls"].append({"index": row["index"], "component": row["component"],
                                         "route": row["route"], "evidence": output, "checks": checks,
-                                        "pass_gate": all(v["pass_gate"] for v in checks.values())})
+                                        "direct_graph_gate": exact_graph,
+                                        "pass_gate": exact_graph["pass_gate"] and all(v["pass_gate"] for v in checks.values())})
                 write_json(output_dir / "report.json", report)
         report["status"] = "completed"
-        report["pass_gate"] = all(row["pass_gate"] for row in report["calls"])
+        report["coverage"] = acoustic_coverage(manifest)
+        report["numerical_pass_gate"] = all(row["pass_gate"] for row in report["calls"])
+        report["pass_gate"] = report["coverage"]["pass_gate"] and report["numerical_pass_gate"]
         report["conclusion_scope"] = "Numerical evidence only; legacy engine source identity and perceptual quality are separate gates"
     except Exception as error:
         report["status"] = "error"

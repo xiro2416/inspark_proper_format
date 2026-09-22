@@ -1,0 +1,3816 @@
+{
+  "schema": 1,
+  "hardware_scope": "sm89",
+  "batch": 1,
+  "text": "他正在整理文件。",
+  "requested": {
+    "schema": 1,
+    "status": "sm89_same_weight_torch28_inductor_baseline_experimental",
+    "compute_backend": "compile",
+    "strict_request_isolation": true,
+    "compile_components": [
+      "target",
+      "draft",
+      "cfm",
+      "vocoder"
+    ],
+    "compile_max_signatures": 1,
+    "compile_error_fallback": true,
+    "precision": "bf16",
+    "components": [
+      "target",
+      "draft",
+      "cfm",
+      "vocoder"
+    ],
+    "convolutions": true,
+    "rnn_precision": "bf16",
+    "target_graphs": false,
+    "draft_graphs": false,
+    "proposal_graphs": false,
+    "prefix_graphs": false,
+    "head_graphs": false,
+    "slot_draft": false,
+    "overlap_acoustics": false,
+    "fused_acceptance": false,
+    "tail_graphs": false
+  },
+  "config": {
+    "weights": "/workspace/A_inspark_marlin/models",
+    "student": "/workspace/A_inspark_marlin/models/cfm_oracle500.pt",
+    "student_sha256": "635ab7025fbd4eaa999fcd3e964512df081d5c9cff093a59d383e050c70bcfca",
+    "cache": "/workspace/A_inspark_marlin/.cache",
+    "max_batch": 1,
+    "cpu_threads": 2,
+    "max_speech_tokens": 1500,
+    "max_text_tokens": 120,
+    "reference_seconds": 3,
+    "max_cached_voices": 16,
+    "target_tf32": false,
+    "rnn_tf32": false
+  },
+  "measured": [
+    {
+      "wave": 1,
+      "wall_ms": 833.4139306098223,
+      "all_first_pcm_ms": 213.99076282978058,
+      "rows": [
+        {
+          "id": "wave1-row0",
+          "first_pcm_ms": 213.99076282978058,
+          "complete": true,
+          "error": null,
+          "chunks": 2,
+          "samples": 61440,
+          "codes": 140,
+          "codes_sha256": "239da7f4b4d62b557caf5f69842118b4791e44a205c4c9805ccf65c8b6416a2f",
+          "audio_seconds": 2.786394557823129,
+          "accepted": [
+            1,
+            3,
+            0,
+            1,
+            0,
+            2,
+            6,
+            5,
+            3,
+            0,
+            0,
+            0,
+            2,
+            2,
+            7,
+            0,
+            3,
+            3,
+            5,
+            2,
+            1,
+            2,
+            7,
+            6,
+            1,
+            2,
+            4,
+            3,
+            2,
+            3,
+            0,
+            0,
+            7,
+            0,
+            2,
+            2,
+            7,
+            5,
+            2
+          ]
+        }
+      ],
+      "memory_allocated": 8504205824,
+      "memory_reserved": 11393826816,
+      "peak_allocated": 9943896576
+    },
+    {
+      "wave": 2,
+      "wall_ms": 841.6915275156498,
+      "all_first_pcm_ms": 221.98902070522308,
+      "rows": [
+        {
+          "id": "wave2-row0",
+          "first_pcm_ms": 221.98902070522308,
+          "complete": true,
+          "error": null,
+          "chunks": 2,
+          "samples": 61440,
+          "codes": 140,
+          "codes_sha256": "239da7f4b4d62b557caf5f69842118b4791e44a205c4c9805ccf65c8b6416a2f",
+          "audio_seconds": 2.786394557823129,
+          "accepted": [
+            1,
+            3,
+            0,
+            1,
+            0,
+            2,
+            6,
+            5,
+            3,
+            0,
+            0,
+            0,
+            2,
+            2,
+            7,
+            0,
+            3,
+            3,
+            5,
+            2,
+            1,
+            2,
+            7,
+            6,
+            1,
+            2,
+            4,
+            3,
+            2,
+            3,
+            0,
+            0,
+            7,
+            0,
+            2,
+            2,
+            7,
+            5,
+            2
+          ]
+        }
+      ],
+      "memory_allocated": 8504205824,
+      "memory_reserved": 11393826816,
+      "peak_allocated": 9943896576
+    },
+    {
+      "wave": 3,
+      "wall_ms": 818.1807771325111,
+      "all_first_pcm_ms": 209.70486477017403,
+      "rows": [
+        {
+          "id": "wave3-row0",
+          "first_pcm_ms": 209.70486477017403,
+          "complete": true,
+          "error": null,
+          "chunks": 2,
+          "samples": 61440,
+          "codes": 140,
+          "codes_sha256": "239da7f4b4d62b557caf5f69842118b4791e44a205c4c9805ccf65c8b6416a2f",
+          "audio_seconds": 2.786394557823129,
+          "accepted": [
+            1,
+            3,
+            0,
+            1,
+            0,
+            2,
+            6,
+            5,
+            3,
+            0,
+            0,
+            0,
+            2,
+            2,
+            7,
+            0,
+            3,
+            3,
+            5,
+            2,
+            1,
+            2,
+            7,
+            6,
+            1,
+            2,
+            4,
+            3,
+            2,
+            3,
+            0,
+            0,
+            7,
+            0,
+            2,
+            2,
+            7,
+            5,
+            2
+          ]
+        }
+      ],
+      "memory_allocated": 8504205824,
+      "memory_reserved": 11393826816,
+      "peak_allocated": 9943896576
+    }
+  ],
+  "warmups": [
+    {
+      "wave": 0,
+      "wall_ms": 74259.55237261951,
+      "all_first_pcm_ms": 72769.30681429803,
+      "rows": [
+        {
+          "id": "wave0-row0",
+          "first_pcm_ms": 72769.30681429803,
+          "complete": true,
+          "error": null,
+          "chunks": 2,
+          "samples": 61440,
+          "codes": 140,
+          "codes_sha256": "239da7f4b4d62b557caf5f69842118b4791e44a205c4c9805ccf65c8b6416a2f",
+          "audio_seconds": 2.786394557823129,
+          "accepted": [
+            1,
+            3,
+            0,
+            1,
+            0,
+            2,
+            6,
+            5,
+            3,
+            0,
+            0,
+            0,
+            2,
+            2,
+            7,
+            0,
+            3,
+            3,
+            5,
+            2,
+            1,
+            2,
+            7,
+            6,
+            1,
+            2,
+            4,
+            3,
+            2,
+            3,
+            0,
+            0,
+            7,
+            0,
+            2,
+            2,
+            7,
+            5,
+            2
+          ]
+        }
+      ],
+      "memory_allocated": 8501584384,
+      "memory_reserved": 11356078080,
+      "peak_allocated": 9943896576
+    }
+  ],
+  "errors": [],
+  "execution_pass": true,
+  "numerical_pass": false,
+  "torch": "2.8.0+cu128",
+  "gpu": "NVIDIA GeForce RTX 4090",
+  "sm": [
+    8,
+    9
+  ],
+  "timing_scope": "host admission through first PCM / full EOS; includes CPU/GPU copies, allocation and launch; excludes model/reference preparation",
+  "deployment": {
+    "requested": {
+      "schema": 1,
+      "status": "sm89_same_weight_torch28_inductor_baseline_experimental",
+      "compute_backend": "compile",
+      "strict_request_isolation": true,
+      "compile_components": [
+        "target",
+        "draft",
+        "cfm",
+        "vocoder"
+      ],
+      "compile_max_signatures": 1,
+      "compile_error_fallback": true,
+      "precision": "bf16",
+      "components": [
+        "target",
+        "draft",
+        "cfm",
+        "vocoder"
+      ],
+      "convolutions": true,
+      "rnn_precision": "bf16",
+      "target_graphs": false,
+      "draft_graphs": false,
+      "proposal_graphs": false,
+      "prefix_graphs": false,
+      "head_graphs": false,
+      "slot_draft": false,
+      "overlap_acoustics": false,
+      "fused_acceptance": false,
+      "tail_graphs": false
+    },
+    "resolved_precision": "bf16",
+    "resolved_rnn_precision": "bf16",
+    "sm": 89,
+    "hardware_validation": "Profile-specific numerical and performance evidence required; runtime identity is not an audit pass",
+    "hardware": {
+      "name": "NVIDIA GeForce RTX 4090",
+      "sm": 89,
+      "sms": 128
+    },
+    "online_learning": false,
+    "tail_graphs": false,
+    "compute_backend": "compile",
+    "custom_kernels": false,
+    "tf32": false,
+    "same_model_structure": true,
+    "shared_batch_rng": false,
+    "precision": {
+      "mode": "bf16",
+      "components": [
+        "target",
+        "draft",
+        "cfm",
+        "vocoder"
+      ],
+      "matrices": [
+        {
+          "path": "target.blocks.0.attn.c_attn",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            3840
+          ]
+        },
+        {
+          "path": "target.blocks.0.attn.c_proj",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            1280
+          ]
+        },
+        {
+          "path": "target.blocks.0.mlp.c_fc",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            5120
+          ]
+        },
+        {
+          "path": "target.blocks.0.mlp.c_proj",
+          "precision": "bf16",
+          "original_shape": [
+            5120,
+            1280
+          ]
+        },
+        {
+          "path": "target.blocks.1.attn.c_attn",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            3840
+          ]
+        },
+        {
+          "path": "target.blocks.1.attn.c_proj",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            1280
+          ]
+        },
+        {
+          "path": "target.blocks.1.mlp.c_fc",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            5120
+          ]
+        },
+        {
+          "path": "target.blocks.1.mlp.c_proj",
+          "precision": "bf16",
+          "original_shape": [
+            5120,
+            1280
+          ]
+        },
+        {
+          "path": "target.blocks.2.attn.c_attn",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            3840
+          ]
+        },
+        {
+          "path": "target.blocks.2.attn.c_proj",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            1280
+          ]
+        },
+        {
+          "path": "target.blocks.2.mlp.c_fc",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            5120
+          ]
+        },
+        {
+          "path": "target.blocks.2.mlp.c_proj",
+          "precision": "bf16",
+          "original_shape": [
+            5120,
+            1280
+          ]
+        },
+        {
+          "path": "target.blocks.3.attn.c_attn",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            3840
+          ]
+        },
+        {
+          "path": "target.blocks.3.attn.c_proj",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            1280
+          ]
+        },
+        {
+          "path": "target.blocks.3.mlp.c_fc",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            5120
+          ]
+        },
+        {
+          "path": "target.blocks.3.mlp.c_proj",
+          "precision": "bf16",
+          "original_shape": [
+            5120,
+            1280
+          ]
+        },
+        {
+          "path": "target.blocks.4.attn.c_attn",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            3840
+          ]
+        },
+        {
+          "path": "target.blocks.4.attn.c_proj",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            1280
+          ]
+        },
+        {
+          "path": "target.blocks.4.mlp.c_fc",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            5120
+          ]
+        },
+        {
+          "path": "target.blocks.4.mlp.c_proj",
+          "precision": "bf16",
+          "original_shape": [
+            5120,
+            1280
+          ]
+        },
+        {
+          "path": "target.blocks.5.attn.c_attn",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            3840
+          ]
+        },
+        {
+          "path": "target.blocks.5.attn.c_proj",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            1280
+          ]
+        },
+        {
+          "path": "target.blocks.5.mlp.c_fc",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            5120
+          ]
+        },
+        {
+          "path": "target.blocks.5.mlp.c_proj",
+          "precision": "bf16",
+          "original_shape": [
+            5120,
+            1280
+          ]
+        },
+        {
+          "path": "target.blocks.6.attn.c_attn",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            3840
+          ]
+        },
+        {
+          "path": "target.blocks.6.attn.c_proj",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            1280
+          ]
+        },
+        {
+          "path": "target.blocks.6.mlp.c_fc",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            5120
+          ]
+        },
+        {
+          "path": "target.blocks.6.mlp.c_proj",
+          "precision": "bf16",
+          "original_shape": [
+            5120,
+            1280
+          ]
+        },
+        {
+          "path": "target.blocks.7.attn.c_attn",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            3840
+          ]
+        },
+        {
+          "path": "target.blocks.7.attn.c_proj",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            1280
+          ]
+        },
+        {
+          "path": "target.blocks.7.mlp.c_fc",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            5120
+          ]
+        },
+        {
+          "path": "target.blocks.7.mlp.c_proj",
+          "precision": "bf16",
+          "original_shape": [
+            5120,
+            1280
+          ]
+        },
+        {
+          "path": "target.blocks.8.attn.c_attn",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            3840
+          ]
+        },
+        {
+          "path": "target.blocks.8.attn.c_proj",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            1280
+          ]
+        },
+        {
+          "path": "target.blocks.8.mlp.c_fc",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            5120
+          ]
+        },
+        {
+          "path": "target.blocks.8.mlp.c_proj",
+          "precision": "bf16",
+          "original_shape": [
+            5120,
+            1280
+          ]
+        },
+        {
+          "path": "target.blocks.9.attn.c_attn",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            3840
+          ]
+        },
+        {
+          "path": "target.blocks.9.attn.c_proj",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            1280
+          ]
+        },
+        {
+          "path": "target.blocks.9.mlp.c_fc",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            5120
+          ]
+        },
+        {
+          "path": "target.blocks.9.mlp.c_proj",
+          "precision": "bf16",
+          "original_shape": [
+            5120,
+            1280
+          ]
+        },
+        {
+          "path": "target.blocks.10.attn.c_attn",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            3840
+          ]
+        },
+        {
+          "path": "target.blocks.10.attn.c_proj",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            1280
+          ]
+        },
+        {
+          "path": "target.blocks.10.mlp.c_fc",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            5120
+          ]
+        },
+        {
+          "path": "target.blocks.10.mlp.c_proj",
+          "precision": "bf16",
+          "original_shape": [
+            5120,
+            1280
+          ]
+        },
+        {
+          "path": "target.blocks.11.attn.c_attn",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            3840
+          ]
+        },
+        {
+          "path": "target.blocks.11.attn.c_proj",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            1280
+          ]
+        },
+        {
+          "path": "target.blocks.11.mlp.c_fc",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            5120
+          ]
+        },
+        {
+          "path": "target.blocks.11.mlp.c_proj",
+          "precision": "bf16",
+          "original_shape": [
+            5120,
+            1280
+          ]
+        },
+        {
+          "path": "target.blocks.12.attn.c_attn",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            3840
+          ]
+        },
+        {
+          "path": "target.blocks.12.attn.c_proj",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            1280
+          ]
+        },
+        {
+          "path": "target.blocks.12.mlp.c_fc",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            5120
+          ]
+        },
+        {
+          "path": "target.blocks.12.mlp.c_proj",
+          "precision": "bf16",
+          "original_shape": [
+            5120,
+            1280
+          ]
+        },
+        {
+          "path": "target.blocks.13.attn.c_attn",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            3840
+          ]
+        },
+        {
+          "path": "target.blocks.13.attn.c_proj",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            1280
+          ]
+        },
+        {
+          "path": "target.blocks.13.mlp.c_fc",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            5120
+          ]
+        },
+        {
+          "path": "target.blocks.13.mlp.c_proj",
+          "precision": "bf16",
+          "original_shape": [
+            5120,
+            1280
+          ]
+        },
+        {
+          "path": "target.blocks.14.attn.c_attn",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            3840
+          ]
+        },
+        {
+          "path": "target.blocks.14.attn.c_proj",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            1280
+          ]
+        },
+        {
+          "path": "target.blocks.14.mlp.c_fc",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            5120
+          ]
+        },
+        {
+          "path": "target.blocks.14.mlp.c_proj",
+          "precision": "bf16",
+          "original_shape": [
+            5120,
+            1280
+          ]
+        },
+        {
+          "path": "target.blocks.15.attn.c_attn",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            3840
+          ]
+        },
+        {
+          "path": "target.blocks.15.attn.c_proj",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            1280
+          ]
+        },
+        {
+          "path": "target.blocks.15.mlp.c_fc",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            5120
+          ]
+        },
+        {
+          "path": "target.blocks.15.mlp.c_proj",
+          "precision": "bf16",
+          "original_shape": [
+            5120,
+            1280
+          ]
+        },
+        {
+          "path": "target.blocks.16.attn.c_attn",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            3840
+          ]
+        },
+        {
+          "path": "target.blocks.16.attn.c_proj",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            1280
+          ]
+        },
+        {
+          "path": "target.blocks.16.mlp.c_fc",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            5120
+          ]
+        },
+        {
+          "path": "target.blocks.16.mlp.c_proj",
+          "precision": "bf16",
+          "original_shape": [
+            5120,
+            1280
+          ]
+        },
+        {
+          "path": "target.blocks.17.attn.c_attn",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            3840
+          ]
+        },
+        {
+          "path": "target.blocks.17.attn.c_proj",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            1280
+          ]
+        },
+        {
+          "path": "target.blocks.17.mlp.c_fc",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            5120
+          ]
+        },
+        {
+          "path": "target.blocks.17.mlp.c_proj",
+          "precision": "bf16",
+          "original_shape": [
+            5120,
+            1280
+          ]
+        },
+        {
+          "path": "target.blocks.18.attn.c_attn",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            3840
+          ]
+        },
+        {
+          "path": "target.blocks.18.attn.c_proj",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            1280
+          ]
+        },
+        {
+          "path": "target.blocks.18.mlp.c_fc",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            5120
+          ]
+        },
+        {
+          "path": "target.blocks.18.mlp.c_proj",
+          "precision": "bf16",
+          "original_shape": [
+            5120,
+            1280
+          ]
+        },
+        {
+          "path": "target.blocks.19.attn.c_attn",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            3840
+          ]
+        },
+        {
+          "path": "target.blocks.19.attn.c_proj",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            1280
+          ]
+        },
+        {
+          "path": "target.blocks.19.mlp.c_fc",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            5120
+          ]
+        },
+        {
+          "path": "target.blocks.19.mlp.c_proj",
+          "precision": "bf16",
+          "original_shape": [
+            5120,
+            1280
+          ]
+        },
+        {
+          "path": "target.blocks.20.attn.c_attn",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            3840
+          ]
+        },
+        {
+          "path": "target.blocks.20.attn.c_proj",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            1280
+          ]
+        },
+        {
+          "path": "target.blocks.20.mlp.c_fc",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            5120
+          ]
+        },
+        {
+          "path": "target.blocks.20.mlp.c_proj",
+          "precision": "bf16",
+          "original_shape": [
+            5120,
+            1280
+          ]
+        },
+        {
+          "path": "target.blocks.21.attn.c_attn",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            3840
+          ]
+        },
+        {
+          "path": "target.blocks.21.attn.c_proj",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            1280
+          ]
+        },
+        {
+          "path": "target.blocks.21.mlp.c_fc",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            5120
+          ]
+        },
+        {
+          "path": "target.blocks.21.mlp.c_proj",
+          "precision": "bf16",
+          "original_shape": [
+            5120,
+            1280
+          ]
+        },
+        {
+          "path": "target.blocks.22.attn.c_attn",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            3840
+          ]
+        },
+        {
+          "path": "target.blocks.22.attn.c_proj",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            1280
+          ]
+        },
+        {
+          "path": "target.blocks.22.mlp.c_fc",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            5120
+          ]
+        },
+        {
+          "path": "target.blocks.22.mlp.c_proj",
+          "precision": "bf16",
+          "original_shape": [
+            5120,
+            1280
+          ]
+        },
+        {
+          "path": "target.blocks.23.attn.c_attn",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            3840
+          ]
+        },
+        {
+          "path": "target.blocks.23.attn.c_proj",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            1280
+          ]
+        },
+        {
+          "path": "target.blocks.23.mlp.c_fc",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            5120
+          ]
+        },
+        {
+          "path": "target.blocks.23.mlp.c_proj",
+          "precision": "bf16",
+          "original_shape": [
+            5120,
+            1280
+          ]
+        },
+        {
+          "path": "draft.blocks.0.q_proj",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            1280
+          ]
+        },
+        {
+          "path": "draft.blocks.0.k_proj",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            1280
+          ]
+        },
+        {
+          "path": "draft.blocks.0.v_proj",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            1280
+          ]
+        },
+        {
+          "path": "draft.blocks.0.o_proj",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            1280
+          ]
+        },
+        {
+          "path": "draft.blocks.0.mlp.0",
+          "precision": "bf16",
+          "original_shape": [
+            5120,
+            1280
+          ]
+        },
+        {
+          "path": "draft.blocks.0.mlp.2",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            5120
+          ]
+        },
+        {
+          "path": "draft.blocks.1.q_proj",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            1280
+          ]
+        },
+        {
+          "path": "draft.blocks.1.k_proj",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            1280
+          ]
+        },
+        {
+          "path": "draft.blocks.1.v_proj",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            1280
+          ]
+        },
+        {
+          "path": "draft.blocks.1.o_proj",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            1280
+          ]
+        },
+        {
+          "path": "draft.blocks.1.mlp.0",
+          "precision": "bf16",
+          "original_shape": [
+            5120,
+            1280
+          ]
+        },
+        {
+          "path": "draft.blocks.1.mlp.2",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            5120
+          ]
+        },
+        {
+          "path": "draft.blocks.2.q_proj",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            1280
+          ]
+        },
+        {
+          "path": "draft.blocks.2.k_proj",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            1280
+          ]
+        },
+        {
+          "path": "draft.blocks.2.v_proj",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            1280
+          ]
+        },
+        {
+          "path": "draft.blocks.2.o_proj",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            1280
+          ]
+        },
+        {
+          "path": "draft.blocks.2.mlp.0",
+          "precision": "bf16",
+          "original_shape": [
+            5120,
+            1280
+          ]
+        },
+        {
+          "path": "draft.blocks.2.mlp.2",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            5120
+          ]
+        },
+        {
+          "path": "cfm.blocks.0.attention.wqkv",
+          "precision": "bf16",
+          "original_shape": [
+            1536,
+            512
+          ]
+        },
+        {
+          "path": "cfm.blocks.0.attention.wo",
+          "precision": "bf16",
+          "original_shape": [
+            512,
+            512
+          ]
+        },
+        {
+          "path": "cfm.blocks.0.feed_forward.w1",
+          "precision": "bf16",
+          "original_shape": [
+            1536,
+            512
+          ]
+        },
+        {
+          "path": "cfm.blocks.0.feed_forward.w3",
+          "precision": "bf16",
+          "original_shape": [
+            1536,
+            512
+          ]
+        },
+        {
+          "path": "cfm.blocks.0.feed_forward.w2",
+          "precision": "bf16",
+          "original_shape": [
+            512,
+            1536
+          ]
+        },
+        {
+          "path": "cfm.blocks.0.skip_in_linear",
+          "precision": "bf16",
+          "original_shape": [
+            512,
+            1024
+          ]
+        },
+        {
+          "path": "cfm.blocks.1.attention.wqkv",
+          "precision": "bf16",
+          "original_shape": [
+            1536,
+            512
+          ]
+        },
+        {
+          "path": "cfm.blocks.1.attention.wo",
+          "precision": "bf16",
+          "original_shape": [
+            512,
+            512
+          ]
+        },
+        {
+          "path": "cfm.blocks.1.feed_forward.w1",
+          "precision": "bf16",
+          "original_shape": [
+            1536,
+            512
+          ]
+        },
+        {
+          "path": "cfm.blocks.1.feed_forward.w3",
+          "precision": "bf16",
+          "original_shape": [
+            1536,
+            512
+          ]
+        },
+        {
+          "path": "cfm.blocks.1.feed_forward.w2",
+          "precision": "bf16",
+          "original_shape": [
+            512,
+            1536
+          ]
+        },
+        {
+          "path": "cfm.blocks.1.skip_in_linear",
+          "precision": "bf16",
+          "original_shape": [
+            512,
+            1024
+          ]
+        },
+        {
+          "path": "cfm.blocks.2.attention.wqkv",
+          "precision": "bf16",
+          "original_shape": [
+            1536,
+            512
+          ]
+        },
+        {
+          "path": "cfm.blocks.2.attention.wo",
+          "precision": "bf16",
+          "original_shape": [
+            512,
+            512
+          ]
+        },
+        {
+          "path": "cfm.blocks.2.feed_forward.w1",
+          "precision": "bf16",
+          "original_shape": [
+            1536,
+            512
+          ]
+        },
+        {
+          "path": "cfm.blocks.2.feed_forward.w3",
+          "precision": "bf16",
+          "original_shape": [
+            1536,
+            512
+          ]
+        },
+        {
+          "path": "cfm.blocks.2.feed_forward.w2",
+          "precision": "bf16",
+          "original_shape": [
+            512,
+            1536
+          ]
+        },
+        {
+          "path": "cfm.blocks.2.skip_in_linear",
+          "precision": "bf16",
+          "original_shape": [
+            512,
+            1024
+          ]
+        },
+        {
+          "path": "cfm.blocks.3.attention.wqkv",
+          "precision": "bf16",
+          "original_shape": [
+            1536,
+            512
+          ]
+        },
+        {
+          "path": "cfm.blocks.3.attention.wo",
+          "precision": "bf16",
+          "original_shape": [
+            512,
+            512
+          ]
+        },
+        {
+          "path": "cfm.blocks.3.feed_forward.w1",
+          "precision": "bf16",
+          "original_shape": [
+            1536,
+            512
+          ]
+        },
+        {
+          "path": "cfm.blocks.3.feed_forward.w3",
+          "precision": "bf16",
+          "original_shape": [
+            1536,
+            512
+          ]
+        },
+        {
+          "path": "cfm.blocks.3.feed_forward.w2",
+          "precision": "bf16",
+          "original_shape": [
+            512,
+            1536
+          ]
+        },
+        {
+          "path": "cfm.blocks.3.skip_in_linear",
+          "precision": "bf16",
+          "original_shape": [
+            512,
+            1024
+          ]
+        },
+        {
+          "path": "cfm.blocks.4.attention.wqkv",
+          "precision": "bf16",
+          "original_shape": [
+            1536,
+            512
+          ]
+        },
+        {
+          "path": "cfm.blocks.4.attention.wo",
+          "precision": "bf16",
+          "original_shape": [
+            512,
+            512
+          ]
+        },
+        {
+          "path": "cfm.blocks.4.feed_forward.w1",
+          "precision": "bf16",
+          "original_shape": [
+            1536,
+            512
+          ]
+        },
+        {
+          "path": "cfm.blocks.4.feed_forward.w3",
+          "precision": "bf16",
+          "original_shape": [
+            1536,
+            512
+          ]
+        },
+        {
+          "path": "cfm.blocks.4.feed_forward.w2",
+          "precision": "bf16",
+          "original_shape": [
+            512,
+            1536
+          ]
+        },
+        {
+          "path": "cfm.blocks.4.skip_in_linear",
+          "precision": "bf16",
+          "original_shape": [
+            512,
+            1024
+          ]
+        },
+        {
+          "path": "cfm.blocks.5.attention.wqkv",
+          "precision": "bf16",
+          "original_shape": [
+            1536,
+            512
+          ]
+        },
+        {
+          "path": "cfm.blocks.5.attention.wo",
+          "precision": "bf16",
+          "original_shape": [
+            512,
+            512
+          ]
+        },
+        {
+          "path": "cfm.blocks.5.feed_forward.w1",
+          "precision": "bf16",
+          "original_shape": [
+            1536,
+            512
+          ]
+        },
+        {
+          "path": "cfm.blocks.5.feed_forward.w3",
+          "precision": "bf16",
+          "original_shape": [
+            1536,
+            512
+          ]
+        },
+        {
+          "path": "cfm.blocks.5.feed_forward.w2",
+          "precision": "bf16",
+          "original_shape": [
+            512,
+            1536
+          ]
+        },
+        {
+          "path": "cfm.blocks.5.skip_in_linear",
+          "precision": "bf16",
+          "original_shape": [
+            512,
+            1024
+          ]
+        },
+        {
+          "path": "cfm.blocks.6.attention.wqkv",
+          "precision": "bf16",
+          "original_shape": [
+            1536,
+            512
+          ]
+        },
+        {
+          "path": "cfm.blocks.6.attention.wo",
+          "precision": "bf16",
+          "original_shape": [
+            512,
+            512
+          ]
+        },
+        {
+          "path": "cfm.blocks.6.feed_forward.w1",
+          "precision": "bf16",
+          "original_shape": [
+            1536,
+            512
+          ]
+        },
+        {
+          "path": "cfm.blocks.6.feed_forward.w3",
+          "precision": "bf16",
+          "original_shape": [
+            1536,
+            512
+          ]
+        },
+        {
+          "path": "cfm.blocks.6.feed_forward.w2",
+          "precision": "bf16",
+          "original_shape": [
+            512,
+            1536
+          ]
+        },
+        {
+          "path": "cfm.blocks.6.skip_in_linear",
+          "precision": "bf16",
+          "original_shape": [
+            512,
+            1024
+          ]
+        },
+        {
+          "path": "cfm.blocks.7.attention.wqkv",
+          "precision": "bf16",
+          "original_shape": [
+            1536,
+            512
+          ]
+        },
+        {
+          "path": "cfm.blocks.7.attention.wo",
+          "precision": "bf16",
+          "original_shape": [
+            512,
+            512
+          ]
+        },
+        {
+          "path": "cfm.blocks.7.feed_forward.w1",
+          "precision": "bf16",
+          "original_shape": [
+            1536,
+            512
+          ]
+        },
+        {
+          "path": "cfm.blocks.7.feed_forward.w3",
+          "precision": "bf16",
+          "original_shape": [
+            1536,
+            512
+          ]
+        },
+        {
+          "path": "cfm.blocks.7.feed_forward.w2",
+          "precision": "bf16",
+          "original_shape": [
+            512,
+            1536
+          ]
+        },
+        {
+          "path": "cfm.blocks.7.skip_in_linear",
+          "precision": "bf16",
+          "original_shape": [
+            512,
+            1024
+          ]
+        },
+        {
+          "path": "cfm.blocks.8.attention.wqkv",
+          "precision": "bf16",
+          "original_shape": [
+            1536,
+            512
+          ]
+        },
+        {
+          "path": "cfm.blocks.8.attention.wo",
+          "precision": "bf16",
+          "original_shape": [
+            512,
+            512
+          ]
+        },
+        {
+          "path": "cfm.blocks.8.feed_forward.w1",
+          "precision": "bf16",
+          "original_shape": [
+            1536,
+            512
+          ]
+        },
+        {
+          "path": "cfm.blocks.8.feed_forward.w3",
+          "precision": "bf16",
+          "original_shape": [
+            1536,
+            512
+          ]
+        },
+        {
+          "path": "cfm.blocks.8.feed_forward.w2",
+          "precision": "bf16",
+          "original_shape": [
+            512,
+            1536
+          ]
+        },
+        {
+          "path": "cfm.blocks.8.skip_in_linear",
+          "precision": "bf16",
+          "original_shape": [
+            512,
+            1024
+          ]
+        },
+        {
+          "path": "cfm.blocks.9.attention.wqkv",
+          "precision": "bf16",
+          "original_shape": [
+            1536,
+            512
+          ]
+        },
+        {
+          "path": "cfm.blocks.9.attention.wo",
+          "precision": "bf16",
+          "original_shape": [
+            512,
+            512
+          ]
+        },
+        {
+          "path": "cfm.blocks.9.feed_forward.w1",
+          "precision": "bf16",
+          "original_shape": [
+            1536,
+            512
+          ]
+        },
+        {
+          "path": "cfm.blocks.9.feed_forward.w3",
+          "precision": "bf16",
+          "original_shape": [
+            1536,
+            512
+          ]
+        },
+        {
+          "path": "cfm.blocks.9.feed_forward.w2",
+          "precision": "bf16",
+          "original_shape": [
+            512,
+            1536
+          ]
+        },
+        {
+          "path": "cfm.blocks.9.skip_in_linear",
+          "precision": "bf16",
+          "original_shape": [
+            512,
+            1024
+          ]
+        },
+        {
+          "path": "cfm.blocks.10.attention.wqkv",
+          "precision": "bf16",
+          "original_shape": [
+            1536,
+            512
+          ]
+        },
+        {
+          "path": "cfm.blocks.10.attention.wo",
+          "precision": "bf16",
+          "original_shape": [
+            512,
+            512
+          ]
+        },
+        {
+          "path": "cfm.blocks.10.feed_forward.w1",
+          "precision": "bf16",
+          "original_shape": [
+            1536,
+            512
+          ]
+        },
+        {
+          "path": "cfm.blocks.10.feed_forward.w3",
+          "precision": "bf16",
+          "original_shape": [
+            1536,
+            512
+          ]
+        },
+        {
+          "path": "cfm.blocks.10.feed_forward.w2",
+          "precision": "bf16",
+          "original_shape": [
+            512,
+            1536
+          ]
+        },
+        {
+          "path": "cfm.blocks.10.skip_in_linear",
+          "precision": "bf16",
+          "original_shape": [
+            512,
+            1024
+          ]
+        },
+        {
+          "path": "cfm.blocks.11.attention.wqkv",
+          "precision": "bf16",
+          "original_shape": [
+            1536,
+            512
+          ]
+        },
+        {
+          "path": "cfm.blocks.11.attention.wo",
+          "precision": "bf16",
+          "original_shape": [
+            512,
+            512
+          ]
+        },
+        {
+          "path": "cfm.blocks.11.feed_forward.w1",
+          "precision": "bf16",
+          "original_shape": [
+            1536,
+            512
+          ]
+        },
+        {
+          "path": "cfm.blocks.11.feed_forward.w3",
+          "precision": "bf16",
+          "original_shape": [
+            1536,
+            512
+          ]
+        },
+        {
+          "path": "cfm.blocks.11.feed_forward.w2",
+          "precision": "bf16",
+          "original_shape": [
+            512,
+            1536
+          ]
+        },
+        {
+          "path": "cfm.blocks.11.skip_in_linear",
+          "precision": "bf16",
+          "original_shape": [
+            512,
+            1024
+          ]
+        },
+        {
+          "path": "cfm.blocks.12.attention.wqkv",
+          "precision": "bf16",
+          "original_shape": [
+            1536,
+            512
+          ]
+        },
+        {
+          "path": "cfm.blocks.12.attention.wo",
+          "precision": "bf16",
+          "original_shape": [
+            512,
+            512
+          ]
+        },
+        {
+          "path": "cfm.blocks.12.feed_forward.w1",
+          "precision": "bf16",
+          "original_shape": [
+            1536,
+            512
+          ]
+        },
+        {
+          "path": "cfm.blocks.12.feed_forward.w3",
+          "precision": "bf16",
+          "original_shape": [
+            1536,
+            512
+          ]
+        },
+        {
+          "path": "cfm.blocks.12.feed_forward.w2",
+          "precision": "bf16",
+          "original_shape": [
+            512,
+            1536
+          ]
+        },
+        {
+          "path": "cfm.blocks.12.skip_in_linear",
+          "precision": "bf16",
+          "original_shape": [
+            512,
+            1024
+          ]
+        },
+        {
+          "path": "cfm.wavenet.in_layers.0.conv.conv",
+          "precision": "bf16",
+          "original_shape": [
+            1024,
+            512,
+            5
+          ],
+          "convolution": true
+        },
+        {
+          "path": "cfm.wavenet.in_layers.1.conv.conv",
+          "precision": "bf16",
+          "original_shape": [
+            1024,
+            512,
+            5
+          ],
+          "convolution": true
+        },
+        {
+          "path": "cfm.wavenet.in_layers.2.conv.conv",
+          "precision": "bf16",
+          "original_shape": [
+            1024,
+            512,
+            5
+          ],
+          "convolution": true
+        },
+        {
+          "path": "cfm.wavenet.in_layers.3.conv.conv",
+          "precision": "bf16",
+          "original_shape": [
+            1024,
+            512,
+            5
+          ],
+          "convolution": true
+        },
+        {
+          "path": "cfm.wavenet.in_layers.4.conv.conv",
+          "precision": "bf16",
+          "original_shape": [
+            1024,
+            512,
+            5
+          ],
+          "convolution": true
+        },
+        {
+          "path": "cfm.wavenet.in_layers.5.conv.conv",
+          "precision": "bf16",
+          "original_shape": [
+            1024,
+            512,
+            5
+          ],
+          "convolution": true
+        },
+        {
+          "path": "cfm.wavenet.in_layers.6.conv.conv",
+          "precision": "bf16",
+          "original_shape": [
+            1024,
+            512,
+            5
+          ],
+          "convolution": true
+        },
+        {
+          "path": "cfm.wavenet.in_layers.7.conv.conv",
+          "precision": "bf16",
+          "original_shape": [
+            1024,
+            512,
+            5
+          ],
+          "convolution": true
+        },
+        {
+          "path": "cfm.wavenet.res_skip_layers.0.conv.conv",
+          "precision": "bf16",
+          "original_shape": [
+            1024,
+            512,
+            1
+          ],
+          "convolution": true
+        },
+        {
+          "path": "cfm.wavenet.res_skip_layers.1.conv.conv",
+          "precision": "bf16",
+          "original_shape": [
+            1024,
+            512,
+            1
+          ],
+          "convolution": true
+        },
+        {
+          "path": "cfm.wavenet.res_skip_layers.2.conv.conv",
+          "precision": "bf16",
+          "original_shape": [
+            1024,
+            512,
+            1
+          ],
+          "convolution": true
+        },
+        {
+          "path": "cfm.wavenet.res_skip_layers.3.conv.conv",
+          "precision": "bf16",
+          "original_shape": [
+            1024,
+            512,
+            1
+          ],
+          "convolution": true
+        },
+        {
+          "path": "cfm.wavenet.res_skip_layers.4.conv.conv",
+          "precision": "bf16",
+          "original_shape": [
+            1024,
+            512,
+            1
+          ],
+          "convolution": true
+        },
+        {
+          "path": "cfm.wavenet.res_skip_layers.5.conv.conv",
+          "precision": "bf16",
+          "original_shape": [
+            1024,
+            512,
+            1
+          ],
+          "convolution": true
+        },
+        {
+          "path": "cfm.wavenet.res_skip_layers.6.conv.conv",
+          "precision": "bf16",
+          "original_shape": [
+            1024,
+            512,
+            1
+          ],
+          "convolution": true
+        },
+        {
+          "path": "cfm.wavenet.res_skip_layers.7.conv.conv",
+          "precision": "bf16",
+          "original_shape": [
+            512,
+            512,
+            1
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.0.ups.0",
+          "precision": "bf16",
+          "original_shape": [
+            1536,
+            768,
+            8
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.0.resblock0.convs1.0",
+          "precision": "bf16",
+          "original_shape": [
+            768,
+            768,
+            3
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.0.resblock0.convs1.1",
+          "precision": "bf16",
+          "original_shape": [
+            768,
+            768,
+            3
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.0.resblock0.convs1.2",
+          "precision": "bf16",
+          "original_shape": [
+            768,
+            768,
+            3
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.0.resblock0.convs2.0",
+          "precision": "bf16",
+          "original_shape": [
+            768,
+            768,
+            3
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.0.resblock0.convs2.1",
+          "precision": "bf16",
+          "original_shape": [
+            768,
+            768,
+            3
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.0.resblock0.convs2.2",
+          "precision": "bf16",
+          "original_shape": [
+            768,
+            768,
+            3
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.0.resblock1.convs1.0",
+          "precision": "bf16",
+          "original_shape": [
+            768,
+            768,
+            7
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.0.resblock1.convs1.1",
+          "precision": "bf16",
+          "original_shape": [
+            768,
+            768,
+            7
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.0.resblock1.convs1.2",
+          "precision": "bf16",
+          "original_shape": [
+            768,
+            768,
+            7
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.0.resblock1.convs2.0",
+          "precision": "bf16",
+          "original_shape": [
+            768,
+            768,
+            7
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.0.resblock1.convs2.1",
+          "precision": "bf16",
+          "original_shape": [
+            768,
+            768,
+            7
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.0.resblock1.convs2.2",
+          "precision": "bf16",
+          "original_shape": [
+            768,
+            768,
+            7
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.0.resblock2.convs1.0",
+          "precision": "bf16",
+          "original_shape": [
+            768,
+            768,
+            11
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.0.resblock2.convs1.1",
+          "precision": "bf16",
+          "original_shape": [
+            768,
+            768,
+            11
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.0.resblock2.convs1.2",
+          "precision": "bf16",
+          "original_shape": [
+            768,
+            768,
+            11
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.0.resblock2.convs2.0",
+          "precision": "bf16",
+          "original_shape": [
+            768,
+            768,
+            11
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.0.resblock2.convs2.1",
+          "precision": "bf16",
+          "original_shape": [
+            768,
+            768,
+            11
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.0.resblock2.convs2.2",
+          "precision": "bf16",
+          "original_shape": [
+            768,
+            768,
+            11
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.1.ups.0",
+          "precision": "bf16",
+          "original_shape": [
+            768,
+            384,
+            8
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.1.resblock0.convs1.0",
+          "precision": "bf16",
+          "original_shape": [
+            384,
+            384,
+            3
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.1.resblock0.convs1.1",
+          "precision": "bf16",
+          "original_shape": [
+            384,
+            384,
+            3
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.1.resblock0.convs1.2",
+          "precision": "bf16",
+          "original_shape": [
+            384,
+            384,
+            3
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.1.resblock0.convs2.0",
+          "precision": "bf16",
+          "original_shape": [
+            384,
+            384,
+            3
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.1.resblock0.convs2.1",
+          "precision": "bf16",
+          "original_shape": [
+            384,
+            384,
+            3
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.1.resblock0.convs2.2",
+          "precision": "bf16",
+          "original_shape": [
+            384,
+            384,
+            3
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.1.resblock1.convs1.0",
+          "precision": "bf16",
+          "original_shape": [
+            384,
+            384,
+            7
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.1.resblock1.convs1.1",
+          "precision": "bf16",
+          "original_shape": [
+            384,
+            384,
+            7
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.1.resblock1.convs1.2",
+          "precision": "bf16",
+          "original_shape": [
+            384,
+            384,
+            7
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.1.resblock1.convs2.0",
+          "precision": "bf16",
+          "original_shape": [
+            384,
+            384,
+            7
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.1.resblock1.convs2.1",
+          "precision": "bf16",
+          "original_shape": [
+            384,
+            384,
+            7
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.1.resblock1.convs2.2",
+          "precision": "bf16",
+          "original_shape": [
+            384,
+            384,
+            7
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.1.resblock2.convs1.0",
+          "precision": "bf16",
+          "original_shape": [
+            384,
+            384,
+            11
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.1.resblock2.convs1.1",
+          "precision": "bf16",
+          "original_shape": [
+            384,
+            384,
+            11
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.1.resblock2.convs1.2",
+          "precision": "bf16",
+          "original_shape": [
+            384,
+            384,
+            11
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.1.resblock2.convs2.0",
+          "precision": "bf16",
+          "original_shape": [
+            384,
+            384,
+            11
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.1.resblock2.convs2.1",
+          "precision": "bf16",
+          "original_shape": [
+            384,
+            384,
+            11
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.1.resblock2.convs2.2",
+          "precision": "bf16",
+          "original_shape": [
+            384,
+            384,
+            11
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.2.ups.0",
+          "precision": "bf16",
+          "original_shape": [
+            384,
+            192,
+            4
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.2.resblock0.convs1.0",
+          "precision": "bf16",
+          "original_shape": [
+            192,
+            192,
+            3
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.2.resblock0.convs1.1",
+          "precision": "bf16",
+          "original_shape": [
+            192,
+            192,
+            3
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.2.resblock0.convs1.2",
+          "precision": "bf16",
+          "original_shape": [
+            192,
+            192,
+            3
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.2.resblock0.convs2.0",
+          "precision": "bf16",
+          "original_shape": [
+            192,
+            192,
+            3
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.2.resblock0.convs2.1",
+          "precision": "bf16",
+          "original_shape": [
+            192,
+            192,
+            3
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.2.resblock0.convs2.2",
+          "precision": "bf16",
+          "original_shape": [
+            192,
+            192,
+            3
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.2.resblock1.convs1.0",
+          "precision": "bf16",
+          "original_shape": [
+            192,
+            192,
+            7
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.2.resblock1.convs1.1",
+          "precision": "bf16",
+          "original_shape": [
+            192,
+            192,
+            7
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.2.resblock1.convs1.2",
+          "precision": "bf16",
+          "original_shape": [
+            192,
+            192,
+            7
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.2.resblock1.convs2.0",
+          "precision": "bf16",
+          "original_shape": [
+            192,
+            192,
+            7
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.2.resblock1.convs2.1",
+          "precision": "bf16",
+          "original_shape": [
+            192,
+            192,
+            7
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.2.resblock1.convs2.2",
+          "precision": "bf16",
+          "original_shape": [
+            192,
+            192,
+            7
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.2.resblock2.convs1.0",
+          "precision": "bf16",
+          "original_shape": [
+            192,
+            192,
+            11
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.2.resblock2.convs1.1",
+          "precision": "bf16",
+          "original_shape": [
+            192,
+            192,
+            11
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.2.resblock2.convs1.2",
+          "precision": "bf16",
+          "original_shape": [
+            192,
+            192,
+            11
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.2.resblock2.convs2.0",
+          "precision": "bf16",
+          "original_shape": [
+            192,
+            192,
+            11
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.2.resblock2.convs2.1",
+          "precision": "bf16",
+          "original_shape": [
+            192,
+            192,
+            11
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.2.resblock2.convs2.2",
+          "precision": "bf16",
+          "original_shape": [
+            192,
+            192,
+            11
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.3.ups.0",
+          "precision": "bf16",
+          "original_shape": [
+            192,
+            96,
+            4
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.3.resblock0.convs1.0",
+          "precision": "bf16",
+          "original_shape": [
+            96,
+            96,
+            3
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.3.resblock0.convs1.1",
+          "precision": "bf16",
+          "original_shape": [
+            96,
+            96,
+            3
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.3.resblock0.convs1.2",
+          "precision": "bf16",
+          "original_shape": [
+            96,
+            96,
+            3
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.3.resblock0.convs2.0",
+          "precision": "bf16",
+          "original_shape": [
+            96,
+            96,
+            3
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.3.resblock0.convs2.1",
+          "precision": "bf16",
+          "original_shape": [
+            96,
+            96,
+            3
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.3.resblock0.convs2.2",
+          "precision": "bf16",
+          "original_shape": [
+            96,
+            96,
+            3
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.3.resblock1.convs1.0",
+          "precision": "bf16",
+          "original_shape": [
+            96,
+            96,
+            7
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.3.resblock1.convs1.1",
+          "precision": "bf16",
+          "original_shape": [
+            96,
+            96,
+            7
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.3.resblock1.convs1.2",
+          "precision": "bf16",
+          "original_shape": [
+            96,
+            96,
+            7
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.3.resblock1.convs2.0",
+          "precision": "bf16",
+          "original_shape": [
+            96,
+            96,
+            7
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.3.resblock1.convs2.1",
+          "precision": "bf16",
+          "original_shape": [
+            96,
+            96,
+            7
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.3.resblock1.convs2.2",
+          "precision": "bf16",
+          "original_shape": [
+            96,
+            96,
+            7
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.3.resblock2.convs1.0",
+          "precision": "bf16",
+          "original_shape": [
+            96,
+            96,
+            11
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.3.resblock2.convs1.1",
+          "precision": "bf16",
+          "original_shape": [
+            96,
+            96,
+            11
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.3.resblock2.convs1.2",
+          "precision": "bf16",
+          "original_shape": [
+            96,
+            96,
+            11
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.3.resblock2.convs2.0",
+          "precision": "bf16",
+          "original_shape": [
+            96,
+            96,
+            11
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.3.resblock2.convs2.1",
+          "precision": "bf16",
+          "original_shape": [
+            96,
+            96,
+            11
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.3.resblock2.convs2.2",
+          "precision": "bf16",
+          "original_shape": [
+            96,
+            96,
+            11
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.4.ups.0",
+          "precision": "bf16",
+          "original_shape": [
+            96,
+            48,
+            4
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.4.resblock0.convs1.0",
+          "precision": "bf16",
+          "original_shape": [
+            48,
+            48,
+            3
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.4.resblock0.convs1.1",
+          "precision": "bf16",
+          "original_shape": [
+            48,
+            48,
+            3
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.4.resblock0.convs1.2",
+          "precision": "bf16",
+          "original_shape": [
+            48,
+            48,
+            3
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.4.resblock0.convs2.0",
+          "precision": "bf16",
+          "original_shape": [
+            48,
+            48,
+            3
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.4.resblock0.convs2.1",
+          "precision": "bf16",
+          "original_shape": [
+            48,
+            48,
+            3
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.4.resblock0.convs2.2",
+          "precision": "bf16",
+          "original_shape": [
+            48,
+            48,
+            3
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.4.resblock1.convs1.0",
+          "precision": "bf16",
+          "original_shape": [
+            48,
+            48,
+            7
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.4.resblock1.convs1.1",
+          "precision": "bf16",
+          "original_shape": [
+            48,
+            48,
+            7
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.4.resblock1.convs1.2",
+          "precision": "bf16",
+          "original_shape": [
+            48,
+            48,
+            7
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.4.resblock1.convs2.0",
+          "precision": "bf16",
+          "original_shape": [
+            48,
+            48,
+            7
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.4.resblock1.convs2.1",
+          "precision": "bf16",
+          "original_shape": [
+            48,
+            48,
+            7
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.4.resblock1.convs2.2",
+          "precision": "bf16",
+          "original_shape": [
+            48,
+            48,
+            7
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.4.resblock2.convs1.0",
+          "precision": "bf16",
+          "original_shape": [
+            48,
+            48,
+            11
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.4.resblock2.convs1.1",
+          "precision": "bf16",
+          "original_shape": [
+            48,
+            48,
+            11
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.4.resblock2.convs1.2",
+          "precision": "bf16",
+          "original_shape": [
+            48,
+            48,
+            11
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.4.resblock2.convs2.0",
+          "precision": "bf16",
+          "original_shape": [
+            48,
+            48,
+            11
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.4.resblock2.convs2.1",
+          "precision": "bf16",
+          "original_shape": [
+            48,
+            48,
+            11
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.4.resblock2.convs2.2",
+          "precision": "bf16",
+          "original_shape": [
+            48,
+            48,
+            11
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.5.ups.0",
+          "precision": "bf16",
+          "original_shape": [
+            48,
+            24,
+            4
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.5.resblock0.convs1.0",
+          "precision": "bf16",
+          "original_shape": [
+            24,
+            24,
+            3
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.5.resblock0.convs1.1",
+          "precision": "bf16",
+          "original_shape": [
+            24,
+            24,
+            3
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.5.resblock0.convs1.2",
+          "precision": "bf16",
+          "original_shape": [
+            24,
+            24,
+            3
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.5.resblock0.convs2.0",
+          "precision": "bf16",
+          "original_shape": [
+            24,
+            24,
+            3
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.5.resblock0.convs2.1",
+          "precision": "bf16",
+          "original_shape": [
+            24,
+            24,
+            3
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.5.resblock0.convs2.2",
+          "precision": "bf16",
+          "original_shape": [
+            24,
+            24,
+            3
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.5.resblock1.convs1.0",
+          "precision": "bf16",
+          "original_shape": [
+            24,
+            24,
+            7
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.5.resblock1.convs1.1",
+          "precision": "bf16",
+          "original_shape": [
+            24,
+            24,
+            7
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.5.resblock1.convs1.2",
+          "precision": "bf16",
+          "original_shape": [
+            24,
+            24,
+            7
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.5.resblock1.convs2.0",
+          "precision": "bf16",
+          "original_shape": [
+            24,
+            24,
+            7
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.5.resblock1.convs2.1",
+          "precision": "bf16",
+          "original_shape": [
+            24,
+            24,
+            7
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.5.resblock1.convs2.2",
+          "precision": "bf16",
+          "original_shape": [
+            24,
+            24,
+            7
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.5.resblock2.convs1.0",
+          "precision": "bf16",
+          "original_shape": [
+            24,
+            24,
+            11
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.5.resblock2.convs1.1",
+          "precision": "bf16",
+          "original_shape": [
+            24,
+            24,
+            11
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.5.resblock2.convs1.2",
+          "precision": "bf16",
+          "original_shape": [
+            24,
+            24,
+            11
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.5.resblock2.convs2.0",
+          "precision": "bf16",
+          "original_shape": [
+            24,
+            24,
+            11
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.5.resblock2.convs2.1",
+          "precision": "bf16",
+          "original_shape": [
+            24,
+            24,
+            11
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.5.resblock2.convs2.2",
+          "precision": "bf16",
+          "original_shape": [
+            24,
+            24,
+            11
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.conv_pre",
+          "precision": "bf16",
+          "boundary": true
+        },
+        {
+          "path": "vocoder.conv_post",
+          "precision": "bf16",
+          "boundary": true
+        }
+      ],
+      "device": {
+        "name": "NVIDIA GeForce RTX 4090",
+        "sm": 89,
+        "sms": 128,
+        "shared_per_sm": 102400,
+        "shared_per_cta": 101376,
+        "registers_per_sm": 65536,
+        "threads_per_sm": 1536,
+        "max_ctas_per_sm": 32
+      },
+      "cache": {
+        "path": "/workspace/A_inspark_marlin/.cache/kernel_plans/5dee04bf08155a90f5797cbecd4c751aadbac382533143c2a0ba949fba84c450.json",
+        "key": "5dee04bf08155a90f5797cbecd4c751aadbac382533143c2a0ba949fba84c450",
+        "loaded": 0,
+        "total": 0,
+        "online_tuning": false
+      },
+      "plans": {},
+      "interface_precision": "FP32",
+      "observed_head_shape_extents": {
+        "target": [
+          8,
+          64,
+          128,
+          256,
+          4096
+        ],
+        "cfm": [
+          310,
+          4096
+        ],
+        "draft": [
+          7,
+          64,
+          256,
+          512,
+          1024,
+          4096
+        ]
+      },
+      "convolution_quantized": true,
+      "rnn_quantized": false,
+      "kv_quantized": false,
+      "calibrated_quality": false,
+      "online_tuning": false
+    },
+    "rnn": {
+      "mode": "bf16",
+      "matrices": [
+        "state",
+        "hidden",
+        "output"
+      ],
+      "folded_token_table": "FP32",
+      "nonlinear_math": "FP32",
+      "online_tuning": false,
+      "cache": {
+        "path": "/workspace/A_inspark_marlin/.cache/kernel_plans/64414bdf07e63de2c4db97e0697cc45b0c4313edebab70fe7bd99d7de8f37766.json",
+        "key": "64414bdf07e63de2c4db97e0697cc45b0c4313edebab70fe7bd99d7de8f37766",
+        "loaded": 0,
+        "total": 0,
+        "online_tuning": false
+      }
+    },
+    "compile": {
+      "components": [
+        "target",
+        "draft",
+        "cfm",
+        "vocoder"
+      ],
+      "offline_warmup_required": true,
+      "online_compile": false,
+      "unknown_shape": "eager",
+      "fullgraph": true,
+      "dynamic": false,
+      "cudagraphs": false,
+      "torch": "2.8.0+cu128",
+      "triton": "3.4.0"
+    },
+    "request_isolation": {
+      "strict_request_isolation": true,
+      "rng_policy": "legacy_per_request",
+      "shared_rng_paths": [],
+      "request_stream_v1_implemented": false
+    }
+  },
+  "prepare_seconds": 27.96861458569765,
+  "operator_audit": {
+    "draft": {
+      "comparisons": [
+        {
+          "output": 0,
+          "candidate_precision": "bf16",
+          "atol": 0.01,
+          "rtol": 0.01,
+          "expected_shape": [
+            1,
+            7,
+            1280
+          ],
+          "actual_shape": [
+            1,
+            7,
+            1280
+          ],
+          "reference_dtype": "torch.float32",
+          "candidate_dtype": "torch.float32",
+          "storage_dtypes_match": true,
+          "total_elements": 8960,
+          "candidate_elements": 8960,
+          "tolerance_provenance": {
+            "source": "src/acc_infer_clear/guardrails/numerics.py:TOLERANCES",
+            "selection": "declared candidate arithmetic precision",
+            "empirically_calibrated": false,
+            "storage_dtype_equality_required": false,
+            "comparison_dtype": "torch.float64",
+            "rule": "abs(actual-reference) <= atol + rtol * abs(reference)"
+          },
+          "finite_reference": true,
+          "finite_actual": true,
+          "pass_gate": true,
+          "max_abs": 0.0036182403564453125,
+          "mean_abs": 0.000550467533381457,
+          "relative_l2": 0.0073749231106304,
+          "cosine": 0.9999733306431327,
+          "snr_db": 42.6448500637499,
+          "mismatched_elements": 0
+        },
+        {
+          "output": 1,
+          "candidate_precision": "bf16",
+          "atol": 0.01,
+          "rtol": 0.01,
+          "expected_shape": [
+            1,
+            7,
+            8194
+          ],
+          "actual_shape": [
+            1,
+            7,
+            8194
+          ],
+          "reference_dtype": "torch.float32",
+          "candidate_dtype": "torch.float32",
+          "storage_dtypes_match": true,
+          "total_elements": 57358,
+          "candidate_elements": 57358,
+          "tolerance_provenance": {
+            "source": "src/acc_infer_clear/guardrails/numerics.py:TOLERANCES",
+            "selection": "declared candidate arithmetic precision",
+            "empirically_calibrated": false,
+            "storage_dtype_equality_required": false,
+            "comparison_dtype": "torch.float64",
+            "rule": "abs(actual-reference) <= atol + rtol * abs(reference)"
+          },
+          "finite_reference": true,
+          "finite_actual": true,
+          "pass_gate": false,
+          "max_abs": 0.04472437500953674,
+          "mean_abs": 0.007356733369463925,
+          "relative_l2": 0.008252457706065877,
+          "cosine": 0.9999681515364414,
+          "snr_db": 41.668333855116366,
+          "mismatched_elements": 4465,
+          "reason": "tolerance exceeded"
+        }
+      ],
+      "timings": {
+        "eager": {
+          "gpu_ms": 2.0296703338623048,
+          "wall_ms": 2.0346982404589653
+        },
+        "compiled": {
+          "gpu_ms": 0.8972031593322753,
+          "wall_ms": 0.9023614227771759
+        }
+      },
+      "pass_gate": false,
+      "timing_scope": "real-input module call including internal casts/launches; excludes surrounding runtime packing, separately measured end-to-end"
+    },
+    "cfm": {
+      "comparisons": [
+        {
+          "output": 0,
+          "candidate_precision": "bf16",
+          "atol": 0.01,
+          "rtol": 0.01,
+          "expected_shape": [
+            1,
+            80,
+            310
+          ],
+          "actual_shape": [
+            1,
+            80,
+            310
+          ],
+          "reference_dtype": "torch.float32",
+          "candidate_dtype": "torch.float32",
+          "storage_dtypes_match": true,
+          "total_elements": 24800,
+          "candidate_elements": 24800,
+          "tolerance_provenance": {
+            "source": "src/acc_infer_clear/guardrails/numerics.py:TOLERANCES",
+            "selection": "declared candidate arithmetic precision",
+            "empirically_calibrated": false,
+            "storage_dtype_equality_required": false,
+            "comparison_dtype": "torch.float64",
+            "rule": "abs(actual-reference) <= atol + rtol * abs(reference)"
+          },
+          "finite_reference": true,
+          "finite_actual": true,
+          "pass_gate": false,
+          "max_abs": 0.04578232765197754,
+          "mean_abs": 0.006370520878699608,
+          "relative_l2": 0.001822920139921794,
+          "cosine": 0.9999983632298495,
+          "snr_db": 54.784647137607934,
+          "mismatched_elements": 167,
+          "reason": "tolerance exceeded"
+        }
+      ],
+      "timings": {
+        "eager": {
+          "gpu_ms": 18.726914978027345,
+          "wall_ms": 18.734966404736042
+        },
+        "compiled": {
+          "gpu_ms": 5.914547348022461,
+          "wall_ms": 5.921481363475323
+        }
+      },
+      "pass_gate": false,
+      "timing_scope": "real-input module call including internal casts/launches; excludes surrounding runtime packing, separately measured end-to-end"
+    },
+    "vocoder": {
+      "comparisons": [
+        {
+          "output": 0,
+          "candidate_precision": "bf16",
+          "atol": 0.01,
+          "rtol": 0.01,
+          "expected_shape": [
+            1,
+            1,
+            13312
+          ],
+          "actual_shape": [
+            1,
+            1,
+            13312
+          ],
+          "reference_dtype": "torch.float32",
+          "candidate_dtype": "torch.float32",
+          "storage_dtypes_match": true,
+          "total_elements": 13312,
+          "candidate_elements": 13312,
+          "tolerance_provenance": {
+            "source": "src/acc_infer_clear/guardrails/numerics.py:TOLERANCES",
+            "selection": "declared candidate arithmetic precision",
+            "empirically_calibrated": false,
+            "storage_dtype_equality_required": false,
+            "comparison_dtype": "torch.float64",
+            "rule": "abs(actual-reference) <= atol + rtol * abs(reference)"
+          },
+          "finite_reference": true,
+          "finite_actual": true,
+          "pass_gate": true,
+          "max_abs": 0.000732421875,
+          "mean_abs": 9.827734958470012e-05,
+          "relative_l2": 0.034818055126224094,
+          "cosine": 0.9994034013071368,
+          "snr_db": 29.163909828956577,
+          "mismatched_elements": 0
+        }
+      ],
+      "timings": {
+        "eager": {
+          "gpu_ms": 35.480062866210936,
+          "wall_ms": 35.48865411430597
+        },
+        "compiled": {
+          "gpu_ms": 12.738365173339844,
+          "wall_ms": 12.743844091892242
+        }
+      },
+      "pass_gate": true,
+      "timing_scope": "real-input module call including internal casts/launches; excludes surrounding runtime packing, separately measured end-to-end"
+    }
+  },
+  "routes": {
+    "sessions": 0,
+    "draft_calls": 156,
+    "target_calls": 156,
+    "device_round_attempts": 0,
+    "device_round_successes": 0,
+    "device_round_fallbacks": 0,
+    "device_target_steps": 0,
+    "device_draft_steps": 0,
+    "draft_backbone_calls": 156,
+    "native_target_steps": 0,
+    "native_draft_steps": 0,
+    "native_draft_compare": [],
+    "native_cfm_backend": null,
+    "native_cfm_calls": 0,
+    "native_cfm_fallbacks": 0,
+    "native_vocoder_backend": null,
+    "native_vocoder_calls": 0,
+    "native_vocoder_fallbacks": 0,
+    "head_graphs": null,
+    "acoustic_routes": {
+      "cfm": {
+        "wrapper": {},
+        "wrapper_total": {
+          "calls": 0,
+          "fallbacks": 0
+        },
+        "wrapper_prepare": {
+          "calls": 0,
+          "fallbacks": 0
+        },
+        "wrapper_direct": {
+          "calls": 0,
+          "fallbacks": 0
+        },
+        "graph_routes": []
+      },
+      "vocoder": {
+        "wrapper": {
+          "component": "vocoder",
+          "compiled_calls": 4,
+          "eager_calls": 4,
+          "warmed_signatures": 1,
+          "signatures": [
+            "('tuple', (('tuple', (('tensor', (1, 80, 52), (24800, 310, 1), 'torch.float32', 'cuda:0', False),)), ('dict', ())))"
+          ],
+          "failed_signatures": 0,
+          "errors": [],
+          "compile_seconds": 41.847761280834675,
+          "online_compile": false,
+          "unknown_shape": "eager",
+          "compiler_error": "eager"
+        },
+        "wrapper_total": {
+          "calls": 0,
+          "fallbacks": 0
+        },
+        "wrapper_prepare": {
+          "calls": 0,
+          "fallbacks": 0
+        },
+        "wrapper_direct": {
+          "calls": 0,
+          "fallbacks": 0
+        },
+        "graph_routes": []
+      }
+    },
+    "strict_request_isolation": true,
+    "rng_policy": "legacy_per_request",
+    "active_rows": 0,
+    "error_sessions": 0,
+    "target_slots": null,
+    "draft_slots": null,
+    "memory": {
+      "cuda_allocated_bytes": 8504205824,
+      "cuda_reserved_bytes": 11393826816,
+      "cuda_peak_allocated_bytes": 9943896576,
+      "cuda_peak_reserved_bytes": 11393826816,
+      "rss_bytes": 3798712320
+    }
+  },
+  "compile": {
+    "target": {
+      "component": "target",
+      "compiled_calls": 0,
+      "eager_calls": 156,
+      "warmed_signatures": 0,
+      "signatures": [],
+      "failed_signatures": 39,
+      "errors": [
+        {
+          "kind": "offline_compile",
+          "error": "Unsupported('Logger not supported for non-export cases. To avoid graph breaks caused by logger in compile-mode, it is recommended to disable logging by adding logging methods to config.ignore_logger_methods\\n\\nfrom user code:\\n   File \"/workspace/A_inspark_marlin/inference/src/acc_infer_clear/models/indextts2/dspark/target.py\", line 21, in _block_forward_with_hidden_states\\n    body=self.model.transformer(inputs_embeds=embeddings,past_key_values=past_key_values,attention_mask=attention_mask,\\n  File \"/workspace/A_inspark_marlin/.venv/lib/python3.11/site-packages/transformers/models/gpt2/modeling_gpt2.py\", line 847, in forward\\n    logger.warning_once(\\n\\nSet TORCHDYNAMO_VERBOSE=1 for the internal stack trace (please do this especially if you\\'re reporting a bug to PyTorch). For even more developer context, set TORCH_LOGS=\"+dynamo\"\\n')"
+        },
+        {
+          "kind": "offline_compile",
+          "error": "Unsupported('Logger not supported for non-export cases. To avoid graph breaks caused by logger in compile-mode, it is recommended to disable logging by adding logging methods to config.ignore_logger_methods\\n\\nfrom user code:\\n   File \"/workspace/A_inspark_marlin/inference/src/acc_infer_clear/models/indextts2/dspark/target.py\", line 21, in _block_forward_with_hidden_states\\n    body=self.model.transformer(inputs_embeds=embeddings,past_key_values=past_key_values,attention_mask=attention_mask,\\n  File \"/workspace/A_inspark_marlin/.venv/lib/python3.11/site-packages/transformers/models/gpt2/modeling_gpt2.py\", line 847, in forward\\n    logger.warning_once(\\n\\nSet TORCHDYNAMO_VERBOSE=1 for the internal stack trace (please do this especially if you\\'re reporting a bug to PyTorch). For even more developer context, set TORCH_LOGS=\"+dynamo\"\\n')"
+        },
+        {
+          "kind": "offline_compile",
+          "error": "Unsupported('Logger not supported for non-export cases. To avoid graph breaks caused by logger in compile-mode, it is recommended to disable logging by adding logging methods to config.ignore_logger_methods\\n\\nfrom user code:\\n   File \"/workspace/A_inspark_marlin/inference/src/acc_infer_clear/models/indextts2/dspark/target.py\", line 21, in _block_forward_with_hidden_states\\n    body=self.model.transformer(inputs_embeds=embeddings,past_key_values=past_key_values,attention_mask=attention_mask,\\n  File \"/workspace/A_inspark_marlin/.venv/lib/python3.11/site-packages/transformers/models/gpt2/modeling_gpt2.py\", line 847, in forward\\n    logger.warning_once(\\n\\nSet TORCHDYNAMO_VERBOSE=1 for the internal stack trace (please do this especially if you\\'re reporting a bug to PyTorch). For even more developer context, set TORCH_LOGS=\"+dynamo\"\\n')"
+        },
+        {
+          "kind": "offline_compile",
+          "error": "Unsupported('Logger not supported for non-export cases. To avoid graph breaks caused by logger in compile-mode, it is recommended to disable logging by adding logging methods to config.ignore_logger_methods\\n\\nfrom user code:\\n   File \"/workspace/A_inspark_marlin/inference/src/acc_infer_clear/models/indextts2/dspark/target.py\", line 21, in _block_forward_with_hidden_states\\n    body=self.model.transformer(inputs_embeds=embeddings,past_key_values=past_key_values,attention_mask=attention_mask,\\n  File \"/workspace/A_inspark_marlin/.venv/lib/python3.11/site-packages/transformers/models/gpt2/modeling_gpt2.py\", line 847, in forward\\n    logger.warning_once(\\n\\nSet TORCHDYNAMO_VERBOSE=1 for the internal stack trace (please do this especially if you\\'re reporting a bug to PyTorch). For even more developer context, set TORCH_LOGS=\"+dynamo\"\\n')"
+        },
+        {
+          "kind": "offline_compile",
+          "error": "Unsupported('Logger not supported for non-export cases. To avoid graph breaks caused by logger in compile-mode, it is recommended to disable logging by adding logging methods to config.ignore_logger_methods\\n\\nfrom user code:\\n   File \"/workspace/A_inspark_marlin/inference/src/acc_infer_clear/models/indextts2/dspark/target.py\", line 21, in _block_forward_with_hidden_states\\n    body=self.model.transformer(inputs_embeds=embeddings,past_key_values=past_key_values,attention_mask=attention_mask,\\n  File \"/workspace/A_inspark_marlin/.venv/lib/python3.11/site-packages/transformers/models/gpt2/modeling_gpt2.py\", line 847, in forward\\n    logger.warning_once(\\n\\nSet TORCHDYNAMO_VERBOSE=1 for the internal stack trace (please do this especially if you\\'re reporting a bug to PyTorch). For even more developer context, set TORCH_LOGS=\"+dynamo\"\\n')"
+        },
+        {
+          "kind": "offline_compile",
+          "error": "Unsupported('Logger not supported for non-export cases. To avoid graph breaks caused by logger in compile-mode, it is recommended to disable logging by adding logging methods to config.ignore_logger_methods\\n\\nfrom user code:\\n   File \"/workspace/A_inspark_marlin/inference/src/acc_infer_clear/models/indextts2/dspark/target.py\", line 21, in _block_forward_with_hidden_states\\n    body=self.model.transformer(inputs_embeds=embeddings,past_key_values=past_key_values,attention_mask=attention_mask,\\n  File \"/workspace/A_inspark_marlin/.venv/lib/python3.11/site-packages/transformers/models/gpt2/modeling_gpt2.py\", line 847, in forward\\n    logger.warning_once(\\n\\nSet TORCHDYNAMO_VERBOSE=1 for the internal stack trace (please do this especially if you\\'re reporting a bug to PyTorch). For even more developer context, set TORCH_LOGS=\"+dynamo\"\\n')"
+        },
+        {
+          "kind": "offline_compile",
+          "error": "Unsupported('Logger not supported for non-export cases. To avoid graph breaks caused by logger in compile-mode, it is recommended to disable logging by adding logging methods to config.ignore_logger_methods\\n\\nfrom user code:\\n   File \"/workspace/A_inspark_marlin/inference/src/acc_infer_clear/models/indextts2/dspark/target.py\", line 21, in _block_forward_with_hidden_states\\n    body=self.model.transformer(inputs_embeds=embeddings,past_key_values=past_key_values,attention_mask=attention_mask,\\n  File \"/workspace/A_inspark_marlin/.venv/lib/python3.11/site-packages/transformers/models/gpt2/modeling_gpt2.py\", line 847, in forward\\n    logger.warning_once(\\n\\nSet TORCHDYNAMO_VERBOSE=1 for the internal stack trace (please do this especially if you\\'re reporting a bug to PyTorch). For even more developer context, set TORCH_LOGS=\"+dynamo\"\\n')"
+        },
+        {
+          "kind": "offline_compile",
+          "error": "Unsupported('Logger not supported for non-export cases. To avoid graph breaks caused by logger in compile-mode, it is recommended to disable logging by adding logging methods to config.ignore_logger_methods\\n\\nfrom user code:\\n   File \"/workspace/A_inspark_marlin/inference/src/acc_infer_clear/models/indextts2/dspark/target.py\", line 21, in _block_forward_with_hidden_states\\n    body=self.model.transformer(inputs_embeds=embeddings,past_key_values=past_key_values,attention_mask=attention_mask,\\n  File \"/workspace/A_inspark_marlin/.venv/lib/python3.11/site-packages/transformers/models/gpt2/modeling_gpt2.py\", line 847, in forward\\n    logger.warning_once(\\n\\nSet TORCHDYNAMO_VERBOSE=1 for the internal stack trace (please do this especially if you\\'re reporting a bug to PyTorch). For even more developer context, set TORCH_LOGS=\"+dynamo\"\\n')"
+        },
+        {
+          "kind": "offline_compile",
+          "error": "Unsupported('Logger not supported for non-export cases. To avoid graph breaks caused by logger in compile-mode, it is recommended to disable logging by adding logging methods to config.ignore_logger_methods\\n\\nfrom user code:\\n   File \"/workspace/A_inspark_marlin/inference/src/acc_infer_clear/models/indextts2/dspark/target.py\", line 21, in _block_forward_with_hidden_states\\n    body=self.model.transformer(inputs_embeds=embeddings,past_key_values=past_key_values,attention_mask=attention_mask,\\n  File \"/workspace/A_inspark_marlin/.venv/lib/python3.11/site-packages/transformers/models/gpt2/modeling_gpt2.py\", line 847, in forward\\n    logger.warning_once(\\n\\nSet TORCHDYNAMO_VERBOSE=1 for the internal stack trace (please do this especially if you\\'re reporting a bug to PyTorch). For even more developer context, set TORCH_LOGS=\"+dynamo\"\\n')"
+        },
+        {
+          "kind": "offline_compile",
+          "error": "Unsupported('Logger not supported for non-export cases. To avoid graph breaks caused by logger in compile-mode, it is recommended to disable logging by adding logging methods to config.ignore_logger_methods\\n\\nfrom user code:\\n   File \"/workspace/A_inspark_marlin/inference/src/acc_infer_clear/models/indextts2/dspark/target.py\", line 21, in _block_forward_with_hidden_states\\n    body=self.model.transformer(inputs_embeds=embeddings,past_key_values=past_key_values,attention_mask=attention_mask,\\n  File \"/workspace/A_inspark_marlin/.venv/lib/python3.11/site-packages/transformers/models/gpt2/modeling_gpt2.py\", line 847, in forward\\n    logger.warning_once(\\n\\nSet TORCHDYNAMO_VERBOSE=1 for the internal stack trace (please do this especially if you\\'re reporting a bug to PyTorch). For even more developer context, set TORCH_LOGS=\"+dynamo\"\\n')"
+        },
+        {
+          "kind": "offline_compile",
+          "error": "Unsupported('Logger not supported for non-export cases. To avoid graph breaks caused by logger in compile-mode, it is recommended to disable logging by adding logging methods to config.ignore_logger_methods\\n\\nfrom user code:\\n   File \"/workspace/A_inspark_marlin/inference/src/acc_infer_clear/models/indextts2/dspark/target.py\", line 21, in _block_forward_with_hidden_states\\n    body=self.model.transformer(inputs_embeds=embeddings,past_key_values=past_key_values,attention_mask=attention_mask,\\n  File \"/workspace/A_inspark_marlin/.venv/lib/python3.11/site-packages/transformers/models/gpt2/modeling_gpt2.py\", line 847, in forward\\n    logger.warning_once(\\n\\nSet TORCHDYNAMO_VERBOSE=1 for the internal stack trace (please do this especially if you\\'re reporting a bug to PyTorch). For even more developer context, set TORCH_LOGS=\"+dynamo\"\\n')"
+        },
+        {
+          "kind": "offline_compile",
+          "error": "Unsupported('Logger not supported for non-export cases. To avoid graph breaks caused by logger in compile-mode, it is recommended to disable logging by adding logging methods to config.ignore_logger_methods\\n\\nfrom user code:\\n   File \"/workspace/A_inspark_marlin/inference/src/acc_infer_clear/models/indextts2/dspark/target.py\", line 21, in _block_forward_with_hidden_states\\n    body=self.model.transformer(inputs_embeds=embeddings,past_key_values=past_key_values,attention_mask=attention_mask,\\n  File \"/workspace/A_inspark_marlin/.venv/lib/python3.11/site-packages/transformers/models/gpt2/modeling_gpt2.py\", line 847, in forward\\n    logger.warning_once(\\n\\nSet TORCHDYNAMO_VERBOSE=1 for the internal stack trace (please do this especially if you\\'re reporting a bug to PyTorch). For even more developer context, set TORCH_LOGS=\"+dynamo\"\\n')"
+        },
+        {
+          "kind": "offline_compile",
+          "error": "Unsupported('Logger not supported for non-export cases. To avoid graph breaks caused by logger in compile-mode, it is recommended to disable logging by adding logging methods to config.ignore_logger_methods\\n\\nfrom user code:\\n   File \"/workspace/A_inspark_marlin/inference/src/acc_infer_clear/models/indextts2/dspark/target.py\", line 21, in _block_forward_with_hidden_states\\n    body=self.model.transformer(inputs_embeds=embeddings,past_key_values=past_key_values,attention_mask=attention_mask,\\n  File \"/workspace/A_inspark_marlin/.venv/lib/python3.11/site-packages/transformers/models/gpt2/modeling_gpt2.py\", line 847, in forward\\n    logger.warning_once(\\n\\nSet TORCHDYNAMO_VERBOSE=1 for the internal stack trace (please do this especially if you\\'re reporting a bug to PyTorch). For even more developer context, set TORCH_LOGS=\"+dynamo\"\\n')"
+        },
+        {
+          "kind": "offline_compile",
+          "error": "Unsupported('Logger not supported for non-export cases. To avoid graph breaks caused by logger in compile-mode, it is recommended to disable logging by adding logging methods to config.ignore_logger_methods\\n\\nfrom user code:\\n   File \"/workspace/A_inspark_marlin/inference/src/acc_infer_clear/models/indextts2/dspark/target.py\", line 21, in _block_forward_with_hidden_states\\n    body=self.model.transformer(inputs_embeds=embeddings,past_key_values=past_key_values,attention_mask=attention_mask,\\n  File \"/workspace/A_inspark_marlin/.venv/lib/python3.11/site-packages/transformers/models/gpt2/modeling_gpt2.py\", line 847, in forward\\n    logger.warning_once(\\n\\nSet TORCHDYNAMO_VERBOSE=1 for the internal stack trace (please do this especially if you\\'re reporting a bug to PyTorch). For even more developer context, set TORCH_LOGS=\"+dynamo\"\\n')"
+        },
+        {
+          "kind": "offline_compile",
+          "error": "Unsupported('Logger not supported for non-export cases. To avoid graph breaks caused by logger in compile-mode, it is recommended to disable logging by adding logging methods to config.ignore_logger_methods\\n\\nfrom user code:\\n   File \"/workspace/A_inspark_marlin/inference/src/acc_infer_clear/models/indextts2/dspark/target.py\", line 21, in _block_forward_with_hidden_states\\n    body=self.model.transformer(inputs_embeds=embeddings,past_key_values=past_key_values,attention_mask=attention_mask,\\n  File \"/workspace/A_inspark_marlin/.venv/lib/python3.11/site-packages/transformers/models/gpt2/modeling_gpt2.py\", line 847, in forward\\n    logger.warning_once(\\n\\nSet TORCHDYNAMO_VERBOSE=1 for the internal stack trace (please do this especially if you\\'re reporting a bug to PyTorch). For even more developer context, set TORCH_LOGS=\"+dynamo\"\\n')"
+        },
+        {
+          "kind": "offline_compile",
+          "error": "Unsupported('Logger not supported for non-export cases. To avoid graph breaks caused by logger in compile-mode, it is recommended to disable logging by adding logging methods to config.ignore_logger_methods\\n\\nfrom user code:\\n   File \"/workspace/A_inspark_marlin/inference/src/acc_infer_clear/models/indextts2/dspark/target.py\", line 21, in _block_forward_with_hidden_states\\n    body=self.model.transformer(inputs_embeds=embeddings,past_key_values=past_key_values,attention_mask=attention_mask,\\n  File \"/workspace/A_inspark_marlin/.venv/lib/python3.11/site-packages/transformers/models/gpt2/modeling_gpt2.py\", line 847, in forward\\n    logger.warning_once(\\n\\nSet TORCHDYNAMO_VERBOSE=1 for the internal stack trace (please do this especially if you\\'re reporting a bug to PyTorch). For even more developer context, set TORCH_LOGS=\"+dynamo\"\\n')"
+        },
+        {
+          "kind": "offline_compile",
+          "error": "Unsupported('Logger not supported for non-export cases. To avoid graph breaks caused by logger in compile-mode, it is recommended to disable logging by adding logging methods to config.ignore_logger_methods\\n\\nfrom user code:\\n   File \"/workspace/A_inspark_marlin/inference/src/acc_infer_clear/models/indextts2/dspark/target.py\", line 21, in _block_forward_with_hidden_states\\n    body=self.model.transformer(inputs_embeds=embeddings,past_key_values=past_key_values,attention_mask=attention_mask,\\n  File \"/workspace/A_inspark_marlin/.venv/lib/python3.11/site-packages/transformers/models/gpt2/modeling_gpt2.py\", line 847, in forward\\n    logger.warning_once(\\n\\nSet TORCHDYNAMO_VERBOSE=1 for the internal stack trace (please do this especially if you\\'re reporting a bug to PyTorch). For even more developer context, set TORCH_LOGS=\"+dynamo\"\\n')"
+        },
+        {
+          "kind": "offline_compile",
+          "error": "Unsupported('Logger not supported for non-export cases. To avoid graph breaks caused by logger in compile-mode, it is recommended to disable logging by adding logging methods to config.ignore_logger_methods\\n\\nfrom user code:\\n   File \"/workspace/A_inspark_marlin/inference/src/acc_infer_clear/models/indextts2/dspark/target.py\", line 21, in _block_forward_with_hidden_states\\n    body=self.model.transformer(inputs_embeds=embeddings,past_key_values=past_key_values,attention_mask=attention_mask,\\n  File \"/workspace/A_inspark_marlin/.venv/lib/python3.11/site-packages/transformers/models/gpt2/modeling_gpt2.py\", line 847, in forward\\n    logger.warning_once(\\n\\nSet TORCHDYNAMO_VERBOSE=1 for the internal stack trace (please do this especially if you\\'re reporting a bug to PyTorch). For even more developer context, set TORCH_LOGS=\"+dynamo\"\\n')"
+        },
+        {
+          "kind": "offline_compile",
+          "error": "Unsupported('Logger not supported for non-export cases. To avoid graph breaks caused by logger in compile-mode, it is recommended to disable logging by adding logging methods to config.ignore_logger_methods\\n\\nfrom user code:\\n   File \"/workspace/A_inspark_marlin/inference/src/acc_infer_clear/models/indextts2/dspark/target.py\", line 21, in _block_forward_with_hidden_states\\n    body=self.model.transformer(inputs_embeds=embeddings,past_key_values=past_key_values,attention_mask=attention_mask,\\n  File \"/workspace/A_inspark_marlin/.venv/lib/python3.11/site-packages/transformers/models/gpt2/modeling_gpt2.py\", line 847, in forward\\n    logger.warning_once(\\n\\nSet TORCHDYNAMO_VERBOSE=1 for the internal stack trace (please do this especially if you\\'re reporting a bug to PyTorch). For even more developer context, set TORCH_LOGS=\"+dynamo\"\\n')"
+        },
+        {
+          "kind": "offline_compile",
+          "error": "Unsupported('Logger not supported for non-export cases. To avoid graph breaks caused by logger in compile-mode, it is recommended to disable logging by adding logging methods to config.ignore_logger_methods\\n\\nfrom user code:\\n   File \"/workspace/A_inspark_marlin/inference/src/acc_infer_clear/models/indextts2/dspark/target.py\", line 21, in _block_forward_with_hidden_states\\n    body=self.model.transformer(inputs_embeds=embeddings,past_key_values=past_key_values,attention_mask=attention_mask,\\n  File \"/workspace/A_inspark_marlin/.venv/lib/python3.11/site-packages/transformers/models/gpt2/modeling_gpt2.py\", line 847, in forward\\n    logger.warning_once(\\n\\nSet TORCHDYNAMO_VERBOSE=1 for the internal stack trace (please do this especially if you\\'re reporting a bug to PyTorch). For even more developer context, set TORCH_LOGS=\"+dynamo\"\\n')"
+        },
+        {
+          "kind": "offline_compile",
+          "error": "Unsupported('Logger not supported for non-export cases. To avoid graph breaks caused by logger in compile-mode, it is recommended to disable logging by adding logging methods to config.ignore_logger_methods\\n\\nfrom user code:\\n   File \"/workspace/A_inspark_marlin/inference/src/acc_infer_clear/models/indextts2/dspark/target.py\", line 21, in _block_forward_with_hidden_states\\n    body=self.model.transformer(inputs_embeds=embeddings,past_key_values=past_key_values,attention_mask=attention_mask,\\n  File \"/workspace/A_inspark_marlin/.venv/lib/python3.11/site-packages/transformers/models/gpt2/modeling_gpt2.py\", line 847, in forward\\n    logger.warning_once(\\n\\nSet TORCHDYNAMO_VERBOSE=1 for the internal stack trace (please do this especially if you\\'re reporting a bug to PyTorch). For even more developer context, set TORCH_LOGS=\"+dynamo\"\\n')"
+        },
+        {
+          "kind": "offline_compile",
+          "error": "Unsupported('Logger not supported for non-export cases. To avoid graph breaks caused by logger in compile-mode, it is recommended to disable logging by adding logging methods to config.ignore_logger_methods\\n\\nfrom user code:\\n   File \"/workspace/A_inspark_marlin/inference/src/acc_infer_clear/models/indextts2/dspark/target.py\", line 21, in _block_forward_with_hidden_states\\n    body=self.model.transformer(inputs_embeds=embeddings,past_key_values=past_key_values,attention_mask=attention_mask,\\n  File \"/workspace/A_inspark_marlin/.venv/lib/python3.11/site-packages/transformers/models/gpt2/modeling_gpt2.py\", line 847, in forward\\n    logger.warning_once(\\n\\nSet TORCHDYNAMO_VERBOSE=1 for the internal stack trace (please do this especially if you\\'re reporting a bug to PyTorch). For even more developer context, set TORCH_LOGS=\"+dynamo\"\\n')"
+        },
+        {
+          "kind": "offline_compile",
+          "error": "Unsupported('Logger not supported for non-export cases. To avoid graph breaks caused by logger in compile-mode, it is recommended to disable logging by adding logging methods to config.ignore_logger_methods\\n\\nfrom user code:\\n   File \"/workspace/A_inspark_marlin/inference/src/acc_infer_clear/models/indextts2/dspark/target.py\", line 21, in _block_forward_with_hidden_states\\n    body=self.model.transformer(inputs_embeds=embeddings,past_key_values=past_key_values,attention_mask=attention_mask,\\n  File \"/workspace/A_inspark_marlin/.venv/lib/python3.11/site-packages/transformers/models/gpt2/modeling_gpt2.py\", line 847, in forward\\n    logger.warning_once(\\n\\nSet TORCHDYNAMO_VERBOSE=1 for the internal stack trace (please do this especially if you\\'re reporting a bug to PyTorch). For even more developer context, set TORCH_LOGS=\"+dynamo\"\\n')"
+        },
+        {
+          "kind": "offline_compile",
+          "error": "Unsupported('Logger not supported for non-export cases. To avoid graph breaks caused by logger in compile-mode, it is recommended to disable logging by adding logging methods to config.ignore_logger_methods\\n\\nfrom user code:\\n   File \"/workspace/A_inspark_marlin/inference/src/acc_infer_clear/models/indextts2/dspark/target.py\", line 21, in _block_forward_with_hidden_states\\n    body=self.model.transformer(inputs_embeds=embeddings,past_key_values=past_key_values,attention_mask=attention_mask,\\n  File \"/workspace/A_inspark_marlin/.venv/lib/python3.11/site-packages/transformers/models/gpt2/modeling_gpt2.py\", line 847, in forward\\n    logger.warning_once(\\n\\nSet TORCHDYNAMO_VERBOSE=1 for the internal stack trace (please do this especially if you\\'re reporting a bug to PyTorch). For even more developer context, set TORCH_LOGS=\"+dynamo\"\\n')"
+        },
+        {
+          "kind": "offline_compile",
+          "error": "Unsupported('Logger not supported for non-export cases. To avoid graph breaks caused by logger in compile-mode, it is recommended to disable logging by adding logging methods to config.ignore_logger_methods\\n\\nfrom user code:\\n   File \"/workspace/A_inspark_marlin/inference/src/acc_infer_clear/models/indextts2/dspark/target.py\", line 21, in _block_forward_with_hidden_states\\n    body=self.model.transformer(inputs_embeds=embeddings,past_key_values=past_key_values,attention_mask=attention_mask,\\n  File \"/workspace/A_inspark_marlin/.venv/lib/python3.11/site-packages/transformers/models/gpt2/modeling_gpt2.py\", line 847, in forward\\n    logger.warning_once(\\n\\nSet TORCHDYNAMO_VERBOSE=1 for the internal stack trace (please do this especially if you\\'re reporting a bug to PyTorch). For even more developer context, set TORCH_LOGS=\"+dynamo\"\\n')"
+        },
+        {
+          "kind": "offline_compile",
+          "error": "Unsupported('Logger not supported for non-export cases. To avoid graph breaks caused by logger in compile-mode, it is recommended to disable logging by adding logging methods to config.ignore_logger_methods\\n\\nfrom user code:\\n   File \"/workspace/A_inspark_marlin/inference/src/acc_infer_clear/models/indextts2/dspark/target.py\", line 21, in _block_forward_with_hidden_states\\n    body=self.model.transformer(inputs_embeds=embeddings,past_key_values=past_key_values,attention_mask=attention_mask,\\n  File \"/workspace/A_inspark_marlin/.venv/lib/python3.11/site-packages/transformers/models/gpt2/modeling_gpt2.py\", line 847, in forward\\n    logger.warning_once(\\n\\nSet TORCHDYNAMO_VERBOSE=1 for the internal stack trace (please do this especially if you\\'re reporting a bug to PyTorch). For even more developer context, set TORCH_LOGS=\"+dynamo\"\\n')"
+        },
+        {
+          "kind": "offline_compile",
+          "error": "Unsupported('Logger not supported for non-export cases. To avoid graph breaks caused by logger in compile-mode, it is recommended to disable logging by adding logging methods to config.ignore_logger_methods\\n\\nfrom user code:\\n   File \"/workspace/A_inspark_marlin/inference/src/acc_infer_clear/models/indextts2/dspark/target.py\", line 21, in _block_forward_with_hidden_states\\n    body=self.model.transformer(inputs_embeds=embeddings,past_key_values=past_key_values,attention_mask=attention_mask,\\n  File \"/workspace/A_inspark_marlin/.venv/lib/python3.11/site-packages/transformers/models/gpt2/modeling_gpt2.py\", line 847, in forward\\n    logger.warning_once(\\n\\nSet TORCHDYNAMO_VERBOSE=1 for the internal stack trace (please do this especially if you\\'re reporting a bug to PyTorch). For even more developer context, set TORCH_LOGS=\"+dynamo\"\\n')"
+        },
+        {
+          "kind": "offline_compile",
+          "error": "Unsupported('Logger not supported for non-export cases. To avoid graph breaks caused by logger in compile-mode, it is recommended to disable logging by adding logging methods to config.ignore_logger_methods\\n\\nfrom user code:\\n   File \"/workspace/A_inspark_marlin/inference/src/acc_infer_clear/models/indextts2/dspark/target.py\", line 21, in _block_forward_with_hidden_states\\n    body=self.model.transformer(inputs_embeds=embeddings,past_key_values=past_key_values,attention_mask=attention_mask,\\n  File \"/workspace/A_inspark_marlin/.venv/lib/python3.11/site-packages/transformers/models/gpt2/modeling_gpt2.py\", line 847, in forward\\n    logger.warning_once(\\n\\nSet TORCHDYNAMO_VERBOSE=1 for the internal stack trace (please do this especially if you\\'re reporting a bug to PyTorch). For even more developer context, set TORCH_LOGS=\"+dynamo\"\\n')"
+        },
+        {
+          "kind": "offline_compile",
+          "error": "Unsupported('Logger not supported for non-export cases. To avoid graph breaks caused by logger in compile-mode, it is recommended to disable logging by adding logging methods to config.ignore_logger_methods\\n\\nfrom user code:\\n   File \"/workspace/A_inspark_marlin/inference/src/acc_infer_clear/models/indextts2/dspark/target.py\", line 21, in _block_forward_with_hidden_states\\n    body=self.model.transformer(inputs_embeds=embeddings,past_key_values=past_key_values,attention_mask=attention_mask,\\n  File \"/workspace/A_inspark_marlin/.venv/lib/python3.11/site-packages/transformers/models/gpt2/modeling_gpt2.py\", line 847, in forward\\n    logger.warning_once(\\n\\nSet TORCHDYNAMO_VERBOSE=1 for the internal stack trace (please do this especially if you\\'re reporting a bug to PyTorch). For even more developer context, set TORCH_LOGS=\"+dynamo\"\\n')"
+        },
+        {
+          "kind": "offline_compile",
+          "error": "Unsupported('Logger not supported for non-export cases. To avoid graph breaks caused by logger in compile-mode, it is recommended to disable logging by adding logging methods to config.ignore_logger_methods\\n\\nfrom user code:\\n   File \"/workspace/A_inspark_marlin/inference/src/acc_infer_clear/models/indextts2/dspark/target.py\", line 21, in _block_forward_with_hidden_states\\n    body=self.model.transformer(inputs_embeds=embeddings,past_key_values=past_key_values,attention_mask=attention_mask,\\n  File \"/workspace/A_inspark_marlin/.venv/lib/python3.11/site-packages/transformers/models/gpt2/modeling_gpt2.py\", line 847, in forward\\n    logger.warning_once(\\n\\nSet TORCHDYNAMO_VERBOSE=1 for the internal stack trace (please do this especially if you\\'re reporting a bug to PyTorch). For even more developer context, set TORCH_LOGS=\"+dynamo\"\\n')"
+        },
+        {
+          "kind": "offline_compile",
+          "error": "Unsupported('Logger not supported for non-export cases. To avoid graph breaks caused by logger in compile-mode, it is recommended to disable logging by adding logging methods to config.ignore_logger_methods\\n\\nfrom user code:\\n   File \"/workspace/A_inspark_marlin/inference/src/acc_infer_clear/models/indextts2/dspark/target.py\", line 21, in _block_forward_with_hidden_states\\n    body=self.model.transformer(inputs_embeds=embeddings,past_key_values=past_key_values,attention_mask=attention_mask,\\n  File \"/workspace/A_inspark_marlin/.venv/lib/python3.11/site-packages/transformers/models/gpt2/modeling_gpt2.py\", line 847, in forward\\n    logger.warning_once(\\n\\nSet TORCHDYNAMO_VERBOSE=1 for the internal stack trace (please do this especially if you\\'re reporting a bug to PyTorch). For even more developer context, set TORCH_LOGS=\"+dynamo\"\\n')"
+        },
+        {
+          "kind": "offline_compile",
+          "error": "Unsupported('Logger not supported for non-export cases. To avoid graph breaks caused by logger in compile-mode, it is recommended to disable logging by adding logging methods to config.ignore_logger_methods\\n\\nfrom user code:\\n   File \"/workspace/A_inspark_marlin/inference/src/acc_infer_clear/models/indextts2/dspark/target.py\", line 21, in _block_forward_with_hidden_states\\n    body=self.model.transformer(inputs_embeds=embeddings,past_key_values=past_key_values,attention_mask=attention_mask,\\n  File \"/workspace/A_inspark_marlin/.venv/lib/python3.11/site-packages/transformers/models/gpt2/modeling_gpt2.py\", line 847, in forward\\n    logger.warning_once(\\n\\nSet TORCHDYNAMO_VERBOSE=1 for the internal stack trace (please do this especially if you\\'re reporting a bug to PyTorch). For even more developer context, set TORCH_LOGS=\"+dynamo\"\\n')"
+        },
+        {
+          "kind": "offline_compile",
+          "error": "Unsupported('Logger not supported for non-export cases. To avoid graph breaks caused by logger in compile-mode, it is recommended to disable logging by adding logging methods to config.ignore_logger_methods\\n\\nfrom user code:\\n   File \"/workspace/A_inspark_marlin/inference/src/acc_infer_clear/models/indextts2/dspark/target.py\", line 21, in _block_forward_with_hidden_states\\n    body=self.model.transformer(inputs_embeds=embeddings,past_key_values=past_key_values,attention_mask=attention_mask,\\n  File \"/workspace/A_inspark_marlin/.venv/lib/python3.11/site-packages/transformers/models/gpt2/modeling_gpt2.py\", line 847, in forward\\n    logger.warning_once(\\n\\nSet TORCHDYNAMO_VERBOSE=1 for the internal stack trace (please do this especially if you\\'re reporting a bug to PyTorch). For even more developer context, set TORCH_LOGS=\"+dynamo\"\\n')"
+        },
+        {
+          "kind": "offline_compile",
+          "error": "Unsupported('Logger not supported for non-export cases. To avoid graph breaks caused by logger in compile-mode, it is recommended to disable logging by adding logging methods to config.ignore_logger_methods\\n\\nfrom user code:\\n   File \"/workspace/A_inspark_marlin/inference/src/acc_infer_clear/models/indextts2/dspark/target.py\", line 21, in _block_forward_with_hidden_states\\n    body=self.model.transformer(inputs_embeds=embeddings,past_key_values=past_key_values,attention_mask=attention_mask,\\n  File \"/workspace/A_inspark_marlin/.venv/lib/python3.11/site-packages/transformers/models/gpt2/modeling_gpt2.py\", line 847, in forward\\n    logger.warning_once(\\n\\nSet TORCHDYNAMO_VERBOSE=1 for the internal stack trace (please do this especially if you\\'re reporting a bug to PyTorch). For even more developer context, set TORCH_LOGS=\"+dynamo\"\\n')"
+        },
+        {
+          "kind": "offline_compile",
+          "error": "Unsupported('Logger not supported for non-export cases. To avoid graph breaks caused by logger in compile-mode, it is recommended to disable logging by adding logging methods to config.ignore_logger_methods\\n\\nfrom user code:\\n   File \"/workspace/A_inspark_marlin/inference/src/acc_infer_clear/models/indextts2/dspark/target.py\", line 21, in _block_forward_with_hidden_states\\n    body=self.model.transformer(inputs_embeds=embeddings,past_key_values=past_key_values,attention_mask=attention_mask,\\n  File \"/workspace/A_inspark_marlin/.venv/lib/python3.11/site-packages/transformers/models/gpt2/modeling_gpt2.py\", line 847, in forward\\n    logger.warning_once(\\n\\nSet TORCHDYNAMO_VERBOSE=1 for the internal stack trace (please do this especially if you\\'re reporting a bug to PyTorch). For even more developer context, set TORCH_LOGS=\"+dynamo\"\\n')"
+        },
+        {
+          "kind": "offline_compile",
+          "error": "Unsupported('Logger not supported for non-export cases. To avoid graph breaks caused by logger in compile-mode, it is recommended to disable logging by adding logging methods to config.ignore_logger_methods\\n\\nfrom user code:\\n   File \"/workspace/A_inspark_marlin/inference/src/acc_infer_clear/models/indextts2/dspark/target.py\", line 21, in _block_forward_with_hidden_states\\n    body=self.model.transformer(inputs_embeds=embeddings,past_key_values=past_key_values,attention_mask=attention_mask,\\n  File \"/workspace/A_inspark_marlin/.venv/lib/python3.11/site-packages/transformers/models/gpt2/modeling_gpt2.py\", line 847, in forward\\n    logger.warning_once(\\n\\nSet TORCHDYNAMO_VERBOSE=1 for the internal stack trace (please do this especially if you\\'re reporting a bug to PyTorch). For even more developer context, set TORCH_LOGS=\"+dynamo\"\\n')"
+        },
+        {
+          "kind": "offline_compile",
+          "error": "Unsupported('Logger not supported for non-export cases. To avoid graph breaks caused by logger in compile-mode, it is recommended to disable logging by adding logging methods to config.ignore_logger_methods\\n\\nfrom user code:\\n   File \"/workspace/A_inspark_marlin/inference/src/acc_infer_clear/models/indextts2/dspark/target.py\", line 21, in _block_forward_with_hidden_states\\n    body=self.model.transformer(inputs_embeds=embeddings,past_key_values=past_key_values,attention_mask=attention_mask,\\n  File \"/workspace/A_inspark_marlin/.venv/lib/python3.11/site-packages/transformers/models/gpt2/modeling_gpt2.py\", line 847, in forward\\n    logger.warning_once(\\n\\nSet TORCHDYNAMO_VERBOSE=1 for the internal stack trace (please do this especially if you\\'re reporting a bug to PyTorch). For even more developer context, set TORCH_LOGS=\"+dynamo\"\\n')"
+        },
+        {
+          "kind": "offline_compile",
+          "error": "Unsupported('Logger not supported for non-export cases. To avoid graph breaks caused by logger in compile-mode, it is recommended to disable logging by adding logging methods to config.ignore_logger_methods\\n\\nfrom user code:\\n   File \"/workspace/A_inspark_marlin/inference/src/acc_infer_clear/models/indextts2/dspark/target.py\", line 21, in _block_forward_with_hidden_states\\n    body=self.model.transformer(inputs_embeds=embeddings,past_key_values=past_key_values,attention_mask=attention_mask,\\n  File \"/workspace/A_inspark_marlin/.venv/lib/python3.11/site-packages/transformers/models/gpt2/modeling_gpt2.py\", line 847, in forward\\n    logger.warning_once(\\n\\nSet TORCHDYNAMO_VERBOSE=1 for the internal stack trace (please do this especially if you\\'re reporting a bug to PyTorch). For even more developer context, set TORCH_LOGS=\"+dynamo\"\\n')"
+        },
+        {
+          "kind": "offline_compile",
+          "error": "Unsupported('Logger not supported for non-export cases. To avoid graph breaks caused by logger in compile-mode, it is recommended to disable logging by adding logging methods to config.ignore_logger_methods\\n\\nfrom user code:\\n   File \"/workspace/A_inspark_marlin/inference/src/acc_infer_clear/models/indextts2/dspark/target.py\", line 21, in _block_forward_with_hidden_states\\n    body=self.model.transformer(inputs_embeds=embeddings,past_key_values=past_key_values,attention_mask=attention_mask,\\n  File \"/workspace/A_inspark_marlin/.venv/lib/python3.11/site-packages/transformers/models/gpt2/modeling_gpt2.py\", line 847, in forward\\n    logger.warning_once(\\n\\nSet TORCHDYNAMO_VERBOSE=1 for the internal stack trace (please do this especially if you\\'re reporting a bug to PyTorch). For even more developer context, set TORCH_LOGS=\"+dynamo\"\\n')"
+        }
+      ],
+      "compile_seconds": 0.6374362353235483,
+      "online_compile": false,
+      "unknown_shape": "eager",
+      "compiler_error": "eager"
+    },
+    "draft": {
+      "component": "draft",
+      "compiled_calls": 4,
+      "eager_calls": 152,
+      "warmed_signatures": 1,
+      "signatures": [
+        "('tuple', (('tuple', (('tensor', (1,), (1,), 'torch.int64', 'cuda:0', False), ('tensor', (1, 7), (7, 1), 'torch.int64', 'cuda:0', False), ('tuple', (('tensor', (1, 20, 41, 64), (52480, 2624, 64, 1), 'torch.float32', 'cuda:0', False), ('tensor', (1, 20, 41, 64), (52480, 2624, 64, 1), 'torch.float32', 'cuda:0', False), ('tensor', (1, 20, 41, 64), (52480, 2624, 64, 1), 'torch.float32', 'cuda:0', False))), ('tuple', (('tensor', (1, 20, 41, 64), (52480, 2624, 64, 1), 'torch.float32', 'cuda:0', False), ('tensor', (1, 20, 41, 64), (52480, 2624, 64, 1), 'torch.float32', 'cuda:0', False), ('tensor', (1, 20, 41, 64), (52480, 2624, 64, 1), 'torch.float32', 'cuda:0', False))), ('tensor', (1, 41), (41, 1), 'torch.bool', 'cuda:0', False), ('NoneType', None))), ('dict', ())))"
+      ],
+      "failed_signatures": 0,
+      "errors": [],
+      "compile_seconds": 7.176566941663623,
+      "online_compile": false,
+      "unknown_shape": "eager",
+      "compiler_error": "eager"
+    },
+    "cfm": {
+      "component": "cfm",
+      "compiled_calls": 8,
+      "eager_calls": 8,
+      "warmed_signatures": 1,
+      "signatures": [
+        "('tuple', (('tuple', (('tensor', (1, 80, 310), (24800, 310, 1), 'torch.float32', 'cuda:0', False), ('tensor', (1, 80, 310), (24800, 310, 1), 'torch.float32', 'cuda:0', False), ('tensor', (1,), (1,), 'torch.int64', 'cuda:0', False), ('tensor', (1, 2), (2, 1), 'torch.float32', 'cuda:0', False), ('tensor', (1, 192), (192, 1), 'torch.float32', 'cuda:0', False), ('tensor', (1, 310, 512), (158720, 512, 1), 'torch.float32', 'cuda:0', False))), ('dict', ())))"
+      ],
+      "failed_signatures": 0,
+      "errors": [],
+      "compile_seconds": 23.120189560577273,
+      "online_compile": false,
+      "unknown_shape": "eager",
+      "compiler_error": "eager"
+    },
+    "vocoder": {
+      "component": "vocoder",
+      "compiled_calls": 4,
+      "eager_calls": 4,
+      "warmed_signatures": 1,
+      "signatures": [
+        "('tuple', (('tuple', (('tensor', (1, 80, 52), (24800, 310, 1), 'torch.float32', 'cuda:0', False),)), ('dict', ())))"
+      ],
+      "failed_signatures": 0,
+      "errors": [],
+      "compile_seconds": 41.847761280834675,
+      "online_compile": false,
+      "unknown_shape": "eager",
+      "compiler_error": "eager"
+    }
+  },
+  "summary": {
+    "all_first_pcm_median_ms": 213.99076282978058,
+    "complete_median_ms": 833.4139306098223,
+    "complete_eos": true
+  },
+  "external_memory_mib": 21854
+}

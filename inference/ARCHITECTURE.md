@@ -46,6 +46,14 @@ The full preparation path still records the installed Triton version in its
 plan-cache identity; use the PyTorch-bundled installation for eager/compile.
 This metadata import is separate from executing project Triton kernels.
 
+The request-local TRT Target path imports the current canonical valid KV prefix
+into the selected fixed-batch engine before each host-scheduled native call and
+exports its K128 cache afterward. This handles batch changes, cancellation and
+generic fallback without stale mirrors. Identity slots and `KV+8 <= 128` are
+required; other cases retain the generic path. The legacy device loop refreshes
+once at loop entry. These copies count toward end-to-end time. Native BF16 KV
+storage rounds the prefix; it is a candidate arithmetic policy, not FP32 parity.
+
 Target compilation uses a thin cache-format adapter around the original body:
 it performs Transformers' own tuple-to-`DynamicCache` conversion before the
 transformer call and restores tuple outputs afterward. This removes only the

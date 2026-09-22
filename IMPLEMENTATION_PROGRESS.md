@@ -22,8 +22,8 @@ intermediate milestone, not completion of the overall goal.
 
 - [x] Migrate to inference/ and models/ops/quantization/runtime/api/guardrails.
 - [x] Preserve CLI, model semantics, resource identities and packaging.
-- [ ] Establish true same-weight FP32/BF16 eager and torch.compile baselines.
-- [ ] Fix request RNG/cache/buffer isolation and test cancellation/reuse/fallback.
+- [x] Establish true same-weight FP32/BF16 eager and torch.compile baselines (failed numerical trials retained).
+- [x] Fix request RNG/cache/buffer isolation and test cancellation/reuse/fallback (long soak remains separate).
 - [ ] Run per-stage numerical and 256-case quality audits with honest statuses.
 - [ ] Measure operators and end-to-end paths on GPU 6.
 - [ ] Run concurrency 1/4/8/16, ten minutes each; record and skip 16 on OOM.
@@ -108,3 +108,19 @@ has known numerical failures, retained as evidence.
   direct/graph output equality. True-input head CFM/Vocoder comparisons still
   fail strict BF16/FP32 audits. BF16 eager tail replay matches the deployed tail;
   BF16-vs-FP32 arithmetic differences are reported separately.
+- B1/B4 acoustic engines were rebuilt with actual checkpoint/ONNX/engine
+  provenance, preserving original files. New source evidence does not upgrade
+  old engine provenance or numerical status.
+- Pure B4 FP32/BF16 eager and Draft/Vocoder-only compile baselines completed.
+  The restricted B1 compile trial passed its sampled numerical gates and kept
+  the BF16 eager token sequence for the measured input. B4 did not pass; both
+  component failures remain public. This is not general compile certification.
+- Request-local GPU RNG checks, 54 controlled same-input acceptance/prefix
+  cases and four compact-cache boundary tests passed. Host-scheduled Target
+  native dispatch now synchronizes the bounded canonical cache; legacy device
+  entry also refreshes the selected batch mirror without changing RNG draws.
+  CPU regressions cover batch switches, cancellation/reuse and native fallback.
+- B1/B4 ten-second functional soaks passed with actual native Target calls,
+  complete EOS, long KV and drained ownership checks. These short runs use the
+  original runtime config and do not qualify as ten-minute stability evidence;
+  the formal run selects the TF32-disabled reference runtime explicitly.

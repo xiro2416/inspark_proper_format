@@ -6,8 +6,8 @@ relaxed for compiler-generated kernels.
 
 ## Observed failure
 
-The local real-model B1 trial
-[`compile_bf16_b1_casts.json`](../outputs/stage2/compile_bf16_b1_casts.json)
+The real-model B1 trial
+[`compile_bf16_b1_casts.json`](../../reports/sm89/stage2/baselines/compile_bf16_b1_casts.json)
 compiled all four components without compiler errors, with
 `emulate_precision_casts=True`, but failed the numerical gate:
 
@@ -19,7 +19,7 @@ compiled all four components without compiler errors, with
 | Vocoder | 867 |
 
 This is an experimental result, not an accepted accelerated reference. The
-earlier local [`compile_bf16_b1.json`](../outputs/stage2/compile_bf16_b1.json)
+earlier [`compile_bf16_b1.json`](../../reports/sm89/stage2/baselines/compile_bf16_b1.json)
 also failed Draft/CFM and could not compile Target because of Transformers'
 legacy-cache deprecation logger. Its Vocoder pass does not contradict the later
 failure: upstream generated trajectories changed the real mel input. Comparisons
@@ -62,7 +62,7 @@ unchanged `0.01/0.01` gate. The executable regression is
 `test_bf16_bias_unfusion_is_a_documented_rounding_pitfall`. It documents the
 hazard; it is deliberately not an Inductor or GPU model pass claim.
 
-## Accuracy-first next trial
+## Accuracy-first follow-up
 
 The B1 real-input trial with this rewrite disabled is retained in
 `compile_bf16_b1_no_rewrite.json`: Draft and Vocoder passed their captured boundary
@@ -80,6 +80,15 @@ changing its arithmetic specification. It still requires same-input GPU audit:
 normalization reductions, other fusions and convolution algorithms can also
 change numerical results. Splitting compilation by whole layers alone does not
 prevent an addmm rewrite inside each layer.
+
+The completed [`compile_bf16_b1_no_rewrite.json`](../../reports/sm89/stage2/baselines/compile_bf16_b1_no_rewrite.json)
+trial records `pattern_matcher=False` and `emulate_precision_casts=True`.
+Draft and Vocoder pass their sampled same-input comparisons, but Target and CFM
+still fail, so the overall numerical gate remains false. These component results
+apply only to this trial's captured inputs; changed AR trajectories prevent a
+cross-trial error-rate comparison. The
+[stage-two index](../../reports/sm89/stage2/README.md) keeps all three trials and
+their execution-coverage limitations.
 
 The current audit clones compiled outputs before invoking eager. Inspection of
 the four boundaries found no input-mutation/cache-alias explanation for these

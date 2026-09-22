@@ -49,6 +49,14 @@ class DeviceRoundHead:
         bank=getattr(runtime.target,'native_full_bank',None);slot_values=[r.kv.slot for r in rows]
         self.native_target=(bank if bank is not None and
             bank.eligible(self.b,slot_values,max(r.past_length for r in rows)) else None)
+        if self.native_target is not None:
+            # The previous host round may have used a different batch engine or
+            # generic fallback. Each engine owns a separate BF16 mirror: import
+            # the canonical valid prefix once at loop entry, on the model stream.
+            # This setup copy is measured with the loop and consumes no RNG.
+            backend=self.native_target.backends[self.b]
+            for row in rows:
+                backend.import_slot(runtime.target.storage,row.kv.slot,row.kv.slot,row.past_length)
         self.native_draft_eligible=self.rt.backbone.native_eligible(
             self.b,[r.cache.pool_slot for r in rows],max(r.cache.length for r in rows))
 

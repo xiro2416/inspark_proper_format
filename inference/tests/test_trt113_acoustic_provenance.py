@@ -113,6 +113,27 @@ class AcousticProvenanceTest(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "plan SHA256"):
             audit.replay_acoustic_engine_evidence(manifest, models)
 
+    def test_direct_graph_gate_requires_finite_exact_evidence_for_graph_routes(self):
+        row = {"route": {"execution": "graph"}}
+        self.assertFalse(audit.direct_graph_gate(row)["pass_gate"])
+        for value in ({"exact_gate": True, "pass_gate": False},
+                      {"exact_gate": False, "pass_gate": True}):
+            self.assertFalse(audit.direct_graph_gate({**row, "graph_vs_direct": value})["pass_gate"])
+        self.assertTrue(audit.direct_graph_gate({**row, "graph_vs_direct": {
+            "exact_gate": True, "pass_gate": True}})["pass_gate"])
+        self.assertTrue(audit.direct_graph_gate({"route": {"execution": "direct"}})["pass_gate"])
+
+    def test_installed_native_engines_are_not_actual_execution_coverage(self):
+        manifest = {"calls": [{"component": component, "route": {
+            "backend": "eager", "candidate_backend": "tensorrt113", "batch": 1}}
+            for component in ("cfm", "vocoder")]}
+        self.assertFalse(audit.acoustic_coverage(manifest)["pass_gate"])
+        for row in manifest["calls"]:
+            row["route"]["backend"] = "tensorrt113"
+        coverage = audit.acoustic_coverage(manifest)
+        self.assertTrue(coverage["pass_gate"])
+        self.assertEqual(coverage["components"]["cfm"]["actual_native_batches"], [1])
+
 
 if __name__ == "__main__":
     unittest.main()

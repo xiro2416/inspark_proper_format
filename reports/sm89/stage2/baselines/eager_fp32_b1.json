@@ -1,0 +1,363 @@
+{
+  "schema": 1,
+  "hardware_scope": "sm89",
+  "batch": 1,
+  "text": "他正在整理文件。",
+  "requested": {
+    "schema": 1,
+    "status": "sm89_same_weight_pure_pytorch_fp32_reference",
+    "compute_backend": "eager",
+    "strict_request_isolation": true,
+    "precision": "fp32",
+    "components": [],
+    "convolutions": false,
+    "rnn_precision": "fp32",
+    "target_graphs": false,
+    "draft_graphs": false,
+    "proposal_graphs": false,
+    "prefix_graphs": false,
+    "head_graphs": false,
+    "slot_draft": false,
+    "overlap_acoustics": false,
+    "fused_acceptance": false,
+    "tail_graphs": false
+  },
+  "config": {
+    "weights": "/workspace/A_inspark_marlin/models",
+    "student": "/workspace/A_inspark_marlin/models/cfm_oracle500.pt",
+    "student_sha256": "635ab7025fbd4eaa999fcd3e964512df081d5c9cff093a59d383e050c70bcfca",
+    "cache": "/workspace/A_inspark_marlin/.cache",
+    "max_batch": 1,
+    "cpu_threads": 2,
+    "max_speech_tokens": 1500,
+    "max_text_tokens": 120,
+    "reference_seconds": 3,
+    "max_cached_voices": 16,
+    "target_tf32": false,
+    "rnn_tf32": false
+  },
+  "measured": [
+    {
+      "wave": 1,
+      "wall_ms": 633.2508735358715,
+      "all_first_pcm_ms": 286.5071576088667,
+      "rows": [
+        {
+          "id": "wave1-row0",
+          "first_pcm_ms": 286.5071576088667,
+          "complete": true,
+          "error": null,
+          "chunks": 2,
+          "samples": 52224,
+          "codes": 119,
+          "codes_sha256": "45ac59abccb356e565d89afcc5e010025ea30a88bd2e0395dab6a6c4d2ff77a0",
+          "audio_seconds": 2.36843537414966,
+          "accepted": [
+            1,
+            3,
+            0,
+            2,
+            0,
+            0,
+            2,
+            2,
+            7,
+            2,
+            7,
+            3,
+            1,
+            4,
+            6,
+            1,
+            7,
+            7,
+            5,
+            7,
+            7,
+            5,
+            5,
+            7,
+            3
+          ]
+        }
+      ],
+      "memory_allocated": 7832333824,
+      "memory_reserved": 10131341312,
+      "peak_allocated": 9943896576
+    },
+    {
+      "wave": 2,
+      "wall_ms": 641.390023753047,
+      "all_first_pcm_ms": 289.1526613384485,
+      "rows": [
+        {
+          "id": "wave2-row0",
+          "first_pcm_ms": 289.1526613384485,
+          "complete": true,
+          "error": null,
+          "chunks": 2,
+          "samples": 52224,
+          "codes": 119,
+          "codes_sha256": "45ac59abccb356e565d89afcc5e010025ea30a88bd2e0395dab6a6c4d2ff77a0",
+          "audio_seconds": 2.36843537414966,
+          "accepted": [
+            1,
+            3,
+            0,
+            2,
+            0,
+            0,
+            2,
+            2,
+            7,
+            2,
+            7,
+            3,
+            1,
+            4,
+            6,
+            1,
+            7,
+            7,
+            5,
+            7,
+            7,
+            5,
+            5,
+            7,
+            3
+          ]
+        }
+      ],
+      "memory_allocated": 7832237568,
+      "memory_reserved": 10131341312,
+      "peak_allocated": 9943896576
+    },
+    {
+      "wave": 3,
+      "wall_ms": 658.1752970814705,
+      "all_first_pcm_ms": 301.605224609375,
+      "rows": [
+        {
+          "id": "wave3-row0",
+          "first_pcm_ms": 301.605224609375,
+          "complete": true,
+          "error": null,
+          "chunks": 2,
+          "samples": 52224,
+          "codes": 119,
+          "codes_sha256": "45ac59abccb356e565d89afcc5e010025ea30a88bd2e0395dab6a6c4d2ff77a0",
+          "audio_seconds": 2.36843537414966,
+          "accepted": [
+            1,
+            3,
+            0,
+            2,
+            0,
+            0,
+            2,
+            2,
+            7,
+            2,
+            7,
+            3,
+            1,
+            4,
+            6,
+            1,
+            7,
+            7,
+            5,
+            7,
+            7,
+            5,
+            5,
+            7,
+            3
+          ]
+        }
+      ],
+      "memory_allocated": 7832333824,
+      "memory_reserved": 10131341312,
+      "peak_allocated": 9943896576
+    }
+  ],
+  "warmups": [
+    {
+      "wave": 0,
+      "wall_ms": 942.7852351218462,
+      "all_first_pcm_ms": 492.82402358949184,
+      "rows": [
+        {
+          "id": "wave0-row0",
+          "first_pcm_ms": 492.82402358949184,
+          "complete": true,
+          "error": null,
+          "chunks": 2,
+          "samples": 52224,
+          "codes": 119,
+          "codes_sha256": "45ac59abccb356e565d89afcc5e010025ea30a88bd2e0395dab6a6c4d2ff77a0",
+          "audio_seconds": 2.36843537414966,
+          "accepted": [
+            1,
+            3,
+            0,
+            2,
+            0,
+            0,
+            2,
+            2,
+            7,
+            2,
+            7,
+            3,
+            1,
+            4,
+            6,
+            1,
+            7,
+            7,
+            5,
+            7,
+            7,
+            5,
+            5,
+            7,
+            3
+          ]
+        }
+      ],
+      "memory_allocated": 7832237568,
+      "memory_reserved": 10129244160,
+      "peak_allocated": 9943896576
+    }
+  ],
+  "errors": [],
+  "execution_pass": true,
+  "numerical_pass": null,
+  "torch": "2.8.0+cu128",
+  "gpu": "NVIDIA GeForce RTX 4090",
+  "sm": [
+    8,
+    9
+  ],
+  "timing_scope": "host admission through first PCM / full EOS; includes CPU/GPU copies, allocation and launch; excludes model/reference preparation",
+  "deployment": {
+    "requested": {
+      "schema": 1,
+      "status": "sm89_same_weight_pure_pytorch_fp32_reference",
+      "compute_backend": "eager",
+      "strict_request_isolation": true,
+      "precision": "fp32",
+      "components": [],
+      "convolutions": false,
+      "rnn_precision": "fp32",
+      "target_graphs": false,
+      "draft_graphs": false,
+      "proposal_graphs": false,
+      "prefix_graphs": false,
+      "head_graphs": false,
+      "slot_draft": false,
+      "overlap_acoustics": false,
+      "fused_acceptance": false,
+      "tail_graphs": false
+    },
+    "resolved_precision": "fp32",
+    "resolved_rnn_precision": "fp32",
+    "sm": 89,
+    "hardware_validation": "Profile-specific numerical and performance evidence required; runtime identity is not an audit pass",
+    "hardware": {
+      "name": "NVIDIA GeForce RTX 4090",
+      "sm": 89,
+      "sms": 128
+    },
+    "online_learning": false,
+    "tail_graphs": false,
+    "compute_backend": "eager",
+    "custom_kernels": false,
+    "tf32": false,
+    "same_model_structure": true,
+    "shared_batch_rng": false,
+    "request_isolation": {
+      "strict_request_isolation": true,
+      "rng_policy": "legacy_per_request",
+      "shared_rng_paths": [],
+      "request_stream_v1_implemented": false
+    }
+  },
+  "prepare_seconds": 30.631039328873158,
+  "routes": {
+    "sessions": 0,
+    "draft_calls": 100,
+    "target_calls": 100,
+    "device_round_attempts": 0,
+    "device_round_successes": 0,
+    "device_round_fallbacks": 0,
+    "device_target_steps": 0,
+    "device_draft_steps": 0,
+    "draft_backbone_calls": 100,
+    "native_target_steps": 0,
+    "native_draft_steps": 0,
+    "native_draft_compare": [],
+    "native_cfm_backend": null,
+    "native_cfm_calls": 0,
+    "native_cfm_fallbacks": 0,
+    "native_vocoder_backend": null,
+    "native_vocoder_calls": 0,
+    "native_vocoder_fallbacks": 0,
+    "head_graphs": null,
+    "acoustic_routes": {
+      "cfm": {
+        "wrapper": {},
+        "wrapper_total": {
+          "calls": 0,
+          "fallbacks": 0
+        },
+        "wrapper_prepare": {
+          "calls": 0,
+          "fallbacks": 0
+        },
+        "wrapper_direct": {
+          "calls": 0,
+          "fallbacks": 0
+        },
+        "graph_routes": []
+      },
+      "vocoder": {
+        "wrapper": {},
+        "wrapper_total": {
+          "calls": 0,
+          "fallbacks": 0
+        },
+        "wrapper_prepare": {
+          "calls": 0,
+          "fallbacks": 0
+        },
+        "wrapper_direct": {
+          "calls": 0,
+          "fallbacks": 0
+        },
+        "graph_routes": []
+      }
+    },
+    "strict_request_isolation": true,
+    "rng_policy": "legacy_per_request",
+    "active_rows": 0,
+    "error_sessions": 0,
+    "target_slots": null,
+    "draft_slots": null,
+    "memory": {
+      "cuda_allocated_bytes": 7832333824,
+      "cuda_reserved_bytes": 10131341312,
+      "cuda_peak_allocated_bytes": 9943896576,
+      "cuda_peak_reserved_bytes": 10131341312,
+      "rss_bytes": 3209719808
+    }
+  },
+  "summary": {
+    "all_first_pcm_median_ms": 289.1526613384485,
+    "complete_median_ms": 641.390023753047,
+    "complete_eos": true
+  },
+  "external_memory_mib": 21854
+}

@@ -4,6 +4,9 @@ set -euo pipefail
 project_dir="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)"
 repo_root="$(cd -- "$project_dir/.." && pwd)"
 cd "$repo_root"
+export UV_CACHE_DIR="${UV_CACHE_DIR:-$repo_root/.cache/uv}"
+export UV_PYTHON_INSTALL_DIR="${UV_PYTHON_INSTALL_DIR:-$repo_root/.cache/uv-python}"
+export HF_ENDPOINT="${HF_ENDPOINT:-https://hf-mirror.com}"
 command -v uv >/dev/null 2>&1 || { echo "Install uv first" >&2; exit 1; }
 [[ -x .venv/bin/python ]] || { echo "Run scripts/bootstrap.sh first" >&2; exit 1; }
 if [[ ! -x .venv-trt113/bin/python ]]; then

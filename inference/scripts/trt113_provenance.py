@@ -41,7 +41,7 @@ def source_identity(root=None):
         "git_sha": head, "dirty": bool(status), "scope": scope, "files": len(records),
         "source_sha256": source_hash,
         "dirty_fingerprint": hashlib.sha256(status + source_hash.encode()).hexdigest() if status else None,
-        "snapshot": "local source files before TensorRT network construction",
+        "snapshot": "local source files at provenance collection time; caller defines build/capture/replay phase",
     }
 
 

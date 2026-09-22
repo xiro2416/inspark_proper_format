@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+# Historical SM89 optimized profiles: "fp32" here includes custom kernels/graphs.
+# Pure PyTorch reference: benchmarks/benchmark_reference.py + sm89_eager_fp32.json.
 set -euo pipefail
 if [[ $# -lt 1 || $# -gt 2 ]]; then
   echo "usage: $0 /path/to/reference.wav [fp32|bf16|bf16-triton]" >&2

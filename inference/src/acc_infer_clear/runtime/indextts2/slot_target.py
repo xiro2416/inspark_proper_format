@@ -29,6 +29,7 @@ class SlotTarget(BatchedTarget):
         self.consumer_layout=bool(consumer_layout)
         self.trace_subcomponents=False
         self.native_attention=None;self.native_graphs={};self.native_graph_hits=0;self.native_full_bank=None
+        self.native_full_steps=0
     def _profile_scope(self,name):
         return torch.profiler.record_function(name) if self.trace_subcomponents else nullcontext()
     def import_cache(self,packed,row,length):
@@ -136,10 +137,15 @@ class SlotTarget(BatchedTarget):
             self.keep[kv.slot,kv.length:kv.length+8].copy_(mask[0,-8:])
         lengths=[kv.length for x,kv,mask,pos in jobs]
         limit=next(n for n in (64,128,256,512,1024,2048) if n>=max(lengths)+8)
-        slots=torch.tensor([kv.slot for x,kv,mask,pos in jobs],device=self.storage.device,dtype=torch.int32)
+        slot_values=[kv.slot for x,kv,mask,pos in jobs]
+        slots=torch.tensor(slot_values,device=self.storage.device,dtype=torch.int32)
         lens=torch.tensor(lengths,device=self.storage.device,dtype=torch.int32)
         x=torch.cat([j[0] for j in jobs]);key=(len(jobs),limit)
-        if self.graph_sealed and key in self.graphs:
+        bank=self.native_full_bank
+        if self.graph_sealed and bank is not None and bank.eligible(len(jobs),slot_values,max(lengths)):
+            logits,selected,final=bank.run_with_canonical_cache(x,slots,lens,slot_values,lengths)
+            self.native_full_steps+=1;self.graph_hits+=1
+        elif self.graph_sealed and key in self.graphs:
             logits,selected,final=self.graphs[key](x,slots,lens);self.graph_hits+=1
         else:logits,selected,final=self.math(x,slots,lens,limit)
         result=[]
@@ -149,4 +155,6 @@ class SlotTarget(BatchedTarget):
         return result
     def stats(self):
         return dict(super().stats(),graph_hits=self.graph_hits,graph_keys=[list(k) for k in self.graphs],
-                    persistent_kv=True,history_pack_bytes_per_verify=0)
+                    native_full_steps=self.native_full_steps,persistent_kv=True,
+                    history_pack_bytes_per_verify=0,
+                    native_cache_sync='canonical prefix import and K128 export per host-scheduled native verify')

@@ -49,6 +49,11 @@ failure; `*_first_chunks.json` files contain actual routing windows and latency.
 contains hashes, not weights or engine binaries. Legacy acoustic metadata has no
 export weight attestation and must not be upgraded retroactively.
 
+In the original CFM audit JSON, `native_stats.identity.sha256` was an engine-hash
+field collision, not the student checkpoint hash. The raw evidence is retained
+unchanged. Current code keeps `identity.sha256` for the student and records
+`engine_sha256` separately; do not infer a checkpoint change from this old field.
+
 The CFM mean includes 258/310 masked prompt frames. AR timings include diagnostic
 cache reset/packing and have asymmetric preprocessing; do not use them as fair
 operator speedups. Vocoder direct enqueues include Python plugin launch overhead,

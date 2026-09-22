@@ -38,7 +38,8 @@ def _engine_stats(engine):
         device_target_steps=getattr(engine.rt,'device_target_steps',0),
         device_draft_steps=getattr(engine.rt.backbone,'device_steps',0),
         draft_backbone_calls=getattr(engine.rt.backbone,'calls',0),
-        native_target_steps=getattr(engine.rt,'native_target_steps',0),
+        native_target_steps=(getattr(engine.rt,'native_target_steps',0)+
+                             getattr(engine.rt.target,'native_full_steps',0)),
         native_draft_steps=getattr(engine.rt.backbone,'native_full_steps',0),
         native_draft_compare=list(getattr(engine.rt.backbone,'native_compare',())),
         native_cfm_backend=getattr(getattr(engine,'student',None),'identity',{}).get('backend'),

@@ -28,7 +28,7 @@ def main():
     parser.add_argument("--operator-repeats", type=int, default=10)
     parser.add_argument("--json-out", required=True)
     args = parser.parse_args()
-    if args.repeats < 1 or args.warmups < 0:
+    if args.repeats < 1 or args.warmups < 0 or args.operator_repeats < 1:
         parser.error("Invalid repeat/warmup counts")
     from acc_infer_clear.runtime.device import GPULease, select_gpu
     with GPULease(args.gpu) as lease:
@@ -49,6 +49,7 @@ def run(args):
     from acc_infer_clear.runtime.deployment import load as load_plan
     from acc_infer_clear.runtime.engine import Engine
     from acc_infer_clear.runtime.pool import _engine_stats
+    from scripts.trt113_provenance import source_identity, capture_provenance, file_record
     config = load(args.config)
     config["max_batch"] = args.batch
     plan = load_plan(args.deployment)
@@ -58,11 +59,16 @@ def run(args):
                   errors=[], execution_pass=False, numerical_pass=None,
                   torch=torch.__version__, gpu=torch.cuda.get_device_name(),
                   sm=list(torch.cuda.get_device_capability()),
+                  source=source_identity(), deployment_file=file_record(args.deployment,"deployment"),
+                  runtime_file=file_record(args.config,"runtime_config"),
+                  cuda=torch.version.cuda, cudnn=torch.backends.cudnn.version(),
                   timing_scope="host admission through first PCM / full EOS; includes CPU/GPU copies, allocation and launch; excludes model/reference preparation")
     try:
         start = time.perf_counter()
         engine = Engine(config)
         engine.prepare_reference("voice", args.reference)
+        report["model_provenance"] = {component:capture_provenance(component,config,args.config,model=engine)
+                                      for component in ("target","draft","cfm","vocoder")}
         report["deployment"] = engine.prepare_deployment(plan)
         report["prepare_seconds"] = time.perf_counter()-start
         bank = getattr(engine, "compile_bank", None)

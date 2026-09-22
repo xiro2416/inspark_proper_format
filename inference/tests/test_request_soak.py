@@ -181,6 +181,27 @@ class RequestSoak(unittest.TestCase):
         gate=soak.pass_gate(result,args(seconds=4))
         self.assertFalse(gate['passed']);self.assertIn('long_sequence',gate['failed_checks'])
 
+    def test_host_native_counts_remain_windowed_and_do_not_imply_all_trt_soak(self):
+        class NativeHostPool(FakePool):
+            def stats(self):
+                value=super().stats()[0]
+                calls=sum(self.target_batches.values())
+                value.update(target_calls=calls,native_target_steps=calls,device_target_steps=0)
+                return [value]
+        case=dict(id='case',text='真实测试句子。',seed=7,emotion=[0.]*8);clock=Clock()
+        factory=lambda config,gpu,workers:NativeHostPool(config,gpu,workers,clock=clock)
+        with redirect_stdout(io.StringIO()):
+            result=soak.run_tier(args(seconds=4),{}, {},[case],4,factory,clock=clock)
+        delta=result['counter_delta'];batch_delta=result['pass_gate']['microbatch']['target_batch_counts_delta']
+        self.assertGreater(result['before']['native_target_steps'],0)
+        self.assertEqual(delta['native_target_steps'],2)
+        self.assertEqual(delta['native_target_steps'],sum(batch_delta.values()))
+        self.assertEqual(delta['target_calls'],delta['native_target_steps'])
+        self.assertEqual(delta['device_target_steps'],0)
+        # Full-EOS/lifecycle gates are intentionally not an all-native coverage gate.
+        result['after']['native_target_steps']=result['before']['native_target_steps']
+        self.assertTrue(soak.pass_gate(result,args(seconds=4))['passed'])
+
     def test_oom_skip_never_hides_required_tier_or_non_oom_failure(self):
         oom=RuntimeError('torch.OutOfMemoryError: CUDA out of memory')
         self.assertTrue(soak.may_skip_oom(oom,16,[16]))

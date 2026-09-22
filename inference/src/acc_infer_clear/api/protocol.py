@@ -22,7 +22,7 @@ FIELDS = {
 
 def parse_event(line):
     event = json.loads(line)
-    if not isinstance(event, dict) or event.get("op") not in FIELDS:
+    if not isinstance(event, dict) or not isinstance(event.get("op"), str) or event["op"] not in FIELDS:
         raise ValueError("Expected an object with a supported op")
     required, optional = FIELDS[event["op"]]
     if not required <= event.keys() or set(event) - required - optional:

@@ -1,0 +1,5731 @@
+{
+  "schema": 1,
+  "hardware_scope": "sm89",
+  "batch": 1,
+  "text": "他正在整理文件。",
+  "requested": {
+    "schema": 1,
+    "status": "sm89_same_weight_torch28_inductor_baseline_experimental",
+    "compute_backend": "compile",
+    "strict_request_isolation": true,
+    "compile_components": [
+      "target",
+      "draft",
+      "cfm",
+      "vocoder"
+    ],
+    "compile_max_signatures": 1,
+    "compile_error_fallback": true,
+    "compile_pattern_matcher": false,
+    "precision": "bf16",
+    "components": [
+      "target",
+      "draft",
+      "cfm",
+      "vocoder"
+    ],
+    "convolutions": true,
+    "rnn_precision": "bf16",
+    "target_graphs": false,
+    "draft_graphs": false,
+    "proposal_graphs": false,
+    "prefix_graphs": false,
+    "head_graphs": false,
+    "slot_draft": false,
+    "overlap_acoustics": false,
+    "fused_acceptance": false,
+    "tail_graphs": false
+  },
+  "config": {
+    "weights": "/workspace/A_inspark_marlin/models",
+    "student": "/workspace/A_inspark_marlin/models/cfm_oracle500.pt",
+    "student_sha256": "635ab7025fbd4eaa999fcd3e964512df081d5c9cff093a59d383e050c70bcfca",
+    "cache": "/workspace/A_inspark_marlin/.cache",
+    "max_batch": 1,
+    "cpu_threads": 2,
+    "max_speech_tokens": 1500,
+    "max_text_tokens": 120,
+    "reference_seconds": 3,
+    "max_cached_voices": 16,
+    "target_tf32": false,
+    "rnn_tf32": false
+  },
+  "measured": [
+    {
+      "wave": 1,
+      "wall_ms": 834.8836060613394,
+      "all_first_pcm_ms": 298.9827338606119,
+      "rows": [
+        {
+          "id": "wave1-row0",
+          "first_pcm_ms": 298.9827338606119,
+          "complete": true,
+          "error": null,
+          "chunks": 2,
+          "samples": 51712,
+          "codes": 118,
+          "codes_sha256": "674d4a544fd2c5bacc6e6ef351b744454dbfc124f52e8a7216d09ab9ede17da9",
+          "audio_seconds": 2.345215419501134,
+          "accepted": [
+            3,
+            0,
+            5,
+            2,
+            0,
+            0,
+            1,
+            2,
+            3,
+            0,
+            4,
+            1,
+            1,
+            2,
+            0,
+            1,
+            7,
+            2,
+            7,
+            4,
+            3,
+            1,
+            4,
+            2,
+            7,
+            3,
+            7,
+            7,
+            1,
+            6,
+            1
+          ]
+        }
+      ],
+      "memory_allocated": 6275673088,
+      "memory_reserved": 10146021376,
+      "peak_allocated": 9943896576
+    },
+    {
+      "wave": 2,
+      "wall_ms": 823.3771808445454,
+      "all_first_pcm_ms": 293.5389541089535,
+      "rows": [
+        {
+          "id": "wave2-row0",
+          "first_pcm_ms": 293.5389541089535,
+          "complete": true,
+          "error": null,
+          "chunks": 2,
+          "samples": 51712,
+          "codes": 118,
+          "codes_sha256": "674d4a544fd2c5bacc6e6ef351b744454dbfc124f52e8a7216d09ab9ede17da9",
+          "audio_seconds": 2.345215419501134,
+          "accepted": [
+            3,
+            0,
+            5,
+            2,
+            0,
+            0,
+            1,
+            2,
+            3,
+            0,
+            4,
+            1,
+            1,
+            2,
+            0,
+            1,
+            7,
+            2,
+            7,
+            4,
+            3,
+            1,
+            4,
+            2,
+            7,
+            3,
+            7,
+            7,
+            1,
+            6,
+            1
+          ]
+        }
+      ],
+      "memory_allocated": 6276066304,
+      "memory_reserved": 10146021376,
+      "peak_allocated": 9943896576
+    },
+    {
+      "wave": 3,
+      "wall_ms": 821.4876148849726,
+      "all_first_pcm_ms": 292.53860004246235,
+      "rows": [
+        {
+          "id": "wave3-row0",
+          "first_pcm_ms": 292.53860004246235,
+          "complete": true,
+          "error": null,
+          "chunks": 2,
+          "samples": 51712,
+          "codes": 118,
+          "codes_sha256": "674d4a544fd2c5bacc6e6ef351b744454dbfc124f52e8a7216d09ab9ede17da9",
+          "audio_seconds": 2.345215419501134,
+          "accepted": [
+            3,
+            0,
+            5,
+            2,
+            0,
+            0,
+            1,
+            2,
+            3,
+            0,
+            4,
+            1,
+            1,
+            2,
+            0,
+            1,
+            7,
+            2,
+            7,
+            4,
+            3,
+            1,
+            4,
+            2,
+            7,
+            3,
+            7,
+            7,
+            1,
+            6,
+            1
+          ]
+        }
+      ],
+      "memory_allocated": 6275673088,
+      "memory_reserved": 10146021376,
+      "peak_allocated": 9943896576
+    }
+  ],
+  "warmups": [
+    {
+      "wave": 0,
+      "wall_ms": 88223.89186359942,
+      "all_first_pcm_ms": 87561.8436653167,
+      "rows": [
+        {
+          "id": "wave0-row0",
+          "first_pcm_ms": 87561.8436653167,
+          "complete": true,
+          "error": null,
+          "chunks": 2,
+          "samples": 51712,
+          "codes": 118,
+          "codes_sha256": "674d4a544fd2c5bacc6e6ef351b744454dbfc124f52e8a7216d09ab9ede17da9",
+          "audio_seconds": 2.345215419501134,
+          "accepted": [
+            3,
+            0,
+            5,
+            2,
+            0,
+            0,
+            1,
+            2,
+            3,
+            0,
+            4,
+            1,
+            1,
+            2,
+            0,
+            1,
+            7,
+            2,
+            7,
+            4,
+            3,
+            1,
+            4,
+            2,
+            7,
+            3,
+            7,
+            7,
+            1,
+            6,
+            1
+          ]
+        }
+      ],
+      "memory_allocated": 6276066304,
+      "memory_reserved": 10143924224,
+      "peak_allocated": 9943896576
+    }
+  ],
+  "errors": [],
+  "execution_pass": true,
+  "numerical_pass": false,
+  "torch": "2.8.0+cu128",
+  "gpu": "NVIDIA GeForce RTX 4090",
+  "sm": [
+    8,
+    9
+  ],
+  "timing_scope": "host admission through first PCM / full EOS; includes CPU/GPU copies, allocation and launch; excludes model/reference preparation",
+  "deployment": {
+    "requested": {
+      "schema": 1,
+      "status": "sm89_same_weight_torch28_inductor_baseline_experimental",
+      "compute_backend": "compile",
+      "strict_request_isolation": true,
+      "compile_components": [
+        "target",
+        "draft",
+        "cfm",
+        "vocoder"
+      ],
+      "compile_max_signatures": 1,
+      "compile_error_fallback": true,
+      "compile_pattern_matcher": false,
+      "precision": "bf16",
+      "components": [
+        "target",
+        "draft",
+        "cfm",
+        "vocoder"
+      ],
+      "convolutions": true,
+      "rnn_precision": "bf16",
+      "target_graphs": false,
+      "draft_graphs": false,
+      "proposal_graphs": false,
+      "prefix_graphs": false,
+      "head_graphs": false,
+      "slot_draft": false,
+      "overlap_acoustics": false,
+      "fused_acceptance": false,
+      "tail_graphs": false
+    },
+    "resolved_precision": "bf16",
+    "resolved_rnn_precision": "bf16",
+    "sm": 89,
+    "hardware_validation": "Profile-specific numerical and performance evidence required; runtime identity is not an audit pass",
+    "hardware": {
+      "name": "NVIDIA GeForce RTX 4090",
+      "sm": 89,
+      "sms": 128
+    },
+    "online_learning": false,
+    "tail_graphs": false,
+    "compute_backend": "compile",
+    "custom_kernels": false,
+    "tf32": false,
+    "same_model_structure": true,
+    "shared_batch_rng": false,
+    "precision": {
+      "mode": "bf16",
+      "components": [
+        "target",
+        "draft",
+        "cfm",
+        "vocoder"
+      ],
+      "matrices": [
+        {
+          "path": "target.blocks.0.attn.c_attn",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            3840
+          ]
+        },
+        {
+          "path": "target.blocks.0.attn.c_proj",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            1280
+          ]
+        },
+        {
+          "path": "target.blocks.0.mlp.c_fc",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            5120
+          ]
+        },
+        {
+          "path": "target.blocks.0.mlp.c_proj",
+          "precision": "bf16",
+          "original_shape": [
+            5120,
+            1280
+          ]
+        },
+        {
+          "path": "target.blocks.1.attn.c_attn",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            3840
+          ]
+        },
+        {
+          "path": "target.blocks.1.attn.c_proj",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            1280
+          ]
+        },
+        {
+          "path": "target.blocks.1.mlp.c_fc",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            5120
+          ]
+        },
+        {
+          "path": "target.blocks.1.mlp.c_proj",
+          "precision": "bf16",
+          "original_shape": [
+            5120,
+            1280
+          ]
+        },
+        {
+          "path": "target.blocks.2.attn.c_attn",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            3840
+          ]
+        },
+        {
+          "path": "target.blocks.2.attn.c_proj",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            1280
+          ]
+        },
+        {
+          "path": "target.blocks.2.mlp.c_fc",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            5120
+          ]
+        },
+        {
+          "path": "target.blocks.2.mlp.c_proj",
+          "precision": "bf16",
+          "original_shape": [
+            5120,
+            1280
+          ]
+        },
+        {
+          "path": "target.blocks.3.attn.c_attn",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            3840
+          ]
+        },
+        {
+          "path": "target.blocks.3.attn.c_proj",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            1280
+          ]
+        },
+        {
+          "path": "target.blocks.3.mlp.c_fc",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            5120
+          ]
+        },
+        {
+          "path": "target.blocks.3.mlp.c_proj",
+          "precision": "bf16",
+          "original_shape": [
+            5120,
+            1280
+          ]
+        },
+        {
+          "path": "target.blocks.4.attn.c_attn",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            3840
+          ]
+        },
+        {
+          "path": "target.blocks.4.attn.c_proj",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            1280
+          ]
+        },
+        {
+          "path": "target.blocks.4.mlp.c_fc",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            5120
+          ]
+        },
+        {
+          "path": "target.blocks.4.mlp.c_proj",
+          "precision": "bf16",
+          "original_shape": [
+            5120,
+            1280
+          ]
+        },
+        {
+          "path": "target.blocks.5.attn.c_attn",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            3840
+          ]
+        },
+        {
+          "path": "target.blocks.5.attn.c_proj",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            1280
+          ]
+        },
+        {
+          "path": "target.blocks.5.mlp.c_fc",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            5120
+          ]
+        },
+        {
+          "path": "target.blocks.5.mlp.c_proj",
+          "precision": "bf16",
+          "original_shape": [
+            5120,
+            1280
+          ]
+        },
+        {
+          "path": "target.blocks.6.attn.c_attn",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            3840
+          ]
+        },
+        {
+          "path": "target.blocks.6.attn.c_proj",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            1280
+          ]
+        },
+        {
+          "path": "target.blocks.6.mlp.c_fc",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            5120
+          ]
+        },
+        {
+          "path": "target.blocks.6.mlp.c_proj",
+          "precision": "bf16",
+          "original_shape": [
+            5120,
+            1280
+          ]
+        },
+        {
+          "path": "target.blocks.7.attn.c_attn",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            3840
+          ]
+        },
+        {
+          "path": "target.blocks.7.attn.c_proj",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            1280
+          ]
+        },
+        {
+          "path": "target.blocks.7.mlp.c_fc",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            5120
+          ]
+        },
+        {
+          "path": "target.blocks.7.mlp.c_proj",
+          "precision": "bf16",
+          "original_shape": [
+            5120,
+            1280
+          ]
+        },
+        {
+          "path": "target.blocks.8.attn.c_attn",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            3840
+          ]
+        },
+        {
+          "path": "target.blocks.8.attn.c_proj",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            1280
+          ]
+        },
+        {
+          "path": "target.blocks.8.mlp.c_fc",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            5120
+          ]
+        },
+        {
+          "path": "target.blocks.8.mlp.c_proj",
+          "precision": "bf16",
+          "original_shape": [
+            5120,
+            1280
+          ]
+        },
+        {
+          "path": "target.blocks.9.attn.c_attn",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            3840
+          ]
+        },
+        {
+          "path": "target.blocks.9.attn.c_proj",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            1280
+          ]
+        },
+        {
+          "path": "target.blocks.9.mlp.c_fc",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            5120
+          ]
+        },
+        {
+          "path": "target.blocks.9.mlp.c_proj",
+          "precision": "bf16",
+          "original_shape": [
+            5120,
+            1280
+          ]
+        },
+        {
+          "path": "target.blocks.10.attn.c_attn",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            3840
+          ]
+        },
+        {
+          "path": "target.blocks.10.attn.c_proj",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            1280
+          ]
+        },
+        {
+          "path": "target.blocks.10.mlp.c_fc",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            5120
+          ]
+        },
+        {
+          "path": "target.blocks.10.mlp.c_proj",
+          "precision": "bf16",
+          "original_shape": [
+            5120,
+            1280
+          ]
+        },
+        {
+          "path": "target.blocks.11.attn.c_attn",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            3840
+          ]
+        },
+        {
+          "path": "target.blocks.11.attn.c_proj",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            1280
+          ]
+        },
+        {
+          "path": "target.blocks.11.mlp.c_fc",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            5120
+          ]
+        },
+        {
+          "path": "target.blocks.11.mlp.c_proj",
+          "precision": "bf16",
+          "original_shape": [
+            5120,
+            1280
+          ]
+        },
+        {
+          "path": "target.blocks.12.attn.c_attn",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            3840
+          ]
+        },
+        {
+          "path": "target.blocks.12.attn.c_proj",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            1280
+          ]
+        },
+        {
+          "path": "target.blocks.12.mlp.c_fc",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            5120
+          ]
+        },
+        {
+          "path": "target.blocks.12.mlp.c_proj",
+          "precision": "bf16",
+          "original_shape": [
+            5120,
+            1280
+          ]
+        },
+        {
+          "path": "target.blocks.13.attn.c_attn",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            3840
+          ]
+        },
+        {
+          "path": "target.blocks.13.attn.c_proj",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            1280
+          ]
+        },
+        {
+          "path": "target.blocks.13.mlp.c_fc",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            5120
+          ]
+        },
+        {
+          "path": "target.blocks.13.mlp.c_proj",
+          "precision": "bf16",
+          "original_shape": [
+            5120,
+            1280
+          ]
+        },
+        {
+          "path": "target.blocks.14.attn.c_attn",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            3840
+          ]
+        },
+        {
+          "path": "target.blocks.14.attn.c_proj",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            1280
+          ]
+        },
+        {
+          "path": "target.blocks.14.mlp.c_fc",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            5120
+          ]
+        },
+        {
+          "path": "target.blocks.14.mlp.c_proj",
+          "precision": "bf16",
+          "original_shape": [
+            5120,
+            1280
+          ]
+        },
+        {
+          "path": "target.blocks.15.attn.c_attn",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            3840
+          ]
+        },
+        {
+          "path": "target.blocks.15.attn.c_proj",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            1280
+          ]
+        },
+        {
+          "path": "target.blocks.15.mlp.c_fc",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            5120
+          ]
+        },
+        {
+          "path": "target.blocks.15.mlp.c_proj",
+          "precision": "bf16",
+          "original_shape": [
+            5120,
+            1280
+          ]
+        },
+        {
+          "path": "target.blocks.16.attn.c_attn",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            3840
+          ]
+        },
+        {
+          "path": "target.blocks.16.attn.c_proj",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            1280
+          ]
+        },
+        {
+          "path": "target.blocks.16.mlp.c_fc",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            5120
+          ]
+        },
+        {
+          "path": "target.blocks.16.mlp.c_proj",
+          "precision": "bf16",
+          "original_shape": [
+            5120,
+            1280
+          ]
+        },
+        {
+          "path": "target.blocks.17.attn.c_attn",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            3840
+          ]
+        },
+        {
+          "path": "target.blocks.17.attn.c_proj",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            1280
+          ]
+        },
+        {
+          "path": "target.blocks.17.mlp.c_fc",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            5120
+          ]
+        },
+        {
+          "path": "target.blocks.17.mlp.c_proj",
+          "precision": "bf16",
+          "original_shape": [
+            5120,
+            1280
+          ]
+        },
+        {
+          "path": "target.blocks.18.attn.c_attn",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            3840
+          ]
+        },
+        {
+          "path": "target.blocks.18.attn.c_proj",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            1280
+          ]
+        },
+        {
+          "path": "target.blocks.18.mlp.c_fc",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            5120
+          ]
+        },
+        {
+          "path": "target.blocks.18.mlp.c_proj",
+          "precision": "bf16",
+          "original_shape": [
+            5120,
+            1280
+          ]
+        },
+        {
+          "path": "target.blocks.19.attn.c_attn",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            3840
+          ]
+        },
+        {
+          "path": "target.blocks.19.attn.c_proj",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            1280
+          ]
+        },
+        {
+          "path": "target.blocks.19.mlp.c_fc",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            5120
+          ]
+        },
+        {
+          "path": "target.blocks.19.mlp.c_proj",
+          "precision": "bf16",
+          "original_shape": [
+            5120,
+            1280
+          ]
+        },
+        {
+          "path": "target.blocks.20.attn.c_attn",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            3840
+          ]
+        },
+        {
+          "path": "target.blocks.20.attn.c_proj",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            1280
+          ]
+        },
+        {
+          "path": "target.blocks.20.mlp.c_fc",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            5120
+          ]
+        },
+        {
+          "path": "target.blocks.20.mlp.c_proj",
+          "precision": "bf16",
+          "original_shape": [
+            5120,
+            1280
+          ]
+        },
+        {
+          "path": "target.blocks.21.attn.c_attn",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            3840
+          ]
+        },
+        {
+          "path": "target.blocks.21.attn.c_proj",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            1280
+          ]
+        },
+        {
+          "path": "target.blocks.21.mlp.c_fc",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            5120
+          ]
+        },
+        {
+          "path": "target.blocks.21.mlp.c_proj",
+          "precision": "bf16",
+          "original_shape": [
+            5120,
+            1280
+          ]
+        },
+        {
+          "path": "target.blocks.22.attn.c_attn",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            3840
+          ]
+        },
+        {
+          "path": "target.blocks.22.attn.c_proj",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            1280
+          ]
+        },
+        {
+          "path": "target.blocks.22.mlp.c_fc",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            5120
+          ]
+        },
+        {
+          "path": "target.blocks.22.mlp.c_proj",
+          "precision": "bf16",
+          "original_shape": [
+            5120,
+            1280
+          ]
+        },
+        {
+          "path": "target.blocks.23.attn.c_attn",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            3840
+          ]
+        },
+        {
+          "path": "target.blocks.23.attn.c_proj",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            1280
+          ]
+        },
+        {
+          "path": "target.blocks.23.mlp.c_fc",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            5120
+          ]
+        },
+        {
+          "path": "target.blocks.23.mlp.c_proj",
+          "precision": "bf16",
+          "original_shape": [
+            5120,
+            1280
+          ]
+        },
+        {
+          "path": "draft.blocks.0.q_proj",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            1280
+          ]
+        },
+        {
+          "path": "draft.blocks.0.k_proj",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            1280
+          ]
+        },
+        {
+          "path": "draft.blocks.0.v_proj",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            1280
+          ]
+        },
+        {
+          "path": "draft.blocks.0.o_proj",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            1280
+          ]
+        },
+        {
+          "path": "draft.blocks.0.mlp.0",
+          "precision": "bf16",
+          "original_shape": [
+            5120,
+            1280
+          ]
+        },
+        {
+          "path": "draft.blocks.0.mlp.2",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            5120
+          ]
+        },
+        {
+          "path": "draft.blocks.1.q_proj",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            1280
+          ]
+        },
+        {
+          "path": "draft.blocks.1.k_proj",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            1280
+          ]
+        },
+        {
+          "path": "draft.blocks.1.v_proj",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            1280
+          ]
+        },
+        {
+          "path": "draft.blocks.1.o_proj",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            1280
+          ]
+        },
+        {
+          "path": "draft.blocks.1.mlp.0",
+          "precision": "bf16",
+          "original_shape": [
+            5120,
+            1280
+          ]
+        },
+        {
+          "path": "draft.blocks.1.mlp.2",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            5120
+          ]
+        },
+        {
+          "path": "draft.blocks.2.q_proj",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            1280
+          ]
+        },
+        {
+          "path": "draft.blocks.2.k_proj",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            1280
+          ]
+        },
+        {
+          "path": "draft.blocks.2.v_proj",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            1280
+          ]
+        },
+        {
+          "path": "draft.blocks.2.o_proj",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            1280
+          ]
+        },
+        {
+          "path": "draft.blocks.2.mlp.0",
+          "precision": "bf16",
+          "original_shape": [
+            5120,
+            1280
+          ]
+        },
+        {
+          "path": "draft.blocks.2.mlp.2",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            5120
+          ]
+        },
+        {
+          "path": "cfm.blocks.0.attention.wqkv",
+          "precision": "bf16",
+          "original_shape": [
+            1536,
+            512
+          ]
+        },
+        {
+          "path": "cfm.blocks.0.attention.wo",
+          "precision": "bf16",
+          "original_shape": [
+            512,
+            512
+          ]
+        },
+        {
+          "path": "cfm.blocks.0.feed_forward.w1",
+          "precision": "bf16",
+          "original_shape": [
+            1536,
+            512
+          ]
+        },
+        {
+          "path": "cfm.blocks.0.feed_forward.w3",
+          "precision": "bf16",
+          "original_shape": [
+            1536,
+            512
+          ]
+        },
+        {
+          "path": "cfm.blocks.0.feed_forward.w2",
+          "precision": "bf16",
+          "original_shape": [
+            512,
+            1536
+          ]
+        },
+        {
+          "path": "cfm.blocks.0.skip_in_linear",
+          "precision": "bf16",
+          "original_shape": [
+            512,
+            1024
+          ]
+        },
+        {
+          "path": "cfm.blocks.1.attention.wqkv",
+          "precision": "bf16",
+          "original_shape": [
+            1536,
+            512
+          ]
+        },
+        {
+          "path": "cfm.blocks.1.attention.wo",
+          "precision": "bf16",
+          "original_shape": [
+            512,
+            512
+          ]
+        },
+        {
+          "path": "cfm.blocks.1.feed_forward.w1",
+          "precision": "bf16",
+          "original_shape": [
+            1536,
+            512
+          ]
+        },
+        {
+          "path": "cfm.blocks.1.feed_forward.w3",
+          "precision": "bf16",
+          "original_shape": [
+            1536,
+            512
+          ]
+        },
+        {
+          "path": "cfm.blocks.1.feed_forward.w2",
+          "precision": "bf16",
+          "original_shape": [
+            512,
+            1536
+          ]
+        },
+        {
+          "path": "cfm.blocks.1.skip_in_linear",
+          "precision": "bf16",
+          "original_shape": [
+            512,
+            1024
+          ]
+        },
+        {
+          "path": "cfm.blocks.2.attention.wqkv",
+          "precision": "bf16",
+          "original_shape": [
+            1536,
+            512
+          ]
+        },
+        {
+          "path": "cfm.blocks.2.attention.wo",
+          "precision": "bf16",
+          "original_shape": [
+            512,
+            512
+          ]
+        },
+        {
+          "path": "cfm.blocks.2.feed_forward.w1",
+          "precision": "bf16",
+          "original_shape": [
+            1536,
+            512
+          ]
+        },
+        {
+          "path": "cfm.blocks.2.feed_forward.w3",
+          "precision": "bf16",
+          "original_shape": [
+            1536,
+            512
+          ]
+        },
+        {
+          "path": "cfm.blocks.2.feed_forward.w2",
+          "precision": "bf16",
+          "original_shape": [
+            512,
+            1536
+          ]
+        },
+        {
+          "path": "cfm.blocks.2.skip_in_linear",
+          "precision": "bf16",
+          "original_shape": [
+            512,
+            1024
+          ]
+        },
+        {
+          "path": "cfm.blocks.3.attention.wqkv",
+          "precision": "bf16",
+          "original_shape": [
+            1536,
+            512
+          ]
+        },
+        {
+          "path": "cfm.blocks.3.attention.wo",
+          "precision": "bf16",
+          "original_shape": [
+            512,
+            512
+          ]
+        },
+        {
+          "path": "cfm.blocks.3.feed_forward.w1",
+          "precision": "bf16",
+          "original_shape": [
+            1536,
+            512
+          ]
+        },
+        {
+          "path": "cfm.blocks.3.feed_forward.w3",
+          "precision": "bf16",
+          "original_shape": [
+            1536,
+            512
+          ]
+        },
+        {
+          "path": "cfm.blocks.3.feed_forward.w2",
+          "precision": "bf16",
+          "original_shape": [
+            512,
+            1536
+          ]
+        },
+        {
+          "path": "cfm.blocks.3.skip_in_linear",
+          "precision": "bf16",
+          "original_shape": [
+            512,
+            1024
+          ]
+        },
+        {
+          "path": "cfm.blocks.4.attention.wqkv",
+          "precision": "bf16",
+          "original_shape": [
+            1536,
+            512
+          ]
+        },
+        {
+          "path": "cfm.blocks.4.attention.wo",
+          "precision": "bf16",
+          "original_shape": [
+            512,
+            512
+          ]
+        },
+        {
+          "path": "cfm.blocks.4.feed_forward.w1",
+          "precision": "bf16",
+          "original_shape": [
+            1536,
+            512
+          ]
+        },
+        {
+          "path": "cfm.blocks.4.feed_forward.w3",
+          "precision": "bf16",
+          "original_shape": [
+            1536,
+            512
+          ]
+        },
+        {
+          "path": "cfm.blocks.4.feed_forward.w2",
+          "precision": "bf16",
+          "original_shape": [
+            512,
+            1536
+          ]
+        },
+        {
+          "path": "cfm.blocks.4.skip_in_linear",
+          "precision": "bf16",
+          "original_shape": [
+            512,
+            1024
+          ]
+        },
+        {
+          "path": "cfm.blocks.5.attention.wqkv",
+          "precision": "bf16",
+          "original_shape": [
+            1536,
+            512
+          ]
+        },
+        {
+          "path": "cfm.blocks.5.attention.wo",
+          "precision": "bf16",
+          "original_shape": [
+            512,
+            512
+          ]
+        },
+        {
+          "path": "cfm.blocks.5.feed_forward.w1",
+          "precision": "bf16",
+          "original_shape": [
+            1536,
+            512
+          ]
+        },
+        {
+          "path": "cfm.blocks.5.feed_forward.w3",
+          "precision": "bf16",
+          "original_shape": [
+            1536,
+            512
+          ]
+        },
+        {
+          "path": "cfm.blocks.5.feed_forward.w2",
+          "precision": "bf16",
+          "original_shape": [
+            512,
+            1536
+          ]
+        },
+        {
+          "path": "cfm.blocks.5.skip_in_linear",
+          "precision": "bf16",
+          "original_shape": [
+            512,
+            1024
+          ]
+        },
+        {
+          "path": "cfm.blocks.6.attention.wqkv",
+          "precision": "bf16",
+          "original_shape": [
+            1536,
+            512
+          ]
+        },
+        {
+          "path": "cfm.blocks.6.attention.wo",
+          "precision": "bf16",
+          "original_shape": [
+            512,
+            512
+          ]
+        },
+        {
+          "path": "cfm.blocks.6.feed_forward.w1",
+          "precision": "bf16",
+          "original_shape": [
+            1536,
+            512
+          ]
+        },
+        {
+          "path": "cfm.blocks.6.feed_forward.w3",
+          "precision": "bf16",
+          "original_shape": [
+            1536,
+            512
+          ]
+        },
+        {
+          "path": "cfm.blocks.6.feed_forward.w2",
+          "precision": "bf16",
+          "original_shape": [
+            512,
+            1536
+          ]
+        },
+        {
+          "path": "cfm.blocks.6.skip_in_linear",
+          "precision": "bf16",
+          "original_shape": [
+            512,
+            1024
+          ]
+        },
+        {
+          "path": "cfm.blocks.7.attention.wqkv",
+          "precision": "bf16",
+          "original_shape": [
+            1536,
+            512
+          ]
+        },
+        {
+          "path": "cfm.blocks.7.attention.wo",
+          "precision": "bf16",
+          "original_shape": [
+            512,
+            512
+          ]
+        },
+        {
+          "path": "cfm.blocks.7.feed_forward.w1",
+          "precision": "bf16",
+          "original_shape": [
+            1536,
+            512
+          ]
+        },
+        {
+          "path": "cfm.blocks.7.feed_forward.w3",
+          "precision": "bf16",
+          "original_shape": [
+            1536,
+            512
+          ]
+        },
+        {
+          "path": "cfm.blocks.7.feed_forward.w2",
+          "precision": "bf16",
+          "original_shape": [
+            512,
+            1536
+          ]
+        },
+        {
+          "path": "cfm.blocks.7.skip_in_linear",
+          "precision": "bf16",
+          "original_shape": [
+            512,
+            1024
+          ]
+        },
+        {
+          "path": "cfm.blocks.8.attention.wqkv",
+          "precision": "bf16",
+          "original_shape": [
+            1536,
+            512
+          ]
+        },
+        {
+          "path": "cfm.blocks.8.attention.wo",
+          "precision": "bf16",
+          "original_shape": [
+            512,
+            512
+          ]
+        },
+        {
+          "path": "cfm.blocks.8.feed_forward.w1",
+          "precision": "bf16",
+          "original_shape": [
+            1536,
+            512
+          ]
+        },
+        {
+          "path": "cfm.blocks.8.feed_forward.w3",
+          "precision": "bf16",
+          "original_shape": [
+            1536,
+            512
+          ]
+        },
+        {
+          "path": "cfm.blocks.8.feed_forward.w2",
+          "precision": "bf16",
+          "original_shape": [
+            512,
+            1536
+          ]
+        },
+        {
+          "path": "cfm.blocks.8.skip_in_linear",
+          "precision": "bf16",
+          "original_shape": [
+            512,
+            1024
+          ]
+        },
+        {
+          "path": "cfm.blocks.9.attention.wqkv",
+          "precision": "bf16",
+          "original_shape": [
+            1536,
+            512
+          ]
+        },
+        {
+          "path": "cfm.blocks.9.attention.wo",
+          "precision": "bf16",
+          "original_shape": [
+            512,
+            512
+          ]
+        },
+        {
+          "path": "cfm.blocks.9.feed_forward.w1",
+          "precision": "bf16",
+          "original_shape": [
+            1536,
+            512
+          ]
+        },
+        {
+          "path": "cfm.blocks.9.feed_forward.w3",
+          "precision": "bf16",
+          "original_shape": [
+            1536,
+            512
+          ]
+        },
+        {
+          "path": "cfm.blocks.9.feed_forward.w2",
+          "precision": "bf16",
+          "original_shape": [
+            512,
+            1536
+          ]
+        },
+        {
+          "path": "cfm.blocks.9.skip_in_linear",
+          "precision": "bf16",
+          "original_shape": [
+            512,
+            1024
+          ]
+        },
+        {
+          "path": "cfm.blocks.10.attention.wqkv",
+          "precision": "bf16",
+          "original_shape": [
+            1536,
+            512
+          ]
+        },
+        {
+          "path": "cfm.blocks.10.attention.wo",
+          "precision": "bf16",
+          "original_shape": [
+            512,
+            512
+          ]
+        },
+        {
+          "path": "cfm.blocks.10.feed_forward.w1",
+          "precision": "bf16",
+          "original_shape": [
+            1536,
+            512
+          ]
+        },
+        {
+          "path": "cfm.blocks.10.feed_forward.w3",
+          "precision": "bf16",
+          "original_shape": [
+            1536,
+            512
+          ]
+        },
+        {
+          "path": "cfm.blocks.10.feed_forward.w2",
+          "precision": "bf16",
+          "original_shape": [
+            512,
+            1536
+          ]
+        },
+        {
+          "path": "cfm.blocks.10.skip_in_linear",
+          "precision": "bf16",
+          "original_shape": [
+            512,
+            1024
+          ]
+        },
+        {
+          "path": "cfm.blocks.11.attention.wqkv",
+          "precision": "bf16",
+          "original_shape": [
+            1536,
+            512
+          ]
+        },
+        {
+          "path": "cfm.blocks.11.attention.wo",
+          "precision": "bf16",
+          "original_shape": [
+            512,
+            512
+          ]
+        },
+        {
+          "path": "cfm.blocks.11.feed_forward.w1",
+          "precision": "bf16",
+          "original_shape": [
+            1536,
+            512
+          ]
+        },
+        {
+          "path": "cfm.blocks.11.feed_forward.w3",
+          "precision": "bf16",
+          "original_shape": [
+            1536,
+            512
+          ]
+        },
+        {
+          "path": "cfm.blocks.11.feed_forward.w2",
+          "precision": "bf16",
+          "original_shape": [
+            512,
+            1536
+          ]
+        },
+        {
+          "path": "cfm.blocks.11.skip_in_linear",
+          "precision": "bf16",
+          "original_shape": [
+            512,
+            1024
+          ]
+        },
+        {
+          "path": "cfm.blocks.12.attention.wqkv",
+          "precision": "bf16",
+          "original_shape": [
+            1536,
+            512
+          ]
+        },
+        {
+          "path": "cfm.blocks.12.attention.wo",
+          "precision": "bf16",
+          "original_shape": [
+            512,
+            512
+          ]
+        },
+        {
+          "path": "cfm.blocks.12.feed_forward.w1",
+          "precision": "bf16",
+          "original_shape": [
+            1536,
+            512
+          ]
+        },
+        {
+          "path": "cfm.blocks.12.feed_forward.w3",
+          "precision": "bf16",
+          "original_shape": [
+            1536,
+            512
+          ]
+        },
+        {
+          "path": "cfm.blocks.12.feed_forward.w2",
+          "precision": "bf16",
+          "original_shape": [
+            512,
+            1536
+          ]
+        },
+        {
+          "path": "cfm.blocks.12.skip_in_linear",
+          "precision": "bf16",
+          "original_shape": [
+            512,
+            1024
+          ]
+        },
+        {
+          "path": "cfm.wavenet.in_layers.0.conv.conv",
+          "precision": "bf16",
+          "original_shape": [
+            1024,
+            512,
+            5
+          ],
+          "convolution": true
+        },
+        {
+          "path": "cfm.wavenet.in_layers.1.conv.conv",
+          "precision": "bf16",
+          "original_shape": [
+            1024,
+            512,
+            5
+          ],
+          "convolution": true
+        },
+        {
+          "path": "cfm.wavenet.in_layers.2.conv.conv",
+          "precision": "bf16",
+          "original_shape": [
+            1024,
+            512,
+            5
+          ],
+          "convolution": true
+        },
+        {
+          "path": "cfm.wavenet.in_layers.3.conv.conv",
+          "precision": "bf16",
+          "original_shape": [
+            1024,
+            512,
+            5
+          ],
+          "convolution": true
+        },
+        {
+          "path": "cfm.wavenet.in_layers.4.conv.conv",
+          "precision": "bf16",
+          "original_shape": [
+            1024,
+            512,
+            5
+          ],
+          "convolution": true
+        },
+        {
+          "path": "cfm.wavenet.in_layers.5.conv.conv",
+          "precision": "bf16",
+          "original_shape": [
+            1024,
+            512,
+            5
+          ],
+          "convolution": true
+        },
+        {
+          "path": "cfm.wavenet.in_layers.6.conv.conv",
+          "precision": "bf16",
+          "original_shape": [
+            1024,
+            512,
+            5
+          ],
+          "convolution": true
+        },
+        {
+          "path": "cfm.wavenet.in_layers.7.conv.conv",
+          "precision": "bf16",
+          "original_shape": [
+            1024,
+            512,
+            5
+          ],
+          "convolution": true
+        },
+        {
+          "path": "cfm.wavenet.res_skip_layers.0.conv.conv",
+          "precision": "bf16",
+          "original_shape": [
+            1024,
+            512,
+            1
+          ],
+          "convolution": true
+        },
+        {
+          "path": "cfm.wavenet.res_skip_layers.1.conv.conv",
+          "precision": "bf16",
+          "original_shape": [
+            1024,
+            512,
+            1
+          ],
+          "convolution": true
+        },
+        {
+          "path": "cfm.wavenet.res_skip_layers.2.conv.conv",
+          "precision": "bf16",
+          "original_shape": [
+            1024,
+            512,
+            1
+          ],
+          "convolution": true
+        },
+        {
+          "path": "cfm.wavenet.res_skip_layers.3.conv.conv",
+          "precision": "bf16",
+          "original_shape": [
+            1024,
+            512,
+            1
+          ],
+          "convolution": true
+        },
+        {
+          "path": "cfm.wavenet.res_skip_layers.4.conv.conv",
+          "precision": "bf16",
+          "original_shape": [
+            1024,
+            512,
+            1
+          ],
+          "convolution": true
+        },
+        {
+          "path": "cfm.wavenet.res_skip_layers.5.conv.conv",
+          "precision": "bf16",
+          "original_shape": [
+            1024,
+            512,
+            1
+          ],
+          "convolution": true
+        },
+        {
+          "path": "cfm.wavenet.res_skip_layers.6.conv.conv",
+          "precision": "bf16",
+          "original_shape": [
+            1024,
+            512,
+            1
+          ],
+          "convolution": true
+        },
+        {
+          "path": "cfm.wavenet.res_skip_layers.7.conv.conv",
+          "precision": "bf16",
+          "original_shape": [
+            512,
+            512,
+            1
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.0.ups.0",
+          "precision": "bf16",
+          "original_shape": [
+            1536,
+            768,
+            8
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.0.resblock0.convs1.0",
+          "precision": "bf16",
+          "original_shape": [
+            768,
+            768,
+            3
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.0.resblock0.convs1.1",
+          "precision": "bf16",
+          "original_shape": [
+            768,
+            768,
+            3
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.0.resblock0.convs1.2",
+          "precision": "bf16",
+          "original_shape": [
+            768,
+            768,
+            3
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.0.resblock0.convs2.0",
+          "precision": "bf16",
+          "original_shape": [
+            768,
+            768,
+            3
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.0.resblock0.convs2.1",
+          "precision": "bf16",
+          "original_shape": [
+            768,
+            768,
+            3
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.0.resblock0.convs2.2",
+          "precision": "bf16",
+          "original_shape": [
+            768,
+            768,
+            3
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.0.resblock1.convs1.0",
+          "precision": "bf16",
+          "original_shape": [
+            768,
+            768,
+            7
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.0.resblock1.convs1.1",
+          "precision": "bf16",
+          "original_shape": [
+            768,
+            768,
+            7
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.0.resblock1.convs1.2",
+          "precision": "bf16",
+          "original_shape": [
+            768,
+            768,
+            7
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.0.resblock1.convs2.0",
+          "precision": "bf16",
+          "original_shape": [
+            768,
+            768,
+            7
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.0.resblock1.convs2.1",
+          "precision": "bf16",
+          "original_shape": [
+            768,
+            768,
+            7
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.0.resblock1.convs2.2",
+          "precision": "bf16",
+          "original_shape": [
+            768,
+            768,
+            7
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.0.resblock2.convs1.0",
+          "precision": "bf16",
+          "original_shape": [
+            768,
+            768,
+            11
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.0.resblock2.convs1.1",
+          "precision": "bf16",
+          "original_shape": [
+            768,
+            768,
+            11
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.0.resblock2.convs1.2",
+          "precision": "bf16",
+          "original_shape": [
+            768,
+            768,
+            11
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.0.resblock2.convs2.0",
+          "precision": "bf16",
+          "original_shape": [
+            768,
+            768,
+            11
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.0.resblock2.convs2.1",
+          "precision": "bf16",
+          "original_shape": [
+            768,
+            768,
+            11
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.0.resblock2.convs2.2",
+          "precision": "bf16",
+          "original_shape": [
+            768,
+            768,
+            11
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.1.ups.0",
+          "precision": "bf16",
+          "original_shape": [
+            768,
+            384,
+            8
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.1.resblock0.convs1.0",
+          "precision": "bf16",
+          "original_shape": [
+            384,
+            384,
+            3
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.1.resblock0.convs1.1",
+          "precision": "bf16",
+          "original_shape": [
+            384,
+            384,
+            3
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.1.resblock0.convs1.2",
+          "precision": "bf16",
+          "original_shape": [
+            384,
+            384,
+            3
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.1.resblock0.convs2.0",
+          "precision": "bf16",
+          "original_shape": [
+            384,
+            384,
+            3
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.1.resblock0.convs2.1",
+          "precision": "bf16",
+          "original_shape": [
+            384,
+            384,
+            3
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.1.resblock0.convs2.2",
+          "precision": "bf16",
+          "original_shape": [
+            384,
+            384,
+            3
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.1.resblock1.convs1.0",
+          "precision": "bf16",
+          "original_shape": [
+            384,
+            384,
+            7
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.1.resblock1.convs1.1",
+          "precision": "bf16",
+          "original_shape": [
+            384,
+            384,
+            7
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.1.resblock1.convs1.2",
+          "precision": "bf16",
+          "original_shape": [
+            384,
+            384,
+            7
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.1.resblock1.convs2.0",
+          "precision": "bf16",
+          "original_shape": [
+            384,
+            384,
+            7
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.1.resblock1.convs2.1",
+          "precision": "bf16",
+          "original_shape": [
+            384,
+            384,
+            7
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.1.resblock1.convs2.2",
+          "precision": "bf16",
+          "original_shape": [
+            384,
+            384,
+            7
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.1.resblock2.convs1.0",
+          "precision": "bf16",
+          "original_shape": [
+            384,
+            384,
+            11
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.1.resblock2.convs1.1",
+          "precision": "bf16",
+          "original_shape": [
+            384,
+            384,
+            11
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.1.resblock2.convs1.2",
+          "precision": "bf16",
+          "original_shape": [
+            384,
+            384,
+            11
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.1.resblock2.convs2.0",
+          "precision": "bf16",
+          "original_shape": [
+            384,
+            384,
+            11
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.1.resblock2.convs2.1",
+          "precision": "bf16",
+          "original_shape": [
+            384,
+            384,
+            11
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.1.resblock2.convs2.2",
+          "precision": "bf16",
+          "original_shape": [
+            384,
+            384,
+            11
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.2.ups.0",
+          "precision": "bf16",
+          "original_shape": [
+            384,
+            192,
+            4
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.2.resblock0.convs1.0",
+          "precision": "bf16",
+          "original_shape": [
+            192,
+            192,
+            3
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.2.resblock0.convs1.1",
+          "precision": "bf16",
+          "original_shape": [
+            192,
+            192,
+            3
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.2.resblock0.convs1.2",
+          "precision": "bf16",
+          "original_shape": [
+            192,
+            192,
+            3
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.2.resblock0.convs2.0",
+          "precision": "bf16",
+          "original_shape": [
+            192,
+            192,
+            3
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.2.resblock0.convs2.1",
+          "precision": "bf16",
+          "original_shape": [
+            192,
+            192,
+            3
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.2.resblock0.convs2.2",
+          "precision": "bf16",
+          "original_shape": [
+            192,
+            192,
+            3
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.2.resblock1.convs1.0",
+          "precision": "bf16",
+          "original_shape": [
+            192,
+            192,
+            7
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.2.resblock1.convs1.1",
+          "precision": "bf16",
+          "original_shape": [
+            192,
+            192,
+            7
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.2.resblock1.convs1.2",
+          "precision": "bf16",
+          "original_shape": [
+            192,
+            192,
+            7
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.2.resblock1.convs2.0",
+          "precision": "bf16",
+          "original_shape": [
+            192,
+            192,
+            7
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.2.resblock1.convs2.1",
+          "precision": "bf16",
+          "original_shape": [
+            192,
+            192,
+            7
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.2.resblock1.convs2.2",
+          "precision": "bf16",
+          "original_shape": [
+            192,
+            192,
+            7
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.2.resblock2.convs1.0",
+          "precision": "bf16",
+          "original_shape": [
+            192,
+            192,
+            11
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.2.resblock2.convs1.1",
+          "precision": "bf16",
+          "original_shape": [
+            192,
+            192,
+            11
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.2.resblock2.convs1.2",
+          "precision": "bf16",
+          "original_shape": [
+            192,
+            192,
+            11
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.2.resblock2.convs2.0",
+          "precision": "bf16",
+          "original_shape": [
+            192,
+            192,
+            11
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.2.resblock2.convs2.1",
+          "precision": "bf16",
+          "original_shape": [
+            192,
+            192,
+            11
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.2.resblock2.convs2.2",
+          "precision": "bf16",
+          "original_shape": [
+            192,
+            192,
+            11
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.3.ups.0",
+          "precision": "bf16",
+          "original_shape": [
+            192,
+            96,
+            4
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.3.resblock0.convs1.0",
+          "precision": "bf16",
+          "original_shape": [
+            96,
+            96,
+            3
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.3.resblock0.convs1.1",
+          "precision": "bf16",
+          "original_shape": [
+            96,
+            96,
+            3
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.3.resblock0.convs1.2",
+          "precision": "bf16",
+          "original_shape": [
+            96,
+            96,
+            3
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.3.resblock0.convs2.0",
+          "precision": "bf16",
+          "original_shape": [
+            96,
+            96,
+            3
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.3.resblock0.convs2.1",
+          "precision": "bf16",
+          "original_shape": [
+            96,
+            96,
+            3
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.3.resblock0.convs2.2",
+          "precision": "bf16",
+          "original_shape": [
+            96,
+            96,
+            3
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.3.resblock1.convs1.0",
+          "precision": "bf16",
+          "original_shape": [
+            96,
+            96,
+            7
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.3.resblock1.convs1.1",
+          "precision": "bf16",
+          "original_shape": [
+            96,
+            96,
+            7
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.3.resblock1.convs1.2",
+          "precision": "bf16",
+          "original_shape": [
+            96,
+            96,
+            7
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.3.resblock1.convs2.0",
+          "precision": "bf16",
+          "original_shape": [
+            96,
+            96,
+            7
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.3.resblock1.convs2.1",
+          "precision": "bf16",
+          "original_shape": [
+            96,
+            96,
+            7
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.3.resblock1.convs2.2",
+          "precision": "bf16",
+          "original_shape": [
+            96,
+            96,
+            7
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.3.resblock2.convs1.0",
+          "precision": "bf16",
+          "original_shape": [
+            96,
+            96,
+            11
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.3.resblock2.convs1.1",
+          "precision": "bf16",
+          "original_shape": [
+            96,
+            96,
+            11
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.3.resblock2.convs1.2",
+          "precision": "bf16",
+          "original_shape": [
+            96,
+            96,
+            11
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.3.resblock2.convs2.0",
+          "precision": "bf16",
+          "original_shape": [
+            96,
+            96,
+            11
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.3.resblock2.convs2.1",
+          "precision": "bf16",
+          "original_shape": [
+            96,
+            96,
+            11
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.3.resblock2.convs2.2",
+          "precision": "bf16",
+          "original_shape": [
+            96,
+            96,
+            11
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.4.ups.0",
+          "precision": "bf16",
+          "original_shape": [
+            96,
+            48,
+            4
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.4.resblock0.convs1.0",
+          "precision": "bf16",
+          "original_shape": [
+            48,
+            48,
+            3
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.4.resblock0.convs1.1",
+          "precision": "bf16",
+          "original_shape": [
+            48,
+            48,
+            3
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.4.resblock0.convs1.2",
+          "precision": "bf16",
+          "original_shape": [
+            48,
+            48,
+            3
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.4.resblock0.convs2.0",
+          "precision": "bf16",
+          "original_shape": [
+            48,
+            48,
+            3
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.4.resblock0.convs2.1",
+          "precision": "bf16",
+          "original_shape": [
+            48,
+            48,
+            3
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.4.resblock0.convs2.2",
+          "precision": "bf16",
+          "original_shape": [
+            48,
+            48,
+            3
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.4.resblock1.convs1.0",
+          "precision": "bf16",
+          "original_shape": [
+            48,
+            48,
+            7
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.4.resblock1.convs1.1",
+          "precision": "bf16",
+          "original_shape": [
+            48,
+            48,
+            7
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.4.resblock1.convs1.2",
+          "precision": "bf16",
+          "original_shape": [
+            48,
+            48,
+            7
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.4.resblock1.convs2.0",
+          "precision": "bf16",
+          "original_shape": [
+            48,
+            48,
+            7
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.4.resblock1.convs2.1",
+          "precision": "bf16",
+          "original_shape": [
+            48,
+            48,
+            7
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.4.resblock1.convs2.2",
+          "precision": "bf16",
+          "original_shape": [
+            48,
+            48,
+            7
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.4.resblock2.convs1.0",
+          "precision": "bf16",
+          "original_shape": [
+            48,
+            48,
+            11
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.4.resblock2.convs1.1",
+          "precision": "bf16",
+          "original_shape": [
+            48,
+            48,
+            11
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.4.resblock2.convs1.2",
+          "precision": "bf16",
+          "original_shape": [
+            48,
+            48,
+            11
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.4.resblock2.convs2.0",
+          "precision": "bf16",
+          "original_shape": [
+            48,
+            48,
+            11
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.4.resblock2.convs2.1",
+          "precision": "bf16",
+          "original_shape": [
+            48,
+            48,
+            11
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.4.resblock2.convs2.2",
+          "precision": "bf16",
+          "original_shape": [
+            48,
+            48,
+            11
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.5.ups.0",
+          "precision": "bf16",
+          "original_shape": [
+            48,
+            24,
+            4
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.5.resblock0.convs1.0",
+          "precision": "bf16",
+          "original_shape": [
+            24,
+            24,
+            3
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.5.resblock0.convs1.1",
+          "precision": "bf16",
+          "original_shape": [
+            24,
+            24,
+            3
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.5.resblock0.convs1.2",
+          "precision": "bf16",
+          "original_shape": [
+            24,
+            24,
+            3
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.5.resblock0.convs2.0",
+          "precision": "bf16",
+          "original_shape": [
+            24,
+            24,
+            3
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.5.resblock0.convs2.1",
+          "precision": "bf16",
+          "original_shape": [
+            24,
+            24,
+            3
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.5.resblock0.convs2.2",
+          "precision": "bf16",
+          "original_shape": [
+            24,
+            24,
+            3
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.5.resblock1.convs1.0",
+          "precision": "bf16",
+          "original_shape": [
+            24,
+            24,
+            7
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.5.resblock1.convs1.1",
+          "precision": "bf16",
+          "original_shape": [
+            24,
+            24,
+            7
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.5.resblock1.convs1.2",
+          "precision": "bf16",
+          "original_shape": [
+            24,
+            24,
+            7
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.5.resblock1.convs2.0",
+          "precision": "bf16",
+          "original_shape": [
+            24,
+            24,
+            7
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.5.resblock1.convs2.1",
+          "precision": "bf16",
+          "original_shape": [
+            24,
+            24,
+            7
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.5.resblock1.convs2.2",
+          "precision": "bf16",
+          "original_shape": [
+            24,
+            24,
+            7
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.5.resblock2.convs1.0",
+          "precision": "bf16",
+          "original_shape": [
+            24,
+            24,
+            11
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.5.resblock2.convs1.1",
+          "precision": "bf16",
+          "original_shape": [
+            24,
+            24,
+            11
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.5.resblock2.convs1.2",
+          "precision": "bf16",
+          "original_shape": [
+            24,
+            24,
+            11
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.5.resblock2.convs2.0",
+          "precision": "bf16",
+          "original_shape": [
+            24,
+            24,
+            11
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.5.resblock2.convs2.1",
+          "precision": "bf16",
+          "original_shape": [
+            24,
+            24,
+            11
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.5.resblock2.convs2.2",
+          "precision": "bf16",
+          "original_shape": [
+            24,
+            24,
+            11
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.conv_pre",
+          "precision": "bf16",
+          "boundary": true
+        },
+        {
+          "path": "vocoder.conv_post",
+          "precision": "bf16",
+          "boundary": true
+        }
+      ],
+      "device": {
+        "name": "NVIDIA GeForce RTX 4090",
+        "sm": 89,
+        "sms": 128,
+        "shared_per_sm": 102400,
+        "shared_per_cta": 101376,
+        "registers_per_sm": 65536,
+        "threads_per_sm": 1536,
+        "max_ctas_per_sm": 32
+      },
+      "cache": {
+        "path": "/workspace/A_inspark_marlin/.cache/kernel_plans/24abd704787d6c411738e8850ca97e03c98a6cfbd31880e419f139fd40be70a3.json",
+        "key": "24abd704787d6c411738e8850ca97e03c98a6cfbd31880e419f139fd40be70a3",
+        "loaded": 0,
+        "total": 0,
+        "online_tuning": false
+      },
+      "plans": {},
+      "interface_precision": "FP32",
+      "observed_head_shape_extents": {
+        "target": [
+          8,
+          64,
+          128,
+          256,
+          4096
+        ],
+        "cfm": [
+          310,
+          4096
+        ],
+        "draft": [
+          7,
+          64,
+          256,
+          512,
+          1024,
+          4096
+        ]
+      },
+      "convolution_quantized": true,
+      "rnn_quantized": false,
+      "kv_quantized": false,
+      "calibrated_quality": false,
+      "online_tuning": false
+    },
+    "rnn": {
+      "mode": "bf16",
+      "matrices": [
+        "state",
+        "hidden",
+        "output"
+      ],
+      "folded_token_table": "FP32",
+      "nonlinear_math": "FP32",
+      "online_tuning": false,
+      "cache": {
+        "path": "/workspace/A_inspark_marlin/.cache/kernel_plans/81fd7f6b432ef5b8e73bc55294916470392a11bfd6e7fc97366e0717f3156ad3.json",
+        "key": "81fd7f6b432ef5b8e73bc55294916470392a11bfd6e7fc97366e0717f3156ad3",
+        "loaded": 0,
+        "total": 0,
+        "online_tuning": false
+      }
+    },
+    "compile": {
+      "components": [
+        "target",
+        "draft",
+        "cfm",
+        "vocoder"
+      ],
+      "offline_warmup_required": true,
+      "online_compile": false,
+      "unknown_shape": "eager",
+      "fullgraph": true,
+      "dynamic": false,
+      "cudagraphs": false,
+      "emulate_precision_casts": true,
+      "pattern_matcher": false,
+      "torch": "2.8.0+cu128",
+      "triton": "3.4.0"
+    },
+    "request_isolation": {
+      "strict_request_isolation": true,
+      "rng_policy": "legacy_per_request",
+      "shared_rng_paths": [],
+      "changed_sampler_paths": [],
+      "request_stream_v1_implemented": false
+    }
+  },
+  "prepare_seconds": 27.757849210873246,
+  "operator_audit": {
+    "draft": {
+      "comparisons": [
+        {
+          "output": 0,
+          "candidate_precision": "bf16",
+          "atol": 0.01,
+          "rtol": 0.01,
+          "expected_shape": [
+            1,
+            7,
+            1280
+          ],
+          "actual_shape": [
+            1,
+            7,
+            1280
+          ],
+          "reference_dtype": "torch.float32",
+          "candidate_dtype": "torch.float32",
+          "storage_dtypes_match": true,
+          "total_elements": 8960,
+          "candidate_elements": 8960,
+          "tolerance_provenance": {
+            "source": "src/acc_infer_clear/guardrails/numerics.py:TOLERANCES",
+            "selection": "declared candidate arithmetic precision",
+            "empirically_calibrated": false,
+            "storage_dtype_equality_required": false,
+            "comparison_dtype": "torch.float64",
+            "rule": "abs(actual-reference) <= atol + rtol * abs(reference)"
+          },
+          "finite_reference": true,
+          "finite_actual": true,
+          "pass_gate": true,
+          "max_abs": 5.960464477539063e-08,
+          "mean_abs": 6.636079368555718e-10,
+          "relative_l2": 2.904222229520887e-08,
+          "cosine": 0.9999999999999996,
+          "snr_db": 150.73940309441144,
+          "mismatched_elements": 0
+        },
+        {
+          "output": 1,
+          "candidate_precision": "bf16",
+          "atol": 0.01,
+          "rtol": 0.01,
+          "expected_shape": [
+            1,
+            7,
+            8194
+          ],
+          "actual_shape": [
+            1,
+            7,
+            8194
+          ],
+          "reference_dtype": "torch.float32",
+          "candidate_dtype": "torch.float32",
+          "storage_dtypes_match": true,
+          "total_elements": 57358,
+          "candidate_elements": 57358,
+          "tolerance_provenance": {
+            "source": "src/acc_infer_clear/guardrails/numerics.py:TOLERANCES",
+            "selection": "declared candidate arithmetic precision",
+            "empirically_calibrated": false,
+            "storage_dtype_equality_required": false,
+            "comparison_dtype": "torch.float64",
+            "rule": "abs(actual-reference) <= atol + rtol * abs(reference)"
+          },
+          "finite_reference": true,
+          "finite_actual": true,
+          "pass_gate": true,
+          "max_abs": 9.5367431640625e-07,
+          "mean_abs": 1.7289885554654006e-08,
+          "relative_l2": 5.477860545072925e-08,
+          "cosine": 0.9999999999999987,
+          "snr_db": 145.22778056349662,
+          "mismatched_elements": 0
+        }
+      ],
+      "timings": {
+        "eager": {
+          "gpu_ms": 1.9913728713989258,
+          "wall_ms": 1.9961707293987274
+        },
+        "compiled": {
+          "gpu_ms": 0.9468928337097168,
+          "wall_ms": 0.9517088532447815
+        }
+      },
+      "pass_gate": true,
+      "timing_scope": "real-input module call including internal casts/launches; excludes surrounding runtime packing, separately measured end-to-end"
+    },
+    "target": {
+      "comparisons": [
+        {
+          "output": 0,
+          "candidate_precision": "bf16",
+          "atol": 0.01,
+          "rtol": 0.01,
+          "expected_shape": [
+            1,
+            8,
+            8194
+          ],
+          "actual_shape": [
+            1,
+            8,
+            8194
+          ],
+          "reference_dtype": "torch.float32",
+          "candidate_dtype": "torch.float32",
+          "storage_dtypes_match": true,
+          "total_elements": 65552,
+          "candidate_elements": 65552,
+          "tolerance_provenance": {
+            "source": "src/acc_infer_clear/guardrails/numerics.py:TOLERANCES",
+            "selection": "declared candidate arithmetic precision",
+            "empirically_calibrated": false,
+            "storage_dtype_equality_required": false,
+            "comparison_dtype": "torch.float64",
+            "rule": "abs(actual-reference) <= atol + rtol * abs(reference)"
+          },
+          "finite_reference": true,
+          "finite_actual": true,
+          "pass_gate": false,
+          "max_abs": 0.03668045997619629,
+          "mean_abs": 0.005195372909619965,
+          "relative_l2": 0.0029678885806891284,
+          "cosine": 0.9999955962947509,
+          "snr_db": 50.551048144006934,
+          "mismatched_elements": 819,
+          "reason": "tolerance exceeded"
+        },
+        {
+          "output": 1,
+          "candidate_precision": "bf16",
+          "atol": 0.01,
+          "rtol": 0.01,
+          "expected_shape": [
+            1,
+            20,
+            49,
+            64
+          ],
+          "actual_shape": [
+            1,
+            20,
+            49,
+            64
+          ],
+          "reference_dtype": "torch.float32",
+          "candidate_dtype": "torch.float32",
+          "storage_dtypes_match": true,
+          "total_elements": 62720,
+          "candidate_elements": 62720,
+          "tolerance_provenance": {
+            "source": "src/acc_infer_clear/guardrails/numerics.py:TOLERANCES",
+            "selection": "declared candidate arithmetic precision",
+            "empirically_calibrated": false,
+            "storage_dtype_equality_required": false,
+            "comparison_dtype": "torch.float64",
+            "rule": "abs(actual-reference) <= atol + rtol * abs(reference)"
+          },
+          "finite_reference": true,
+          "finite_actual": true,
+          "pass_gate": true,
+          "max_abs": 0.0,
+          "mean_abs": 0.0,
+          "relative_l2": 0.0,
+          "cosine": 0.9999999999999999,
+          "snr_db": 296.97502905481724,
+          "mismatched_elements": 0
+        },
+        {
+          "output": 2,
+          "candidate_precision": "bf16",
+          "atol": 0.01,
+          "rtol": 0.01,
+          "expected_shape": [
+            1,
+            20,
+            49,
+            64
+          ],
+          "actual_shape": [
+            1,
+            20,
+            49,
+            64
+          ],
+          "reference_dtype": "torch.float32",
+          "candidate_dtype": "torch.float32",
+          "storage_dtypes_match": true,
+          "total_elements": 62720,
+          "candidate_elements": 62720,
+          "tolerance_provenance": {
+            "source": "src/acc_infer_clear/guardrails/numerics.py:TOLERANCES",
+            "selection": "declared candidate arithmetic precision",
+            "empirically_calibrated": false,
+            "storage_dtype_equality_required": false,
+            "comparison_dtype": "torch.float64",
+            "rule": "abs(actual-reference) <= atol + rtol * abs(reference)"
+          },
+          "finite_reference": true,
+          "finite_actual": true,
+          "pass_gate": true,
+          "max_abs": 0.0,
+          "mean_abs": 0.0,
+          "relative_l2": 0.0,
+          "cosine": 0.9999999999999998,
+          "snr_db": 287.83780472752227,
+          "mismatched_elements": 0
+        },
+        {
+          "output": 3,
+          "candidate_precision": "bf16",
+          "atol": 0.01,
+          "rtol": 0.01,
+          "expected_shape": [
+            1,
+            20,
+            49,
+            64
+          ],
+          "actual_shape": [
+            1,
+            20,
+            49,
+            64
+          ],
+          "reference_dtype": "torch.float32",
+          "candidate_dtype": "torch.float32",
+          "storage_dtypes_match": true,
+          "total_elements": 62720,
+          "candidate_elements": 62720,
+          "tolerance_provenance": {
+            "source": "src/acc_infer_clear/guardrails/numerics.py:TOLERANCES",
+            "selection": "declared candidate arithmetic precision",
+            "empirically_calibrated": false,
+            "storage_dtype_equality_required": false,
+            "comparison_dtype": "torch.float64",
+            "rule": "abs(actual-reference) <= atol + rtol * abs(reference)"
+          },
+          "finite_reference": true,
+          "finite_actual": true,
+          "pass_gate": true,
+          "max_abs": 0.00390625,
+          "mean_abs": 7.808816676237146e-07,
+          "relative_l2": 4.2928630915836244e-05,
+          "cosine": 0.9999999990785706,
+          "snr_db": 87.34505923724969,
+          "mismatched_elements": 0
+        },
+        {
+          "output": 4,
+          "candidate_precision": "bf16",
+          "atol": 0.01,
+          "rtol": 0.01,
+          "expected_shape": [
+            1,
+            20,
+            49,
+            64
+          ],
+          "actual_shape": [
+            1,
+            20,
+            49,
+            64
+          ],
+          "reference_dtype": "torch.float32",
+          "candidate_dtype": "torch.float32",
+          "storage_dtypes_match": true,
+          "total_elements": 62720,
+          "candidate_elements": 62720,
+          "tolerance_provenance": {
+            "source": "src/acc_infer_clear/guardrails/numerics.py:TOLERANCES",
+            "selection": "declared candidate arithmetic precision",
+            "empirically_calibrated": false,
+            "storage_dtype_equality_required": false,
+            "comparison_dtype": "torch.float64",
+            "rule": "abs(actual-reference) <= atol + rtol * abs(reference)"
+          },
+          "finite_reference": true,
+          "finite_actual": true,
+          "pass_gate": true,
+          "max_abs": 0.001953125,
+          "mean_abs": 4.78795311432712e-07,
+          "relative_l2": 4.2914247561210155e-05,
+          "cosine": 0.9999999990791936,
+          "snr_db": 87.34796995586242,
+          "mismatched_elements": 0
+        },
+        {
+          "output": 5,
+          "candidate_precision": "bf16",
+          "atol": 0.01,
+          "rtol": 0.01,
+          "expected_shape": [
+            1,
+            20,
+            49,
+            64
+          ],
+          "actual_shape": [
+            1,
+            20,
+            49,
+            64
+          ],
+          "reference_dtype": "torch.float32",
+          "candidate_dtype": "torch.float32",
+          "storage_dtypes_match": true,
+          "total_elements": 62720,
+          "candidate_elements": 62720,
+          "tolerance_provenance": {
+            "source": "src/acc_infer_clear/guardrails/numerics.py:TOLERANCES",
+            "selection": "declared candidate arithmetic precision",
+            "empirically_calibrated": false,
+            "storage_dtype_equality_required": false,
+            "comparison_dtype": "torch.float64",
+            "rule": "abs(actual-reference) <= atol + rtol * abs(reference)"
+          },
+          "finite_reference": true,
+          "finite_actual": true,
+          "pass_gate": true,
+          "max_abs": 0.03125,
+          "mean_abs": 6.179557162888197e-05,
+          "relative_l2": 0.0006085859221960252,
+          "cosine": 0.9999998149515734,
+          "snr_db": 64.31356195915272,
+          "mismatched_elements": 0
+        },
+        {
+          "output": 6,
+          "candidate_precision": "bf16",
+          "atol": 0.01,
+          "rtol": 0.01,
+          "expected_shape": [
+            1,
+            20,
+            49,
+            64
+          ],
+          "actual_shape": [
+            1,
+            20,
+            49,
+            64
+          ],
+          "reference_dtype": "torch.float32",
+          "candidate_dtype": "torch.float32",
+          "storage_dtypes_match": true,
+          "total_elements": 62720,
+          "candidate_elements": 62720,
+          "tolerance_provenance": {
+            "source": "src/acc_infer_clear/guardrails/numerics.py:TOLERANCES",
+            "selection": "declared candidate arithmetic precision",
+            "empirically_calibrated": false,
+            "storage_dtype_equality_required": false,
+            "comparison_dtype": "torch.float64",
+            "rule": "abs(actual-reference) <= atol + rtol * abs(reference)"
+          },
+          "finite_reference": true,
+          "finite_actual": true,
+          "pass_gate": true,
+          "max_abs": 0.0078125,
+          "mean_abs": 2.8041115847929402e-05,
+          "relative_l2": 0.00041471790294795175,
+          "cosine": 0.9999999140094984,
+          "snr_db": 67.64494432364899,
+          "mismatched_elements": 0
+        },
+        {
+          "output": 7,
+          "candidate_precision": "bf16",
+          "atol": 0.01,
+          "rtol": 0.01,
+          "expected_shape": [
+            1,
+            20,
+            49,
+            64
+          ],
+          "actual_shape": [
+            1,
+            20,
+            49,
+            64
+          ],
+          "reference_dtype": "torch.float32",
+          "candidate_dtype": "torch.float32",
+          "storage_dtypes_match": true,
+          "total_elements": 62720,
+          "candidate_elements": 62720,
+          "tolerance_provenance": {
+            "source": "src/acc_infer_clear/guardrails/numerics.py:TOLERANCES",
+            "selection": "declared candidate arithmetic precision",
+            "empirically_calibrated": false,
+            "storage_dtype_equality_required": false,
+            "comparison_dtype": "torch.float64",
+            "rule": "abs(actual-reference) <= atol + rtol * abs(reference)"
+          },
+          "finite_reference": true,
+          "finite_actual": true,
+          "pass_gate": true,
+          "max_abs": 0.03125,
+          "mean_abs": 7.145156969829482e-05,
+          "relative_l2": 0.0006109618433057899,
+          "cosine": 0.9999998133663466,
+          "snr_db": 64.27971824225851,
+          "mismatched_elements": 0
+        },
+        {
+          "output": 8,
+          "candidate_precision": "bf16",
+          "atol": 0.01,
+          "rtol": 0.01,
+          "expected_shape": [
+            1,
+            20,
+            49,
+            64
+          ],
+          "actual_shape": [
+            1,
+            20,
+            49,
+            64
+          ],
+          "reference_dtype": "torch.float32",
+          "candidate_dtype": "torch.float32",
+          "storage_dtypes_match": true,
+          "total_elements": 62720,
+          "candidate_elements": 62720,
+          "tolerance_provenance": {
+            "source": "src/acc_infer_clear/guardrails/numerics.py:TOLERANCES",
+            "selection": "declared candidate arithmetic precision",
+            "empirically_calibrated": false,
+            "storage_dtype_equality_required": false,
+            "comparison_dtype": "torch.float64",
+            "rule": "abs(actual-reference) <= atol + rtol * abs(reference)"
+          },
+          "finite_reference": true,
+          "finite_actual": true,
+          "pass_gate": true,
+          "max_abs": 0.0078125,
+          "mean_abs": 4.945512937039746e-05,
+          "relative_l2": 0.000601305141933405,
+          "cosine": 0.9999998192162269,
+          "snr_db": 64.41810164722918,
+          "mismatched_elements": 0
+        },
+        {
+          "output": 9,
+          "candidate_precision": "bf16",
+          "atol": 0.01,
+          "rtol": 0.01,
+          "expected_shape": [
+            1,
+            20,
+            49,
+            64
+          ],
+          "actual_shape": [
+            1,
+            20,
+            49,
+            64
+          ],
+          "reference_dtype": "torch.float32",
+          "candidate_dtype": "torch.float32",
+          "storage_dtypes_match": true,
+          "total_elements": 62720,
+          "candidate_elements": 62720,
+          "tolerance_provenance": {
+            "source": "src/acc_infer_clear/guardrails/numerics.py:TOLERANCES",
+            "selection": "declared candidate arithmetic precision",
+            "empirically_calibrated": false,
+            "storage_dtype_equality_required": false,
+            "comparison_dtype": "torch.float64",
+            "rule": "abs(actual-reference) <= atol + rtol * abs(reference)"
+          },
+          "finite_reference": true,
+          "finite_actual": true,
+          "pass_gate": true,
+          "max_abs": 0.03125,
+          "mean_abs": 9.429832654339928e-05,
+          "relative_l2": 0.0006807561375172655,
+          "cosine": 0.9999997683141695,
+          "snr_db": 63.34016868972352,
+          "mismatched_elements": 0
+        },
+        {
+          "output": 10,
+          "candidate_precision": "bf16",
+          "atol": 0.01,
+          "rtol": 0.01,
+          "expected_shape": [
+            1,
+            20,
+            49,
+            64
+          ],
+          "actual_shape": [
+            1,
+            20,
+            49,
+            64
+          ],
+          "reference_dtype": "torch.float32",
+          "candidate_dtype": "torch.float32",
+          "storage_dtypes_match": true,
+          "total_elements": 62720,
+          "candidate_elements": 62720,
+          "tolerance_provenance": {
+            "source": "src/acc_infer_clear/guardrails/numerics.py:TOLERANCES",
+            "selection": "declared candidate arithmetic precision",
+            "empirically_calibrated": false,
+            "storage_dtype_equality_required": false,
+            "comparison_dtype": "torch.float64",
+            "rule": "abs(actual-reference) <= atol + rtol * abs(reference)"
+          },
+          "finite_reference": true,
+          "finite_actual": true,
+          "pass_gate": true,
+          "max_abs": 0.0078125,
+          "mean_abs": 5.996548855791287e-05,
+          "relative_l2": 0.0007076292942417245,
+          "cosine": 0.9999997496758956,
+          "snr_db": 63.00388393174739,
+          "mismatched_elements": 0
+        },
+        {
+          "output": 11,
+          "candidate_precision": "bf16",
+          "atol": 0.01,
+          "rtol": 0.01,
+          "expected_shape": [
+            1,
+            20,
+            49,
+            64
+          ],
+          "actual_shape": [
+            1,
+            20,
+            49,
+            64
+          ],
+          "reference_dtype": "torch.float32",
+          "candidate_dtype": "torch.float32",
+          "storage_dtypes_match": true,
+          "total_elements": 62720,
+          "candidate_elements": 62720,
+          "tolerance_provenance": {
+            "source": "src/acc_infer_clear/guardrails/numerics.py:TOLERANCES",
+            "selection": "declared candidate arithmetic precision",
+            "empirically_calibrated": false,
+            "storage_dtype_equality_required": false,
+            "comparison_dtype": "torch.float64",
+            "rule": "abs(actual-reference) <= atol + rtol * abs(reference)"
+          },
+          "finite_reference": true,
+          "finite_actual": true,
+          "pass_gate": false,
+          "max_abs": 0.03125,
+          "mean_abs": 0.00016609854920178046,
+          "relative_l2": 0.0010559146122095288,
+          "cosine": 0.9999994447798943,
+          "snr_db": 59.52742400243772,
+          "mismatched_elements": 4,
+          "reason": "tolerance exceeded"
+        },
+        {
+          "output": 12,
+          "candidate_precision": "bf16",
+          "atol": 0.01,
+          "rtol": 0.01,
+          "expected_shape": [
+            1,
+            20,
+            49,
+            64
+          ],
+          "actual_shape": [
+            1,
+            20,
+            49,
+            64
+          ],
+          "reference_dtype": "torch.float32",
+          "candidate_dtype": "torch.float32",
+          "storage_dtypes_match": true,
+          "total_elements": 62720,
+          "candidate_elements": 62720,
+          "tolerance_provenance": {
+            "source": "src/acc_infer_clear/guardrails/numerics.py:TOLERANCES",
+            "selection": "declared candidate arithmetic precision",
+            "empirically_calibrated": false,
+            "storage_dtype_equality_required": false,
+            "comparison_dtype": "torch.float64",
+            "rule": "abs(actual-reference) <= atol + rtol * abs(reference)"
+          },
+          "finite_reference": true,
+          "finite_actual": true,
+          "pass_gate": true,
+          "max_abs": 0.0078125,
+          "mean_abs": 8.460344100485044e-05,
+          "relative_l2": 0.0008927138990230579,
+          "cosine": 0.9999996015410626,
+          "snr_db": 60.98575406934798,
+          "mismatched_elements": 0
+        },
+        {
+          "output": 13,
+          "candidate_precision": "bf16",
+          "atol": 0.01,
+          "rtol": 0.01,
+          "expected_shape": [
+            1,
+            20,
+            49,
+            64
+          ],
+          "actual_shape": [
+            1,
+            20,
+            49,
+            64
+          ],
+          "reference_dtype": "torch.float32",
+          "candidate_dtype": "torch.float32",
+          "storage_dtypes_match": true,
+          "total_elements": 62720,
+          "candidate_elements": 62720,
+          "tolerance_provenance": {
+            "source": "src/acc_infer_clear/guardrails/numerics.py:TOLERANCES",
+            "selection": "declared candidate arithmetic precision",
+            "empirically_calibrated": false,
+            "storage_dtype_equality_required": false,
+            "comparison_dtype": "torch.float64",
+            "rule": "abs(actual-reference) <= atol + rtol * abs(reference)"
+          },
+          "finite_reference": true,
+          "finite_actual": true,
+          "pass_gate": false,
+          "max_abs": 0.03125,
+          "mean_abs": 0.00018823736784409506,
+          "relative_l2": 0.0010044690200664177,
+          "cosine": 0.9999994955346327,
+          "snr_db": 59.96126906525707,
+          "mismatched_elements": 1,
+          "reason": "tolerance exceeded"
+        },
+        {
+          "output": 14,
+          "candidate_precision": "bf16",
+          "atol": 0.01,
+          "rtol": 0.01,
+          "expected_shape": [
+            1,
+            20,
+            49,
+            64
+          ],
+          "actual_shape": [
+            1,
+            20,
+            49,
+            64
+          ],
+          "reference_dtype": "torch.float32",
+          "candidate_dtype": "torch.float32",
+          "storage_dtypes_match": true,
+          "total_elements": 62720,
+          "candidate_elements": 62720,
+          "tolerance_provenance": {
+            "source": "src/acc_infer_clear/guardrails/numerics.py:TOLERANCES",
+            "selection": "declared candidate arithmetic precision",
+            "empirically_calibrated": false,
+            "storage_dtype_equality_required": false,
+            "comparison_dtype": "torch.float64",
+            "rule": "abs(actual-reference) <= atol + rtol * abs(reference)"
+          },
+          "finite_reference": true,
+          "finite_actual": true,
+          "pass_gate": true,
+          "max_abs": 0.0078125,
+          "mean_abs": 0.00012483361880390013,
+          "relative_l2": 0.0011557267317481201,
+          "cosine": 0.9999993321828038,
+          "snr_db": 58.74289682909537,
+          "mismatched_elements": 0
+        },
+        {
+          "output": 15,
+          "candidate_precision": "bf16",
+          "atol": 0.01,
+          "rtol": 0.01,
+          "expected_shape": [
+            1,
+            20,
+            49,
+            64
+          ],
+          "actual_shape": [
+            1,
+            20,
+            49,
+            64
+          ],
+          "reference_dtype": "torch.float32",
+          "candidate_dtype": "torch.float32",
+          "storage_dtypes_match": true,
+          "total_elements": 62720,
+          "candidate_elements": 62720,
+          "tolerance_provenance": {
+            "source": "src/acc_infer_clear/guardrails/numerics.py:TOLERANCES",
+            "selection": "declared candidate arithmetic precision",
+            "empirically_calibrated": false,
+            "storage_dtype_equality_required": false,
+            "comparison_dtype": "torch.float64",
+            "rule": "abs(actual-reference) <= atol + rtol * abs(reference)"
+          },
+          "finite_reference": true,
+          "finite_actual": true,
+          "pass_gate": false,
+          "max_abs": 0.03125,
+          "mean_abs": 0.00022975002244418985,
+          "relative_l2": 0.001107669120097146,
+          "cosine": 0.9999993866133057,
+          "snr_db": 59.11179902999618,
+          "mismatched_elements": 1,
+          "reason": "tolerance exceeded"
+        },
+        {
+          "output": 16,
+          "candidate_precision": "bf16",
+          "atol": 0.01,
+          "rtol": 0.01,
+          "expected_shape": [
+            1,
+            20,
+            49,
+            64
+          ],
+          "actual_shape": [
+            1,
+            20,
+            49,
+            64
+          ],
+          "reference_dtype": "torch.float32",
+          "candidate_dtype": "torch.float32",
+          "storage_dtypes_match": true,
+          "total_elements": 62720,
+          "candidate_elements": 62720,
+          "tolerance_provenance": {
+            "source": "src/acc_infer_clear/guardrails/numerics.py:TOLERANCES",
+            "selection": "declared candidate arithmetic precision",
+            "empirically_calibrated": false,
+            "storage_dtype_equality_required": false,
+            "comparison_dtype": "torch.float64",
+            "rule": "abs(actual-reference) <= atol + rtol * abs(reference)"
+          },
+          "finite_reference": true,
+          "finite_actual": true,
+          "pass_gate": true,
+          "max_abs": 0.015625,
+          "mean_abs": 0.000175391859850105,
+          "relative_l2": 0.0013000206956270582,
+          "cosine": 0.9999991549995799,
+          "snr_db": 57.72099467809268,
+          "mismatched_elements": 0
+        },
+        {
+          "output": 17,
+          "candidate_precision": "bf16",
+          "atol": 0.01,
+          "rtol": 0.01,
+          "expected_shape": [
+            1,
+            20,
+            49,
+            64
+          ],
+          "actual_shape": [
+            1,
+            20,
+            49,
+            64
+          ],
+          "reference_dtype": "torch.float32",
+          "candidate_dtype": "torch.float32",
+          "storage_dtypes_match": true,
+          "total_elements": 62720,
+          "candidate_elements": 62720,
+          "tolerance_provenance": {
+            "source": "src/acc_infer_clear/guardrails/numerics.py:TOLERANCES",
+            "selection": "declared candidate arithmetic precision",
+            "empirically_calibrated": false,
+            "storage_dtype_equality_required": false,
+            "comparison_dtype": "torch.float64",
+            "rule": "abs(actual-reference) <= atol + rtol * abs(reference)"
+          },
+          "finite_reference": true,
+          "finite_actual": true,
+          "pass_gate": false,
+          "max_abs": 0.03125,
+          "mean_abs": 0.00023120995991084042,
+          "relative_l2": 0.0011767746838142457,
+          "cosine": 0.9999993076007524,
+          "snr_db": 58.586133664856625,
+          "mismatched_elements": 1,
+          "reason": "tolerance exceeded"
+        },
+        {
+          "output": 18,
+          "candidate_precision": "bf16",
+          "atol": 0.01,
+          "rtol": 0.01,
+          "expected_shape": [
+            1,
+            20,
+            49,
+            64
+          ],
+          "actual_shape": [
+            1,
+            20,
+            49,
+            64
+          ],
+          "reference_dtype": "torch.float32",
+          "candidate_dtype": "torch.float32",
+          "storage_dtypes_match": true,
+          "total_elements": 62720,
+          "candidate_elements": 62720,
+          "tolerance_provenance": {
+            "source": "src/acc_infer_clear/guardrails/numerics.py:TOLERANCES",
+            "selection": "declared candidate arithmetic precision",
+            "empirically_calibrated": false,
+            "storage_dtype_equality_required": false,
+            "comparison_dtype": "torch.float64",
+            "rule": "abs(actual-reference) <= atol + rtol * abs(reference)"
+          },
+          "finite_reference": true,
+          "finite_actual": true,
+          "pass_gate": true,
+          "max_abs": 0.015625,
+          "mean_abs": 0.00020858988127842243,
+          "relative_l2": 0.0014659824557079443,
+          "cosine": 0.9999989254489312,
+          "snr_db": 56.67742454253112,
+          "mismatched_elements": 0
+        },
+        {
+          "output": 19,
+          "candidate_precision": "bf16",
+          "atol": 0.01,
+          "rtol": 0.01,
+          "expected_shape": [
+            1,
+            20,
+            49,
+            64
+          ],
+          "actual_shape": [
+            1,
+            20,
+            49,
+            64
+          ],
+          "reference_dtype": "torch.float32",
+          "candidate_dtype": "torch.float32",
+          "storage_dtypes_match": true,
+          "total_elements": 62720,
+          "candidate_elements": 62720,
+          "tolerance_provenance": {
+            "source": "src/acc_infer_clear/guardrails/numerics.py:TOLERANCES",
+            "selection": "declared candidate arithmetic precision",
+            "empirically_calibrated": false,
+            "storage_dtype_equality_required": false,
+            "comparison_dtype": "torch.float64",
+            "rule": "abs(actual-reference) <= atol + rtol * abs(reference)"
+          },
+          "finite_reference": true,
+          "finite_actual": true,
+          "pass_gate": false,
+          "max_abs": 0.015625,
+          "mean_abs": 0.0002541343282376017,
+          "relative_l2": 0.0012230405585498755,
+          "cosine": 0.9999992521284295,
+          "snr_db": 58.25118281246583,
+          "mismatched_elements": 2,
+          "reason": "tolerance exceeded"
+        },
+        {
+          "output": 20,
+          "candidate_precision": "bf16",
+          "atol": 0.01,
+          "rtol": 0.01,
+          "expected_shape": [
+            1,
+            20,
+            49,
+            64
+          ],
+          "actual_shape": [
+            1,
+            20,
+            49,
+            64
+          ],
+          "reference_dtype": "torch.float32",
+          "candidate_dtype": "torch.float32",
+          "storage_dtypes_match": true,
+          "total_elements": 62720,
+          "candidate_elements": 62720,
+          "tolerance_provenance": {
+            "source": "src/acc_infer_clear/guardrails/numerics.py:TOLERANCES",
+            "selection": "declared candidate arithmetic precision",
+            "empirically_calibrated": false,
+            "storage_dtype_equality_required": false,
+            "comparison_dtype": "torch.float64",
+            "rule": "abs(actual-reference) <= atol + rtol * abs(reference)"
+          },
+          "finite_reference": true,
+          "finite_actual": true,
+          "pass_gate": true,
+          "max_abs": 0.015625,
+          "mean_abs": 0.0002484540930207895,
+          "relative_l2": 0.0016190513164392522,
+          "cosine": 0.999998689373718,
+          "snr_db": 55.81478771803684,
+          "mismatched_elements": 0
+        },
+        {
+          "output": 21,
+          "candidate_precision": "bf16",
+          "atol": 0.01,
+          "rtol": 0.01,
+          "expected_shape": [
+            1,
+            20,
+            49,
+            64
+          ],
+          "actual_shape": [
+            1,
+            20,
+            49,
+            64
+          ],
+          "reference_dtype": "torch.float32",
+          "candidate_dtype": "torch.float32",
+          "storage_dtypes_match": true,
+          "total_elements": 62720,
+          "candidate_elements": 62720,
+          "tolerance_provenance": {
+            "source": "src/acc_infer_clear/guardrails/numerics.py:TOLERANCES",
+            "selection": "declared candidate arithmetic precision",
+            "empirically_calibrated": false,
+            "storage_dtype_equality_required": false,
+            "comparison_dtype": "torch.float64",
+            "rule": "abs(actual-reference) <= atol + rtol * abs(reference)"
+          },
+          "finite_reference": true,
+          "finite_actual": true,
+          "pass_gate": false,
+          "max_abs": 0.03125,
+          "mean_abs": 0.0003289153362263222,
+          "relative_l2": 0.001400212708840287,
+          "cosine": 0.9999990197728799,
+          "snr_db": 57.076119697027266,
+          "mismatched_elements": 3,
+          "reason": "tolerance exceeded"
+        },
+        {
+          "output": 22,
+          "candidate_precision": "bf16",
+          "atol": 0.01,
+          "rtol": 0.01,
+          "expected_shape": [
+            1,
+            20,
+            49,
+            64
+          ],
+          "actual_shape": [
+            1,
+            20,
+            49,
+            64
+          ],
+          "reference_dtype": "torch.float32",
+          "candidate_dtype": "torch.float32",
+          "storage_dtypes_match": true,
+          "total_elements": 62720,
+          "candidate_elements": 62720,
+          "tolerance_provenance": {
+            "source": "src/acc_infer_clear/guardrails/numerics.py:TOLERANCES",
+            "selection": "declared candidate arithmetic precision",
+            "empirically_calibrated": false,
+            "storage_dtype_equality_required": false,
+            "comparison_dtype": "torch.float64",
+            "rule": "abs(actual-reference) <= atol + rtol * abs(reference)"
+          },
+          "finite_reference": true,
+          "finite_actual": true,
+          "pass_gate": true,
+          "max_abs": 0.03125,
+          "mean_abs": 0.0002987422505203559,
+          "relative_l2": 0.0017079173804715035,
+          "cosine": 0.9999985415097037,
+          "snr_db": 55.350662837731555,
+          "mismatched_elements": 0
+        },
+        {
+          "output": 23,
+          "candidate_precision": "bf16",
+          "atol": 0.01,
+          "rtol": 0.01,
+          "expected_shape": [
+            1,
+            20,
+            49,
+            64
+          ],
+          "actual_shape": [
+            1,
+            20,
+            49,
+            64
+          ],
+          "reference_dtype": "torch.float32",
+          "candidate_dtype": "torch.float32",
+          "storage_dtypes_match": true,
+          "total_elements": 62720,
+          "candidate_elements": 62720,
+          "tolerance_provenance": {
+            "source": "src/acc_infer_clear/guardrails/numerics.py:TOLERANCES",
+            "selection": "declared candidate arithmetic precision",
+            "empirically_calibrated": false,
+            "storage_dtype_equality_required": false,
+            "comparison_dtype": "torch.float64",
+            "rule": "abs(actual-reference) <= atol + rtol * abs(reference)"
+          },
+          "finite_reference": true,
+          "finite_actual": true,
+          "pass_gate": false,
+          "max_abs": 0.03125,
+          "mean_abs": 0.0003573996376018135,
+          "relative_l2": 0.0015644292459450178,
+          "cosine": 0.9999987764843147,
+          "snr_db": 56.112881476057346,
+          "mismatched_elements": 4,
+          "reason": "tolerance exceeded"
+        },
+        {
+          "output": 24,
+          "candidate_precision": "bf16",
+          "atol": 0.01,
+          "rtol": 0.01,
+          "expected_shape": [
+            1,
+            20,
+            49,
+            64
+          ],
+          "actual_shape": [
+            1,
+            20,
+            49,
+            64
+          ],
+          "reference_dtype": "torch.float32",
+          "candidate_dtype": "torch.float32",
+          "storage_dtypes_match": true,
+          "total_elements": 62720,
+          "candidate_elements": 62720,
+          "tolerance_provenance": {
+            "source": "src/acc_infer_clear/guardrails/numerics.py:TOLERANCES",
+            "selection": "declared candidate arithmetic precision",
+            "empirically_calibrated": false,
+            "storage_dtype_equality_required": false,
+            "comparison_dtype": "torch.float64",
+            "rule": "abs(actual-reference) <= atol + rtol * abs(reference)"
+          },
+          "finite_reference": true,
+          "finite_actual": true,
+          "pass_gate": true,
+          "max_abs": 0.015625,
+          "mean_abs": 0.00032930725957362023,
+          "relative_l2": 0.0019216848384904877,
+          "cosine": 0.9999981536526517,
+          "snr_db": 54.32635672593676,
+          "mismatched_elements": 0
+        },
+        {
+          "output": 25,
+          "candidate_precision": "bf16",
+          "atol": 0.01,
+          "rtol": 0.01,
+          "expected_shape": [
+            1,
+            20,
+            49,
+            64
+          ],
+          "actual_shape": [
+            1,
+            20,
+            49,
+            64
+          ],
+          "reference_dtype": "torch.float32",
+          "candidate_dtype": "torch.float32",
+          "storage_dtypes_match": true,
+          "total_elements": 62720,
+          "candidate_elements": 62720,
+          "tolerance_provenance": {
+            "source": "src/acc_infer_clear/guardrails/numerics.py:TOLERANCES",
+            "selection": "declared candidate arithmetic precision",
+            "empirically_calibrated": false,
+            "storage_dtype_equality_required": false,
+            "comparison_dtype": "torch.float64",
+            "rule": "abs(actual-reference) <= atol + rtol * abs(reference)"
+          },
+          "finite_reference": true,
+          "finite_actual": true,
+          "pass_gate": false,
+          "max_abs": 0.03125,
+          "mean_abs": 0.0003622657486370632,
+          "relative_l2": 0.0015642077097391105,
+          "cosine": 0.9999987768876708,
+          "snr_db": 56.11411155744155,
+          "mismatched_elements": 3,
+          "reason": "tolerance exceeded"
+        },
+        {
+          "output": 26,
+          "candidate_precision": "bf16",
+          "atol": 0.01,
+          "rtol": 0.01,
+          "expected_shape": [
+            1,
+            20,
+            49,
+            64
+          ],
+          "actual_shape": [
+            1,
+            20,
+            49,
+            64
+          ],
+          "reference_dtype": "torch.float32",
+          "candidate_dtype": "torch.float32",
+          "storage_dtypes_match": true,
+          "total_elements": 62720,
+          "candidate_elements": 62720,
+          "tolerance_provenance": {
+            "source": "src/acc_infer_clear/guardrails/numerics.py:TOLERANCES",
+            "selection": "declared candidate arithmetic precision",
+            "empirically_calibrated": false,
+            "storage_dtype_equality_required": false,
+            "comparison_dtype": "torch.float64",
+            "rule": "abs(actual-reference) <= atol + rtol * abs(reference)"
+          },
+          "finite_reference": true,
+          "finite_actual": true,
+          "pass_gate": true,
+          "max_abs": 0.015625,
+          "mean_abs": 0.000337053014307606,
+          "relative_l2": 0.0018957466568456612,
+          "cosine": 0.999998204364525,
+          "snr_db": 54.44439402440429,
+          "mismatched_elements": 0
+        },
+        {
+          "output": 27,
+          "candidate_precision": "bf16",
+          "atol": 0.01,
+          "rtol": 0.01,
+          "expected_shape": [
+            1,
+            20,
+            49,
+            64
+          ],
+          "actual_shape": [
+            1,
+            20,
+            49,
+            64
+          ],
+          "reference_dtype": "torch.float32",
+          "candidate_dtype": "torch.float32",
+          "storage_dtypes_match": true,
+          "total_elements": 62720,
+          "candidate_elements": 62720,
+          "tolerance_provenance": {
+            "source": "src/acc_infer_clear/guardrails/numerics.py:TOLERANCES",
+            "selection": "declared candidate arithmetic precision",
+            "empirically_calibrated": false,
+            "storage_dtype_equality_required": false,
+            "comparison_dtype": "torch.float64",
+            "rule": "abs(actual-reference) <= atol + rtol * abs(reference)"
+          },
+          "finite_reference": true,
+          "finite_actual": true,
+          "pass_gate": false,
+          "max_abs": 0.03125,
+          "mean_abs": 0.00037656413505271995,
+          "relative_l2": 0.0015315780249275854,
+          "cosine": 0.9999988271758844,
+          "snr_db": 56.297217470685936,
+          "mismatched_elements": 7,
+          "reason": "tolerance exceeded"
+        },
+        {
+          "output": 28,
+          "candidate_precision": "bf16",
+          "atol": 0.01,
+          "rtol": 0.01,
+          "expected_shape": [
+            1,
+            20,
+            49,
+            64
+          ],
+          "actual_shape": [
+            1,
+            20,
+            49,
+            64
+          ],
+          "reference_dtype": "torch.float32",
+          "candidate_dtype": "torch.float32",
+          "storage_dtypes_match": true,
+          "total_elements": 62720,
+          "candidate_elements": 62720,
+          "tolerance_provenance": {
+            "source": "src/acc_infer_clear/guardrails/numerics.py:TOLERANCES",
+            "selection": "declared candidate arithmetic precision",
+            "empirically_calibrated": false,
+            "storage_dtype_equality_required": false,
+            "comparison_dtype": "torch.float64",
+            "rule": "abs(actual-reference) <= atol + rtol * abs(reference)"
+          },
+          "finite_reference": true,
+          "finite_actual": true,
+          "pass_gate": false,
+          "max_abs": 0.015625,
+          "mean_abs": 0.0003722189108327944,
+          "relative_l2": 0.0019623735589135508,
+          "cosine": 0.999998074551282,
+          "snr_db": 54.144366329210165,
+          "mismatched_elements": 2,
+          "reason": "tolerance exceeded"
+        },
+        {
+          "output": 29,
+          "candidate_precision": "bf16",
+          "atol": 0.01,
+          "rtol": 0.01,
+          "expected_shape": [
+            1,
+            20,
+            49,
+            64
+          ],
+          "actual_shape": [
+            1,
+            20,
+            49,
+            64
+          ],
+          "reference_dtype": "torch.float32",
+          "candidate_dtype": "torch.float32",
+          "storage_dtypes_match": true,
+          "total_elements": 62720,
+          "candidate_elements": 62720,
+          "tolerance_provenance": {
+            "source": "src/acc_infer_clear/guardrails/numerics.py:TOLERANCES",
+            "selection": "declared candidate arithmetic precision",
+            "empirically_calibrated": false,
+            "storage_dtype_equality_required": false,
+            "comparison_dtype": "torch.float64",
+            "rule": "abs(actual-reference) <= atol + rtol * abs(reference)"
+          },
+          "finite_reference": true,
+          "finite_actual": true,
+          "pass_gate": false,
+          "max_abs": 0.03125,
+          "mean_abs": 0.00038490769054208486,
+          "relative_l2": 0.0015942403355573061,
+          "cosine": 0.9999987292116986,
+          "snr_db": 55.94892414137717,
+          "mismatched_elements": 3,
+          "reason": "tolerance exceeded"
+        },
+        {
+          "output": 30,
+          "candidate_precision": "bf16",
+          "atol": 0.01,
+          "rtol": 0.01,
+          "expected_shape": [
+            1,
+            20,
+            49,
+            64
+          ],
+          "actual_shape": [
+            1,
+            20,
+            49,
+            64
+          ],
+          "reference_dtype": "torch.float32",
+          "candidate_dtype": "torch.float32",
+          "storage_dtypes_match": true,
+          "total_elements": 62720,
+          "candidate_elements": 62720,
+          "tolerance_provenance": {
+            "source": "src/acc_infer_clear/guardrails/numerics.py:TOLERANCES",
+            "selection": "declared candidate arithmetic precision",
+            "empirically_calibrated": false,
+            "storage_dtype_equality_required": false,
+            "comparison_dtype": "torch.float64",
+            "rule": "abs(actual-reference) <= atol + rtol * abs(reference)"
+          },
+          "finite_reference": true,
+          "finite_actual": true,
+          "pass_gate": true,
+          "max_abs": 0.015625,
+          "mean_abs": 0.0003626446866867494,
+          "relative_l2": 0.0019109284535364722,
+          "cosine": 0.9999981742576622,
+          "snr_db": 54.3751114584391,
+          "mismatched_elements": 0
+        },
+        {
+          "output": 31,
+          "candidate_precision": "bf16",
+          "atol": 0.01,
+          "rtol": 0.01,
+          "expected_shape": [
+            1,
+            20,
+            49,
+            64
+          ],
+          "actual_shape": [
+            1,
+            20,
+            49,
+            64
+          ],
+          "reference_dtype": "torch.float32",
+          "candidate_dtype": "torch.float32",
+          "storage_dtypes_match": true,
+          "total_elements": 62720,
+          "candidate_elements": 62720,
+          "tolerance_provenance": {
+            "source": "src/acc_infer_clear/guardrails/numerics.py:TOLERANCES",
+            "selection": "declared candidate arithmetic precision",
+            "empirically_calibrated": false,
+            "storage_dtype_equality_required": false,
+            "comparison_dtype": "torch.float64",
+            "rule": "abs(actual-reference) <= atol + rtol * abs(reference)"
+          },
+          "finite_reference": true,
+          "finite_actual": true,
+          "pass_gate": false,
+          "max_abs": 0.015625,
+          "mean_abs": 0.0003896904691141479,
+          "relative_l2": 0.0016035387227782802,
+          "cosine": 0.9999987143362107,
+          "snr_db": 55.898410962470365,
+          "mismatched_elements": 2,
+          "reason": "tolerance exceeded"
+        },
+        {
+          "output": 32,
+          "candidate_precision": "bf16",
+          "atol": 0.01,
+          "rtol": 0.01,
+          "expected_shape": [
+            1,
+            20,
+            49,
+            64
+          ],
+          "actual_shape": [
+            1,
+            20,
+            49,
+            64
+          ],
+          "reference_dtype": "torch.float32",
+          "candidate_dtype": "torch.float32",
+          "storage_dtypes_match": true,
+          "total_elements": 62720,
+          "candidate_elements": 62720,
+          "tolerance_provenance": {
+            "source": "src/acc_infer_clear/guardrails/numerics.py:TOLERANCES",
+            "selection": "declared candidate arithmetic precision",
+            "empirically_calibrated": false,
+            "storage_dtype_equality_required": false,
+            "comparison_dtype": "torch.float64",
+            "rule": "abs(actual-reference) <= atol + rtol * abs(reference)"
+          },
+          "finite_reference": true,
+          "finite_actual": true,
+          "pass_gate": false,
+          "max_abs": 0.015625,
+          "mean_abs": 0.00036662590062739903,
+          "relative_l2": 0.0019545291828595578,
+          "cosine": 0.9999980899415292,
+          "snr_db": 54.179156815606746,
+          "mismatched_elements": 2,
+          "reason": "tolerance exceeded"
+        },
+        {
+          "output": 33,
+          "candidate_precision": "bf16",
+          "atol": 0.01,
+          "rtol": 0.01,
+          "expected_shape": [
+            1,
+            20,
+            49,
+            64
+          ],
+          "actual_shape": [
+            1,
+            20,
+            49,
+            64
+          ],
+          "reference_dtype": "torch.float32",
+          "candidate_dtype": "torch.float32",
+          "storage_dtypes_match": true,
+          "total_elements": 62720,
+          "candidate_elements": 62720,
+          "tolerance_provenance": {
+            "source": "src/acc_infer_clear/guardrails/numerics.py:TOLERANCES",
+            "selection": "declared candidate arithmetic precision",
+            "empirically_calibrated": false,
+            "storage_dtype_equality_required": false,
+            "comparison_dtype": "torch.float64",
+            "rule": "abs(actual-reference) <= atol + rtol * abs(reference)"
+          },
+          "finite_reference": true,
+          "finite_actual": true,
+          "pass_gate": false,
+          "max_abs": 0.015625,
+          "mean_abs": 0.00040532377101861096,
+          "relative_l2": 0.0016706474104021577,
+          "cosine": 0.9999986046090978,
+          "snr_db": 55.542303962926425,
+          "mismatched_elements": 2,
+          "reason": "tolerance exceeded"
+        },
+        {
+          "output": 34,
+          "candidate_precision": "bf16",
+          "atol": 0.01,
+          "rtol": 0.01,
+          "expected_shape": [
+            1,
+            20,
+            49,
+            64
+          ],
+          "actual_shape": [
+            1,
+            20,
+            49,
+            64
+          ],
+          "reference_dtype": "torch.float32",
+          "candidate_dtype": "torch.float32",
+          "storage_dtypes_match": true,
+          "total_elements": 62720,
+          "candidate_elements": 62720,
+          "tolerance_provenance": {
+            "source": "src/acc_infer_clear/guardrails/numerics.py:TOLERANCES",
+            "selection": "declared candidate arithmetic precision",
+            "empirically_calibrated": false,
+            "storage_dtype_equality_required": false,
+            "comparison_dtype": "torch.float64",
+            "rule": "abs(actual-reference) <= atol + rtol * abs(reference)"
+          },
+          "finite_reference": true,
+          "finite_actual": true,
+          "pass_gate": false,
+          "max_abs": 0.015625,
+          "mean_abs": 0.0003739396414282371,
+          "relative_l2": 0.0020043845927182483,
+          "cosine": 0.9999979916492738,
+          "snr_db": 53.96037888493689,
+          "mismatched_elements": 1,
+          "reason": "tolerance exceeded"
+        },
+        {
+          "output": 35,
+          "candidate_precision": "bf16",
+          "atol": 0.01,
+          "rtol": 0.01,
+          "expected_shape": [
+            1,
+            20,
+            49,
+            64
+          ],
+          "actual_shape": [
+            1,
+            20,
+            49,
+            64
+          ],
+          "reference_dtype": "torch.float32",
+          "candidate_dtype": "torch.float32",
+          "storage_dtypes_match": true,
+          "total_elements": 62720,
+          "candidate_elements": 62720,
+          "tolerance_provenance": {
+            "source": "src/acc_infer_clear/guardrails/numerics.py:TOLERANCES",
+            "selection": "declared candidate arithmetic precision",
+            "empirically_calibrated": false,
+            "storage_dtype_equality_required": false,
+            "comparison_dtype": "torch.float64",
+            "rule": "abs(actual-reference) <= atol + rtol * abs(reference)"
+          },
+          "finite_reference": true,
+          "finite_actual": true,
+          "pass_gate": false,
+          "max_abs": 0.015625,
+          "mean_abs": 0.00042171859163410815,
+          "relative_l2": 0.0017044366737628753,
+          "cosine": 0.9999985475059981,
+          "snr_db": 55.368382596196575,
+          "mismatched_elements": 3,
+          "reason": "tolerance exceeded"
+        },
+        {
+          "output": 36,
+          "candidate_precision": "bf16",
+          "atol": 0.01,
+          "rtol": 0.01,
+          "expected_shape": [
+            1,
+            20,
+            49,
+            64
+          ],
+          "actual_shape": [
+            1,
+            20,
+            49,
+            64
+          ],
+          "reference_dtype": "torch.float32",
+          "candidate_dtype": "torch.float32",
+          "storage_dtypes_match": true,
+          "total_elements": 62720,
+          "candidate_elements": 62720,
+          "tolerance_provenance": {
+            "source": "src/acc_infer_clear/guardrails/numerics.py:TOLERANCES",
+            "selection": "declared candidate arithmetic precision",
+            "empirically_calibrated": false,
+            "storage_dtype_equality_required": false,
+            "comparison_dtype": "torch.float64",
+            "rule": "abs(actual-reference) <= atol + rtol * abs(reference)"
+          },
+          "finite_reference": true,
+          "finite_actual": true,
+          "pass_gate": false,
+          "max_abs": 0.015625,
+          "mean_abs": 0.00037546563817530265,
+          "relative_l2": 0.0019442422993630583,
+          "cosine": 0.9999981100417399,
+          "snr_db": 54.22499224993334,
+          "mismatched_elements": 1,
+          "reason": "tolerance exceeded"
+        },
+        {
+          "output": 37,
+          "candidate_precision": "bf16",
+          "atol": 0.01,
+          "rtol": 0.01,
+          "expected_shape": [
+            1,
+            20,
+            49,
+            64
+          ],
+          "actual_shape": [
+            1,
+            20,
+            49,
+            64
+          ],
+          "reference_dtype": "torch.float32",
+          "candidate_dtype": "torch.float32",
+          "storage_dtypes_match": true,
+          "total_elements": 62720,
+          "candidate_elements": 62720,
+          "tolerance_provenance": {
+            "source": "src/acc_infer_clear/guardrails/numerics.py:TOLERANCES",
+            "selection": "declared candidate arithmetic precision",
+            "empirically_calibrated": false,
+            "storage_dtype_equality_required": false,
+            "comparison_dtype": "torch.float64",
+            "rule": "abs(actual-reference) <= atol + rtol * abs(reference)"
+          },
+          "finite_reference": true,
+          "finite_actual": true,
+          "pass_gate": false,
+          "max_abs": 0.01708984375,
+          "mean_abs": 0.0004229214517589735,
+          "relative_l2": 0.00174666765495236,
+          "cosine": 0.9999984746738632,
+          "snr_db": 55.15579444013588,
+          "mismatched_elements": 4,
+          "reason": "tolerance exceeded"
+        },
+        {
+          "output": 38,
+          "candidate_precision": "bf16",
+          "atol": 0.01,
+          "rtol": 0.01,
+          "expected_shape": [
+            1,
+            20,
+            49,
+            64
+          ],
+          "actual_shape": [
+            1,
+            20,
+            49,
+            64
+          ],
+          "reference_dtype": "torch.float32",
+          "candidate_dtype": "torch.float32",
+          "storage_dtypes_match": true,
+          "total_elements": 62720,
+          "candidate_elements": 62720,
+          "tolerance_provenance": {
+            "source": "src/acc_infer_clear/guardrails/numerics.py:TOLERANCES",
+            "selection": "declared candidate arithmetic precision",
+            "empirically_calibrated": false,
+            "storage_dtype_equality_required": false,
+            "comparison_dtype": "torch.float64",
+            "rule": "abs(actual-reference) <= atol + rtol * abs(reference)"
+          },
+          "finite_reference": true,
+          "finite_actual": true,
+          "pass_gate": false,
+          "max_abs": 0.015625,
+          "mean_abs": 0.00038021893753689164,
+          "relative_l2": 0.002036056218173637,
+          "cosine": 0.999997927258351,
+          "snr_db": 53.82420469462776,
+          "mismatched_elements": 1,
+          "reason": "tolerance exceeded"
+        },
+        {
+          "output": 39,
+          "candidate_precision": "bf16",
+          "atol": 0.01,
+          "rtol": 0.01,
+          "expected_shape": [
+            1,
+            20,
+            49,
+            64
+          ],
+          "actual_shape": [
+            1,
+            20,
+            49,
+            64
+          ],
+          "reference_dtype": "torch.float32",
+          "candidate_dtype": "torch.float32",
+          "storage_dtypes_match": true,
+          "total_elements": 62720,
+          "candidate_elements": 62720,
+          "tolerance_provenance": {
+            "source": "src/acc_infer_clear/guardrails/numerics.py:TOLERANCES",
+            "selection": "declared candidate arithmetic precision",
+            "empirically_calibrated": false,
+            "storage_dtype_equality_required": false,
+            "comparison_dtype": "torch.float64",
+            "rule": "abs(actual-reference) <= atol + rtol * abs(reference)"
+          },
+          "finite_reference": true,
+          "finite_actual": true,
+          "pass_gate": false,
+          "max_abs": 0.015869140625,
+          "mean_abs": 0.0004429730909819506,
+          "relative_l2": 0.0018209362802432737,
+          "cosine": 0.9999983421271434,
+          "snr_db": 54.794105022848555,
+          "mismatched_elements": 2,
+          "reason": "tolerance exceeded"
+        },
+        {
+          "output": 40,
+          "candidate_precision": "bf16",
+          "atol": 0.01,
+          "rtol": 0.01,
+          "expected_shape": [
+            1,
+            20,
+            49,
+            64
+          ],
+          "actual_shape": [
+            1,
+            20,
+            49,
+            64
+          ],
+          "reference_dtype": "torch.float32",
+          "candidate_dtype": "torch.float32",
+          "storage_dtypes_match": true,
+          "total_elements": 62720,
+          "candidate_elements": 62720,
+          "tolerance_provenance": {
+            "source": "src/acc_infer_clear/guardrails/numerics.py:TOLERANCES",
+            "selection": "declared candidate arithmetic precision",
+            "empirically_calibrated": false,
+            "storage_dtype_equality_required": false,
+            "comparison_dtype": "torch.float64",
+            "rule": "abs(actual-reference) <= atol + rtol * abs(reference)"
+          },
+          "finite_reference": true,
+          "finite_actual": true,
+          "pass_gate": true,
+          "max_abs": 0.015625,
+          "mean_abs": 0.000389403089576838,
+          "relative_l2": 0.002047086075371433,
+          "cosine": 0.9999979049762645,
+          "snr_db": 53.777277916921705,
+          "mismatched_elements": 0
+        },
+        {
+          "output": 41,
+          "candidate_precision": "bf16",
+          "atol": 0.01,
+          "rtol": 0.01,
+          "expected_shape": [
+            1,
+            20,
+            49,
+            64
+          ],
+          "actual_shape": [
+            1,
+            20,
+            49,
+            64
+          ],
+          "reference_dtype": "torch.float32",
+          "candidate_dtype": "torch.float32",
+          "storage_dtypes_match": true,
+          "total_elements": 62720,
+          "candidate_elements": 62720,
+          "tolerance_provenance": {
+            "source": "src/acc_infer_clear/guardrails/numerics.py:TOLERANCES",
+            "selection": "declared candidate arithmetic precision",
+            "empirically_calibrated": false,
+            "storage_dtype_equality_required": false,
+            "comparison_dtype": "torch.float64",
+            "rule": "abs(actual-reference) <= atol + rtol * abs(reference)"
+          },
+          "finite_reference": true,
+          "finite_actual": true,
+          "pass_gate": false,
+          "max_abs": 0.015625,
+          "mean_abs": 0.0004161810844528432,
+          "relative_l2": 0.001774925010722348,
+          "cosine": 0.9999984248464706,
+          "snr_db": 55.016399816881425,
+          "mismatched_elements": 1,
+          "reason": "tolerance exceeded"
+        },
+        {
+          "output": 42,
+          "candidate_precision": "bf16",
+          "atol": 0.01,
+          "rtol": 0.01,
+          "expected_shape": [
+            1,
+            20,
+            49,
+            64
+          ],
+          "actual_shape": [
+            1,
+            20,
+            49,
+            64
+          ],
+          "reference_dtype": "torch.float32",
+          "candidate_dtype": "torch.float32",
+          "storage_dtypes_match": true,
+          "total_elements": 62720,
+          "candidate_elements": 62720,
+          "tolerance_provenance": {
+            "source": "src/acc_infer_clear/guardrails/numerics.py:TOLERANCES",
+            "selection": "declared candidate arithmetic precision",
+            "empirically_calibrated": false,
+            "storage_dtype_equality_required": false,
+            "comparison_dtype": "torch.float64",
+            "rule": "abs(actual-reference) <= atol + rtol * abs(reference)"
+          },
+          "finite_reference": true,
+          "finite_actual": true,
+          "pass_gate": true,
+          "max_abs": 0.015625,
+          "mean_abs": 0.00039570164654109327,
+          "relative_l2": 0.002107665285315116,
+          "cosine": 0.9999977788710557,
+          "snr_db": 53.52396715080849,
+          "mismatched_elements": 0
+        },
+        {
+          "output": 43,
+          "candidate_precision": "bf16",
+          "atol": 0.01,
+          "rtol": 0.01,
+          "expected_shape": [
+            1,
+            20,
+            49,
+            64
+          ],
+          "actual_shape": [
+            1,
+            20,
+            49,
+            64
+          ],
+          "reference_dtype": "torch.float32",
+          "candidate_dtype": "torch.float32",
+          "storage_dtypes_match": true,
+          "total_elements": 62720,
+          "candidate_elements": 62720,
+          "tolerance_provenance": {
+            "source": "src/acc_infer_clear/guardrails/numerics.py:TOLERANCES",
+            "selection": "declared candidate arithmetic precision",
+            "empirically_calibrated": false,
+            "storage_dtype_equality_required": false,
+            "comparison_dtype": "torch.float64",
+            "rule": "abs(actual-reference) <= atol + rtol * abs(reference)"
+          },
+          "finite_reference": true,
+          "finite_actual": true,
+          "pass_gate": false,
+          "max_abs": 0.0166015625,
+          "mean_abs": 0.00045417364002490535,
+          "relative_l2": 0.0019970731513757924,
+          "cosine": 0.9999980065348355,
+          "snr_db": 53.99212053877022,
+          "mismatched_elements": 7,
+          "reason": "tolerance exceeded"
+        },
+        {
+          "output": 44,
+          "candidate_precision": "bf16",
+          "atol": 0.01,
+          "rtol": 0.01,
+          "expected_shape": [
+            1,
+            20,
+            49,
+            64
+          ],
+          "actual_shape": [
+            1,
+            20,
+            49,
+            64
+          ],
+          "reference_dtype": "torch.float32",
+          "candidate_dtype": "torch.float32",
+          "storage_dtypes_match": true,
+          "total_elements": 62720,
+          "candidate_elements": 62720,
+          "tolerance_provenance": {
+            "source": "src/acc_infer_clear/guardrails/numerics.py:TOLERANCES",
+            "selection": "declared candidate arithmetic precision",
+            "empirically_calibrated": false,
+            "storage_dtype_equality_required": false,
+            "comparison_dtype": "torch.float64",
+            "rule": "abs(actual-reference) <= atol + rtol * abs(reference)"
+          },
+          "finite_reference": true,
+          "finite_actual": true,
+          "pass_gate": false,
+          "max_abs": 0.015625,
+          "mean_abs": 0.0004191174057825488,
+          "relative_l2": 0.002278614475636853,
+          "cosine": 0.9999974050261089,
+          "snr_db": 52.84658295902342,
+          "mismatched_elements": 5,
+          "reason": "tolerance exceeded"
+        },
+        {
+          "output": 45,
+          "candidate_precision": "bf16",
+          "atol": 0.01,
+          "rtol": 0.01,
+          "expected_shape": [
+            1,
+            20,
+            49,
+            64
+          ],
+          "actual_shape": [
+            1,
+            20,
+            49,
+            64
+          ],
+          "reference_dtype": "torch.float32",
+          "candidate_dtype": "torch.float32",
+          "storage_dtypes_match": true,
+          "total_elements": 62720,
+          "candidate_elements": 62720,
+          "tolerance_provenance": {
+            "source": "src/acc_infer_clear/guardrails/numerics.py:TOLERANCES",
+            "selection": "declared candidate arithmetic precision",
+            "empirically_calibrated": false,
+            "storage_dtype_equality_required": false,
+            "comparison_dtype": "torch.float64",
+            "rule": "abs(actual-reference) <= atol + rtol * abs(reference)"
+          },
+          "finite_reference": true,
+          "finite_actual": true,
+          "pass_gate": false,
+          "max_abs": 0.015625,
+          "mean_abs": 0.00042278007509148857,
+          "relative_l2": 0.002029108965732021,
+          "cosine": 0.9999979424870746,
+          "snr_db": 53.853892603488305,
+          "mismatched_elements": 3,
+          "reason": "tolerance exceeded"
+        },
+        {
+          "output": 46,
+          "candidate_precision": "bf16",
+          "atol": 0.01,
+          "rtol": 0.01,
+          "expected_shape": [
+            1,
+            20,
+            49,
+            64
+          ],
+          "actual_shape": [
+            1,
+            20,
+            49,
+            64
+          ],
+          "reference_dtype": "torch.float32",
+          "candidate_dtype": "torch.float32",
+          "storage_dtypes_match": true,
+          "total_elements": 62720,
+          "candidate_elements": 62720,
+          "tolerance_provenance": {
+            "source": "src/acc_infer_clear/guardrails/numerics.py:TOLERANCES",
+            "selection": "declared candidate arithmetic precision",
+            "empirically_calibrated": false,
+            "storage_dtype_equality_required": false,
+            "comparison_dtype": "torch.float64",
+            "rule": "abs(actual-reference) <= atol + rtol * abs(reference)"
+          },
+          "finite_reference": true,
+          "finite_actual": true,
+          "pass_gate": false,
+          "max_abs": 0.015625,
+          "mean_abs": 0.0004253244160541467,
+          "relative_l2": 0.00229544754311458,
+          "cosine": 0.9999973654921946,
+          "snr_db": 52.78265255062907,
+          "mismatched_elements": 1,
+          "reason": "tolerance exceeded"
+        },
+        {
+          "output": 47,
+          "candidate_precision": "bf16",
+          "atol": 0.01,
+          "rtol": 0.01,
+          "expected_shape": [
+            1,
+            20,
+            49,
+            64
+          ],
+          "actual_shape": [
+            1,
+            20,
+            49,
+            64
+          ],
+          "reference_dtype": "torch.float32",
+          "candidate_dtype": "torch.float32",
+          "storage_dtypes_match": true,
+          "total_elements": 62720,
+          "candidate_elements": 62720,
+          "tolerance_provenance": {
+            "source": "src/acc_infer_clear/guardrails/numerics.py:TOLERANCES",
+            "selection": "declared candidate arithmetic precision",
+            "empirically_calibrated": false,
+            "storage_dtype_equality_required": false,
+            "comparison_dtype": "torch.float64",
+            "rule": "abs(actual-reference) <= atol + rtol * abs(reference)"
+          },
+          "finite_reference": true,
+          "finite_actual": true,
+          "pass_gate": false,
+          "max_abs": 0.015625,
+          "mean_abs": 0.00043291087091273196,
+          "relative_l2": 0.0019872740383445977,
+          "cosine": 0.9999980259607829,
+          "snr_db": 54.03484482051388,
+          "mismatched_elements": 8,
+          "reason": "tolerance exceeded"
+        },
+        {
+          "output": 48,
+          "candidate_precision": "bf16",
+          "atol": 0.01,
+          "rtol": 0.01,
+          "expected_shape": [
+            1,
+            20,
+            49,
+            64
+          ],
+          "actual_shape": [
+            1,
+            20,
+            49,
+            64
+          ],
+          "reference_dtype": "torch.float32",
+          "candidate_dtype": "torch.float32",
+          "storage_dtypes_match": true,
+          "total_elements": 62720,
+          "candidate_elements": 62720,
+          "tolerance_provenance": {
+            "source": "src/acc_infer_clear/guardrails/numerics.py:TOLERANCES",
+            "selection": "declared candidate arithmetic precision",
+            "empirically_calibrated": false,
+            "storage_dtype_equality_required": false,
+            "comparison_dtype": "torch.float64",
+            "rule": "abs(actual-reference) <= atol + rtol * abs(reference)"
+          },
+          "finite_reference": true,
+          "finite_actual": true,
+          "pass_gate": false,
+          "max_abs": 0.0234375,
+          "mean_abs": 0.0004082157561669545,
+          "relative_l2": 0.0023061796528661316,
+          "cosine": 0.9999973410692504,
+          "snr_db": 52.74213727812605,
+          "mismatched_elements": 5,
+          "reason": "tolerance exceeded"
+        },
+        {
+          "output": 49,
+          "candidate_precision": "bf16",
+          "atol": 0.01,
+          "rtol": 0.01,
+          "expected_shape": [
+            1,
+            8,
+            6400
+          ],
+          "actual_shape": [
+            1,
+            8,
+            6400
+          ],
+          "reference_dtype": "torch.float32",
+          "candidate_dtype": "torch.float32",
+          "storage_dtypes_match": true,
+          "total_elements": 51200,
+          "candidate_elements": 51200,
+          "tolerance_provenance": {
+            "source": "src/acc_infer_clear/guardrails/numerics.py:TOLERANCES",
+            "selection": "declared candidate arithmetic precision",
+            "empirically_calibrated": false,
+            "storage_dtype_equality_required": false,
+            "comparison_dtype": "torch.float64",
+            "rule": "abs(actual-reference) <= atol + rtol * abs(reference)"
+          },
+          "finite_reference": true,
+          "finite_actual": true,
+          "pass_gate": false,
+          "max_abs": 0.1513671875,
+          "mean_abs": 0.005751617495843675,
+          "relative_l2": 0.002791079294630028,
+          "cosine": 0.9999961071470611,
+          "snr_db": 51.08455650038803,
+          "mismatched_elements": 1773,
+          "reason": "tolerance exceeded"
+        },
+        {
+          "output": 50,
+          "candidate_precision": "bf16",
+          "atol": 0.01,
+          "rtol": 0.01,
+          "expected_shape": [
+            1,
+            8,
+            1280
+          ],
+          "actual_shape": [
+            1,
+            8,
+            1280
+          ],
+          "reference_dtype": "torch.float32",
+          "candidate_dtype": "torch.float32",
+          "storage_dtypes_match": true,
+          "total_elements": 10240,
+          "candidate_elements": 10240,
+          "tolerance_provenance": {
+            "source": "src/acc_infer_clear/guardrails/numerics.py:TOLERANCES",
+            "selection": "declared candidate arithmetic precision",
+            "empirically_calibrated": false,
+            "storage_dtype_equality_required": false,
+            "comparison_dtype": "torch.float64",
+            "rule": "abs(actual-reference) <= atol + rtol * abs(reference)"
+          },
+          "finite_reference": true,
+          "finite_actual": true,
+          "pass_gate": true,
+          "max_abs": 0.014462947845458984,
+          "mean_abs": 0.0008431647836341316,
+          "relative_l2": 0.0028880590476083414,
+          "cosine": 0.999995848885188,
+          "snr_db": 50.7878786334862,
+          "mismatched_elements": 0
+        }
+      ],
+      "timings": {
+        "eager": {
+          "gpu_ms": 14.71856689453125,
+          "wall_ms": 14.7270942106843
+        },
+        "compiled": {
+          "gpu_ms": 6.5526786804199215,
+          "wall_ms": 6.562045216560364
+        }
+      },
+      "pass_gate": false,
+      "timing_scope": "real-input module call including internal casts/launches; excludes surrounding runtime packing, separately measured end-to-end"
+    },
+    "cfm": {
+      "comparisons": [
+        {
+          "output": 0,
+          "candidate_precision": "bf16",
+          "atol": 0.01,
+          "rtol": 0.01,
+          "expected_shape": [
+            1,
+            80,
+            310
+          ],
+          "actual_shape": [
+            1,
+            80,
+            310
+          ],
+          "reference_dtype": "torch.float32",
+          "candidate_dtype": "torch.float32",
+          "storage_dtypes_match": true,
+          "total_elements": 24800,
+          "candidate_elements": 24800,
+          "tolerance_provenance": {
+            "source": "src/acc_infer_clear/guardrails/numerics.py:TOLERANCES",
+            "selection": "declared candidate arithmetic precision",
+            "empirically_calibrated": false,
+            "storage_dtype_equality_required": false,
+            "comparison_dtype": "torch.float64",
+            "rule": "abs(actual-reference) <= atol + rtol * abs(reference)"
+          },
+          "finite_reference": true,
+          "finite_actual": true,
+          "pass_gate": false,
+          "max_abs": 0.04144096374511719,
+          "mean_abs": 0.005622128156978907,
+          "relative_l2": 0.0016058138421288577,
+          "cosine": 0.9999987113079105,
+          "snr_db": 55.88609605564527,
+          "mismatched_elements": 122,
+          "reason": "tolerance exceeded"
+        }
+      ],
+      "timings": {
+        "eager": {
+          "gpu_ms": 16.373965454101562,
+          "wall_ms": 16.381199285387993
+        },
+        "compiled": {
+          "gpu_ms": 5.369139099121094,
+          "wall_ms": 5.375486798584461
+        }
+      },
+      "pass_gate": false,
+      "timing_scope": "real-input module call including internal casts/launches; excludes surrounding runtime packing, separately measured end-to-end"
+    },
+    "vocoder": {
+      "comparisons": [
+        {
+          "output": 0,
+          "candidate_precision": "bf16",
+          "atol": 0.01,
+          "rtol": 0.01,
+          "expected_shape": [
+            1,
+            1,
+            13312
+          ],
+          "actual_shape": [
+            1,
+            1,
+            13312
+          ],
+          "reference_dtype": "torch.float32",
+          "candidate_dtype": "torch.float32",
+          "storage_dtypes_match": true,
+          "total_elements": 13312,
+          "candidate_elements": 13312,
+          "tolerance_provenance": {
+            "source": "src/acc_infer_clear/guardrails/numerics.py:TOLERANCES",
+            "selection": "declared candidate arithmetic precision",
+            "empirically_calibrated": false,
+            "storage_dtype_equality_required": false,
+            "comparison_dtype": "torch.float64",
+            "rule": "abs(actual-reference) <= atol + rtol * abs(reference)"
+          },
+          "finite_reference": true,
+          "finite_actual": true,
+          "pass_gate": true,
+          "max_abs": 0.00592041015625,
+          "mean_abs": 0.00028671867627193796,
+          "relative_l2": 0.011869583308982872,
+          "cosine": 0.9999306226216111,
+          "snr_db": 38.51129054051364,
+          "mismatched_elements": 0
+        }
+      ],
+      "timings": {
+        "eager": {
+          "gpu_ms": 35.580108642578125,
+          "wall_ms": 35.587477311491966
+        },
+        "compiled": {
+          "gpu_ms": 16.641229248046876,
+          "wall_ms": 16.649515740573406
+        }
+      },
+      "pass_gate": true,
+      "timing_scope": "real-input module call including internal casts/launches; excludes surrounding runtime packing, separately measured end-to-end"
+    }
+  },
+  "routes": {
+    "sessions": 0,
+    "draft_calls": 124,
+    "target_calls": 124,
+    "scheduler_max_batch": 1,
+    "target_batch_counts": {
+      "1": 124
+    },
+    "device_round_attempts": 0,
+    "device_round_successes": 0,
+    "device_round_fallbacks": 0,
+    "device_target_steps": 0,
+    "device_draft_steps": 0,
+    "draft_backbone_calls": 124,
+    "native_target_steps": 0,
+    "native_draft_steps": 0,
+    "native_draft_compare": [],
+    "native_cfm_backend": null,
+    "native_cfm_calls": 0,
+    "native_cfm_fallbacks": 0,
+    "native_vocoder_backend": null,
+    "native_vocoder_calls": 0,
+    "native_vocoder_fallbacks": 0,
+    "head_graphs": null,
+    "acoustic_routes": {
+      "cfm": {
+        "wrapper": {},
+        "wrapper_total": {
+          "calls": 0,
+          "fallbacks": 0
+        },
+        "wrapper_prepare": {
+          "calls": 0,
+          "fallbacks": 0
+        },
+        "wrapper_direct": {
+          "calls": 0,
+          "fallbacks": 0
+        },
+        "graph_routes": []
+      },
+      "vocoder": {
+        "wrapper": {
+          "component": "vocoder",
+          "compiled_calls": 4,
+          "eager_calls": 4,
+          "warmed_signatures": 1,
+          "signatures": [
+            "('tuple', (('tuple', (('tensor', (1, 80, 52), (24800, 310, 1), 'torch.float32', 'cuda:0', False),)), ('dict', ())))"
+          ],
+          "failed_signatures": 0,
+          "errors": [],
+          "compile_seconds": 40.05465446040034,
+          "audit_seconds": 0.6753276698291302,
+          "emulate_precision_casts": true,
+          "online_compile": false,
+          "pattern_matcher": false,
+          "unknown_shape": "eager",
+          "compiler_error": "eager"
+        },
+        "wrapper_total": {
+          "calls": 0,
+          "fallbacks": 0
+        },
+        "wrapper_prepare": {
+          "calls": 0,
+          "fallbacks": 0
+        },
+        "wrapper_direct": {
+          "calls": 0,
+          "fallbacks": 0
+        },
+        "graph_routes": []
+      }
+    },
+    "strict_request_isolation": true,
+    "rng_policy": "legacy_per_request",
+    "active_rows": 0,
+    "error_sessions": 0,
+    "target_slots": null,
+    "draft_slots": null,
+    "memory": {
+      "cuda_allocated_bytes": 6275673088,
+      "cuda_reserved_bytes": 10146021376,
+      "cuda_peak_allocated_bytes": 9943896576,
+      "cuda_peak_reserved_bytes": 10146021376,
+      "rss_bytes": 3811942400
+    }
+  },
+  "compile": {
+    "target": {
+      "component": "target",
+      "compiled_calls": 4,
+      "eager_calls": 120,
+      "warmed_signatures": 1,
+      "signatures": [
+        "('tuple', (('tuple', (('tensor', (1, 8, 1280), (10240, 1280, 1), 'torch.float32', 'cuda:0', False), ('tuple', (('tuple', (('tensor', (1, 20, 41, 64), (52480, 2624, 64, 1), 'torch.float32', 'cuda:0', False), ('tensor', (1, 20, 41, 64), (52480, 2624, 64, 1), 'torch.float32', 'cuda:0', False))), ('tuple', (('tensor', (1, 20, 41, 64), (52480, 2624, 64, 1), 'torch.float32', 'cuda:0', False), ('tensor', (1, 20, 41, 64), (52480, 2624, 64, 1), 'torch.float32', 'cuda:0', False))), ('tuple', (('tensor', (1, 20, 41, 64), (52480, 2624, 64, 1), 'torch.float32', 'cuda:0', False), ('tensor', (1, 20, 41, 64), (52480, 2624, 64, 1), 'torch.float32', 'cuda:0', False))), ('tuple', (('tensor', (1, 20, 41, 64), (52480, 2624, 64, 1), 'torch.float32', 'cuda:0', False), ('tensor', (1, 20, 41, 64), (52480, 2624, 64, 1), 'torch.float32', 'cuda:0', False))), ('tuple', (('tensor', (1, 20, 41, 64), (52480, 2624, 64, 1), 'torch.float32', 'cuda:0', False), ('tensor', (1, 20, 41, 64), (52480, 2624, 64, 1), 'torch.float32', 'cuda:0', False))), ('tuple', (('tensor', (1, 20, 41, 64), (52480, 2624, 64, 1), 'torch.float32', 'cuda:0', False), ('tensor', (1, 20, 41, 64), (52480, 2624, 64, 1), 'torch.float32', 'cuda:0', False))), ('tuple', (('tensor', (1, 20, 41, 64), (52480, 2624, 64, 1), 'torch.float32', 'cuda:0', False), ('tensor', (1, 20, 41, 64), (52480, 2624, 64, 1), 'torch.float32', 'cuda:0', False))), ('tuple', (('tensor', (1, 20, 41, 64), (52480, 2624, 64, 1), 'torch.float32', 'cuda:0', False), ('tensor', (1, 20, 41, 64), (52480, 2624, 64, 1), 'torch.float32', 'cuda:0', False))), ('tuple', (('tensor', (1, 20, 41, 64), (52480, 2624, 64, 1), 'torch.float32', 'cuda:0', False), ('tensor', (1, 20, 41, 64), (52480, 2624, 64, 1), 'torch.float32', 'cuda:0', False))), ('tuple', (('tensor', (1, 20, 41, 64), (52480, 2624, 64, 1), 'torch.float32', 'cuda:0', False), ('tensor', (1, 20, 41, 64), (52480, 2624, 64, 1), 'torch.float32', 'cuda:0', False))), ('tuple', (('tensor', (1, 20, 41, 64), (52480, 2624, 64, 1), 'torch.float32', 'cuda:0', False), ('tensor', (1, 20, 41, 64), (52480, 2624, 64, 1), 'torch.float32', 'cuda:0', False))), ('tuple', (('tensor', (1, 20, 41, 64), (52480, 2624, 64, 1), 'torch.float32', 'cuda:0', False), ('tensor', (1, 20, 41, 64), (52480, 2624, 64, 1), 'torch.float32', 'cuda:0', False))), ('tuple', (('tensor', (1, 20, 41, 64), (52480, 2624, 64, 1), 'torch.float32', 'cuda:0', False), ('tensor', (1, 20, 41, 64), (52480, 2624, 64, 1), 'torch.float32', 'cuda:0', False))), ('tuple', (('tensor', (1, 20, 41, 64), (52480, 2624, 64, 1), 'torch.float32', 'cuda:0', False), ('tensor', (1, 20, 41, 64), (52480, 2624, 64, 1), 'torch.float32', 'cuda:0', False))), ('tuple', (('tensor', (1, 20, 41, 64), (52480, 2624, 64, 1), 'torch.float32', 'cuda:0', False), ('tensor', (1, 20, 41, 64), (52480, 2624, 64, 1), 'torch.float32', 'cuda:0', False))), ('tuple', (('tensor', (1, 20, 41, 64), (52480, 2624, 64, 1), 'torch.float32', 'cuda:0', False), ('tensor', (1, 20, 41, 64), (52480, 2624, 64, 1), 'torch.float32', 'cuda:0', False))), ('tuple', (('tensor', (1, 20, 41, 64), (52480, 2624, 64, 1), 'torch.float32', 'cuda:0', False), ('tensor', (1, 20, 41, 64), (52480, 2624, 64, 1), 'torch.float32', 'cuda:0', False))), ('tuple', (('tensor', (1, 20, 41, 64), (52480, 2624, 64, 1), 'torch.float32', 'cuda:0', False), ('tensor', (1, 20, 41, 64), (52480, 2624, 64, 1), 'torch.float32', 'cuda:0', False))), ('tuple', (('tensor', (1, 20, 41, 64), (52480, 2624, 64, 1), 'torch.float32', 'cuda:0', False), ('tensor', (1, 20, 41, 64), (52480, 2624, 64, 1), 'torch.float32', 'cuda:0', False))), ('tuple', (('tensor', (1, 20, 41, 64), (52480, 2624, 64, 1), 'torch.float32', 'cuda:0', False), ('tensor', (1, 20, 41, 64), (52480, 2624, 64, 1), 'torch.float32', 'cuda:0', False))), ('tuple', (('tensor', (1, 20, 41, 64), (52480, 2624, 64, 1), 'torch.float32', 'cuda:0', False), ('tensor', (1, 20, 41, 64), (52480, 2624, 64, 1), 'torch.float32', 'cuda:0', False))), ('tuple', (('tensor', (1, 20, 41, 64), (52480, 2624, 64, 1), 'torch.float32', 'cuda:0', False), ('tensor', (1, 20, 41, 64), (52480, 2624, 64, 1), 'torch.float32', 'cuda:0', False))), ('tuple', (('tensor', (1, 20, 41, 64), (52480, 2624, 64, 1), 'torch.float32', 'cuda:0', False), ('tensor', (1, 20, 41, 64), (52480, 2624, 64, 1), 'torch.float32', 'cuda:0', False))), ('tuple', (('tensor', (1, 20, 41, 64), (52480, 2624, 64, 1), 'torch.float32', 'cuda:0', False), ('tensor', (1, 20, 41, 64), (52480, 2624, 64, 1), 'torch.float32', 'cuda:0', False))))), ('tensor', (1, 49), (49, 1), 'torch.int64', 'cuda:0', False), ('NoneType', None))), ('dict', ())))"
+      ],
+      "failed_signatures": 0,
+      "errors": [],
+      "compile_seconds": 19.03182454779744,
+      "audit_seconds": 0.31812687031924725,
+      "emulate_precision_casts": true,
+      "online_compile": false,
+      "pattern_matcher": false,
+      "unknown_shape": "eager",
+      "compiler_error": "eager"
+    },
+    "draft": {
+      "component": "draft",
+      "compiled_calls": 4,
+      "eager_calls": 120,
+      "warmed_signatures": 1,
+      "signatures": [
+        "('tuple', (('tuple', (('tensor', (1,), (1,), 'torch.int64', 'cuda:0', False), ('tensor', (1, 7), (7, 1), 'torch.int64', 'cuda:0', False), ('tuple', (('tensor', (1, 20, 41, 64), (52480, 2624, 64, 1), 'torch.float32', 'cuda:0', False), ('tensor', (1, 20, 41, 64), (52480, 2624, 64, 1), 'torch.float32', 'cuda:0', False), ('tensor', (1, 20, 41, 64), (52480, 2624, 64, 1), 'torch.float32', 'cuda:0', False))), ('tuple', (('tensor', (1, 20, 41, 64), (52480, 2624, 64, 1), 'torch.float32', 'cuda:0', False), ('tensor', (1, 20, 41, 64), (52480, 2624, 64, 1), 'torch.float32', 'cuda:0', False), ('tensor', (1, 20, 41, 64), (52480, 2624, 64, 1), 'torch.float32', 'cuda:0', False))), ('tensor', (1, 41), (41, 1), 'torch.bool', 'cuda:0', False), ('NoneType', None))), ('dict', ())))"
+      ],
+      "failed_signatures": 0,
+      "errors": [],
+      "compile_seconds": 5.440181186422706,
+      "audit_seconds": 0.04339423403143883,
+      "emulate_precision_casts": true,
+      "online_compile": false,
+      "pattern_matcher": false,
+      "unknown_shape": "eager",
+      "compiler_error": "eager"
+    },
+    "cfm": {
+      "component": "cfm",
+      "compiled_calls": 8,
+      "eager_calls": 8,
+      "warmed_signatures": 1,
+      "signatures": [
+        "('tuple', (('tuple', (('tensor', (1, 80, 310), (24800, 310, 1), 'torch.float32', 'cuda:0', False), ('tensor', (1, 80, 310), (24800, 310, 1), 'torch.float32', 'cuda:0', False), ('tensor', (1,), (1,), 'torch.int64', 'cuda:0', False), ('tensor', (1, 2), (2, 1), 'torch.float32', 'cuda:0', False), ('tensor', (1, 192), (192, 1), 'torch.float32', 'cuda:0', False), ('tensor', (1, 310, 512), (158720, 512, 1), 'torch.float32', 'cuda:0', False))), ('dict', ())))"
+      ],
+      "failed_signatures": 0,
+      "errors": [],
+      "compile_seconds": 21.20968757942319,
+      "audit_seconds": 0.28567275032401085,
+      "emulate_precision_casts": true,
+      "online_compile": false,
+      "pattern_matcher": false,
+      "unknown_shape": "eager",
+      "compiler_error": "eager"
+    },
+    "vocoder": {
+      "component": "vocoder",
+      "compiled_calls": 4,
+      "eager_calls": 4,
+      "warmed_signatures": 1,
+      "signatures": [
+        "('tuple', (('tuple', (('tensor', (1, 80, 52), (24800, 310, 1), 'torch.float32', 'cuda:0', False),)), ('dict', ())))"
+      ],
+      "failed_signatures": 0,
+      "errors": [],
+      "compile_seconds": 40.05465446040034,
+      "audit_seconds": 0.6753276698291302,
+      "emulate_precision_casts": true,
+      "online_compile": false,
+      "pattern_matcher": false,
+      "unknown_shape": "eager",
+      "compiler_error": "eager"
+    }
+  },
+  "summary": {
+    "all_first_pcm_median_ms": 293.5389541089535,
+    "complete_median_ms": 823.3771808445454,
+    "complete_eos": true
+  },
+  "external_memory_mib": 21854
+}

@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+# Historical SM120 profile smoke, not the current pure eager SM89 audit.
+# For the latter use benchmarks/benchmark_reference.py with sm89_eager_fp32.json.
 set -euo pipefail
 if [[ $# -ne 1 ]]; then echo "usage: $0 /path/to/reference.wav" >&2; exit 2; fi
 project_dir="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)"

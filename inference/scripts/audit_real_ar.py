@@ -39,6 +39,8 @@ class GraphProxy:
         return getattr(self.wrapped, name)
 
     def __call__(self, *args):
+        if self.component == "draft":
+            self.recorder.draft_positions[self.batch] = cpu_copy(args[1])
         if self.recorder.counts[self.component] >= self.recorder.limit:
             return self.wrapped(*args)
         return self.recorder.call(self, args)
@@ -73,12 +75,78 @@ class ProposalProxy:
         return result
 
 
+class ProposalCallProxy:
+    """Observe generic request-owned sampling without changing draws/results."""
+    def __init__(self, proposal, recorder):
+        self.wrapped, self.recorder = proposal, recorder
+
+    def __getattr__(self, name):
+        return getattr(self.wrapped, name)
+
+    def __call__(self, jobs, tasks):
+        import torch
+        result = self.wrapped(jobs, tasks)
+        batch = len(jobs)
+        self.recorder.verify_tokens[batch] = cpu_copy(torch.cat([
+            torch.cat((job["anchor_token"].reshape(1, 1), output[0]), dim=1)
+            for job, output in zip(jobs, result)]))
+        first = torch.tensor([job["first_position"] for job in jobs])
+        self.recorder.draft_positions[batch] = first[:, None] + torch.arange(7)[None]
+        return result
+
+
+def ar_coverage(calls):
+    counts = {component: sum(row["component"] == component for row in calls)
+              for component in ("target", "draft")}
+    batches = {component: sorted({row["batch"] for row in calls if row["component"] == component})
+               for component in counts}
+    return {"required_components": ["target", "draft"], "calls": counts, "batches": batches,
+            "pass_gate": all(counts.values()),
+            "scope": "at least one actual native call per component; installed engines alone are not coverage"}
+
+
+def bitwise_equal(left, right):
+    import torch
+    return (left.shape == right.shape and left.dtype == right.dtype and
+            torch.equal(left.contiguous().view(torch.uint8), right.contiguous().view(torch.uint8)))
+
+
+def target_untouched_cache_equal(before, after, lengths):
+    return all(bitwise_equal(before[:, :, row, :, :length], after[:, :, row, :, :length]) and
+               bitwise_equal(before[:, :, row, :, length+8:], after[:, :, row, :, length+8:])
+               for row, length in enumerate(lengths))
+
+
+def replay_ar_engine_evidence(manifest, model_provenance):
+    """Recheck frozen engine/metadata hashes and actual current loader files."""
+    from validate_trt113_ar import engine_evidence
+    result = {}
+    for row in manifest["ar_calls"]:
+        component, batch = row["component"], row["batch"]
+        if str(batch) in result.get(component, {}):
+            continue
+        frozen = manifest["ar_engines"][component][str(batch)]
+        if row["route"]["artifact"]["sha256"] != frozen["sha256"]:
+            raise ValueError("Captured AR route does not match its engine evidence")
+        paths = {item["role"]: item["path"] for item in model_provenance[component]["model_sources"]}
+        current = engine_evidence(frozen["path"], batch, component, paths)
+        if current["sha256"] != frozen["sha256"]:
+            raise ValueError("AR engine SHA256 changed after capture")
+        if current["build_metadata_sha256"] != frozen["build_metadata_sha256"]:
+            raise ValueError("AR build metadata SHA256 changed after capture")
+        if current["weight_identity_verified"] and not frozen["weight_identity_verified"]:
+            raise ValueError("Reference replay cannot upgrade unverified AR capture provenance")
+        result.setdefault(component, {})[str(batch)] = current
+    return result
+
+
 class BoundedARRecorder:
     def __init__(self, engine, directory, manifest, limit):
         self.engine, self.directory, self.manifest = engine, Path(directory), manifest
         self.limit, self.counts = limit, {"target": 0, "draft": 0}
         self.verify_tokens, self.draft_positions = {}, {}
         manifest["ar_calls"] = []
+        manifest["ar_capture_coverage"] = ar_coverage([])
         manifest["ar_scope"] = {"max_calls_per_component": limit,
             "reference": "same real graph inputs/cache, not independent regenerated trajectory",
             "not_covered": ["generic fallback AR calls", "proposal RNN/acceptance/residual tensors",
@@ -89,6 +157,7 @@ class BoundedARRecorder:
         self.manifest["ar_engines"] = {}
         for batch, graph in list(self.engine.rt.proposal.graphs.items()):
             self.engine.rt.proposal.graphs[batch] = ProposalProxy(graph, self)
+        self.engine.rt.proposal = ProposalCallProxy(self.engine.rt.proposal, self)
         for component, owner in (("target", self.engine.rt.target), ("draft", self.engine.rt.backbone)):
             bank = getattr(owner, "native_full_bank", None)
             if bank is None:
@@ -97,8 +166,11 @@ class BoundedARRecorder:
             for key, graph in list(bank.graphs.items()):
                 actual_paths = {row["role"]: row["path"] for row in
                                 self.manifest["model_provenance"][component]["model_sources"]}
-                self.manifest["ar_engines"][component][str(key[0])] = engine_evidence(
+                evidence = engine_evidence(
                     bank.artifacts[key[0]]["path"], key[0], component, actual_paths)
+                if evidence["sha256"] != bank.artifacts[key[0]]["sha256"]:
+                    raise ValueError("AR engine file differs from the already loaded engine")
+                self.manifest["ar_engines"][component][str(key[0])] = evidence
                 proxy = GraphProxy(graph, self, component, key[0], bank.backends[key[0]], bank)
                 bank.graphs[key] = proxy
                 # DeviceRoundHead requires this identity, not merely equal keys.
@@ -139,7 +211,10 @@ class BoundedARRecorder:
         outputs = proxy.wrapped(*inputs)
         names = ("logits", "selected", "final") if component == "target" else ("hidden", "base")
         frozen = cpu_copy(dict(zip(names, outputs)))
-        after = cpu_copy(backend.cache[:, :, :batch]) if component == "target" else before
+        after = cpu_copy(backend.cache[:, :, :batch])
+        length_values = lengths.tolist()
+        state_checks = {"graph_untouched_cache": (target_untouched_cache_equal(before, after, length_values)
+                         if component == "target" else bitwise_equal(before, after))}
         if component == "target":
             frozen["new_kv"] = new_target_kv(after, lengths.tolist())
         # Save frozen graph results before the direct validation call can reuse
@@ -153,12 +228,19 @@ class BoundedARRecorder:
                 x = self.engine.rt.engine.draft._noise_embeddings(inputs[0], inputs[1])
                 direct = backend.run(x, slots, lengths)
             direct_frozen = cpu_copy(dict(zip(names, direct)))
+            direct_after = cpu_copy(backend.cache[:, :, :batch])
+            state_checks["direct_untouched_cache"] = (
+                target_untouched_cache_equal(before, direct_after, length_values)
+                if component == "target" else bitwise_equal(before, direct_after))
             if component == "target":
-                direct_frozen["new_kv"] = new_target_kv(cpu_copy(backend.cache[:, :, :batch]), lengths.tolist())
+                direct_frozen["new_kv"] = new_target_kv(direct_after, length_values)
         finally:
-            if component == "target":
-                backend.cache[:, :, :batch].copy_(after.to(device))
-        bundle.update(output=frozen, direct_output=direct_frozen)
+            # Draft's declared cache input is read-only. Restoring its original
+            # bytes also prevents a failed audit invocation polluting the run.
+            restored = after if component == "target" else before
+            backend.cache[:, :, :batch].copy_(restored.to(device))
+            state_checks["audit_cache_restored"] = bitwise_equal(restored, cpu_copy(backend.cache[:, :, :batch]))
+        bundle.update(output=frozen, direct_output=direct_frozen, cache_after=after)
         exact = {name: bool(torch.equal(frozen[name], direct_frozen[name])) for name in frozen}
         index = len(self.manifest["ar_calls"])
         evidence = save_bundle(self.directory / "ar_bundles", index, bundle)
@@ -167,8 +249,10 @@ class BoundedARRecorder:
             "route": {"backend": "tensorrt113", "execution": "existing_graph", "graph_key": [batch, 128],
                       "artifact": proxy.bank.artifacts[batch]},
             "evidence": evidence, "graph_direct_exact": exact,
-            "graph_direct_exact_gate": all(exact.values())})
+            "graph_direct_exact_gate": all(exact.values()), "cache_state_checks": state_checks,
+            "cache_state_gate": all(state_checks.values())})
         self.counts[component] += 1
+        self.manifest["ar_capture_coverage"] = ar_coverage(self.manifest["ar_calls"])
         write_json(self.directory / "capture.json", self.manifest)
         return tuple(frozen[name].to(device) for name in names)
 
@@ -214,11 +298,16 @@ def capture(args):
         def install(self):
             super().install()
             BoundedARRecorder(self.engine, self.directory, self.manifest, args.ar_max_calls).install()
-    acoustic.AcousticRecorder = CombinedRecorder
-    acoustic.reference_provenance = lambda engine, options: {
-        component: capture_provenance(component, engine.config, options.config, model=engine)
-        for component in ("target", "draft", "cfm", "vocoder")}
-    acoustic.capture_run(args)
+    original_provenance = acoustic.reference_provenance
+    try:
+        acoustic.AcousticRecorder = CombinedRecorder
+        acoustic.reference_provenance = lambda engine, options: {
+            component: capture_provenance(component, engine.config, options.config, model=engine)
+            for component in ("target", "draft", "cfm", "vocoder")}
+        acoustic.capture_run(args)
+    finally:
+        acoustic.AcousticRecorder = original
+        acoustic.reference_provenance = original_provenance
 
 
 def reference(args):
@@ -254,9 +343,10 @@ def reference(args):
             current = {r["role"]: r["sha256"] for r in provenance["model_sources"]}
             if before != current:
                 raise ValueError(f"Actual {component} loader checkpoint/config hash changed")
-        report["engine_identity"] = manifest["ar_engines"]
-        report["weight_identity_verified"] = all(evidence["weight_identity_verified"]
-            for engines in manifest["ar_engines"].values() for evidence in engines.values())
+        report["coverage"] = ar_coverage(manifest["ar_calls"])
+        report["engine_identity"] = replay_ar_engine_evidence(manifest, report["model_provenance"])
+        identities = [evidence for engines in report["engine_identity"].values() for evidence in engines.values()]
+        report["weight_identity_verified"] = bool(identities) and all(evidence["weight_identity_verified"] for evidence in identities)
         if args.precision == "bf16":
             engine.prepare_precision("bf16", ["target", "draft"], False)
         with torch.cuda.stream(engine.model.stream), torch.inference_mode():
@@ -282,10 +372,12 @@ def reference(args):
                         checks["bf16_reference_vs_fp32_reference"] = compare_outputs(fp32_output, expected)
                 report["calls"].append({"index": row["index"], "component": row["component"],
                     "evidence": evidence, "checks": checks, "graph_direct_exact_gate": row["graph_direct_exact_gate"],
-                    "pass_gate": row["graph_direct_exact_gate"] and all(v["pass_gate"] for v in checks.values())})
+                    "cache_state_gate": row.get("cache_state_gate", False),
+                    "pass_gate": row["graph_direct_exact_gate"] and row.get("cache_state_gate", False)
+                                 and all(v["pass_gate"] for v in checks.values())})
                 write_json(output / "report.json", report)
         report["status"] = "completed"
-        report["pass_gate"] = all(row["pass_gate"] for row in report["calls"])
+        report["pass_gate"] = report["coverage"]["pass_gate"] and all(row["pass_gate"] for row in report["calls"])
     except Exception as error:
         report["status"] = "error"
         report["error"] = {"type": type(error).__name__, "message": str(error), "traceback": traceback.format_exc()}

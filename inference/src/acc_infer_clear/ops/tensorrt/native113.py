@@ -212,6 +212,25 @@ class NativeTargetFullBank113:
     def eligible(self,batch,slot_values,max_length):
         return (batch,128) in self.graphs and slot_values==list(range(batch)) and max_length+8<=128
 
+    def run_with_canonical_cache(self,x,slots,lengths,slot_values,host_lengths):
+        """Host-scheduled request-local path, independent of device RNG.
+
+        A previous call may have used another batch engine or the generic path.
+        Refresh the bounded prefix from the canonical pool before every call;
+        export afterward so cropping, cancellation and later fallback see the
+        actual native KV. Copies are part of end-to-end measurements. The
+        existing device-round path retains its once-per-loop synchronization.
+        """
+        batch=len(host_lengths)
+        if not self.eligible(batch,slot_values,max(host_lengths)):
+            raise ValueError('Native Target requires identity slots and KV+8 <= 128')
+        backend=self.backends[batch]
+        for slot,length in zip(slot_values,host_lengths):
+            backend.import_slot(self.target.storage,slot,slot,length)
+        result=self.graphs[batch,128](x,slots,lengths)
+        self.export(batch,self.target.storage)
+        return result
+
     def export(self,batch,target_storage):
         target_storage[:,:,:batch,:,:128].copy_(self.backends[batch].cache[:,:,:batch])
 

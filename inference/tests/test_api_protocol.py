@@ -12,7 +12,7 @@ class ProtocolTests(unittest.TestCase):
             self.assertEqual(parse_event(json.dumps(event)), event)
 
     def test_invalid_requests(self):
-        for event in ([], {}, {"op":"unknown"}, {"op":"run","id":"a"},
+        for event in ([], {}, {"op":[]}, {"op":"unknown"}, {"op":"run","id":"a"},
                       {"op":"open","id":None}, {"op":"open","id":""},
                       {"op":"open","id":"a","seed":True},
                       {"op":"open","id":"a","seed":2**63},

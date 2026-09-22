@@ -17,6 +17,61 @@ from acc_infer_clear.guardrails.snapshots import file_sha256, write_json
 from trt113_provenance import capture_provenance, file_record, source_identity
 
 
+def gpu_preflight(lease):
+    return {"recorded": True, "physical_gpu": int(lease.index),
+            "existing_memory_mib": lease.initial_memory_mib,
+            "initial_utilization_percent": lease.initial_utilization,
+            "explicit_shared_run": lease.shared, "external_processes_preserved": True,
+            "scope": "cooperative lease preflight before model/CUDA initialization; no exclusive occupancy claim"}
+
+
+def native_engine_evidence(engine, model_provenance):
+    from audit_real_acoustics import capture_acoustic_engine_evidence
+    from validate_trt113_ar import engine_evidence
+    evidence = capture_acoustic_engine_evidence(engine, model_provenance)
+    for component, owner in (("target", engine.rt.target), ("draft", engine.rt.backbone)):
+        bank = getattr(owner, "native_full_bank", None)
+        if bank is None:
+            evidence[component] = {"has_native_engine": False, "provenance_status": "not_applicable",
+                                   "weight_identity_verified": None, "engines": {}}
+            continue
+        paths = {row["role"]: row["path"] for row in model_provenance[component]["model_sources"]}
+        engines = {}
+        for batch, artifact in bank.artifacts.items():
+            current = engine_evidence(artifact["path"], int(batch), component, paths)
+            if current["sha256"] != artifact["sha256"]:
+                raise ValueError("Generation AR engine file differs from the already loaded engine")
+            engines[str(batch)] = current
+        verified = bool(engines) and all(row["weight_identity_verified"] for row in engines.values())
+        evidence[component] = {"has_native_engine": bool(engines), "engines": engines,
+            "weight_identity_verified": verified,
+            "provenance_status": "recorded_not_audited" if verified else "legacy_unverified"}
+    for row in evidence.values():
+        if not row["has_native_engine"]:
+            row["weight_identity_verified"] = None
+            row["provenance_status"] = "not_applicable"
+    return evidence
+
+
+def runtime_counters(engine):
+    host_target = getattr(engine.rt.target, "native_full_steps", 0)
+    device_target = getattr(engine.rt, "native_target_steps", 0)
+    return {"target": engine.rt.target.stats(), "draft": engine.rt.backbone.stats(),
+            "device_round_attempts": engine.device_round_attempts,
+            "device_round_successes": engine.device_round_successes,
+            "device_round_fallbacks": engine.device_round_fallbacks,
+            "native_target_steps": host_target + device_target,
+            "native_target_host_steps": host_target, "native_target_device_steps": device_target,
+            "device_target_steps": getattr(engine.rt, "device_target_steps", 0),
+            "native_draft_steps": getattr(engine.rt.backbone, "native_full_steps", 0),
+            "native_target_counter_semantics": "host native_full_steps plus device-round native_target_steps; excludes graph preparation"}
+
+
+def admission_emotions(cases):
+    """Freeze exactly the emotion lists passed at this group's admission."""
+    return {case["id"]: list(case["emotion"]) for case in cases}
+
+
 def generate(args):
     import numpy as np
     import soundfile as sf
@@ -60,6 +115,7 @@ def generate(args):
     args.output_dir.mkdir(parents=True, exist_ok=True)
     summary = {"schema": 1, "status": "running", **identity, "cases": len(cases),
                "scope": "full_eos_quality_corpus", "batch": args.batch, "performance_claim": False,
+               "gpu_preflight": getattr(args, "gpu_preflight", {"recorded": False, "physical_gpu": args.gpu}),
                "seed_semantics": "request seeds recorded; legacy shared RNG profiles need not reproduce eager codes",
                "rows_generated_this_invocation": 0, "rows_resumed": len(completed)}
     engine = None
@@ -83,7 +139,9 @@ def generate(args):
                 if before != now:
                     raise ValueError(f"Resume actual {component} checkpoint hashes changed")
         summary["deployment"] = engine.prepare_deployment(deployment)
-        summary["hardware"] = {"name": torch.cuda.get_device_name(), "sm": list(torch.cuda.get_device_capability())}
+        summary["native_engine_evidence"] = native_engine_evidence(engine, summary["model_provenance"])
+        summary["hardware"] = {"physical_gpu": args.gpu, "name": torch.cuda.get_device_name(),
+                               "sm": list(torch.cuda.get_device_capability())}
         write_json(summary_path, summary)
         with metadata_path.open("a" if args.resume else "w") as metadata:
             for group_start in range(0, len(cases), args.batch):
@@ -91,9 +149,10 @@ def generate(args):
                 group = [case for case in original_group if case["id"] not in completed]
                 if group and len(group) != len(original_group):
                     raise ValueError("Resume cannot change a partially completed group; use a fresh directory")
+                emotions = admission_emotions(group)
                 started = time.perf_counter()
                 for case in group:
-                    engine.create_session(case["id"], voices[case["reference_audio"]], case["seed"], case["emotion"])
+                    engine.create_session(case["id"], voices[case["reference_audio"]], case["seed"], emotions[case["id"]])
                     engine.push_text(case["id"], case["text"]); engine.finish_input(case["id"])
                 while engine.ready():
                     engine.run_ready()
@@ -108,6 +167,7 @@ def generate(args):
                     sf.write(output, pcm, 22050, subtype="PCM_16")
                     row = {"id": case["id"], "complete": True, "eos": True, "seed": case["seed"],
                            "text": case["text"], "reference_audio": case["reference_audio"],
+                           "emotion": list(emotions[case["id"]]),
                            "sha256": file_sha256(output), "samples": int(pcm.size), "sample_rate": 22050,
                            "codes": list(session["codes"]), "accepted": list(session["accepted"]),
                            "rounds": session["rounds"], "group_elapsed_s": time.perf_counter() - started,
@@ -120,15 +180,7 @@ def generate(args):
                     print(json.dumps({"completed": group_start + offset + 1, "total": len(cases), "id": case["id"],
                                       "samples": row["samples"], "group_elapsed_s": row["group_elapsed_s"]}), flush=True)
         summary["head_routes"] = engine.head_graphs.stats() if engine.head_graphs else None
-        summary["runtime_counters"] = {
-            "target": engine.rt.target.stats(), "draft": engine.rt.backbone.stats(),
-            "device_round_attempts": engine.device_round_attempts,
-            "device_round_successes": engine.device_round_successes,
-            "device_round_fallbacks": engine.device_round_fallbacks,
-            "native_target_steps": getattr(engine.rt, "native_target_steps", 0),
-            "device_target_steps": getattr(engine.rt, "device_target_steps", 0),
-            "native_draft_steps": getattr(engine.rt.backbone, "native_full_steps", 0),
-        }
+        summary["runtime_counters"] = runtime_counters(engine)
         summary["status"] = "completed"
     except Exception as error:
         summary["status"] = "error"
@@ -160,7 +212,8 @@ def main():
         if plan.get("batched_proposal_rng") or plan.get("device_round_b8"):
             parser.error("Legacy shared-RNG profiles cannot resume by skipping completed requests")
     from acc_infer_clear.runtime.device import GPULease, select_gpu
-    with GPULease(args.gpu):
+    with GPULease(args.gpu) as lease:
+        args.gpu_preflight = gpu_preflight(lease)
         select_gpu(args.gpu)
         generate(args)
 

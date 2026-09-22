@@ -1,0 +1,6097 @@
+{
+  "schema": 1,
+  "scope": "real_trajectory_acoustic_same_input_audit",
+  "status": "captured",
+  "calls": [
+    {
+      "index": 0,
+      "component": "cfm",
+      "chunk_index": 0,
+      "head": true,
+      "route": {
+        "kind": "tensorrt",
+        "backend": "tensorrt113",
+        "candidate_backend": "tensorrt113",
+        "component": "cfm",
+        "batch": 1,
+        "frames": 310,
+        "engine_batch": 1,
+        "engine_frames": 310,
+        "plan": "/workspace/A_inspark_marlin/artifacts/trt113_cfm/plan_b1.json",
+        "sha256": "df6662ee84387f9982856a2e171e7a087dd829467b0f461d6e9f7bdd646420a0",
+        "reason": null,
+        "plugins": [],
+        "fallback": false,
+        "execution": "graph",
+        "graph_key": [
+          1,
+          258
+        ]
+      },
+      "members": [
+        {
+          "id": "sm89-q000",
+          "codes": [
+            6337,
+            942,
+            5691,
+            4586,
+            2046,
+            7500,
+            5683,
+            1283,
+            2439,
+            5169,
+            6435,
+            6933,
+            1224,
+            6040,
+            4250,
+            3942,
+            275,
+            6980,
+            232,
+            6540,
+            922,
+            6557,
+            2508,
+            822,
+            402,
+            6132,
+            97,
+            6311,
+            5878,
+            7123,
+            313,
+            6544,
+            5205,
+            4285,
+            280,
+            3096
+          ],
+          "eos": false,
+          "core": 44,
+          "horizon": 52,
+          "prompt_frames": 258,
+          "emitted_before": 0,
+          "accepted": [
+            1,
+            4,
+            3,
+            3,
+            2,
+            6,
+            1,
+            1,
+            5
+          ],
+          "kv_head_length": 76
+        }
+      ],
+      "evidence": {
+        "file": "000000.pt",
+        "sha256": "a6e16c14e6fedddeb510cdf17d63299270dde9ea2e5ee2f94a650a514df5eab5",
+        "tensors": [
+          {
+            "name": "/direct_output",
+            "shape": [
+              1,
+              80,
+              310
+            ],
+            "dtype": "torch.float32",
+            "sha256": "263e0311ac095c4749095b3d56f6f388e3f9a328dc6b8f196ae594f6fc51cdbe",
+            "elements": 24800
+          },
+          {
+            "name": "/inputs/0",
+            "shape": [
+              1,
+              80,
+              310
+            ],
+            "dtype": "torch.float32",
+            "sha256": "bfa871702122b03abfc133715ec2e17e18d7967efb7a26ec374bc9bf821f3668",
+            "elements": 24800
+          },
+          {
+            "name": "/inputs/1",
+            "shape": [
+              1,
+              80,
+              310
+            ],
+            "dtype": "torch.float32",
+            "sha256": "85c0cd4a3453410aecff3d3087b5ca55ad76c708d6ebdf20f9679b865ced0a35",
+            "elements": 24800
+          },
+          {
+            "name": "/inputs/2",
+            "shape": [
+              1
+            ],
+            "dtype": "torch.int64",
+            "sha256": "7a85c50dcf4c5c04054aac946828d60e8ce4600b94508c5a781598adc63db173",
+            "elements": 1
+          },
+          {
+            "name": "/inputs/3",
+            "shape": [
+              1,
+              192
+            ],
+            "dtype": "torch.float32",
+            "sha256": "d2697268fccf2535c928ac2e0ed51d5308e3ab6e9d5be6f50349dfdeb137b21e",
+            "elements": 192
+          },
+          {
+            "name": "/inputs/4",
+            "shape": [
+              1,
+              310,
+              512
+            ],
+            "dtype": "torch.float32",
+            "sha256": "4b8adc9cdcc284c2ff7df30938622c5b8044fdbb2c3d4fa754cb85dbf0256039",
+            "elements": 158720
+          },
+          {
+            "name": "/inputs/5",
+            "shape": [
+              1,
+              1,
+              310
+            ],
+            "dtype": "torch.bool",
+            "sha256": "d3272cf44db386df75e76d2083d5d3591c0ffc7d1f3d3b3e6e6da4190857f5f1",
+            "elements": 310
+          },
+          {
+            "name": "/output",
+            "shape": [
+              1,
+              80,
+              310
+            ],
+            "dtype": "torch.float32",
+            "sha256": "263e0311ac095c4749095b3d56f6f388e3f9a328dc6b8f196ae594f6fc51cdbe",
+            "elements": 24800
+          }
+        ]
+      },
+      "graph_vs_direct": {
+        "candidate_precision": "fp32",
+        "atol": 1e-05,
+        "rtol": 0.0001,
+        "expected_shape": [
+          1,
+          80,
+          310
+        ],
+        "actual_shape": [
+          1,
+          80,
+          310
+        ],
+        "reference_dtype": "torch.float32",
+        "candidate_dtype": "torch.float32",
+        "storage_dtypes_match": true,
+        "total_elements": 24800,
+        "candidate_elements": 24800,
+        "tolerance_provenance": {
+          "source": "src/acc_infer_clear/guardrails/numerics.py:TOLERANCES",
+          "selection": "declared candidate arithmetic precision",
+          "empirically_calibrated": false,
+          "storage_dtype_equality_required": false,
+          "comparison_dtype": "torch.float64",
+          "rule": "abs(actual-reference) <= atol + rtol * abs(reference)"
+        },
+        "finite_reference": true,
+        "finite_actual": true,
+        "pass_gate": true,
+        "max_abs": 0.0,
+        "mean_abs": 0.0,
+        "relative_l2": 0.0,
+        "cosine": 1.0000000000000049,
+        "snr_db": 311.05640797767325,
+        "mismatched_elements": 0,
+        "bitwise_exact": true,
+        "exact_gate": true
+      },
+      "direct_graph_scope": "same callable and frozen inputs; no timing claim"
+    },
+    {
+      "index": 1,
+      "component": "vocoder",
+      "chunk_index": 0,
+      "head": true,
+      "route": {
+        "kind": "tensorrt",
+        "backend": "tensorrt113",
+        "candidate_backend": "tensorrt113",
+        "component": "vocoder",
+        "batch": 1,
+        "frames": 52,
+        "engine_batch": 1,
+        "engine_frames": 52,
+        "plan": "/workspace/A_inspark_marlin/artifacts/trt113_vocoder/plan_b1_nativeconv_strong.json",
+        "sha256": "9e850e09634eb7dce0dafb053063fd5f1137bac285fa94210c0dc0d62fae0960",
+        "reason": null,
+        "plugins": [
+          "inspark::alias_free",
+          "inspark::deconv1d"
+        ],
+        "fallback": false,
+        "execution": "graph",
+        "graph_key": 1
+      },
+      "members": [
+        {
+          "id": "sm89-q000",
+          "codes": [
+            6337,
+            942,
+            5691,
+            4586,
+            2046,
+            7500,
+            5683,
+            1283,
+            2439,
+            5169,
+            6435,
+            6933,
+            1224,
+            6040,
+            4250,
+            3942,
+            275,
+            6980,
+            232,
+            6540,
+            922,
+            6557,
+            2508,
+            822,
+            402,
+            6132,
+            97,
+            6311,
+            5878,
+            7123,
+            313,
+            6544,
+            5205,
+            4285,
+            280,
+            3096
+          ],
+          "eos": false,
+          "core": 44,
+          "horizon": 52,
+          "prompt_frames": 258,
+          "emitted_before": 0,
+          "accepted": [
+            1,
+            4,
+            3,
+            3,
+            2,
+            6,
+            1,
+            1,
+            5
+          ],
+          "kv_head_length": 76
+        }
+      ],
+      "evidence": {
+        "file": "000001.pt",
+        "sha256": "c80ed48ccc04b760aeb6aaedb8f33400d9d64214fab53d64870eec33061451e0",
+        "tensors": [
+          {
+            "name": "/direct_output",
+            "shape": [
+              1,
+              1,
+              13312
+            ],
+            "dtype": "torch.float32",
+            "sha256": "0a2c8bdabb60ae2ba42c3da0ac09a75092ba349bc25c05a59abd6463f240757e",
+            "elements": 13312
+          },
+          {
+            "name": "/inputs/0",
+            "shape": [
+              1,
+              80,
+              52
+            ],
+            "dtype": "torch.float32",
+            "sha256": "177dd97e905caa19e94599c48af3445e35936e1b7a3532a8b5f30113650ecf74",
+            "elements": 4160
+          },
+          {
+            "name": "/output",
+            "shape": [
+              1,
+              1,
+              13312
+            ],
+            "dtype": "torch.float32",
+            "sha256": "0a2c8bdabb60ae2ba42c3da0ac09a75092ba349bc25c05a59abd6463f240757e",
+            "elements": 13312
+          }
+        ]
+      },
+      "graph_vs_direct": {
+        "candidate_precision": "fp32",
+        "atol": 1e-05,
+        "rtol": 0.0001,
+        "expected_shape": [
+          1,
+          1,
+          13312
+        ],
+        "actual_shape": [
+          1,
+          1,
+          13312
+        ],
+        "reference_dtype": "torch.float32",
+        "candidate_dtype": "torch.float32",
+        "storage_dtypes_match": true,
+        "total_elements": 13312,
+        "candidate_elements": 13312,
+        "tolerance_provenance": {
+          "source": "src/acc_infer_clear/guardrails/numerics.py:TOLERANCES",
+          "selection": "declared candidate arithmetic precision",
+          "empirically_calibrated": false,
+          "storage_dtype_equality_required": false,
+          "comparison_dtype": "torch.float64",
+          "rule": "abs(actual-reference) <= atol + rtol * abs(reference)"
+        },
+        "finite_reference": true,
+        "finite_actual": true,
+        "pass_gate": true,
+        "max_abs": 0.0,
+        "mean_abs": 0.0,
+        "relative_l2": 0.0,
+        "cosine": 1.0,
+        "snr_db": 284.92224976658633,
+        "mismatched_elements": 0,
+        "bitwise_exact": true,
+        "exact_gate": true
+      },
+      "direct_graph_scope": "same callable and frozen inputs; no timing claim"
+    },
+    {
+      "index": 2,
+      "component": "cfm",
+      "chunk_index": 1,
+      "head": false,
+      "route": {
+        "kind": "eager",
+        "backend": "eager",
+        "candidate_backend": "tensorrt113",
+        "component": "cfm",
+        "batch": 1,
+        "frames": 557,
+        "engine_batch": 1,
+        "engine_frames": 310,
+        "plan": "/workspace/A_inspark_marlin/artifacts/trt113_cfm/plan_b1.json",
+        "sha256": "df6662ee84387f9982856a2e171e7a087dd829467b0f461d6e9f7bdd646420a0",
+        "reason": "x.shape",
+        "plugins": [],
+        "fallback": true,
+        "execution": "direct",
+        "graph_fallback": "tail_not_captured"
+      },
+      "members": [
+        {
+          "id": "sm89-q000",
+          "codes": [
+            6337,
+            942,
+            5691,
+            4586,
+            2046,
+            7500,
+            5683,
+            1283,
+            2439,
+            5169,
+            6435,
+            6933,
+            1224,
+            6040,
+            4250,
+            3942,
+            275,
+            6980,
+            232,
+            6540,
+            922,
+            6557,
+            2508,
+            822,
+            402,
+            6132,
+            97,
+            6311,
+            5878,
+            7123,
+            313,
+            6544,
+            5205,
+            4285,
+            280,
+            3096,
+            1893,
+            7158,
+            1721,
+            6343,
+            2875,
+            4467,
+            1152,
+            2837,
+            6924,
+            4876,
+            7238,
+            2328,
+            8026,
+            31,
+            8029,
+            2729,
+            3887,
+            5509,
+            8001,
+            1462,
+            6764,
+            7238,
+            6536,
+            3560,
+            2880,
+            5295,
+            936,
+            5468,
+            6842,
+            6237,
+            1046,
+            1447,
+            4467,
+            3005,
+            2220,
+            5111,
+            8029,
+            8111,
+            969,
+            76,
+            3534,
+            242,
+            2890,
+            2149,
+            1128,
+            910,
+            7951,
+            7039,
+            6166,
+            5175,
+            6319,
+            5760,
+            205,
+            2519,
+            7397,
+            5987,
+            3214,
+            5195,
+            3084,
+            6508,
+            6438,
+            6607,
+            6214,
+            6342,
+            1041,
+            4897,
+            840,
+            6591,
+            107,
+            6015,
+            8053,
+            3735,
+            6981,
+            3960,
+            7502,
+            6959,
+            7096,
+            7426,
+            6736,
+            1716,
+            3286,
+            6634,
+            7189,
+            2515,
+            6330,
+            3335,
+            5356,
+            7755,
+            3534,
+            1126,
+            7003,
+            8184,
+            3910,
+            2212,
+            1619,
+            5320,
+            4235,
+            3848,
+            3936,
+            4326,
+            2466,
+            1608,
+            8027,
+            6981,
+            1398,
+            2212,
+            4186,
+            2922,
+            5098,
+            4086,
+            5098,
+            6508,
+            2705,
+            4995,
+            1819,
+            3733,
+            7050,
+            4916,
+            1261,
+            6533,
+            2543,
+            4679,
+            5270,
+            4477,
+            867,
+            980,
+            6586,
+            6015,
+            2046,
+            3979,
+            3534,
+            5314,
+            8065,
+            286,
+            6638,
+            8065,
+            5847,
+            6388
+          ],
+          "eos": true,
+          "core": 299,
+          "horizon": 299,
+          "prompt_frames": 258,
+          "emitted_before": 11264,
+          "accepted": [
+            1,
+            4,
+            3,
+            3,
+            2,
+            6,
+            1,
+            1,
+            5,
+            5,
+            6,
+            7,
+            7,
+            5,
+            6,
+            5,
+            1,
+            7,
+            3,
+            5,
+            5,
+            3,
+            0,
+            7,
+            7,
+            6,
+            0,
+            1,
+            5,
+            1,
+            4,
+            2,
+            0,
+            4,
+            7,
+            1,
+            1
+          ],
+          "kv_head_length": 236
+        }
+      ],
+      "evidence": {
+        "file": "000002.pt",
+        "sha256": "967bf081c39cbdaf5a1ed17e53e37f25c9561e9829c5550545d446847aa46433",
+        "tensors": [
+          {
+            "name": "/inputs/0",
+            "shape": [
+              1,
+              80,
+              557
+            ],
+            "dtype": "torch.float32",
+            "sha256": "300c414b82cc27b3629367716cac141f61f4a172b091159e9ec85c44c6a85178",
+            "elements": 44560
+          },
+          {
+            "name": "/inputs/1",
+            "shape": [
+              1,
+              80,
+              557
+            ],
+            "dtype": "torch.float32",
+            "sha256": "de8663ff27b70da2be61fb70ae243726988dde7fa89f751f2b3e82e9c4193966",
+            "elements": 44560
+          },
+          {
+            "name": "/inputs/2",
+            "shape": [
+              1
+            ],
+            "dtype": "torch.int64",
+            "sha256": "d847ea54d8eda11ca76df3a99ccc98a513fbda1db297948efed083c582aecf0c",
+            "elements": 1
+          },
+          {
+            "name": "/inputs/3",
+            "shape": [
+              1,
+              192
+            ],
+            "dtype": "torch.float32",
+            "sha256": "d2697268fccf2535c928ac2e0ed51d5308e3ab6e9d5be6f50349dfdeb137b21e",
+            "elements": 192
+          },
+          {
+            "name": "/inputs/4",
+            "shape": [
+              1,
+              557,
+              512
+            ],
+            "dtype": "torch.float32",
+            "sha256": "24879d636aa7038ddf84bfeb53132572fada64f8c552b1c13c05cb85c166ca68",
+            "elements": 285184
+          },
+          {
+            "name": "/inputs/5",
+            "shape": [
+              1,
+              1,
+              557
+            ],
+            "dtype": "torch.bool",
+            "sha256": "b9bd97b00ccdb338ed696927f0384654dc9a1bc7d6e53ed567d839452029c3f4",
+            "elements": 557
+          },
+          {
+            "name": "/output",
+            "shape": [
+              1,
+              80,
+              557
+            ],
+            "dtype": "torch.float32",
+            "sha256": "72594fbcea2c9c95983b48d55600299b81b69e8084b6ddd6706bd7350be94231",
+            "elements": 44560
+          }
+        ]
+      },
+      "graph_vs_direct": null,
+      "direct_graph_scope": "same callable and frozen inputs; no timing claim"
+    },
+    {
+      "index": 3,
+      "component": "vocoder",
+      "chunk_index": 1,
+      "head": false,
+      "route": {
+        "kind": "eager",
+        "backend": "eager",
+        "candidate_backend": "tensorrt113",
+        "component": "vocoder",
+        "batch": 1,
+        "frames": 299,
+        "engine_batch": 1,
+        "engine_frames": 52,
+        "plan": "/workspace/A_inspark_marlin/artifacts/trt113_vocoder/plan_b1_nativeconv_strong.json",
+        "sha256": "9e850e09634eb7dce0dafb053063fd5f1137bac285fa94210c0dc0d62fae0960",
+        "reason": "mel.shape",
+        "plugins": [
+          "inspark::alias_free",
+          "inspark::deconv1d"
+        ],
+        "fallback": true,
+        "execution": "direct",
+        "graph_fallback": "tail_not_captured"
+      },
+      "members": [
+        {
+          "id": "sm89-q000",
+          "codes": [
+            6337,
+            942,
+            5691,
+            4586,
+            2046,
+            7500,
+            5683,
+            1283,
+            2439,
+            5169,
+            6435,
+            6933,
+            1224,
+            6040,
+            4250,
+            3942,
+            275,
+            6980,
+            232,
+            6540,
+            922,
+            6557,
+            2508,
+            822,
+            402,
+            6132,
+            97,
+            6311,
+            5878,
+            7123,
+            313,
+            6544,
+            5205,
+            4285,
+            280,
+            3096,
+            1893,
+            7158,
+            1721,
+            6343,
+            2875,
+            4467,
+            1152,
+            2837,
+            6924,
+            4876,
+            7238,
+            2328,
+            8026,
+            31,
+            8029,
+            2729,
+            3887,
+            5509,
+            8001,
+            1462,
+            6764,
+            7238,
+            6536,
+            3560,
+            2880,
+            5295,
+            936,
+            5468,
+            6842,
+            6237,
+            1046,
+            1447,
+            4467,
+            3005,
+            2220,
+            5111,
+            8029,
+            8111,
+            969,
+            76,
+            3534,
+            242,
+            2890,
+            2149,
+            1128,
+            910,
+            7951,
+            7039,
+            6166,
+            5175,
+            6319,
+            5760,
+            205,
+            2519,
+            7397,
+            5987,
+            3214,
+            5195,
+            3084,
+            6508,
+            6438,
+            6607,
+            6214,
+            6342,
+            1041,
+            4897,
+            840,
+            6591,
+            107,
+            6015,
+            8053,
+            3735,
+            6981,
+            3960,
+            7502,
+            6959,
+            7096,
+            7426,
+            6736,
+            1716,
+            3286,
+            6634,
+            7189,
+            2515,
+            6330,
+            3335,
+            5356,
+            7755,
+            3534,
+            1126,
+            7003,
+            8184,
+            3910,
+            2212,
+            1619,
+            5320,
+            4235,
+            3848,
+            3936,
+            4326,
+            2466,
+            1608,
+            8027,
+            6981,
+            1398,
+            2212,
+            4186,
+            2922,
+            5098,
+            4086,
+            5098,
+            6508,
+            2705,
+            4995,
+            1819,
+            3733,
+            7050,
+            4916,
+            1261,
+            6533,
+            2543,
+            4679,
+            5270,
+            4477,
+            867,
+            980,
+            6586,
+            6015,
+            2046,
+            3979,
+            3534,
+            5314,
+            8065,
+            286,
+            6638,
+            8065,
+            5847,
+            6388
+          ],
+          "eos": true,
+          "core": 299,
+          "horizon": 299,
+          "prompt_frames": 258,
+          "emitted_before": 11264,
+          "accepted": [
+            1,
+            4,
+            3,
+            3,
+            2,
+            6,
+            1,
+            1,
+            5,
+            5,
+            6,
+            7,
+            7,
+            5,
+            6,
+            5,
+            1,
+            7,
+            3,
+            5,
+            5,
+            3,
+            0,
+            7,
+            7,
+            6,
+            0,
+            1,
+            5,
+            1,
+            4,
+            2,
+            0,
+            4,
+            7,
+            1,
+            1
+          ],
+          "kv_head_length": 236
+        }
+      ],
+      "evidence": {
+        "file": "000003.pt",
+        "sha256": "8924a86c23315cf57138a0af3b11cfc0e4f4bd4cbb769e669ea7e8ac08389104",
+        "tensors": [
+          {
+            "name": "/inputs/0",
+            "shape": [
+              1,
+              80,
+              299
+            ],
+            "dtype": "torch.float32",
+            "sha256": "6de9eb2dd6cd3f6cc8c3cfd23ba7da35328d1dcfaf50ad8d9b1d03741698a280",
+            "elements": 23920
+          },
+          {
+            "name": "/output",
+            "shape": [
+              1,
+              1,
+              76544
+            ],
+            "dtype": "torch.float32",
+            "sha256": "40dfe3962aa63458549849794256a1098f50afe9fbc83cf9cf91681d9b829bb7",
+            "elements": 76544
+          }
+        ]
+      },
+      "graph_vs_direct": null,
+      "direct_graph_scope": "same callable and frozen inputs; no timing claim"
+    },
+    {
+      "index": 4,
+      "component": "cfm",
+      "chunk_index": 2,
+      "head": false,
+      "route": {
+        "kind": "eager",
+        "backend": "eager",
+        "candidate_backend": "tensorrt113",
+        "component": "cfm",
+        "batch": 1,
+        "frames": 765,
+        "engine_batch": 1,
+        "engine_frames": 310,
+        "plan": "/workspace/A_inspark_marlin/artifacts/trt113_cfm/plan_b1.json",
+        "sha256": "df6662ee84387f9982856a2e171e7a087dd829467b0f461d6e9f7bdd646420a0",
+        "reason": "x.shape",
+        "plugins": [],
+        "fallback": true,
+        "execution": "direct",
+        "graph_fallback": "tail_not_captured"
+      },
+      "members": [
+        {
+          "id": "sm89-q000",
+          "codes": [
+            6337,
+            942,
+            5691,
+            4586,
+            2046,
+            7500,
+            5683,
+            1283,
+            2439,
+            5169,
+            6435,
+            6933,
+            1224,
+            6040,
+            4250,
+            3942,
+            275,
+            6980,
+            232,
+            6540,
+            922,
+            6557,
+            2508,
+            822,
+            402,
+            6132,
+            97,
+            6311,
+            5878,
+            7123,
+            313,
+            6544,
+            5205,
+            4285,
+            280,
+            3096,
+            1893,
+            7158,
+            1721,
+            6343,
+            2875,
+            4467,
+            1152,
+            2837,
+            6924,
+            4876,
+            7238,
+            2328,
+            8026,
+            31,
+            8029,
+            2729,
+            3887,
+            5509,
+            8001,
+            1462,
+            6764,
+            7238,
+            6536,
+            3560,
+            2880,
+            5295,
+            936,
+            5468,
+            6842,
+            6237,
+            1046,
+            1447,
+            4467,
+            3005,
+            2220,
+            5111,
+            8029,
+            8111,
+            969,
+            76,
+            3534,
+            242,
+            2890,
+            2149,
+            1128,
+            910,
+            7951,
+            7039,
+            6166,
+            5175,
+            6319,
+            5760,
+            205,
+            2519,
+            7397,
+            5987,
+            3214,
+            5195,
+            3084,
+            6508,
+            6438,
+            6607,
+            6214,
+            6342,
+            1041,
+            4897,
+            840,
+            6591,
+            107,
+            6015,
+            8053,
+            3735,
+            6981,
+            3960,
+            7502,
+            6959,
+            7096,
+            7426,
+            6736,
+            1716,
+            3286,
+            6634,
+            7189,
+            2515,
+            6330,
+            3335,
+            5356,
+            7755,
+            3534,
+            1126,
+            7003,
+            8184,
+            3910,
+            2212,
+            1619,
+            5320,
+            4235,
+            3848,
+            3936,
+            4326,
+            2466,
+            1608,
+            8027,
+            6981,
+            1398,
+            2212,
+            4186,
+            2922,
+            5098,
+            4086,
+            5098,
+            6508,
+            2705,
+            4995,
+            1819,
+            3733,
+            7050,
+            4916,
+            1261,
+            6533,
+            2543,
+            4679,
+            5270,
+            4477,
+            867,
+            980,
+            6586,
+            6015,
+            2046,
+            3979,
+            3534,
+            5314,
+            8065,
+            286,
+            6638,
+            8065,
+            5847,
+            6388,
+            4961,
+            4338,
+            8133,
+            486,
+            7116,
+            7274,
+            1105,
+            6677,
+            4824,
+            4517,
+            4201,
+            961,
+            8026,
+            961,
+            1147,
+            1152,
+            4005,
+            8131,
+            2226,
+            1296,
+            3699,
+            2290,
+            2289,
+            6330,
+            8137,
+            7224,
+            2011,
+            3254,
+            6964,
+            3733,
+            4201,
+            5237,
+            1819,
+            1447,
+            5708,
+            3298,
+            1129,
+            596,
+            6126,
+            5098,
+            3303,
+            7255,
+            822,
+            4152,
+            1499,
+            5141,
+            327,
+            3767,
+            1847,
+            3686,
+            1938,
+            3923,
+            942,
+            5953,
+            7044,
+            1559,
+            8131,
+            829,
+            6981,
+            6393,
+            2935,
+            1569,
+            3310,
+            3534,
+            1838,
+            3887,
+            6965,
+            5415,
+            3855,
+            8026,
+            239,
+            1431,
+            3131,
+            7640,
+            2685,
+            6465,
+            8131,
+            3131,
+            4161,
+            6529,
+            5408,
+            4335,
+            587,
+            5956,
+            5633,
+            1328,
+            4201,
+            4029,
+            6803,
+            7064,
+            1451,
+            368,
+            3932,
+            2195,
+            1330,
+            1448,
+            3084,
+            1343,
+            5948,
+            6136,
+            7824,
+            3485,
+            1097,
+            1864,
+            2092,
+            2365,
+            6532,
+            4451,
+            7718,
+            1385,
+            286,
+            2830,
+            1707,
+            2938,
+            6946,
+            2413,
+            3904,
+            3419,
+            6049,
+            3534,
+            5031
+          ],
+          "eos": true,
+          "core": 507,
+          "horizon": 507,
+          "prompt_frames": 258,
+          "emitted_before": 76544,
+          "accepted": [
+            1,
+            4,
+            3,
+            3,
+            2,
+            6,
+            1,
+            1,
+            5,
+            5,
+            6,
+            7,
+            7,
+            5,
+            6,
+            5,
+            1,
+            7,
+            3,
+            5,
+            5,
+            3,
+            0,
+            7,
+            7,
+            6,
+            0,
+            1,
+            5,
+            1,
+            4,
+            2,
+            0,
+            4,
+            7,
+            1,
+            1,
+            2,
+            1,
+            5,
+            5,
+            3,
+            5,
+            1,
+            0,
+            2,
+            0,
+            0,
+            6,
+            4,
+            4,
+            3,
+            3,
+            7,
+            7,
+            7,
+            1,
+            6,
+            2,
+            5,
+            1,
+            2,
+            0,
+            5,
+            7
+          ],
+          "kv_head_length": 376
+        }
+      ],
+      "evidence": {
+        "file": "000004.pt",
+        "sha256": "b66214aeb8cf34928903818f4d426b05190d4e19b349d2cce45ce6a263a010b6",
+        "tensors": [
+          {
+            "name": "/inputs/0",
+            "shape": [
+              1,
+              80,
+              765
+            ],
+            "dtype": "torch.float32",
+            "sha256": "32b3d348227c4cd3b752dfc57e6a108077874428c279972c08671f67cf54ea13",
+            "elements": 61200
+          },
+          {
+            "name": "/inputs/1",
+            "shape": [
+              1,
+              80,
+              765
+            ],
+            "dtype": "torch.float32",
+            "sha256": "76a4c92cd908d5b2696465fc2f1b456f172d004374f1b089a161f6fe06297703",
+            "elements": 61200
+          },
+          {
+            "name": "/inputs/2",
+            "shape": [
+              1
+            ],
+            "dtype": "torch.int64",
+            "sha256": "d2851f4d6c7fa010eba9b33e500b6ef27555b4a0bf12384775ccadd6d67cd2c6",
+            "elements": 1
+          },
+          {
+            "name": "/inputs/3",
+            "shape": [
+              1,
+              192
+            ],
+            "dtype": "torch.float32",
+            "sha256": "d2697268fccf2535c928ac2e0ed51d5308e3ab6e9d5be6f50349dfdeb137b21e",
+            "elements": 192
+          },
+          {
+            "name": "/inputs/4",
+            "shape": [
+              1,
+              765,
+              512
+            ],
+            "dtype": "torch.float32",
+            "sha256": "f8879933cba368ca4b1ee845305c876ff7f41e68714ee9e7addb0c10692f68db",
+            "elements": 391680
+          },
+          {
+            "name": "/inputs/5",
+            "shape": [
+              1,
+              1,
+              765
+            ],
+            "dtype": "torch.bool",
+            "sha256": "f37df21cc06970c9277e0c891a37a80460940a90fd8c2ea4847f523d5a683276",
+            "elements": 765
+          },
+          {
+            "name": "/output",
+            "shape": [
+              1,
+              80,
+              765
+            ],
+            "dtype": "torch.float32",
+            "sha256": "ba3979fc57c8f39b764312d965143e196a4fb80cced0d6e4042a93665eccdc48",
+            "elements": 61200
+          }
+        ]
+      },
+      "graph_vs_direct": null,
+      "direct_graph_scope": "same callable and frozen inputs; no timing claim"
+    },
+    {
+      "index": 5,
+      "component": "vocoder",
+      "chunk_index": 2,
+      "head": false,
+      "route": {
+        "kind": "eager",
+        "backend": "eager",
+        "candidate_backend": "tensorrt113",
+        "component": "vocoder",
+        "batch": 1,
+        "frames": 507,
+        "engine_batch": 1,
+        "engine_frames": 52,
+        "plan": "/workspace/A_inspark_marlin/artifacts/trt113_vocoder/plan_b1_nativeconv_strong.json",
+        "sha256": "9e850e09634eb7dce0dafb053063fd5f1137bac285fa94210c0dc0d62fae0960",
+        "reason": "mel.shape",
+        "plugins": [
+          "inspark::alias_free",
+          "inspark::deconv1d"
+        ],
+        "fallback": true,
+        "execution": "direct",
+        "graph_fallback": "tail_not_captured"
+      },
+      "members": [
+        {
+          "id": "sm89-q000",
+          "codes": [
+            6337,
+            942,
+            5691,
+            4586,
+            2046,
+            7500,
+            5683,
+            1283,
+            2439,
+            5169,
+            6435,
+            6933,
+            1224,
+            6040,
+            4250,
+            3942,
+            275,
+            6980,
+            232,
+            6540,
+            922,
+            6557,
+            2508,
+            822,
+            402,
+            6132,
+            97,
+            6311,
+            5878,
+            7123,
+            313,
+            6544,
+            5205,
+            4285,
+            280,
+            3096,
+            1893,
+            7158,
+            1721,
+            6343,
+            2875,
+            4467,
+            1152,
+            2837,
+            6924,
+            4876,
+            7238,
+            2328,
+            8026,
+            31,
+            8029,
+            2729,
+            3887,
+            5509,
+            8001,
+            1462,
+            6764,
+            7238,
+            6536,
+            3560,
+            2880,
+            5295,
+            936,
+            5468,
+            6842,
+            6237,
+            1046,
+            1447,
+            4467,
+            3005,
+            2220,
+            5111,
+            8029,
+            8111,
+            969,
+            76,
+            3534,
+            242,
+            2890,
+            2149,
+            1128,
+            910,
+            7951,
+            7039,
+            6166,
+            5175,
+            6319,
+            5760,
+            205,
+            2519,
+            7397,
+            5987,
+            3214,
+            5195,
+            3084,
+            6508,
+            6438,
+            6607,
+            6214,
+            6342,
+            1041,
+            4897,
+            840,
+            6591,
+            107,
+            6015,
+            8053,
+            3735,
+            6981,
+            3960,
+            7502,
+            6959,
+            7096,
+            7426,
+            6736,
+            1716,
+            3286,
+            6634,
+            7189,
+            2515,
+            6330,
+            3335,
+            5356,
+            7755,
+            3534,
+            1126,
+            7003,
+            8184,
+            3910,
+            2212,
+            1619,
+            5320,
+            4235,
+            3848,
+            3936,
+            4326,
+            2466,
+            1608,
+            8027,
+            6981,
+            1398,
+            2212,
+            4186,
+            2922,
+            5098,
+            4086,
+            5098,
+            6508,
+            2705,
+            4995,
+            1819,
+            3733,
+            7050,
+            4916,
+            1261,
+            6533,
+            2543,
+            4679,
+            5270,
+            4477,
+            867,
+            980,
+            6586,
+            6015,
+            2046,
+            3979,
+            3534,
+            5314,
+            8065,
+            286,
+            6638,
+            8065,
+            5847,
+            6388,
+            4961,
+            4338,
+            8133,
+            486,
+            7116,
+            7274,
+            1105,
+            6677,
+            4824,
+            4517,
+            4201,
+            961,
+            8026,
+            961,
+            1147,
+            1152,
+            4005,
+            8131,
+            2226,
+            1296,
+            3699,
+            2290,
+            2289,
+            6330,
+            8137,
+            7224,
+            2011,
+            3254,
+            6964,
+            3733,
+            4201,
+            5237,
+            1819,
+            1447,
+            5708,
+            3298,
+            1129,
+            596,
+            6126,
+            5098,
+            3303,
+            7255,
+            822,
+            4152,
+            1499,
+            5141,
+            327,
+            3767,
+            1847,
+            3686,
+            1938,
+            3923,
+            942,
+            5953,
+            7044,
+            1559,
+            8131,
+            829,
+            6981,
+            6393,
+            2935,
+            1569,
+            3310,
+            3534,
+            1838,
+            3887,
+            6965,
+            5415,
+            3855,
+            8026,
+            239,
+            1431,
+            3131,
+            7640,
+            2685,
+            6465,
+            8131,
+            3131,
+            4161,
+            6529,
+            5408,
+            4335,
+            587,
+            5956,
+            5633,
+            1328,
+            4201,
+            4029,
+            6803,
+            7064,
+            1451,
+            368,
+            3932,
+            2195,
+            1330,
+            1448,
+            3084,
+            1343,
+            5948,
+            6136,
+            7824,
+            3485,
+            1097,
+            1864,
+            2092,
+            2365,
+            6532,
+            4451,
+            7718,
+            1385,
+            286,
+            2830,
+            1707,
+            2938,
+            6946,
+            2413,
+            3904,
+            3419,
+            6049,
+            3534,
+            5031
+          ],
+          "eos": true,
+          "core": 507,
+          "horizon": 507,
+          "prompt_frames": 258,
+          "emitted_before": 76544,
+          "accepted": [
+            1,
+            4,
+            3,
+            3,
+            2,
+            6,
+            1,
+            1,
+            5,
+            5,
+            6,
+            7,
+            7,
+            5,
+            6,
+            5,
+            1,
+            7,
+            3,
+            5,
+            5,
+            3,
+            0,
+            7,
+            7,
+            6,
+            0,
+            1,
+            5,
+            1,
+            4,
+            2,
+            0,
+            4,
+            7,
+            1,
+            1,
+            2,
+            1,
+            5,
+            5,
+            3,
+            5,
+            1,
+            0,
+            2,
+            0,
+            0,
+            6,
+            4,
+            4,
+            3,
+            3,
+            7,
+            7,
+            7,
+            1,
+            6,
+            2,
+            5,
+            1,
+            2,
+            0,
+            5,
+            7
+          ],
+          "kv_head_length": 376
+        }
+      ],
+      "evidence": {
+        "file": "000005.pt",
+        "sha256": "336cfe9f813dd165f05f7420aab4eba1c9088b0edbf9f7588dc1d60935f6944d",
+        "tensors": [
+          {
+            "name": "/inputs/0",
+            "shape": [
+              1,
+              80,
+              507
+            ],
+            "dtype": "torch.float32",
+            "sha256": "e6c0459c935a32b9373c24a9997215b38be27f244b7a13b391c5f53181c355bc",
+            "elements": 40560
+          },
+          {
+            "name": "/output",
+            "shape": [
+              1,
+              1,
+              129792
+            ],
+            "dtype": "torch.float32",
+            "sha256": "d9ce1da9be0aaefef1de8c530b59ccbddc44ba33f7fa5d16963d0488fd7855fb",
+            "elements": 129792
+          }
+        ]
+      },
+      "graph_vs_direct": null,
+      "direct_graph_scope": "same callable and frozen inputs; no timing claim"
+    }
+  ],
+  "requests": [
+    {
+      "id": "sm89-q000",
+      "complete": true,
+      "eos": true,
+      "codes": [
+        6337,
+        942,
+        5691,
+        4586,
+        2046,
+        7500,
+        5683,
+        1283,
+        2439,
+        5169,
+        6435,
+        6933,
+        1224,
+        6040,
+        4250,
+        3942,
+        275,
+        6980,
+        232,
+        6540,
+        922,
+        6557,
+        2508,
+        822,
+        402,
+        6132,
+        97,
+        6311,
+        5878,
+        7123,
+        313,
+        6544,
+        5205,
+        4285,
+        280,
+        3096,
+        1893,
+        7158,
+        1721,
+        6343,
+        2875,
+        4467,
+        1152,
+        2837,
+        6924,
+        4876,
+        7238,
+        2328,
+        8026,
+        31,
+        8029,
+        2729,
+        3887,
+        5509,
+        8001,
+        1462,
+        6764,
+        7238,
+        6536,
+        3560,
+        2880,
+        5295,
+        936,
+        5468,
+        6842,
+        6237,
+        1046,
+        1447,
+        4467,
+        3005,
+        2220,
+        5111,
+        8029,
+        8111,
+        969,
+        76,
+        3534,
+        242,
+        2890,
+        2149,
+        1128,
+        910,
+        7951,
+        7039,
+        6166,
+        5175,
+        6319,
+        5760,
+        205,
+        2519,
+        7397,
+        5987,
+        3214,
+        5195,
+        3084,
+        6508,
+        6438,
+        6607,
+        6214,
+        6342,
+        1041,
+        4897,
+        840,
+        6591,
+        107,
+        6015,
+        8053,
+        3735,
+        6981,
+        3960,
+        7502,
+        6959,
+        7096,
+        7426,
+        6736,
+        1716,
+        3286,
+        6634,
+        7189,
+        2515,
+        6330,
+        3335,
+        5356,
+        7755,
+        3534,
+        1126,
+        7003,
+        8184,
+        3910,
+        2212,
+        1619,
+        5320,
+        4235,
+        3848,
+        3936,
+        4326,
+        2466,
+        1608,
+        8027,
+        6981,
+        1398,
+        2212,
+        4186,
+        2922,
+        5098,
+        4086,
+        5098,
+        6508,
+        2705,
+        4995,
+        1819,
+        3733,
+        7050,
+        4916,
+        1261,
+        6533,
+        2543,
+        4679,
+        5270,
+        4477,
+        867,
+        980,
+        6586,
+        6015,
+        2046,
+        3979,
+        3534,
+        5314,
+        8065,
+        286,
+        6638,
+        8065,
+        5847,
+        6388,
+        4961,
+        4338,
+        8133,
+        486,
+        7116,
+        7274,
+        1105,
+        6677,
+        4824,
+        4517,
+        4201,
+        961,
+        8026,
+        961,
+        1147,
+        1152,
+        4005,
+        8131,
+        2226,
+        1296,
+        3699,
+        2290,
+        2289,
+        6330,
+        8137,
+        7224,
+        2011,
+        3254,
+        6964,
+        3733,
+        4201,
+        5237,
+        1819,
+        1447,
+        5708,
+        3298,
+        1129,
+        596,
+        6126,
+        5098,
+        3303,
+        7255,
+        822,
+        4152,
+        1499,
+        5141,
+        327,
+        3767,
+        1847,
+        3686,
+        1938,
+        3923,
+        942,
+        5953,
+        7044,
+        1559,
+        8131,
+        829,
+        6981,
+        6393,
+        2935,
+        1569,
+        3310,
+        3534,
+        1838,
+        3887,
+        6965,
+        5415,
+        3855,
+        8026,
+        239,
+        1431,
+        3131,
+        7640,
+        2685,
+        6465,
+        8131,
+        3131,
+        4161,
+        6529,
+        5408,
+        4335,
+        587,
+        5956,
+        5633,
+        1328,
+        4201,
+        4029,
+        6803,
+        7064,
+        1451,
+        368,
+        3932,
+        2195,
+        1330,
+        1448,
+        3084,
+        1343,
+        5948,
+        6136,
+        7824,
+        3485,
+        1097,
+        1864,
+        2092,
+        2365,
+        6532,
+        4451,
+        7718,
+        1385,
+        286,
+        2830,
+        1707,
+        2938,
+        6946,
+        2413,
+        3904,
+        3419,
+        6049,
+        3534,
+        5031
+      ],
+      "accepted": [
+        1,
+        4,
+        3,
+        3,
+        2,
+        6,
+        1,
+        1,
+        5,
+        5,
+        6,
+        7,
+        7,
+        5,
+        6,
+        5,
+        1,
+        7,
+        3,
+        5,
+        5,
+        3,
+        0,
+        7,
+        7,
+        6,
+        0,
+        1,
+        5,
+        1,
+        4,
+        2,
+        0,
+        4,
+        7,
+        1,
+        1,
+        2,
+        1,
+        5,
+        5,
+        3,
+        5,
+        1,
+        0,
+        2,
+        0,
+        0,
+        6,
+        4,
+        4,
+        3,
+        3,
+        7,
+        7,
+        7,
+        1,
+        6,
+        2,
+        5,
+        1,
+        2,
+        0,
+        5,
+        7
+      ],
+      "rounds": 65,
+      "wave": {
+        "role": "generated_audio",
+        "path": "/workspace/A_inspark_marlin/outputs/stage2/real_acoustic_b1/sm89-q000.wav",
+        "sha256": "87d9f8e9d515e8750ef25a6e26ba82dbf41de95e5670d62814577e2ad165da85",
+        "bytes": 259628
+      },
+      "samples": 129792,
+      "chunks": [
+        {
+          "index": 0,
+          "ready": 8865658.85002159,
+          "seconds": 0.5108390022675737,
+          "sample_start": 0,
+          "sample_end": 11264,
+          "crossfade": 0,
+          "eos": false,
+          "head_before_eos": true,
+          "cfm_batch": 1,
+          "vocoder_batch": 1
+        },
+        {
+          "index": 1,
+          "ready": 8865660.605929704,
+          "seconds": 2.9605442176870747,
+          "sample_start": 11264,
+          "sample_end": 76544,
+          "crossfade": 2048,
+          "eos": true,
+          "head_before_eos": false,
+          "cfm_batch": 1,
+          "vocoder_batch": 1
+        },
+        {
+          "index": 2,
+          "ready": 8865662.456782637,
+          "seconds": 2.414875283446712,
+          "sample_start": 76544,
+          "sample_end": 129792,
+          "crossfade": 0,
+          "eos": true,
+          "head_before_eos": false,
+          "cfm_batch": 1,
+          "vocoder_batch": 1
+        }
+      ]
+    }
+  ],
+  "cases": [
+    {
+      "source_line": 1213,
+      "text": "你今天穿这条裙子超好看！在哪买的？我也要冲！",
+      "emotion_label": "给我链接！现在！立刻！",
+      "emotion": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.99,
+        0.01
+      ],
+      "dominant_emotion": "surprise",
+      "dominant_index": 6,
+      "id": "sm89-q000",
+      "seed": 236950053,
+      "reference_audio": "/workspace/index-tts/data/audio/old/mingxiang_gao.wav"
+    }
+  ],
+  "corpus": {
+    "role": "corpus",
+    "path": "/workspace/A_inspark_marlin/inference/configs/sm89_quality_256.json",
+    "sha256": "1cd0faada10ebbced74a5848bb7b7aa379ca084f69a61913f5e97d6d67b9b2ad",
+    "bytes": 129822
+  },
+  "tolerances": {
+    "fp32": {
+      "atol": 1e-05,
+      "rtol": 0.0001
+    },
+    "bf16": {
+      "atol": 0.01,
+      "rtol": 0.01
+    }
+  },
+  "config": {
+    "weights": "/workspace/A_inspark_marlin/models",
+    "student": "/workspace/A_inspark_marlin/models/cfm_oracle500.pt",
+    "student_sha256": "635ab7025fbd4eaa999fcd3e964512df081d5c9cff093a59d383e050c70bcfca",
+    "cache": "/workspace/A_inspark_marlin/.cache",
+    "max_batch": 1,
+    "cpu_threads": 2,
+    "max_speech_tokens": 1500,
+    "max_text_tokens": 120,
+    "reference_seconds": 3,
+    "max_cached_voices": 16,
+    "target_tf32": false,
+    "rnn_tf32": false
+  },
+  "source": {
+    "git_sha": "34e0443b84103d52a52f753dfc6b7446b212f9c2",
+    "dirty": true,
+    "scope": [
+      "src",
+      "scripts",
+      "benchmarks",
+      "configs",
+      "pyproject.toml"
+    ],
+    "files": 331,
+    "source_sha256": "5bf6e0320176661a753cad7c5b11efe68c4e8db8e191b3aba7888dccce7385a5",
+    "dirty_fingerprint": "9ecdd1f1c3a990cce719810786f978f3c8f3c860f02ef5830c155548de29b705",
+    "snapshot": "local source files before TensorRT network construction"
+  },
+  "performance_claim": false,
+  "coverage": [
+    "CFM full output/masked/generated",
+    "Vocoder pre-clamp waveform",
+    "existing head graph versus direct",
+    "full-EOS codes and chunks"
+  ],
+  "not_covered": [
+    "AR internal tensors",
+    "latent and condition internal tensors",
+    "CFM estimator intermediate steps",
+    "crossfade arithmetic replay"
+  ],
+  "references": [
+    {
+      "role": "reference_audio",
+      "path": "/workspace/index-tts/data/audio/old/mingxiang_gao.wav",
+      "sha256": "fa482cdaed99bc3c14c5ee2af8d25363a66e7e8778891a6b37c3d60973873793",
+      "bytes": 1024044
+    }
+  ],
+  "model_provenance": {
+    "cfm": {
+      "schema": 1,
+      "status": "recorded_not_audited",
+      "component": "cfm",
+      "model_sources": [
+        {
+          "role": "s2mel_checkpoint",
+          "path": "/workspace/A_inspark_marlin/models/index_tts2/s2mel.pth",
+          "sha256": "aae1bb12017cbb47e7a5ce537fc82f40b6b1deb71acdb9b8f25686f32714b636",
+          "bytes": 1202198223
+        },
+        {
+          "role": "student_checkpoint",
+          "path": "/workspace/A_inspark_marlin/models/cfm_oracle500.pt",
+          "sha256": "635ab7025fbd4eaa999fcd3e964512df081d5c9cff093a59d383e050c70bcfca",
+          "bytes": 397177451
+        },
+        {
+          "role": "s2mel_config",
+          "path": "/workspace/A_inspark_marlin/models/index_tts2/config.yaml",
+          "sha256": "ea9c2815ecc3874577c7ac158b97248c027250e5b05972fbbb1216b6d6539081",
+          "bytes": 2882
+        }
+      ],
+      "configuration": [
+        {
+          "role": "runtime_config",
+          "path": "/workspace/A_inspark_marlin/inference/configs/runtime_reference.yaml",
+          "sha256": "68893e67fe29392acaa5f40ceef955f33e4b19bcde06bc86f170abfa17bc9d52",
+          "bytes": 313
+        }
+      ],
+      "source": {
+        "git_sha": "34e0443b84103d52a52f753dfc6b7446b212f9c2",
+        "dirty": true,
+        "scope": [
+          "src",
+          "scripts",
+          "benchmarks",
+          "configs",
+          "pyproject.toml"
+        ],
+        "files": 331,
+        "source_sha256": "5bf6e0320176661a753cad7c5b11efe68c4e8db8e191b3aba7888dccce7385a5",
+        "dirty_fingerprint": "9ecdd1f1c3a990cce719810786f978f3c8f3c860f02ef5830c155548de29b705",
+        "snapshot": "local source files before TensorRT network construction"
+      },
+      "software": {
+        "torch": "2.8.0+cu128",
+        "cuda": "12.8",
+        "triton": "3.5.0",
+        "numpy": "2.2.6",
+        "tensorrt": null
+      },
+      "hardware": {
+        "gpu_name": "NVIDIA GeForce RTX 4090",
+        "sm": 89
+      }
+    },
+    "vocoder": {
+      "schema": 1,
+      "status": "recorded_not_audited",
+      "component": "vocoder",
+      "model_sources": [
+        {
+          "role": "vocoder_checkpoint",
+          "path": "/workspace/A_inspark_marlin/models/index_tts2/hf_cache/bigvgan/bigvgan_generator.pt",
+          "sha256": "e95ba25972d3de0628d99cd156e9315a9c018899bf739988959ebe3544080ced",
+          "bytes": 449228171
+        },
+        {
+          "role": "vocoder_config",
+          "path": "/workspace/A_inspark_marlin/models/index_tts2/hf_cache/bigvgan/config.json",
+          "sha256": "88a1f47acf747db0b21e97a389d838566147f7a5464583ff5c8d819d870f03ee",
+          "bytes": 1405
+        }
+      ],
+      "configuration": [
+        {
+          "role": "runtime_config",
+          "path": "/workspace/A_inspark_marlin/inference/configs/runtime_reference.yaml",
+          "sha256": "68893e67fe29392acaa5f40ceef955f33e4b19bcde06bc86f170abfa17bc9d52",
+          "bytes": 313
+        }
+      ],
+      "source": {
+        "git_sha": "34e0443b84103d52a52f753dfc6b7446b212f9c2",
+        "dirty": true,
+        "scope": [
+          "src",
+          "scripts",
+          "benchmarks",
+          "configs",
+          "pyproject.toml"
+        ],
+        "files": 331,
+        "source_sha256": "5bf6e0320176661a753cad7c5b11efe68c4e8db8e191b3aba7888dccce7385a5",
+        "dirty_fingerprint": "9ecdd1f1c3a990cce719810786f978f3c8f3c860f02ef5830c155548de29b705",
+        "snapshot": "local source files before TensorRT network construction"
+      },
+      "software": {
+        "torch": "2.8.0+cu128",
+        "cuda": "12.8",
+        "triton": "3.5.0",
+        "numpy": "2.2.6",
+        "tensorrt": null
+      },
+      "hardware": {
+        "gpu_name": "NVIDIA GeForce RTX 4090",
+        "sm": 89
+      }
+    }
+  },
+  "deployment": {
+    "requested": {
+      "schema": 1,
+      "status": "sm89_bf16_trt113_target_draft_cfm_vocoder_b1_experimental",
+      "precision": "bf16",
+      "components": [
+        "target",
+        "draft",
+        "cfm",
+        "vocoder"
+      ],
+      "convolutions": true,
+      "rnn_precision": "bf16",
+      "target_graphs": true,
+      "draft_graphs": true,
+      "proposal_graphs": true,
+      "prefix_graphs": true,
+      "head_graphs": true,
+      "slot_draft": true,
+      "context_graphs": true,
+      "context_scatter": true,
+      "device_accept_plan": true,
+      "device_residual": true,
+      "device_round_b8": true,
+      "overlap_acoustics": false,
+      "fused_acceptance": true,
+      "tail_graphs": false,
+      "head_batch_barrier": true,
+      "acoustic_kernels": "alias",
+      "acoustic_plan": null,
+      "tensorrt113_target_full_plan": "/workspace/A_inspark_marlin/artifacts/trt113_target_full/plan_b1_audited_source.json",
+      "tensorrt113_draft_full_plan": "/workspace/A_inspark_marlin/artifacts/trt113_draft_full/plan_b1_audited_source.json",
+      "tensorrt113_cfm_plan": "/workspace/A_inspark_marlin/artifacts/trt113_cfm/plan_b1.json",
+      "tensorrt113_vocoder_plan": "/workspace/A_inspark_marlin/artifacts/trt113_vocoder/plan_b1_nativeconv_strong.json"
+    },
+    "resolved_precision": "bf16",
+    "resolved_rnn_precision": "bf16",
+    "sm": 89,
+    "hardware_validation": "Profile-specific numerical and performance evidence required; runtime identity is not an audit pass",
+    "hardware": {
+      "name": "NVIDIA GeForce RTX 4090",
+      "sm": 89,
+      "sms": 128
+    },
+    "online_learning": false,
+    "tail_graphs": false,
+    "precision": {
+      "mode": "bf16",
+      "components": [
+        "target",
+        "draft",
+        "cfm",
+        "vocoder"
+      ],
+      "matrices": [
+        {
+          "path": "target.blocks.0.attn.c_attn",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            3840
+          ]
+        },
+        {
+          "path": "target.blocks.0.attn.c_proj",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            1280
+          ]
+        },
+        {
+          "path": "target.blocks.0.mlp.c_fc",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            5120
+          ]
+        },
+        {
+          "path": "target.blocks.0.mlp.c_proj",
+          "precision": "bf16",
+          "original_shape": [
+            5120,
+            1280
+          ]
+        },
+        {
+          "path": "target.blocks.1.attn.c_attn",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            3840
+          ]
+        },
+        {
+          "path": "target.blocks.1.attn.c_proj",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            1280
+          ]
+        },
+        {
+          "path": "target.blocks.1.mlp.c_fc",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            5120
+          ]
+        },
+        {
+          "path": "target.blocks.1.mlp.c_proj",
+          "precision": "bf16",
+          "original_shape": [
+            5120,
+            1280
+          ]
+        },
+        {
+          "path": "target.blocks.2.attn.c_attn",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            3840
+          ]
+        },
+        {
+          "path": "target.blocks.2.attn.c_proj",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            1280
+          ]
+        },
+        {
+          "path": "target.blocks.2.mlp.c_fc",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            5120
+          ]
+        },
+        {
+          "path": "target.blocks.2.mlp.c_proj",
+          "precision": "bf16",
+          "original_shape": [
+            5120,
+            1280
+          ]
+        },
+        {
+          "path": "target.blocks.3.attn.c_attn",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            3840
+          ]
+        },
+        {
+          "path": "target.blocks.3.attn.c_proj",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            1280
+          ]
+        },
+        {
+          "path": "target.blocks.3.mlp.c_fc",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            5120
+          ]
+        },
+        {
+          "path": "target.blocks.3.mlp.c_proj",
+          "precision": "bf16",
+          "original_shape": [
+            5120,
+            1280
+          ]
+        },
+        {
+          "path": "target.blocks.4.attn.c_attn",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            3840
+          ]
+        },
+        {
+          "path": "target.blocks.4.attn.c_proj",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            1280
+          ]
+        },
+        {
+          "path": "target.blocks.4.mlp.c_fc",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            5120
+          ]
+        },
+        {
+          "path": "target.blocks.4.mlp.c_proj",
+          "precision": "bf16",
+          "original_shape": [
+            5120,
+            1280
+          ]
+        },
+        {
+          "path": "target.blocks.5.attn.c_attn",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            3840
+          ]
+        },
+        {
+          "path": "target.blocks.5.attn.c_proj",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            1280
+          ]
+        },
+        {
+          "path": "target.blocks.5.mlp.c_fc",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            5120
+          ]
+        },
+        {
+          "path": "target.blocks.5.mlp.c_proj",
+          "precision": "bf16",
+          "original_shape": [
+            5120,
+            1280
+          ]
+        },
+        {
+          "path": "target.blocks.6.attn.c_attn",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            3840
+          ]
+        },
+        {
+          "path": "target.blocks.6.attn.c_proj",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            1280
+          ]
+        },
+        {
+          "path": "target.blocks.6.mlp.c_fc",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            5120
+          ]
+        },
+        {
+          "path": "target.blocks.6.mlp.c_proj",
+          "precision": "bf16",
+          "original_shape": [
+            5120,
+            1280
+          ]
+        },
+        {
+          "path": "target.blocks.7.attn.c_attn",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            3840
+          ]
+        },
+        {
+          "path": "target.blocks.7.attn.c_proj",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            1280
+          ]
+        },
+        {
+          "path": "target.blocks.7.mlp.c_fc",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            5120
+          ]
+        },
+        {
+          "path": "target.blocks.7.mlp.c_proj",
+          "precision": "bf16",
+          "original_shape": [
+            5120,
+            1280
+          ]
+        },
+        {
+          "path": "target.blocks.8.attn.c_attn",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            3840
+          ]
+        },
+        {
+          "path": "target.blocks.8.attn.c_proj",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            1280
+          ]
+        },
+        {
+          "path": "target.blocks.8.mlp.c_fc",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            5120
+          ]
+        },
+        {
+          "path": "target.blocks.8.mlp.c_proj",
+          "precision": "bf16",
+          "original_shape": [
+            5120,
+            1280
+          ]
+        },
+        {
+          "path": "target.blocks.9.attn.c_attn",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            3840
+          ]
+        },
+        {
+          "path": "target.blocks.9.attn.c_proj",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            1280
+          ]
+        },
+        {
+          "path": "target.blocks.9.mlp.c_fc",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            5120
+          ]
+        },
+        {
+          "path": "target.blocks.9.mlp.c_proj",
+          "precision": "bf16",
+          "original_shape": [
+            5120,
+            1280
+          ]
+        },
+        {
+          "path": "target.blocks.10.attn.c_attn",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            3840
+          ]
+        },
+        {
+          "path": "target.blocks.10.attn.c_proj",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            1280
+          ]
+        },
+        {
+          "path": "target.blocks.10.mlp.c_fc",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            5120
+          ]
+        },
+        {
+          "path": "target.blocks.10.mlp.c_proj",
+          "precision": "bf16",
+          "original_shape": [
+            5120,
+            1280
+          ]
+        },
+        {
+          "path": "target.blocks.11.attn.c_attn",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            3840
+          ]
+        },
+        {
+          "path": "target.blocks.11.attn.c_proj",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            1280
+          ]
+        },
+        {
+          "path": "target.blocks.11.mlp.c_fc",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            5120
+          ]
+        },
+        {
+          "path": "target.blocks.11.mlp.c_proj",
+          "precision": "bf16",
+          "original_shape": [
+            5120,
+            1280
+          ]
+        },
+        {
+          "path": "target.blocks.12.attn.c_attn",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            3840
+          ]
+        },
+        {
+          "path": "target.blocks.12.attn.c_proj",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            1280
+          ]
+        },
+        {
+          "path": "target.blocks.12.mlp.c_fc",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            5120
+          ]
+        },
+        {
+          "path": "target.blocks.12.mlp.c_proj",
+          "precision": "bf16",
+          "original_shape": [
+            5120,
+            1280
+          ]
+        },
+        {
+          "path": "target.blocks.13.attn.c_attn",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            3840
+          ]
+        },
+        {
+          "path": "target.blocks.13.attn.c_proj",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            1280
+          ]
+        },
+        {
+          "path": "target.blocks.13.mlp.c_fc",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            5120
+          ]
+        },
+        {
+          "path": "target.blocks.13.mlp.c_proj",
+          "precision": "bf16",
+          "original_shape": [
+            5120,
+            1280
+          ]
+        },
+        {
+          "path": "target.blocks.14.attn.c_attn",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            3840
+          ]
+        },
+        {
+          "path": "target.blocks.14.attn.c_proj",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            1280
+          ]
+        },
+        {
+          "path": "target.blocks.14.mlp.c_fc",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            5120
+          ]
+        },
+        {
+          "path": "target.blocks.14.mlp.c_proj",
+          "precision": "bf16",
+          "original_shape": [
+            5120,
+            1280
+          ]
+        },
+        {
+          "path": "target.blocks.15.attn.c_attn",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            3840
+          ]
+        },
+        {
+          "path": "target.blocks.15.attn.c_proj",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            1280
+          ]
+        },
+        {
+          "path": "target.blocks.15.mlp.c_fc",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            5120
+          ]
+        },
+        {
+          "path": "target.blocks.15.mlp.c_proj",
+          "precision": "bf16",
+          "original_shape": [
+            5120,
+            1280
+          ]
+        },
+        {
+          "path": "target.blocks.16.attn.c_attn",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            3840
+          ]
+        },
+        {
+          "path": "target.blocks.16.attn.c_proj",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            1280
+          ]
+        },
+        {
+          "path": "target.blocks.16.mlp.c_fc",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            5120
+          ]
+        },
+        {
+          "path": "target.blocks.16.mlp.c_proj",
+          "precision": "bf16",
+          "original_shape": [
+            5120,
+            1280
+          ]
+        },
+        {
+          "path": "target.blocks.17.attn.c_attn",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            3840
+          ]
+        },
+        {
+          "path": "target.blocks.17.attn.c_proj",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            1280
+          ]
+        },
+        {
+          "path": "target.blocks.17.mlp.c_fc",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            5120
+          ]
+        },
+        {
+          "path": "target.blocks.17.mlp.c_proj",
+          "precision": "bf16",
+          "original_shape": [
+            5120,
+            1280
+          ]
+        },
+        {
+          "path": "target.blocks.18.attn.c_attn",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            3840
+          ]
+        },
+        {
+          "path": "target.blocks.18.attn.c_proj",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            1280
+          ]
+        },
+        {
+          "path": "target.blocks.18.mlp.c_fc",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            5120
+          ]
+        },
+        {
+          "path": "target.blocks.18.mlp.c_proj",
+          "precision": "bf16",
+          "original_shape": [
+            5120,
+            1280
+          ]
+        },
+        {
+          "path": "target.blocks.19.attn.c_attn",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            3840
+          ]
+        },
+        {
+          "path": "target.blocks.19.attn.c_proj",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            1280
+          ]
+        },
+        {
+          "path": "target.blocks.19.mlp.c_fc",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            5120
+          ]
+        },
+        {
+          "path": "target.blocks.19.mlp.c_proj",
+          "precision": "bf16",
+          "original_shape": [
+            5120,
+            1280
+          ]
+        },
+        {
+          "path": "target.blocks.20.attn.c_attn",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            3840
+          ]
+        },
+        {
+          "path": "target.blocks.20.attn.c_proj",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            1280
+          ]
+        },
+        {
+          "path": "target.blocks.20.mlp.c_fc",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            5120
+          ]
+        },
+        {
+          "path": "target.blocks.20.mlp.c_proj",
+          "precision": "bf16",
+          "original_shape": [
+            5120,
+            1280
+          ]
+        },
+        {
+          "path": "target.blocks.21.attn.c_attn",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            3840
+          ]
+        },
+        {
+          "path": "target.blocks.21.attn.c_proj",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            1280
+          ]
+        },
+        {
+          "path": "target.blocks.21.mlp.c_fc",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            5120
+          ]
+        },
+        {
+          "path": "target.blocks.21.mlp.c_proj",
+          "precision": "bf16",
+          "original_shape": [
+            5120,
+            1280
+          ]
+        },
+        {
+          "path": "target.blocks.22.attn.c_attn",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            3840
+          ]
+        },
+        {
+          "path": "target.blocks.22.attn.c_proj",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            1280
+          ]
+        },
+        {
+          "path": "target.blocks.22.mlp.c_fc",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            5120
+          ]
+        },
+        {
+          "path": "target.blocks.22.mlp.c_proj",
+          "precision": "bf16",
+          "original_shape": [
+            5120,
+            1280
+          ]
+        },
+        {
+          "path": "target.blocks.23.attn.c_attn",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            3840
+          ]
+        },
+        {
+          "path": "target.blocks.23.attn.c_proj",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            1280
+          ]
+        },
+        {
+          "path": "target.blocks.23.mlp.c_fc",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            5120
+          ]
+        },
+        {
+          "path": "target.blocks.23.mlp.c_proj",
+          "precision": "bf16",
+          "original_shape": [
+            5120,
+            1280
+          ]
+        },
+        {
+          "path": "draft.blocks.0.q_proj",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            1280
+          ]
+        },
+        {
+          "path": "draft.blocks.0.k_proj",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            1280
+          ]
+        },
+        {
+          "path": "draft.blocks.0.v_proj",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            1280
+          ]
+        },
+        {
+          "path": "draft.blocks.0.o_proj",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            1280
+          ]
+        },
+        {
+          "path": "draft.blocks.0.mlp.0",
+          "precision": "bf16",
+          "original_shape": [
+            5120,
+            1280
+          ]
+        },
+        {
+          "path": "draft.blocks.0.mlp.2",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            5120
+          ]
+        },
+        {
+          "path": "draft.blocks.1.q_proj",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            1280
+          ]
+        },
+        {
+          "path": "draft.blocks.1.k_proj",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            1280
+          ]
+        },
+        {
+          "path": "draft.blocks.1.v_proj",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            1280
+          ]
+        },
+        {
+          "path": "draft.blocks.1.o_proj",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            1280
+          ]
+        },
+        {
+          "path": "draft.blocks.1.mlp.0",
+          "precision": "bf16",
+          "original_shape": [
+            5120,
+            1280
+          ]
+        },
+        {
+          "path": "draft.blocks.1.mlp.2",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            5120
+          ]
+        },
+        {
+          "path": "draft.blocks.2.q_proj",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            1280
+          ]
+        },
+        {
+          "path": "draft.blocks.2.k_proj",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            1280
+          ]
+        },
+        {
+          "path": "draft.blocks.2.v_proj",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            1280
+          ]
+        },
+        {
+          "path": "draft.blocks.2.o_proj",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            1280
+          ]
+        },
+        {
+          "path": "draft.blocks.2.mlp.0",
+          "precision": "bf16",
+          "original_shape": [
+            5120,
+            1280
+          ]
+        },
+        {
+          "path": "draft.blocks.2.mlp.2",
+          "precision": "bf16",
+          "original_shape": [
+            1280,
+            5120
+          ]
+        },
+        {
+          "path": "cfm.blocks.0.attention.wqkv",
+          "precision": "bf16",
+          "original_shape": [
+            1536,
+            512
+          ]
+        },
+        {
+          "path": "cfm.blocks.0.attention.wo",
+          "precision": "bf16",
+          "original_shape": [
+            512,
+            512
+          ]
+        },
+        {
+          "path": "cfm.blocks.0.feed_forward.w1",
+          "precision": "bf16",
+          "original_shape": [
+            1536,
+            512
+          ]
+        },
+        {
+          "path": "cfm.blocks.0.feed_forward.w3",
+          "precision": "bf16",
+          "original_shape": [
+            1536,
+            512
+          ]
+        },
+        {
+          "path": "cfm.blocks.0.feed_forward.w2",
+          "precision": "bf16",
+          "original_shape": [
+            512,
+            1536
+          ]
+        },
+        {
+          "path": "cfm.blocks.0.skip_in_linear",
+          "precision": "bf16",
+          "original_shape": [
+            512,
+            1024
+          ]
+        },
+        {
+          "path": "cfm.blocks.1.attention.wqkv",
+          "precision": "bf16",
+          "original_shape": [
+            1536,
+            512
+          ]
+        },
+        {
+          "path": "cfm.blocks.1.attention.wo",
+          "precision": "bf16",
+          "original_shape": [
+            512,
+            512
+          ]
+        },
+        {
+          "path": "cfm.blocks.1.feed_forward.w1",
+          "precision": "bf16",
+          "original_shape": [
+            1536,
+            512
+          ]
+        },
+        {
+          "path": "cfm.blocks.1.feed_forward.w3",
+          "precision": "bf16",
+          "original_shape": [
+            1536,
+            512
+          ]
+        },
+        {
+          "path": "cfm.blocks.1.feed_forward.w2",
+          "precision": "bf16",
+          "original_shape": [
+            512,
+            1536
+          ]
+        },
+        {
+          "path": "cfm.blocks.1.skip_in_linear",
+          "precision": "bf16",
+          "original_shape": [
+            512,
+            1024
+          ]
+        },
+        {
+          "path": "cfm.blocks.2.attention.wqkv",
+          "precision": "bf16",
+          "original_shape": [
+            1536,
+            512
+          ]
+        },
+        {
+          "path": "cfm.blocks.2.attention.wo",
+          "precision": "bf16",
+          "original_shape": [
+            512,
+            512
+          ]
+        },
+        {
+          "path": "cfm.blocks.2.feed_forward.w1",
+          "precision": "bf16",
+          "original_shape": [
+            1536,
+            512
+          ]
+        },
+        {
+          "path": "cfm.blocks.2.feed_forward.w3",
+          "precision": "bf16",
+          "original_shape": [
+            1536,
+            512
+          ]
+        },
+        {
+          "path": "cfm.blocks.2.feed_forward.w2",
+          "precision": "bf16",
+          "original_shape": [
+            512,
+            1536
+          ]
+        },
+        {
+          "path": "cfm.blocks.2.skip_in_linear",
+          "precision": "bf16",
+          "original_shape": [
+            512,
+            1024
+          ]
+        },
+        {
+          "path": "cfm.blocks.3.attention.wqkv",
+          "precision": "bf16",
+          "original_shape": [
+            1536,
+            512
+          ]
+        },
+        {
+          "path": "cfm.blocks.3.attention.wo",
+          "precision": "bf16",
+          "original_shape": [
+            512,
+            512
+          ]
+        },
+        {
+          "path": "cfm.blocks.3.feed_forward.w1",
+          "precision": "bf16",
+          "original_shape": [
+            1536,
+            512
+          ]
+        },
+        {
+          "path": "cfm.blocks.3.feed_forward.w3",
+          "precision": "bf16",
+          "original_shape": [
+            1536,
+            512
+          ]
+        },
+        {
+          "path": "cfm.blocks.3.feed_forward.w2",
+          "precision": "bf16",
+          "original_shape": [
+            512,
+            1536
+          ]
+        },
+        {
+          "path": "cfm.blocks.3.skip_in_linear",
+          "precision": "bf16",
+          "original_shape": [
+            512,
+            1024
+          ]
+        },
+        {
+          "path": "cfm.blocks.4.attention.wqkv",
+          "precision": "bf16",
+          "original_shape": [
+            1536,
+            512
+          ]
+        },
+        {
+          "path": "cfm.blocks.4.attention.wo",
+          "precision": "bf16",
+          "original_shape": [
+            512,
+            512
+          ]
+        },
+        {
+          "path": "cfm.blocks.4.feed_forward.w1",
+          "precision": "bf16",
+          "original_shape": [
+            1536,
+            512
+          ]
+        },
+        {
+          "path": "cfm.blocks.4.feed_forward.w3",
+          "precision": "bf16",
+          "original_shape": [
+            1536,
+            512
+          ]
+        },
+        {
+          "path": "cfm.blocks.4.feed_forward.w2",
+          "precision": "bf16",
+          "original_shape": [
+            512,
+            1536
+          ]
+        },
+        {
+          "path": "cfm.blocks.4.skip_in_linear",
+          "precision": "bf16",
+          "original_shape": [
+            512,
+            1024
+          ]
+        },
+        {
+          "path": "cfm.blocks.5.attention.wqkv",
+          "precision": "bf16",
+          "original_shape": [
+            1536,
+            512
+          ]
+        },
+        {
+          "path": "cfm.blocks.5.attention.wo",
+          "precision": "bf16",
+          "original_shape": [
+            512,
+            512
+          ]
+        },
+        {
+          "path": "cfm.blocks.5.feed_forward.w1",
+          "precision": "bf16",
+          "original_shape": [
+            1536,
+            512
+          ]
+        },
+        {
+          "path": "cfm.blocks.5.feed_forward.w3",
+          "precision": "bf16",
+          "original_shape": [
+            1536,
+            512
+          ]
+        },
+        {
+          "path": "cfm.blocks.5.feed_forward.w2",
+          "precision": "bf16",
+          "original_shape": [
+            512,
+            1536
+          ]
+        },
+        {
+          "path": "cfm.blocks.5.skip_in_linear",
+          "precision": "bf16",
+          "original_shape": [
+            512,
+            1024
+          ]
+        },
+        {
+          "path": "cfm.blocks.6.attention.wqkv",
+          "precision": "bf16",
+          "original_shape": [
+            1536,
+            512
+          ]
+        },
+        {
+          "path": "cfm.blocks.6.attention.wo",
+          "precision": "bf16",
+          "original_shape": [
+            512,
+            512
+          ]
+        },
+        {
+          "path": "cfm.blocks.6.feed_forward.w1",
+          "precision": "bf16",
+          "original_shape": [
+            1536,
+            512
+          ]
+        },
+        {
+          "path": "cfm.blocks.6.feed_forward.w3",
+          "precision": "bf16",
+          "original_shape": [
+            1536,
+            512
+          ]
+        },
+        {
+          "path": "cfm.blocks.6.feed_forward.w2",
+          "precision": "bf16",
+          "original_shape": [
+            512,
+            1536
+          ]
+        },
+        {
+          "path": "cfm.blocks.6.skip_in_linear",
+          "precision": "bf16",
+          "original_shape": [
+            512,
+            1024
+          ]
+        },
+        {
+          "path": "cfm.blocks.7.attention.wqkv",
+          "precision": "bf16",
+          "original_shape": [
+            1536,
+            512
+          ]
+        },
+        {
+          "path": "cfm.blocks.7.attention.wo",
+          "precision": "bf16",
+          "original_shape": [
+            512,
+            512
+          ]
+        },
+        {
+          "path": "cfm.blocks.7.feed_forward.w1",
+          "precision": "bf16",
+          "original_shape": [
+            1536,
+            512
+          ]
+        },
+        {
+          "path": "cfm.blocks.7.feed_forward.w3",
+          "precision": "bf16",
+          "original_shape": [
+            1536,
+            512
+          ]
+        },
+        {
+          "path": "cfm.blocks.7.feed_forward.w2",
+          "precision": "bf16",
+          "original_shape": [
+            512,
+            1536
+          ]
+        },
+        {
+          "path": "cfm.blocks.7.skip_in_linear",
+          "precision": "bf16",
+          "original_shape": [
+            512,
+            1024
+          ]
+        },
+        {
+          "path": "cfm.blocks.8.attention.wqkv",
+          "precision": "bf16",
+          "original_shape": [
+            1536,
+            512
+          ]
+        },
+        {
+          "path": "cfm.blocks.8.attention.wo",
+          "precision": "bf16",
+          "original_shape": [
+            512,
+            512
+          ]
+        },
+        {
+          "path": "cfm.blocks.8.feed_forward.w1",
+          "precision": "bf16",
+          "original_shape": [
+            1536,
+            512
+          ]
+        },
+        {
+          "path": "cfm.blocks.8.feed_forward.w3",
+          "precision": "bf16",
+          "original_shape": [
+            1536,
+            512
+          ]
+        },
+        {
+          "path": "cfm.blocks.8.feed_forward.w2",
+          "precision": "bf16",
+          "original_shape": [
+            512,
+            1536
+          ]
+        },
+        {
+          "path": "cfm.blocks.8.skip_in_linear",
+          "precision": "bf16",
+          "original_shape": [
+            512,
+            1024
+          ]
+        },
+        {
+          "path": "cfm.blocks.9.attention.wqkv",
+          "precision": "bf16",
+          "original_shape": [
+            1536,
+            512
+          ]
+        },
+        {
+          "path": "cfm.blocks.9.attention.wo",
+          "precision": "bf16",
+          "original_shape": [
+            512,
+            512
+          ]
+        },
+        {
+          "path": "cfm.blocks.9.feed_forward.w1",
+          "precision": "bf16",
+          "original_shape": [
+            1536,
+            512
+          ]
+        },
+        {
+          "path": "cfm.blocks.9.feed_forward.w3",
+          "precision": "bf16",
+          "original_shape": [
+            1536,
+            512
+          ]
+        },
+        {
+          "path": "cfm.blocks.9.feed_forward.w2",
+          "precision": "bf16",
+          "original_shape": [
+            512,
+            1536
+          ]
+        },
+        {
+          "path": "cfm.blocks.9.skip_in_linear",
+          "precision": "bf16",
+          "original_shape": [
+            512,
+            1024
+          ]
+        },
+        {
+          "path": "cfm.blocks.10.attention.wqkv",
+          "precision": "bf16",
+          "original_shape": [
+            1536,
+            512
+          ]
+        },
+        {
+          "path": "cfm.blocks.10.attention.wo",
+          "precision": "bf16",
+          "original_shape": [
+            512,
+            512
+          ]
+        },
+        {
+          "path": "cfm.blocks.10.feed_forward.w1",
+          "precision": "bf16",
+          "original_shape": [
+            1536,
+            512
+          ]
+        },
+        {
+          "path": "cfm.blocks.10.feed_forward.w3",
+          "precision": "bf16",
+          "original_shape": [
+            1536,
+            512
+          ]
+        },
+        {
+          "path": "cfm.blocks.10.feed_forward.w2",
+          "precision": "bf16",
+          "original_shape": [
+            512,
+            1536
+          ]
+        },
+        {
+          "path": "cfm.blocks.10.skip_in_linear",
+          "precision": "bf16",
+          "original_shape": [
+            512,
+            1024
+          ]
+        },
+        {
+          "path": "cfm.blocks.11.attention.wqkv",
+          "precision": "bf16",
+          "original_shape": [
+            1536,
+            512
+          ]
+        },
+        {
+          "path": "cfm.blocks.11.attention.wo",
+          "precision": "bf16",
+          "original_shape": [
+            512,
+            512
+          ]
+        },
+        {
+          "path": "cfm.blocks.11.feed_forward.w1",
+          "precision": "bf16",
+          "original_shape": [
+            1536,
+            512
+          ]
+        },
+        {
+          "path": "cfm.blocks.11.feed_forward.w3",
+          "precision": "bf16",
+          "original_shape": [
+            1536,
+            512
+          ]
+        },
+        {
+          "path": "cfm.blocks.11.feed_forward.w2",
+          "precision": "bf16",
+          "original_shape": [
+            512,
+            1536
+          ]
+        },
+        {
+          "path": "cfm.blocks.11.skip_in_linear",
+          "precision": "bf16",
+          "original_shape": [
+            512,
+            1024
+          ]
+        },
+        {
+          "path": "cfm.blocks.12.attention.wqkv",
+          "precision": "bf16",
+          "original_shape": [
+            1536,
+            512
+          ]
+        },
+        {
+          "path": "cfm.blocks.12.attention.wo",
+          "precision": "bf16",
+          "original_shape": [
+            512,
+            512
+          ]
+        },
+        {
+          "path": "cfm.blocks.12.feed_forward.w1",
+          "precision": "bf16",
+          "original_shape": [
+            1536,
+            512
+          ]
+        },
+        {
+          "path": "cfm.blocks.12.feed_forward.w3",
+          "precision": "bf16",
+          "original_shape": [
+            1536,
+            512
+          ]
+        },
+        {
+          "path": "cfm.blocks.12.feed_forward.w2",
+          "precision": "bf16",
+          "original_shape": [
+            512,
+            1536
+          ]
+        },
+        {
+          "path": "cfm.blocks.12.skip_in_linear",
+          "precision": "bf16",
+          "original_shape": [
+            512,
+            1024
+          ]
+        },
+        {
+          "path": "cfm.wavenet.in_layers.0.conv.conv",
+          "precision": "bf16",
+          "original_shape": [
+            1024,
+            512,
+            5
+          ],
+          "convolution": true
+        },
+        {
+          "path": "cfm.wavenet.in_layers.1.conv.conv",
+          "precision": "bf16",
+          "original_shape": [
+            1024,
+            512,
+            5
+          ],
+          "convolution": true
+        },
+        {
+          "path": "cfm.wavenet.in_layers.2.conv.conv",
+          "precision": "bf16",
+          "original_shape": [
+            1024,
+            512,
+            5
+          ],
+          "convolution": true
+        },
+        {
+          "path": "cfm.wavenet.in_layers.3.conv.conv",
+          "precision": "bf16",
+          "original_shape": [
+            1024,
+            512,
+            5
+          ],
+          "convolution": true
+        },
+        {
+          "path": "cfm.wavenet.in_layers.4.conv.conv",
+          "precision": "bf16",
+          "original_shape": [
+            1024,
+            512,
+            5
+          ],
+          "convolution": true
+        },
+        {
+          "path": "cfm.wavenet.in_layers.5.conv.conv",
+          "precision": "bf16",
+          "original_shape": [
+            1024,
+            512,
+            5
+          ],
+          "convolution": true
+        },
+        {
+          "path": "cfm.wavenet.in_layers.6.conv.conv",
+          "precision": "bf16",
+          "original_shape": [
+            1024,
+            512,
+            5
+          ],
+          "convolution": true
+        },
+        {
+          "path": "cfm.wavenet.in_layers.7.conv.conv",
+          "precision": "bf16",
+          "original_shape": [
+            1024,
+            512,
+            5
+          ],
+          "convolution": true
+        },
+        {
+          "path": "cfm.wavenet.res_skip_layers.0.conv.conv",
+          "precision": "bf16",
+          "original_shape": [
+            1024,
+            512,
+            1
+          ],
+          "convolution": true
+        },
+        {
+          "path": "cfm.wavenet.res_skip_layers.1.conv.conv",
+          "precision": "bf16",
+          "original_shape": [
+            1024,
+            512,
+            1
+          ],
+          "convolution": true
+        },
+        {
+          "path": "cfm.wavenet.res_skip_layers.2.conv.conv",
+          "precision": "bf16",
+          "original_shape": [
+            1024,
+            512,
+            1
+          ],
+          "convolution": true
+        },
+        {
+          "path": "cfm.wavenet.res_skip_layers.3.conv.conv",
+          "precision": "bf16",
+          "original_shape": [
+            1024,
+            512,
+            1
+          ],
+          "convolution": true
+        },
+        {
+          "path": "cfm.wavenet.res_skip_layers.4.conv.conv",
+          "precision": "bf16",
+          "original_shape": [
+            1024,
+            512,
+            1
+          ],
+          "convolution": true
+        },
+        {
+          "path": "cfm.wavenet.res_skip_layers.5.conv.conv",
+          "precision": "bf16",
+          "original_shape": [
+            1024,
+            512,
+            1
+          ],
+          "convolution": true
+        },
+        {
+          "path": "cfm.wavenet.res_skip_layers.6.conv.conv",
+          "precision": "bf16",
+          "original_shape": [
+            1024,
+            512,
+            1
+          ],
+          "convolution": true
+        },
+        {
+          "path": "cfm.wavenet.res_skip_layers.7.conv.conv",
+          "precision": "bf16",
+          "original_shape": [
+            512,
+            512,
+            1
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.0.ups.0",
+          "precision": "bf16",
+          "original_shape": [
+            1536,
+            768,
+            8
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.0.resblock0.convs1.0",
+          "precision": "bf16",
+          "original_shape": [
+            768,
+            768,
+            3
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.0.resblock0.convs1.1",
+          "precision": "bf16",
+          "original_shape": [
+            768,
+            768,
+            3
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.0.resblock0.convs1.2",
+          "precision": "bf16",
+          "original_shape": [
+            768,
+            768,
+            3
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.0.resblock0.convs2.0",
+          "precision": "bf16",
+          "original_shape": [
+            768,
+            768,
+            3
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.0.resblock0.convs2.1",
+          "precision": "bf16",
+          "original_shape": [
+            768,
+            768,
+            3
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.0.resblock0.convs2.2",
+          "precision": "bf16",
+          "original_shape": [
+            768,
+            768,
+            3
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.0.resblock1.convs1.0",
+          "precision": "bf16",
+          "original_shape": [
+            768,
+            768,
+            7
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.0.resblock1.convs1.1",
+          "precision": "bf16",
+          "original_shape": [
+            768,
+            768,
+            7
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.0.resblock1.convs1.2",
+          "precision": "bf16",
+          "original_shape": [
+            768,
+            768,
+            7
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.0.resblock1.convs2.0",
+          "precision": "bf16",
+          "original_shape": [
+            768,
+            768,
+            7
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.0.resblock1.convs2.1",
+          "precision": "bf16",
+          "original_shape": [
+            768,
+            768,
+            7
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.0.resblock1.convs2.2",
+          "precision": "bf16",
+          "original_shape": [
+            768,
+            768,
+            7
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.0.resblock2.convs1.0",
+          "precision": "bf16",
+          "original_shape": [
+            768,
+            768,
+            11
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.0.resblock2.convs1.1",
+          "precision": "bf16",
+          "original_shape": [
+            768,
+            768,
+            11
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.0.resblock2.convs1.2",
+          "precision": "bf16",
+          "original_shape": [
+            768,
+            768,
+            11
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.0.resblock2.convs2.0",
+          "precision": "bf16",
+          "original_shape": [
+            768,
+            768,
+            11
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.0.resblock2.convs2.1",
+          "precision": "bf16",
+          "original_shape": [
+            768,
+            768,
+            11
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.0.resblock2.convs2.2",
+          "precision": "bf16",
+          "original_shape": [
+            768,
+            768,
+            11
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.1.ups.0",
+          "precision": "bf16",
+          "original_shape": [
+            768,
+            384,
+            8
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.1.resblock0.convs1.0",
+          "precision": "bf16",
+          "original_shape": [
+            384,
+            384,
+            3
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.1.resblock0.convs1.1",
+          "precision": "bf16",
+          "original_shape": [
+            384,
+            384,
+            3
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.1.resblock0.convs1.2",
+          "precision": "bf16",
+          "original_shape": [
+            384,
+            384,
+            3
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.1.resblock0.convs2.0",
+          "precision": "bf16",
+          "original_shape": [
+            384,
+            384,
+            3
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.1.resblock0.convs2.1",
+          "precision": "bf16",
+          "original_shape": [
+            384,
+            384,
+            3
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.1.resblock0.convs2.2",
+          "precision": "bf16",
+          "original_shape": [
+            384,
+            384,
+            3
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.1.resblock1.convs1.0",
+          "precision": "bf16",
+          "original_shape": [
+            384,
+            384,
+            7
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.1.resblock1.convs1.1",
+          "precision": "bf16",
+          "original_shape": [
+            384,
+            384,
+            7
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.1.resblock1.convs1.2",
+          "precision": "bf16",
+          "original_shape": [
+            384,
+            384,
+            7
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.1.resblock1.convs2.0",
+          "precision": "bf16",
+          "original_shape": [
+            384,
+            384,
+            7
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.1.resblock1.convs2.1",
+          "precision": "bf16",
+          "original_shape": [
+            384,
+            384,
+            7
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.1.resblock1.convs2.2",
+          "precision": "bf16",
+          "original_shape": [
+            384,
+            384,
+            7
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.1.resblock2.convs1.0",
+          "precision": "bf16",
+          "original_shape": [
+            384,
+            384,
+            11
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.1.resblock2.convs1.1",
+          "precision": "bf16",
+          "original_shape": [
+            384,
+            384,
+            11
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.1.resblock2.convs1.2",
+          "precision": "bf16",
+          "original_shape": [
+            384,
+            384,
+            11
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.1.resblock2.convs2.0",
+          "precision": "bf16",
+          "original_shape": [
+            384,
+            384,
+            11
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.1.resblock2.convs2.1",
+          "precision": "bf16",
+          "original_shape": [
+            384,
+            384,
+            11
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.1.resblock2.convs2.2",
+          "precision": "bf16",
+          "original_shape": [
+            384,
+            384,
+            11
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.2.ups.0",
+          "precision": "bf16",
+          "original_shape": [
+            384,
+            192,
+            4
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.2.resblock0.convs1.0",
+          "precision": "bf16",
+          "original_shape": [
+            192,
+            192,
+            3
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.2.resblock0.convs1.1",
+          "precision": "bf16",
+          "original_shape": [
+            192,
+            192,
+            3
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.2.resblock0.convs1.2",
+          "precision": "bf16",
+          "original_shape": [
+            192,
+            192,
+            3
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.2.resblock0.convs2.0",
+          "precision": "bf16",
+          "original_shape": [
+            192,
+            192,
+            3
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.2.resblock0.convs2.1",
+          "precision": "bf16",
+          "original_shape": [
+            192,
+            192,
+            3
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.2.resblock0.convs2.2",
+          "precision": "bf16",
+          "original_shape": [
+            192,
+            192,
+            3
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.2.resblock1.convs1.0",
+          "precision": "bf16",
+          "original_shape": [
+            192,
+            192,
+            7
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.2.resblock1.convs1.1",
+          "precision": "bf16",
+          "original_shape": [
+            192,
+            192,
+            7
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.2.resblock1.convs1.2",
+          "precision": "bf16",
+          "original_shape": [
+            192,
+            192,
+            7
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.2.resblock1.convs2.0",
+          "precision": "bf16",
+          "original_shape": [
+            192,
+            192,
+            7
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.2.resblock1.convs2.1",
+          "precision": "bf16",
+          "original_shape": [
+            192,
+            192,
+            7
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.2.resblock1.convs2.2",
+          "precision": "bf16",
+          "original_shape": [
+            192,
+            192,
+            7
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.2.resblock2.convs1.0",
+          "precision": "bf16",
+          "original_shape": [
+            192,
+            192,
+            11
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.2.resblock2.convs1.1",
+          "precision": "bf16",
+          "original_shape": [
+            192,
+            192,
+            11
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.2.resblock2.convs1.2",
+          "precision": "bf16",
+          "original_shape": [
+            192,
+            192,
+            11
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.2.resblock2.convs2.0",
+          "precision": "bf16",
+          "original_shape": [
+            192,
+            192,
+            11
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.2.resblock2.convs2.1",
+          "precision": "bf16",
+          "original_shape": [
+            192,
+            192,
+            11
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.2.resblock2.convs2.2",
+          "precision": "bf16",
+          "original_shape": [
+            192,
+            192,
+            11
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.3.ups.0",
+          "precision": "bf16",
+          "original_shape": [
+            192,
+            96,
+            4
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.3.resblock0.convs1.0",
+          "precision": "bf16",
+          "original_shape": [
+            96,
+            96,
+            3
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.3.resblock0.convs1.1",
+          "precision": "bf16",
+          "original_shape": [
+            96,
+            96,
+            3
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.3.resblock0.convs1.2",
+          "precision": "bf16",
+          "original_shape": [
+            96,
+            96,
+            3
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.3.resblock0.convs2.0",
+          "precision": "bf16",
+          "original_shape": [
+            96,
+            96,
+            3
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.3.resblock0.convs2.1",
+          "precision": "bf16",
+          "original_shape": [
+            96,
+            96,
+            3
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.3.resblock0.convs2.2",
+          "precision": "bf16",
+          "original_shape": [
+            96,
+            96,
+            3
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.3.resblock1.convs1.0",
+          "precision": "bf16",
+          "original_shape": [
+            96,
+            96,
+            7
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.3.resblock1.convs1.1",
+          "precision": "bf16",
+          "original_shape": [
+            96,
+            96,
+            7
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.3.resblock1.convs1.2",
+          "precision": "bf16",
+          "original_shape": [
+            96,
+            96,
+            7
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.3.resblock1.convs2.0",
+          "precision": "bf16",
+          "original_shape": [
+            96,
+            96,
+            7
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.3.resblock1.convs2.1",
+          "precision": "bf16",
+          "original_shape": [
+            96,
+            96,
+            7
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.3.resblock1.convs2.2",
+          "precision": "bf16",
+          "original_shape": [
+            96,
+            96,
+            7
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.3.resblock2.convs1.0",
+          "precision": "bf16",
+          "original_shape": [
+            96,
+            96,
+            11
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.3.resblock2.convs1.1",
+          "precision": "bf16",
+          "original_shape": [
+            96,
+            96,
+            11
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.3.resblock2.convs1.2",
+          "precision": "bf16",
+          "original_shape": [
+            96,
+            96,
+            11
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.3.resblock2.convs2.0",
+          "precision": "bf16",
+          "original_shape": [
+            96,
+            96,
+            11
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.3.resblock2.convs2.1",
+          "precision": "bf16",
+          "original_shape": [
+            96,
+            96,
+            11
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.3.resblock2.convs2.2",
+          "precision": "bf16",
+          "original_shape": [
+            96,
+            96,
+            11
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.4.ups.0",
+          "precision": "bf16",
+          "original_shape": [
+            96,
+            48,
+            4
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.4.resblock0.convs1.0",
+          "precision": "bf16",
+          "original_shape": [
+            48,
+            48,
+            3
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.4.resblock0.convs1.1",
+          "precision": "bf16",
+          "original_shape": [
+            48,
+            48,
+            3
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.4.resblock0.convs1.2",
+          "precision": "bf16",
+          "original_shape": [
+            48,
+            48,
+            3
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.4.resblock0.convs2.0",
+          "precision": "bf16",
+          "original_shape": [
+            48,
+            48,
+            3
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.4.resblock0.convs2.1",
+          "precision": "bf16",
+          "original_shape": [
+            48,
+            48,
+            3
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.4.resblock0.convs2.2",
+          "precision": "bf16",
+          "original_shape": [
+            48,
+            48,
+            3
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.4.resblock1.convs1.0",
+          "precision": "bf16",
+          "original_shape": [
+            48,
+            48,
+            7
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.4.resblock1.convs1.1",
+          "precision": "bf16",
+          "original_shape": [
+            48,
+            48,
+            7
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.4.resblock1.convs1.2",
+          "precision": "bf16",
+          "original_shape": [
+            48,
+            48,
+            7
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.4.resblock1.convs2.0",
+          "precision": "bf16",
+          "original_shape": [
+            48,
+            48,
+            7
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.4.resblock1.convs2.1",
+          "precision": "bf16",
+          "original_shape": [
+            48,
+            48,
+            7
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.4.resblock1.convs2.2",
+          "precision": "bf16",
+          "original_shape": [
+            48,
+            48,
+            7
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.4.resblock2.convs1.0",
+          "precision": "bf16",
+          "original_shape": [
+            48,
+            48,
+            11
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.4.resblock2.convs1.1",
+          "precision": "bf16",
+          "original_shape": [
+            48,
+            48,
+            11
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.4.resblock2.convs1.2",
+          "precision": "bf16",
+          "original_shape": [
+            48,
+            48,
+            11
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.4.resblock2.convs2.0",
+          "precision": "bf16",
+          "original_shape": [
+            48,
+            48,
+            11
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.4.resblock2.convs2.1",
+          "precision": "bf16",
+          "original_shape": [
+            48,
+            48,
+            11
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.4.resblock2.convs2.2",
+          "precision": "bf16",
+          "original_shape": [
+            48,
+            48,
+            11
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.5.ups.0",
+          "precision": "bf16",
+          "original_shape": [
+            48,
+            24,
+            4
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.5.resblock0.convs1.0",
+          "precision": "bf16",
+          "original_shape": [
+            24,
+            24,
+            3
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.5.resblock0.convs1.1",
+          "precision": "bf16",
+          "original_shape": [
+            24,
+            24,
+            3
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.5.resblock0.convs1.2",
+          "precision": "bf16",
+          "original_shape": [
+            24,
+            24,
+            3
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.5.resblock0.convs2.0",
+          "precision": "bf16",
+          "original_shape": [
+            24,
+            24,
+            3
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.5.resblock0.convs2.1",
+          "precision": "bf16",
+          "original_shape": [
+            24,
+            24,
+            3
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.5.resblock0.convs2.2",
+          "precision": "bf16",
+          "original_shape": [
+            24,
+            24,
+            3
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.5.resblock1.convs1.0",
+          "precision": "bf16",
+          "original_shape": [
+            24,
+            24,
+            7
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.5.resblock1.convs1.1",
+          "precision": "bf16",
+          "original_shape": [
+            24,
+            24,
+            7
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.5.resblock1.convs1.2",
+          "precision": "bf16",
+          "original_shape": [
+            24,
+            24,
+            7
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.5.resblock1.convs2.0",
+          "precision": "bf16",
+          "original_shape": [
+            24,
+            24,
+            7
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.5.resblock1.convs2.1",
+          "precision": "bf16",
+          "original_shape": [
+            24,
+            24,
+            7
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.5.resblock1.convs2.2",
+          "precision": "bf16",
+          "original_shape": [
+            24,
+            24,
+            7
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.5.resblock2.convs1.0",
+          "precision": "bf16",
+          "original_shape": [
+            24,
+            24,
+            11
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.5.resblock2.convs1.1",
+          "precision": "bf16",
+          "original_shape": [
+            24,
+            24,
+            11
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.5.resblock2.convs1.2",
+          "precision": "bf16",
+          "original_shape": [
+            24,
+            24,
+            11
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.5.resblock2.convs2.0",
+          "precision": "bf16",
+          "original_shape": [
+            24,
+            24,
+            11
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.5.resblock2.convs2.1",
+          "precision": "bf16",
+          "original_shape": [
+            24,
+            24,
+            11
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.stages.5.resblock2.convs2.2",
+          "precision": "bf16",
+          "original_shape": [
+            24,
+            24,
+            11
+          ],
+          "convolution": true
+        },
+        {
+          "path": "vocoder.conv_pre",
+          "precision": "bf16",
+          "boundary": true
+        },
+        {
+          "path": "vocoder.conv_post",
+          "precision": "bf16",
+          "boundary": true
+        }
+      ],
+      "device": {
+        "name": "NVIDIA GeForce RTX 4090",
+        "sm": 89,
+        "sms": 128,
+        "shared_per_sm": 102400,
+        "shared_per_cta": 101376,
+        "registers_per_sm": 65536,
+        "threads_per_sm": 1536,
+        "max_ctas_per_sm": 32
+      },
+      "cache": {
+        "path": "/workspace/A_inspark_marlin/.cache/kernel_plans/1a1bc0df10e048444ca23e0e00f9708900bda593365e71e1aca6cbe30a6c1037.json",
+        "key": "1a1bc0df10e048444ca23e0e00f9708900bda593365e71e1aca6cbe30a6c1037",
+        "loaded": 0,
+        "total": 0,
+        "online_tuning": false
+      },
+      "plans": {},
+      "interface_precision": "FP32",
+      "observed_head_shape_extents": {
+        "target": [
+          8,
+          64,
+          128,
+          256,
+          4096
+        ],
+        "cfm": [
+          310,
+          4096
+        ],
+        "draft": [
+          7,
+          64,
+          256,
+          512,
+          1024,
+          4096
+        ]
+      },
+      "convolution_quantized": true,
+      "rnn_quantized": false,
+      "kv_quantized": false,
+      "calibrated_quality": false,
+      "online_tuning": false
+    },
+    "rnn": {
+      "mode": "bf16",
+      "matrices": [
+        "state",
+        "hidden",
+        "output"
+      ],
+      "folded_token_table": "FP32",
+      "nonlinear_math": "FP32",
+      "online_tuning": false,
+      "cache": {
+        "path": "/workspace/A_inspark_marlin/.cache/kernel_plans/31a6cf0f8dc9286143bca88ca74f9b509d63f2a865dea6ee88eb5e5dd96213c0.json",
+        "key": "31a6cf0f8dc9286143bca88ca74f9b509d63f2a865dea6ee88eb5e5dd96213c0",
+        "loaded": 0,
+        "total": 0,
+        "online_tuning": false
+      }
+    },
+    "tensorrt113_cfm": {
+      "backend": "TensorRT 11.3 native full two-step CFM Solver",
+      "batch": 1,
+      "frames": 310,
+      "prompt_frames": 258,
+      "calls": 0,
+      "fallbacks": 0,
+      "fallback_reasons": {},
+      "identity": {
+        "path": "/workspace/A_inspark_marlin/models/cfm_oracle500.pt",
+        "sha256": "635ab7025fbd4eaa999fcd3e964512df081d5c9cff093a59d383e050c70bcfca",
+        "source": {
+          "path": "/workspace/cfm_distill/oracle/checkpoint.pt",
+          "sha256": "709ec1ff7f6cf581dcfc7b891105102ff3781aefd781edeef29f9e8d52b7852c",
+          "designation": "User-designated current Oracle"
+        },
+        "step": 500,
+        "intervals": [
+          [
+            0,
+            0.5
+          ],
+          [
+            0.5,
+            1
+          ]
+        ],
+        "cfg": 0,
+        "precision": "BF16 weights/linears with FP32 interfaces and two-step accumulation",
+        "backend": "TensorRT 11.3 native",
+        "batch": 1,
+        "frames": 310,
+        "prompt_frames": 258,
+        "plan": "/workspace/A_inspark_marlin/artifacts/trt113_cfm/plan_b1.json",
+        "engine_sha256": "df6662ee84387f9982856a2e171e7a087dd829467b0f461d6e9f7bdd646420a0",
+        "interface_precision": "FP32"
+      }
+    },
+    "acoustic_kernels": {
+      "mode": "alias",
+      "convolutions": [],
+      "alias_modules": [
+        "vocoder.resblocks.0.activations.0",
+        "vocoder.resblocks.0.activations.1",
+        "vocoder.resblocks.0.activations.2",
+        "vocoder.resblocks.0.activations.3",
+        "vocoder.resblocks.0.activations.4",
+        "vocoder.resblocks.0.activations.5",
+        "vocoder.resblocks.1.activations.0",
+        "vocoder.resblocks.1.activations.1",
+        "vocoder.resblocks.1.activations.2",
+        "vocoder.resblocks.1.activations.3",
+        "vocoder.resblocks.1.activations.4",
+        "vocoder.resblocks.1.activations.5",
+        "vocoder.resblocks.2.activations.0",
+        "vocoder.resblocks.2.activations.1",
+        "vocoder.resblocks.2.activations.2",
+        "vocoder.resblocks.2.activations.3",
+        "vocoder.resblocks.2.activations.4",
+        "vocoder.resblocks.2.activations.5",
+        "vocoder.resblocks.3.activations.0",
+        "vocoder.resblocks.3.activations.1",
+        "vocoder.resblocks.3.activations.2",
+        "vocoder.resblocks.3.activations.3",
+        "vocoder.resblocks.3.activations.4",
+        "vocoder.resblocks.3.activations.5",
+        "vocoder.resblocks.4.activations.0",
+        "vocoder.resblocks.4.activations.1",
+        "vocoder.resblocks.4.activations.2",
+        "vocoder.resblocks.4.activations.3",
+        "vocoder.resblocks.4.activations.4",
+        "vocoder.resblocks.4.activations.5",
+        "vocoder.resblocks.5.activations.0",
+        "vocoder.resblocks.5.activations.1",
+        "vocoder.resblocks.5.activations.2",
+        "vocoder.resblocks.5.activations.3",
+        "vocoder.resblocks.5.activations.4",
+        "vocoder.resblocks.5.activations.5",
+        "vocoder.resblocks.6.activations.0",
+        "vocoder.resblocks.6.activations.1",
+        "vocoder.resblocks.6.activations.2",
+        "vocoder.resblocks.6.activations.3",
+        "vocoder.resblocks.6.activations.4",
+        "vocoder.resblocks.6.activations.5",
+        "vocoder.resblocks.7.activations.0",
+        "vocoder.resblocks.7.activations.1",
+        "vocoder.resblocks.7.activations.2",
+        "vocoder.resblocks.7.activations.3",
+        "vocoder.resblocks.7.activations.4",
+        "vocoder.resblocks.7.activations.5",
+        "vocoder.resblocks.8.activations.0",
+        "vocoder.resblocks.8.activations.1",
+        "vocoder.resblocks.8.activations.2",
+        "vocoder.resblocks.8.activations.3",
+        "vocoder.resblocks.8.activations.4",
+        "vocoder.resblocks.8.activations.5",
+        "vocoder.resblocks.9.activations.0",
+        "vocoder.resblocks.9.activations.1",
+        "vocoder.resblocks.9.activations.2",
+        "vocoder.resblocks.9.activations.3",
+        "vocoder.resblocks.9.activations.4",
+        "vocoder.resblocks.9.activations.5",
+        "vocoder.resblocks.10.activations.0",
+        "vocoder.resblocks.10.activations.1",
+        "vocoder.resblocks.10.activations.2",
+        "vocoder.resblocks.10.activations.3",
+        "vocoder.resblocks.10.activations.4",
+        "vocoder.resblocks.10.activations.5",
+        "vocoder.resblocks.11.activations.0",
+        "vocoder.resblocks.11.activations.1",
+        "vocoder.resblocks.11.activations.2",
+        "vocoder.resblocks.11.activations.3",
+        "vocoder.resblocks.11.activations.4",
+        "vocoder.resblocks.11.activations.5",
+        "vocoder.resblocks.12.activations.0",
+        "vocoder.resblocks.12.activations.1",
+        "vocoder.resblocks.12.activations.2",
+        "vocoder.resblocks.12.activations.3",
+        "vocoder.resblocks.12.activations.4",
+        "vocoder.resblocks.12.activations.5",
+        "vocoder.resblocks.13.activations.0",
+        "vocoder.resblocks.13.activations.1",
+        "vocoder.resblocks.13.activations.2",
+        "vocoder.resblocks.13.activations.3",
+        "vocoder.resblocks.13.activations.4",
+        "vocoder.resblocks.13.activations.5",
+        "vocoder.resblocks.14.activations.0",
+        "vocoder.resblocks.14.activations.1",
+        "vocoder.resblocks.14.activations.2",
+        "vocoder.resblocks.14.activations.3",
+        "vocoder.resblocks.14.activations.4",
+        "vocoder.resblocks.14.activations.5",
+        "vocoder.resblocks.15.activations.0",
+        "vocoder.resblocks.15.activations.1",
+        "vocoder.resblocks.15.activations.2",
+        "vocoder.resblocks.15.activations.3",
+        "vocoder.resblocks.15.activations.4",
+        "vocoder.resblocks.15.activations.5",
+        "vocoder.resblocks.16.activations.0",
+        "vocoder.resblocks.16.activations.1",
+        "vocoder.resblocks.16.activations.2",
+        "vocoder.resblocks.16.activations.3",
+        "vocoder.resblocks.16.activations.4",
+        "vocoder.resblocks.16.activations.5",
+        "vocoder.resblocks.17.activations.0",
+        "vocoder.resblocks.17.activations.1",
+        "vocoder.resblocks.17.activations.2",
+        "vocoder.resblocks.17.activations.3",
+        "vocoder.resblocks.17.activations.4",
+        "vocoder.resblocks.17.activations.5",
+        "vocoder.activation_post"
+      ],
+      "online_tuning": false
+    },
+    "tensorrt113_vocoder": {
+      "backend": "TensorRT 11.3 BigVGAN with in-engine Quick Plugins",
+      "batch": 1,
+      "frames": 52,
+      "calls": 0,
+      "fallbacks": 0,
+      "fallback_reasons": {},
+      "plan": "/workspace/A_inspark_marlin/artifacts/trt113_vocoder/plan_b1_nativeconv_strong.json",
+      "sha256": "9e850e09634eb7dce0dafb053063fd5f1137bac285fa94210c0dc0d62fae0960",
+      "plugins": [
+        "inspark::alias_free",
+        "inspark::deconv1d"
+      ],
+      "precision": "BF16 learned convolutions; FP32 alias-free plugin and interfaces",
+      "interface_precision": "FP32"
+    },
+    "target": {
+      "calls": 0,
+      "rows": 0,
+      "mean_batch": 0.0,
+      "shapes": {
+        "(1, 128)": 4,
+        "(1, 256)": 24,
+        "(1, 512)": 28
+      },
+      "graph_hits": 0,
+      "graph_keys": [
+        [
+          1,
+          64
+        ],
+        [
+          1,
+          128
+        ]
+      ],
+      "persistent_kv": true,
+      "history_pack_bytes_per_verify": 0
+    },
+    "tensorrt113_target_full": {
+      "keys": [
+        [
+          1,
+          128
+        ]
+      ],
+      "backend": "TensorRT 11.3 full Target",
+      "artifacts": {
+        "1": {
+          "path": "/workspace/A_inspark_marlin/artifacts/trt113_target_full/audited_source/target_full_b1.engine",
+          "sha256": "2658a9e15e058dee977f2893658a0159dd3a420253e24e50f37cec11d5331f63",
+          "plan_hash_verified": true,
+          "provenance_status": "recorded_not_audited",
+          "numerical_audit_pass": false
+        }
+      }
+    },
+    "tensorrt113_draft_full": {
+      "keys": [
+        [
+          1,
+          128
+        ]
+      ],
+      "backend": "TensorRT 11.3 full Draft",
+      "artifacts": {
+        "1": {
+          "path": "/workspace/A_inspark_marlin/artifacts/trt113_draft_full/audited_source/draft_full_b1.engine",
+          "sha256": "5e5dc406beb1f0364db8bab64cd5eede050ef39868b3e9d987263fba9b9e8435",
+          "plan_hash_verified": true,
+          "provenance_status": "recorded_not_audited",
+          "numerical_audit_pass": false
+        }
+      }
+    },
+    "context_graphs": {
+      "total_token_buckets": [
+        8
+      ],
+      "online_capture": false,
+      "padding": "next_multiple_of_8",
+      "precision_unchanged": true,
+      "fused_slot_scatter": true,
+      "direct_layer_scatter": false
+    },
+    "proposal": {
+      "batches": [
+        1
+      ],
+      "online_capture": false
+    },
+    "draft": {
+      "keys": [
+        [
+          1,
+          64
+        ],
+        [
+          1,
+          128
+        ]
+      ],
+      "history_packing": false,
+      "online_capture": false
+    },
+    "prefix": {
+      "prefill_keys": [
+        [
+          1,
+          48
+        ]
+      ],
+      "latent_keys": [
+        [
+          1,
+          80
+        ]
+      ],
+      "hits": {
+        "prefill": 0,
+        "latent": 0
+      },
+      "tail_eager": {
+        "prefill": 0,
+        "latent": 0
+      },
+      "online_capture": false
+    },
+    "device_accept_plan": {
+      "k": 7,
+      "compact_host_values_per_row": 4,
+      "packed_host_values_before": 35,
+      "online_compile": false,
+      "semantics": "accepted_prefix_exact"
+    },
+    "device_residual": {
+      "max_thinning_attempts": 64,
+      "decision_d2h": false,
+      "fallback_policy": "device counter; candidate invalid if nonzero",
+      "final_group_sampling": "explicit request-owned uniform",
+      "online_compile": false
+    },
+    "device_round_b8": {
+      "head_only": true,
+      "batches": [
+        1
+      ],
+      "kv_limit": 128,
+      "host_boundary": "all_ready scalar per round",
+      "compiled": {
+        "batches": [
+          1
+        ],
+        "commit_capacity": 1564,
+        "keep_capacity": 2048,
+        "online_compile": false
+      },
+      "parent_graph": false,
+      "online_capture": false
+    },
+    "acoustics": {
+      "cfm_keys": [
+        [
+          1,
+          258
+        ]
+      ],
+      "vocoder_batches": [
+        1
+      ],
+      "hits": {
+        "cfm": 0,
+        "vocoder": 0
+      },
+      "sealed": true,
+      "online_capture": false,
+      "tail_graphs": false,
+      "captured_routes": {
+        "cfm": [
+          {
+            "key": [
+              1,
+              258
+            ],
+            "route": {
+              "kind": "tensorrt",
+              "backend": "tensorrt113",
+              "candidate_backend": "tensorrt113",
+              "component": "cfm",
+              "batch": 1,
+              "frames": 310,
+              "engine_batch": 1,
+              "engine_frames": 310,
+              "plan": "/workspace/A_inspark_marlin/artifacts/trt113_cfm/plan_b1.json",
+              "sha256": "df6662ee84387f9982856a2e171e7a087dd829467b0f461d6e9f7bdd646420a0",
+              "reason": null,
+              "plugins": [],
+              "fallback": false
+            }
+          }
+        ],
+        "vocoder": [
+          {
+            "key": 1,
+            "route": {
+              "kind": "tensorrt",
+              "backend": "tensorrt113",
+              "candidate_backend": "tensorrt113",
+              "component": "vocoder",
+              "batch": 1,
+              "frames": 52,
+              "engine_batch": 1,
+              "engine_frames": 52,
+              "plan": "/workspace/A_inspark_marlin/artifacts/trt113_vocoder/plan_b1_nativeconv_strong.json",
+              "sha256": "9e850e09634eb7dce0dafb053063fd5f1137bac285fa94210c0dc0d62fae0960",
+              "reason": null,
+              "plugins": [
+                "inspark::alias_free",
+                "inspark::deconv1d"
+              ],
+              "fallback": false
+            }
+          }
+        ]
+      },
+      "route_counts": [
+        {
+          "route": {
+            "kind": "tensorrt",
+            "backend": "tensorrt113",
+            "candidate_backend": "tensorrt113",
+            "component": "cfm",
+            "batch": 1,
+            "frames": 310,
+            "engine_batch": 1,
+            "engine_frames": 310,
+            "plan": "/workspace/A_inspark_marlin/artifacts/trt113_cfm/plan_b1.json",
+            "sha256": "df6662ee84387f9982856a2e171e7a087dd829467b0f461d6e9f7bdd646420a0",
+            "reason": null,
+            "plugins": [],
+            "fallback": false
+          },
+          "prepare": 1,
+          "direct": 0,
+          "replay": 0,
+          "fallback": 0
+        },
+        {
+          "route": {
+            "kind": "tensorrt",
+            "backend": "tensorrt113",
+            "candidate_backend": "tensorrt113",
+            "component": "vocoder",
+            "batch": 1,
+            "frames": 52,
+            "engine_batch": 1,
+            "engine_frames": 52,
+            "plan": "/workspace/A_inspark_marlin/artifacts/trt113_vocoder/plan_b1_nativeconv_strong.json",
+            "sha256": "9e850e09634eb7dce0dafb053063fd5f1137bac285fa94210c0dc0d62fae0960",
+            "reason": null,
+            "plugins": [
+              "inspark::alias_free",
+              "inspark::deconv1d"
+            ],
+            "fallback": false
+          },
+          "prepare": 1,
+          "direct": 0,
+          "replay": 0,
+          "fallback": 0
+        }
+      ],
+      "wrapper_prepare_counts": {
+        "cfm": {
+          "calls": 4,
+          "fallbacks": 0
+        },
+        "vocoder": {
+          "calls": 4,
+          "fallbacks": 0
+        }
+      },
+      "counter_semantics": {
+        "prepare": "successful graph captures, excluding warmup calls",
+        "replay": "successful graph replays, classified by the frozen capture route",
+        "direct": "successful uncaptured calls through this graph bank",
+        "fallback": "runtime calls using eager backend fallback or an unavailable graph",
+        "wrapper_prepare_counts": "cumulative wrapper calls/fallbacks at preparation completion"
+      }
+    },
+    "request_isolation": {
+      "strict_request_isolation": false,
+      "rng_policy": "legacy_shared",
+      "shared_rng_paths": [
+        "device_round_b8"
+      ],
+      "changed_sampler_paths": [],
+      "request_stream_v1_implemented": false
+    },
+    "compute_backend": "optimized"
+  },
+  "deployment_file": {
+    "role": "deployment",
+    "path": "/workspace/A_inspark_marlin/inference/configs/sm89_bf16_trt113_full_b1.json",
+    "sha256": "cb65c522f579fcea23de27a7f0bf8e931728c2b304e3b14ac58b9aa00549134e",
+    "bytes": 1053
+  },
+  "hardware": {
+    "name": "NVIDIA GeForce RTX 4090",
+    "sm": [
+      8,
+      9
+    ]
+  },
+  "head_routes": {
+    "cfm_keys": [
+      [
+        1,
+        258
+      ]
+    ],
+    "vocoder_batches": [
+      1
+    ],
+    "hits": {
+      "cfm": 1,
+      "vocoder": 1
+    },
+    "sealed": true,
+    "online_capture": false,
+    "tail_graphs": false,
+    "captured_routes": {
+      "cfm": [
+        {
+          "key": [
+            1,
+            258
+          ],
+          "route": {
+            "kind": "tensorrt",
+            "backend": "tensorrt113",
+            "candidate_backend": "tensorrt113",
+            "component": "cfm",
+            "batch": 1,
+            "frames": 310,
+            "engine_batch": 1,
+            "engine_frames": 310,
+            "plan": "/workspace/A_inspark_marlin/artifacts/trt113_cfm/plan_b1.json",
+            "sha256": "df6662ee84387f9982856a2e171e7a087dd829467b0f461d6e9f7bdd646420a0",
+            "reason": null,
+            "plugins": [],
+            "fallback": false
+          }
+        }
+      ],
+      "vocoder": [
+        {
+          "key": 1,
+          "route": {
+            "kind": "tensorrt",
+            "backend": "tensorrt113",
+            "candidate_backend": "tensorrt113",
+            "component": "vocoder",
+            "batch": 1,
+            "frames": 52,
+            "engine_batch": 1,
+            "engine_frames": 52,
+            "plan": "/workspace/A_inspark_marlin/artifacts/trt113_vocoder/plan_b1_nativeconv_strong.json",
+            "sha256": "9e850e09634eb7dce0dafb053063fd5f1137bac285fa94210c0dc0d62fae0960",
+            "reason": null,
+            "plugins": [
+              "inspark::alias_free",
+              "inspark::deconv1d"
+            ],
+            "fallback": false
+          }
+        }
+      ]
+    },
+    "route_counts": [
+      {
+        "route": {
+          "kind": "tensorrt",
+          "backend": "tensorrt113",
+          "candidate_backend": "tensorrt113",
+          "component": "cfm",
+          "batch": 1,
+          "frames": 310,
+          "engine_batch": 1,
+          "engine_frames": 310,
+          "plan": "/workspace/A_inspark_marlin/artifacts/trt113_cfm/plan_b1.json",
+          "sha256": "df6662ee84387f9982856a2e171e7a087dd829467b0f461d6e9f7bdd646420a0",
+          "reason": null,
+          "plugins": [],
+          "fallback": false
+        },
+        "prepare": 1,
+        "direct": 0,
+        "replay": 1,
+        "fallback": 0
+      },
+      {
+        "route": {
+          "kind": "tensorrt",
+          "backend": "tensorrt113",
+          "candidate_backend": "tensorrt113",
+          "component": "vocoder",
+          "batch": 1,
+          "frames": 52,
+          "engine_batch": 1,
+          "engine_frames": 52,
+          "plan": "/workspace/A_inspark_marlin/artifacts/trt113_vocoder/plan_b1_nativeconv_strong.json",
+          "sha256": "9e850e09634eb7dce0dafb053063fd5f1137bac285fa94210c0dc0d62fae0960",
+          "reason": null,
+          "plugins": [
+            "inspark::alias_free",
+            "inspark::deconv1d"
+          ],
+          "fallback": false
+        },
+        "prepare": 1,
+        "direct": 0,
+        "replay": 1,
+        "fallback": 0
+      }
+    ],
+    "wrapper_prepare_counts": {
+      "cfm": {
+        "calls": 4,
+        "fallbacks": 0
+      },
+      "vocoder": {
+        "calls": 4,
+        "fallbacks": 0
+      }
+    },
+    "counter_semantics": {
+      "prepare": "successful graph captures, excluding warmup calls",
+      "replay": "successful graph replays, classified by the frozen capture route",
+      "direct": "successful uncaptured calls through this graph bank",
+      "fallback": "runtime calls using eager backend fallback or an unavailable graph",
+      "wrapper_prepare_counts": "cumulative wrapper calls/fallbacks at preparation completion"
+    }
+  },
+  "direct_graph_exact": true
+}
