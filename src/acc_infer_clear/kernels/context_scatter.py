@@ -12,6 +12,9 @@ def _scatter(K,V,POOL,SRC,LENGTHS,SLOTS,DEST,B:tl.constexpr,L:tl.constexpr,
     token=i//(H*D);hd=i%(H*D);head=hd//D;dim=hd%D
     length=tl.load(LENGTHS+request);valid=(token<length)&(head<H)&(dim<D)
     source=tl.load(SRC+request)+token;slot=tl.load(SLOTS+request);dest=tl.load(DEST+request)+token
+    # The same projections update a canonical K2048 pool and an optional K128
+    # TRT mirror. Long-context fallback must never write past the compact arena.
+    valid=valid&(source>=0)&(source<T)&(slot>=0)&(slot<S)&(dest>=0)&(dest<C)
     source_offset=(((layer*H+head)*T+source)*D+dim)
     value=tl.load(tl.where(kv==0,K,V)+source_offset,mask=valid,other=0.)
     target=(((((layer*2+kv)*S+slot)*H+head)*C+dest)*D+dim)
@@ -40,6 +43,7 @@ def _scatter_layer(K,V,POOL,SRC,LENGTHS,SLOTS,DEST,
     request=group%B;kv=group//B;token=i//(H*D);hd=i%(H*D);head=hd//D;dim=hd%D
     length=tl.load(LENGTHS+request);valid=(token<length)&(head<H)&(dim<D)
     source=tl.load(SRC+request)+token;slot=tl.load(SLOTS+request);dest=tl.load(DEST+request)+token
+    valid=valid&(slot>=0)&(slot<S)&(dest>=0)&(dest<C)
     value=tl.load(tl.where(kv==0,K+head*K1+source*K2+dim*K3,V+head*V1+source*V2+dim*V3),mask=valid,other=0.)
     target=(((((LAYER*2+kv)*S+slot)*H+head)*C+dest)*D+dim)
     tl.store(POOL+target,value,mask=valid)

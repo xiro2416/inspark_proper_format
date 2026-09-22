@@ -104,7 +104,8 @@ def prepare(engine,plan):
     resolve=lambda value:('fp8' if caps.native_fp8 else 'bf16') if value=='auto' else value
     result=dict(requested=plan,resolved_precision=resolve(plan['precision']),
                 resolved_rnn_precision=resolve(plan['rnn_precision']),sm=caps.sm,
-                hardware_validation='RTX6000D SM120 tested; other device models require validation',online_learning=False,tail_graphs=False)
+                hardware_validation='Profile-specific numerical and performance evidence required; runtime identity is not an audit pass',
+                hardware=dict(name=caps.name,sm=caps.sm,sms=caps.sms),online_learning=False,tail_graphs=False)
     engine.deployment_state='preparing'
     try:
         if plan.get('planner_v2_manifest'):

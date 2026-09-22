@@ -38,6 +38,10 @@ class SlotDraft(BatchedDraftBackbone):
         self.native_full_bank=None
         self.native_full_steps=0
         self.native_compare=[]
+    def native_eligible(self,batch,slot_values,max_length):
+        bank=self.native_full_bank
+        return (bank is not None and (batch,128) in bank.graphs and
+                slot_values==list(range(batch)) and max_length+8<=128)
     def _profile_scope(self,name):
         return torch.profiler.record_function(name) if self.trace_subcomponents else nullcontext()
     def math(self,anchors,positions,slots,lengths,limit):
@@ -76,12 +80,14 @@ class SlotDraft(BatchedDraftBackbone):
         for j in jobs:self.pool.check(j['cache'])
         lengths=[j['cache'].length for j in jobs];limit=next(n for n in (64,128,256,512,1024,2048) if n>=max(lengths)+7)
         device=self.pool.storage.device
-        slots=torch.tensor([j['cache'].pool_slot for j in jobs],device=device,dtype=torch.int32)
+        slot_values=[j['cache'].pool_slot for j in jobs]
+        slots=torch.tensor(slot_values,device=device,dtype=torch.int32)
         lens=torch.tensor(lengths,device=device,dtype=torch.int32)
         positions=torch.tensor([j['first_position'] for j in jobs],device=device)[:,None]+self.step
         anchors=torch.cat([j['anchor_token'].reshape(1) for j in jobs]);b=len(jobs)
-        native=(self.native_full_bank is not None and (b,limit) in self.native_full_bank.graphs)
-        if (b,limit) in self.graphs:
+        native_graph=(self.native_full_bank is not None and (b,limit) in self.native_full_bank.graphs)
+        native=native_graph and self.native_eligible(b,slot_values,max(lengths))
+        if (b,limit) in self.graphs and (not native_graph or native):
             hidden,base=self.graphs[b,limit](anchors,positions,slots,lens);self.graph_hits+=1
             if native:
                 self.native_full_steps+=1

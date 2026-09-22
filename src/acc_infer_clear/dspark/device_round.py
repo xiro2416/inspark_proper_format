@@ -49,17 +49,24 @@ class DeviceRoundHead:
         bank=getattr(runtime.target,'native_full_bank',None);slot_values=[r.kv.slot for r in rows]
         self.native_target=(bank if bank is not None and
             bank.eligible(self.b,slot_values,max(r.past_length for r in rows)) else None)
+        self.native_draft_eligible=self.rt.backbone.native_eligible(
+            self.b,[r.cache.pool_slot for r in rows],max(r.cache.length for r in rows))
 
     def step(self,use_child_graphs=True):
         active=~self.ready;first=self.past+1-self.mel
         draft_args=(self.last,first[:,None]+self.step7,self.draft_slots,self.draft_lengths)
         if use_child_graphs:
             bank=getattr(self.rt.backbone,'native_full_bank',None)
-            native=(bank is not None and (self.b,128) in bank.graphs and
+            native=(self.native_draft_eligible and bank is not None and (self.b,128) in bank.graphs and
                     self.rt.backbone.graphs[self.b,128] is bank.graphs[self.b,128])
             cache_before=(self.rt.backbone.compare_native_cache(self.draft_slots,self.draft_lengths)
                           if native and os.environ.get('ACC_COMPARE_NATIVE_DRAFT')=='1' else None)
-            hidden,base=self.rt.backbone.graphs[self.b,128](*draft_args)
+            selected_graph=self.rt.backbone.graphs[self.b,128]
+            graph_is_native=bank is not None and selected_graph is bank.graphs.get((self.b,128))
+            if graph_is_native and not native:
+                hidden,base=self.rt.backbone.math(*draft_args,128)
+            else:hidden,base=selected_graph(*draft_args)
+            self.rt.backbone.device_steps=getattr(self.rt.backbone,'device_steps',0)+1
             if native:
                 self.rt.backbone.native_full_steps+=1
                 if os.environ.get('ACC_COMPARE_NATIVE_DRAFT')=='1':
@@ -71,6 +78,7 @@ class DeviceRoundHead:
         tokens=torch.cat((self.last[:,None],proposed),1);positions=first[:,None]+self.step8
         tm=self.rt.engine.target.model;x=tm.embeddings(tokens)+tm.text_pos_embedding.emb(positions)
         mark_keep(self.rt.target.keep,self.target_slots,self.past)
+        self.rt.device_target_steps=getattr(self.rt,'device_target_steps',0)+1
         if use_child_graphs and self.native_target is not None:
             self.rt.native_target_steps+=1
             logits,selected,final=self.native_target.graphs[self.b,128](x,self.target_slots,self.past)
@@ -101,11 +109,16 @@ class DeviceRoundHead:
         self.ready.copy_(self.done|(self.token_lengths*172>=5200))
 
     def run(self,max_rounds=64):
-        launched=0;initial_failures=int(self.rt.residual.device_failures.item());self.failed=False
+        launched=0;initial_failures=int(self.rt.residual.device_failures.item());self.failed=False;self.fallback_reason=None
         while True:
-            status(self.ready,self.rt.residual.device_failures,self.status,initial_failures);value=int(self.status.item())
-            if value&2:self.failed=True;return 0
+            status(self.ready,self.rt.residual.device_failures,self.status,initial_failures,
+                   self.past,self.draft_lengths);value=int(self.status.item())
+            if value&2:self.failed=True;self.fallback_reason='residual';return 0
             if value&1:break
+            if value&4:
+                self.fallback_reason='kv_capacity'
+                self.finish()
+                return launched
             if launched>=max_rounds:raise RuntimeError('Device head exceeded round limit')
             self.step();launched+=1
         torch.cuda.synchronize();self.finish();return launched

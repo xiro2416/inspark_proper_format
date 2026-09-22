@@ -142,7 +142,10 @@ class NativeTargetFull113:
         self.runtime = self.trt.Runtime(self.trt.Logger(self.trt.Logger.ERROR))
         self.engine = self.runtime.deserialize_cuda_engine(Path(engine_path).read_bytes())
         if self.engine is None: raise RuntimeError(f"Failed to deserialize {engine_path}")
+        expected = _ar_io_signature(self.trt, 'target', self.batch)
+        _validate_engine_io(self.engine, self.trt, expected, 'Target')
         self.context = self.engine.create_execution_context()
+        if self.context is None: raise RuntimeError('Failed to create Target execution context')
         self.cache = torch.empty(24, 2, max_slots, 20, 128, 64, device=device, dtype=torch.bfloat16)
         self.mask = torch.empty(batch, 1, 8, 128, device=device, dtype=torch.bool)
         self.logits = torch.empty(batch, 8, 8194, device=device, dtype=torch.float32)
@@ -180,10 +183,12 @@ class NativeTargetFullBank113:
         from acc_infer_clear.runtime.graphs import capture
         plan_file = Path(plan_path).resolve(); plan = json.loads(plan_file.read_text())
         self.backends = {}; self.graphs = {}; self.capture = capture; self.target = target
+        self.artifacts = {}
         for raw_batch, raw_path in plan["engines"].items():
             batch = int(raw_batch)
             if batch > target.max_batch: continue
-            path = Path(raw_path); path = path if path.is_absolute() else (plan_file.parent / path).resolve()
+            path, identity = _plan_engine_identity(plan_file, plan, raw_batch, raw_path)
+            self.artifacts[batch] = identity
             self.backends[batch] = NativeTargetFull113(path,batch,target.max_slots,target.storage.device)
 
     def import_slot(self, packed, row, slot, length):
@@ -200,7 +205,8 @@ class NativeTargetFullBank113:
             backend.cache.zero_()
             self.graphs[batch,128]=self.capture(lambda xx,ss,ll,b=backend:b.run(xx,self.target.keep,ss,ll),
                                                  (x,slots,lengths))
-        return dict(keys=[list(k) for k in self.graphs],backend="TensorRT 11.3 full Target")
+        return dict(keys=[list(k) for k in self.graphs],backend="TensorRT 11.3 full Target",
+                    artifacts=self.artifacts)
 
     def eligible(self,batch,slot_values,max_length):
         return (batch,128) in self.graphs and slot_values==list(range(batch)) and max_length+8<=128
@@ -217,7 +223,10 @@ class NativeDraftFull113:
         self.runtime = self.trt.Runtime(self.trt.Logger(self.trt.Logger.ERROR))
         self.engine = self.runtime.deserialize_cuda_engine(Path(engine_path).read_bytes())
         if self.engine is None: raise RuntimeError(f"Failed to deserialize {engine_path}")
+        expected = _ar_io_signature(self.trt, 'draft', self.batch)
+        _validate_engine_io(self.engine, self.trt, expected, 'Draft')
         self.context = self.engine.create_execution_context(); self.cache = cache
+        if self.context is None: raise RuntimeError('Failed to create Draft execution context')
         self.mask = torch.empty(batch,1,7,135,device=device,dtype=torch.bool)
         self.hidden = torch.empty(batch,7,1280,device=device,dtype=torch.float32)
         self.base = torch.empty(batch,7,8194,device=device,dtype=torch.float32)
@@ -251,11 +260,12 @@ class NativeDraftFullBank113:
         model=draft.model;pool=draft.pool;param=next(model.parameters())
         self.cache=torch.empty(len(model.layers),2,pool.max_slots,model.layers[0].num_heads,
                                128,model.layers[0].head_dim,device=param.device,dtype=param.dtype)
-        self.backends={};self.graphs={};self.draft=draft
+        self.backends={};self.graphs={};self.draft=draft;self.artifacts={}
         for raw_batch,raw_path in plan["engines"].items():
             batch=int(raw_batch)
             if batch>pool.max_slots//2:continue
-            path=Path(raw_path);path=path if path.is_absolute() else (plan_file.parent/path).resolve()
+            path, identity = _plan_engine_identity(plan_file, plan, raw_batch, raw_path)
+            self.artifacts[batch] = identity
             self.backends[batch]=NativeDraftFull113(path,batch,self.cache,param.device)
         pool.native_bank=self
 
@@ -277,7 +287,8 @@ class NativeDraftFullBank113:
             self.graphs[batch,128]=capture(
                 lambda aa,pp,ss,ll,b=backend:b.run(model._noise_embeddings(aa,pp),ss,ll),
                 (anchors,positions,slots,lengths))
-        return dict(keys=[list(k) for k in self.graphs],backend="TensorRT 11.3 full Draft")
+        return dict(keys=[list(k) for k in self.graphs],backend="TensorRT 11.3 full Draft",
+                    artifacts=self.artifacts)
 
     def enabled_for_total(self,total):
         # ``total`` is the padded count of newly committed context tokens, not
@@ -288,36 +299,150 @@ class NativeDraftFullBank113:
         return bool(self.backends)
 
 
+def _plan_engine_identity(plan_file, plan, raw_batch, raw_path):
+    path = Path(raw_path)
+    path = path if path.is_absolute() else (plan_file.parent / path).resolve()
+    with path.open('rb') as handle:
+        digest = hashlib.file_digest(handle, 'sha256').hexdigest()
+    expected = plan.get('engine_sha256', {}).get(str(raw_batch))
+    if expected is not None and digest != expected:
+        raise ValueError(f'TensorRT engine hash mismatch: {path}')
+    provenance = plan.get('provenance', {}).get(str(raw_batch))
+    return path, dict(path=str(path), sha256=digest, plan_hash_verified=expected is not None,
+                      provenance_status='recorded_not_audited' if provenance else 'legacy_unverified',
+                      numerical_audit_pass=False)
+
+
+def _ar_io_signature(trt, component, batch):
+    inp, out = trt.TensorIOMode.INPUT, trt.TensorIOMode.OUTPUT
+    if component == 'target':
+        expected = {'x': ((batch, 8, 1280), trt.float32, inp),
+                    'mask': ((batch, 1, 8, 128), trt.bool, inp),
+                    'write_indices': ((batch,), trt.int32, inp),
+                    'logits': ((batch, 8, 8194), trt.float32, out),
+                    'selected': ((batch, 8, 6400), trt.float32, out),
+                    'final': ((batch, 8, 1280), trt.float32, out)}
+        for layer in range(24):
+            for letter in ('k', 'v'):
+                for direction, mode in (('in', inp), ('out', out)):
+                    expected[f'{letter}_cache_{direction}_{layer}'] = ((batch, 20, 128, 64), trt.bfloat16, mode)
+        return expected
+    if component == 'draft':
+        expected = {'x': ((batch, 7, 1280), trt.float32, inp),
+                    'mask': ((batch, 1, 7, 135), trt.bool, inp),
+                    'hidden': ((batch, 7, 1280), trt.float32, out),
+                    'base': ((batch, 7, 8194), trt.float32, out)}
+        for layer in range(3):
+            for letter in ('k', 'v'):
+                expected[f'{letter}_cache_{layer}'] = ((batch, 20, 128, 64), trt.float32, inp)
+        return expected
+    raise ValueError(f'Unknown AR component: {component}')
+
+
+def _validate_engine_io(engine, trt, expected, component):
+    """Validate the physical binding contract before allocating/enqueuing buffers."""
+    names = [engine.get_tensor_name(i) for i in range(engine.num_io_tensors)]
+    if len(names) != len(expected) or set(names) != set(expected):
+        raise ValueError(f"TensorRT {component} I/O names mismatch: {names}; expected {list(expected)}")
+    for name, (shape, dtype, mode) in expected.items():
+        actual = (tuple(engine.get_tensor_shape(name)), engine.get_tensor_dtype(name),
+                  engine.get_tensor_mode(name))
+        if actual != (shape, dtype, mode):
+            raise ValueError(f"TensorRT {component} I/O mismatch for {name}: {actual}; "
+                             f"expected {(shape, dtype, mode)}")
+        if engine.get_tensor_location(name) != trt.TensorLocation.DEVICE:
+            raise ValueError(f"TensorRT {component} I/O {name} must use device memory")
+        if engine.get_tensor_format(name) != trt.TensorFormat.LINEAR:
+            raise ValueError(f"TensorRT {component} I/O {name} must use contiguous LINEAR format")
+
+
+def _validate_acoustic_io(engine, trt, expected):
+    return _validate_engine_io(engine, trt, expected, 'acoustic')
+
+
+def _acoustic_route(wrapper, args):
+    """Read tensor metadata only: safe during capture and without a CUDA context."""
+    reason = None
+    for (name, shape, dtype), value in zip(wrapper.input_signature, args):
+        if not isinstance(value, torch.Tensor):
+            reason = f"{name}.type"
+        elif tuple(value.shape) != shape:
+            reason = f"{name}.shape"
+        elif value.dtype != dtype:
+            reason = f"{name}.dtype"
+        elif value.device != wrapper.device or value.device.type != "cuda":
+            reason = f"{name}.device"
+        elif value.layout != torch.strided or not value.is_contiguous():
+            reason = f"{name}.layout"
+        if reason is not None:
+            break
+    if len(args) != len(wrapper.input_signature):
+        reason = "argument_count"
+    first = args[0] if args else None
+    shape = tuple(first.shape) if isinstance(first, torch.Tensor) else ()
+    return dict(kind="tensorrt" if reason is None else "eager",
+                backend="tensorrt113" if reason is None else "eager",
+                candidate_backend="tensorrt113", component=wrapper.component,
+                batch=shape[0] if shape else None, frames=shape[-1] if len(shape) == 3 else None,
+                engine_batch=wrapper.batch, engine_frames=wrapper.frames,
+                plan=wrapper.plan, sha256=wrapper.engine_sha256, reason=reason,
+                plugins=list(wrapper.plugins))
+
+
 class NativeCFMSolver113:
-    """Static B8/F310 full two-step CFM Solver on the shared TRT 11.3 runtime."""
+    """Static B1/B4/B8, F310/P258 two-step CFM on the shared TRT 11.3 runtime."""
 
     def __init__(self, plan_path, eager):
         import json
         plan_file=Path(plan_path).resolve();plan=json.loads(plan_file.read_text())
-        if int(plan.get("format",-1))!=1 or int(plan.get("batch",-1))!=8 or int(plan.get("frames",-1))!=310:
-            raise ValueError("Expected static TensorRT 11.3 B8/F310 CFM plan")
+        if (plan.get("format") != 1 or type(plan.get("batch")) is not int or
+                plan["batch"] not in (1, 4, 8) or plan.get("frames") != 310 or
+                plan.get("prompt_frames") != 258):
+            raise ValueError("Expected static TensorRT 11.3 B1/B4/B8, F310/P258 CFM plan")
+        self.batch=plan["batch"];self.frames=310;self.component="cfm";self.plugins=[]
+        self.plan=str(plan_file)
         engine_path=Path(plan["engine"])
         if not engine_path.is_absolute():engine_path=(plan_file.parent/engine_path).resolve()
-        if hashlib.sha256(engine_path.read_bytes()).hexdigest()!=plan.get("sha256"):
+        serialized=engine_path.read_bytes();self.engine_sha256=hashlib.sha256(serialized).hexdigest()
+        if self.engine_sha256!=plan.get("sha256"):
             raise ValueError("TensorRT 11.3 CFM engine hash mismatch")
         self.trt=_import_trt113();self.runtime=self.trt.Runtime(self.trt.Logger(self.trt.Logger.ERROR))
-        self.engine=self.runtime.deserialize_cuda_engine(engine_path.read_bytes())
+        self.engine=self.runtime.deserialize_cuda_engine(serialized)
         if self.engine is None:raise RuntimeError(f"Failed to deserialize {engine_path}")
+        b=self.batch;trt=self.trt
+        self.input_signature=(("x",(b,80,310),torch.float32),
+                              ("prompt",(b,80,310),torch.float32),
+                              ("lengths",(b,),torch.int64),
+                              ("style",(b,192),torch.float32),
+                              ("mu",(b,310,512),torch.float32),
+                              ("mask",(b,1,310),torch.bool))
+        dtypes={torch.float32:trt.float32,torch.int64:trt.int64,torch.bool:trt.bool}
+        expected={name:(shape,dtypes[dtype],trt.TensorIOMode.INPUT)
+                  for name,shape,dtype in self.input_signature}
+        expected["output"]=((b,80,310),trt.float32,trt.TensorIOMode.OUTPUT)
+        _validate_acoustic_io(self.engine,trt,expected)
         self.context=self.engine.create_execution_context();self.eager=eager
+        if self.context is None:raise RuntimeError("Failed to create TensorRT CFM execution context")
         self.model=eager.model;self.times=eager.times;self.identity=dict(eager.identity)
-        self.identity.update(backend="TensorRT 11.3 native",batch=8,frames=310,plan=str(plan_file))
-        self.observer=None;self.calls=0;self.fallbacks=0
-        device=next(eager.model.parameters()).device
-        self.output=torch.empty(8,80,310,device=device,dtype=torch.float32)
+        self.identity.update(backend="TensorRT 11.3 native",batch=b,frames=310,
+                             prompt_frames=258,plan=self.plan,engine_sha256=self.engine_sha256,
+                             precision=plan.get('precision','BF16 learned matrices; FP32 interfaces and solver accumulation'),
+                             interface_precision='FP32')
+        self.observer=None;self.calls=0;self.fallbacks=0;self.fallback_reasons={}
+        self.device=next(eager.model.parameters()).device
+        if self.device.type != "cuda":raise ValueError("TensorRT CFM model must reside on CUDA")
+        self.output=torch.empty(b,80,310,device=self.device,dtype=torch.float32)
+
+    def route_for_signature(self,*args):
+        return _acoustic_route(self,args)
+
+    describe_route=route_for_signature
 
     def __call__(self,x,prompt,lengths,style,mu,mask):
-        signature=(x.shape==(8,80,310) and prompt.shape==(8,80,310) and
-                   lengths.shape==(8,) and style.shape==(8,192) and mu.shape==(8,310,512) and
-                   mask.shape==(8,1,310) and x.dtype is torch.float32 and
-                   prompt.dtype is torch.float32 and lengths.dtype is torch.int64 and
-                   style.dtype is torch.float32 and mu.dtype is torch.float32 and mask.dtype is torch.bool)
-        if not signature:
+        route=self.route_for_signature(x,prompt,lengths,style,mu,mask)
+        if route["kind"] != "tensorrt":
             self.fallbacks+=1
+            reason=route["reason"];self.fallback_reasons[reason]=self.fallback_reasons.get(reason,0)+1
             return self.eager(x,prompt,lengths,style,mu,mask)
         addresses={"x":x.data_ptr(),"prompt":prompt.data_ptr(),"lengths":lengths.data_ptr(),
                    "style":style.data_ptr(),"mu":mu.data_ptr(),"mask":mask.data_ptr(),
@@ -331,35 +456,65 @@ class NativeCFMSolver113:
         return self.output
 
     def stats(self):
-        return dict(backend="TensorRT 11.3 native full two-step CFM Solver",batch=8,frames=310,
-                    calls=self.calls,fallbacks=self.fallbacks,identity=self.identity)
+        return dict(backend="TensorRT 11.3 native full two-step CFM Solver",batch=self.batch,frames=310,
+                    prompt_frames=258,calls=self.calls,fallbacks=self.fallbacks,
+                    fallback_reasons=dict(self.fallback_reasons),identity=dict(self.identity))
 
 
 class NativeVocoder113:
-    """Static B8/F52 native BigVGAN engine with in-engine Quick Plugins."""
+    """Static B1/B4/B8, F52 BigVGAN TRT engine including in-engine Quick Plugins."""
 
     def __init__(self, plan_path, eager):
         import json
         from acc_infer_clear.tensorrt_backend.vocoder_plugin import register
 
         plan_file=Path(plan_path).resolve();plan=json.loads(plan_file.read_text())
-        if int(plan.get("format",-1))!=1 or int(plan.get("batch",-1))!=8 or int(plan.get("frames",-1))!=52:
-            raise ValueError("Expected static TensorRT 11.3 B8/F52 Vocoder plan")
+        if (plan.get("format") != 1 or type(plan.get("batch")) is not int or
+                plan["batch"] not in (1, 4, 8) or plan.get("frames") != 52):
+            raise ValueError("Expected static TensorRT 11.3 B1/B4/B8, F52 Vocoder plan")
+        self.batch=plan["batch"];self.frames=52;self.component="vocoder"
+        self.plugins=plan.get("plugins",["Quick Plugins (inventory unspecified)"])
+        if not isinstance(self.plugins,list) or any(not isinstance(p,str) for p in self.plugins):
+            raise ValueError("TensorRT Vocoder plugins must be a list of names")
+        self.plan=str(plan_file)
+        self.precision=plan.get('precision','BF16 learned convolutions; FP32 alias-free activation and interfaces')
         engine_path=Path(plan["engine"])
         if not engine_path.is_absolute():engine_path=(plan_file.parent/engine_path).resolve()
-        if hashlib.sha256(engine_path.read_bytes()).hexdigest()!=plan.get("sha256"):
+        serialized=engine_path.read_bytes();self.engine_sha256=hashlib.sha256(serialized).hexdigest()
+        if self.engine_sha256!=plan.get("sha256"):
             raise ValueError("TensorRT 11.3 Vocoder engine hash mismatch")
         self.trt=_import_trt113();register()
         self.runtime=self.trt.Runtime(self.trt.Logger(self.trt.Logger.ERROR))
-        self.engine=self.runtime.deserialize_cuda_engine(engine_path.read_bytes())
+        self.engine=self.runtime.deserialize_cuda_engine(serialized)
         if self.engine is None:raise RuntimeError(f"Failed to deserialize {engine_path}")
+        b=self.batch;trt=self.trt
+        self.input_signature=(("mel",(b,80,52),torch.float32),)
+        expected={"mel":((b,80,52),trt.float32,trt.TensorIOMode.INPUT),
+                  "pcm":((b,1,13312),trt.float32,trt.TensorIOMode.OUTPUT)}
+        _validate_acoustic_io(self.engine,trt,expected)
         self.context=self.engine.create_execution_context();self.eager=eager
-        self.calls=0;self.fallbacks=0;self.plan=str(plan_file)
-        self.output=torch.empty(8,1,13312,device="cuda",dtype=torch.float32)
+        if self.context is None:raise RuntimeError("Failed to create TensorRT Vocoder execution context")
+        self.calls=0;self.fallbacks=0;self.fallback_reasons={}
+        # The serving entrypoint is usually BigVGAN.forward, a bound method.
+        from itertools import chain
+        model=getattr(eager,"__self__",eager)
+        sample=next(chain(model.parameters(),model.buffers()),None)
+        if sample is None or sample.device.type != "cuda":
+            raise ValueError("TensorRT Vocoder reference model must reside on CUDA")
+        self.device=sample.device
+        self.output=torch.empty(b,1,13312,device=self.device,dtype=torch.float32)
+
+    def route_for_signature(self,*args):
+        return _acoustic_route(self,args)
+
+    describe_route=route_for_signature
 
     def __call__(self,mel):
-        if mel.shape!=(8,80,52) or mel.dtype is not torch.float32:
-            self.fallbacks+=1;return self.eager(mel)
+        route=self.route_for_signature(mel)
+        if route["kind"] != "tensorrt":
+            self.fallbacks+=1
+            reason=route["reason"];self.fallback_reasons[reason]=self.fallback_reasons.get(reason,0)+1
+            return self.eager(mel)
         for name,address in (("mel",mel.data_ptr()),("pcm",self.output.data_ptr())):
             if not self.context.set_tensor_address(name,address):
                 raise RuntimeError(f"TensorRT refused Vocoder binding {name}")
@@ -368,5 +523,8 @@ class NativeVocoder113:
         self.calls+=1;return self.output
 
     def stats(self):
-        return dict(backend="TensorRT 11.3 native BigVGAN with alias-free plugin",
-                    batch=8,frames=52,calls=self.calls,fallbacks=self.fallbacks,plan=self.plan)
+        return dict(backend="TensorRT 11.3 BigVGAN with in-engine Quick Plugins",
+                    batch=self.batch,frames=52,calls=self.calls,fallbacks=self.fallbacks,
+                    fallback_reasons=dict(self.fallback_reasons),plan=self.plan,
+                    sha256=self.engine_sha256,plugins=list(self.plugins),
+                    precision=self.precision,interface_precision='FP32')

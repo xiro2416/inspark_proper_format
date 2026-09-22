@@ -1,9 +1,21 @@
-# InSpark Marlin
+# InSpark inference — SM89 / historical SM120
+
+The current work targets `xiro2416/inspark_proper_format`. Independent SM89
+B1/B4 TensorRT 11.3 profiles, their exact engine boundaries and audit policy are
+documented in [TENSORRT113_B1_B4.md](TENSORRT113_B1_B4.md). The original local B8
+implementation is preserved in commit `813eb3d`; B8 remains available.
+
+The material below describes the **historical SM120 deployment**. Its numerical,
+quality and performance claims must not be applied to SM89. Architecture migration
+and the complete same-model eager/compile audit are tracked in
+[IMPLEMENTATION_PROGRESS.md](IMPLEMENTATION_PROGRESS.md).
+
+## Historical SM120 deployment
 
 Inference-only, first-packet-oriented IndexTTS2 runtime with Universal DSpark,
 batched Target verification, native FP8 kernels, explicit CUDA Graphs and a
 two-step distilled CFM. This repository does **not** contain training code,
-datasets, profiling reports or official IndexTTS2 weights.
+datasets or official IndexTTS2 weights. Profile-specific reports are included.
 
 The published execution plans are validated only for NVIDIA RTX 6000D
 (SM120, 156 SMs), CUDA 12.8, PyTorch 2.8.0+cu128 and Triton 3.5.0. Do not copy

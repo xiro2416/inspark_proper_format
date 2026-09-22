@@ -42,12 +42,24 @@ def mark_keep(keep,slots,lengths):
     b=slots.numel();_mark_keep[(b,)](keep,slots,lengths,b,keep.shape[1],num_warps=1)
 
 @triton.jit
-def _status(READY,FAILURES,OUT,INITIAL:tl.constexpr,B:tl.constexpr,BLOCK:tl.constexpr):
+def _status(READY,FAILURES,OUT,PAST,DRAFT,INITIAL:tl.constexpr,B:tl.constexpr,BLOCK:tl.constexpr,CHECK_CAPACITY:tl.constexpr):
     i=tl.arange(0,BLOCK);all_ready=tl.sum(tl.load(READY+i,mask=i<B,other=1).to(tl.int32),axis=0)==BLOCK
-    failed=tl.load(FAILURES)>INITIAL;tl.store(OUT,all_ready.to(tl.int32)|(failed.to(tl.int32)<<1))
+    failed=tl.load(FAILURES)>INITIAL
+    capacity=tl.full((),0,tl.int32)
+    if CHECK_CAPACITY:
+        # The Target verification and Context commit can each write eight
+        # positions, including for rows evaluated inside a fixed-batch graph.
+        past=tl.load(PAST+i,mask=i<B,other=0)
+        draft=tl.load(DRAFT+i,mask=i<B,other=0)
+        capacity=tl.sum(((i<B)&((past+8>128)|(draft+8>128))).to(tl.int32),axis=0)>0
+    tl.store(OUT,all_ready.to(tl.int32)|(failed.to(tl.int32)<<1)|(capacity.to(tl.int32)<<2))
 
-def status(ready,failures,out,initial):
-    block=triton.next_power_of_2(ready.numel());_status[(1,)](ready,failures,out,int(initial),ready.numel(),block,num_warps=1)
+def status(ready,failures,out,initial,past=None,draft_lengths=None):
+    if (past is None)!=(draft_lengths is None):raise ValueError('Both cache lengths are required')
+    check=past is not None
+    block=triton.next_power_of_2(ready.numel())
+    _status[(1,)](ready,failures,out,past if check else ready,
+        draft_lengths if check else ready,int(initial),ready.numel(),block,check,num_warps=1)
 
 def prepare(device,eos,max_tokens,batches=(8,)):
     """Compile selected Batch commit/keep/status signatures before admission."""
@@ -61,5 +73,6 @@ def prepare(device,eos,max_tokens,batches=(8,)):
         commit(proposed,correction,counts,flags,flags,buffer,lengths,past,history,rounds,done,committed,last,eos,max_tokens,active)
         keep=torch.zeros(2*max(b,8),2048,device=device,dtype=torch.int32);slots=torch.arange(b,device=device,dtype=torch.int32);mark_keep(keep,slots,past)
         state=torch.zeros((),device=device,dtype=torch.int32);status(done,torch.zeros_like(state),state,0)
+        status(done,torch.zeros_like(state),state,0,past,past)
     torch.cuda.current_stream().synchronize()
     return dict(batches=list(batches),commit_capacity=capacity,keep_capacity=2048,online_compile=False)

@@ -24,6 +24,7 @@ def main() -> None:
     from acc_infer_clear.config import load
     from acc_infer_clear.runtime.device import GPULease
     from acc_infer_clear.streaming.engine import Engine
+    from trt113_provenance import capture_onnx_artifact, capture_provenance, file_record
 
     if args.frames != args.prompt_frames + 52:
         raise ValueError("First-head CFM export requires prompt_frames + 52")
@@ -50,6 +51,8 @@ def main() -> None:
         engine = Engine(config)
         try:
             engine.prepare_precision("bf16", ["target", "draft", "cfm", "vocoder"], True)
+            provenance = capture_provenance("cfm", config, args.config, model=engine)
+            provenance["source"]["snapshot"] = "local source files before ONNX export"
             model = FullCFMSolver(engine.student).eval().requires_grad_(False)
             device = next(model.parameters()).device
             b, frames, prompt_frames = args.batch, args.frames, args.prompt_frames
@@ -75,12 +78,22 @@ def main() -> None:
                 dynamo=False,
                 external_data=True,
             )
+            onnx_artifact = capture_onnx_artifact(output)
             report = {
                 "batch": b,
                 "frames": frames,
                 "prompt_frames": prompt_frames,
                 "onnx": str(output),
                 "bytes": output.stat().st_size,
+                "onnx_sha256": onnx_artifact["sha256"],
+                "onnx_artifact": onnx_artifact,
+                "provenance": provenance,
+                "provenance_status": provenance["status"],
+                "exporter": file_record(__file__, "onnx_exporter"),
+                "export_settings": {"opset": 20, "dynamo": False, "external_data": True,
+                                    "constant_folding": True, "precision": "bf16_fp32_interfaces",
+                                    "batch": b, "frames": frames, "prompt_frames": prompt_frames,
+                                    "intervals": [[0, 0.5], [0.5, 1]], "cfg": 0},
                 "inputs": [
                     {"name": name, "shape": list(value.shape), "dtype": str(value.dtype)}
                     for name, value in zip(("x", "prompt", "lengths", "style", "mu", "mask"), inputs)

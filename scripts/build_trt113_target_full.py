@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Build a fixed-batch full 24-layer Target engine with native TRT 11.3."""
 import argparse
+import hashlib
 import json
 import os
 import time
@@ -11,7 +12,10 @@ def main():
     p = argparse.ArgumentParser(); p.add_argument("--gpu", type=int, default=6)
     p.add_argument("--batch", type=int, required=True); p.add_argument("--config", default="configs/runtime.yaml")
     p.add_argument("--deployment", default="configs/sm89_bf16_target_trt113_lab.json")
-    p.add_argument("--out-dir", default="artifacts/trt113_target_full"); args = p.parse_args()
+    p.add_argument("--out-dir", default="artifacts/trt113_target_full")
+    p.add_argument("--plan", help="Write a single-batch plan with engine hash and build provenance")
+    p.add_argument("--optimization-level", type=int, default=3, choices=range(6))
+    args = p.parse_args()
     os.environ["CUDA_VISIBLE_DEVICES"] = str(args.gpu)
     import numpy as np
     import torch
@@ -20,17 +24,21 @@ def main():
     from acc_infer_clear.runtime.device import GPULease
     from acc_infer_clear.streaming.engine import Engine
     from acc_infer_clear.tensorrt_backend.native113 import _import_trt113
+    from trt113_provenance import capture_provenance
     trt = _import_trt113()
+    if not trt.__version__.startswith("11.3."):
+        raise RuntimeError(f"Expected TensorRT 11.3, got {trt.__version__}")
 
     config = load_config(args.config); config["max_batch"] = args.batch
     with GPULease(args.gpu):
         engine = Engine(config)
         try:
             engine.prepare_deployment(load_deployment(args.deployment))
+            provenance = capture_provenance("target", config, args.config, args.deployment, engine)
             tm = engine.rt.target.target.model; blocks = tm.transformer.h; b = args.batch
             logger = trt.Logger(trt.Logger.WARNING); builder = trt.Builder(logger)
             network = builder.create_network(1 << int(trt.NetworkDefinitionCreationFlag.STRONGLY_TYPED))
-            keepalive = []
+            keepalive = []; constants_digest = hashlib.sha256()
 
             def constant(tensor, shape=None, dtype=None):
                 value = tensor.detach().cpu().contiguous()
@@ -39,6 +47,9 @@ def main():
                     weights = trt.Weights(trt.bfloat16, value.ctypes.data, value.size)
                 else:
                     value = value.float().numpy().copy(); keepalive.append(value); weights = trt.Weights(value)
+                constants_digest.update(json.dumps({"shape": list(shape or tuple(tensor.shape)),
+                                                    "storage_dtype": str(value.dtype)}, sort_keys=True).encode())
+                constants_digest.update(memoryview(value).cast("B"))
                 return network.add_constant(shape or tuple(tensor.shape), weights).get_output(0)
 
             def cast(x, dtype): return network.add_cast(x, dtype).get_output(0)
@@ -106,15 +117,46 @@ def main():
                 bias = constant(lm_linear.bias, (1, 1, lm_linear.bias.numel()), trt.float32)
                 logits = network.add_elementwise(logits, bias, trt.ElementWiseOperation.SUM).get_output(0)
             logits.name = "logits"; network.mark_output(logits)
-            build = builder.create_builder_config(); build.builder_optimization_level = 3
+            build = builder.create_builder_config(); build.builder_optimization_level = args.optimization_level
+            # lm_head and FP32 interfaces must not silently use single-TF32 GEMM.
+            build.clear_flag(trt.BuilderFlag.TF32)
             build.set_memory_pool_limit(trt.MemoryPoolType.WORKSPACE, 8 << 30)
             started = time.time(); serialized = builder.build_serialized_network(network, build)
             if serialized is None: raise RuntimeError("TensorRT full Target build failed")
-            out = Path(args.out_dir); out.mkdir(parents=True, exist_ok=True)
+            out = Path(args.out_dir).resolve(); out.mkdir(parents=True, exist_ok=True)
             path = out / f"target_full_b{b}.engine"; path.write_bytes(bytes(serialized))
-            report = {"batch": b, "engine": str(path), "bytes": path.stat().st_size,
+            artifact_hash = hashlib.sha256(path.read_bytes()).hexdigest()
+            provenance["constant_data_sha256"] = constants_digest.hexdigest()
+            settings = {"optimization_level": args.optimization_level, "workspace_bytes": 8 << 30,
+                        "strongly_typed": True, "tf32": bool(build.get_flag(trt.BuilderFlag.TF32)),
+                        "batch": b, "query_tokens": 8, "kv_limit": 128,
+                        "attention_decomposable": True, "layers": len(blocks)}
+            runtime = trt.Runtime(logger); built = runtime.deserialize_cuda_engine(serialized)
+            if built is None:
+                raise RuntimeError("Built Target engine could not be deserialized")
+            tensors = [{"name": built.get_tensor_name(index),
+                        "mode": str(built.get_tensor_mode(built.get_tensor_name(index))),
+                        "dtype": str(built.get_tensor_dtype(built.get_tensor_name(index))),
+                        "shape": list(built.get_tensor_shape(built.get_tensor_name(index)))}
+                       for index in range(built.num_io_tensors)]
+            report = {"format": 1, "backend": "TensorRT 11.3 native full Target",
+                      "precision": "BF16 Linear/KV with FP32 interfaces, norms, residuals and lm_head",
+                      "batch": b, "engine": str(path), "bytes": path.stat().st_size, "sha256": artifact_hash,
                       "build_seconds": time.time() - started, "trt": trt.__version__,
-                      "optimization_level": 3, "workspace_bytes": 8 << 30, "cache_outputs": cache_names}
+                      "torch": torch.__version__, "cuda": torch.version.cuda,
+                      **provenance["hardware"], "provenance": provenance, "builder_settings": settings,
+                      "tf32": settings["tf32"], "strongly_typed": True, "kv_limit": 128,
+                      "optimization_level": args.optimization_level, "workspace_bytes": 8 << 30,
+                      "tensors": tensors, "cache_outputs": cache_names}
+            if args.plan:
+                plan_path = Path(args.plan).resolve(); plan_path.parent.mkdir(parents=True, exist_ok=True)
+                plan = {key: report[key] for key in ("format", "backend", "precision", "kv_limit", "trt",
+                        "torch", "cuda", "gpu_name", "sm", "optimization_level", "workspace_bytes", "tf32", "strongly_typed")}
+                plan.update(engines={str(b): os.path.relpath(path, plan_path.parent)},
+                            engine_sha256={str(b): artifact_hash}, provenance={str(b): provenance},
+                            builder_settings={str(b): settings}, tensors={str(b): tensors},
+                            provenance_status="recorded_not_audited")
+                plan_path.write_text(json.dumps(plan, indent=2))
             (out / f"target_full_b{b}.json").write_text(json.dumps(report, indent=2)); print(json.dumps(report, indent=2))
         finally:
             engine.close()

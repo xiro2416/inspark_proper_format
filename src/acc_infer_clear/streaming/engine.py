@@ -179,7 +179,7 @@ class Engine(StreamingCore):
                 use_device=(getattr(self,'device_round_b8',False) and index==0 and
                             max_rounds is None and len(rows) in self.device_round_batches and
                             max(r.past_length for r in rows)+8<=128 and
-                            max(r.cache.length for r in rows)+7<=128)
+                            max(r.cache.length for r in rows)+8<=128)
                 if use_device:
                     self.device_round_attempts+=1
                     if self.device_round_bank is not None:
@@ -187,9 +187,10 @@ class Engine(StreamingCore):
                     else:
                         from acc_infer_clear.dspark.device_round import DeviceRoundHead
                         device_runner=DeviceRoundHead(self.rt,rows,self.config['max_speech_tokens']);device_runner.run()
-                    if device_runner.failed:self.device_round_fallbacks+=1
-                    else:
-                        self.device_round_successes+=1
+                    if device_runner.failed or getattr(device_runner,'fallback_reason',None):
+                        self.device_round_fallbacks+=1
+                    else:self.device_round_successes+=1
+                    if not device_runner.failed:
                         for row in rows:owner[id(row)]['rounds']+=len(row.accepted)
                 while not (all if barrier else any)(is_ready(row) for row in rows):
                     active=[row for row in rows if not is_ready(row)]

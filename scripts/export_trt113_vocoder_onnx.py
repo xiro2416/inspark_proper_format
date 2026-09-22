@@ -25,6 +25,7 @@ def main() -> None:
     from acc_infer_clear.config import load
     from acc_infer_clear.runtime.device import GPULease
     from acc_infer_clear.streaming.engine import Engine
+    from trt113_provenance import capture_onnx_artifact, capture_provenance, file_record
 
     class AliasFreePluginFunction(torch.autograd.Function):
         @staticmethod
@@ -173,6 +174,8 @@ def main() -> None:
         engine = Engine(config)
         try:
             engine.prepare_precision("bf16", ["target", "draft", "cfm", "vocoder"], True)
+            provenance = capture_provenance("vocoder", config, args.config, model=engine)
+            provenance["source"]["snapshot"] = "local source files before ONNX export"
             model = engine.tts.bigvgan.eval().requires_grad_(False)
             device = next(model.buffers()).device
             example = torch.randn(
@@ -192,9 +195,18 @@ def main() -> None:
                 input_names=["mel"], output_names=["pcm"], dynamo=False,
                 external_data=True, custom_opsets={"inspark": 1},
             )
+            onnx_artifact = capture_onnx_artifact(output)
             report = {
                 "batch": args.batch, "frames": args.frames,
                 "onnx": str(output), "bytes": output.stat().st_size,
+                "onnx_sha256": onnx_artifact["sha256"], "onnx_artifact": onnx_artifact,
+                "provenance": provenance, "provenance_status": provenance["status"],
+                "exporter": file_record(__file__, "onnx_exporter"),
+                "export_settings": {"opset": 20, "dynamo": False, "external_data": True,
+                                    "constant_folding": True, "precision": "bf16_fp32_interfaces",
+                                    "batch": args.batch, "frames": args.frames,
+                                    "regular_conv": args.regular_conv,
+                                    "custom_opsets": {"inspark": 1}},
                 "input": {"shape": list(example.shape), "dtype": str(example.dtype)},
                 "output": {"shape": list(expected.shape), "dtype": str(expected.dtype)},
                 "plugin_nodes": len(changed), "plugin_paths": changed,

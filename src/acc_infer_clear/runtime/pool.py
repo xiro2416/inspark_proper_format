@@ -3,6 +3,38 @@ import multiprocessing as mp
 import os,time,traceback,sys
 from contextlib import redirect_stdout
 
+def _engine_stats(engine):
+    """Separate backend enqueues from replays, which never call Python wrappers."""
+    head=getattr(engine,'head_graphs',None)
+    graph_stats=head.stats() if head is not None else None
+    acoustic={}
+    for component,fn in (('cfm',getattr(engine,'student',None)),('vocoder',getattr(engine,'vocoder',None))):
+        stats=getattr(fn,'stats',None)
+        wrapper=stats() if callable(stats) else {}
+        total=dict(calls=int(getattr(fn,'calls',0)),fallbacks=int(getattr(fn,'fallbacks',0)))
+        prepare=(graph_stats or {}).get('wrapper_prepare_counts',{}).get(component,dict(calls=0,fallbacks=0))
+        acoustic[component]=dict(wrapper=wrapper,wrapper_total=total,wrapper_prepare=prepare,
+            wrapper_direct=dict(calls=total['calls']-prepare['calls'],fallbacks=total['fallbacks']-prepare['fallbacks']),
+            graph_routes=[row for row in (graph_stats or {}).get('route_counts',[])
+                          if row['route']['component']==component])
+    result=dict(sessions=len(engine.sessions),draft_calls=engine.rt.proposal.calls,target_calls=engine.rt.target.calls,
+        device_round_attempts=engine.device_round_attempts,device_round_successes=engine.device_round_successes,
+        device_round_fallbacks=engine.device_round_fallbacks,
+        device_target_steps=getattr(engine.rt,'device_target_steps',0),
+        device_draft_steps=getattr(engine.rt.backbone,'device_steps',0),
+        draft_backbone_calls=getattr(engine.rt.backbone,'calls',0),
+        native_target_steps=getattr(engine.rt,'native_target_steps',0),
+        native_draft_steps=getattr(engine.rt.backbone,'native_full_steps',0),
+        native_draft_compare=list(getattr(engine.rt.backbone,'native_compare',())),
+        native_cfm_backend=getattr(getattr(engine,'student',None),'identity',{}).get('backend'),
+        native_cfm_calls=acoustic['cfm']['wrapper_total']['calls'],
+        native_cfm_fallbacks=acoustic['cfm']['wrapper_total']['fallbacks'],
+        native_vocoder_backend=acoustic['vocoder']['wrapper'].get('backend'),
+        native_vocoder_calls=acoustic['vocoder']['wrapper_total']['calls'],
+        native_vocoder_fallbacks=acoustic['vocoder']['wrapper_total']['fallbacks'],
+        head_graphs=graph_stats,acoustic_routes=acoustic)
+    return result
+
 def _worker(gpu,config,pipe):
     from .device import select_gpu
     select_gpu(gpu)
@@ -15,15 +47,7 @@ def _worker(gpu,config,pipe):
             cmd,args,kwargs=pipe.recv()
             if cmd=='close':break
             try:
-                if cmd=='stats':result=dict(sessions=len(engine.sessions),draft_calls=engine.rt.proposal.calls,target_calls=engine.rt.target.calls,
-                    device_round_attempts=engine.device_round_attempts,device_round_successes=engine.device_round_successes,
-                    device_round_fallbacks=engine.device_round_fallbacks,
-                    native_target_steps=getattr(engine.rt,'native_target_steps',0),
-                    native_draft_steps=getattr(engine.rt.backbone,'native_full_steps',0),
-                    native_draft_compare=list(getattr(engine.rt.backbone,'native_compare',())),
-                    native_cfm_backend=getattr(getattr(engine,'student',None),'identity',{}).get('backend'),
-                    native_cfm_calls=getattr(getattr(engine,'student',None),'calls',0),
-                    native_cfm_fallbacks=getattr(getattr(engine,'student',None),'fallbacks',0))
+                if cmd=='stats':result=_engine_stats(engine)
                 elif cmd=='result':
                     s=engine.sessions[args[0]]
                     result=dict(id=args[0],text=s['text'],parts=s['parts'],codes=s['codes'],complete=s['complete'],error=s['error'],chunks=s['chunks'],arrival=s['arrival'],

@@ -1,7 +1,8 @@
 # Codex deployment contract
 
-This is the inference-only release. Do not search for training code, experiment
-reports or profiler traces; they are intentionally absent.
+This is an inference-only repository. SM89 TensorRT implementation, reports and
+audits are in scope; preserve historical SM120 evidence separately. Do not add
+training code or official model weights.
 
 ## Current production path
 
@@ -17,7 +18,20 @@ reports or profiler traces; they are intentionally absent.
 - CFM is the hash-pinned Oracle500 derivative and always uses two intervals
   `[0,.5]` and `[.5,1]` with CFG disabled.
 - First output is 44 acoustic frames with eight frames of right context.
-- No torch.compile, TensorRT, vLLM or online autotuning is used.
+- Backends are explicit: reference PyTorch, offline torch.compile, project
+  Triton/CUDA kernels and TensorRT 11.3 where the selected profile supports it.
+  Serving must not compile, capture graphs or autotune new shapes online.
+
+## Current implementation goal
+
+See `IMPLEMENTATION_PROGRESS.md`. First finish independent SM89 B1/B4
+Target/Draft/CFM/Vocoder TensorRT 11.3 first-head profiles, then publish to
+`xiro2416/inspark_proper_format`, reorganize and perform the full audit.
+Do not stop after the first stage. Six hours is a target, not a hard stop.
+Only physical GPU 6 is authorized for this task; run GPU work sequentially.
+Existing external GPU processes must remain untouched. Explicit shared-GPU
+runs must record pre-existing memory and workload interference.
+All task files, caches and locks belong under `/workspace`.
 
 ## Deployment rules
 

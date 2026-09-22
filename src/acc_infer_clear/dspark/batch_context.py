@@ -89,6 +89,9 @@ class BatchedContextAppend:
         if self.pool is not None:
             for j in normalized:self.pool.attach(j['cache'])
         lengths = [j['selected_hidden'].shape[1] for j in normalized]
+        if self.pool is not None and any(j['cache'].length+n>self.pool.capacity
+                                         for j,n in zip(normalized,lengths)):
+            raise ValueError('Draft context capacity exceeded')
         prepared = torch.cat([m.prepare_context(j['selected_hidden'], j.get('final_hidden')) for j in normalized], dim=1)
         positions = torch.cat([torch.arange(j['cache'].length, j['cache'].length + n, device=prepared.device) for j, n in zip(normalized, lengths)])[None]
         total=prepared.shape[1];bucket=((total+7)//8)*8

@@ -5,10 +5,10 @@ Six-hour target: 2026-09-22 21:32:34 UTC. Completion takes priority over this ta
 
 ## Stage 1 — independent SM89 B1/B4 TensorRT 11.3
 
-- [ ] Preserve original local B8 source snapshot.
-- [ ] Parameterize CFM/Vocoder runtime, builders and validators; verify engine I/O.
-- [ ] Build independent B1/B4 acoustic engines, retaining Target/Draft and B8.
-- [ ] Add trustworthy graph replay routing evidence and cache/shape safety checks.
+- [x] Preserve original local B8 source snapshot: commit `813eb3d`.
+- [x] Parameterize CFM/Vocoder runtime, builders and validators; verify engine I/O.
+- [x] Build independent B1/B4 acoustic engines, retaining Target/Draft and B8.
+- [x] Add trustworthy graph replay routing evidence and cache/shape safety checks.
 - [ ] Verify direct execution, graph replay and real first chunks on GPU 6.
 - [ ] Publish original snapshot and B1/B4 implementation to inspark_proper_format.
 
@@ -48,3 +48,38 @@ Draft identity-slot/K128 checks need attention. Existing real-audio Vocoder A/B
 was reproduced on CPU (16 pairs, mean cosine 0.999989578, mean SNR 58.3034 dB),
 but this is not a complete same-model eager audit. Random Vocoder validation
 has known numerical failures, retained as evidence.
+
+## Execution log
+
+- Original B8 snapshot committed locally; no GitHub push before B1/B4 completion.
+- GPU 6 has 21,854 MiB pre-existing allocations and was idle at preflight.
+  Explicit shared-device mode preserves these processes and records this limit.
+- B1 CFM (1x80x310) and native-convolution Vocoder (1x80x52) built with
+  TensorRT 11.3.0.99, strongly typed, TF32 disabled. B4 builds are in progress.
+- Added ONNX 1.23.0 and pytest 8.4.2 from the Tsinghua mirror; dependency changes
+  include protobuf 7.36.2 and ml-dtypes 0.6.0, to be captured in reproducible setup.
+- First CPU regression run: 17 passed. Cache-boundary tests added subsequently.
+- 2026-09-22 15:49 UTC: 45 CPU tests passed; four GPU-only tests correctly skipped.
+- B1 real first-chunk audit passed two warmups and five measured waves, with
+  Target/Draft native counts matching all execution counts, CFM/Vocoder frozen
+  TRT graph routes, and no runtime fallback. First-chunk P50 42.564 ms,
+  P95 52.785 ms. This does not establish numerical parity, complete EOS or soak.
+- Guarded compact K128 context scatter and device-loop boundaries; the canonical
+  long-context pool remains intact. A GPU boundary regression test is queued.
+- Legacy Target/Draft engine metadata does not attest model checkpoint identity.
+  Builders are being extended to record actual checkpoint and converted-constant
+  hashes; the Target builder must explicitly disable TF32 before new audits.
+- Request-local RNG repair requires an explicit legacy-seed compatibility choice;
+  asked the user asynchronously. No new RNG semantics have been enabled yet.
+- 2026-09-22 16:08 UTC: 73 CPU tests passed; all four GPU boundary tests passed
+  separately on GPU6. B1/B4 source-attested Target and Draft engines were rebuilt
+  with TF32 disabled; original engine files are retained.
+- B4 initial real first-chunk audit also passed: five measured four-request waves,
+  all four TRT routes, no fallback; all-ready P50 74.236 ms. Final routing checks
+  for rebuilt AR engines and retained B8 are queued.
+- Diagnostic numerical results are NOT an overall pass: B1 CFM passes; B4 CFM
+  has 19 native-vs-BF16 and 3 BF16-vs-FP32 out-of-tolerance elements. Random-mel
+  Vocoder B1/B4 fails; these inputs are not a perceptual quality distribution.
+  Source-attested AR B1/B4 also fails strict numerical comparisons, while the
+  measured cache preservation and native-direct/graph invariants pass. Keep the
+  candidate experimental; publish failures without relaxing tolerances.

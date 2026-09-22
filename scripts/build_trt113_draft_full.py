@@ -13,25 +13,32 @@ def main():
     p.add_argument("--batch",type=int,required=True);p.add_argument("--config",default="configs/runtime.yaml")
     p.add_argument("--deployment",default="configs/sm89_bf16_target_trt113_lab.json")
     p.add_argument("--out-dir",default="artifacts/trt113_draft_full")
+    p.add_argument("--plan",help="Write a single-batch plan with engine hash and build provenance")
     p.add_argument("--optimization-level",type=int,default=5,choices=range(6))
     p.add_argument("--stable-block-linears",action="store_true")
     p.add_argument("--debug-outputs",action="store_true");args=p.parse_args()
     os.environ["CUDA_VISIBLE_DEVICES"]=str(args.gpu)
+    import numpy as np
     import torch
     from acc_infer_clear.config import load as load_config
     from acc_infer_clear.runtime.deployment import load as load_deployment
     from acc_infer_clear.runtime.device import GPULease
     from acc_infer_clear.streaming.engine import Engine
     from acc_infer_clear.tensorrt_backend.native113 import _import_trt113
+    from trt113_provenance import capture_provenance
     trt=_import_trt113();config=load_config(args.config);config["max_batch"]=args.batch
+    if not trt.__version__.startswith("11.3."):
+        raise RuntimeError(f"Expected TensorRT 11.3, got {trt.__version__}")
     with GPULease(args.gpu):
         engine=Engine(config)
         try:
             engine.prepare_deployment(load_deployment(args.deployment));m=engine.rt.engine.draft;b=args.batch
+            provenance=capture_provenance("draft",config,args.config,args.deployment,engine)
             if len(m.layers)!=3 or m.hidden_size!=1280 or m.block_size!=7:
                 raise ValueError("Builder is specialized for the deployed three-layer H1280/Q7 Draft")
             logger=trt.Logger(trt.Logger.WARNING);builder=trt.Builder(logger)
             network=builder.create_network(1 << int(trt.NetworkDefinitionCreationFlag.STRONGLY_TYPED));keep=[]
+            constants_digest=hashlib.sha256()
 
             def constant(tensor,shape=None,dtype=None):
                 value=tensor.detach().cpu().contiguous()
@@ -40,6 +47,9 @@ def main():
                     weights=trt.Weights(trt.bfloat16,value.ctypes.data,value.size)
                 else:
                     value=value.float().numpy().copy();keep.append(value);weights=trt.Weights(value)
+                constants_digest.update(json.dumps({"shape":list(shape or tuple(tensor.shape)),
+                                                    "storage_dtype":str(value.dtype)},sort_keys=True).encode())
+                constants_digest.update(memoryview(value).cast("B"))
                 return network.add_constant(shape or tuple(tensor.shape),weights).get_output(0)
             def cast(x,dtype):return network.add_cast(x,dtype).get_output(0)
             def linear(x,module):
@@ -126,8 +136,39 @@ def main():
             build.set_memory_pool_limit(trt.MemoryPoolType.WORKSPACE,8<<30)
             started=time.time();serialized=builder.build_serialized_network(network,build)
             if serialized is None:raise RuntimeError("TensorRT full Draft build failed")
-            out=Path(args.out_dir);out.mkdir(parents=True,exist_ok=True);path=out/f"draft_full_b{b}.engine";path.write_bytes(bytes(serialized))
-            report={"batch":b,"engine":str(path),"bytes":path.stat().st_size,"sha256":hashlib.sha256(path.read_bytes()).hexdigest(),"build_seconds":time.time()-started,"trt":trt.__version__,"optimization_level":args.optimization_level,"workspace_bytes":8<<30,"precision":"BF16 block Linear with FP32 attention/KV/norms/residuals/lm_head/interfaces","tf32":False,"debug_outputs":args.debug_outputs,"stable_block_linears":args.stable_block_linears,"qkv":"three eager-origin projections"}
+            out=Path(args.out_dir).resolve();out.mkdir(parents=True,exist_ok=True);path=out/f"draft_full_b{b}.engine";path.write_bytes(bytes(serialized))
+            artifact_hash=hashlib.sha256(path.read_bytes()).hexdigest()
+            provenance["constant_data_sha256"]=constants_digest.hexdigest()
+            settings={"optimization_level":args.optimization_level,"workspace_bytes":8<<30,
+                      "strongly_typed":True,"tf32":bool(build.get_flag(trt.BuilderFlag.TF32)),
+                      "batch":b,"query_tokens":7,"kv_limit":128,"layers":len(m.layers),
+                      "attention_decomposable":True,"debug_outputs":args.debug_outputs,
+                      "stable_block_linears":args.stable_block_linears,"qkv":"three eager-origin projections"}
+            runtime=trt.Runtime(logger);built=runtime.deserialize_cuda_engine(serialized)
+            if built is None:raise RuntimeError("Built Draft engine could not be deserialized")
+            tensors=[{"name":built.get_tensor_name(index),
+                      "mode":str(built.get_tensor_mode(built.get_tensor_name(index))),
+                      "dtype":str(built.get_tensor_dtype(built.get_tensor_name(index))),
+                      "shape":list(built.get_tensor_shape(built.get_tensor_name(index)))}
+                     for index in range(built.num_io_tensors)]
+            report={"format":1,"backend":"TensorRT 11.3 native full Draft",
+                    "batch":b,"engine":str(path),"bytes":path.stat().st_size,"sha256":artifact_hash,
+                    "build_seconds":time.time()-started,"trt":trt.__version__,"torch":torch.__version__,"cuda":torch.version.cuda,
+                    **provenance["hardware"],"provenance":provenance,"builder_settings":settings,
+                    "optimization_level":args.optimization_level,"workspace_bytes":8<<30,
+                    "precision":"BF16 block Linear with FP32 attention/KV/norms/residuals/lm_head/interfaces",
+                    "tf32":settings["tf32"],"strongly_typed":True,"kv_limit":128,"tensors":tensors,
+                    "debug_outputs":args.debug_outputs,"stable_block_linears":args.stable_block_linears,
+                    "qkv":"three eager-origin projections"}
+            if args.plan:
+                plan_path=Path(args.plan).resolve();plan_path.parent.mkdir(parents=True,exist_ok=True)
+                plan={key:report[key] for key in ("format","backend","precision","kv_limit","trt","torch","cuda",
+                      "gpu_name","sm","optimization_level","workspace_bytes","tf32","strongly_typed")}
+                plan.update(engines={str(b):os.path.relpath(path,plan_path.parent)},
+                            engine_sha256={str(b):artifact_hash},provenance={str(b):provenance},
+                            builder_settings={str(b):settings},tensors={str(b):tensors},
+                            provenance_status="recorded_not_audited")
+                plan_path.write_text(json.dumps(plan,indent=2))
             (out/f"draft_full_b{b}.json").write_text(json.dumps(report,indent=2));print(json.dumps(report,indent=2))
         finally:engine.close()
 
