@@ -162,3 +162,9 @@ has known numerical failures, retained as evidence.
   Full CPU regression after that diagnostic-only change: 212 passed, four GPU
   tests skipped. Independent 8/16 tiers are running; a clearly separate warmed
   B4 control is planned to test the observed early-growth/late-plateau behavior.
+- 2026-09-22 18:35 UTC: independent 8- and 16-concurrency ten-minute tiers
+  passed without OOM: 1,164/1,237 EOS completions and 116/123 cancellations,
+  respectively. Both use maximum B8 execution and the request-isolated legacy
+  B8 engine profile; they do not certify the original shared-RNG profile or
+  legacy engine checkpoint provenance. B4's separate 128-wave warmup control
+  has started, with unchanged 600-second measurement and memory thresholds.

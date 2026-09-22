@@ -51,6 +51,33 @@ CUDA reserved/peak memory is recorded separately; allocator caching alone is not
 
 Runs shorter than 600 seconds can only be `smoke_passed`, with `soak_qualified=false`; absolute memory/long-KV/RNG gates still apply, but a short smoke cannot qualify its memory trend. A >=600-second run must have sufficient trend samples and pass both growth and slope limits. This establishes only the bounded tested window, not an indefinite leak-free guarantee.
 
+### Cold-window failure and a separate warmed control
+
+The [first formal SM89 run](../../reports/sm89/stage2/runtime/soak_600_initial.json)
+passed B1 but failed B4's RSS growth budget: 287.71 MiB exceeded 256 MiB after
+one warmup wave. Its late RSS slope passed. Early growth followed by a plateau
+is not, by itself, proof of a particular cache or proof that no slow leak exists.
+The original failed report is retained unchanged. Its combined diagnostic
+incorrectly labeled the absolute failure as a trend failure too; subsequent code
+reports these predicates independently without changing the overall pass gate.
+
+An explicitly separate B4 control may exercise the corpus before establishing
+the measured baseline, using the same configuration and unchanged budgets:
+
+```bash
+ACC_TRITON_TOOLCHAIN=custom bash scripts/run.sh benchmarks/soak_requests.py \
+  --gpu 6 --reference /workspace/index-tts/data/audio/old/mingxiang_gao.wav \
+  --seconds 600 --concurrency 4 --batch 4 --warmups 128 --strict-isolation \
+  --output /workspace/A_inspark_marlin/.work/soak_b4_warmed_control.json
+```
+
+At B4, 128 warmup waves admit 512 requests without deliberate cancellation.
+For the current 256-case selection rule this covers all case IDs, but not every
+possible numerical, cancellation or operator-shape branch. `warmup_seconds` and
+`warmups` are retained separately; none of that time counts toward the 600-second
+measured window. A warmed pass never erases the cold growth failure or its
+preparation cost. Neither run establishes indefinite stability or eager parity.
+
 ## Allowed OOM and status
 
 Only explicit CUDA out-of-memory errors in a tier named by `--allow-oom-skip-concurrency` can be skipped. The parser never allows 1/4/8 in this list. Non-OOM failures, including memory-gate failures or illegal memory accesses, always fail the run.

@@ -298,11 +298,35 @@ overall conjunction and thresholds. [Regression tests](runtime/soak_diagnostic_l
 cover both an over-budget early allocation with flat late RSS and an excessive
 late slope with a below-budget peak. The original JSON was not rewritten.
 
-Independent 8/16-concurrency runs and a separately labeled B4 fully warmed
-control are in progress. A warmed control will not replace or erase this cold
-growth failure; its preparation cost, warmup count and measured window must be
-reported explicitly. These are bounded stability observations, not numerical,
-quality, isolated-device performance or indefinite leak-free certification.
+Here "cold growth" means growth after one warmup wave, not model cold-start
+latency: model/reference preparation, probes and that warmup are excluded.
+Independent 8/16-concurrency runs completed using the same memory budgets and
+one warmup wave, with the corrected independent diagnostic labels:
+
+| Concurrency / model batch | Measured seconds | Complete EOS / cancelled | Maximum observed KV | Peak drained CUDA growth, MiB | Peak drained RSS growth, MiB | Late RSS slope, MiB/min | Result |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | --- |
+| [8 / B8](runtime/soak_600_c8.json) | 600.97 | 1,164 / 116 | 641 | 0.76 | 177.04 | 1.222 | Passed |
+| [16 / maximum B8](runtime/soak_600_c16.json) | 603.85 | 1,237 / 123 | 588 | 0.76 | 242.20 | 1.140 | Passed; no OOM skip |
+
+Both used request-isolated `sm89_trt113_safe_b8.json`, **not** the original
+shared-RNG B8 profile used by the quality and numerical reports. Their B8 engine
+provenance remains legacy/unverified. Actual model batches stayed <=8; 16
+admitted requests do not imply a B16 engine. The 16-concurrency RSS result is
+close to the declared 256 MiB limit and is not a guarantee for other inputs or
+longer operation. No 32/64-concurrency validation is claimed.
+
+All these runs share physical GPU6 with the recorded 21,854 MiB external
+allocation. CPU quality evaluation overlapped part of the initial B1 tier;
+a short CPU regression run overlapped the initial B8 period. These are not
+isolated-device latency claims. Allocator-reserved memory is reported separately
+from live allocation; its growth is not silently substituted for the live-memory
+gate. Every measurement includes admission, inference, receive, cleanup and
+monitoring/reporting overhead and drains its last wave fully.
+
+A separately labeled B4 fully warmed control is in progress. It will not replace
+or erase the one-wave RSS growth failure; preparation cost, warmup count and
+measured window must be reported explicitly. These are bounded stability
+observations, not numerical, quality or indefinite leak-free certification.
 
 ## Complete-EOS paired quality: 256 cases per arm
 
@@ -372,8 +396,8 @@ unused historical installed packages were not silently removed.
 
 ## Subsequent evidence
 
-Remaining 600-second concurrency tiers and the B4 warmed control will be indexed
-separately when completed. Nothing here claims those outstanding gates passed.
+The B4 warmed control will be indexed separately when completed. Nothing here
+claims that outstanding gate passed.
 Reproduction commands and external asset
 requirements are in [SM89_AUDIT.md](../../../inference/docs/SM89_AUDIT.md). Preserve the
 directories above and their original JSON; append later runs under distinct
