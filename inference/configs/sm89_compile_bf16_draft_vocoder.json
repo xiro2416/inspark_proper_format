@@ -1,0 +1,23 @@
+{
+  "schema": 1,
+  "status": "sm89_bf16_draft_vocoder_inductor_subset_experimental",
+  "compute_backend": "compile",
+  "strict_request_isolation": true,
+  "compile_components": ["draft", "vocoder"],
+  "compile_max_signatures": 1,
+  "compile_error_fallback": false,
+  "compile_pattern_matcher": false,
+  "precision": "bf16",
+  "components": ["target", "draft", "cfm", "vocoder"],
+  "convolutions": true,
+  "rnn_precision": "bf16",
+  "target_graphs": false,
+  "draft_graphs": false,
+  "proposal_graphs": false,
+  "prefix_graphs": false,
+  "head_graphs": false,
+  "slot_draft": false,
+  "overlap_acoustics": false,
+  "fused_acceptance": false,
+  "tail_graphs": false
+}

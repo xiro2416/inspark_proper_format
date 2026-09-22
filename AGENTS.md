@@ -4,12 +4,16 @@ This is an inference-only repository. SM89 TensorRT implementation, reports and
 audits are in scope; preserve historical SM120 evidence separately. Do not add
 training code or official model weights.
 
-## Current production path
+## Current entry points and reference path
 
 - Entry point: `python -m acc_infer_clear.cli` through `scripts/run.sh`.
-- Runtime config: `configs/runtime.yaml`.
-- Deployment config: `configs/sm120.json`.
-- Model manifest: `configs/model_sources.json`.
+- Installable source: `inference/src/acc_infer_clear`; the runner changes cwd to `inference`.
+- Reference runtime config: `inference/configs/runtime_reference.yaml` (TF32 disabled).
+- CLI default deployment: `inference/configs/sm89_eager_fp32.json`.
+- Experimental request-isolated TRT profiles: `inference/configs/sm89_trt113_safe_b{1,4,8}.json`.
+- Original fast TRT profiles retain legacy shared device RNG and are not isolation-certified.
+- Historical SM120 deployment: `inference/configs/sm120.json`; not recertified by migration.
+- Model manifest: `inference/configs/model_sources.json`.
 - Universal Draft proposes seven codec tokens; Target verifies eight positions
   including the anchor and accepts a prefix.
 - Fixed first-head graph batches use device-resident acceptance-prefix,
@@ -35,7 +39,7 @@ All task files, caches and locks belong under `/workspace`.
 
 ## Deployment rules
 
-1. Run `scripts/bootstrap.sh`, then `scripts/download_models.sh`.
+1. Run `scripts/bootstrap.sh`, then `scripts/download_models.sh`; downloading models must not auto-install historical hardware plans.
 2. Never upload or vendor official GPT/S2Mel/BigVGAN/W2V-BERT/MaskGCT/CampPlus
    weights. Download them from the pinned upstream revisions.
 3. Use exactly one physical GPU per test. `--gpu` is a physical GPU index and

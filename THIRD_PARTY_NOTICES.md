@@ -3,7 +3,8 @@
 The necessary IndexTTS2, DSpark/PCG and audio-model definitions were extracted
 from the frozen universal implementation. This release adds inference-only
 runtime dispatch, explicit CUDA Graph capture, quantization and custom GPU
-kernels. Training, profiling and experiment drivers are intentionally absent.
+kernels. Training is excluded; inference benchmark and audit drivers are
+included under `inference/benchmarks` and `inference/scripts`.
 
 - IndexTTS2 and its derivative CFM student: original `LICENSE` (bilibili Model Use License Agreement) retained at project root. Original model assets remain an external dependency.
 - DSpark / DeepSpec components: `licenses/DeepSpec.txt`.
@@ -13,5 +14,5 @@ kernels. Training, profiling and experiment drivers are intentionally absent.
 
 Official neural weights remain external dependencies and are fetched from their
 original repositories at revisions and hashes recorded in
-`configs/model_sources.json`. Source normalization and pruning do not imply
+`inference/configs/model_sources.json`. Source normalization and pruning do not imply
 ownership of third-party model definitions.

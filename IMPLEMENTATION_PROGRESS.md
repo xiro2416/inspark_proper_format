@@ -10,7 +10,7 @@ Six-hour target: 2026-09-22 21:32:34 UTC. Completion takes priority over this ta
 - [x] Build independent B1/B4 acoustic engines, retaining Target/Draft and B8.
 - [x] Add trustworthy graph replay routing evidence and cache/shape safety checks.
 - [x] Execute direct/graph numerical audits and verify real first-chunk routing on GPU 6 (numerical failures retained).
-- [ ] Publish original snapshot and B1/B4 implementation to inspark_proper_format.
+- [x] Publish original snapshot and B1/B4 implementation to inspark_proper_format (verified remote `34e0443`).
 
 Coverage matches existing B8: Target verify8/K128, Draft backbone7/K128,
 CFM prompt258/F310/two steps, Vocoder F52 with in-engine plugins. Prefill,
@@ -20,8 +20,8 @@ intermediate milestone, not completion of the overall goal.
 
 ## Stage 2 — architecture, correctness and full audit
 
-- [ ] Migrate to inference/ and models/ops/quantization/runtime/api/guardrails.
-- [ ] Preserve CLI, model semantics, resource identities and packaging.
+- [x] Migrate to inference/ and models/ops/quantization/runtime/api/guardrails.
+- [x] Preserve CLI, model semantics, resource identities and packaging.
 - [ ] Establish true same-weight FP32/BF16 eager and torch.compile baselines.
 - [ ] Fix request RNG/cache/buffer isolation and test cancellation/reuse/fallback.
 - [ ] Run per-stage numerical and 256-case quality audits with honest statuses.
@@ -90,3 +90,21 @@ has known numerical failures, retained as evidence.
 - Stage-one code committed as `d646331`; full reports are under
   `reports/sm89/trt113_b1_b4_stage1/`. Overall numerical parity is FAILED, not
   implied by successful routing. Stage two remains mandatory.
+- First publish verified remote main `34e0443`; implementation then moved to
+  `inference/`, retaining only thin public compatibility exports. Wheel resource
+  checks include CUDA source/attribution and exclude model/engine artifacts.
+- CPU lifecycle tests now cover pool alias double-release, failed prefill
+  rollback, cancel/close best-effort cleanup and unchanged per-request RNG.
+  Safe TRT configs disable shared device/batched RNG instead of silently
+  redefining request seed semantics. Historical fast profiles remain explicit.
+- Pure FP32/BF16 eager full-EOS B1 smoke succeeded. Three-wave short-sentence
+  first-PCM medians: 289.153/252.073 ms; complete-EOS medians: 641.390/741.541 ms.
+  These are preliminary shared-device baselines, not matched-token speedups.
+- Initial Inductor B1 trial ran full EOS, but Target compilation failed at a
+  Transformers deprecation logger; Draft/CFM numerical gates failed and Vocoder
+  passed. Retained the report; a local cache-format adapter and explicit eager
+  precision-cast preservation are under re-audit, without tolerance changes.
+- First real B1 full-EOS acoustic capture proved TRT head routes and bitwise
+  direct/graph output equality. True-input head CFM/Vocoder comparisons still
+  fail strict BF16/FP32 audits. BF16 eager tail replay matches the deployed tail;
+  BF16-vs-FP32 arithmetic differences are reported separately.
