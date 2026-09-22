@@ -5,7 +5,7 @@
 Run from the repository root with the same reference used for the candidate audit. This task is restricted to physical GPU 6; the script requires an explicit `--gpu` and has no default GPU:
 
 ```bash
-PYTHONPATH=inference/src .venv/bin/python inference/benchmarks/soak_requests.py \
+ACC_TRITON_TOOLCHAIN=custom bash scripts/run.sh benchmarks/soak_requests.py \
   --gpu 6 --reference /workspace/index-tts/data/audio/old/mingxiang_gao.wav \
   --seconds 10 --concurrency 1 4 --strict-isolation \
   --output /workspace/A_inspark_marlin/.work/soak_smoke.json
@@ -19,7 +19,7 @@ physical GPU and pre-existing shared-device allocation. These are execution
 provenance, not a replacement for checkpoint-bound numerical/quality reports.
 
 ```bash
-PYTHONPATH=inference/src .venv/bin/python inference/benchmarks/soak_requests.py \
+ACC_TRITON_TOOLCHAIN=custom bash scripts/run.sh benchmarks/soak_requests.py \
   --gpu 6 --reference /workspace/index-tts/data/audio/old/mingxiang_gao.wav \
   --seconds 600 --concurrency 1 4 8 16 --batch 8 --strict-isolation \
   --allow-oom-skip-concurrency 16 \

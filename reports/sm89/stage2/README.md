@@ -3,20 +3,24 @@
 This directory archives completed RTX 4090 / SM89 observations. It is separate
 from historical SM120 results and from the
 [stage-one build and preliminary audits](../trt113_b1_b4_stage1/README.md).
-The files are byte-for-byte copies of existing local JSON, not regenerated
+The files are byte-for-byte copies of existing local JSON and one original
+preflight-failure text log, not regenerated
 results: [COPY_MANIFEST.json](COPY_MANIFEST.json) records their source paths,
 SHA256 hashes and sizes. Original absolute paths, source identities, errors and
 provenance fields are retained without alteration.
 
 The archive paths have distinct scopes:
 
-- `baselines/`: same-model B1/B4 eager/compile execution and sampled compile-versus-eager comparisons.
+- `baselines/`: same-model B1/B4 eager/compile execution, sampled compile-versus-eager comparisons, and separately sampled TRT timings.
 - `legacy_real_acoustic_b1/`: one completed real trajectory captured with the old acoustic engines, plus frozen-input FP32/BF16 replays.
 - `builds/{cfm,vocoder}/`: new B1/B4 export, engine-build and plan metadata, kept separate from the legacy capture.
+- `real_safe_b{1,4}_audited/`: source-attested real AR/acoustic captures and their independent FP32/BF16 replays, including failures.
+- `real_legacy_b8/`: original shared-device-RNG B8 capture/replays, with unverified legacy engine origins.
+- `runtime/`: controlled-input CUDA RNG/acceptance checks, a short functional soak smoke and an original GPU-busy rejection log, not a completed long-duration soak.
 
 No tensors, audio, ONNX graphs, engines or checkpoints are included. References
 to local `.pt` files in the JSON identify withheld replay evidence by hash; this
-public JSON-only archive is not a standalone executable replay bundle.
+public report archive is not a standalone executable replay bundle.
 
 ## Eager and compile baselines
 
@@ -64,6 +68,26 @@ compiled inference. Compilation/audit overhead is reported separately. The
 the BF16 bias-rounding counterexample and why successful compilation alone does
 not establish parity.
 
+## Request-isolated TensorRT timing observations
+
+These two runs used **two warmups and five measured waves**, not the one-plus-three
+sampling of the eager/compile table above. They used `runtime_reference.yaml`
+(TF32 disabled), the same short text, complete-EOS execution, and the same recorded
+21,854 MiB external GPU residency. Preparation is excluded; the report's
+`timing_scope` defines the measured host admission/copy/allocation/launch and
+execution work.
+
+| Run | All first PCM P50, ms | Full EOS P50, ms | Timing-run conclusion |
+| --- | ---: | ---: | --- |
+| [B1 safe TRT](baselines/trt113_safe_b1.json) | 54.99 | 330.84 | Execution passed; timing report does not run a numerical gate (`null`) |
+| [B4 safe TRT](baselines/trt113_safe_b4.json) | 106.15 | 839.20 | Execution passed; timing report does not run a numerical gate (`null`) |
+
+The independent same-input replays below fail their overall numerical gates.
+These timings therefore **do not qualify this backend for numerical acceptance**,
+nor establish a controlled speedup over differently sampled eager runs or
+different AR trajectories. The `safe` name denotes request-isolation settings,
+not numerical or model-quality certification.
+
 ## Source-attested acoustic build metadata
 
 These files describe newly exported and built engines; they do not upgrade the
@@ -85,6 +109,53 @@ TensorRT 11.3, SM89 and `tf32=false`.
 The plans are archived unchanged, including original local engine paths; they
 are evidence, not portable engine bundles. Each new build needs its own real-input
 replay and quality gate. There are no binary ONNX or engine files in this archive.
+
+## Source-attested B1/B4 real replay
+
+The [B1 capture](real_safe_b1_audited/capture.json) completed one real request;
+the [B4 capture](real_safe_b4_audited/capture.json) completed four, all through EOS.
+Each records two actual native Target calls and two native Draft calls at its
+declared batch, plus native CFM/Vocoder first-head calls. This is observed
+execution coverage, not merely the presence of installed engines. B1 records
+6 acoustic calls; B4 records 18, with fallback tails audited separately.
+
+Both batches verify the actual engine/checkpoint identity for all four native
+components. Recorded direct/graph outputs are exact; the AR cache-state checks
+also pass. These findings establish artifact identity and graph/cache behavior,
+not equality with eager arithmetic. Each batch has **four failed overall replay
+reports**:
+
+| Batch | AR against FP32 | AR against BF16 | Acoustic against FP32 | Acoustic against BF16 |
+| --- | --- | --- | --- | --- |
+| B1 | [Failed](real_safe_b1_audited/ar_reference_fp32/report.json) | [Failed](real_safe_b1_audited/ar_reference_bf16/report.json) | [Failed](real_safe_b1_audited/reference_fp32/report.json) | [Failed](real_safe_b1_audited/reference_bf16/report.json) |
+| B4 | [Failed](real_safe_b4_audited/ar_reference_fp32/report.json) | [Failed](real_safe_b4_audited/ar_reference_bf16/report.json) | [Failed](real_safe_b4_audited/reference_fp32/report.json) | [Failed](real_safe_b4_audited/reference_bf16/report.json) |
+
+Both sampled calls of Target and Draft fail native-versus-reference numerical
+comparisons in each precision and batch. Acoustic failures are more specific:
+
+| Batch / reference | CFM native head mismatches | Vocoder native head mismatches |
+| --- | ---: | ---: |
+| B1 / FP32 | 0 (passed) | 2,741 (failed) |
+| B1 / BF16 | 0 (passed) | 677 (failed) |
+| B4 / FP32 | 15 (failed) | 6,184 (failed) |
+| B4 / BF16 | 6 (failed) | 2,198 (failed) |
+
+Counts above use `deployed_vs_reference.comparisons.all` (the full CFM tensor
+or Vocoder pre-clamp waveform), without double-counting generated-region metrics.
+The four B1 and sixteen B4 fallback tail calls match their BF16 eager reference
+exactly (`max_abs=0`); they do not match FP32 arithmetic. The additional
+`bf16_reference_vs_fp32_reference` comparisons are cross-precision errors and
+must not be relabeled as native-versus-BF16 failures. Overall report failure
+does not mean every component, region or comparison failed.
+
+All candidate comparisons retain the declared BF16 `atol=rtol=0.01` policy even
+when the reference/output storage is FP32. These source-attested captures are
+distinct from the legacy B1 capture below: new B1 CFM head comparisons pass for
+these inputs, and the old legacy mismatch counts must not be transplanted here.
+Bounded AR output/KV and acoustic-boundary coverage is not an audit of every
+intermediate model tensor, all signatures, all AR steps, or perceptual quality.
+Capture/replay is instrumented and makes no performance claim. Keep failed
+reports and their frozen-input hashes; faster execution cannot waive these gates.
 
 ## Legacy B1 real acoustic capture
 
@@ -119,10 +190,86 @@ CFM intermediate steps or crossfade arithmetic. It makes no performance or
 perceptual-quality claim. Hashes and model provenance are evidence of what was
 observed, not a substitute for numerical and model-quality gates.
 
+## Legacy B8 real replay: not the request-isolated profile
+
+The [B8 capture](real_legacy_b8/capture.json) uses the original
+`sm89_bf16_trt113_full_b8.json` shared-device-RNG/device-round profile, **not**
+`sm89_trt113_safe_b8.json`. Capture/reference arithmetic uses
+`runtime_reference.yaml` with `target_tf32=false` and `rnn_tf32=false`.
+All eight requests completed EOS. There are two observed native Target calls,
+two native Draft calls, and 34 acoustic calls: native CFM/Vocoder B8 first heads
+followed by 32 fallback calls. All four components have real native execution
+coverage; recorded direct/graph equality and AR cache-state checks pass.
+
+**All four engine origins remain `legacy_unverified`.** Actual engine bytes are
+hashed, but historical source/checkpoint binding is not verified. B1/B4's new
+source-attested engines cannot establish B8 identity. Matching current eager
+loader checkpoint hashes, graph/direct equality, or a known engine-file hash
+must not be promoted into historical weight-provenance proof.
+
+All four completed reports have a failed overall gate:
+[AR/FP32](real_legacy_b8/ar_reference_fp32/report.json),
+[AR/BF16](real_legacy_b8/ar_reference_bf16/report.json),
+[acoustic/FP32](real_legacy_b8/reference_fp32/report.json), and
+[acoustic/BF16](real_legacy_b8/reference_bf16/report.json). Selected component
+metrics below are native-versus-reference comparisons on the same frozen inputs,
+using unchanged BF16 `atol=rtol=0.01`:
+
+| Component / measured output | Against FP32: mismatches | Against BF16: mismatches |
+| --- | ---: | ---: |
+| Target logits, sum of two recorded calls | 31,415 | 40,724 |
+| Draft base logits, sum of two recorded calls | 47,195 | 96,642 |
+| CFM full first-head tensor | 39 | 17 |
+| Vocoder pre-clamp first-head waveform | 4,829 | 3,889 |
+
+Both native calls of Target and Draft fail their component comparison gates;
+the table selects logits rather than summing unlike outputs/KV. It does not mean
+every output fails: the second Draft hidden-output comparison against FP32
+passes. Both acoustic heads fail for each reference precision. All 32 fallback
+tail calls instead match BF16 eager exactly (`max_abs=0`); their FP32 comparisons
+fail. Additional `bf16_reference_vs_fp32_reference` failures are separately
+identified cross-precision errors, not failures of those BF16 tail routes.
+This bounded audit neither certifies shared-RNG isolation nor measures full
+corpus quality/performance, and its mismatch counts are not directly comparable
+to B1/B4 trajectories with different inputs.
+
+## Controlled runtime checks and short smoke
+
+- [CUDA request-RNG isolation](runtime/request_rng_isolation_gpu.json) passed the
+  controlled identical-probability-input scenarios, including cancellation and
+  recreation; its shared-RNG negative control detected the intended violation.
+  It does not assert identical real-model trajectories across batch sizes.
+- [CUDA acceptance/prefix metadata](runtime/acceptance_metadata_gpu.json) passed
+  54 controlled-input cases over batches 1/4/8 using the actual hash-bound ASG
+  checkpoint and EOS token 8193. Exact discrete metadata and floating gates are
+  separate from full-model numerical/quality validation.
+- [Short soak smoke](runtime/soak_smoke.json) requested only 10 seconds at each
+  concurrency 1 and 4. It completed 10 and 15 EOS requests respectively, with
+  one cancellation in the latter tier, and observed KV lengths up to 399/405.
+  Its `status=smoke_passed` explicitly has `full_soak_pass=false` and
+  `soak_qualified=false`. The memory trend windows were only 5.96/5.61 seconds,
+  below the required 60 seconds; neither is a qualified memory-stability result.
+
+This earlier smoke used the original `runtime.yaml` defaults (`target_tf32=true`),
+not the TF32-disabled reference configuration for the subsequent 600-second
+tests. Its original JSON predates the runtime-file/source preflight fields and
+is preserved without backfilling them. Do not combine its timings or scope with
+later reference-config soak evidence, or claim it covers 8/16/32/64 concurrency.
+
+The original [B1 BF16 replay preflight rejection log](runtime/real_safe_b1_bf16_preflight_busy.log)
+records `GPU6 is busy (21854MiB,23%)`: the cooperative lease rejected that attempt
+before replay. After utilization returned idle, the retry completed and produced
+the [B1 BF16 acoustic report](real_safe_b1_audited/reference_bf16/report.json),
+whose numerical gate remains failed. A successful retry means completed
+execution, not numerical acceptance. The log does not establish whether the
+23% utilization came from another process or residual activity of prior work;
+no such attribution is made. Both the rejection and later result are retained.
+
 ## Subsequent evidence
 
-New B1/B4 source-attested acoustic captures, paired quality evaluation and
-concurrency/long-sequence/soak evidence will be indexed separately when completed.
-Nothing in this initial archive claims those gates passed. Preserve the
+Paired 256-case quality evaluation, additional batches and full 600-second
+concurrency tiers will be indexed separately when completed. Nothing here claims
+those outstanding gates passed. Reproduction commands and external asset
+requirements are in [SM89_AUDIT.md](../../../inference/docs/SM89_AUDIT.md). Preserve the
 directories above and their original JSON; append later runs under distinct
 names, retain failures and verify copied-file hashes before publication.

@@ -374,6 +374,7 @@ def main():
     parser.add_argument('--allow-oom-skip-concurrency',nargs='*',type=int,choices=(16,32,64),default=[],
                         help='Only CUDA OOM in listed tiers may be skipped; completed_with_allowed_skip is not a full soak pass')
     parser.add_argument('--output',type=workspace_path,required=True)
+    parser.add_argument('--host-context',default='not declared',help='Record other CPU/host work during the measured soak')
     args=parser.parse_args()
     if args.seconds<=0 or args.warmups<0 or args.cancel_every<0 or args.request_timeout_seconds<=0:
         parser.error('Invalid duration/warmup/cancellation/timeout value')
@@ -394,6 +395,7 @@ def main():
     if not cases or any(not case.get('text') or len(case.get('emotion',[]))!=8 for case in cases):
         raise ValueError('Expected real corpus cases with text, seed and eight-value emotion')
     report=dict(scope='complete_eos_soak_not_numerical_or_quality_audit',status='running',
+        host_context=args.host_context,
         hardware_scope='runtime-reported GPU only; no transfer of SM89 results to other architectures',
         memory_claim='Explicit post-warmup live CUDA/RSS growth and late-trend budgets; not an unbounded leak-free guarantee',
         corpus=dict(path=str(args.corpus),sha256=hashlib.sha256(args.corpus.read_bytes()).hexdigest()),

@@ -1,0 +1,3225 @@
+{
+  "scope": "complete_eos_soak_not_numerical_or_quality_audit",
+  "status": "smoke_passed",
+  "hardware_scope": "runtime-reported GPU only; no transfer of SM89 results to other architectures",
+  "memory_claim": "Explicit post-warmup live CUDA/RSS growth and late-trend budgets; not an unbounded leak-free guarantee",
+  "corpus": {
+    "path": "/workspace/A_inspark_marlin/inference/configs/sm89_quality_256.json",
+    "sha256": "1cd0faada10ebbced74a5848bb7b7aa379ca084f69a61913f5e97d6d67b9b2ad"
+  },
+  "reference": {
+    "path": "/workspace/index-tts/data/audio/old/mingxiang_gao.wav",
+    "sha256": "fa482cdaed99bc3c14c5ee2af8d25363a66e7e8778891a6b37c3d60973873793"
+  },
+  "tiers": [
+    {
+      "concurrency": 1,
+      "deployment_path": "/workspace/A_inspark_marlin/inference/configs/sm89_trt113_safe_b1.json",
+      "strict_overrides": {
+        "device_parent_graph": {
+          "before": null,
+          "after": false
+        }
+      },
+      "model_max_batch": 1,
+      "scheduling": "bounded_waves_with_complete_eos_drain",
+      "requested_seconds": 10.0,
+      "status": "smoke_passed",
+      "requests": [
+        {
+          "id": "soak-lane-0",
+          "outcome": "complete_eos",
+          "complete": true,
+          "eos": true,
+          "chunks": [
+            {
+              "index": 0,
+              "samples": 11264,
+              "eos": false,
+              "cfm_batch": 1,
+              "vocoder_batch": 1
+            },
+            {
+              "index": 1,
+              "samples": 85504,
+              "eos": true,
+              "cfm_batch": 1,
+              "vocoder_batch": 1
+            },
+            {
+              "index": 2,
+              "samples": 44800,
+              "eos": true,
+              "cfm_batch": 1,
+              "vocoder_batch": 1
+            }
+          ],
+          "samples": 141568,
+          "pcm16_sha256": "71c51aaea7d37333ad8551f3a29d565d2ebba8978b03f3a7138492a6bfb176da",
+          "code_count": 322,
+          "rounds": 67,
+          "kv_length": 399,
+          "first_chunk_ms": 52.60363221168518,
+          "lifetime_ms": 1010.9789576381445,
+          "case_id": "sm89-q147",
+          "long_text": true,
+          "text_characters": 20,
+          "seed": 1900286609
+        },
+        {
+          "id": "soak-lane-0",
+          "outcome": "complete_eos",
+          "complete": true,
+          "eos": true,
+          "chunks": [
+            {
+              "index": 0,
+              "samples": 11264,
+              "eos": false,
+              "cfm_batch": 1,
+              "vocoder_batch": 1
+            },
+            {
+              "index": 1,
+              "samples": 42240,
+              "eos": true,
+              "cfm_batch": 1,
+              "vocoder_batch": 1
+            },
+            {
+              "index": 2,
+              "samples": 48640,
+              "eos": true,
+              "cfm_batch": 1,
+              "vocoder_batch": 1
+            }
+          ],
+          "samples": 102144,
+          "pcm16_sha256": "ddc28e33cee9e6b6ac0c019b416beb1114f46e0afae47684c9656cbaf069f7be",
+          "code_count": 232,
+          "rounds": 56,
+          "kv_length": 302,
+          "first_chunk_ms": 60.97248010337353,
+          "lifetime_ms": 978.2283212989569,
+          "case_id": "sm89-q001",
+          "long_text": false,
+          "text_characters": 17,
+          "seed": 370077989
+        },
+        {
+          "id": "soak-lane-0",
+          "outcome": "complete_eos",
+          "complete": true,
+          "eos": true,
+          "chunks": [
+            {
+              "index": 0,
+              "samples": 11264,
+              "eos": false,
+              "cfm_batch": 1,
+              "vocoder_batch": 1
+            },
+            {
+              "index": 1,
+              "samples": 93952,
+              "eos": true,
+              "cfm_batch": 1,
+              "vocoder_batch": 1
+            },
+            {
+              "index": 2,
+              "samples": 31488,
+              "eos": true,
+              "cfm_batch": 1,
+              "vocoder_batch": 1
+            }
+          ],
+          "samples": 136704,
+          "pcm16_sha256": "48a5b44ad74d61f07f7363985bf62f914461c64ccd36196f0e8ee8f114fc2f87",
+          "code_count": 311,
+          "rounds": 69,
+          "kv_length": 384,
+          "first_chunk_ms": 40.44059291481972,
+          "lifetime_ms": 1231.0718782246113,
+          "case_id": "sm89-q002",
+          "long_text": false,
+          "text_characters": 18,
+          "seed": 18640084
+        },
+        {
+          "id": "soak-lane-0",
+          "outcome": "complete_eos",
+          "complete": true,
+          "eos": true,
+          "chunks": [
+            {
+              "index": 0,
+              "samples": 11264,
+              "eos": false,
+              "cfm_batch": 1,
+              "vocoder_batch": 1
+            },
+            {
+              "index": 1,
+              "samples": 53248,
+              "eos": true,
+              "cfm_batch": 1,
+              "vocoder_batch": 1
+            },
+            {
+              "index": 2,
+              "samples": 36096,
+              "eos": true,
+              "cfm_batch": 1,
+              "vocoder_batch": 1
+            }
+          ],
+          "samples": 100608,
+          "pcm16_sha256": "6b2c40a6670a0d687d91b4d964091a8654f44c46af155db6badd8c200c8ffe5f",
+          "code_count": 229,
+          "rounds": 60,
+          "kv_length": 294,
+          "first_chunk_ms": 68.84373351931572,
+          "lifetime_ms": 990.6540997326374,
+          "case_id": "sm89-q003",
+          "long_text": false,
+          "text_characters": 14,
+          "seed": 1897214542
+        },
+        {
+          "id": "soak-lane-0",
+          "outcome": "complete_eos",
+          "complete": true,
+          "eos": true,
+          "chunks": [
+            {
+              "index": 0,
+              "samples": 11264,
+              "eos": false,
+              "cfm_batch": 1,
+              "vocoder_batch": 1
+            },
+            {
+              "index": 1,
+              "samples": 44544,
+              "eos": true,
+              "cfm_batch": 1,
+              "vocoder_batch": 1
+            },
+            {
+              "index": 2,
+              "samples": 50944,
+              "eos": true,
+              "cfm_batch": 1,
+              "vocoder_batch": 1
+            }
+          ],
+          "samples": 106752,
+          "pcm16_sha256": "f1099964e4ddd1fde696c05a19a2f2e266a543ae22b6868fe48d7eca188b5b99",
+          "code_count": 243,
+          "rounds": 55,
+          "kv_length": 317,
+          "first_chunk_ms": 40.04501923918724,
+          "lifetime_ms": 987.2557278722525,
+          "case_id": "sm89-q004",
+          "long_text": false,
+          "text_characters": 19,
+          "seed": 1666779786
+        },
+        {
+          "id": "soak-lane-0",
+          "outcome": "complete_eos",
+          "complete": true,
+          "eos": true,
+          "chunks": [
+            {
+              "index": 0,
+              "samples": 11264,
+              "eos": false,
+              "cfm_batch": 1,
+              "vocoder_batch": 1
+            },
+            {
+              "index": 1,
+              "samples": 61696,
+              "eos": true,
+              "cfm_batch": 1,
+              "vocoder_batch": 1
+            },
+            {
+              "index": 2,
+              "samples": 44032,
+              "eos": true,
+              "cfm_batch": 1,
+              "vocoder_batch": 1
+            }
+          ],
+          "samples": 116992,
+          "pcm16_sha256": "f79e56fd55ca1d3c2ffbde1d05237c7dd0d280e81d6b01c37066327a6bfb576b",
+          "code_count": 266,
+          "rounds": 54,
+          "kv_length": 336,
+          "first_chunk_ms": 36.32519394159317,
+          "lifetime_ms": 1020.6757448613644,
+          "case_id": "sm89-q005",
+          "long_text": false,
+          "text_characters": 17,
+          "seed": 430478590
+        },
+        {
+          "id": "soak-lane-0",
+          "outcome": "complete_eos",
+          "complete": true,
+          "eos": true,
+          "chunks": [
+            {
+              "index": 0,
+              "samples": 11264,
+              "eos": false,
+              "cfm_batch": 1,
+              "vocoder_batch": 1
+            },
+            {
+              "index": 1,
+              "samples": 67328,
+              "eos": true,
+              "cfm_batch": 1,
+              "vocoder_batch": 1
+            },
+            {
+              "index": 2,
+              "samples": 25600,
+              "eos": true,
+              "cfm_batch": 1,
+              "vocoder_batch": 1
+            }
+          ],
+          "samples": 104192,
+          "pcm16_sha256": "6e2af454c88a8c1bffddcc861ecf9afd8f4a93acd283d2965fe31266540004af",
+          "code_count": 237,
+          "rounds": 55,
+          "kv_length": 307,
+          "first_chunk_ms": 51.725246012210846,
+          "lifetime_ms": 983.1180553883314,
+          "case_id": "sm89-q006",
+          "long_text": false,
+          "text_characters": 17,
+          "seed": 227822043
+        },
+        {
+          "id": "soak-lane-0",
+          "outcome": "complete_eos",
+          "complete": true,
+          "eos": true,
+          "chunks": [
+            {
+              "index": 0,
+              "samples": 11264,
+              "eos": false,
+              "cfm_batch": 1,
+              "vocoder_batch": 1
+            },
+            {
+              "index": 1,
+              "samples": 56832,
+              "eos": true,
+              "cfm_batch": 1,
+              "vocoder_batch": 1
+            },
+            {
+              "index": 2,
+              "samples": 58112,
+              "eos": true,
+              "cfm_batch": 1,
+              "vocoder_batch": 1
+            }
+          ],
+          "samples": 126208,
+          "pcm16_sha256": "0877b75fc41c9fe12385262bbe7003fc3170220418327d8aae11d4b0ea60dd1f",
+          "code_count": 287,
+          "rounds": 66,
+          "kv_length": 364,
+          "first_chunk_ms": 39.50326330959797,
+          "lifetime_ms": 1187.2209943830967,
+          "case_id": "sm89-q192",
+          "long_text": true,
+          "text_characters": 20,
+          "seed": 1669363967
+        },
+        {
+          "id": "soak-lane-0",
+          "outcome": "complete_eos",
+          "complete": true,
+          "eos": true,
+          "chunks": [
+            {
+              "index": 0,
+              "samples": 11264,
+              "eos": false,
+              "cfm_batch": 1,
+              "vocoder_batch": 1
+            },
+            {
+              "index": 1,
+              "samples": 68352,
+              "eos": true,
+              "cfm_batch": 1,
+              "vocoder_batch": 1
+            },
+            {
+              "index": 2,
+              "samples": 38144,
+              "eos": true,
+              "cfm_batch": 1,
+              "vocoder_batch": 1
+            }
+          ],
+          "samples": 117760,
+          "pcm16_sha256": "0fbb8ec5de20360249e7c47aa5609d7d4a02cafce8e2f3b5bbb86c5421ac5f1c",
+          "code_count": 268,
+          "rounds": 66,
+          "kv_length": 344,
+          "first_chunk_ms": 48.97725209593773,
+          "lifetime_ms": 1184.3610182404518,
+          "case_id": "sm89-q008",
+          "long_text": false,
+          "text_characters": 20,
+          "seed": 1417967647
+        },
+        {
+          "id": "soak-lane-0",
+          "outcome": "complete_eos",
+          "complete": true,
+          "eos": true,
+          "chunks": [
+            {
+              "index": 0,
+              "samples": 11264,
+              "eos": false,
+              "cfm_batch": 1,
+              "vocoder_batch": 1
+            },
+            {
+              "index": 1,
+              "samples": 93440,
+              "eos": true,
+              "cfm_batch": 1,
+              "vocoder_batch": 1
+            },
+            {
+              "index": 2,
+              "samples": 30720,
+              "eos": true,
+              "cfm_batch": 1,
+              "vocoder_batch": 1
+            }
+          ],
+          "samples": 135424,
+          "pcm16_sha256": "e774aef6dce3c67fd7095a247ed12c020730b46534d29beb9e982dc57c4dd680",
+          "code_count": 308,
+          "rounds": 69,
+          "kv_length": 385,
+          "first_chunk_ms": 41.74260050058365,
+          "lifetime_ms": 1570.7052983343601,
+          "case_id": "sm89-q009",
+          "long_text": false,
+          "text_characters": 21,
+          "seed": 160758062
+        }
+      ],
+      "snapshots": [
+        {
+          "elapsed_s": 1.0135627835988998,
+          "sessions": 0,
+          "active_rows": 0,
+          "error_sessions": 0,
+          "memory": {
+            "cuda_allocated_bytes": 7476017664,
+            "cuda_reserved_bytes": 8128561152,
+            "cuda_peak_allocated_bytes": 7868566016,
+            "cuda_peak_reserved_bytes": 9032433664,
+            "rss_bytes": 3938889728
+          },
+          "target_slots": {
+            "capacity": 2,
+            "free": 2,
+            "free_unique": 2,
+            "leased": 0,
+            "valid": true
+          },
+          "draft_slots": {
+            "capacity": 2,
+            "free": 2,
+            "free_unique": 2,
+            "leased": 0,
+            "valid": true
+          },
+          "rng_policy": "legacy_per_request",
+          "scheduler_max_batch": 1,
+          "target_batch_counts": {
+            "1": 136
+          },
+          "target_calls": 136,
+          "device_target_steps": 0,
+          "draft_backbone_calls": 136,
+          "device_draft_steps": 0,
+          "native_target_steps": 30,
+          "native_draft_steps": 20,
+          "device_round_attempts": 0,
+          "device_round_successes": 0,
+          "device_round_fallbacks": 0,
+          "native_cfm_calls": 4,
+          "native_cfm_fallbacks": 4,
+          "native_vocoder_calls": 4,
+          "native_vocoder_fallbacks": 4,
+          "strict_request_isolation": true,
+          "admitted_concurrency": 1
+        },
+        {
+          "elapsed_s": 1.9964438136667013,
+          "sessions": 0,
+          "active_rows": 0,
+          "error_sessions": 0,
+          "memory": {
+            "cuda_allocated_bytes": 7476017664,
+            "cuda_reserved_bytes": 8128561152,
+            "cuda_peak_allocated_bytes": 7868566016,
+            "cuda_peak_reserved_bytes": 9032433664,
+            "rss_bytes": 3939278848
+          },
+          "target_slots": {
+            "capacity": 2,
+            "free": 2,
+            "free_unique": 2,
+            "leased": 0,
+            "valid": true
+          },
+          "draft_slots": {
+            "capacity": 2,
+            "free": 2,
+            "free_unique": 2,
+            "leased": 0,
+            "valid": true
+          },
+          "rng_policy": "legacy_per_request",
+          "scheduler_max_batch": 1,
+          "target_batch_counts": {
+            "1": 192
+          },
+          "target_calls": 192,
+          "device_target_steps": 0,
+          "draft_backbone_calls": 192,
+          "device_draft_steps": 0,
+          "native_target_steps": 48,
+          "native_draft_steps": 32,
+          "device_round_attempts": 0,
+          "device_round_successes": 0,
+          "device_round_fallbacks": 0,
+          "native_cfm_calls": 4,
+          "native_cfm_fallbacks": 6,
+          "native_vocoder_calls": 4,
+          "native_vocoder_fallbacks": 6,
+          "strict_request_isolation": true,
+          "admitted_concurrency": 1
+        },
+        {
+          "elapsed_s": 3.2327309120446444,
+          "sessions": 0,
+          "active_rows": 0,
+          "error_sessions": 0,
+          "memory": {
+            "cuda_allocated_bytes": 7476017664,
+            "cuda_reserved_bytes": 8206155776,
+            "cuda_peak_allocated_bytes": 7868566016,
+            "cuda_peak_reserved_bytes": 9032433664,
+            "rss_bytes": 3939762176
+          },
+          "target_slots": {
+            "capacity": 2,
+            "free": 2,
+            "free_unique": 2,
+            "leased": 0,
+            "valid": true
+          },
+          "draft_slots": {
+            "capacity": 2,
+            "free": 2,
+            "free_unique": 2,
+            "leased": 0,
+            "valid": true
+          },
+          "rng_policy": "legacy_per_request",
+          "scheduler_max_batch": 1,
+          "target_batch_counts": {
+            "1": 261
+          },
+          "target_calls": 261,
+          "device_target_steps": 0,
+          "draft_backbone_calls": 261,
+          "device_draft_steps": 0,
+          "native_target_steps": 59,
+          "native_draft_steps": 40,
+          "device_round_attempts": 0,
+          "device_round_successes": 0,
+          "device_round_fallbacks": 0,
+          "native_cfm_calls": 4,
+          "native_cfm_fallbacks": 8,
+          "native_vocoder_calls": 4,
+          "native_vocoder_fallbacks": 8,
+          "strict_request_isolation": true,
+          "admitted_concurrency": 1
+        },
+        {
+          "elapsed_s": 4.228679120540619,
+          "sessions": 0,
+          "active_rows": 0,
+          "error_sessions": 0,
+          "memory": {
+            "cuda_allocated_bytes": 7476017664,
+            "cuda_reserved_bytes": 8206155776,
+            "cuda_peak_allocated_bytes": 7868566016,
+            "cuda_peak_reserved_bytes": 9032433664,
+            "rss_bytes": 3939778560
+          },
+          "target_slots": {
+            "capacity": 2,
+            "free": 2,
+            "free_unique": 2,
+            "leased": 0,
+            "valid": true
+          },
+          "draft_slots": {
+            "capacity": 2,
+            "free": 2,
+            "free_unique": 2,
+            "leased": 0,
+            "valid": true
+          },
+          "rng_policy": "legacy_per_request",
+          "scheduler_max_batch": 1,
+          "target_batch_counts": {
+            "1": 321
+          },
+          "target_calls": 321,
+          "device_target_steps": 0,
+          "draft_backbone_calls": 321,
+          "device_draft_steps": 0,
+          "native_target_steps": 81,
+          "native_draft_steps": 55,
+          "device_round_attempts": 0,
+          "device_round_successes": 0,
+          "device_round_fallbacks": 0,
+          "native_cfm_calls": 4,
+          "native_cfm_fallbacks": 10,
+          "native_vocoder_calls": 4,
+          "native_vocoder_fallbacks": 10,
+          "strict_request_isolation": true,
+          "admitted_concurrency": 1
+        },
+        {
+          "elapsed_s": 5.218921918421984,
+          "sessions": 0,
+          "active_rows": 0,
+          "error_sessions": 0,
+          "memory": {
+            "cuda_allocated_bytes": 7476017664,
+            "cuda_reserved_bytes": 8206155776,
+            "cuda_peak_allocated_bytes": 7868566016,
+            "cuda_peak_reserved_bytes": 9032433664,
+            "rss_bytes": 3939823616
+          },
+          "target_slots": {
+            "capacity": 2,
+            "free": 2,
+            "free_unique": 2,
+            "leased": 0,
+            "valid": true
+          },
+          "draft_slots": {
+            "capacity": 2,
+            "free": 2,
+            "free_unique": 2,
+            "leased": 0,
+            "valid": true
+          },
+          "rng_policy": "legacy_per_request",
+          "scheduler_max_batch": 1,
+          "target_batch_counts": {
+            "1": 376
+          },
+          "target_calls": 376,
+          "device_target_steps": 0,
+          "draft_backbone_calls": 376,
+          "device_draft_steps": 0,
+          "native_target_steps": 96,
+          "native_draft_steps": 66,
+          "device_round_attempts": 0,
+          "device_round_successes": 0,
+          "device_round_fallbacks": 0,
+          "native_cfm_calls": 4,
+          "native_cfm_fallbacks": 12,
+          "native_vocoder_calls": 4,
+          "native_vocoder_fallbacks": 12,
+          "strict_request_isolation": true,
+          "admitted_concurrency": 1
+        },
+        {
+          "elapsed_s": 6.24270723760128,
+          "sessions": 0,
+          "active_rows": 0,
+          "error_sessions": 0,
+          "memory": {
+            "cuda_allocated_bytes": 7476017664,
+            "cuda_reserved_bytes": 8206155776,
+            "cuda_peak_allocated_bytes": 7868566016,
+            "cuda_peak_reserved_bytes": 9032433664,
+            "rss_bytes": 3939827712
+          },
+          "target_slots": {
+            "capacity": 2,
+            "free": 2,
+            "free_unique": 2,
+            "leased": 0,
+            "valid": true
+          },
+          "draft_slots": {
+            "capacity": 2,
+            "free": 2,
+            "free_unique": 2,
+            "leased": 0,
+            "valid": true
+          },
+          "rng_policy": "legacy_per_request",
+          "scheduler_max_batch": 1,
+          "target_batch_counts": {
+            "1": 430
+          },
+          "target_calls": 430,
+          "device_target_steps": 0,
+          "draft_backbone_calls": 430,
+          "device_draft_steps": 0,
+          "native_target_steps": 106,
+          "native_draft_steps": 73,
+          "device_round_attempts": 0,
+          "device_round_successes": 0,
+          "device_round_fallbacks": 0,
+          "native_cfm_calls": 4,
+          "native_cfm_fallbacks": 14,
+          "native_vocoder_calls": 4,
+          "native_vocoder_fallbacks": 14,
+          "strict_request_isolation": true,
+          "admitted_concurrency": 1
+        },
+        {
+          "elapsed_s": 7.228999959304929,
+          "sessions": 0,
+          "active_rows": 0,
+          "error_sessions": 0,
+          "memory": {
+            "cuda_allocated_bytes": 7476017664,
+            "cuda_reserved_bytes": 8206155776,
+            "cuda_peak_allocated_bytes": 7868566016,
+            "cuda_peak_reserved_bytes": 9032433664,
+            "rss_bytes": 3939889152
+          },
+          "target_slots": {
+            "capacity": 2,
+            "free": 2,
+            "free_unique": 2,
+            "leased": 0,
+            "valid": true
+          },
+          "draft_slots": {
+            "capacity": 2,
+            "free": 2,
+            "free_unique": 2,
+            "leased": 0,
+            "valid": true
+          },
+          "rng_policy": "legacy_per_request",
+          "scheduler_max_batch": 1,
+          "target_batch_counts": {
+            "1": 485
+          },
+          "target_calls": 485,
+          "device_target_steps": 0,
+          "draft_backbone_calls": 485,
+          "device_draft_steps": 0,
+          "native_target_steps": 121,
+          "native_draft_steps": 83,
+          "device_round_attempts": 0,
+          "device_round_successes": 0,
+          "device_round_fallbacks": 0,
+          "native_cfm_calls": 4,
+          "native_cfm_fallbacks": 16,
+          "native_vocoder_calls": 4,
+          "native_vocoder_fallbacks": 16,
+          "strict_request_isolation": true,
+          "admitted_concurrency": 1
+        },
+        {
+          "elapsed_s": 8.41976523026824,
+          "sessions": 0,
+          "active_rows": 0,
+          "error_sessions": 0,
+          "memory": {
+            "cuda_allocated_bytes": 7476017664,
+            "cuda_reserved_bytes": 8206155776,
+            "cuda_peak_allocated_bytes": 7868566016,
+            "cuda_peak_reserved_bytes": 9032433664,
+            "rss_bytes": 3939946496
+          },
+          "target_slots": {
+            "capacity": 2,
+            "free": 2,
+            "free_unique": 2,
+            "leased": 0,
+            "valid": true
+          },
+          "draft_slots": {
+            "capacity": 2,
+            "free": 2,
+            "free_unique": 2,
+            "leased": 0,
+            "valid": true
+          },
+          "rng_policy": "legacy_per_request",
+          "scheduler_max_batch": 1,
+          "target_batch_counts": {
+            "1": 551
+          },
+          "target_calls": 551,
+          "device_target_steps": 0,
+          "draft_backbone_calls": 551,
+          "device_draft_steps": 0,
+          "native_target_steps": 133,
+          "native_draft_steps": 92,
+          "device_round_attempts": 0,
+          "device_round_successes": 0,
+          "device_round_fallbacks": 0,
+          "native_cfm_calls": 4,
+          "native_cfm_fallbacks": 18,
+          "native_vocoder_calls": 4,
+          "native_vocoder_fallbacks": 18,
+          "strict_request_isolation": true,
+          "admitted_concurrency": 1
+        },
+        {
+          "elapsed_s": 9.607597399502993,
+          "sessions": 0,
+          "active_rows": 0,
+          "error_sessions": 0,
+          "memory": {
+            "cuda_allocated_bytes": 7476017664,
+            "cuda_reserved_bytes": 8206155776,
+            "cuda_peak_allocated_bytes": 7868566016,
+            "cuda_peak_reserved_bytes": 9032433664,
+            "rss_bytes": 3940143104
+          },
+          "target_slots": {
+            "capacity": 2,
+            "free": 2,
+            "free_unique": 2,
+            "leased": 0,
+            "valid": true
+          },
+          "draft_slots": {
+            "capacity": 2,
+            "free": 2,
+            "free_unique": 2,
+            "leased": 0,
+            "valid": true
+          },
+          "rng_policy": "legacy_per_request",
+          "scheduler_max_batch": 1,
+          "target_batch_counts": {
+            "1": 617
+          },
+          "target_calls": 617,
+          "device_target_steps": 0,
+          "draft_backbone_calls": 617,
+          "device_draft_steps": 0,
+          "native_target_steps": 145,
+          "native_draft_steps": 100,
+          "device_round_attempts": 0,
+          "device_round_successes": 0,
+          "device_round_fallbacks": 0,
+          "native_cfm_calls": 4,
+          "native_cfm_fallbacks": 20,
+          "native_vocoder_calls": 4,
+          "native_vocoder_fallbacks": 20,
+          "strict_request_isolation": true,
+          "admitted_concurrency": 1
+        },
+        {
+          "elapsed_s": 11.182625276967883,
+          "sessions": 0,
+          "active_rows": 0,
+          "error_sessions": 0,
+          "memory": {
+            "cuda_allocated_bytes": 7476017664,
+            "cuda_reserved_bytes": 8206155776,
+            "cuda_peak_allocated_bytes": 7868566016,
+            "cuda_peak_reserved_bytes": 9032433664,
+            "rss_bytes": 3940200448
+          },
+          "target_slots": {
+            "capacity": 2,
+            "free": 2,
+            "free_unique": 2,
+            "leased": 0,
+            "valid": true
+          },
+          "draft_slots": {
+            "capacity": 2,
+            "free": 2,
+            "free_unique": 2,
+            "leased": 0,
+            "valid": true
+          },
+          "rng_policy": "legacy_per_request",
+          "scheduler_max_batch": 1,
+          "target_batch_counts": {
+            "1": 686
+          },
+          "target_calls": 686,
+          "device_target_steps": 0,
+          "draft_backbone_calls": 686,
+          "device_draft_steps": 0,
+          "native_target_steps": 157,
+          "native_draft_steps": 109,
+          "device_round_attempts": 0,
+          "device_round_successes": 0,
+          "device_round_fallbacks": 0,
+          "native_cfm_calls": 4,
+          "native_cfm_fallbacks": 22,
+          "native_vocoder_calls": 4,
+          "native_vocoder_fallbacks": 22,
+          "strict_request_isolation": true,
+          "admitted_concurrency": 1
+        }
+      ],
+      "warmups": 1,
+      "deployment": {
+        "hardware": {
+          "name": "NVIDIA GeForce RTX 4090",
+          "sm": 89,
+          "sms": 128
+        },
+        "sm": 89,
+        "requested": {
+          "schema": 1,
+          "precision": "bf16",
+          "components": [
+            "target",
+            "draft",
+            "cfm",
+            "vocoder"
+          ],
+          "convolutions": true,
+          "rnn_precision": "bf16",
+          "target_graphs": true,
+          "draft_graphs": true,
+          "proposal_graphs": true,
+          "prefix_graphs": true,
+          "head_graphs": true,
+          "slot_draft": true,
+          "context_graphs": true,
+          "context_scatter": true,
+          "device_accept_plan": false,
+          "device_residual": false,
+          "device_round_b8": false,
+          "batched_proposal_rng": false,
+          "overlap_acoustics": false,
+          "fused_acceptance": true,
+          "tail_graphs": false,
+          "head_batch_barrier": true,
+          "acoustic_kernels": "alias",
+          "acoustic_plan": null,
+          "strict_request_isolation": true,
+          "status": "sm89_trt113_b1_request_isolated_numerically_experimental",
+          "tensorrt113_target_full_plan": "/workspace/A_inspark_marlin/artifacts/trt113_target_full/plan_b1_audited_source.json",
+          "tensorrt113_draft_full_plan": "/workspace/A_inspark_marlin/artifacts/trt113_draft_full/plan_b1_audited_source.json",
+          "tensorrt113_cfm_plan": "/workspace/A_inspark_marlin/artifacts/trt113_cfm/plan_b1_audited_source.json",
+          "tensorrt113_vocoder_plan": "/workspace/A_inspark_marlin/artifacts/trt113_vocoder/plan_b1_nativeconv_strong_audited_source.json",
+          "device_parent_graph": false
+        },
+        "request_isolation": {
+          "strict_request_isolation": true,
+          "rng_policy": "legacy_per_request",
+          "shared_rng_paths": [],
+          "changed_sampler_paths": [],
+          "request_stream_v1_implemented": false
+        },
+        "compute_backend": "optimized"
+      },
+      "expected_error_checks": [
+        "empty_input_rejected",
+        "empty_input_rejected"
+      ],
+      "setup_seconds": 36.887431716546416,
+      "rng_boundary_checks": {
+        "other_inference_and_cancel": {
+          "passed": true,
+          "changed_fields": [],
+          "before": {
+            "request_id": "soak-rng-reuse",
+            "seed": 1443349810,
+            "rng_policy": "legacy_per_request",
+            "state_sha256": "091497b18904d6e8ccc83c7ef3ad24bf33f350edc91dbb8cd7b84213a68344e8",
+            "next_uniform_prefix_sha256": "98d5ec70963f599f694487b7ddd331bb49a66be2714a011fd039ab372c088d03",
+            "cfm_noise_prefix_sha256": "a78fd9f12495d9d2becdd5770bbb1e4ba58b6f7e2b211f44df9d934fb55a520e",
+            "prefix_draws": 32,
+            "rounds": 0,
+            "code_count": 0,
+            "phase": "session_boundary"
+          },
+          "after": {
+            "request_id": "soak-rng-reuse",
+            "seed": 1443349810,
+            "rng_policy": "legacy_per_request",
+            "state_sha256": "091497b18904d6e8ccc83c7ef3ad24bf33f350edc91dbb8cd7b84213a68344e8",
+            "next_uniform_prefix_sha256": "98d5ec70963f599f694487b7ddd331bb49a66be2714a011fd039ab372c088d03",
+            "cfm_noise_prefix_sha256": "a78fd9f12495d9d2becdd5770bbb1e4ba58b6f7e2b211f44df9d934fb55a520e",
+            "prefix_draws": 32,
+            "rounds": 0,
+            "code_count": 0,
+            "phase": "session_boundary"
+          }
+        },
+        "cancel_recreate_same_seed": {
+          "passed": true,
+          "changed_fields": [],
+          "before": {
+            "request_id": "soak-rng-reuse",
+            "seed": 1443349810,
+            "rng_policy": "legacy_per_request",
+            "state_sha256": "091497b18904d6e8ccc83c7ef3ad24bf33f350edc91dbb8cd7b84213a68344e8",
+            "next_uniform_prefix_sha256": "98d5ec70963f599f694487b7ddd331bb49a66be2714a011fd039ab372c088d03",
+            "cfm_noise_prefix_sha256": "a78fd9f12495d9d2becdd5770bbb1e4ba58b6f7e2b211f44df9d934fb55a520e",
+            "prefix_draws": 32,
+            "rounds": 0,
+            "code_count": 0,
+            "phase": "session_boundary"
+          },
+          "after": {
+            "request_id": "soak-rng-reuse",
+            "seed": 1443349810,
+            "rng_policy": "legacy_per_request",
+            "state_sha256": "091497b18904d6e8ccc83c7ef3ad24bf33f350edc91dbb8cd7b84213a68344e8",
+            "next_uniform_prefix_sha256": "98d5ec70963f599f694487b7ddd331bb49a66be2714a011fd039ab372c088d03",
+            "cfm_noise_prefix_sha256": "a78fd9f12495d9d2becdd5770bbb1e4ba58b6f7e2b211f44df9d934fb55a520e",
+            "prefix_draws": 32,
+            "rounds": 0,
+            "code_count": 0,
+            "phase": "session_boundary"
+          }
+        },
+        "active_row_admit_cancel": {
+          "passed": true,
+          "changed_fields": [],
+          "before": {
+            "request_id": "soak-rng-reuse",
+            "seed": 1443349810,
+            "rng_policy": "legacy_per_request",
+            "state_sha256": "51758f482dea73580e660bfd02d9fc25968c68c1a4eed6e0a126236d02e5dc90",
+            "next_uniform_prefix_sha256": "ec74dd70d1245678c68059f1f52461c7ec058c4e574f907a3278b7137970a4cf",
+            "cfm_noise_prefix_sha256": "a78fd9f12495d9d2becdd5770bbb1e4ba58b6f7e2b211f44df9d934fb55a520e",
+            "prefix_draws": 32,
+            "rounds": 1,
+            "code_count": 2,
+            "phase": "active_row"
+          },
+          "after": {
+            "request_id": "soak-rng-reuse",
+            "seed": 1443349810,
+            "rng_policy": "legacy_per_request",
+            "state_sha256": "51758f482dea73580e660bfd02d9fc25968c68c1a4eed6e0a126236d02e5dc90",
+            "next_uniform_prefix_sha256": "ec74dd70d1245678c68059f1f52461c7ec058c4e574f907a3278b7137970a4cf",
+            "cfm_noise_prefix_sha256": "a78fd9f12495d9d2becdd5770bbb1e4ba58b6f7e2b211f44df9d934fb55a520e",
+            "prefix_draws": 32,
+            "rounds": 1,
+            "code_count": 2,
+            "phase": "active_row"
+          }
+        },
+        "active_row_observed": true,
+        "active_cancel_recreate_same_seed": {
+          "passed": true,
+          "changed_fields": [],
+          "before": {
+            "request_id": "soak-rng-reuse",
+            "seed": 1443349810,
+            "rng_policy": "legacy_per_request",
+            "state_sha256": "091497b18904d6e8ccc83c7ef3ad24bf33f350edc91dbb8cd7b84213a68344e8",
+            "next_uniform_prefix_sha256": "98d5ec70963f599f694487b7ddd331bb49a66be2714a011fd039ab372c088d03",
+            "cfm_noise_prefix_sha256": "a78fd9f12495d9d2becdd5770bbb1e4ba58b6f7e2b211f44df9d934fb55a520e",
+            "prefix_draws": 32,
+            "rounds": 0,
+            "code_count": 0,
+            "phase": "session_boundary"
+          },
+          "after": {
+            "request_id": "soak-rng-reuse",
+            "seed": 1443349810,
+            "rng_policy": "legacy_per_request",
+            "state_sha256": "091497b18904d6e8ccc83c7ef3ad24bf33f350edc91dbb8cd7b84213a68344e8",
+            "next_uniform_prefix_sha256": "98d5ec70963f599f694487b7ddd331bb49a66be2714a011fd039ab372c088d03",
+            "cfm_noise_prefix_sha256": "a78fd9f12495d9d2becdd5770bbb1e4ba58b6f7e2b211f44df9d934fb55a520e",
+            "prefix_draws": 32,
+            "rounds": 0,
+            "code_count": 0,
+            "phase": "session_boundary"
+          }
+        },
+        "passed": true,
+        "scope": "Unchanged witness progress across unrelated operations; post-numerical-branch stream/token equality is not asserted"
+      },
+      "rng_probe_seconds": 0.09392658062279224,
+      "warmup_seconds": 1.3542313054203987,
+      "before": {
+        "sessions": 0,
+        "active_rows": 0,
+        "error_sessions": 0,
+        "memory": {
+          "cuda_allocated_bytes": 7476017664,
+          "cuda_reserved_bytes": 8126464000,
+          "cuda_peak_allocated_bytes": 7868566016,
+          "cuda_peak_reserved_bytes": 9032433664,
+          "rss_bytes": 3938795520
+        },
+        "target_slots": {
+          "capacity": 2,
+          "free": 2,
+          "free_unique": 2,
+          "leased": 0,
+          "valid": true
+        },
+        "draft_slots": {
+          "capacity": 2,
+          "free": 2,
+          "free_unique": 2,
+          "leased": 0,
+          "valid": true
+        },
+        "rng_policy": "legacy_per_request",
+        "scheduler_max_batch": 1,
+        "target_batch_counts": {
+          "1": 69
+        },
+        "target_calls": 69,
+        "device_target_steps": 0,
+        "draft_backbone_calls": 69,
+        "device_draft_steps": 0,
+        "native_target_steps": 16,
+        "native_draft_steps": 10,
+        "device_round_attempts": 0,
+        "device_round_successes": 0,
+        "device_round_fallbacks": 0,
+        "native_cfm_calls": 4,
+        "native_cfm_fallbacks": 2,
+        "native_vocoder_calls": 4,
+        "native_vocoder_fallbacks": 2,
+        "strict_request_isolation": true,
+        "acoustic_routes": {
+          "cfm": {
+            "graph_routes": [
+              {
+                "route": {
+                  "kind": "tensorrt",
+                  "backend": "tensorrt113",
+                  "candidate_backend": "tensorrt113",
+                  "component": "cfm",
+                  "batch": 1,
+                  "frames": 310,
+                  "engine_batch": 1,
+                  "engine_frames": 310,
+                  "plan": "/workspace/A_inspark_marlin/artifacts/trt113_cfm/plan_b1_audited_source.json",
+                  "sha256": "c220d0c5c58e5703b0a80d81816bb9b40f9b4769981dd09f3d6867300f458538",
+                  "reason": null,
+                  "provenance_status": "recorded_not_audited",
+                  "plan_sha256": "4a88fca80c009d6bb51136e69fed85eea827f9ab8642e455cb36f93ac12d3ce8",
+                  "weight_identity_verified": false,
+                  "loader_weights_checked": false,
+                  "plugins": [],
+                  "fallback": false
+                },
+                "prepare": 1,
+                "direct": 0,
+                "replay": 1,
+                "fallback": 0
+              }
+            ],
+            "wrapper_total": {
+              "calls": 4,
+              "fallbacks": 2
+            }
+          },
+          "vocoder": {
+            "graph_routes": [
+              {
+                "route": {
+                  "kind": "tensorrt",
+                  "backend": "tensorrt113",
+                  "candidate_backend": "tensorrt113",
+                  "component": "vocoder",
+                  "batch": 1,
+                  "frames": 52,
+                  "engine_batch": 1,
+                  "engine_frames": 52,
+                  "plan": "/workspace/A_inspark_marlin/artifacts/trt113_vocoder/plan_b1_nativeconv_strong_audited_source.json",
+                  "sha256": "e507eef2cd801530fa3f18b318e3dc2e0a8d27266fe43d7bf6060ee121dfe769",
+                  "reason": null,
+                  "provenance_status": "recorded_not_audited",
+                  "plan_sha256": "35701dde70dc39230dfd354c871b360109c70ba069f695c76d9bfd2ee7f01f2c",
+                  "weight_identity_verified": false,
+                  "loader_weights_checked": false,
+                  "plugins": [
+                    "inspark::alias_free",
+                    "inspark::deconv1d"
+                  ],
+                  "fallback": false
+                },
+                "prepare": 1,
+                "direct": 0,
+                "replay": 1,
+                "fallback": 0
+              }
+            ],
+            "wrapper_total": {
+              "calls": 4,
+              "fallbacks": 2
+            }
+          }
+        }
+      },
+      "timing_scope": "Admission through full EOS/cancel and drain; excludes setup, error/RNG probes and warmup; includes sampling/reporting overhead",
+      "after": {
+        "sessions": 0,
+        "active_rows": 0,
+        "error_sessions": 0,
+        "memory": {
+          "cuda_allocated_bytes": 7476017664,
+          "cuda_reserved_bytes": 8206155776,
+          "cuda_peak_allocated_bytes": 7868566016,
+          "cuda_peak_reserved_bytes": 9032433664,
+          "rss_bytes": 3940200448
+        },
+        "target_slots": {
+          "capacity": 2,
+          "free": 2,
+          "free_unique": 2,
+          "leased": 0,
+          "valid": true
+        },
+        "draft_slots": {
+          "capacity": 2,
+          "free": 2,
+          "free_unique": 2,
+          "leased": 0,
+          "valid": true
+        },
+        "rng_policy": "legacy_per_request",
+        "scheduler_max_batch": 1,
+        "target_batch_counts": {
+          "1": 686
+        },
+        "target_calls": 686,
+        "device_target_steps": 0,
+        "draft_backbone_calls": 686,
+        "device_draft_steps": 0,
+        "native_target_steps": 157,
+        "native_draft_steps": 109,
+        "device_round_attempts": 0,
+        "device_round_successes": 0,
+        "device_round_fallbacks": 0,
+        "native_cfm_calls": 4,
+        "native_cfm_fallbacks": 22,
+        "native_vocoder_calls": 4,
+        "native_vocoder_fallbacks": 22,
+        "strict_request_isolation": true,
+        "acoustic_routes": {
+          "cfm": {
+            "graph_routes": [
+              {
+                "route": {
+                  "kind": "tensorrt",
+                  "backend": "tensorrt113",
+                  "candidate_backend": "tensorrt113",
+                  "component": "cfm",
+                  "batch": 1,
+                  "frames": 310,
+                  "engine_batch": 1,
+                  "engine_frames": 310,
+                  "plan": "/workspace/A_inspark_marlin/artifacts/trt113_cfm/plan_b1_audited_source.json",
+                  "sha256": "c220d0c5c58e5703b0a80d81816bb9b40f9b4769981dd09f3d6867300f458538",
+                  "reason": null,
+                  "provenance_status": "recorded_not_audited",
+                  "plan_sha256": "4a88fca80c009d6bb51136e69fed85eea827f9ab8642e455cb36f93ac12d3ce8",
+                  "weight_identity_verified": false,
+                  "loader_weights_checked": false,
+                  "plugins": [],
+                  "fallback": false
+                },
+                "prepare": 1,
+                "direct": 0,
+                "replay": 11,
+                "fallback": 0
+              }
+            ],
+            "wrapper_total": {
+              "calls": 4,
+              "fallbacks": 22
+            }
+          },
+          "vocoder": {
+            "graph_routes": [
+              {
+                "route": {
+                  "kind": "tensorrt",
+                  "backend": "tensorrt113",
+                  "candidate_backend": "tensorrt113",
+                  "component": "vocoder",
+                  "batch": 1,
+                  "frames": 52,
+                  "engine_batch": 1,
+                  "engine_frames": 52,
+                  "plan": "/workspace/A_inspark_marlin/artifacts/trt113_vocoder/plan_b1_nativeconv_strong_audited_source.json",
+                  "sha256": "e507eef2cd801530fa3f18b318e3dc2e0a8d27266fe43d7bf6060ee121dfe769",
+                  "reason": null,
+                  "provenance_status": "recorded_not_audited",
+                  "plan_sha256": "35701dde70dc39230dfd354c871b360109c70ba069f695c76d9bfd2ee7f01f2c",
+                  "weight_identity_verified": false,
+                  "loader_weights_checked": false,
+                  "plugins": [
+                    "inspark::alias_free",
+                    "inspark::deconv1d"
+                  ],
+                  "fallback": false
+                },
+                "prepare": 1,
+                "direct": 0,
+                "replay": 11,
+                "fallback": 0
+              }
+            ],
+            "wrapper_total": {
+              "calls": 4,
+              "fallbacks": 22
+            }
+          }
+        }
+      },
+      "elapsed_s": 11.187960773706436,
+      "waves": 10,
+      "counter_delta": {
+        "target_calls": 617,
+        "device_target_steps": 0,
+        "draft_backbone_calls": 617,
+        "device_draft_steps": 0,
+        "native_target_steps": 141,
+        "native_draft_steps": 99,
+        "device_round_attempts": 0,
+        "device_round_successes": 0,
+        "device_round_fallbacks": 0,
+        "native_cfm_calls": 0,
+        "native_cfm_fallbacks": 20,
+        "native_vocoder_calls": 0,
+        "native_vocoder_fallbacks": 20
+      },
+      "summary": {
+        "admitted": 10,
+        "complete_eos": 10,
+        "cancelled": 0,
+        "completed_requests_per_s": 0.8938179353919133,
+        "complete_latency_ms": {
+          "n": 10,
+          "min": 978.2283212989569,
+          "median": 1015.8273512497544,
+          "p95": 1570.7052983343601,
+          "max": 1570.7052983343601,
+          "mean": 1114.4270095974207
+        },
+        "first_chunk_ms": {
+          "n": 10,
+          "min": 36.32519394159317,
+          "median": 45.35992629826069,
+          "p95": 68.84373351931572,
+          "max": 68.84373351931572,
+          "mean": 48.117901384830475
+        },
+        "max_code_count": 322,
+        "max_observed_kv_length": 399,
+        "long_text_completed": 2,
+        "reused_request_ids": 9,
+        "allocated_growth_bytes": 0,
+        "reserved_growth_bytes": 79691776
+      },
+      "pass_gate": {
+        "passed": true,
+        "validation_level": "smoke",
+        "soak_qualified": false,
+        "checks": {
+          "requested_duration": true,
+          "complete_eos": true,
+          "long_sequence": true,
+          "actual_concurrency": true,
+          "microbatch_bound": true,
+          "per_request_legacy_rng": true,
+          "rng_boundaries": true,
+          "empty_input_error_recovery": true,
+          "memory_absolute": true,
+          "memory_trend": true
+        },
+        "failed_checks": [],
+        "long_sequence": {
+          "min_kv_length": 129,
+          "completed_count": 10,
+          "witnesses": [
+            {
+              "id": "soak-lane-0",
+              "case_id": "sm89-q147",
+              "kv_length": 399,
+              "code_count": 322,
+              "text_characters": 20
+            },
+            {
+              "id": "soak-lane-0",
+              "case_id": "sm89-q001",
+              "kv_length": 302,
+              "code_count": 232,
+              "text_characters": 17
+            },
+            {
+              "id": "soak-lane-0",
+              "case_id": "sm89-q002",
+              "kv_length": 384,
+              "code_count": 311,
+              "text_characters": 18
+            },
+            {
+              "id": "soak-lane-0",
+              "case_id": "sm89-q003",
+              "kv_length": 294,
+              "code_count": 229,
+              "text_characters": 14
+            },
+            {
+              "id": "soak-lane-0",
+              "case_id": "sm89-q004",
+              "kv_length": 317,
+              "code_count": 243,
+              "text_characters": 19
+            },
+            {
+              "id": "soak-lane-0",
+              "case_id": "sm89-q005",
+              "kv_length": 336,
+              "code_count": 266,
+              "text_characters": 17
+            },
+            {
+              "id": "soak-lane-0",
+              "case_id": "sm89-q006",
+              "kv_length": 307,
+              "code_count": 237,
+              "text_characters": 17
+            },
+            {
+              "id": "soak-lane-0",
+              "case_id": "sm89-q192",
+              "kv_length": 364,
+              "code_count": 287,
+              "text_characters": 20
+            }
+          ]
+        },
+        "microbatch": {
+          "configured": 1,
+          "observed_max": 1,
+          "target_batches": [
+            1
+          ],
+          "target_batch_counts_delta": {
+            "1": 617
+          }
+        },
+        "memory": {
+          "passed": false,
+          "absolute_passed": true,
+          "trend_sufficient": false,
+          "late_samples": 6,
+          "late_span_seconds": 5.963703358545899,
+          "min_samples": 3,
+          "min_span_seconds": 60,
+          "metrics": {
+            "cuda_allocated_bytes": {
+              "final_growth_mib": 0.0,
+              "peak_drained_growth_mib": 0.0,
+              "growth_limit_mib": 64,
+              "growth_passed": true,
+              "late_slope_mib_per_min": 0.0,
+              "slope_limit_mib_per_min": 1,
+              "trend_passed": null
+            },
+            "rss_bytes": {
+              "final_growth_mib": 1.33984375,
+              "peak_drained_growth_mib": 1.33984375,
+              "growth_limit_mib": 256,
+              "growth_passed": true,
+              "late_slope_mib_per_min": 4.052880449083341,
+              "slope_limit_mib_per_min": 16,
+              "trend_passed": null
+            }
+          },
+          "scope": "Post-wave fully drained live CUDA/RSS memory; reserved allocator cache is recorded but not treated as a leak"
+        },
+        "smoke_limit": "Below 600 seconds is only a functional smoke; insufficient trend duration never qualifies as soak"
+      }
+    },
+    {
+      "concurrency": 4,
+      "deployment_path": "/workspace/A_inspark_marlin/inference/configs/sm89_trt113_safe_b4.json",
+      "strict_overrides": {
+        "device_parent_graph": {
+          "before": null,
+          "after": false
+        }
+      },
+      "model_max_batch": 4,
+      "scheduling": "bounded_waves_with_complete_eos_drain",
+      "requested_seconds": 10.0,
+      "status": "smoke_passed",
+      "requests": [
+        {
+          "id": "soak-lane-2",
+          "outcome": "complete_eos",
+          "complete": true,
+          "eos": true,
+          "chunks": [
+            {
+              "index": 0,
+              "samples": 11264,
+              "eos": false,
+              "cfm_batch": 4,
+              "vocoder_batch": 4
+            },
+            {
+              "index": 1,
+              "samples": 93440,
+              "eos": true,
+              "cfm_batch": 1,
+              "vocoder_batch": 1
+            },
+            {
+              "index": 2,
+              "samples": 25856,
+              "eos": true,
+              "cfm_batch": 1,
+              "vocoder_batch": 1
+            }
+          ],
+          "samples": 130560,
+          "pcm16_sha256": "f5ecddfce23faa7a355a3c4f9be7be5ba00d45af12d2ef99cdceccbe4d60379f",
+          "code_count": 297,
+          "rounds": 64,
+          "kv_length": 369,
+          "first_chunk_ms": 100.95174610614777,
+          "lifetime_ms": 1698.4701417386532,
+          "case_id": "sm89-q002",
+          "long_text": false,
+          "text_characters": 18,
+          "seed": 18640084
+        },
+        {
+          "id": "soak-lane-3",
+          "outcome": "complete_eos",
+          "complete": true,
+          "eos": true,
+          "chunks": [
+            {
+              "index": 0,
+              "samples": 11264,
+              "eos": false,
+              "cfm_batch": 4,
+              "vocoder_batch": 4
+            },
+            {
+              "index": 1,
+              "samples": 62208,
+              "eos": true,
+              "cfm_batch": 1,
+              "vocoder_batch": 1
+            },
+            {
+              "index": 2,
+              "samples": 31232,
+              "eos": true,
+              "cfm_batch": 1,
+              "vocoder_batch": 1
+            }
+          ],
+          "samples": 104704,
+          "pcm16_sha256": "83fa8295b0259308893cc4846363d0a9143b3cef3f2d47c89d86cde1ced0c9a1",
+          "code_count": 238,
+          "rounds": 57,
+          "kv_length": 303,
+          "first_chunk_ms": 100.75096599757671,
+          "lifetime_ms": 1811.8894845247269,
+          "case_id": "sm89-q003",
+          "long_text": false,
+          "text_characters": 14,
+          "seed": 1897214542
+        },
+        {
+          "id": "soak-lane-0",
+          "outcome": "complete_eos",
+          "complete": true,
+          "eos": true,
+          "chunks": [
+            {
+              "index": 0,
+              "samples": 11264,
+              "eos": false,
+              "cfm_batch": 4,
+              "vocoder_batch": 4
+            },
+            {
+              "index": 1,
+              "samples": 76800,
+              "eos": true,
+              "cfm_batch": 1,
+              "vocoder_batch": 1
+            },
+            {
+              "index": 2,
+              "samples": 41216,
+              "eos": true,
+              "cfm_batch": 1,
+              "vocoder_batch": 1
+            }
+          ],
+          "samples": 129280,
+          "pcm16_sha256": "89c497883be006cdffe624dc33b3ec25234657feefc8e07aa61f541005c19b5e",
+          "code_count": 294,
+          "rounds": 76,
+          "kv_length": 371,
+          "first_chunk_ms": 101.6549076884985,
+          "lifetime_ms": 1982.4589900672436,
+          "case_id": "sm89-q147",
+          "long_text": true,
+          "text_characters": 20,
+          "seed": 1900286609
+        },
+        {
+          "id": "soak-lane-1",
+          "outcome": "complete_eos",
+          "complete": true,
+          "eos": true,
+          "chunks": [
+            {
+              "index": 0,
+              "samples": 11264,
+              "eos": false,
+              "cfm_batch": 4,
+              "vocoder_batch": 4
+            },
+            {
+              "index": 1,
+              "samples": 44032,
+              "eos": true,
+              "cfm_batch": 1,
+              "vocoder_batch": 1
+            },
+            {
+              "index": 2,
+              "samples": 47616,
+              "eos": true,
+              "cfm_batch": 1,
+              "vocoder_batch": 1
+            }
+          ],
+          "samples": 102912,
+          "pcm16_sha256": "0ae0185fc7749a7a2573695aa435ab1fe37f2d81bde05c93652aaf372847ede3",
+          "code_count": 234,
+          "rounds": 56,
+          "kv_length": 303,
+          "first_chunk_ms": 101.15687176585197,
+          "lifetime_ms": 2219.0659772604704,
+          "case_id": "sm89-q001",
+          "long_text": false,
+          "text_characters": 17,
+          "seed": 370077989
+        },
+        {
+          "id": "soak-lane-2",
+          "outcome": "complete_eos",
+          "complete": true,
+          "eos": true,
+          "chunks": [
+            {
+              "index": 0,
+              "samples": 11264,
+              "eos": false,
+              "cfm_batch": 4,
+              "vocoder_batch": 4
+            },
+            {
+              "index": 1,
+              "samples": 63488,
+              "eos": true,
+              "cfm_batch": 1,
+              "vocoder_batch": 1
+            },
+            {
+              "index": 2,
+              "samples": 37888,
+              "eos": true,
+              "cfm_batch": 1,
+              "vocoder_batch": 1
+            }
+          ],
+          "samples": 112640,
+          "pcm16_sha256": "d01ede2c4e7987cc0bdd46c7cc7d9cf22279da46455dcc996b872b54398faceb",
+          "code_count": 256,
+          "rounds": 63,
+          "kv_length": 327,
+          "first_chunk_ms": 103.23021933436394,
+          "lifetime_ms": 2140.501093119383,
+          "case_id": "sm89-q006",
+          "long_text": false,
+          "text_characters": 17,
+          "seed": 227822043
+        },
+        {
+          "id": "soak-lane-1",
+          "outcome": "complete_eos",
+          "complete": true,
+          "eos": true,
+          "chunks": [
+            {
+              "index": 0,
+              "samples": 11264,
+              "eos": false,
+              "cfm_batch": 4,
+              "vocoder_batch": 4
+            },
+            {
+              "index": 1,
+              "samples": 64256,
+              "eos": true,
+              "cfm_batch": 1,
+              "vocoder_batch": 1
+            },
+            {
+              "index": 2,
+              "samples": 48128,
+              "eos": true,
+              "cfm_batch": 1,
+              "vocoder_batch": 1
+            }
+          ],
+          "samples": 123648,
+          "pcm16_sha256": "00ed349850491c56e1978038a355677ffdada8236ef24eb4c0650f3628f3cd7c",
+          "code_count": 281,
+          "rounds": 58,
+          "kv_length": 351,
+          "first_chunk_ms": 103.51098142564297,
+          "lifetime_ms": 2307.5676653534174,
+          "case_id": "sm89-q005",
+          "long_text": false,
+          "text_characters": 17,
+          "seed": 430478590
+        },
+        {
+          "id": "soak-lane-0",
+          "outcome": "complete_eos",
+          "complete": true,
+          "eos": true,
+          "chunks": [
+            {
+              "index": 0,
+              "samples": 11264,
+              "eos": false,
+              "cfm_batch": 4,
+              "vocoder_batch": 4
+            },
+            {
+              "index": 1,
+              "samples": 42752,
+              "eos": true,
+              "cfm_batch": 1,
+              "vocoder_batch": 1
+            },
+            {
+              "index": 2,
+              "samples": 60672,
+              "eos": true,
+              "cfm_batch": 1,
+              "vocoder_batch": 1
+            }
+          ],
+          "samples": 114688,
+          "pcm16_sha256": "2e21728c077ca5da2aaa2414a67fb2e6d8dc1b8685bad8665ea637005e84ac8e",
+          "code_count": 261,
+          "rounds": 67,
+          "kv_length": 335,
+          "first_chunk_ms": 104.06707972288132,
+          "lifetime_ms": 2679.7443497925997,
+          "case_id": "sm89-q004",
+          "long_text": false,
+          "text_characters": 19,
+          "seed": 1666779786
+        },
+        {
+          "id": "soak-lane-3",
+          "outcome": "complete_eos",
+          "complete": true,
+          "eos": true,
+          "chunks": [
+            {
+              "index": 0,
+              "samples": 11264,
+              "eos": false,
+              "cfm_batch": 4,
+              "vocoder_batch": 4
+            },
+            {
+              "index": 1,
+              "samples": 54784,
+              "eos": true,
+              "cfm_batch": 1,
+              "vocoder_batch": 1
+            },
+            {
+              "index": 2,
+              "samples": 62720,
+              "eos": true,
+              "cfm_batch": 1,
+              "vocoder_batch": 1
+            }
+          ],
+          "samples": 128768,
+          "pcm16_sha256": "91478c268d7ff0be893224a6e35f67ec36d676c1155ba629886e25acfc1c9971",
+          "code_count": 293,
+          "rounds": 67,
+          "kv_length": 370,
+          "first_chunk_ms": 103.05633768439293,
+          "lifetime_ms": 2858.137335628271,
+          "case_id": "sm89-q192",
+          "long_text": true,
+          "text_characters": 20,
+          "seed": 1669363967
+        },
+        {
+          "id": "soak-lane-2",
+          "outcome": "cancelled",
+          "complete": false,
+          "eos": false,
+          "chunks": [],
+          "samples": 0,
+          "pcm16_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "code_count": 0,
+          "rounds": 1,
+          "kv_length": null,
+          "first_chunk_ms": null,
+          "lifetime_ms": 19.279904663562775,
+          "case_id": "sm89-q010",
+          "long_text": false,
+          "text_characters": 19,
+          "seed": 1543354576
+        },
+        {
+          "id": "soak-lane-3",
+          "outcome": "complete_eos",
+          "complete": true,
+          "eos": true,
+          "chunks": [
+            {
+              "index": 0,
+              "samples": 11264,
+              "eos": false,
+              "cfm_batch": 3,
+              "vocoder_batch": 3
+            },
+            {
+              "index": 1,
+              "samples": 49408,
+              "eos": true,
+              "cfm_batch": 1,
+              "vocoder_batch": 1
+            },
+            {
+              "index": 2,
+              "samples": 23296,
+              "eos": true,
+              "cfm_batch": 1,
+              "vocoder_batch": 1
+            }
+          ],
+          "samples": 83968,
+          "pcm16_sha256": "f9b9e77c30da9259c6fa974a9ea56651c64d15991a4fe5d6955d4e015942d17c",
+          "code_count": 191,
+          "rounds": 47,
+          "kv_length": 259,
+          "first_chunk_ms": 98.7837202847004,
+          "lifetime_ms": 1708.3060778677464,
+          "case_id": "sm89-q011",
+          "long_text": false,
+          "text_characters": 16,
+          "seed": 1555148913
+        },
+        {
+          "id": "soak-lane-1",
+          "outcome": "complete_eos",
+          "complete": true,
+          "eos": true,
+          "chunks": [
+            {
+              "index": 0,
+              "samples": 11264,
+              "eos": false,
+              "cfm_batch": 3,
+              "vocoder_batch": 3
+            },
+            {
+              "index": 1,
+              "samples": 96000,
+              "eos": true,
+              "cfm_batch": 1,
+              "vocoder_batch": 1
+            },
+            {
+              "index": 2,
+              "samples": 37120,
+              "eos": true,
+              "cfm_batch": 1,
+              "vocoder_batch": 1
+            }
+          ],
+          "samples": 144384,
+          "pcm16_sha256": "1a22f7cc3d3cf935f0e6cbcec70c83679675fcfdad9dc7bdf25b795976cc65c8",
+          "code_count": 328,
+          "rounds": 70,
+          "kv_length": 405,
+          "first_chunk_ms": 99.20254535973072,
+          "lifetime_ms": 1934.5220252871513,
+          "case_id": "sm89-q009",
+          "long_text": false,
+          "text_characters": 21,
+          "seed": 160758062
+        },
+        {
+          "id": "soak-lane-0",
+          "outcome": "complete_eos",
+          "complete": true,
+          "eos": true,
+          "chunks": [
+            {
+              "index": 0,
+              "samples": 11264,
+              "eos": false,
+              "cfm_batch": 3,
+              "vocoder_batch": 3
+            },
+            {
+              "index": 1,
+              "samples": 67840,
+              "eos": true,
+              "cfm_batch": 1,
+              "vocoder_batch": 1
+            },
+            {
+              "index": 2,
+              "samples": 28160,
+              "eos": true,
+              "cfm_batch": 1,
+              "vocoder_batch": 1
+            }
+          ],
+          "samples": 107264,
+          "pcm16_sha256": "51c8c2ad24ab7cf7fecb6ec9f789538f6fc571629411172c29f9f40616b05d5f",
+          "code_count": 244,
+          "rounds": 57,
+          "kv_length": 320,
+          "first_chunk_ms": 99.6102187782526,
+          "lifetime_ms": 2024.3766903877258,
+          "case_id": "sm89-q008",
+          "long_text": false,
+          "text_characters": 20,
+          "seed": 1417967647
+        },
+        {
+          "id": "soak-lane-1",
+          "outcome": "complete_eos",
+          "complete": true,
+          "eos": true,
+          "chunks": [
+            {
+              "index": 0,
+              "samples": 11264,
+              "eos": false,
+              "cfm_batch": 4,
+              "vocoder_batch": 4
+            },
+            {
+              "index": 1,
+              "samples": 78336,
+              "eos": true,
+              "cfm_batch": 1,
+              "vocoder_batch": 1
+            }
+          ],
+          "samples": 89600,
+          "pcm16_sha256": "e6611a9d2db701cec7d41e6eb7d0309947a272321cc04fb2d228cdc59488fd83",
+          "code_count": 204,
+          "rounds": 48,
+          "kv_length": 276,
+          "first_chunk_ms": 99.41404685378075,
+          "lifetime_ms": 1446.6388653963804,
+          "case_id": "sm89-q013",
+          "long_text": false,
+          "text_characters": 18,
+          "seed": 281948003
+        },
+        {
+          "id": "soak-lane-0",
+          "outcome": "complete_eos",
+          "complete": true,
+          "eos": true,
+          "chunks": [
+            {
+              "index": 0,
+              "samples": 11264,
+              "eos": false,
+              "cfm_batch": 4,
+              "vocoder_batch": 4
+            },
+            {
+              "index": 1,
+              "samples": 106240,
+              "eos": true,
+              "cfm_batch": 1,
+              "vocoder_batch": 1
+            }
+          ],
+          "samples": 117504,
+          "pcm16_sha256": "761994d55018add4c278098a008a43e939572b1c472df93d2d49d41cda82101c",
+          "code_count": 267,
+          "rounds": 71,
+          "kv_length": 335,
+          "first_chunk_ms": 99.80468638241291,
+          "lifetime_ms": 2016.1103382706642,
+          "case_id": "sm89-q012",
+          "long_text": false,
+          "text_characters": 15,
+          "seed": 535314958
+        },
+        {
+          "id": "soak-lane-2",
+          "outcome": "complete_eos",
+          "complete": true,
+          "eos": true,
+          "chunks": [
+            {
+              "index": 0,
+              "samples": 11264,
+              "eos": false,
+              "cfm_batch": 4,
+              "vocoder_batch": 4
+            },
+            {
+              "index": 1,
+              "samples": 52992,
+              "eos": true,
+              "cfm_batch": 1,
+              "vocoder_batch": 1
+            },
+            {
+              "index": 2,
+              "samples": 54528,
+              "eos": true,
+              "cfm_batch": 1,
+              "vocoder_batch": 1
+            }
+          ],
+          "samples": 118784,
+          "pcm16_sha256": "344f5826a632d55b9ffd67d139d019bddb6a6440d9d99a48c57e13c6539d3722",
+          "code_count": 270,
+          "rounds": 69,
+          "kv_length": 346,
+          "first_chunk_ms": 99.27632473409176,
+          "lifetime_ms": 3061.645071953535,
+          "case_id": "sm89-q246",
+          "long_text": true,
+          "text_characters": 20,
+          "seed": 1793371851
+        },
+        {
+          "id": "soak-lane-3",
+          "outcome": "complete_eos",
+          "complete": true,
+          "eos": true,
+          "chunks": [
+            {
+              "index": 0,
+              "samples": 11264,
+              "eos": false,
+              "cfm_batch": 4,
+              "vocoder_batch": 4
+            },
+            {
+              "index": 1,
+              "samples": 41472,
+              "eos": true,
+              "cfm_batch": 1,
+              "vocoder_batch": 1
+            },
+            {
+              "index": 2,
+              "samples": 39680,
+              "eos": true,
+              "cfm_batch": 1,
+              "vocoder_batch": 1
+            },
+            {
+              "index": 3,
+              "samples": 25856,
+              "eos": true,
+              "cfm_batch": 1,
+              "vocoder_batch": 1
+            }
+          ],
+          "samples": 118272,
+          "pcm16_sha256": "25777984051b9347e57a9855756187ac62f0e2f6665ad301424579c5b2554ded",
+          "code_count": 269,
+          "rounds": 64,
+          "kv_length": 350,
+          "first_chunk_ms": 99.16410408914089,
+          "lifetime_ms": 3571.5909115970135,
+          "case_id": "sm89-q015",
+          "long_text": false,
+          "text_characters": 23,
+          "seed": 2003668703
+        }
+      ],
+      "snapshots": [
+        {
+          "elapsed_s": 2.222620617598295,
+          "sessions": 0,
+          "active_rows": 0,
+          "error_sessions": 0,
+          "memory": {
+            "cuda_allocated_bytes": 11157245952,
+            "cuda_reserved_bytes": 13212057600,
+            "cuda_peak_allocated_bytes": 11896932864,
+            "cuda_peak_reserved_bytes": 13212057600,
+            "rss_bytes": 3668209664
+          },
+          "target_slots": {
+            "capacity": 8,
+            "free": 8,
+            "free_unique": 8,
+            "leased": 0,
+            "valid": true
+          },
+          "draft_slots": {
+            "capacity": 8,
+            "free": 8,
+            "free_unique": 8,
+            "leased": 0,
+            "valid": true
+          },
+          "rng_policy": "legacy_per_request",
+          "scheduler_max_batch": 4,
+          "target_batch_counts": {
+            "1": 20,
+            "4": 72,
+            "3": 40,
+            "2": 40
+          },
+          "target_calls": 172,
+          "device_target_steps": 0,
+          "draft_backbone_calls": 172,
+          "device_draft_steps": 0,
+          "native_target_steps": 22,
+          "native_draft_steps": 16,
+          "device_round_attempts": 0,
+          "device_round_successes": 0,
+          "device_round_fallbacks": 0,
+          "native_cfm_calls": 4,
+          "native_cfm_fallbacks": 28,
+          "native_vocoder_calls": 4,
+          "native_vocoder_fallbacks": 28,
+          "strict_request_isolation": true,
+          "admitted_concurrency": 4
+        },
+        {
+          "elapsed_s": 5.092615777626634,
+          "sessions": 0,
+          "active_rows": 0,
+          "error_sessions": 0,
+          "memory": {
+            "cuda_allocated_bytes": 11157245952,
+            "cuda_reserved_bytes": 13212057600,
+            "cuda_peak_allocated_bytes": 11896932864,
+            "cuda_peak_reserved_bytes": 13212057600,
+            "rss_bytes": 3683667968
+          },
+          "target_slots": {
+            "capacity": 8,
+            "free": 8,
+            "free_unique": 8,
+            "leased": 0,
+            "valid": true
+          },
+          "draft_slots": {
+            "capacity": 8,
+            "free": 8,
+            "free_unique": 8,
+            "leased": 0,
+            "valid": true
+          },
+          "rng_policy": "legacy_per_request",
+          "scheduler_max_batch": 4,
+          "target_batch_counts": {
+            "1": 26,
+            "4": 120,
+            "3": 45,
+            "2": 61
+          },
+          "target_calls": 252,
+          "device_target_steps": 0,
+          "draft_backbone_calls": 252,
+          "device_draft_steps": 0,
+          "native_target_steps": 33,
+          "native_draft_steps": 24,
+          "device_round_attempts": 0,
+          "device_round_successes": 0,
+          "device_round_fallbacks": 0,
+          "native_cfm_calls": 4,
+          "native_cfm_fallbacks": 36,
+          "native_vocoder_calls": 4,
+          "native_vocoder_fallbacks": 36,
+          "strict_request_isolation": true,
+          "admitted_concurrency": 4
+        },
+        {
+          "elapsed_s": 7.124771194532514,
+          "sessions": 0,
+          "active_rows": 0,
+          "error_sessions": 0,
+          "memory": {
+            "cuda_allocated_bytes": 11157245952,
+            "cuda_reserved_bytes": 13212057600,
+            "cuda_peak_allocated_bytes": 11896932864,
+            "cuda_peak_reserved_bytes": 13212057600,
+            "rss_bytes": 3693944832
+          },
+          "target_slots": {
+            "capacity": 8,
+            "free": 8,
+            "free_unique": 8,
+            "leased": 0,
+            "valid": true
+          },
+          "draft_slots": {
+            "capacity": 8,
+            "free": 8,
+            "free_unique": 8,
+            "leased": 0,
+            "valid": true
+          },
+          "rng_policy": "legacy_per_request",
+          "scheduler_max_batch": 4,
+          "target_batch_counts": {
+            "1": 46,
+            "4": 121,
+            "3": 88,
+            "2": 72
+          },
+          "target_calls": 327,
+          "device_target_steps": 0,
+          "draft_backbone_calls": 327,
+          "device_draft_steps": 0,
+          "native_target_steps": 34,
+          "native_draft_steps": 24,
+          "device_round_attempts": 0,
+          "device_round_successes": 0,
+          "device_round_fallbacks": 0,
+          "native_cfm_calls": 4,
+          "native_cfm_fallbacks": 42,
+          "native_vocoder_calls": 4,
+          "native_vocoder_fallbacks": 42,
+          "strict_request_isolation": true,
+          "admitted_concurrency": 4
+        },
+        {
+          "elapsed_s": 10.706564692780375,
+          "sessions": 0,
+          "active_rows": 0,
+          "error_sessions": 0,
+          "memory": {
+            "cuda_allocated_bytes": 11157245952,
+            "cuda_reserved_bytes": 13212057600,
+            "cuda_peak_allocated_bytes": 11896932864,
+            "cuda_peak_reserved_bytes": 13212057600,
+            "rss_bytes": 3708456960
+          },
+          "target_slots": {
+            "capacity": 8,
+            "free": 8,
+            "free_unique": 8,
+            "leased": 0,
+            "valid": true
+          },
+          "draft_slots": {
+            "capacity": 8,
+            "free": 8,
+            "free_unique": 8,
+            "leased": 0,
+            "valid": true
+          },
+          "rng_policy": "legacy_per_request",
+          "scheduler_max_batch": 4,
+          "target_batch_counts": {
+            "1": 88,
+            "4": 145,
+            "3": 104,
+            "2": 105
+          },
+          "target_calls": 442,
+          "device_target_steps": 0,
+          "draft_backbone_calls": 442,
+          "device_draft_steps": 0,
+          "native_target_steps": 43,
+          "native_draft_steps": 30,
+          "device_round_attempts": 0,
+          "device_round_successes": 0,
+          "device_round_fallbacks": 0,
+          "native_cfm_calls": 4,
+          "native_cfm_fallbacks": 49,
+          "native_vocoder_calls": 4,
+          "native_vocoder_fallbacks": 49,
+          "strict_request_isolation": true,
+          "admitted_concurrency": 4
+        }
+      ],
+      "warmups": 1,
+      "deployment": {
+        "hardware": {
+          "name": "NVIDIA GeForce RTX 4090",
+          "sm": 89,
+          "sms": 128
+        },
+        "sm": 89,
+        "requested": {
+          "schema": 1,
+          "precision": "bf16",
+          "components": [
+            "target",
+            "draft",
+            "cfm",
+            "vocoder"
+          ],
+          "convolutions": true,
+          "rnn_precision": "bf16",
+          "target_graphs": true,
+          "draft_graphs": true,
+          "proposal_graphs": true,
+          "prefix_graphs": true,
+          "head_graphs": true,
+          "slot_draft": true,
+          "context_graphs": true,
+          "context_scatter": true,
+          "device_accept_plan": false,
+          "device_residual": false,
+          "device_round_b8": false,
+          "batched_proposal_rng": false,
+          "overlap_acoustics": false,
+          "fused_acceptance": true,
+          "tail_graphs": false,
+          "head_batch_barrier": true,
+          "acoustic_kernels": "alias",
+          "acoustic_plan": null,
+          "strict_request_isolation": true,
+          "status": "sm89_trt113_b4_request_isolated_numerically_experimental",
+          "tensorrt113_target_full_plan": "/workspace/A_inspark_marlin/artifacts/trt113_target_full/plan_b4_audited_source.json",
+          "tensorrt113_draft_full_plan": "/workspace/A_inspark_marlin/artifacts/trt113_draft_full/plan_b4_audited_source.json",
+          "tensorrt113_cfm_plan": "/workspace/A_inspark_marlin/artifacts/trt113_cfm/plan_b4_audited_source.json",
+          "tensorrt113_vocoder_plan": "/workspace/A_inspark_marlin/artifacts/trt113_vocoder/plan_b4_nativeconv_strong_audited_source.json",
+          "device_parent_graph": false
+        },
+        "request_isolation": {
+          "strict_request_isolation": true,
+          "rng_policy": "legacy_per_request",
+          "shared_rng_paths": [],
+          "changed_sampler_paths": [],
+          "request_stream_v1_implemented": false
+        },
+        "compute_backend": "optimized"
+      },
+      "expected_error_checks": [
+        "empty_input_rejected",
+        "empty_input_rejected"
+      ],
+      "setup_seconds": 45.29959993995726,
+      "rng_boundary_checks": {
+        "other_inference_and_cancel": {
+          "passed": true,
+          "changed_fields": [],
+          "before": {
+            "request_id": "soak-rng-reuse",
+            "seed": 1443349810,
+            "rng_policy": "legacy_per_request",
+            "state_sha256": "091497b18904d6e8ccc83c7ef3ad24bf33f350edc91dbb8cd7b84213a68344e8",
+            "next_uniform_prefix_sha256": "98d5ec70963f599f694487b7ddd331bb49a66be2714a011fd039ab372c088d03",
+            "cfm_noise_prefix_sha256": "a78fd9f12495d9d2becdd5770bbb1e4ba58b6f7e2b211f44df9d934fb55a520e",
+            "prefix_draws": 32,
+            "rounds": 0,
+            "code_count": 0,
+            "phase": "session_boundary"
+          },
+          "after": {
+            "request_id": "soak-rng-reuse",
+            "seed": 1443349810,
+            "rng_policy": "legacy_per_request",
+            "state_sha256": "091497b18904d6e8ccc83c7ef3ad24bf33f350edc91dbb8cd7b84213a68344e8",
+            "next_uniform_prefix_sha256": "98d5ec70963f599f694487b7ddd331bb49a66be2714a011fd039ab372c088d03",
+            "cfm_noise_prefix_sha256": "a78fd9f12495d9d2becdd5770bbb1e4ba58b6f7e2b211f44df9d934fb55a520e",
+            "prefix_draws": 32,
+            "rounds": 0,
+            "code_count": 0,
+            "phase": "session_boundary"
+          }
+        },
+        "cancel_recreate_same_seed": {
+          "passed": true,
+          "changed_fields": [],
+          "before": {
+            "request_id": "soak-rng-reuse",
+            "seed": 1443349810,
+            "rng_policy": "legacy_per_request",
+            "state_sha256": "091497b18904d6e8ccc83c7ef3ad24bf33f350edc91dbb8cd7b84213a68344e8",
+            "next_uniform_prefix_sha256": "98d5ec70963f599f694487b7ddd331bb49a66be2714a011fd039ab372c088d03",
+            "cfm_noise_prefix_sha256": "a78fd9f12495d9d2becdd5770bbb1e4ba58b6f7e2b211f44df9d934fb55a520e",
+            "prefix_draws": 32,
+            "rounds": 0,
+            "code_count": 0,
+            "phase": "session_boundary"
+          },
+          "after": {
+            "request_id": "soak-rng-reuse",
+            "seed": 1443349810,
+            "rng_policy": "legacy_per_request",
+            "state_sha256": "091497b18904d6e8ccc83c7ef3ad24bf33f350edc91dbb8cd7b84213a68344e8",
+            "next_uniform_prefix_sha256": "98d5ec70963f599f694487b7ddd331bb49a66be2714a011fd039ab372c088d03",
+            "cfm_noise_prefix_sha256": "a78fd9f12495d9d2becdd5770bbb1e4ba58b6f7e2b211f44df9d934fb55a520e",
+            "prefix_draws": 32,
+            "rounds": 0,
+            "code_count": 0,
+            "phase": "session_boundary"
+          }
+        },
+        "active_row_admit_cancel": {
+          "passed": true,
+          "changed_fields": [],
+          "before": {
+            "request_id": "soak-rng-reuse",
+            "seed": 1443349810,
+            "rng_policy": "legacy_per_request",
+            "state_sha256": "51758f482dea73580e660bfd02d9fc25968c68c1a4eed6e0a126236d02e5dc90",
+            "next_uniform_prefix_sha256": "ec74dd70d1245678c68059f1f52461c7ec058c4e574f907a3278b7137970a4cf",
+            "cfm_noise_prefix_sha256": "a78fd9f12495d9d2becdd5770bbb1e4ba58b6f7e2b211f44df9d934fb55a520e",
+            "prefix_draws": 32,
+            "rounds": 1,
+            "code_count": 2,
+            "phase": "active_row"
+          },
+          "after": {
+            "request_id": "soak-rng-reuse",
+            "seed": 1443349810,
+            "rng_policy": "legacy_per_request",
+            "state_sha256": "51758f482dea73580e660bfd02d9fc25968c68c1a4eed6e0a126236d02e5dc90",
+            "next_uniform_prefix_sha256": "ec74dd70d1245678c68059f1f52461c7ec058c4e574f907a3278b7137970a4cf",
+            "cfm_noise_prefix_sha256": "a78fd9f12495d9d2becdd5770bbb1e4ba58b6f7e2b211f44df9d934fb55a520e",
+            "prefix_draws": 32,
+            "rounds": 1,
+            "code_count": 2,
+            "phase": "active_row"
+          }
+        },
+        "active_row_observed": true,
+        "active_cancel_recreate_same_seed": {
+          "passed": true,
+          "changed_fields": [],
+          "before": {
+            "request_id": "soak-rng-reuse",
+            "seed": 1443349810,
+            "rng_policy": "legacy_per_request",
+            "state_sha256": "091497b18904d6e8ccc83c7ef3ad24bf33f350edc91dbb8cd7b84213a68344e8",
+            "next_uniform_prefix_sha256": "98d5ec70963f599f694487b7ddd331bb49a66be2714a011fd039ab372c088d03",
+            "cfm_noise_prefix_sha256": "a78fd9f12495d9d2becdd5770bbb1e4ba58b6f7e2b211f44df9d934fb55a520e",
+            "prefix_draws": 32,
+            "rounds": 0,
+            "code_count": 0,
+            "phase": "session_boundary"
+          },
+          "after": {
+            "request_id": "soak-rng-reuse",
+            "seed": 1443349810,
+            "rng_policy": "legacy_per_request",
+            "state_sha256": "091497b18904d6e8ccc83c7ef3ad24bf33f350edc91dbb8cd7b84213a68344e8",
+            "next_uniform_prefix_sha256": "98d5ec70963f599f694487b7ddd331bb49a66be2714a011fd039ab372c088d03",
+            "cfm_noise_prefix_sha256": "a78fd9f12495d9d2becdd5770bbb1e4ba58b6f7e2b211f44df9d934fb55a520e",
+            "prefix_draws": 32,
+            "rounds": 0,
+            "code_count": 0,
+            "phase": "session_boundary"
+          }
+        },
+        "passed": true,
+        "scope": "Unchanged witness progress across unrelated operations; post-numerical-branch stream/token equality is not asserted"
+      },
+      "rng_probe_seconds": 0.10441725701093674,
+      "warmup_seconds": 3.056366028264165,
+      "before": {
+        "sessions": 0,
+        "active_rows": 0,
+        "error_sessions": 0,
+        "memory": {
+          "cuda_allocated_bytes": 11157245952,
+          "cuda_reserved_bytes": 13209960448,
+          "cuda_peak_allocated_bytes": 11894516224,
+          "cuda_peak_reserved_bytes": 13209960448,
+          "rss_bytes": 3666927616
+        },
+        "target_slots": {
+          "capacity": 8,
+          "free": 8,
+          "free_unique": 8,
+          "leased": 0,
+          "valid": true
+        },
+        "draft_slots": {
+          "capacity": 8,
+          "free": 8,
+          "free_unique": 8,
+          "leased": 0,
+          "valid": true
+        },
+        "rng_policy": "legacy_per_request",
+        "scheduler_max_batch": 4,
+        "target_batch_counts": {
+          "1": 11,
+          "4": 36,
+          "3": 20,
+          "2": 20
+        },
+        "target_calls": 87,
+        "device_target_steps": 0,
+        "draft_backbone_calls": 87,
+        "device_draft_steps": 0,
+        "native_target_steps": 11,
+        "native_draft_steps": 8,
+        "device_round_attempts": 0,
+        "device_round_successes": 0,
+        "device_round_fallbacks": 0,
+        "native_cfm_calls": 4,
+        "native_cfm_fallbacks": 20,
+        "native_vocoder_calls": 4,
+        "native_vocoder_fallbacks": 20,
+        "strict_request_isolation": true,
+        "acoustic_routes": {
+          "cfm": {
+            "graph_routes": [
+              {
+                "route": {
+                  "kind": "eager",
+                  "backend": "eager",
+                  "candidate_backend": "tensorrt113",
+                  "component": "cfm",
+                  "batch": 1,
+                  "frames": 310,
+                  "engine_batch": 4,
+                  "engine_frames": 310,
+                  "plan": "/workspace/A_inspark_marlin/artifacts/trt113_cfm/plan_b4_audited_source.json",
+                  "sha256": "663082f2771357eb0086402d2dc59c66f7a4b50bade4e8ecb925a4b39fdc2244",
+                  "reason": "x.shape",
+                  "provenance_status": "recorded_not_audited",
+                  "plan_sha256": "2ad8f1f4ef24e0d916c3ffefb14d34c399cbc98ba229a617780daeec50588ba4",
+                  "weight_identity_verified": false,
+                  "loader_weights_checked": false,
+                  "plugins": [],
+                  "fallback": true
+                },
+                "prepare": 1,
+                "direct": 0,
+                "replay": 0,
+                "fallback": 0
+              },
+              {
+                "route": {
+                  "kind": "eager",
+                  "backend": "eager",
+                  "candidate_backend": "tensorrt113",
+                  "component": "cfm",
+                  "batch": 2,
+                  "frames": 310,
+                  "engine_batch": 4,
+                  "engine_frames": 310,
+                  "plan": "/workspace/A_inspark_marlin/artifacts/trt113_cfm/plan_b4_audited_source.json",
+                  "sha256": "663082f2771357eb0086402d2dc59c66f7a4b50bade4e8ecb925a4b39fdc2244",
+                  "reason": "x.shape",
+                  "provenance_status": "recorded_not_audited",
+                  "plan_sha256": "2ad8f1f4ef24e0d916c3ffefb14d34c399cbc98ba229a617780daeec50588ba4",
+                  "weight_identity_verified": false,
+                  "loader_weights_checked": false,
+                  "plugins": [],
+                  "fallback": true
+                },
+                "prepare": 1,
+                "direct": 0,
+                "replay": 0,
+                "fallback": 0
+              },
+              {
+                "route": {
+                  "kind": "eager",
+                  "backend": "eager",
+                  "candidate_backend": "tensorrt113",
+                  "component": "cfm",
+                  "batch": 3,
+                  "frames": 310,
+                  "engine_batch": 4,
+                  "engine_frames": 310,
+                  "plan": "/workspace/A_inspark_marlin/artifacts/trt113_cfm/plan_b4_audited_source.json",
+                  "sha256": "663082f2771357eb0086402d2dc59c66f7a4b50bade4e8ecb925a4b39fdc2244",
+                  "reason": "x.shape",
+                  "provenance_status": "recorded_not_audited",
+                  "plan_sha256": "2ad8f1f4ef24e0d916c3ffefb14d34c399cbc98ba229a617780daeec50588ba4",
+                  "weight_identity_verified": false,
+                  "loader_weights_checked": false,
+                  "plugins": [],
+                  "fallback": true
+                },
+                "prepare": 1,
+                "direct": 0,
+                "replay": 0,
+                "fallback": 0
+              },
+              {
+                "route": {
+                  "kind": "tensorrt",
+                  "backend": "tensorrt113",
+                  "candidate_backend": "tensorrt113",
+                  "component": "cfm",
+                  "batch": 4,
+                  "frames": 310,
+                  "engine_batch": 4,
+                  "engine_frames": 310,
+                  "plan": "/workspace/A_inspark_marlin/artifacts/trt113_cfm/plan_b4_audited_source.json",
+                  "sha256": "663082f2771357eb0086402d2dc59c66f7a4b50bade4e8ecb925a4b39fdc2244",
+                  "reason": null,
+                  "provenance_status": "recorded_not_audited",
+                  "plan_sha256": "2ad8f1f4ef24e0d916c3ffefb14d34c399cbc98ba229a617780daeec50588ba4",
+                  "weight_identity_verified": false,
+                  "loader_weights_checked": false,
+                  "plugins": [],
+                  "fallback": false
+                },
+                "prepare": 1,
+                "direct": 0,
+                "replay": 1,
+                "fallback": 0
+              }
+            ],
+            "wrapper_total": {
+              "calls": 4,
+              "fallbacks": 20
+            }
+          },
+          "vocoder": {
+            "graph_routes": [
+              {
+                "route": {
+                  "kind": "eager",
+                  "backend": "eager",
+                  "candidate_backend": "tensorrt113",
+                  "component": "vocoder",
+                  "batch": 1,
+                  "frames": 52,
+                  "engine_batch": 4,
+                  "engine_frames": 52,
+                  "plan": "/workspace/A_inspark_marlin/artifacts/trt113_vocoder/plan_b4_nativeconv_strong_audited_source.json",
+                  "sha256": "53b3ca19dbdc68b48244bbed78027e46efad54253ab322f272cfb0c7ac09316c",
+                  "reason": "mel.shape",
+                  "provenance_status": "recorded_not_audited",
+                  "plan_sha256": "dbe47ace9544312c297cd44718453b7c11dcf75b732e998248753efc333a6d09",
+                  "weight_identity_verified": false,
+                  "loader_weights_checked": false,
+                  "plugins": [
+                    "inspark::alias_free",
+                    "inspark::deconv1d"
+                  ],
+                  "fallback": true
+                },
+                "prepare": 1,
+                "direct": 0,
+                "replay": 0,
+                "fallback": 0
+              },
+              {
+                "route": {
+                  "kind": "eager",
+                  "backend": "eager",
+                  "candidate_backend": "tensorrt113",
+                  "component": "vocoder",
+                  "batch": 2,
+                  "frames": 52,
+                  "engine_batch": 4,
+                  "engine_frames": 52,
+                  "plan": "/workspace/A_inspark_marlin/artifacts/trt113_vocoder/plan_b4_nativeconv_strong_audited_source.json",
+                  "sha256": "53b3ca19dbdc68b48244bbed78027e46efad54253ab322f272cfb0c7ac09316c",
+                  "reason": "mel.shape",
+                  "provenance_status": "recorded_not_audited",
+                  "plan_sha256": "dbe47ace9544312c297cd44718453b7c11dcf75b732e998248753efc333a6d09",
+                  "weight_identity_verified": false,
+                  "loader_weights_checked": false,
+                  "plugins": [
+                    "inspark::alias_free",
+                    "inspark::deconv1d"
+                  ],
+                  "fallback": true
+                },
+                "prepare": 1,
+                "direct": 0,
+                "replay": 0,
+                "fallback": 0
+              },
+              {
+                "route": {
+                  "kind": "eager",
+                  "backend": "eager",
+                  "candidate_backend": "tensorrt113",
+                  "component": "vocoder",
+                  "batch": 3,
+                  "frames": 52,
+                  "engine_batch": 4,
+                  "engine_frames": 52,
+                  "plan": "/workspace/A_inspark_marlin/artifacts/trt113_vocoder/plan_b4_nativeconv_strong_audited_source.json",
+                  "sha256": "53b3ca19dbdc68b48244bbed78027e46efad54253ab322f272cfb0c7ac09316c",
+                  "reason": "mel.shape",
+                  "provenance_status": "recorded_not_audited",
+                  "plan_sha256": "dbe47ace9544312c297cd44718453b7c11dcf75b732e998248753efc333a6d09",
+                  "weight_identity_verified": false,
+                  "loader_weights_checked": false,
+                  "plugins": [
+                    "inspark::alias_free",
+                    "inspark::deconv1d"
+                  ],
+                  "fallback": true
+                },
+                "prepare": 1,
+                "direct": 0,
+                "replay": 0,
+                "fallback": 0
+              },
+              {
+                "route": {
+                  "kind": "tensorrt",
+                  "backend": "tensorrt113",
+                  "candidate_backend": "tensorrt113",
+                  "component": "vocoder",
+                  "batch": 4,
+                  "frames": 52,
+                  "engine_batch": 4,
+                  "engine_frames": 52,
+                  "plan": "/workspace/A_inspark_marlin/artifacts/trt113_vocoder/plan_b4_nativeconv_strong_audited_source.json",
+                  "sha256": "53b3ca19dbdc68b48244bbed78027e46efad54253ab322f272cfb0c7ac09316c",
+                  "reason": null,
+                  "provenance_status": "recorded_not_audited",
+                  "plan_sha256": "dbe47ace9544312c297cd44718453b7c11dcf75b732e998248753efc333a6d09",
+                  "weight_identity_verified": false,
+                  "loader_weights_checked": false,
+                  "plugins": [
+                    "inspark::alias_free",
+                    "inspark::deconv1d"
+                  ],
+                  "fallback": false
+                },
+                "prepare": 1,
+                "direct": 0,
+                "replay": 1,
+                "fallback": 0
+              }
+            ],
+            "wrapper_total": {
+              "calls": 4,
+              "fallbacks": 20
+            }
+          }
+        }
+      },
+      "timing_scope": "Admission through full EOS/cancel and drain; excludes setup, error/RNG probes and warmup; includes sampling/reporting overhead",
+      "after": {
+        "sessions": 0,
+        "active_rows": 0,
+        "error_sessions": 0,
+        "memory": {
+          "cuda_allocated_bytes": 11157245952,
+          "cuda_reserved_bytes": 13212057600,
+          "cuda_peak_allocated_bytes": 11896932864,
+          "cuda_peak_reserved_bytes": 13212057600,
+          "rss_bytes": 3708465152
+        },
+        "target_slots": {
+          "capacity": 8,
+          "free": 8,
+          "free_unique": 8,
+          "leased": 0,
+          "valid": true
+        },
+        "draft_slots": {
+          "capacity": 8,
+          "free": 8,
+          "free_unique": 8,
+          "leased": 0,
+          "valid": true
+        },
+        "rng_policy": "legacy_per_request",
+        "scheduler_max_batch": 4,
+        "target_batch_counts": {
+          "1": 88,
+          "4": 145,
+          "3": 104,
+          "2": 105
+        },
+        "target_calls": 442,
+        "device_target_steps": 0,
+        "draft_backbone_calls": 442,
+        "device_draft_steps": 0,
+        "native_target_steps": 43,
+        "native_draft_steps": 30,
+        "device_round_attempts": 0,
+        "device_round_successes": 0,
+        "device_round_fallbacks": 0,
+        "native_cfm_calls": 4,
+        "native_cfm_fallbacks": 49,
+        "native_vocoder_calls": 4,
+        "native_vocoder_fallbacks": 49,
+        "strict_request_isolation": true,
+        "acoustic_routes": {
+          "cfm": {
+            "graph_routes": [
+              {
+                "route": {
+                  "kind": "eager",
+                  "backend": "eager",
+                  "candidate_backend": "tensorrt113",
+                  "component": "cfm",
+                  "batch": 1,
+                  "frames": 310,
+                  "engine_batch": 4,
+                  "engine_frames": 310,
+                  "plan": "/workspace/A_inspark_marlin/artifacts/trt113_cfm/plan_b4_audited_source.json",
+                  "sha256": "663082f2771357eb0086402d2dc59c66f7a4b50bade4e8ecb925a4b39fdc2244",
+                  "reason": "x.shape",
+                  "provenance_status": "recorded_not_audited",
+                  "plan_sha256": "2ad8f1f4ef24e0d916c3ffefb14d34c399cbc98ba229a617780daeec50588ba4",
+                  "weight_identity_verified": false,
+                  "loader_weights_checked": false,
+                  "plugins": [],
+                  "fallback": true
+                },
+                "prepare": 1,
+                "direct": 0,
+                "replay": 0,
+                "fallback": 0
+              },
+              {
+                "route": {
+                  "kind": "eager",
+                  "backend": "eager",
+                  "candidate_backend": "tensorrt113",
+                  "component": "cfm",
+                  "batch": 2,
+                  "frames": 310,
+                  "engine_batch": 4,
+                  "engine_frames": 310,
+                  "plan": "/workspace/A_inspark_marlin/artifacts/trt113_cfm/plan_b4_audited_source.json",
+                  "sha256": "663082f2771357eb0086402d2dc59c66f7a4b50bade4e8ecb925a4b39fdc2244",
+                  "reason": "x.shape",
+                  "provenance_status": "recorded_not_audited",
+                  "plan_sha256": "2ad8f1f4ef24e0d916c3ffefb14d34c399cbc98ba229a617780daeec50588ba4",
+                  "weight_identity_verified": false,
+                  "loader_weights_checked": false,
+                  "plugins": [],
+                  "fallback": true
+                },
+                "prepare": 1,
+                "direct": 0,
+                "replay": 0,
+                "fallback": 0
+              },
+              {
+                "route": {
+                  "kind": "eager",
+                  "backend": "eager",
+                  "candidate_backend": "tensorrt113",
+                  "component": "cfm",
+                  "batch": 3,
+                  "frames": 310,
+                  "engine_batch": 4,
+                  "engine_frames": 310,
+                  "plan": "/workspace/A_inspark_marlin/artifacts/trt113_cfm/plan_b4_audited_source.json",
+                  "sha256": "663082f2771357eb0086402d2dc59c66f7a4b50bade4e8ecb925a4b39fdc2244",
+                  "reason": "x.shape",
+                  "provenance_status": "recorded_not_audited",
+                  "plan_sha256": "2ad8f1f4ef24e0d916c3ffefb14d34c399cbc98ba229a617780daeec50588ba4",
+                  "weight_identity_verified": false,
+                  "loader_weights_checked": false,
+                  "plugins": [],
+                  "fallback": true
+                },
+                "prepare": 1,
+                "direct": 0,
+                "replay": 1,
+                "fallback": 1
+              },
+              {
+                "route": {
+                  "kind": "tensorrt",
+                  "backend": "tensorrt113",
+                  "candidate_backend": "tensorrt113",
+                  "component": "cfm",
+                  "batch": 4,
+                  "frames": 310,
+                  "engine_batch": 4,
+                  "engine_frames": 310,
+                  "plan": "/workspace/A_inspark_marlin/artifacts/trt113_cfm/plan_b4_audited_source.json",
+                  "sha256": "663082f2771357eb0086402d2dc59c66f7a4b50bade4e8ecb925a4b39fdc2244",
+                  "reason": null,
+                  "provenance_status": "recorded_not_audited",
+                  "plan_sha256": "2ad8f1f4ef24e0d916c3ffefb14d34c399cbc98ba229a617780daeec50588ba4",
+                  "weight_identity_verified": false,
+                  "loader_weights_checked": false,
+                  "plugins": [],
+                  "fallback": false
+                },
+                "prepare": 1,
+                "direct": 0,
+                "replay": 4,
+                "fallback": 0
+              }
+            ],
+            "wrapper_total": {
+              "calls": 4,
+              "fallbacks": 49
+            }
+          },
+          "vocoder": {
+            "graph_routes": [
+              {
+                "route": {
+                  "kind": "eager",
+                  "backend": "eager",
+                  "candidate_backend": "tensorrt113",
+                  "component": "vocoder",
+                  "batch": 1,
+                  "frames": 52,
+                  "engine_batch": 4,
+                  "engine_frames": 52,
+                  "plan": "/workspace/A_inspark_marlin/artifacts/trt113_vocoder/plan_b4_nativeconv_strong_audited_source.json",
+                  "sha256": "53b3ca19dbdc68b48244bbed78027e46efad54253ab322f272cfb0c7ac09316c",
+                  "reason": "mel.shape",
+                  "provenance_status": "recorded_not_audited",
+                  "plan_sha256": "dbe47ace9544312c297cd44718453b7c11dcf75b732e998248753efc333a6d09",
+                  "weight_identity_verified": false,
+                  "loader_weights_checked": false,
+                  "plugins": [
+                    "inspark::alias_free",
+                    "inspark::deconv1d"
+                  ],
+                  "fallback": true
+                },
+                "prepare": 1,
+                "direct": 0,
+                "replay": 0,
+                "fallback": 0
+              },
+              {
+                "route": {
+                  "kind": "eager",
+                  "backend": "eager",
+                  "candidate_backend": "tensorrt113",
+                  "component": "vocoder",
+                  "batch": 2,
+                  "frames": 52,
+                  "engine_batch": 4,
+                  "engine_frames": 52,
+                  "plan": "/workspace/A_inspark_marlin/artifacts/trt113_vocoder/plan_b4_nativeconv_strong_audited_source.json",
+                  "sha256": "53b3ca19dbdc68b48244bbed78027e46efad54253ab322f272cfb0c7ac09316c",
+                  "reason": "mel.shape",
+                  "provenance_status": "recorded_not_audited",
+                  "plan_sha256": "dbe47ace9544312c297cd44718453b7c11dcf75b732e998248753efc333a6d09",
+                  "weight_identity_verified": false,
+                  "loader_weights_checked": false,
+                  "plugins": [
+                    "inspark::alias_free",
+                    "inspark::deconv1d"
+                  ],
+                  "fallback": true
+                },
+                "prepare": 1,
+                "direct": 0,
+                "replay": 0,
+                "fallback": 0
+              },
+              {
+                "route": {
+                  "kind": "eager",
+                  "backend": "eager",
+                  "candidate_backend": "tensorrt113",
+                  "component": "vocoder",
+                  "batch": 3,
+                  "frames": 52,
+                  "engine_batch": 4,
+                  "engine_frames": 52,
+                  "plan": "/workspace/A_inspark_marlin/artifacts/trt113_vocoder/plan_b4_nativeconv_strong_audited_source.json",
+                  "sha256": "53b3ca19dbdc68b48244bbed78027e46efad54253ab322f272cfb0c7ac09316c",
+                  "reason": "mel.shape",
+                  "provenance_status": "recorded_not_audited",
+                  "plan_sha256": "dbe47ace9544312c297cd44718453b7c11dcf75b732e998248753efc333a6d09",
+                  "weight_identity_verified": false,
+                  "loader_weights_checked": false,
+                  "plugins": [
+                    "inspark::alias_free",
+                    "inspark::deconv1d"
+                  ],
+                  "fallback": true
+                },
+                "prepare": 1,
+                "direct": 0,
+                "replay": 1,
+                "fallback": 1
+              },
+              {
+                "route": {
+                  "kind": "tensorrt",
+                  "backend": "tensorrt113",
+                  "candidate_backend": "tensorrt113",
+                  "component": "vocoder",
+                  "batch": 4,
+                  "frames": 52,
+                  "engine_batch": 4,
+                  "engine_frames": 52,
+                  "plan": "/workspace/A_inspark_marlin/artifacts/trt113_vocoder/plan_b4_nativeconv_strong_audited_source.json",
+                  "sha256": "53b3ca19dbdc68b48244bbed78027e46efad54253ab322f272cfb0c7ac09316c",
+                  "reason": null,
+                  "provenance_status": "recorded_not_audited",
+                  "plan_sha256": "dbe47ace9544312c297cd44718453b7c11dcf75b732e998248753efc333a6d09",
+                  "weight_identity_verified": false,
+                  "loader_weights_checked": false,
+                  "plugins": [
+                    "inspark::alias_free",
+                    "inspark::deconv1d"
+                  ],
+                  "fallback": false
+                },
+                "prepare": 1,
+                "direct": 0,
+                "replay": 4,
+                "fallback": 0
+              }
+            ],
+            "wrapper_total": {
+              "calls": 4,
+              "fallbacks": 49
+            }
+          }
+        }
+      },
+      "elapsed_s": 10.717947402969003,
+      "waves": 4,
+      "counter_delta": {
+        "target_calls": 355,
+        "device_target_steps": 0,
+        "draft_backbone_calls": 355,
+        "device_draft_steps": 0,
+        "native_target_steps": 32,
+        "native_draft_steps": 22,
+        "device_round_attempts": 0,
+        "device_round_successes": 0,
+        "device_round_fallbacks": 0,
+        "native_cfm_calls": 0,
+        "native_cfm_fallbacks": 29,
+        "native_vocoder_calls": 0,
+        "native_vocoder_fallbacks": 29
+      },
+      "summary": {
+        "admitted": 16,
+        "complete_eos": 15,
+        "cancelled": 1,
+        "completed_requests_per_s": 1.3995217028070894,
+        "complete_latency_ms": {
+          "n": 15,
+          "min": 1446.6388653963804,
+          "median": 2024.3766903877258,
+          "p95": 3061.645071953535,
+          "max": 3571.5909115970135,
+          "mean": 2230.735001216332
+        },
+        "first_chunk_ms": {
+          "n": 15,
+          "min": 98.7837202847004,
+          "median": 100.75096599757671,
+          "p95": 103.51098142564297,
+          "max": 104.06707972288132,
+          "mean": 100.90898374716441
+        },
+        "max_code_count": 328,
+        "max_observed_kv_length": 405,
+        "long_text_completed": 3,
+        "reused_request_ids": 12,
+        "allocated_growth_bytes": 0,
+        "reserved_growth_bytes": 2097152
+      },
+      "pass_gate": {
+        "passed": true,
+        "validation_level": "smoke",
+        "soak_qualified": false,
+        "checks": {
+          "requested_duration": true,
+          "complete_eos": true,
+          "long_sequence": true,
+          "actual_concurrency": true,
+          "microbatch_bound": true,
+          "per_request_legacy_rng": true,
+          "rng_boundaries": true,
+          "empty_input_error_recovery": true,
+          "memory_absolute": true,
+          "memory_trend": true
+        },
+        "failed_checks": [],
+        "long_sequence": {
+          "min_kv_length": 129,
+          "completed_count": 15,
+          "witnesses": [
+            {
+              "id": "soak-lane-2",
+              "case_id": "sm89-q002",
+              "kv_length": 369,
+              "code_count": 297,
+              "text_characters": 18
+            },
+            {
+              "id": "soak-lane-3",
+              "case_id": "sm89-q003",
+              "kv_length": 303,
+              "code_count": 238,
+              "text_characters": 14
+            },
+            {
+              "id": "soak-lane-0",
+              "case_id": "sm89-q147",
+              "kv_length": 371,
+              "code_count": 294,
+              "text_characters": 20
+            },
+            {
+              "id": "soak-lane-1",
+              "case_id": "sm89-q001",
+              "kv_length": 303,
+              "code_count": 234,
+              "text_characters": 17
+            },
+            {
+              "id": "soak-lane-2",
+              "case_id": "sm89-q006",
+              "kv_length": 327,
+              "code_count": 256,
+              "text_characters": 17
+            },
+            {
+              "id": "soak-lane-1",
+              "case_id": "sm89-q005",
+              "kv_length": 351,
+              "code_count": 281,
+              "text_characters": 17
+            },
+            {
+              "id": "soak-lane-0",
+              "case_id": "sm89-q004",
+              "kv_length": 335,
+              "code_count": 261,
+              "text_characters": 19
+            },
+            {
+              "id": "soak-lane-3",
+              "case_id": "sm89-q192",
+              "kv_length": 370,
+              "code_count": 293,
+              "text_characters": 20
+            }
+          ]
+        },
+        "microbatch": {
+          "configured": 4,
+          "observed_max": 4,
+          "target_batches": [
+            1,
+            4,
+            3,
+            2
+          ],
+          "target_batch_counts_delta": {
+            "1": 77,
+            "4": 109,
+            "3": 84,
+            "2": 85
+          }
+        },
+        "memory": {
+          "passed": false,
+          "absolute_passed": true,
+          "trend_sufficient": false,
+          "late_samples": 3,
+          "late_span_seconds": 5.613948915153742,
+          "min_samples": 3,
+          "min_span_seconds": 60,
+          "metrics": {
+            "cuda_allocated_bytes": {
+              "final_growth_mib": 0.0,
+              "peak_drained_growth_mib": 0.0,
+              "growth_limit_mib": 64,
+              "growth_passed": true,
+              "late_slope_mib_per_min": 0.0,
+              "slope_limit_mib_per_min": 1,
+              "trend_passed": null
+            },
+            "rss_bytes": {
+              "final_growth_mib": 39.60546875,
+              "peak_drained_growth_mib": 39.60546875,
+              "growth_limit_mib": 256,
+              "growth_passed": true,
+              "late_slope_mib_per_min": 250.27839664617142,
+              "slope_limit_mib_per_min": 16,
+              "trend_passed": null
+            }
+          },
+          "scope": "Post-wave fully drained live CUDA/RSS memory; reserved allocator cache is recorded but not treated as a leak"
+        },
+        "smoke_limit": "Below 600 seconds is only a functional smoke; insufficient trend duration never qualifies as soak"
+      }
+    }
+  ],
+  "pass_gate": {
+    "passed": true,
+    "execution_completed": true,
+    "full_soak_pass": false,
+    "all_requested_tiers_passed": true,
+    "skipped_tiers": [],
+    "soak_qualified": false
+  }
+}

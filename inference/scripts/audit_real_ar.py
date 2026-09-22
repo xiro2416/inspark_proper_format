@@ -140,6 +140,17 @@ def replay_ar_engine_evidence(manifest, model_provenance):
     return result
 
 
+def same_weight_numerical_gate(pass_gate, same_loader_checkpoint_identity, evidence):
+    """Require source-verified engines for both actually observed AR components."""
+    if pass_gate is not True or same_loader_checkpoint_identity is not True:
+        return False
+    for component in ("target", "draft"):
+        engines = evidence.get(component, {})
+        if not engines or any(row.get("weight_identity_verified") is not True for row in engines.values()):
+            return False
+    return True
+
+
 class BoundedARRecorder:
     def __init__(self, engine, directory, manifest, limit):
         self.engine, self.directory, self.manifest = engine, Path(directory), manifest
@@ -324,12 +335,15 @@ def reference(args):
     output.mkdir(parents=True, exist_ok=True)
     report = {"schema": 1, "status": "running", "scope": "real_native_AR_same_input",
               "capture": file_record(manifest_path, "capture"), "calls": [], "pass_gate": False,
+              "numerical_pass_gate": False, "same_weight_numerical_pass_gate": False,
+              "same_loader_checkpoint_identity": False,
               "source": source_identity(), "precision": args.precision, "tolerances": TOLERANCES,
               "reference": "raw Engine; original Target method and BatchedDraftBackbone.forward; no graphs/custom ops",
               "cache_boundary": "Target exact captured BF16 KV promoted to FP32, NOT raw unrounded FP32 trajectory; Draft captured FP32 cache unchanged",
               "target_batching": "ragged row-wise eager; same input semantics, not a batched performance baseline",
               "arithmetic": "BF16 Linear wrappers may output FP32; native BF16 attention/cache arithmetic is not identical",
-              "performance_claim": False}
+              "performance_claim": False,
+              "conclusion_scope": "pass_gate covers numerical comparisons, direct/graph equality, cache-state checks and actual Target/Draft coverage only. same_weight_numerical_pass_gate additionally requires unchanged actual loader hashes and source-verified engines for every observed component/batch. Unknown legacy engine provenance cannot establish a same-weight conclusion. Build-source identity is not independent engine-constant extraction; perceptual quality and performance are separate gates."}
     engine = None
     try:
         config = load(args.config); config["max_batch"] = manifest["config"]["max_batch"]
@@ -343,6 +357,7 @@ def reference(args):
             current = {r["role"]: r["sha256"] for r in provenance["model_sources"]}
             if before != current:
                 raise ValueError(f"Actual {component} loader checkpoint/config hash changed")
+        report["same_loader_checkpoint_identity"] = True
         report["coverage"] = ar_coverage(manifest["ar_calls"])
         report["engine_identity"] = replay_ar_engine_evidence(manifest, report["model_provenance"])
         identities = [evidence for engines in report["engine_identity"].values() for evidence in engines.values()]
@@ -377,7 +392,10 @@ def reference(args):
                                  and all(v["pass_gate"] for v in checks.values())})
                 write_json(output / "report.json", report)
         report["status"] = "completed"
-        report["pass_gate"] = report["coverage"]["pass_gate"] and all(row["pass_gate"] for row in report["calls"])
+        report["numerical_pass_gate"] = all(row["pass_gate"] for row in report["calls"])
+        report["pass_gate"] = report["coverage"]["pass_gate"] and report["numerical_pass_gate"]
+        report["same_weight_numerical_pass_gate"] = same_weight_numerical_gate(
+            report["pass_gate"], report["same_loader_checkpoint_identity"], report["engine_identity"])
     except Exception as error:
         report["status"] = "error"
         report["error"] = {"type": type(error).__name__, "message": str(error), "traceback": traceback.format_exc()}

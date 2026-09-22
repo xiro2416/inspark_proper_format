@@ -250,6 +250,25 @@ def all_acoustic_weights_verified(evidence):
     return bool(native) and all(row["weight_identity_verified"] for row in native)
 
 
+def same_weight_numerical_gate(pass_gate, same_loader_checkpoint_identity, evidence):
+    """Add source identity without changing the numerical/coverage gate.
+
+    Explicitly absent native engines are N/A: matching actual loader hashes
+    suffice for those components. Missing/unknown historical engine evidence is
+    not equivalent to absence, even if the numerical comparisons passed.
+    """
+    if pass_gate is not True or same_loader_checkpoint_identity is not True:
+        return False
+    for component in ("cfm", "vocoder"):
+        row = evidence.get(component, {})
+        native = row.get("has_native_engine")
+        if native is False:
+            continue
+        if native is not True or row.get("weight_identity_verified") is not True:
+            return False
+    return True
+
+
 def direct_graph_gate(row):
     if row["route"].get("execution") != "graph":
         return {"required": False, "pass_gate": True, "reason": "actual direct route; no graph invoked"}
@@ -375,7 +394,9 @@ def replay_reference(args):
               "reference": "raw Engine; no deployment, no graphs, no custom acoustic kernels",
               "arithmetic": {"tf32": False, "policy": args.precision,
                  "bf16": "Linear/Conv wrapper arithmetic; FP32 interfaces; not identical to TensorRT arithmetic"},
-              "performance_claim": False, "pass_gate": False}
+              "performance_claim": False, "pass_gate": False, "numerical_pass_gate": False,
+              "same_loader_checkpoint_identity": False, "same_weight_numerical_pass_gate": False,
+              "conclusion_scope": "pass_gate covers numerical comparisons, direct/graph checks and actual route coverage only. same_weight_numerical_pass_gate additionally requires unchanged actual loader hashes and verified provenance for every native acoustic engine; explicitly absent engines are N/A, not failures. Build-source identity does not independently extract engine constants. Perceptual quality and performance are separate gates."}
     engine = None
     try:
         torch.backends.cuda.matmul.allow_tf32 = False
@@ -423,7 +444,8 @@ def replay_reference(args):
         report["coverage"] = acoustic_coverage(manifest)
         report["numerical_pass_gate"] = all(row["pass_gate"] for row in report["calls"])
         report["pass_gate"] = report["coverage"]["pass_gate"] and report["numerical_pass_gate"]
-        report["conclusion_scope"] = "Numerical evidence only; legacy engine source identity and perceptual quality are separate gates"
+        report["same_weight_numerical_pass_gate"] = same_weight_numerical_gate(
+            report["pass_gate"], report["same_loader_checkpoint_identity"], report["acoustic_engines"])
     except Exception as error:
         report["status"] = "error"
         report["error"] = {"type": type(error).__name__, "message": str(error),

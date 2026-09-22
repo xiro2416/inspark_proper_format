@@ -124,3 +124,13 @@ has known numerical failures, retained as evidence.
   complete EOS, long KV and drained ownership checks. These short runs use the
   original runtime config and do not qualify as ten-minute stability evidence;
   the formal run selects the TF32-disabled reference runtime explicitly.
+- Source-attested B1/B4 actual trajectories and the retained legacy B8 trajectory
+  completed four independent FP32/BF16 AR/acoustic replays each. All overall
+  numerical gates failed; component-level passes and exact BF16 tail controls
+  are retained. B8 engine checkpoint provenance remains unverified.
+- Request-isolated B1/B4 timing (two warmups, five complete-EOS waves): first-PCM
+  medians 54.991/106.151 ms, full-EOS medians 330.840/839.198 ms. Different token
+  trajectories prevent treating these as matched-work eager speedup ratios.
+- Latest CPU regression: 211 passed, four GPU-only tests skipped there and
+  passed separately. The 256-case B1 quality corpus is complete; B4, legacy B8,
+  BF16 eager generation and independent CPU quality scoring are in progress.

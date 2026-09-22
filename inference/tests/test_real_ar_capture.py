@@ -9,7 +9,7 @@ SCRIPTS = Path(__file__).resolve().parents[1] / "scripts"
 sys.path.insert(0, str(SCRIPTS))
 from audit_real_ar import (BoundedARRecorder, GraphProxy, ProposalProxy, ProposalCallProxy,
     actual_target_reference, new_target_kv, ar_coverage, bitwise_equal,
-    target_untouched_cache_equal, replay_ar_engine_evidence)
+    target_untouched_cache_equal, replay_ar_engine_evidence, same_weight_numerical_gate)
 
 
 def test_target_kv_extracts_each_real_row_position():
@@ -91,6 +91,21 @@ def test_native_coverage_needs_both_actual_components_not_merely_an_engine():
     assert not ar_coverage([{"component": "draft", "batch": 4}])["pass_gate"]
     coverage = ar_coverage([{"component": "draft", "batch": 4}, {"component": "target", "batch": 4}])
     assert coverage["pass_gate"] and coverage["calls"] == {"target": 1, "draft": 1}
+
+
+def test_same_weight_gate_needs_numerical_loader_and_every_observed_engine():
+    evidence = {component: {"1": {"weight_identity_verified": True}}
+                for component in ("target", "draft")}
+    assert same_weight_numerical_gate(True, True, evidence)
+    assert not same_weight_numerical_gate(False, True, evidence)
+    assert not same_weight_numerical_gate(True, False, evidence)
+    assert not same_weight_numerical_gate(True, True, {"target": evidence["target"]})
+    assert not same_weight_numerical_gate(True, True, {"target": evidence["target"], "draft": {}})
+    # Even a passing source-verified batch cannot attest another legacy batch.
+    evidence["draft"]["4"] = {"weight_identity_verified": False}
+    assert not same_weight_numerical_gate(True, True, evidence)
+    evidence["draft"]["4"] = {}
+    assert not same_weight_numerical_gate(True, True, evidence)
 
 
 def test_untouched_cache_compares_bytes_including_unused_nan_storage():

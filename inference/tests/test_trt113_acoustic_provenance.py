@@ -134,6 +134,23 @@ class AcousticProvenanceTest(unittest.TestCase):
         self.assertTrue(coverage["pass_gate"])
         self.assertEqual(coverage["components"]["cfm"]["actual_native_batches"], [1])
 
+    def test_same_weight_gate_separates_numerical_source_and_na_evidence(self):
+        native = {"has_native_engine": True, "weight_identity_verified": True}
+        absent = {"has_native_engine": False, "weight_identity_verified": False,
+                  "provenance_status": "not_applicable"}
+        for rows in ((native, native), (native, absent), (absent, absent)):
+            with self.subTest(rows=rows):
+                evidence = dict(zip(("cfm", "vocoder"), rows))
+                self.assertTrue(audit.same_weight_numerical_gate(True, True, evidence))
+                self.assertFalse(audit.same_weight_numerical_gate(False, True, evidence))
+                self.assertFalse(audit.same_weight_numerical_gate(True, False, evidence))
+        # Unknown/missing historical metadata must never become explicit N/A.
+        for unverified in ({}, {"has_native_engine": None},
+                           {"has_native_engine": True, "weight_identity_verified": False}):
+            evidence = {"cfm": native, "vocoder": unverified}
+            self.assertFalse(audit.same_weight_numerical_gate(True, True, evidence))
+        self.assertFalse(audit.same_weight_numerical_gate(True, True, {"cfm": native}))
+
 
 if __name__ == "__main__":
     unittest.main()

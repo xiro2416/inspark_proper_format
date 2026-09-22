@@ -14,6 +14,13 @@ import time
 import traceback
 
 
+def report_exit_code(report):
+    if not report["execution_pass"]:
+        return 1
+    # Eager/TRT timing-only runs use null, not a numerical certification.
+    return 2 if report.get("numerical_pass") is False else 0
+
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--gpu", type=int, default=6)
@@ -39,8 +46,9 @@ def main():
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(json.dumps(report, ensure_ascii=False, indent=2, allow_nan=False)+"\n")
     print(json.dumps(report, ensure_ascii=False, indent=2, allow_nan=False))
-    if not report["execution_pass"]:
-        raise SystemExit(1)
+    status=report_exit_code(report)
+    if status:
+        raise SystemExit(status)
 
 
 def run(args):

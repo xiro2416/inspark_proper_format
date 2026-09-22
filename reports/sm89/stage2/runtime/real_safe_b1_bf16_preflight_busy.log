@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "/workspace/A_inspark_marlin/inference/scripts/audit_real_acoustics.py", line 465, in <module>
+    main()
+  File "/workspace/A_inspark_marlin/inference/scripts/audit_real_acoustics.py", line 459, in main
+    with GPULease(args.gpu):
+  File "/workspace/A_inspark_marlin/inference/src/acc_infer_clear/runtime/device.py", line 27, in __enter__
+    raise RuntimeError(f'GPU{self.index} is busy ({used}MiB,{util}%)')
+RuntimeError: GPU6 is busy (21854MiB,23%)

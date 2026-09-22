@@ -20,6 +20,10 @@ See [SM89 stage-one evidence](../reports/sm89/trt113_b1_b4_stage1/README.md) and
 [engine/build details](../TENSORRT113_B1_B4.md). Stage-two real-input, quality,
 compile and stability measurements are tracked in
 [implementation progress](../IMPLEMENTATION_PROGRESS.md).
+Actual eager/compile trials are in the [stage-two reports](../reports/sm89/stage2/README.md).
+All-four compile and the B4 Draft/Vocoder subset fail sampled numerical gates;
+only the measured B1 subset passed those boundary checks, not a general release
+gate. The default remains pure FP32 eager. See [audit/reproduction commands](docs/SM89_AUDIT.md).
 
 Five measured waves after two warmups on the task's shared GPU6 gave all-first-PCM
 P50 **41.55 / 74.26 / 115.78 ms** for B1/B4/B8. This measures the legacy device-RNG
@@ -84,6 +88,11 @@ fallbacks. Each Engine owns execution contexts and temporary buffers. One
 execution owner schedules each model; arbitrary concurrent host calls on one
 Engine are unsupported. CLI/NDJSON and worker command loops serialize execution
 while supporting multiple active requests.
+`sm89_compile_bf16_draft_vocoder.json` selects only those two compile boundaries.
+The reference benchmark writes its report before exiting: 1 means execution
+failure, 2 means a measured compile numerical failure; `numerical_pass=null`
+means timing-only, not an accuracy pass. Historical reports retain their original
+exit behavior and explicit JSON gate results.
 
 ## Audit policy
 
