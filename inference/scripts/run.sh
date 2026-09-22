@@ -11,6 +11,8 @@ export HF_HOME="${HF_HOME:-$repo_root/.cache/huggingface}"
 export HF_ENDPOINT="${HF_ENDPOINT:-https://hf-mirror.com}"
 export TRITON_CACHE_DIR="${TRITON_CACHE_DIR:-$repo_root/.cache/triton}"
 export TORCHINDUCTOR_CACHE_DIR="${TORCHINDUCTOR_CACHE_DIR:-$repo_root/.cache/torchinductor}"
+export TORCH_EXTENSIONS_DIR="${TORCH_EXTENSIONS_DIR:-$repo_root/.cache/torch_extensions}"
+export TORCH_HOME="${TORCH_HOME:-$repo_root/.cache/torch}"
 export CUDA_CACHE_PATH="${CUDA_CACHE_PATH:-$repo_root/.cache/cuda}"
 mkdir -p "$TMPDIR" "$XDG_CACHE_HOME" "$CUDA_CACHE_PATH"
 case "${ACC_TRITON_TOOLCHAIN:-custom}" in
