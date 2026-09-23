@@ -110,7 +110,7 @@ def test_engine_record_enforces_shape_and_hardware(tmp_path):
             _engine_record(tmp_path, "cfm", 1, {"sm": 89, "name": "GPU"})
 
 
-def test_private_cache_paths_and_attestation(tmp_path):
+def test_private_cache_paths_and_attestation(tmp_path, monkeypatch):
     assert _repo_id("user/private-model") == "user/private-model"
     assert _remote_path("bundles/sm89/b1") == "bundles/sm89/b1"
     for path in ("../bundle", "bundles/../secret", "/bundles/x", "other/x"):
@@ -118,6 +118,10 @@ def test_private_cache_paths_and_attestation(tmp_path):
             _remote_path(path)
     with pytest.raises(ValueError):
         _repo_id("https://huggingface.co/user/repo")
+    with monkeypatch.context() as offline:
+        offline.setenv("HF_HUB_OFFLINE", "1")
+        with pytest.raises(ValueError, match="HF_HUB_OFFLINE=0"):
+            hf_cache._token()
     attestation = tmp_path / "attestation.json"
     attestation.write_text(json.dumps({"schema": 1, "reviewed": True,
                                        "redistribution_permitted": True, "sources": {}}))
@@ -189,7 +193,7 @@ def test_private_cache_publish_is_explicit_and_revision_pinned(monkeypatch):
 
         def create_commit(self, *, operations, **kwargs):
             self.uploaded = operations
-            assert len(operations) == 5
+            assert len(operations) == 6
             assert all(operation.path_or_fileobj.is_file() for operation in operations)
             return type("Commit", (), {"oid": "b" * 40})()
 
@@ -212,3 +216,53 @@ def test_private_cache_publish_is_explicit_and_revision_pinned(monkeypatch):
     assert result["status"] == "published_private"
     assert result["revision"] == "b" * 40
     assert result["bundle_path"] == f"bundles/sm89/{PROFILE}/b4/example-id"
+
+
+def test_private_cache_fetch_retries_failed_private_mirror_on_official_hub(monkeypatch):
+    from huggingface_hub.errors import LocalEntryNotFoundError
+
+    class PrivateApi:
+        def __init__(self, **kwargs):
+            pass
+
+        def model_info(self, *args, **kwargs):
+            return type("Info", (), {"private": True})()
+
+    monkeypatch.setattr(huggingface_hub, "HfApi", PrivateApi)
+    monkeypatch.setattr(hf_cache, "_token", lambda: "dummy-local-test-token")
+    monkeypatch.setattr(hf_cache, "gpu_info", lambda index: {
+        "physical_gpu": index, "sm": 89, "name": "GPU", "memory_total_mib": 49140})
+    monkeypatch.setattr(hf_cache, "ensure_trt113_site", lambda: None)
+    monkeypatch.setattr(hf_cache, "_attestation", lambda path, manifest: {})
+    monkeypatch.setattr(hf_cache, "validate_bundle", lambda root: json.loads((root / "manifest.json").read_text()))
+    work = ROOT / ".work"
+    work.mkdir(exist_ok=True)
+    with tempfile.TemporaryDirectory(dir=work) as directory:
+        root = Path(directory)
+        remote = root / "remote"
+        (remote / "licenses").mkdir(parents=True)
+        manifest = {"schema": 1, "profile": PROFILE, "batch": 1, "bundle_id": "id",
+                    "hardware": {"sm": 89, "name": "GPU", "memory_total_mib": 49140},
+                    "files": {"deployment.json": "unused"}, "deployment": "deployment.json"}
+        (remote / "manifest.json").write_text(json.dumps(manifest))
+        for name in ("LICENSE", "THIRD_PARTY_NOTICES.md", "distribution_attestation.json",
+                     "licenses/BigVGAN.txt", "deployment.json"):
+            (remote / name).write_text(name)
+        endpoints = []
+
+        def download(*, filename, endpoint, **kwargs):
+            endpoints.append(endpoint)
+            if endpoint == "https://hf-mirror.com":
+                raise LocalEntryNotFoundError("private mirror metadata unavailable")
+            return str(remote / filename.rsplit("/", 1)[-1]) if not filename.endswith("licenses/BigVGAN.txt") else str(remote / "licenses/BigVGAN.txt")
+
+        monkeypatch.setattr(huggingface_hub, "hf_hub_download", download)
+        monkeypatch.setattr(hf_cache, "_run", lambda name, command, *, stage, gpu: (stage / "route_report_local.json").write_text('{"status":"passed"}'))
+        reference = root / "reference.wav"
+        reference.write_bytes(b"wav")
+        result = hf_cache.fetch("user/private", "a" * 40,
+                                f"bundles/sm89/{PROFILE}/b1/id", 4, reference,
+                                root / "download", "https://hf-mirror.com")
+        assert result["download_endpoint"] == "https://huggingface.co"
+        assert endpoints[0:2] == ["https://hf-mirror.com", "https://huggingface.co"]
+        assert (Path(result["bundle"]) / "licenses/BigVGAN.txt").is_file()

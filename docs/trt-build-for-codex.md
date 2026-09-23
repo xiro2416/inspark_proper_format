@@ -28,7 +28,8 @@ bash scripts/build_trt.sh --gpu 4 --model indextts2 \
 
 ```bash
 export HF_TOKEN=...  # 在 shell 安全设置，不粘贴到聊天或提交记录
-bash scripts/run.sh -m inspark_infer.command trt publish \
+HF_HUB_OFFLINE=0 HF_ENDPOINT=https://huggingface.co \
+  bash scripts/run.sh -m inspark_infer.command trt publish \
   --bundle /workspace/.../b4/<bundle-id> \
   --repo-id your-namespace/private-trt-cache \
   --attestation /workspace/.../distribution_attestation.json
@@ -37,12 +38,14 @@ bash scripts/run.sh -m inspark_infer.command trt publish \
 发布结果包含不可变的 40 位 Hub commit SHA 和 `bundle_path`。新机器先运行 `bootstrap.sh`、`download_models.sh`、`bootstrap_trt113.sh`，再显式拉取：
 
 ```bash
-bash scripts/run.sh -m inspark_infer.command trt fetch \
+HF_HUB_DISABLE_XET=1 HF_HUB_OFFLINE=0 HF_ENDPOINT=https://huggingface.co \
+  bash scripts/run.sh -m inspark_infer.command trt fetch \
   --repo-id your-namespace/private-trt-cache --revision <40-char-commit> \
   --bundle-path bundles/sm89/first_chunk_p258_f52_k128/b4/<bundle-id> \
-  --gpu 4 --ref-audio /workspace/your_reference.wav
+  --gpu 4 --ref-audio /workspace/your_reference.wav \
+  --endpoint https://hf-mirror.com
 ```
 
-`fetch` 默认经 hf-mirror 下载，确认仓库私有、来源声明、设备型号和 SM、全文件哈希，然后在目标 GPU 上重新运行四组件首 chunk 路由。它不自动认证数值或质量；私有仓库经镜像访问也须在目标网络实际验证。CLI 存在不等于制品已经发布。
+`fetch` 默认先经 hf-mirror 下载；若私有仓库元数据在镜像不可用，仅对该下载失败回退到官方 Hub，并在结果记录实际端点。本环境的 Xet 大文件传输曾停滞，示例用 `HF_HUB_DISABLE_XET=1` 走可续传的普通 HTTP；若新机器的 Xet 正常，可去掉该变量。随后确认仓库私有、来源声明、设备型号和 SM、全文件哈希，在目标 GPU 上重新运行四组件首 chunk 路由。它不自动认证数值或质量；新服务器仍须验证私有仓库认证、网络和对应 GPU 型号。
 
 SM89 既有失败与局部通过证据见 [stage2 报告](../reports/sm89/stage2/README.md)；历史 B1/B4 构建记录见 [归档](../reports/sm89/history/TENSORRT113_B1_B4.md)。

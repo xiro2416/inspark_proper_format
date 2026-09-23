@@ -29,6 +29,8 @@ def _remote_path(value: str) -> str:
 
 
 def _token() -> str:
+    if os.getenv("HF_HUB_OFFLINE") == "1":
+        raise ValueError("Set HF_HUB_OFFLINE=0 for private Hugging Face publish/fetch")
     token = os.getenv("HF_TOKEN")
     if not token:
         raise ValueError("Set HF_TOKEN in the environment; never put it in command arguments")
@@ -90,6 +92,8 @@ def publish(bundle: Path, repo_id: str, attestation: Path) -> dict:
         CommitOperationAdd(path_in_repo=f"{prefix}/LICENSE", path_or_fileobj=ROOT / "LICENSE"),
         CommitOperationAdd(path_in_repo=f"{prefix}/THIRD_PARTY_NOTICES.md",
                            path_or_fileobj=ROOT / "THIRD_PARTY_NOTICES.md"),
+        CommitOperationAdd(path_in_repo=f"{prefix}/licenses/BigVGAN.txt",
+                           path_or_fileobj=ROOT / "licenses/BigVGAN.txt"),
     ))
     commit = api.create_commit(repo_id=repo_id, repo_type="model", token=token,
                                operations=operations,
@@ -101,6 +105,7 @@ def publish(bundle: Path, repo_id: str, attestation: Path) -> dict:
 def fetch(repo_id: str, revision: str, bundle_path: str, gpu: int,
           ref_audio: Path, output_root: Path, endpoint: str) -> dict:
     from huggingface_hub import HfApi, hf_hub_download
+    from huggingface_hub.errors import LocalEntryNotFoundError
 
     token = _token()
     repo_id = _repo_id(repo_id)
@@ -121,10 +126,23 @@ def fetch(repo_id: str, revision: str, bundle_path: str, gpu: int,
     if info.private is not True:
         raise ValueError("Refusing to fetch engines from a public repository through private-cache flow")
     cache_dir = ROOT / ".cache/huggingface"
+    selected_endpoint = endpoint
     def download(name: str) -> Path:
-        return Path(hf_hub_download(repo_id=repo_id, repo_type="model", revision=revision,
-                                    filename=f"{bundle_path}/{name}", token=token,
-                                    cache_dir=cache_dir, endpoint=endpoint))
+        nonlocal selected_endpoint
+        try:
+            return Path(hf_hub_download(repo_id=repo_id, repo_type="model", revision=revision,
+                                        filename=f"{bundle_path}/{name}", token=token,
+                                        cache_dir=cache_dir, endpoint=selected_endpoint))
+        except LocalEntryNotFoundError:
+            if selected_endpoint.rstrip("/") != "https://hf-mirror.com":
+                raise
+            # The mirror may not expose authenticated private-repository
+            # metadata. Retry only that failure against the canonical Hub;
+            # keep the immutable revision and digest gate unchanged.
+            selected_endpoint = "https://huggingface.co"
+            return Path(hf_hub_download(repo_id=repo_id, repo_type="model", revision=revision,
+                                        filename=f"{bundle_path}/{name}", token=token,
+                                        cache_dir=cache_dir, endpoint=selected_endpoint))
 
     manifest = json.loads(download("manifest.json").read_text())
     if manifest.get("schema") != 1 or manifest.get("profile") != PROFILE:
@@ -142,8 +160,11 @@ def fetch(repo_id: str, revision: str, bundle_path: str, gpu: int,
     stage = output_root / ".staging" / uuid.uuid4().hex
     stage.mkdir(parents=True, exist_ok=False)
     shutil.copy2(download("manifest.json"), stage / "manifest.json")
-    for notice in ("LICENSE", "THIRD_PARTY_NOTICES.md", "distribution_attestation.json"):
-        shutil.copy2(download(notice), stage / notice)
+    for notice in ("LICENSE", "THIRD_PARTY_NOTICES.md", "distribution_attestation.json",
+                   "licenses/BigVGAN.txt"):
+        destination = stage / notice
+        destination.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copy2(download(notice), destination)
     for name in manifest.get("files", {}):
         relative = PurePosixPath(name)
         if relative.is_absolute() or ".." in relative.parts:
@@ -169,7 +190,8 @@ def fetch(repo_id: str, revision: str, bundle_path: str, gpu: int,
     else:
         stage.rename(final)
     return {"status": "fetched_route_passed_numerically_experimental", "bundle": str(final),
-            "repo_id": repo_id, "revision": revision, "bundle_id": manifest["bundle_id"]}
+            "repo_id": repo_id, "revision": revision, "bundle_id": manifest["bundle_id"],
+            "download_endpoint": selected_endpoint}
 
 
 def main(argv: list[str] | None = None) -> int:

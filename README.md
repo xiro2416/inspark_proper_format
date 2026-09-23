@@ -12,7 +12,9 @@ IndexTTS2 推理加速仓库。源码统一位于 `src/inspark_infer`；模型�
 | SM120 | 历史 Triton/CUDA 配置与报告 | [历史证据](reports/sm120/README.md)，迁移后未重新认证 |
 | 其他 SM | 暂无经实测的一键 TRT 构建 | 不宣称支持 |
 
-B1/B4 的请求隔离 TRT 路径、B8 的历史和并发结果不是同一测量口径。SM89 的既有结果见 [历史审计](reports/sm89/stage2/README.md)；新布局已在物理 GPU4 构建精确 B1/B4/B8 四组件，并完成真实首 chunk 路由和部分 eager 对照，结论见 [本次报告](reports/sm89/build_bundle_status.md)。数值门禁未通过，不能用路由或单算子加速覆盖；32/64 并发仍待本次独立验证。
+B1/B4 的请求隔离 TRT 路径、B8 的历史和并发结果不是同一测量口径。SM89 的既有结果见 [历史审计](reports/sm89/stage2/README.md)；新布局已在物理 GPU4 构建精确 B1/B4/B8 四组件，并完成真实首 chunk 路由和 eager 对照，结论见 [本次报告](reports/sm89/build_bundle_status.md)。数值门禁未通过，不能用路由或单算子加速覆盖；B8 的单请求、32 和 64 并发各 600 秒完整 EOS 持续运行已通过。
+
+GPU4 上短文本、同口径 BF16 eager 对 TRT 11.3 的首 PCM 中位延迟（预热 2 次、测量 5 次，包含打包/拷贝/启动，不含模型准备）：B1 246.37→54.38 ms，B4 426.57→91.52 ms，B8 531.73→162.81 ms。B1/B4/B8 完整 EOS 的各 256 对质量门禁均通过，但严格浮点门禁未通过；TRT B8 功耗剖析触发限速标记，不能宣称省电或生产认证。
 
 ## 安装与运行
 
@@ -25,11 +27,11 @@ CUDA_VISIBLE_DEVICES='' ACC_TRITON_TOOLCHAIN=default bash scripts/run.sh -m pyte
 
 # FP32 eager 参考；--gpu 为物理 GPU 编号。
 ACC_TRITON_TOOLCHAIN=default bash scripts/run.sh \
-  benchmarks/benchmark_reference.py --gpu 6 --batch 1 \
+  benchmarks/benchmark_reference.py --gpu 4 --batch 1 \
   --deployment configs/hardware/sm89/sm89_eager_fp32.json \
   --json-out outputs/eager_fp32_b1.json
 ```
 
-SM89 精确 B1/B4/B8 首 chunk 的统一离线构建入口为 `bash scripts/build_trt.sh --gpu <物理编号> --model indextts2 --profile first_chunk_p258_f52_k128 --batches 1,4,8 --ref-audio /workspace/reference.wav`。GPU4 实测已完成构建和首 chunk 路由，尚非数值或生产认证。私有 HF 制品的显式发布/拉取及 Codex 扩展步骤见 [构建说明](docs/trt-build-for-codex.md)。
+SM89 精确 B1/B4/B8 首 chunk 的统一离线构建入口为 `bash scripts/build_trt.sh --gpu <物理编号> --model indextts2 --profile first_chunk_p258_f52_k128 --batches 1,4,8 --ref-audio /workspace/reference.wav`。GPU4 实测已完成构建、首 chunk 路由，以及三个私有 HF bundle 的新目录拉取、哈希校验和路由复验；尚非数值或生产认证。私有 HF 制品的显式发布/拉取及 Codex 扩展步骤见 [构建说明](docs/trt-build-for-codex.md)。
 
 精度参考路径禁用 TF32；项目 kernel 与 TRT 均为可选优化。构建、数值、质量和性能分别判定；硬件、shape、精度或 plan 身份不匹配时明确回退或报错。测试与性能入口分别在 `tests/`、`benchmarks/`；通用审计代码在 `src/inspark_infer/guardrails/`。第三方来源见 [许可证与声明](THIRD_PARTY_NOTICES.md)。
