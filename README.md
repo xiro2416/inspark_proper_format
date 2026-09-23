@@ -32,6 +32,6 @@ ACC_TRITON_TOOLCHAIN=default bash scripts/run.sh \
   --json-out outputs/eager_fp32_b1.json
 ```
 
-SM89 精确 B1/B4/B8 首 chunk 的统一离线构建入口为 `bash scripts/build_trt.sh --gpu <物理编号> --model indextts2 --profile first_chunk_p258_f52_k128 --batches 1,4,8 --ref-audio /workspace/reference.wav`。GPU4 实测已完成构建、首 chunk 路由，以及三个私有 HF bundle 的新目录拉取、哈希校验和路由复验；尚非数值或生产认证。私有 HF 制品的显式发布/拉取及 Codex 扩展步骤见 [构建说明](docs/trt-build-for-codex.md)。
+固定首 chunk B1/B4/B8 的一键入口为 `bash scripts/build_trt.sh --gpu <物理编号> --model indextts2 --profile first_chunk_p258_f52_k128 --batches 1,4,8 --ref-audio /workspace/reference.wav --allow-experimental`。它先匹配本地完整 bundle，再匹配固定私有 HF revision，最后才在目标 SM 上串行构建；`--mode reuse-only|build-only` 可强制策略。当前只有 48GB RTX 4090 SM89 经构建、首 chunk 路由和私有 HF 新目录拉取验收，其他 SM 是待实测的构建候选；所有现有 engine 均未通过严格浮点门禁，不能生产认证。builder 和量化分别配置，当前 TRT 仅支持未量化路径。用法、身份约束及 Codex 扩展步骤见 [构建说明](docs/trt-build-for-codex.md)。
 
 精度参考路径禁用 TF32；项目 kernel 与 TRT 均为可选优化。构建、数值、质量和性能分别判定；硬件、shape、精度或 plan 身份不匹配时明确回退或报错。测试与性能入口分别在 `tests/`、`benchmarks/`；通用审计代码在 `src/inspark_infer/guardrails/`。第三方来源见 [许可证与声明](THIRD_PARTY_NOTICES.md)。

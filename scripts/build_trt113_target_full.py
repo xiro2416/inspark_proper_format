@@ -11,11 +11,14 @@ from pathlib import Path
 def main():
     p = argparse.ArgumentParser(); p.add_argument("--gpu", type=int, default=6)
     p.add_argument("--batch", type=int, required=True); p.add_argument("--config", default="configs/common/runtime.yaml")
-    p.add_argument("--deployment", default="configs/hardware/sm89/sm89_bf16_target_trt113_lab.json")
+    p.add_argument("--deployment", default="configs/common/trt113_export_deployment.json")
     p.add_argument("--out-dir", default='artifacts/trt113_target_full')
     p.add_argument("--plan", help="Write a single-batch plan with engine hash and build provenance")
     p.add_argument("--optimization-level", type=int, default=3, choices=range(6))
+    p.add_argument("--workspace-bytes", type=int, default=8 << 30)
+    p.add_argument("--tiling-optimization-level", choices=("none", "fast", "moderate", "full"), default="none")
     args = p.parse_args()
+    if args.workspace_bytes < 1: p.error("--workspace-bytes must be positive")
     os.environ["CUDA_VISIBLE_DEVICES"] = str(args.gpu)
     import numpy as np
     import torch
@@ -118,16 +121,18 @@ def main():
                 logits = network.add_elementwise(logits, bias, trt.ElementWiseOperation.SUM).get_output(0)
             logits.name = "logits"; network.mark_output(logits)
             build = builder.create_builder_config(); build.builder_optimization_level = args.optimization_level
+            build.tiling_optimization_level = getattr(trt.TilingOptimizationLevel, args.tiling_optimization_level.upper())
             # lm_head and FP32 interfaces must not silently use single-TF32 GEMM.
             build.clear_flag(trt.BuilderFlag.TF32)
-            build.set_memory_pool_limit(trt.MemoryPoolType.WORKSPACE, 8 << 30)
+            build.set_memory_pool_limit(trt.MemoryPoolType.WORKSPACE, args.workspace_bytes)
             started = time.time(); serialized = builder.build_serialized_network(network, build)
             if serialized is None: raise RuntimeError("TensorRT full Target build failed")
             out = Path(args.out_dir).resolve(); out.mkdir(parents=True, exist_ok=True)
             path = out / f"target_full_b{b}.engine"; path.write_bytes(bytes(serialized))
             artifact_hash = hashlib.sha256(path.read_bytes()).hexdigest()
             provenance["constant_data_sha256"] = constants_digest.hexdigest()
-            settings = {"optimization_level": args.optimization_level, "workspace_bytes": 8 << 30,
+            settings = {"optimization_level": args.optimization_level, "workspace_bytes": args.workspace_bytes,
+                        "tiling_optimization_level": args.tiling_optimization_level,
                         "strongly_typed": True, "tf32": bool(build.get_flag(trt.BuilderFlag.TF32)),
                         "batch": b, "query_tokens": 8, "kv_limit": 128,
                         "attention_decomposable": True, "layers": len(blocks)}
@@ -146,12 +151,13 @@ def main():
                       "torch": torch.__version__, "cuda": torch.version.cuda,
                       **provenance["hardware"], "provenance": provenance, "builder_settings": settings,
                       "tf32": settings["tf32"], "strongly_typed": True, "kv_limit": 128,
-                      "optimization_level": args.optimization_level, "workspace_bytes": 8 << 30,
+                      "optimization_level": args.optimization_level, "workspace_bytes": args.workspace_bytes,
+                      "tiling_optimization_level": args.tiling_optimization_level,
                       "tensors": tensors, "cache_outputs": cache_names}
             if args.plan:
                 plan_path = Path(args.plan).resolve(); plan_path.parent.mkdir(parents=True, exist_ok=True)
                 plan = {key: report[key] for key in ("format", "backend", "precision", "kv_limit", "trt",
-                        "torch", "cuda", "gpu_name", "sm", "optimization_level", "workspace_bytes", "tf32", "strongly_typed")}
+                        "torch", "cuda", "gpu_name", "sm", "optimization_level", "workspace_bytes", "tiling_optimization_level", "tf32", "strongly_typed")}
                 plan.update(engines={str(b): os.path.relpath(path, plan_path.parent)},
                             engine_sha256={str(b): artifact_hash}, provenance={str(b): provenance},
                             builder_settings={str(b): settings}, tensors={str(b): tensors},

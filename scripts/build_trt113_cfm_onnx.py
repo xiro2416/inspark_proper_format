@@ -19,7 +19,10 @@ def main() -> None:
     parser.add_argument("--batch", type=int, help="Assert the batch inferred from TensorRT IO")
     parser.add_argument("--frames", type=int, help="Assert the frame count inferred from TensorRT IO")
     parser.add_argument("--optimization-level", type=int, default=5, choices=range(6))
+    parser.add_argument("--workspace-bytes", type=int, default=8 << 30)
+    parser.add_argument("--tiling-optimization-level", choices=("none", "fast", "moderate", "full"), default="none")
     args = parser.parse_args()
+    if args.workspace_bytes < 1: parser.error("--workspace-bytes must be positive")
     from inspark_infer.runtime.device import GPULease, select_gpu
     visible = os.environ.get("CUDA_VISIBLE_DEVICES", "")
     gpu = args.gpu if args.gpu is not None else int(visible) if visible.isdecimal() else None
@@ -66,7 +69,8 @@ def build(args):
     config = builder.create_builder_config()
     config.clear_flag(trt.BuilderFlag.TF32)
     config.builder_optimization_level = args.optimization_level
-    config.set_memory_pool_limit(trt.MemoryPoolType.WORKSPACE, 8 << 30)
+    config.tiling_optimization_level = getattr(trt.TilingOptimizationLevel, args.tiling_optimization_level.upper())
+    config.set_memory_pool_limit(trt.MemoryPoolType.WORKSPACE, args.workspace_bytes)
     started = time.time()
     serialized = builder.build_serialized_network(network, config)
     if serialized is None:
@@ -139,7 +143,8 @@ def build(args):
         "gpu_name": torch.cuda.get_device_name(0),
         "sm": major * 10 + minor,
         "optimization_level": args.optimization_level,
-        "workspace_bytes": 8 << 30,
+        "workspace_bytes": args.workspace_bytes,
+        "tiling_optimization_level": args.tiling_optimization_level,
         "strongly_typed": True,
         "tf32": False,
         "precision": "BF16 weights/linears with FP32 interfaces and two-step accumulation",

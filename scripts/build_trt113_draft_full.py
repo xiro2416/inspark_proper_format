@@ -11,12 +11,15 @@ from pathlib import Path
 def main():
     p=argparse.ArgumentParser();p.add_argument("--gpu",type=int,default=6)
     p.add_argument("--batch",type=int,required=True);p.add_argument("--config",default="configs/common/runtime.yaml")
-    p.add_argument("--deployment",default="configs/hardware/sm89/sm89_bf16_target_trt113_lab.json")
+    p.add_argument("--deployment",default="configs/common/trt113_export_deployment.json")
     p.add_argument("--out-dir",default='artifacts/trt113_draft_full')
     p.add_argument("--plan",help="Write a single-batch plan with engine hash and build provenance")
     p.add_argument("--optimization-level",type=int,default=5,choices=range(6))
+    p.add_argument("--workspace-bytes",type=int,default=8 << 30)
+    p.add_argument("--tiling-optimization-level",choices=("none","fast","moderate","full"),default="none")
     p.add_argument("--stable-block-linears",action="store_true")
     p.add_argument("--debug-outputs",action="store_true");args=p.parse_args()
+    if args.workspace_bytes < 1:p.error("--workspace-bytes must be positive")
     os.environ["CUDA_VISIBLE_DEVICES"]=str(args.gpu)
     import numpy as np
     import torch
@@ -128,18 +131,20 @@ def main():
             output=rmsnorm(hidden,m.output_norm);output.name="hidden";network.mark_output(output)
             base=linear_fp32(output,m.lm_head);base.name="base";network.mark_output(base)
             build=builder.create_builder_config();build.builder_optimization_level=args.optimization_level
+            build.tiling_optimization_level=getattr(trt.TilingOptimizationLevel,args.tiling_optimization_level.upper())
             # Current Draft attention deliberately uses Triton tf32x3, which is
             # much closer to FP32 than a single-TF32 TensorRT tactic.  Keep the
             # explicitly BF16 block GEMMs, but forbid TF32 contraction for the
             # FP32 attention and FP32 lm_head portions of this engine.
             build.clear_flag(trt.BuilderFlag.TF32)
-            build.set_memory_pool_limit(trt.MemoryPoolType.WORKSPACE,8<<30)
+            build.set_memory_pool_limit(trt.MemoryPoolType.WORKSPACE,args.workspace_bytes)
             started=time.time();serialized=builder.build_serialized_network(network,build)
             if serialized is None:raise RuntimeError("TensorRT full Draft build failed")
             out=Path(args.out_dir).resolve();out.mkdir(parents=True,exist_ok=True);path=out/f"draft_full_b{b}.engine";path.write_bytes(bytes(serialized))
             artifact_hash=hashlib.sha256(path.read_bytes()).hexdigest()
             provenance["constant_data_sha256"]=constants_digest.hexdigest()
-            settings={"optimization_level":args.optimization_level,"workspace_bytes":8<<30,
+            settings={"optimization_level":args.optimization_level,"workspace_bytes":args.workspace_bytes,
+                      "tiling_optimization_level":args.tiling_optimization_level,
                       "strongly_typed":True,"tf32":bool(build.get_flag(trt.BuilderFlag.TF32)),
                       "batch":b,"query_tokens":7,"kv_limit":128,"layers":len(m.layers),
                       "attention_decomposable":True,"debug_outputs":args.debug_outputs,
@@ -155,7 +160,8 @@ def main():
                     "batch":b,"engine":str(path),"bytes":path.stat().st_size,"sha256":artifact_hash,
                     "build_seconds":time.time()-started,"trt":trt.__version__,"torch":torch.__version__,"cuda":torch.version.cuda,
                     **provenance["hardware"],"provenance":provenance,"builder_settings":settings,
-                    "optimization_level":args.optimization_level,"workspace_bytes":8<<30,
+                    "optimization_level":args.optimization_level,"workspace_bytes":args.workspace_bytes,
+                    "tiling_optimization_level":args.tiling_optimization_level,
                     "precision":"BF16 block Linear with FP32 attention/KV/norms/residuals/lm_head/interfaces",
                     "tf32":settings["tf32"],"strongly_typed":True,"kv_limit":128,"tensors":tensors,
                     "debug_outputs":args.debug_outputs,"stable_block_linears":args.stable_block_linears,
@@ -163,7 +169,7 @@ def main():
             if args.plan:
                 plan_path=Path(args.plan).resolve();plan_path.parent.mkdir(parents=True,exist_ok=True)
                 plan={key:report[key] for key in ("format","backend","precision","kv_limit","trt","torch","cuda",
-                      "gpu_name","sm","optimization_level","workspace_bytes","tf32","strongly_typed")}
+                      "gpu_name","sm","optimization_level","workspace_bytes","tiling_optimization_level","tf32","strongly_typed")}
                 plan.update(engines={str(b):os.path.relpath(path,plan_path.parent)},
                             engine_sha256={str(b):artifact_hash},provenance={str(b):provenance},
                             builder_settings={str(b):settings},tensors={str(b):tensors},

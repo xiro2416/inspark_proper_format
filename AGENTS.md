@@ -4,7 +4,7 @@ This is an inference-only repository. SM89 TensorRT implementation, reports and
 audits are in scope; preserve historical SM120 evidence separately. Do not add
 training code or official model weights.
 
-For the SM89 selected-shape TensorRT builder and future multi-SM extension,
+For the selected-shape TensorRT builder and future multi-SM extension,
 follow `docs/trt-build-for-codex.md`. The CLI exists, but successful build,
 numeric certification and performance remain separate evidence requirements.
 
@@ -30,14 +30,14 @@ numeric certification and performance remain separate evidence requirements.
   Triton/CUDA kernels and TensorRT 11.3 where the selected profile supports it.
   Serving must not compile, capture graphs or autotune new shapes online.
 
-## Current implementation goal
+## TensorRT bundle status
 
 The previous B1/B4 milestone and SM89 audit are preserved under `reports/sm89/`.
-The active two-stage goal is: finish the root-package migration, then deliver a
-single-GPU SM89 B1/B4/B8 fixed-first-chunk TensorRT 11.3 bundle builder with
-audits and an explicit private Hugging Face artifact cache. Publish only to
-`xiro2416/inspark_proper_format` after verification. Do not stop after the
-first stage. Six hours is a target, not a hard stop.
+The completed root-package migration and SM89 B1/B4/B8 bundles are preserved.
+`trt ensure` is cache-first and can attempt the same fixed-shape TensorRT 11.3
+build on SM80+; only the 48GB RTX 4090 SM89 bundles have measured evidence.
+All bundles remain numerically experimental. Publish only to
+`xiro2416/inspark_proper_format` after verification.
 Only physical GPU 4 is authorized for this task by the latest user direction; run GPU work sequentially.
 Existing external GPU processes must remain untouched. Explicit shared-GPU
 runs must record pre-existing memory and workload interference.

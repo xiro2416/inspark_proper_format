@@ -82,7 +82,7 @@ def publish(bundle: Path, repo_id: str, attestation: Path) -> dict:
         info = api.model_info(repo_id, token=token)
     if info.private is not True:
         raise ValueError("Refusing to publish TensorRT engines to a public repository")
-    prefix = f"bundles/sm89/{PROFILE}/b{manifest['batch']}/{manifest['bundle_id']}"
+    prefix = f"bundles/sm{manifest['hardware']['sm']}/{PROFILE}/b{manifest['batch']}/{manifest['bundle_id']}"
     operations = [CommitOperationAdd(path_in_repo=f"{prefix}/{name}", path_or_fileobj=root / name)
                   for name in sorted(manifest["files"])]
     operations.extend((
@@ -97,7 +97,7 @@ def publish(bundle: Path, repo_id: str, attestation: Path) -> dict:
     ))
     commit = api.create_commit(repo_id=repo_id, repo_type="model", token=token,
                                operations=operations,
-                               commit_message=f"TRT11.3 SM89 B{manifest['batch']} {manifest['bundle_id']}")
+                               commit_message=f"TRT11.3 SM{manifest['hardware']['sm']} B{manifest['batch']} {manifest['bundle_id']}")
     return {"status": "published_private", "repo_id": repo_id, "revision": commit.oid,
             "bundle_path": prefix, "bundle_id": manifest["bundle_id"]}
 
@@ -113,8 +113,6 @@ def fetch(repo_id: str, revision: str, bundle_path: str, gpu: int,
     if not re.fullmatch(r"[a-f0-9]{40}", revision):
         raise ValueError("--revision must be an immutable 40-character Hub commit SHA")
     hardware = gpu_info(gpu)
-    if hardware["sm"] != 89:
-        raise ValueError("Only SM89 is currently certified for this engine cache")
     ref_audio = ref_audio.resolve()
     output_root = output_root.resolve()
     if (not ref_audio.is_file() or not ref_audio.is_relative_to(Path("/workspace"))
@@ -145,9 +143,9 @@ def fetch(repo_id: str, revision: str, bundle_path: str, gpu: int,
                                         cache_dir=cache_dir, endpoint=selected_endpoint))
 
     manifest = json.loads(download("manifest.json").read_text())
-    if manifest.get("schema") != 1 or manifest.get("profile") != PROFILE:
+    if manifest.get("schema") not in (1, 2) or manifest.get("profile") != PROFILE:
         raise ValueError("Remote TensorRT bundle schema/profile unsupported")
-    expected_remote = f"bundles/sm89/{PROFILE}/b{manifest.get('batch')}/{manifest.get('bundle_id')}"
+    expected_remote = f"bundles/sm{manifest.get('hardware', {}).get('sm')}/{PROFILE}/b{manifest.get('batch')}/{manifest.get('bundle_id')}"
     if bundle_path != expected_remote:
         raise ValueError("Remote bundle path differs from manifest identity")
     if manifest.get("hardware", {}).get("sm") != hardware["sm"]:
@@ -182,7 +180,7 @@ def fetch(repo_id: str, revision: str, bundle_path: str, gpu: int,
                          "--output", str(stage / "route_report_local.json")], stage=stage, gpu=gpu)
     if json.loads((stage / "route_report_local.json").read_text()).get("status") != "passed":
         raise ValueError("Downloaded bundle failed the target GPU route gate")
-    final = output_root / "sm89" / PROFILE / f"b{manifest['batch']}" / manifest["bundle_id"]
+    final = output_root / f"sm{hardware['sm']}" / PROFILE / f"b{manifest['batch']}" / manifest["bundle_id"]
     final.parent.mkdir(parents=True, exist_ok=True)
     if final.exists():
         validate_bundle(final)

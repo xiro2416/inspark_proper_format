@@ -19,9 +19,12 @@ def main() -> None:
     parser.add_argument("--batch", type=int, help="Assert the batch inferred from TensorRT IO")
     parser.add_argument("--frames", type=int, help="Assert the frame count inferred from TensorRT IO")
     parser.add_argument("--optimization-level", type=int, default=5, choices=range(6))
+    parser.add_argument("--workspace-bytes", type=int, default=8 << 30)
+    parser.add_argument("--tiling-optimization-level", choices=("none", "fast", "moderate", "full"), default="none")
     parser.add_argument("--strongly-typed", action="store_true",
                         help="Preserve ONNX dtypes; export uses a BF16 deconvolution plugin")
     args = parser.parse_args()
+    if args.workspace_bytes < 1: parser.error("--workspace-bytes must be positive")
     from inspark_infer.runtime.device import GPULease, select_gpu
     visible = os.environ.get("CUDA_VISIBLE_DEVICES", "")
     gpu = args.gpu if args.gpu is not None else int(visible) if visible.isdecimal() else None
@@ -66,8 +69,9 @@ def build(args):
         errors = [str(parser_.get_error(i)) for i in range(parser_.num_errors)]
         raise RuntimeError("TensorRT Vocoder ONNX parse failed:\n" + "\n".join(errors))
     config = builder.create_builder_config(); config.builder_optimization_level = args.optimization_level
+    config.tiling_optimization_level = getattr(trt.TilingOptimizationLevel, args.tiling_optimization_level.upper())
     config.clear_flag(trt.BuilderFlag.TF32)
-    config.set_memory_pool_limit(trt.MemoryPoolType.WORKSPACE, 8 << 30)
+    config.set_memory_pool_limit(trt.MemoryPoolType.WORKSPACE, args.workspace_bytes)
     started = time.time(); serialized = builder.build_serialized_network(network, config)
     if serialized is None: raise RuntimeError("TensorRT Vocoder build failed")
     engine_path.write_bytes(bytes(serialized))
@@ -112,7 +116,8 @@ def build(args):
         "build_seconds": time.time() - started, "trt": trt.__version__,
         "torch": torch.__version__, "cuda": torch.version.cuda, "numpy": np.__version__,
         "gpu_name": torch.cuda.get_device_name(0), "sm": major * 10 + minor,
-        "optimization_level": args.optimization_level, "workspace_bytes": 8 << 30,
+        "optimization_level": args.optimization_level, "workspace_bytes": args.workspace_bytes,
+        "tiling_optimization_level": args.tiling_optimization_level,
         "strongly_typed": args.strongly_typed,
         "tf32": False,
         "regular_conv": "plugin" if export.get("conv_plugins") else "native" if export else "unknown",

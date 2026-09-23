@@ -26,8 +26,9 @@ def test_exact_batch_and_unsupported_handoff():
             parse_batches(value)
     result = unsupported({"sm": 120, "name": "future"}, PROFILE, (3,))
     assert result["status"] == "unsupported"
-    assert len(result["reasons"]) == 2
+    assert len(result["reasons"]) == 1
     assert "codex_task" in result
+    assert unsupported({"sm": 120}, PROFILE, (1, 4, 8))["reasons"] == []
 
 
 def test_preflight_never_needs_models_or_trt(monkeypatch, capsys):
@@ -201,7 +202,8 @@ def test_private_cache_publish_is_explicit_and_revision_pinned(monkeypatch):
     monkeypatch.setattr(huggingface_hub, "CommitOperationAdd", Operation)
     monkeypatch.setattr(hf_cache, "_token", lambda: "dummy-local-test-token")
     monkeypatch.setattr(hf_cache, "validate_bundle", lambda root: {
-        "batch": 4, "bundle_id": "example-id", "files": {"target/engine": "digest"}})
+        "batch": 4, "bundle_id": "example-id", "hardware": {"sm": 89},
+        "files": {"target/engine": "digest"}})
     monkeypatch.setattr(hf_cache, "_attestation", lambda path, manifest: {})
     work = ROOT / ".work"
     work.mkdir(exist_ok=True)

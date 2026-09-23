@@ -1,5 +1,9 @@
 # SM89 TensorRT 11.3 新布局实测（2026-09-23）
 
+## 缓存优先入口的追加验收（同日）
+
+新增 `trt ensure` 后，在物理 GPU4 用 `--mode reuse-only` 命中原有 B1/B4/B8 固定 ID，未重建。随后在隔离的 `.work/trt113_ensure_b1_acceptance/` 目录用 `--mode build-only --allow-experimental` 重新构建 B1 四组件；新 schema 2 bundle ID 为 `08e546dba305d3a8877c`，源码指纹 `336b431b3b15cc8404e9947e447b6107a28c3477e07ad19cd075015c82b71dd1`，builder 参数为 Target level 3、其余 level 5、tiling NONE、WORKSPACE 8 GiB、强类型、TF32 关闭。四组件 plan/哈希/源码身份校验及真实首 chunk 路由通过，五次测量全部首 PCM 中位 50.58 ms；再次执行 `reuse-only` 命中该新 bundle。它未上传 HF，`numerical_pass=false`、`certified_for_production=false`，不能把此次路由通过视为新增浮点或质量认证。过程中一次构建因其他工作并行改动源码而按设计拒绝混合指纹，一次因 GPU4 协作锁被占用而在 Target 前停止；失败 staging 均保留，未发布为完整 bundle。其他 SM 和 24GB 同 SM 卡仍无实际构建验收。
+
 本报告只对应物理 GPU4（NVIDIA GeForce RTX 4090，SM89，49140 MiB）上新构建的 `first_chunk_p258_f52_k128`。engine 构建基于提交 `191c821` 的推理代码，清单源码哈希为 `8d8b1a74b75d08095489b06ea15f0a01270d73f3428e67396f1858056d9098d7`；其后仅更新缓存发布工具、测试和报告，未重建 engine。构建和 GPU 测试均在同一张 GPU 上串行运行。其他 SM、其他 GPU 型号、batch 或 shape 未通过本次验证；以下结果不是生产认证。
 
 ## 独立构建与首 chunk 路由

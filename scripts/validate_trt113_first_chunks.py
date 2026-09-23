@@ -242,7 +242,7 @@ def main():
             report['profile']['status']=manifest['requested']['status']
             report['ar_artifacts']={component:manifest.get('tensorrt113_'+component+'_full',{}).get('artifacts',{})
                                     for component in ('target','draft')}
-            if report['profile']['sm']!=89:raise AuditError('This report is scoped to SM89')
+            if report['profile']['sm']<80:raise AuditError('This route requires SM80 or newer')
             hardware=subprocess.check_output(['nvidia-smi','-i',str(args.gpu),
                 '--query-gpu=name,uuid,driver_version,memory.total','--format=csv,noheader,nounits'],text=True)
             report['hardware']=dict(zip(('name','uuid','driver_version','memory_mib'),

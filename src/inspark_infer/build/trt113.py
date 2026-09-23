@@ -20,6 +20,8 @@ import uuid
 PROFILE = "first_chunk_p258_f52_k128"
 BATCHES = (1, 4, 8)
 COMPONENTS = ("target", "draft", "cfm", "vocoder")
+BUILDER_DEFAULT = "configs/common/trt113_builder.json"
+QUANTIZATION_DEFAULT = "configs/common/trt113_quantization.json"
 
 
 def _repository_root() -> Path:
@@ -69,6 +71,21 @@ def parse_batches(raw: str) -> tuple[int, ...]:
     return values
 
 
+def builder_policy(path: Path) -> dict:
+    data = json.loads(path.read_text())
+    if set(data) != {"schema", "optimization_level", "tiling_optimization_level",
+                     "workspace_bytes", "strongly_typed", "tf32"} or data["schema"] != 1:
+        raise ValueError("Unsupported TensorRT builder policy schema")
+    levels = data["optimization_level"]
+    if (not isinstance(levels, dict) or set(levels) != set(COMPONENTS)
+            or any(type(level) is not int or level not in range(6) for level in levels.values())
+            or data["tiling_optimization_level"] not in ("none", "fast", "moderate", "full")
+            or type(data["workspace_bytes"]) is not int or data["workspace_bytes"] < 1
+            or data["strongly_typed"] is not True or data["tf32"] is not False):
+        raise ValueError("Invalid TensorRT 11.3 builder settings or precision contract")
+    return data
+
+
 def gpu_info(gpu: int) -> dict:
     if gpu < 0:
         raise ValueError("--gpu must be a nonnegative physical GPU index")
@@ -87,8 +104,8 @@ def gpu_info(gpu: int) -> dict:
 
 def unsupported(gpu: dict, profile: str, batches: tuple[int, ...]) -> dict:
     reasons = []
-    if gpu["sm"] != 89:
-        reasons.append(f"SM{gpu['sm']} has no certified TensorRT 11.3 builder in this release")
+    if gpu["sm"] < 80:
+        reasons.append(f"SM{gpu['sm']} is below the supported SM80+ runtime capability")
     if profile != PROFILE:
         reasons.append(f"Shape profile {profile!r} is not implemented; supported: {PROFILE}")
     if any(batch not in BATCHES for batch in batches):
@@ -116,11 +133,11 @@ def _run(step: str, args: list[str], *, stage: Path, gpu: int) -> None:
         raise RuntimeError(f"{step} failed with exit {result.returncode}; see {log}")
 
 
-def _steps(batch: int, stage: Path, gpu: int) -> list[tuple[str, list[str]]]:
+def _steps(batch: int, stage: Path, gpu: int, builder: dict | None = None) -> list[tuple[str, list[str]]]:
     def path(component: str, name: str) -> str:
         return str(stage / component / name)
 
-    return [
+    steps = [
         ("target", ["scripts/build_trt113_target_full.py", "--gpu", str(gpu), "--batch", str(batch),
                     "--out-dir", str(stage / "target"), "--plan", path("target", "plan.json")]),
         ("draft", ["scripts/build_trt113_draft_full.py", "--gpu", str(gpu), "--batch", str(batch),
@@ -142,6 +159,13 @@ def _steps(batch: int, stage: Path, gpu: int) -> list[tuple[str, list[str]]]:
                        "--engine", path("vocoder", "vocoder.engine"),
                        "--plan", path("vocoder", "plan.json")]),
     ]
+    if builder is not None:
+        for name, command in steps:
+            if name in COMPONENTS:
+                command.extend(("--optimization-level", str(builder["optimization_level"][name]),
+                                "--workspace-bytes", str(builder["workspace_bytes"]),
+                                "--tiling-optimization-level", builder["tiling_optimization_level"]))
+    return steps
 
 
 def _engine_record(stage: Path, component: str, batch: int, gpu: dict) -> dict:
@@ -191,13 +215,15 @@ def _engine_record(stage: Path, component: str, batch: int, gpu: dict) -> dict:
             "io": tensors, "precision": plan.get("precision"),
             "tf32": plan.get("tf32"), "strongly_typed": plan.get("strongly_typed"),
             "optimization_level": plan.get("optimization_level"),
+            "tiling_optimization_level": plan.get("tiling_optimization_level", "none"),
             "workspace_bytes": plan.get("workspace_bytes"),
             "plugins": plan.get("plugins", [])}
 
 
-def _deployment(stage: Path, batch: int) -> Path:
-    template = ROOT / "configs/hardware/sm89" / f"sm89_trt113_safe_b{batch}.json"
+def _deployment(stage: Path, batch: int, sm: int = 89) -> Path:
+    template = ROOT / "configs/common/trt113_runtime_template.json"
     data = json.loads(template.read_text())
+    data["status"] = f"sm{sm}_trt113_b{batch}_request_isolated_numerically_experimental"
     for component, key in (("target", "tensorrt113_target_full_plan"),
                            ("draft", "tensorrt113_draft_full_plan"),
                            ("cfm", "tensorrt113_cfm_plan"),
@@ -208,18 +234,26 @@ def _deployment(stage: Path, batch: int) -> Path:
     return output
 
 
-def build_one(batch: int, gpu: dict, ref_audio: Path, output_root: Path) -> Path:
+def build_one(batch: int, gpu: dict, ref_audio: Path, output_root: Path,
+              builder: dict | None = None, quantization: dict | None = None) -> Path:
     stage = output_root / ".staging" / uuid.uuid4().hex
     stage.mkdir(parents=True, exist_ok=False)
     try:
-        for name, command in _steps(batch, stage, gpu["physical_gpu"]):
+        for name, command in _steps(batch, stage, gpu["physical_gpu"], builder):
             _run(name, command, stage=stage, gpu=gpu["physical_gpu"])
         records = {component: _engine_record(stage, component, batch, gpu) for component in COMPONENTS}
+        selected_builder = builder or builder_policy(ROOT / BUILDER_DEFAULT)
+        for component, record in records.items():
+            if (record["optimization_level"] != selected_builder["optimization_level"][component]
+                    or record["workspace_bytes"] != selected_builder["workspace_bytes"]
+                    or record["tiling_optimization_level"] != selected_builder["tiling_optimization_level"]
+                    or record["tf32"] is not False or record["strongly_typed"] is not True):
+                raise ValueError(f"{component} engine builder settings differ from requested policy")
         if len({value["source_sha256"] for value in records.values()}) != 1:
             raise ValueError("Component source fingerprints differ; build source changed mid-bundle")
         if len({value["trt"] for value in records.values()}) != 1:
             raise ValueError("Component TensorRT versions differ")
-        deployment = _deployment(stage, batch)
+        deployment = _deployment(stage, batch, gpu["sm"])
         _run("route", ["scripts/validate_trt113_first_chunks.py", "--gpu", str(gpu["physical_gpu"]),
                        "--batch", str(batch), "--deployment", str(deployment),
                        "--reference", str(ref_audio), "--output", str(stage / "route_report.json")],
@@ -228,11 +262,14 @@ def build_one(batch: int, gpu: dict, ref_audio: Path, output_root: Path) -> Path
         if route.get("status") != "passed":
             raise ValueError(f"B{batch} route validation did not pass")
         compatible_hardware = {key: gpu[key] for key in ("name", "sm", "memory_total_mib")}
-        identity = {"schema": 1, "model": "indextts2", "profile": PROFILE, "batch": batch,
+        identity = {"schema": 2, "model": "indextts2", "profile": PROFILE, "batch": batch,
                     "precision_policy": "mixed_bf16_fp32", "quantization": "none",
                     "hardware": compatible_hardware, "trt": records["target"]["trt"],
                     "source_sha256": records["target"]["source_sha256"],
                     "engines": {name: record["engine_sha256"] for name, record in records.items()}}
+        identity["builder"] = selected_builder
+        identity["quantization_policy"] = quantization or {"schema": 1, "scheme": "none",
+            "calibration": None, "scale_format": None, "qdq_graph_sha256": None}
         bundle_id = hashlib.sha256(json.dumps(identity, sort_keys=True).encode()).hexdigest()[:20]
         manifest = {**identity, "bundle_id": bundle_id, "build_gpu": gpu,
                     "components": records,
@@ -246,7 +283,7 @@ def build_one(batch: int, gpu: dict, ref_audio: Path, output_root: Path) -> Path
             if path.is_file() and not path.is_relative_to(stage / "logs")
         }
         _write_json(stage / "manifest.json", manifest)
-        final = output_root / "sm89" / PROFILE / f"b{batch}" / bundle_id
+        final = output_root / f"sm{gpu['sm']}" / PROFILE / f"b{batch}" / bundle_id
         final.parent.mkdir(parents=True, exist_ok=True)
         if final.exists():
             if validate_bundle(final)["bundle_id"] != bundle_id:
@@ -264,14 +301,31 @@ def build_one(batch: int, gpu: dict, ref_audio: Path, output_root: Path) -> Path
 def validate_bundle(root: Path) -> dict:
     root = root.resolve()
     manifest = json.loads((root / "manifest.json").read_text())
-    if manifest.get("schema") != 1 or manifest.get("profile") != PROFILE or manifest.get("batch") not in BATCHES:
+    if manifest.get("schema") not in (1, 2) or manifest.get("profile") != PROFILE or manifest.get("batch") not in BATCHES:
         raise ValueError("Unsupported bundle manifest")
     identity_keys = ("schema", "model", "profile", "batch", "precision_policy",
                      "quantization", "hardware", "trt",
                      "source_sha256", "engines")
+    if manifest["schema"] == 2:
+        identity_keys += ("builder", "quantization_policy")
     if any(key not in manifest for key in identity_keys):
         raise ValueError("Bundle identity is incomplete")
     identity = {key: manifest[key] for key in identity_keys}
+    if manifest["schema"] == 2:
+        from inspark_infer.quantization.trt113 import validate_policy
+        validate_policy(manifest["quantization_policy"])
+        if manifest["quantization_policy"]["scheme"] != "none" or manifest["quantization"] != "none":
+            raise ValueError("Quantized TensorRT bundle requires independent implementation and audit")
+        builder = manifest["builder"]
+        if (not isinstance(builder, dict) or set(builder) != {"schema", "optimization_level",
+                "tiling_optimization_level", "workspace_bytes", "strongly_typed", "tf32"}
+                or builder["schema"] != 1 or set(builder["optimization_level"]) != set(COMPONENTS)
+                or any(type(level) is not int or level not in range(6)
+                       for level in builder["optimization_level"].values())
+                or builder["tiling_optimization_level"] not in ("none", "fast", "moderate", "full")
+                or type(builder["workspace_bytes"]) is not int or builder["workspace_bytes"] < 1
+                or builder["tf32"] is not False or builder["strongly_typed"] is not True):
+            raise ValueError("Invalid TensorRT bundle builder identity")
     expected_id = hashlib.sha256(json.dumps(identity, sort_keys=True).encode()).hexdigest()[:20]
     if manifest.get("bundle_id") != expected_id:
         raise ValueError("Bundle ID does not match its content identity")
@@ -294,6 +348,14 @@ def validate_bundle(root: Path) -> dict:
         if not path.is_relative_to(root) or _digest(path) != digest:
             raise ValueError(f"Bundle file hash/path mismatch: {name}")
     for component, record in manifest["components"].items():
+        if manifest["schema"] == 2 and (record.get("optimization_level") != builder["optimization_level"][component]
+                or record.get("workspace_bytes") != builder["workspace_bytes"]
+                or record.get("tiling_optimization_level") != builder["tiling_optimization_level"]
+                or record.get("tf32") is not False or record.get("strongly_typed") is not True
+                or record.get("trt") != manifest["trt"] or record.get("sm") != manifest["hardware"]["sm"]
+                or record.get("gpu_name") != manifest["hardware"]["name"]
+                or record.get("source_sha256") != manifest["source_sha256"]):
+            raise ValueError(f"{component} settings or provenance differ from bundle identity")
         for key, digest_key in (("engine", "engine_sha256"), ("plan", "plan_sha256")):
             path = (root / record[key]).resolve()
             if not path.is_relative_to(root) or _digest(path) != record[digest_key]:
@@ -315,10 +377,15 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--ref-audio", type=Path, help="Required for supported builds; local WAV used by route gate")
     parser.add_argument("--preflight-only", action="store_true", help=argparse.SUPPRESS)
     parser.add_argument("--output-root", type=Path, default=ROOT / "artifacts/trt113_bundles")
+    parser.add_argument("--builder-config", type=Path, default=ROOT / BUILDER_DEFAULT)
+    parser.add_argument("--quantization-config", type=Path, default=ROOT / QUANTIZATION_DEFAULT)
     parser.add_argument("--json-out", type=Path)
     args = parser.parse_args(argv)
     try:
         batches = parse_batches(args.batches)
+        from inspark_infer.quantization.trt113 import load_policy
+        quantization = load_policy(args.quantization_config)
+        builder = builder_policy(args.builder_config)
         gpu = gpu_info(args.gpu)
         decision = unsupported(gpu, args.profile, batches)
         if decision["reasons"]:
@@ -339,7 +406,8 @@ def main(argv: list[str] | None = None) -> int:
         ensure_trt113_site()
         results = []
         for batch in batches:
-            results.append({"batch": batch, "bundle": str(build_one(batch, gpu, ref, output_root))})
+            results.append({"batch": batch, "bundle": str(build_one(batch, gpu, ref, output_root,
+                                                                       builder, quantization))})
         report = {"status": "built_route_passed_numerically_experimental", "profile": PROFILE,
                   "gpu": gpu, "bundles": results}
         if args.json_out:
