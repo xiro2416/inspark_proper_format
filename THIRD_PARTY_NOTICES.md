@@ -12,6 +12,14 @@ included under `benchmarks/` and `scripts/`.
 - Hugging Face model adaptations and other Apache-2.0 components: `licenses/Apache-2.0.txt`; original notices retained where present. Installed transformers is used instead of copying its large modeling/generation utility files.
 - Amphion / Vocos codec components retain their original source headers. Installed Python dependencies retain their respective package licenses.
 
+The SM89 TensorRT engines, when distributed, are derived from the pinned
+IndexTTS2 and other model weights. Any modifications made to the original model
+in this Derivative Work are not endorsed, warranted, or guaranteed by the
+original right-holder of the original model, and the original right-holder
+disclaims all liability related to this Derivative Work. The original IndexTTS2
+license and copyright notices must accompany every distributed engine bundle;
+private storage does not remove the downstream license obligations.
+
 Official neural weights remain external dependencies and are fetched from their
 original repositories at revisions and hashes recorded in
 `configs/common/model_sources.json`. Source normalization and pruning do not imply

@@ -121,8 +121,17 @@ def test_private_cache_paths_and_attestation(tmp_path):
     attestation = tmp_path / "attestation.json"
     attestation.write_text(json.dumps({"schema": 1, "reviewed": True,
                                        "redistribution_permitted": True, "sources": {}}))
-    with pytest.raises(ValueError, match="every pinned source"):
-        _attestation(attestation)
+    manifest = {"components": {"target": {"model_sources": [
+        {"role": "target_checkpoint", "sha256": "baaaeb8b56328da81731dc540a85a7dee32eca9da28f174b05757cb651c602a4"}]}}}
+    with pytest.raises(ValueError, match="every source embedded"):
+        _attestation(attestation, manifest)
+    attestation.write_text(json.dumps({"schema": 1, "reviewed": True,
+        "redistribution_permitted": True,
+        "sources": {"IndexTeam/IndexTTS-2": {"permitted": True, "evidence": "local license review"}}}))
+    assert _attestation(attestation, manifest)["reviewed"] is True
+    manifest["components"]["target"]["model_sources"][0]["sha256"] = "unknown"
+    with pytest.raises(ValueError, match="not pinned"):
+        _attestation(attestation, manifest)
 
 
 def test_private_cache_rejects_public_repository_before_upload_or_download(monkeypatch):
@@ -142,7 +151,7 @@ def test_private_cache_rejects_public_repository_before_upload_or_download(monke
     monkeypatch.setattr(huggingface_hub, "HfApi", PublicApi)
     monkeypatch.setattr(hf_cache, "_token", lambda: "dummy-local-test-token")
     monkeypatch.setattr(hf_cache, "validate_bundle", lambda root: {"batch": 1, "bundle_id": "id"})
-    monkeypatch.setattr(hf_cache, "_attestation", lambda path: {})
+    monkeypatch.setattr(hf_cache, "_attestation", lambda path, manifest: {})
     monkeypatch.setattr(hf_cache, "gpu_info", lambda index: {
         "physical_gpu": index, "sm": 89, "name": "GPU", "memory_total_mib": 49140})
     work = ROOT / ".work"
@@ -180,7 +189,7 @@ def test_private_cache_publish_is_explicit_and_revision_pinned(monkeypatch):
 
         def create_commit(self, *, operations, **kwargs):
             self.uploaded = operations
-            assert len(operations) == 3
+            assert len(operations) == 5
             assert all(operation.path_or_fileobj.is_file() for operation in operations)
             return type("Commit", (), {"oid": "b" * 40})()
 
@@ -189,7 +198,7 @@ def test_private_cache_publish_is_explicit_and_revision_pinned(monkeypatch):
     monkeypatch.setattr(hf_cache, "_token", lambda: "dummy-local-test-token")
     monkeypatch.setattr(hf_cache, "validate_bundle", lambda root: {
         "batch": 4, "bundle_id": "example-id", "files": {"target/engine": "digest"}})
-    monkeypatch.setattr(hf_cache, "_attestation", lambda path: {})
+    monkeypatch.setattr(hf_cache, "_attestation", lambda path, manifest: {})
     work = ROOT / ".work"
     work.mkdir(exist_ok=True)
     with tempfile.TemporaryDirectory(dir=work) as directory:

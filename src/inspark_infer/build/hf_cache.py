@@ -35,16 +35,22 @@ def _token() -> str:
     return token
 
 
-def _attestation(path: Path) -> dict:
+def _attestation(path: Path, manifest: dict) -> dict:
     data = json.loads(path.read_text())
     if (data.get("schema") != 1 or data.get("reviewed") is not True
             or data.get("redistribution_permitted") is not True):
         raise ValueError("Distribution attestation must explicitly approve redistribution")
     source_manifest = json.loads((ROOT / "configs/common/model_sources.json").read_text())
-    required = {item["repo"] for item in source_manifest["files"]}
+    by_hash = {item["sha256"]: item["repo"] for item in source_manifest["files"]}
+    embedded = {item["sha256"] for component in manifest["components"].values()
+                for item in component["model_sources"]}
+    unknown = embedded - by_hash.keys()
+    if unknown:
+        raise ValueError(f"Embedded weight sources are not pinned: {sorted(unknown)}")
+    required = {by_hash[digest] for digest in embedded}
     approvals = data.get("sources")
     if not isinstance(approvals, dict) or not required <= set(approvals):
-        raise ValueError("Distribution attestation must cover every pinned source repository")
+        raise ValueError("Distribution attestation must cover every source embedded in this bundle")
     for repo in required:
         value = approvals[repo]
         if not isinstance(value, dict) or value.get("permitted") is not True or not value.get("evidence"):
@@ -65,7 +71,7 @@ def publish(bundle: Path, repo_id: str, attestation: Path) -> dict:
     attestation = attestation.resolve()
     if not attestation.is_relative_to(Path("/workspace")):
         raise ValueError("Distribution attestation must be under /workspace")
-    _attestation(attestation)
+    _attestation(attestation, manifest)
     api = HfApi(endpoint="https://huggingface.co", token=token)
     try:
         info = api.model_info(repo_id, token=token)
@@ -81,6 +87,9 @@ def publish(bundle: Path, repo_id: str, attestation: Path) -> dict:
         CommitOperationAdd(path_in_repo=f"{prefix}/manifest.json", path_or_fileobj=root / "manifest.json"),
         CommitOperationAdd(path_in_repo=f"{prefix}/distribution_attestation.json",
                            path_or_fileobj=attestation),
+        CommitOperationAdd(path_in_repo=f"{prefix}/LICENSE", path_or_fileobj=ROOT / "LICENSE"),
+        CommitOperationAdd(path_in_repo=f"{prefix}/THIRD_PARTY_NOTICES.md",
+                           path_or_fileobj=ROOT / "THIRD_PARTY_NOTICES.md"),
     ))
     commit = api.create_commit(repo_id=repo_id, repo_type="model", token=token,
                                operations=operations,
@@ -129,10 +138,12 @@ def fetch(repo_id: str, revision: str, bundle_path: str, gpu: int,
         raise ValueError("Remote bundle GPU model differs; rebuild locally for safe tactics")
     if manifest.get("hardware", {}).get("memory_total_mib") != hardware["memory_total_mib"]:
         raise ValueError("Remote bundle GPU memory class differs; rebuild locally")
-    _attestation(download("distribution_attestation.json"))
+    _attestation(download("distribution_attestation.json"), manifest)
     stage = output_root / ".staging" / uuid.uuid4().hex
     stage.mkdir(parents=True, exist_ok=False)
     shutil.copy2(download("manifest.json"), stage / "manifest.json")
+    for notice in ("LICENSE", "THIRD_PARTY_NOTICES.md", "distribution_attestation.json"):
+        shutil.copy2(download(notice), stage / notice)
     for name in manifest.get("files", {}):
         relative = PurePosixPath(name)
         if relative.is_absolute() or ".." in relative.parts:
