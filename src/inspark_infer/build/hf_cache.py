@@ -57,8 +57,13 @@ def publish(bundle: Path, repo_id: str, attestation: Path) -> dict:
     token = _token()
     repo_id = _repo_id(repo_id)
     root = bundle.resolve()
+    if not root.is_relative_to(Path("/workspace")):
+        raise ValueError("Bundle must be under /workspace")
     manifest = validate_bundle(root)
-    _attestation(attestation.resolve())
+    attestation = attestation.resolve()
+    if not attestation.is_relative_to(Path("/workspace")):
+        raise ValueError("Distribution attestation must be under /workspace")
+    _attestation(attestation)
     api = HfApi(endpoint="https://huggingface.co", token=token)
     try:
         info = api.model_info(repo_id, token=token)
@@ -73,7 +78,7 @@ def publish(bundle: Path, repo_id: str, attestation: Path) -> dict:
     operations.extend((
         CommitOperationAdd(path_in_repo=f"{prefix}/manifest.json", path_or_fileobj=root / "manifest.json"),
         CommitOperationAdd(path_in_repo=f"{prefix}/distribution_attestation.json",
-                           path_or_fileobj=attestation.resolve()),
+                           path_or_fileobj=attestation),
     ))
     commit = api.create_commit(repo_id=repo_id, repo_type="model", token=token,
                                operations=operations,
@@ -112,6 +117,9 @@ def fetch(repo_id: str, revision: str, bundle_path: str, gpu: int,
     manifest = json.loads(download("manifest.json").read_text())
     if manifest.get("schema") != 1 or manifest.get("profile") != PROFILE:
         raise ValueError("Remote TensorRT bundle schema/profile unsupported")
+    expected_remote = f"bundles/sm89/{PROFILE}/b{manifest.get('batch')}/{manifest.get('bundle_id')}"
+    if bundle_path != expected_remote:
+        raise ValueError("Remote bundle path differs from manifest identity")
     if manifest.get("hardware", {}).get("sm") != hardware["sm"]:
         raise ValueError("Remote bundle SM differs from the target GPU")
     if manifest.get("hardware", {}).get("name") != hardware["name"]:

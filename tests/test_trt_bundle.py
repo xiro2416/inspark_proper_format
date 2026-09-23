@@ -45,9 +45,18 @@ def test_bundle_inventory_requires_all_components_and_exact_hashes(tmp_path):
     deployment = root / "deployment.json"
     deployment.write_text("{}")
     files["deployment.json"] = digest(deployment)
-    manifest = {"schema": 1, "profile": PROFILE, "batch": 4, "bundle_id": "test",
+    route = root / "route_report.json"
+    route.write_text("{}")
+    files["route_report.json"] = digest(route)
+    identity = {"schema": 1, "model": "indextts2", "profile": PROFILE, "batch": 4,
+                "hardware": {"name": "GPU", "sm": 89, "memory_total_mib": 49140},
+                "trt": "11.3.0", "source_sha256": "source",
+                "engines": {name: row["engine_sha256"] for name, row in components.items()}}
+    bundle_id = hashlib.sha256(json.dumps(identity, sort_keys=True).encode()).hexdigest()[:20]
+    manifest = {**identity, "bundle_id": bundle_id,
                 "components": components, "deployment": "deployment.json",
-                "deployment_sha256": digest(deployment), "files": files}
+                "deployment_sha256": digest(deployment), "route_report": "route_report.json",
+                "files": files}
     (root / "manifest.json").write_text(json.dumps(manifest))
     assert validate_bundle(root)["batch"] == 4
     (root / "vocoder/engine").write_bytes(b"tampered")

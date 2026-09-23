@@ -230,11 +230,24 @@ def validate_bundle(root: Path) -> dict:
     manifest = json.loads((root / "manifest.json").read_text())
     if manifest.get("schema") != 1 or manifest.get("profile") != PROFILE or manifest.get("batch") not in BATCHES:
         raise ValueError("Unsupported bundle manifest")
+    identity_keys = ("schema", "model", "profile", "batch", "hardware", "trt",
+                     "source_sha256", "engines")
+    if any(key not in manifest for key in identity_keys):
+        raise ValueError("Bundle identity is incomplete")
+    identity = {key: manifest[key] for key in identity_keys}
+    expected_id = hashlib.sha256(json.dumps(identity, sort_keys=True).encode()).hexdigest()[:20]
+    if manifest.get("bundle_id") != expected_id:
+        raise ValueError("Bundle ID does not match its content identity")
     if set(manifest.get("components", {})) != set(COMPONENTS):
         raise ValueError("Bundle must contain all four components")
     files = manifest.get("files")
     if not isinstance(files, dict) or not files:
         raise ValueError("Bundle file inventory is missing")
+    required = {manifest.get("deployment"), manifest.get("route_report")}
+    for record in manifest["components"].values():
+        required.update((record.get("engine"), record.get("plan")))
+    if None in required or not required <= set(files):
+        raise ValueError("Bundle inventory omits an engine, plan, deployment or route report")
     for name, digest in files.items():
         path = (root / name).resolve()
         if not path.is_relative_to(root) or _digest(path) != digest:
@@ -244,6 +257,8 @@ def validate_bundle(root: Path) -> dict:
             path = (root / record[key]).resolve()
             if not path.is_relative_to(root) or _digest(path) != record[digest_key]:
                 raise ValueError(f"{component} {key} hash/path mismatch")
+        if manifest["engines"].get(component) != record["engine_sha256"]:
+            raise ValueError(f"{component} engine disagrees with bundle identity")
     deployment = (root / manifest["deployment"]).resolve()
     if not deployment.is_relative_to(root) or _digest(deployment) != manifest["deployment_sha256"]:
         raise ValueError("Bundle deployment hash/path mismatch")
