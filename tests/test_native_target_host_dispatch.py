@@ -30,9 +30,9 @@ def target_pool(batch=2):
         mirror[:,:,slot,:,:length].copy_(packed[:,:,row,:,:length])
     backend=NS(cache=mirror,import_slot=import_slot)
     def graph(x,slots,lengths):
-        for slot,length in zip(slots.tolist(),lengths.tolist()):
-            assert torch.equal(mirror[:,:,slot,:,:length],pool.storage[:,:,slot,:,:length].bfloat16())
-            mirror[:,:,slot,:,length:length+8].fill_(3.)
+        for row,(slot,length) in enumerate(zip(slots.tolist(),lengths.tolist())):
+            assert torch.equal(mirror[:,:,row,:,:length],pool.storage[:,:,slot,:,:length].bfloat16())
+            mirror[:,:,row,:,length:length+8].fill_(3.)
         return x+10,x+20,x+30
     bank.backends[batch]=backend;bank.graphs[batch,128]=graph
     pool.native_full_bank=bank
@@ -51,7 +51,8 @@ def test_native_dispatch_refreshes_and_exports_canonical_cache(lengths):
     result=pool(jobs(pool,[0,1],lengths))
     assert pool.native_full_steps==1 and pool.generic_calls==0
     assert imports==[(0,0,lengths[0]),(1,1,lengths[1])]
-    assert torch.equal(pool.storage[:,:,:2,:,:128],mirror[:,:,:2].float())
+    for row,length in enumerate(lengths):
+        assert torch.equal(pool.storage[:,:,row,:,:length+8],mirror[:,:,row,:,:length+8].float())
     assert torch.equal(pool.storage[:,:,:,:,128:],tail)
     assert all(torch.equal(row[0],torch.full((1,8,2),10.)) for row in result)
     # A generic/batch-switch call may change valid history: the next native
@@ -64,12 +65,22 @@ def test_native_dispatch_refreshes_and_exports_canonical_cache(lengths):
 
 
 @pytest.mark.parametrize('slots,lengths',[
-    ([1,0],[80,80]),([0,2],[80,80]),([0,1],[121,80]),([0],[80]),
+    ([1,0],[80,80]),([0,2],[80,80]),([0],[80]),
 ])
-def test_non_identity_long_or_unsupported_batch_uses_generic(slots,lengths):
+def test_nonidentity_or_short_batch_packs_without_touching_inactive_canonical_slots(slots,lengths):
+    pool,mirror,imports=target_pool()
+    before=pool.storage.clone()
+    pool(jobs(pool,slots,lengths))
+    assert pool.native_full_steps==1 and pool.generic_calls==0
+    assert imports==[(slot,row,length) for row,(slot,length) in enumerate(zip(slots,lengths))]
+    for slot in set(range(pool.max_slots))-set(slots):
+        assert torch.equal(pool.storage[:,:,slot],before[:,:,slot])
+
+
+def test_long_batch_uses_generic():
     pool,mirror,imports=target_pool()
     before=mirror.clone()
-    pool(jobs(pool,slots,lengths))
+    pool(jobs(pool,[0,1],[121,80]))
     assert pool.native_full_steps==0 and pool.generic_calls==1
     assert imports==[] and torch.equal(mirror,before)
 

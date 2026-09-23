@@ -29,9 +29,9 @@ def fixture():
         backend.import_slot=importer
         def graph(x,slots,lengths,backend=backend,batch=batch):
             backend.calls+=1
-            for slot,length in zip(slots.tolist(),lengths.tolist()):
-                assert torch.equal(backend.cache[:,:,slot,:,:length],pool.storage[:,:,slot,:,:length].bfloat16())
-                backend.cache[:,:,slot,:,length:length+8].fill_(batch+slot+backend.calls)
+            for row,(slot,length) in enumerate(zip(slots.tolist(),lengths.tolist())):
+                assert torch.equal(backend.cache[:,:,row,:,:length],pool.storage[:,:,slot,:,:length].bfloat16())
+                backend.cache[:,:,row,:,length:length+8].fill_(batch+slot+backend.calls)
             for index,out in enumerate(backend.outputs):out.fill_(100*backend.calls+10*batch+index)
             return backend.outputs
         bank.backends[batch]=backend;bank.graphs[batch,128]=graph
@@ -75,16 +75,16 @@ def test_batch_switch_refreshes_selected_mirror_and_preserves_all_output_ownersh
     assert pool.native_full_steps==pool.calls==4 and pool.generic_calls==0
 
 
-def test_nonidentity_fallback_updates_canonical_then_native_reimports_accepted_prefix():
+def test_nonidentity_native_packing_updates_only_request_owned_canonical_slots():
     pool,caches=fixture();update(caches,pool(jobs(caches[:4])))
-    stale=pool.native_full_bank.backends[4].cache.clone()
+    inactive=pool.storage[:,:,4:].clone()
     indices=(2,0,3,1);reordered=[caches[index] for index in indices]
     outputs=pool(jobs(reordered));update(reordered,outputs)
     for index,kv in zip(indices,reordered):caches[index]=kv
-    assert pool.generic_calls==1
-    assert torch.equal(pool.native_full_bank.backends[4].cache,stale)
+    assert pool.generic_calls==0 and pool.native_full_steps==2
+    assert torch.equal(pool.storage[:,:,4:],inactive)
     pool(jobs(caches[:4]))  # The simulated graph asserts all valid imports.
-    assert pool.native_full_steps==2 and pool.calls==3
+    assert pool.native_full_steps==3 and pool.calls==3
 
 
 def test_cancel_reuse_refreshes_every_mirror_and_rejects_old_generation():
@@ -154,6 +154,6 @@ def test_pool_counts_add_host_and_device_without_counting_preparation_or_fallbac
         sessions={},config={'max_batch':8},device_round_attempts=1,device_round_successes=1,device_round_fallbacks=0)
     result=_engine_stats(engine)
     assert result['target_calls']==3 and result['device_target_steps']==5
-    assert result['native_target_steps']==6  # Two host successes plus four device steps.
+    assert result['native_target_steps']==7  # Three host successes plus four device steps.
     assert result['native_target_steps']<=result['target_calls']+result['device_target_steps']
     assert result['target_batch_counts']=={'4':1,'1':2}

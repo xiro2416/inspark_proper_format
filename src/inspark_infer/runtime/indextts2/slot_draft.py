@@ -107,11 +107,19 @@ class SlotDraft(BatchedDraftBackbone):
         # K64's shorter context occupies the same valid positions in the K128
         # engine; the mask excludes its unused context positions.  This does
         # not truncate or reorder any request-owned KV state.
-        native=self.native_eligible(b,slot_values,max(lengths))
-        bucket=f"b{b}_kv{limit}_{'native_engine128' if native else 'eager'}"
+        bank=self.native_full_bank
+        engine_batch=(bank.host_engine_batch(b,max(lengths)) if bank is not None else None)
+        native=engine_batch is not None
+        exact_native=native and self.native_eligible(b,slot_values,max(lengths))
+        route=("native_engine128" if exact_native else
+               f"native_b{engine_batch}_engine128" if native else "eager")
+        bucket=f"b{b}_kv{limit}_{route}"
         self.execution_buckets[bucket]=self.execution_buckets.get(bucket,0)+1
-        if native:
+        if exact_native:
             hidden,base=self.native_full_bank.graphs[b,128](anchors,positions,slots,lens)
+            self.graph_hits+=1;self.native_full_steps+=1
+        elif native:
+            hidden,base=bank.run_packed(engine_batch,anchors,positions,slots,lens,self.pool.storage)
             self.graph_hits+=1;self.native_full_steps+=1
         elif (b,limit) in self.graphs and not native_graph:
             hidden,base=self.graphs[b,limit](anchors,positions,slots,lens);self.graph_hits+=1

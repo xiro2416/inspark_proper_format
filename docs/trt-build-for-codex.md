@@ -5,12 +5,12 @@
 从干净 checkout，在 `/workspace` 下运行以下一条命令；它准备 Python、固定版本模型、TRT 11.3，然后在**一张物理 GPU**上串行构建每个精确 batch 的 Target、Draft、CFM、Vocoder：
 
 ```bash
-bash scripts/build_trt.sh --gpu 6 --model indextts2 \
+bash scripts/build_trt.sh --gpu 4 --model indextts2 \
   --profile first_chunk_p258_f52_k128 --batches 1,4,8 \
   --ref-audio /workspace/your_reference.wav
 ```
 
-`--gpu` 是本机物理编号；6 仅为原工作区的授权卡。构建器会拒绝繁忙设备。也可单独传 `--batches 4`。目前只实现 SM89、精确 B1/B4/B8、首 chunk `Target verify=8/KV128`、`Draft proposal=7/KV128`、`CFM prompt=258/total=310`、`Vocoder=52`。其他 SM、batch 和形状返回机器可读的 `unsupported` 与 `codex_task`；B3/B7 不会自动填充或拆批。权重从 hf-mirror 固定 revision 下载并按 SHA256 校验，engine 构建不依赖 HF engine 缓存。
+`--gpu` 是本机物理编号；示例中的 4 是当前工作区获授权的卡，新服务器应填它自己的空闲物理 GPU 编号。构建器会拒绝繁忙设备。也可单独传 `--batches 4`。目前只实现 SM89、精确 B1/B4/B8、首 chunk `Target verify=8/KV128`、`Draft proposal=7/KV128`、`CFM prompt=258/total=310`、`Vocoder=52`。其他 SM、batch 和形状返回机器可读的 `unsupported` 与 `codex_task`；B3/B7 不会自动填充或拆批。权重从 hf-mirror 固定 revision 下载并按 SHA256 校验，engine 构建不依赖 HF engine 缓存。
 
 入口在 `src/inspark_infer/build/trt113.py`，实际导出和构建由现有 `scripts/build_trt113_*.py`、`scripts/export_trt113_*.py` 执行。每个 batch 写入 `artifacts/trt113_bundles/sm89/first_chunk_p258_f52_k128/bN/<bundle-id>/`；失败停留在 `.staging/`，保留 `logs/` 和 `build_failure.json`，不替换完整 bundle。`manifest.json` 记录 GPU/SDK、源码、四组件 SHA256、文件清单和认证状态。`deployment.json` 只指向同 bundle 的相对 plan。构建门禁运行真实首 chunk 四组件路由检测，但**不证明完整 EOS、浮点一致、质量、32/64 并发或性能优势**。当前数值状态为 `experimental_existing_gates_failed`，生产认证为 `false`。
 
@@ -40,7 +40,7 @@ bash scripts/run.sh -m inspark_infer.command trt publish \
 bash scripts/run.sh -m inspark_infer.command trt fetch \
   --repo-id your-namespace/private-trt-cache --revision <40-char-commit> \
   --bundle-path bundles/sm89/first_chunk_p258_f52_k128/b4/<bundle-id> \
-  --gpu 6 --ref-audio /workspace/your_reference.wav
+  --gpu 4 --ref-audio /workspace/your_reference.wav
 ```
 
 `fetch` 默认经 hf-mirror 下载，确认仓库私有、来源声明、设备型号和 SM、全文件哈希，然后在目标 GPU 上重新运行四组件首 chunk 路由。它不自动认证数值或质量；私有仓库经镜像访问也须在目标网络实际验证。CLI 存在不等于制品已经发布。

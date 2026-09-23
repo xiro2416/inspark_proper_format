@@ -12,13 +12,14 @@ rng=importlib.util.module_from_spec(spec);spec.loader.exec_module(rng)
 
 class RequestRNG(unittest.TestCase):
     def test_real_sampling_adapters_preserve_request_stream_under_batch_and_churn(self):
+        cuda_initialized_before=torch.cuda.is_initialized()
         report=rng.audit('cpu',rounds=2,seed=2026)
         self.assertTrue(report['passed'])
         self.assertTrue(report['shared_rng_negative_control_detected'])
         self.assertTrue(report['cancel_recreate_same_seed_exact'])
         self.assertGreater(report['baseline']['residual_fallbacks'],0)
         self.assertTrue(all(row['random_stream_exact'] for row in report['scenarios']))
-        self.assertFalse(torch.cuda.is_initialized())
+        self.assertEqual(torch.cuda.is_initialized(),cuda_initialized_before)
 
 
 if __name__=='__main__':unittest.main()

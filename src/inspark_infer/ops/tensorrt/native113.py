@@ -212,6 +212,10 @@ class NativeTargetFullBank113:
     def eligible(self,batch,slot_values,max_length):
         return (batch,128) in self.graphs and slot_values==list(range(batch)) and max_length+8<=128
 
+    def host_engine_batch(self,batch,max_length):
+        if max_length+8>128:return None
+        return next((size for size in sorted(self.backends) if size>=batch and (size,128) in self.graphs),None)
+
     def run_with_canonical_cache(self,x,slots,lengths,slot_values,host_lengths):
         """Host-scheduled request-local path, independent of device RNG.
 
@@ -222,14 +226,24 @@ class NativeTargetFullBank113:
         existing device-round path retains its once-per-loop synchronization.
         """
         batch=len(host_lengths)
-        if not self.eligible(batch,slot_values,max(host_lengths)):
-            raise ValueError('Native Target requires identity slots and KV+8 <= 128')
-        backend=self.backends[batch]
-        for slot,length in zip(slot_values,host_lengths):
-            backend.import_slot(self.target.storage,slot,slot,length)
-        result=self.graphs[batch,128](x,slots,lengths)
-        self.export(batch,self.target.storage)
-        return result
+        engine_batch=self.host_engine_batch(batch,max(host_lengths))
+        if engine_batch is None:raise ValueError('No native Target batch with KV+8 <= 128')
+        backend=self.backends[engine_batch]
+        # The fixed engine sees dense rows; the canonical request-owned KV slots
+        # remain untouched except for the rows that actually ran.  Inactive
+        # padding rows are discarded, including their engine-local KV writes.
+        for row,(slot,length) in enumerate(zip(slot_values,host_lengths)):
+            backend.import_slot(self.target.storage,slot,row,length)
+        if engine_batch==batch:
+            padded_x,padded_slots,padded_lengths=x,slots,lengths
+        else:
+            padded_x=x.new_zeros((engine_batch,*x.shape[1:]));padded_x[:batch].copy_(x)
+            padded_slots=slots.new_full((engine_batch,),slot_values[0]);padded_slots[:batch].copy_(slots)
+            padded_lengths=lengths.new_zeros((engine_batch,));padded_lengths[:batch].copy_(lengths)
+        result=self.graphs[engine_batch,128](padded_x,padded_slots,padded_lengths)
+        for row,(slot,length) in enumerate(zip(slot_values,host_lengths)):
+            self.target.storage[:,:,slot,:,:length+8].copy_(backend.cache[:,:,row,:,:length+8])
+        return tuple(tensor[:batch].clone() for tensor in result)
 
     def export(self,batch,target_storage):
         target_storage[:,:,:batch,:,:128].copy_(self.backends[batch].cache[:,:,:batch])
@@ -309,6 +323,33 @@ class NativeDraftFullBank113:
                 (anchors,positions,slots,lengths))
         return dict(keys=[list(k) for k in self.graphs],backend="TensorRT 11.3 full Draft",
                     artifacts=self.artifacts)
+
+    def host_engine_batch(self,batch,max_length):
+        if max_length+7>128:return None
+        return next((size for size in sorted(self.backends) if size>=batch and (size,128) in self.graphs),None)
+
+    def run_packed(self,engine_batch,anchors,positions,slots,lengths,canonical_storage):
+        """Replay a fixed engine for fewer live rows without altering their KV.
+
+        Native Draft reads the compact mirror but never writes it.  Pack the
+        request-owned canonical prefixes into engine rows, then restore the
+        mirror so a later exact-batch graph or Context append sees its own slots.
+        """
+        batch=anchors.shape[0]
+        if engine_batch<batch or (engine_batch,128) not in self.graphs:
+            raise ValueError('No native Draft engine for packed host batch')
+        slot_values=slots.tolist()
+        for row,slot in enumerate(slot_values):
+            self.cache[:,:,row].copy_(canonical_storage[:,:,slot,:,:128])
+        padded_anchors=anchors.new_zeros((engine_batch,));padded_anchors[:batch].copy_(anchors)
+        padded_positions=positions.new_zeros((engine_batch,*positions.shape[1:]));padded_positions[:batch].copy_(positions)
+        padded_slots=torch.arange(engine_batch,device=slots.device,dtype=slots.dtype)
+        padded_lengths=lengths.new_zeros((engine_batch,));padded_lengths[:batch].copy_(lengths)
+        try:
+            hidden,base=self.graphs[engine_batch,128](padded_anchors,padded_positions,padded_slots,padded_lengths)
+            return hidden[:batch].clone(),base[:batch].clone()
+        finally:
+            self.cache[:,:,:engine_batch].copy_(canonical_storage[:,:,:engine_batch,:,:128])
 
     def enabled_for_total(self,total):
         # ``total`` is the padded count of newly committed context tokens, not

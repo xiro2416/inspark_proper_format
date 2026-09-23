@@ -142,7 +142,7 @@ class SlotTarget(BatchedTarget):
         lens=torch.tensor(lengths,device=self.storage.device,dtype=torch.int32)
         x=torch.cat([j[0] for j in jobs]);key=(len(jobs),limit)
         bank=self.native_full_bank
-        if self.graph_sealed and bank is not None and bank.eligible(len(jobs),slot_values,max(lengths)):
+        if self.graph_sealed and bank is not None and bank.host_engine_batch(len(jobs),max(lengths)) is not None:
             logits,selected,final=bank.run_with_canonical_cache(x,slots,lens,slot_values,lengths)
             self.native_full_steps+=1;self.graph_hits+=1
         elif self.graph_sealed and key in self.graphs:
