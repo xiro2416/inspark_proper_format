@@ -6,8 +6,9 @@ from pathlib import Path
 import pytest
 
 from inspark_infer.build.trt113 import (
-    PROFILE, _deployment, _engine_record, parse_batches, unsupported, validate_bundle,
+    PROFILE, _engine_record, parse_batches, unsupported, validate_bundle,
 )
+from inspark_infer.build import trt113
 from inspark_infer.build.hf_cache import _attestation, _remote_path, _repo_id
 
 
@@ -24,6 +25,16 @@ def test_exact_batch_and_unsupported_handoff():
     assert result["status"] == "unsupported"
     assert len(result["reasons"]) == 2
     assert "codex_task" in result
+
+
+def test_preflight_never_needs_models_or_trt(monkeypatch, capsys):
+    monkeypatch.setattr(trt113, "gpu_info", lambda index: {"physical_gpu": index,
+                        "sm": 89, "name": "GPU", "memory_total_mib": 49140,
+                        "memory_used_mib": 0})
+    assert trt113.main(["--preflight-only", "--gpu", "6", "--batches", "1,4"]) == 0
+    assert json.loads(capsys.readouterr().out)["status"] == "supported_build_candidate"
+    assert trt113.main(["--preflight-only", "--gpu", "6", "--batches", "3"]) == 2
+    assert json.loads(capsys.readouterr().out)["status"] == "unsupported"
 
 
 def test_bundle_inventory_requires_all_components_and_exact_hashes(tmp_path):

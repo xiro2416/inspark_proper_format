@@ -4,7 +4,7 @@
 
 | 检查 | 结果 | 证据 / 限制 |
 | --- | --- | --- |
-| 根项目 CPU 回归 | 216 passed, 4 skipped | `CUDA_VISIBLE_DEVICES='' ACC_TRITON_TOOLCHAIN=default bash scripts/run.sh -m pytest -q tests` |
+| 根项目 CPU 回归 | 217 passed, 4 skipped | `CUDA_VISIBLE_DEVICES='' ACC_TRITON_TOOLCHAIN=default bash scripts/run.sh -m pytest -q tests` |
 | wheel | 构建成功 | `uv build --wheel --out-dir .work/wheels/trt_build`；包名 `inspark-infer`，含 `inspark` 入口 |
 | B3 预检 | `unsupported`，不下载权重 | 精确批次仅 B1/B4/B8，输出 Codex 交接 JSON |
 | B1 新 bundle 构建 | **未开始构图** | 唯一授权的物理 GPU6 在租约检查时已有 21854 MiB 占用，默认安全门禁拒绝；日志保存在本地 `.staging`，未产生完整 bundle |
