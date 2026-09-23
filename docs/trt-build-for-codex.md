@@ -14,7 +14,7 @@ bash scripts/build_trt.sh --gpu 6 --model indextts2 \
 
 入口在 `src/inspark_infer/build/trt113.py`，实际导出和构建由现有 `scripts/build_trt113_*.py`、`scripts/export_trt113_*.py` 执行。每个 batch 写入 `artifacts/trt113_bundles/sm89/first_chunk_p258_f52_k128/bN/<bundle-id>/`；失败停留在 `.staging/`，保留 `logs/` 和 `build_failure.json`，不替换完整 bundle。`manifest.json` 记录 GPU/SDK、源码、四组件 SHA256、文件清单和认证状态。`deployment.json` 只指向同 bundle 的相对 plan。构建门禁运行真实首 chunk 四组件路由检测，但**不证明完整 EOS、浮点一致、质量、32/64 并发或性能优势**。当前数值状态为 `experimental_existing_gates_failed`，生产认证为 `false`。
 
-本地直接使用包入口需先 `bash scripts/bootstrap.sh`，然后运行 `bash scripts/run.sh -m inspark_infer.command trt build ...`；通过 wheel 安装则用 `inspark trt build ...`，仍需单独准备权重和 TRT 环境。任何 shape/SM 扩展必须先给出目标 GPU 的构建和审计结果。
+本地直接使用包入口需先 `bash scripts/bootstrap.sh`，然后运行 `bash scripts/run.sh -m inspark_infer.command trt build ...`；通过 wheel 安装则在 checkout 根目录使用 `inspark trt build ...`，或设置 `INSPARK_REPO_ROOT=/workspace/<checkout>`，仍需单独准备权重和 TRT 环境。wheel 不内置构建脚本或模型。任何 shape/SM 扩展必须先给出目标 GPU 的构建和审计结果。
 
 ## 在新 SM 或 shape 上交给 Codex
 

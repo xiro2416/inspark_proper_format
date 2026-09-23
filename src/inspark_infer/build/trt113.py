@@ -20,7 +20,22 @@ import uuid
 PROFILE = "first_chunk_p258_f52_k128"
 BATCHES = (1, 4, 8)
 COMPONENTS = ("target", "draft", "cfm", "vocoder")
-ROOT = Path(__file__).resolve().parents[3]
+
+
+def _repository_root() -> Path:
+    """The wheel supplies the CLI, while checkout scripts/configs remain required."""
+    candidates = [os.getenv("INSPARK_REPO_ROOT"), Path.cwd(), Path(__file__).resolve().parents[3]]
+    for candidate in candidates:
+        if not candidate:
+            continue
+        root = Path(candidate).resolve()
+        if (root.is_relative_to(Path("/workspace")) and (root / "scripts/run.sh").is_file()
+                and (root / "configs/common/model_sources.json").is_file()):
+            return root
+    raise RuntimeError("Run in an inspark-infer checkout under /workspace or set INSPARK_REPO_ROOT")
+
+
+ROOT = _repository_root()
 
 
 def _write_json(path: Path, value: dict) -> None:
