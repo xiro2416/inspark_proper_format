@@ -12,7 +12,7 @@ IndexTTS2 推理加速仓库。源码统一位于 `src/inspark_infer`；模型�
 | SM120 | 历史 Triton/CUDA 配置与报告 | [历史证据](reports/sm120/README.md)，迁移后未重新认证 |
 | 其他 SM | 暂无经实测的一键 TRT 构建 | 不宣称支持 |
 
-B1/B4 的请求隔离 TRT 路径、B8 的历史和并发结果不是同一测量口径。SM89 的实际数值、质量、延迟与稳定性结论见 [审计报告](reports/sm89/stage2/README.md)；不存在 32/64 并发通过的历史结论。数值失败不会被质量分数或单算子加速覆盖。
+B1/B4 的请求隔离 TRT 路径、B8 的历史和并发结果不是同一测量口径。SM89 的实际数值、质量、延迟与稳定性结论见 [历史审计](reports/sm89/stage2/README.md)；新布局上的构建进度见 [本次状态](reports/sm89/build_bundle_status.md)。不存在 32/64 并发通过的历史结论。数值失败不会被质量分数或单算子加速覆盖。
 
 ## 安装与运行
 

@@ -146,7 +146,9 @@ def _engine_record(stage: Path, component: str, batch: int, gpu: dict) -> dict:
     if not engine.is_relative_to(stage.resolve()) or not engine.is_file():
         raise ValueError(f"{component} engine is absent or escapes its bundle")
     digest = _digest(engine)
-    if digest != expected or plan.get("sm") != gpu["sm"] or not str(plan.get("trt", "")).startswith("11.3."):
+    if (digest != expected or plan.get("sm") != gpu["sm"]
+            or plan.get("gpu_name") != gpu["name"]
+            or not str(plan.get("trt", "")).startswith("11.3.")):
         raise ValueError(f"{component} engine/hash/hardware/SDK mismatch")
     if not isinstance(provenance, dict) or provenance.get("status") != "recorded_not_audited":
         raise ValueError(f"{component} has no source-attested build provenance")

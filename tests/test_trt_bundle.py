@@ -91,12 +91,12 @@ def test_engine_record_enforces_shape_and_hardware(tmp_path):
             "provenance": {"status": "recorded_not_audited",
                            "source": {"source_sha256": "abc"}}}
     (child / "plan.json").write_text(json.dumps(plan))
-    assert _engine_record(tmp_path, "cfm", 1, {"sm": 89})["engine"] == "cfm/solver.engine"
+    assert _engine_record(tmp_path, "cfm", 1, {"sm": 89, "name": "GPU"})["engine"] == "cfm/solver.engine"
     for field, value in (("frames", 309), ("sm", 120), ("trt", "10.0")):
         bad = dict(plan, **{field: value})
         (child / "plan.json").write_text(json.dumps(bad))
         with pytest.raises(ValueError):
-            _engine_record(tmp_path, "cfm", 1, {"sm": 89})
+            _engine_record(tmp_path, "cfm", 1, {"sm": 89, "name": "GPU"})
 
 
 def test_private_cache_paths_and_attestation(tmp_path):
