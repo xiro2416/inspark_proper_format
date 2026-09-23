@@ -38,6 +38,15 @@ def _repository_root() -> Path:
 ROOT = _repository_root()
 
 
+def ensure_trt113_site() -> Path:
+    site = Path(os.getenv("ACC_TRT113_SITE", str(ROOT / ".venv-trt113/lib/python3.11/site-packages")))
+    if not site.is_dir():
+        raise ValueError("TensorRT 11.3 environment missing; run scripts/bootstrap_trt113.sh")
+    site = site.resolve()
+    os.environ["ACC_TRT113_SITE"] = str(site)
+    return site
+
+
 def _write_json(path: Path, value: dict) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     temp = path.with_name(path.name + ".tmp")
@@ -327,10 +336,7 @@ def main(argv: list[str] | None = None) -> int:
             raise ValueError("--ref-audio must be an existing WAV under /workspace")
         if not output_root.is_relative_to(Path("/workspace")):
             raise ValueError("Build artifacts must stay under /workspace")
-        site = Path(os.getenv("ACC_TRT113_SITE", str(ROOT / ".venv-trt113/lib/python3.11/site-packages")))
-        if not site.is_dir():
-            raise ValueError("TensorRT 11.3 environment missing; run scripts/bootstrap_trt113.sh")
-        os.environ["ACC_TRT113_SITE"] = str(site.resolve())
+        ensure_trt113_site()
         results = []
         for batch in batches:
             results.append({"batch": batch, "bundle": str(build_one(batch, gpu, ref, output_root))})

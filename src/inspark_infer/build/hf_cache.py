@@ -10,7 +10,9 @@ import shutil
 import sys
 import uuid
 
-from inspark_infer.build.trt113 import ROOT, PROFILE, _run, _write_json, gpu_info, validate_bundle
+from inspark_infer.build.trt113 import (
+    ROOT, PROFILE, _run, ensure_trt113_site, gpu_info, validate_bundle,
+)
 
 
 def _repo_id(value: str) -> str:
@@ -104,6 +106,7 @@ def fetch(repo_id: str, revision: str, bundle_path: str, gpu: int,
     if (not ref_audio.is_file() or not ref_audio.is_relative_to(Path("/workspace"))
             or not output_root.is_relative_to(Path("/workspace"))):
         raise ValueError("Reference audio and output root must be under /workspace")
+    ensure_trt113_site()
     api = HfApi(endpoint="https://huggingface.co", token=token)
     info = api.model_info(repo_id, revision=revision, token=token)
     if info.private is not True:

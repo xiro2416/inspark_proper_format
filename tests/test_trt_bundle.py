@@ -2,13 +2,16 @@
 import hashlib
 import json
 from pathlib import Path
+import tempfile
 
 import pytest
+import huggingface_hub
 
 from inspark_infer.build.trt113 import (
-    PROFILE, _engine_record, parse_batches, unsupported, validate_bundle,
+    PROFILE, ROOT, _engine_record, parse_batches, unsupported, validate_bundle,
 )
 from inspark_infer.build import trt113
+from inspark_infer.build import hf_cache
 from inspark_infer.build.hf_cache import _attestation, _remote_path, _repo_id
 
 
@@ -120,3 +123,83 @@ def test_private_cache_paths_and_attestation(tmp_path):
                                        "redistribution_permitted": True, "sources": {}}))
     with pytest.raises(ValueError, match="every pinned source"):
         _attestation(attestation)
+
+
+def test_private_cache_rejects_public_repository_before_upload_or_download(monkeypatch):
+    class PublicApi:
+        committed = False
+
+        def __init__(self, **kwargs):
+            pass
+
+        def model_info(self, *args, **kwargs):
+            return type("Info", (), {"private": False})()
+
+        def create_commit(self, **kwargs):
+            self.committed = True
+            raise AssertionError("public upload must never start")
+
+    monkeypatch.setattr(huggingface_hub, "HfApi", PublicApi)
+    monkeypatch.setattr(hf_cache, "_token", lambda: "dummy-local-test-token")
+    monkeypatch.setattr(hf_cache, "validate_bundle", lambda root: {"batch": 1, "bundle_id": "id"})
+    monkeypatch.setattr(hf_cache, "_attestation", lambda path: {})
+    monkeypatch.setattr(hf_cache, "gpu_info", lambda index: {
+        "physical_gpu": index, "sm": 89, "name": "GPU", "memory_total_mib": 49140})
+    work = ROOT / ".work"
+    work.mkdir(exist_ok=True)
+    with tempfile.TemporaryDirectory(dir=work) as directory:
+        root = Path(directory)
+        reference = root / "reference.wav"
+        reference.write_bytes(b"wav")
+        with pytest.raises(ValueError, match="public repository"):
+            hf_cache.publish(root, "user/public", reference)
+        with monkeypatch.context() as missing_site:
+            missing_site.setenv("ACC_TRT113_SITE", str(root / "missing-trt-site"))
+            with pytest.raises(ValueError, match="TensorRT 11.3 environment missing"):
+                hf_cache.fetch("user/public", "a" * 40,
+                               f"bundles/sm89/{PROFILE}/b1/id", 6, reference,
+                               root / "bundles", "https://hf-mirror.com")
+        with pytest.raises(ValueError, match="public repository"):
+            hf_cache.fetch("user/public", "a" * 40,
+                           f"bundles/sm89/{PROFILE}/b1/id", 6, reference,
+                           root / "bundles", "https://hf-mirror.com")
+
+
+def test_private_cache_publish_is_explicit_and_revision_pinned(monkeypatch):
+    class Operation:
+        def __init__(self, *, path_in_repo, path_or_fileobj):
+            self.path_in_repo = path_in_repo
+            self.path_or_fileobj = path_or_fileobj
+
+    class PrivateApi:
+        def __init__(self, **kwargs):
+            self.uploaded = None
+
+        def model_info(self, *args, **kwargs):
+            return type("Info", (), {"private": True})()
+
+        def create_commit(self, *, operations, **kwargs):
+            self.uploaded = operations
+            assert len(operations) == 3
+            assert all(operation.path_or_fileobj.is_file() for operation in operations)
+            return type("Commit", (), {"oid": "b" * 40})()
+
+    monkeypatch.setattr(huggingface_hub, "HfApi", PrivateApi)
+    monkeypatch.setattr(huggingface_hub, "CommitOperationAdd", Operation)
+    monkeypatch.setattr(hf_cache, "_token", lambda: "dummy-local-test-token")
+    monkeypatch.setattr(hf_cache, "validate_bundle", lambda root: {
+        "batch": 4, "bundle_id": "example-id", "files": {"target/engine": "digest"}})
+    monkeypatch.setattr(hf_cache, "_attestation", lambda path: {})
+    work = ROOT / ".work"
+    work.mkdir(exist_ok=True)
+    with tempfile.TemporaryDirectory(dir=work) as directory:
+        root = Path(directory)
+        (root / "target").mkdir()
+        (root / "target/engine").write_bytes(b"engine")
+        (root / "manifest.json").write_text("{}")
+        attestation = root / "attestation.json"
+        attestation.write_text("{}")
+        result = hf_cache.publish(root, "user/private", attestation)
+    assert result["status"] == "published_private"
+    assert result["revision"] == "b" * 40
+    assert result["bundle_path"] == f"bundles/sm89/{PROFILE}/b4/example-id"
