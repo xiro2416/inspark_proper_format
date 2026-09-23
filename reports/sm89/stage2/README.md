@@ -66,7 +66,7 @@ Only one signature per component was warmed in these trials. In the no-rewrite
 run, Target/Draft each record 4 compiled calls and 120 eager calls; CFM records
 8/8, Vocoder 4/4. These are mixed compiled/eager end-to-end routes, not wholly
 compiled inference. Compilation/audit overhead is reported separately. The
-[compiler investigation](../../../inference/docs/compile_numerics.md) documents
+[compiler investigation](../../../docs/compile_numerics.md) documents
 the BF16 bias-rounding counterexample and why successful compilation alone does
 not establish parity.
 
@@ -383,7 +383,7 @@ The old FP32 generation JSONL has no per-row emotion field: its emotion is bound
 by the corpus hash only, not retroactively marked as observed. The corpus's
 embedded original-text-source hash is a declaration, not an independent source
 dataset verification. External reference audio/evaluator prerequisites and
-reproduction commands are in [SM89_AUDIT.md](../../../inference/docs/SM89_AUDIT.md).
+reproduction commands are in [SM89_AUDIT.md](../history/SM89_AUDIT_pre_migration.md).
 
 ## Packaging and dependency checks
 
@@ -410,8 +410,8 @@ unused historical installed packages were not silently removed.
 
 The two-stage implementation and the listed audits are complete; their gates
 are not all passed. Reproduction commands and external asset requirements are
-in [SM89_AUDIT.md](../../../inference/docs/SM89_AUDIT.md), with stability policy and
-the warmed-control command in [SOAK.md](../../../inference/benchmarks/SOAK.md).
+in [SM89_AUDIT.md](../history/SM89_AUDIT_pre_migration.md), with stability policy and
+the warmed-control command in [SOAK.md](../../../benchmarks/SOAK.md).
 Preserve original reports, including failures. New hardware, engines, weights,
 shapes, corpus, precision or backend settings require new validation; these
 SM89 observations do not recertify historical SM120 results.
