@@ -60,6 +60,7 @@ def test_bundle_inventory_requires_all_components_and_exact_hashes(tmp_path):
     route.write_text("{}")
     files["route_report.json"] = digest(route)
     identity = {"schema": 1, "model": "indextts2", "profile": PROFILE, "batch": 4,
+                "precision_policy": "mixed_bf16_fp32", "quantization": "none",
                 "hardware": {"name": "GPU", "sm": 89, "memory_total_mib": 49140},
                 "trt": "11.3.0", "source_sha256": "source",
                 "engines": {name: row["engine_sha256"] for name, row in components.items()}}
@@ -70,6 +71,12 @@ def test_bundle_inventory_requires_all_components_and_exact_hashes(tmp_path):
                 "files": files}
     (root / "manifest.json").write_text(json.dumps(manifest))
     assert validate_bundle(root)["batch"] == 4
+    manifest["certified_for_production"] = True
+    (root / "manifest.json").write_text(json.dumps(manifest))
+    with pytest.raises(ValueError, match="Production certification"):
+        validate_bundle(root)
+    manifest["certified_for_production"] = False
+    (root / "manifest.json").write_text(json.dumps(manifest))
     (root / "vocoder/engine").write_bytes(b"tampered")
     with pytest.raises(ValueError, match="hash"):
         validate_bundle(root)
@@ -89,7 +96,8 @@ def test_engine_record_enforces_shape_and_hardware(tmp_path):
             "frames": 310, "sm": 89, "trt": "11.3.0", "gpu_name": "GPU",
             "tensors": [{"name": "x", "shape": [1, 80, 310]}],
             "provenance": {"status": "recorded_not_audited",
-                           "source": {"source_sha256": "abc"}}}
+                           "source": {"source_sha256": "abc"},
+                           "model_sources": [{"role": "checkpoint", "sha256": "weight"}]}}
     (child / "plan.json").write_text(json.dumps(plan))
     assert _engine_record(tmp_path, "cfm", 1, {"sm": 89, "name": "GPU"})["engine"] == "cfm/solver.engine"
     for field, value in (("frames", 309), ("sm", 120), ("trt", "10.0")):

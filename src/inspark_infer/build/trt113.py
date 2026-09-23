@@ -170,11 +170,20 @@ def _engine_record(stage: Path, component: str, batch: int, gpu: dict) -> dict:
     source = provenance.get("source", {}).get("source_sha256")
     if not source:
         raise ValueError(f"{component} has no source fingerprint")
+    model_sources = provenance.get("model_sources")
+    if not isinstance(model_sources, list) or not model_sources:
+        raise ValueError(f"{component} has no pinned model-source record")
     return {"engine": str(engine.relative_to(stage)), "engine_sha256": digest,
             "plan": str(plan_path.relative_to(stage)), "plan_sha256": _digest(plan_path),
             "trt": plan["trt"], "sm": plan["sm"], "gpu_name": plan.get("gpu_name"),
             "source_sha256": source, "provenance_status": provenance["status"],
-            "io": tensors, "precision": plan.get("precision")}
+            "model_sources": [{"role": item["role"], "sha256": item["sha256"]}
+                              for item in model_sources],
+            "io": tensors, "precision": plan.get("precision"),
+            "tf32": plan.get("tf32"), "strongly_typed": plan.get("strongly_typed"),
+            "optimization_level": plan.get("optimization_level"),
+            "workspace_bytes": plan.get("workspace_bytes"),
+            "plugins": plan.get("plugins", [])}
 
 
 def _deployment(stage: Path, batch: int) -> Path:
@@ -211,6 +220,7 @@ def build_one(batch: int, gpu: dict, ref_audio: Path, output_root: Path) -> Path
             raise ValueError(f"B{batch} route validation did not pass")
         compatible_hardware = {key: gpu[key] for key in ("name", "sm", "memory_total_mib")}
         identity = {"schema": 1, "model": "indextts2", "profile": PROFILE, "batch": batch,
+                    "precision_policy": "mixed_bf16_fp32", "quantization": "none",
                     "hardware": compatible_hardware, "trt": records["target"]["trt"],
                     "source_sha256": records["target"]["source_sha256"],
                     "engines": {name: record["engine_sha256"] for name, record in records.items()}}
@@ -247,7 +257,8 @@ def validate_bundle(root: Path) -> dict:
     manifest = json.loads((root / "manifest.json").read_text())
     if manifest.get("schema") != 1 or manifest.get("profile") != PROFILE or manifest.get("batch") not in BATCHES:
         raise ValueError("Unsupported bundle manifest")
-    identity_keys = ("schema", "model", "profile", "batch", "hardware", "trt",
+    identity_keys = ("schema", "model", "profile", "batch", "precision_policy",
+                     "quantization", "hardware", "trt",
                      "source_sha256", "engines")
     if any(key not in manifest for key in identity_keys):
         raise ValueError("Bundle identity is incomplete")
@@ -255,6 +266,10 @@ def validate_bundle(root: Path) -> dict:
     expected_id = hashlib.sha256(json.dumps(identity, sort_keys=True).encode()).hexdigest()[:20]
     if manifest.get("bundle_id") != expected_id:
         raise ValueError("Bundle ID does not match its content identity")
+    if (manifest.get("certified_for_production") is True
+            and not all(manifest.get(key) is True for key in
+                        ("route_pass", "numerical_pass", "quality_pass"))):
+        raise ValueError("Production certification requires route, numerical and quality passes")
     if set(manifest.get("components", {})) != set(COMPONENTS):
         raise ValueError("Bundle must contain all four components")
     files = manifest.get("files")
