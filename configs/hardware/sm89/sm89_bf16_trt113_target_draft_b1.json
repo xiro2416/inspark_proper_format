@@ -1,0 +1,36 @@
+{
+  "schema": 1,
+  "status": "sm89_bf16_trt113_target_draft_b1",
+  "precision": "bf16",
+  "components": [
+    "target",
+    "draft",
+    "cfm",
+    "vocoder"
+  ],
+  "convolutions": true,
+  "rnn_precision": "bf16",
+  "target_graphs": true,
+  "draft_graphs": true,
+  "proposal_graphs": true,
+  "prefix_graphs": true,
+  "head_graphs": true,
+  "slot_draft": true,
+  "context_graphs": true,
+  "context_scatter": true,
+  "device_accept_plan": true,
+  "device_residual": true,
+  "device_round_b8": true,
+  "overlap_acoustics": false,
+  "fused_acceptance": true,
+  "tail_graphs": false,
+  "head_batch_barrier": true,
+  "cfm_triton_fusions": [
+    "norm",
+    "rope"
+  ],
+  "acoustic_kernels": "alias",
+  "acoustic_plan": null,
+  "tensorrt113_target_full_plan": "../../../artifacts/trt113_target_full/plan_b1.json",
+  "tensorrt113_draft_full_plan": "../../../artifacts/trt113_draft_full/plan_b1.json"
+}

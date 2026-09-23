@@ -1,0 +1,31 @@
+{
+  "schema": 1,
+  "status": "sm89_bf16_tensorrt_v3_full_cfm_current_vocoder",
+  "precision": "bf16",
+  "components": [
+    "target",
+    "draft",
+    "cfm",
+    "vocoder"
+  ],
+  "convolutions": true,
+  "rnn_precision": "bf16",
+  "target_graphs": true,
+  "draft_graphs": true,
+  "proposal_graphs": true,
+  "prefix_graphs": true,
+  "head_graphs": true,
+  "slot_draft": true,
+  "context_graphs": true,
+  "context_scatter": true,
+  "device_accept_plan": true,
+  "device_residual": true,
+  "device_round_b8": true,
+  "overlap_acoustics": false,
+  "fused_acceptance": true,
+  "tail_graphs": false,
+  "head_batch_barrier": true,
+  "acoustic_kernels": "alias",
+  "acoustic_plan": null,
+  "tensorrt_plan": "../../../artifacts/tensorrt_sm89_bf16_v3/plan.json"
+}

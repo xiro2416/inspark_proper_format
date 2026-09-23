@@ -4,16 +4,20 @@ This is an inference-only repository. SM89 TensorRT implementation, reports and
 audits are in scope; preserve historical SM120 evidence separately. Do not add
 training code or official model weights.
 
+For the SM89 selected-shape TensorRT builder and future multi-SM extension,
+follow `docs/trt-build-for-codex.md`. The CLI exists, but successful build,
+numeric certification and performance remain separate evidence requirements.
+
 ## Current entry points and reference path
 
-- Entry point: `python -m acc_infer_clear.cli` through `scripts/run.sh`.
-- Installable source: `inference/src/acc_infer_clear`; the runner changes cwd to `inference`.
-- Reference runtime config: `inference/configs/runtime_reference.yaml` (TF32 disabled).
-- CLI default deployment: `inference/configs/sm89_eager_fp32.json`.
-- Experimental request-isolated TRT profiles: `inference/configs/sm89_trt113_safe_b{1,4,8}.json`.
+- Entry point: `python -m inspark_infer.cli` through `scripts/run.sh`; `acc-clear` remains a CLI alias.
+- Installable source: `src/inspark_infer`; the runner works from the repository root.
+- Reference runtime config: `configs/common/runtime_reference.yaml` (TF32 disabled).
+- CLI default deployment: `configs/hardware/sm89/sm89_eager_fp32.json`.
+- Experimental request-isolated TRT profiles: `configs/hardware/sm89/sm89_trt113_safe_b{1,4,8}.json`.
 - Original fast TRT profiles retain legacy shared device RNG and are not isolation-certified.
-- Historical SM120 deployment: `inference/configs/sm120.json`; not recertified by migration.
-- Model manifest: `inference/configs/model_sources.json`.
+- Historical SM120 deployment: `configs/hardware/sm120/sm120.json`; not recertified by migration.
+- Model manifest: `configs/common/model_sources.json`.
 - Universal Draft proposes seven codec tokens; Target verifies eight positions
   including the anchor and accepts a prefix.
 - Fixed first-head graph batches use device-resident acceptance-prefix,
@@ -28,10 +32,12 @@ training code or official model weights.
 
 ## Current implementation goal
 
-See `IMPLEMENTATION_PROGRESS.md`. First finish independent SM89 B1/B4
-Target/Draft/CFM/Vocoder TensorRT 11.3 first-head profiles, then publish to
-`xiro2416/inspark_proper_format`, reorganize and perform the full audit.
-Do not stop after the first stage. Six hours is a target, not a hard stop.
+The previous B1/B4 milestone and SM89 audit are preserved under `reports/sm89/`.
+The active two-stage goal is: finish the root-package migration, then deliver a
+single-GPU SM89 B1/B4/B8 fixed-first-chunk TensorRT 11.3 bundle builder with
+audits and an explicit private Hugging Face artifact cache. Publish only to
+`xiro2416/inspark_proper_format` after verification. Do not stop after the
+first stage. Six hours is a target, not a hard stop.
 Only physical GPU 6 is authorized for this task; run GPU work sequentially.
 Existing external GPU processes must remain untouched. Explicit shared-GPU
 runs must record pre-existing memory and workload interference.
@@ -50,14 +56,14 @@ All task files, caches and locks belong under `/workspace`.
    prepared and validated offline, then versioned explicitly.
 6. Preserve request-owned KV, accepted-prefix/EOS behavior, stream ordering,
    reference VAD policy and the 44-frame first PCM contract.
-7. `configs/sm120_pre_device_commit.json` is the rollback for the device-control
+7. `configs/hardware/sm120/sm120_pre_device_commit.json` is the rollback for the device-control
    chain. The graph policy supports B1..B8/B16/B32; only sizes no larger than
    configured `max_batch` are prepared. Unsupported intermediate batches and
    longer KV must fall back rather than capture online.
 
 ## Porting to SM80/86
 
-Use `PORTING.md`. Keep the pipeline and numerical contracts, but rebuild the
+Use `docs/porting.md`. Keep the pipeline and numerical contracts, but rebuild the
 precision policy, tile plans and graphs. SM80/86 have no native FP8 Tensor Core
 path compatible with this release, so begin with BF16/cuBLAS/cuDNN and measure
 before introducing custom kernels. Never weaken checks merely to make the
