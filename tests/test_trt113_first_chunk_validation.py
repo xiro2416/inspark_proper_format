@@ -13,7 +13,8 @@ spec.loader.exec_module(audit)
 def snapshot(steps=0,replays=0):
     result={name:0 for name in audit.COUNTERS}
     result.update(device_target_steps=steps,device_draft_steps=steps,
-                  native_target_steps=steps,native_draft_steps=steps,acoustic_routes={})
+                  native_target_steps=steps,native_draft_steps=steps,
+                  draft_execution_buckets={},acoustic_routes={})
     for component in ('cfm','vocoder'):
         route=dict(component=component,kind='tensorrt',backend='tensorrt113',batch=4,
                    frames=310 if component=='cfm' else 52,plan=f'{component}.json',sha256='abc')
@@ -67,11 +68,13 @@ class FirstChunkValidationTest(unittest.TestCase):
         self.assertFalse(result['passed'])
         self.assertEqual(len(result['errors']),4)
         after=snapshot(5,1);after['target_calls']=1;after['draft_backbone_calls']=1
+        after['draft_execution_buckets']={'b1_k64_eager':1}
         after['device_round_fallbacks']=1
         result=audit.validate_window(snapshot(),after)
         self.assertFalse(result['passed'])
         self.assertEqual(result['components']['target']['non_trt'],1)
         self.assertEqual(result['components']['draft']['non_trt'],1)
+        self.assertEqual(result['draft_execution_buckets'],{'b1_k64_eager':1})
 
     def test_prepare_events_and_counter_reset_cannot_be_runtime_success(self):
         after=snapshot(5,1);after['acoustic_routes']['vocoder']['graph_routes'][0]['prepare']=2

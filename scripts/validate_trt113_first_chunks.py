@@ -97,6 +97,15 @@ def acoustic_window(before,after,component):
 
 def validate_window(before,after):
     delta={name:difference(before,after,name,'runtime') for name in COUNTERS}
+    old_buckets=before.get('draft_execution_buckets',{})
+    new_buckets=after.get('draft_execution_buckets',{})
+    if not isinstance(old_buckets,dict) or not isinstance(new_buckets,dict):
+        raise AuditError('Draft execution bucket metrics are missing')
+    draft_buckets={name:difference({name:old_buckets.get(name,0)},
+                                   {name:new_buckets.get(name,0)},name,'draft_execution_buckets')
+                   for name in sorted(set(old_buckets)|set(new_buckets))}
+    if sum(draft_buckets.values())!=delta['draft_backbone_calls']:
+        raise AuditError('Draft execution buckets do not account for every backbone call')
     target_total=delta['device_target_steps']+delta['target_calls']
     draft_total=delta['device_draft_steps']+delta['draft_backbone_calls']
     components={
@@ -113,7 +122,8 @@ def validate_window(before,after):
         if counts['native']<=0:errors.append(f'{name}: no native execution observed')
         if counts['total']!=counts['native']:errors.append(f'{name}: native/total execution counts differ')
         if counts.get('fallback',0):errors.append(f'{name}: runtime fallback occurred')
-    return dict(passed=not errors,errors=errors,counter_delta=delta,components=components)
+    return dict(passed=not errors,errors=errors,counter_delta=delta,
+                draft_execution_buckets=draft_buckets,components=components)
 
 
 def request_record(ident,event,state,arrival):

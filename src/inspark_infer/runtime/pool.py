@@ -41,6 +41,7 @@ def _engine_stats(engine):
         native_target_steps=(getattr(engine.rt,'native_target_steps',0)+
                              getattr(engine.rt.target,'native_full_steps',0)),
         native_draft_steps=getattr(engine.rt.backbone,'native_full_steps',0),
+        draft_execution_buckets=dict(getattr(engine.rt.backbone,'execution_buckets',{})),
         native_draft_compare=list(getattr(engine.rt.backbone,'native_compare',())),
         native_cfm_backend=getattr(getattr(engine,'student',None),'identity',{}).get('backend'),
         native_cfm_calls=acoustic['cfm']['wrapper_total']['calls'],

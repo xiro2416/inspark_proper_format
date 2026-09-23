@@ -55,6 +55,7 @@ class SlotDraft(BatchedDraftBackbone):
         self.native_full_bank=None
         self.native_full_steps=0
         self.native_compare=[]
+        self.execution_buckets={}
     def native_eligible(self,batch,slot_values,max_length):
         bank=self.native_full_bank
         return (bank is not None and (batch,128) in bank.graphs and
@@ -103,11 +104,17 @@ class SlotDraft(BatchedDraftBackbone):
         positions=torch.tensor([j['first_position'] for j in jobs],device=device)[:,None]+self.step
         anchors=torch.cat([j['anchor_token'].reshape(1) for j in jobs]);b=len(jobs)
         native_graph=(self.native_full_bank is not None and (b,limit) in self.native_full_bank.graphs)
-        native=native_graph and self.native_eligible(b,slot_values,max(lengths))
-        if (b,limit) in self.graphs and (not native_graph or native):
+        # K64's shorter context occupies the same valid positions in the K128
+        # engine; the mask excludes its unused context positions.  This does
+        # not truncate or reorder any request-owned KV state.
+        native=self.native_eligible(b,slot_values,max(lengths))
+        bucket=f"b{b}_kv{limit}_{'native_engine128' if native else 'eager'}"
+        self.execution_buckets[bucket]=self.execution_buckets.get(bucket,0)+1
+        if native:
+            hidden,base=self.native_full_bank.graphs[b,128](anchors,positions,slots,lens)
+            self.graph_hits+=1;self.native_full_steps+=1
+        elif (b,limit) in self.graphs and not native_graph:
             hidden,base=self.graphs[b,limit](anchors,positions,slots,lens);self.graph_hits+=1
-            if native:
-                self.native_full_steps+=1
         else:hidden,base=self.math(anchors,positions,slots,lens,limit)
         if native and os.environ.get('ACC_COMPARE_NATIVE_DRAFT')=='1':
             self.compare_native_result(anchors,positions,slots,lens,limit,hidden,base)
@@ -140,4 +147,5 @@ class SlotDraft(BatchedDraftBackbone):
                                             hidden=compare(rh,nh),base=compare(rb,nb)))
     def stats(self):return dict(calls=self.calls,rows=self.rows,graph_hits=self.graph_hits,
                                 native_full_steps=self.native_full_steps,native_compare=list(self.native_compare),
+                                execution_buckets=dict(self.execution_buckets),
                                 history_packing=False)

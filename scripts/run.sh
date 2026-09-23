@@ -25,7 +25,7 @@ case "${ACC_TRITON_TOOLCHAIN:-custom}" in
     export ACC_CLEAR_TRITON=default ;;
   *) echo "ACC_TRITON_TOOLCHAIN must be custom or default" >&2; exit 2 ;;
 esac
-export HF_HUB_OFFLINE=1
+export HF_HUB_OFFLINE="${HF_HUB_OFFLINE:-1}"
 export TOKENIZERS_PARALLELISM=false
 export PYTHONUNBUFFERED=1
 export PYTHONDONTWRITEBYTECODE=1

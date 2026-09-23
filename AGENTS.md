@@ -38,7 +38,7 @@ single-GPU SM89 B1/B4/B8 fixed-first-chunk TensorRT 11.3 bundle builder with
 audits and an explicit private Hugging Face artifact cache. Publish only to
 `xiro2416/inspark_proper_format` after verification. Do not stop after the
 first stage. Six hours is a target, not a hard stop.
-Only physical GPU 6 is authorized for this task; run GPU work sequentially.
+Only physical GPU 4 is authorized for this task by the latest user direction; run GPU work sequentially.
 Existing external GPU processes must remain untouched. Explicit shared-GPU
 runs must record pre-existing memory and workload interference.
 All task files, caches and locks belong under `/workspace`.
