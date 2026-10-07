@@ -108,12 +108,17 @@ class BatchedTarget:
             x[row, :length].copy_(src[0])
             mask[row, :length].copy_(keep[0])
         prefill_body = getattr(self, 'prefill_body', self.target._block_forward_with_hidden_states)
+        owner=getattr(prefill_body,'__self__',None)
+        remember=getattr(owner,'remember_prefix_rows',None)
+        if callable(remember):remember(jobs)
         logits, kv, selected, final = prefill_body(x, None, mask, None)
         packed = getattr(kv, 'packed', None)
         if packed is None:
             packed = torch.stack([torch.stack((k, v)) for k, v in kv])
         outputs = []
         imported = []
+        epoch=getattr(self,'prefill_import_epoch',0)+1
+        self.prefill_import_epoch=epoch
         try:
             for row, length in enumerate(lengths):
                 importer = getattr(self, 'pool_import', None)
@@ -125,7 +130,14 @@ class BatchedTarget:
                     own = first.new_empty(len(kv), 2, 1, kv[0][0].shape[1], capacity, kv[0][0].shape[-1])
                     own[:, :, 0, :, :length].copy_(packed[:, :, row, :, :length])
                     owned = RequestKV(own, length)
-                outputs.append((logits[row:row + 1, :length].clone(), owned, selected[row:row + 1, :length].clone(), final[row:row + 1, :length].clone()))
+                if getattr(self,'prefill_import_sources',False):
+                    # A one-admission view of the original batch slab. Epoch
+                    # validation prevents reuse after a subsequent prefill.
+                    owned.prefill_source=(self,epoch,packed,row,length)
+                borrowed=(getattr(self,'prefill_readonly_views',False) and callable(remember))
+                slices=(logits[row:row+1,:length],selected[row:row+1,:length],final[row:row+1,:length])
+                if not borrowed:slices=tuple(value.clone() for value in slices)
+                outputs.append((slices[0],owned,slices[1],slices[2]))
         except Exception as error:
             from inspark_infer.runtime.cleanup import cleanup_all
             release = getattr(self, 'release', None)

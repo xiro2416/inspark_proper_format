@@ -71,11 +71,19 @@ class Proposal:
             noise=torch.stack(noises)
         prior=torch.backends.cuda.matmul.allow_tf32;torch.backends.cuda.matmul.allow_tf32=False
         try:
-            if len(jobs) in self.graphs:
-                graph=self.graphs[len(jobs)]
+            bucket=4 if len(jobs) in (2,3) else 8 if 5<=len(jobs)<=7 else len(jobs)
+            if bucket in self.graphs:
+                graph=self.graphs[bucket]
+                if bucket!=len(jobs):
+                    pad=bucket-len(jobs)
+                    hidden=torch.nn.functional.pad(hidden,(0,0,0,0,0,pad))
+                    base=torch.nn.functional.pad(base,(0,0,0,0,0,pad))
+                    previous=torch.nn.functional.pad(previous,(0,pad))
+                    if noise is not None:noise=torch.nn.functional.pad(noise,(0,0,0,0,0,pad),value=1.)
                 if use_batched_rng:
                     gh,gb,gn,gp=graph.inputs;gh.copy_(hidden);gb.copy_(base);gp.copy_(previous);gn.exponential_(generator=self.batch_generator);graph.graph.replay();tt,pp,ll=graph.outputs
                 else:tt,pp,ll=graph(hidden,base,noise,previous)
+                tt,pp,ll=tt[:len(jobs)],pp[:len(jobs)],ll[:len(jobs)]
                 self.graph_hits+=1
             else:
                 if self.hidden_linear is not None:terms=self.hidden_linear(hidden)

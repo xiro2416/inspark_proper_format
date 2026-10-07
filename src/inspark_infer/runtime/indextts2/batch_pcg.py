@@ -4,6 +4,27 @@ Sampling order per request is unchanged. Dense group-mass work and host decision
 copies are batched. Rare enumeration fallback retains the original algorithm.
 """
 import torch
+import triton
+import triton.language as tl
+
+
+@triton.jit
+def _coarse_residual(Q, P, MEMBERS, WEIGHTS, NEED, OUT,
+                     V: tl.constexpr, G: tl.constexpr, W: tl.constexpr,
+                     GROUP_BLOCK: tl.constexpr, WIDTH_BLOCK: tl.constexpr):
+    row = tl.program_id(0)
+    group = tl.program_id(1) * GROUP_BLOCK + tl.arange(0, GROUP_BLOCK)
+    offsets = tl.arange(0, WIDTH_BLOCK)
+    valid = (group[:, None] < G) & (offsets[None, :] < W)
+    if tl.load(NEED + row):
+        member = tl.load(MEMBERS + group[:, None] * W + offsets[None, :], valid, 0)
+        weight = tl.load(WEIGHTS + group[:, None] * W + offsets[None, :], valid, 0).to(tl.float32)
+        q = tl.load(Q + row * V + member, valid, 0)
+        p = tl.load(P + row * V + member, valid, 0)
+        mass = tl.maximum(tl.sum((q - p) * weight, 1), 0.)
+        tl.store(OUT + row * G + group, mass, group < G)
+    else:
+        tl.store(OUT + row * G + group, 0., group < G)
 
 def generator_for(task, device):
     gen = torch.Generator(device=device)
@@ -109,27 +130,91 @@ class BatchedResidual:
         self.device_failures=None
 
     def prepare_device_normal(self):
-        """Experimental common-path device selection; any fallback rejects run."""
+        """Prepare request-owned GPU thinning with exact coarse fallback."""
         device=self.groups.group_members.device
         self.device_failures=torch.zeros((),device=device,dtype=torch.int32)
+        self.device_enumerations=torch.zeros((),device=device,dtype=torch.int32)
         self.device_normal=True
-        self.batch_generator=torch.Generator(device=device).manual_seed(0x7E517E51)
+        vocab=self.groups.sparse.vocab_size
+        q=torch.full((1,7,vocab),1./vocab,device=device)
+        gen=torch.Generator(device=device).manual_seed(0x7E517E51)
+        self.device_batch(q,q,torch.zeros(1,device=device,dtype=torch.int32),
+                          torch.zeros(1,device=device,dtype=torch.bool),[gen])
+        torch.cuda.current_stream().synchronize()
         return dict(max_thinning_attempts=64,decision_d2h=False,
-                    fallback_policy='device counter; candidate invalid if nonzero',
+                    fallback_policy='exact coarse-residual enumeration on GPU',
                     final_group_sampling='explicit request-owned uniform',online_compile=False)
 
-    def device_batch(self,q_block,p_block,indices,mask):
-        """Fixed-B common path used by the device-round experiment."""
+    def device_batch(self,q_block,p_block,indices,mask,generators):
+        """Fixed-B request-owned PCG residual with no host decision copy."""
         b,k,v=q_block.shape;row=torch.arange(b,device=q_block.device)
         at=indices.long().clamp(0,k-1);q=q_block[row,at].float();p=p_block[row,at].float()
         q=q/q.sum(-1,keepdim=True).clamp_min(1e-12);p=p/p.sum(-1,keepdim=True).clamp_min(1e-12)
-        n=64;ids=self.groups.sample_groups(torch.multinomial(q,n,replacement=True,generator=self.batch_generator),generator=self.batch_generator)
-        uniform=torch.rand((b,n),device=q.device,generator=self.batch_generator)
+        n=64
+        ids=torch.stack([self.groups.sample_groups(
+            torch.multinomial(q[i],n,replacement=True,generator=gen),generator=gen)
+            for i,gen in enumerate(generators)])
+        uniform=torch.stack([torch.rand(n,device=q.device,generator=gen) for gen in generators])
         conditional,members,decisions=self.tensor_body(q,p,ids,uniform)
-        ok=decisions[:,0].bool()|(~mask);self.device_failures.add_((~ok).sum())
-        draw=torch.rand((b,),device=q.device,generator=self.batch_generator)
+        need_exact=mask&(~decisions[:,0].bool())
+        self.device_enumerations.add_(need_exact.sum())
+        draw=torch.stack([torch.rand((),device=q.device,generator=gen) for gen in generators])
         mass=conditional.sum(-1).clamp_min(1e-12);chosen=(conditional.cumsum(-1)<(draw*mass)[:,None]).sum(-1).clamp_max(conditional.shape[1]-1)
-        return members.gather(1,chosen[:,None]).squeeze(1),decisions
+        fast_token=members.gather(1,chosen[:,None]).squeeze(1)
+        g=self.groups;group_count=g.group_members.shape[0];width=g.group_members.shape[1]
+        residual=torch.empty((b,group_count),device=q.device,dtype=torch.float32)
+        _coarse_residual[(b,triton.cdiv(group_count,16))](q,p,g.group_members,g.group_weights,
+            need_exact,residual,v,group_count,width,16,triton.next_power_of_2(width),num_warps=4)
+        group_mass=residual.sum(-1)
+        group_draw=torch.stack([torch.rand((),device=q.device,generator=gen) for gen in generators])
+        selected=(residual.cumsum(-1)<(group_draw*group_mass)[:,None]).sum(-1).clamp_max(group_count-1)
+        exact_members=g.group_members[selected]
+        exact_weights=g.group_weights[selected]
+        exact_conditional=q.gather(1,exact_members)*exact_weights
+        exact_mass=exact_conditional.sum(-1)
+        member_draw=torch.stack([torch.rand((),device=q.device,generator=gen) for gen in generators])
+        member_index=(exact_conditional.cumsum(-1)<(member_draw*exact_mass)[:,None]).sum(-1).clamp_max(width-1)
+        exact_token=exact_members.gather(1,member_index[:,None]).squeeze(1)
+        q_index=(q.cumsum(-1)<member_draw[:,None]).sum(-1).clamp_max(v-1)
+        exact_token=torch.where(group_mass>1e-12,exact_token,q_index)
+        invalid=need_exact&(~torch.isfinite(exact_mass))
+        self.device_failures.add_(invalid.sum())
+        return torch.where(need_exact,exact_token,fast_token),decisions
+
+    def device_batch_draws(self,q_block,p_block,indices,mask,draws):
+        """Request-local GPU residual sampling without per-row host generators."""
+        from inspark_infer.ops.triton.request_rng import categorical
+        b,k,v=q_block.shape;row=torch.arange(b,device=q_block.device)
+        at=indices.long().clamp(0,k-1)
+        q=q_block[row,at].float();p=p_block[row,at].float()
+        q=q/q.sum(-1,keepdim=True).clamp_min(1e-12)
+        p=p/p.sum(-1,keepdim=True).clamp_min(1e-12)
+        candidates=categorical(q,draws['candidates'])
+        counts=self.groups.token_group_counts[candidates]
+        choices=(draws['groups']*counts.float()).long().clamp_min(0)
+        ids=self.groups.token_groups[candidates,choices]
+        conditional,members,decisions=self.tensor_body(q,p,ids,draws['thin'])
+        need_exact=mask&(~decisions[:,0].bool())
+        self.device_enumerations.add_(need_exact.sum())
+        mass=conditional.sum(-1).clamp_min(1e-12)
+        chosen=(conditional.cumsum(-1)<(draws['fast']*mass)[:,None]).sum(-1).clamp_max(conditional.shape[1]-1)
+        fast_token=members.gather(1,chosen[:,None]).squeeze(1)
+        g=self.groups;group_count=g.group_members.shape[0];width=g.group_members.shape[1]
+        residual=torch.empty((b,group_count),device=q.device,dtype=torch.float32)
+        _coarse_residual[(b,triton.cdiv(group_count,16))](q,p,g.group_members,g.group_weights,
+            need_exact,residual,v,group_count,width,16,triton.next_power_of_2(width),num_warps=4)
+        group_mass=residual.sum(-1)
+        selected=(residual.cumsum(-1)<(draws['coarse']*group_mass)[:,None]).sum(-1).clamp_max(group_count-1)
+        exact_members=g.group_members[selected];exact_weights=g.group_weights[selected]
+        exact_conditional=q.gather(1,exact_members)*exact_weights
+        exact_mass=exact_conditional.sum(-1)
+        member_index=(exact_conditional.cumsum(-1)<(draws['member']*exact_mass)[:,None]).sum(-1).clamp_max(width-1)
+        exact_token=exact_members.gather(1,member_index[:,None]).squeeze(1)
+        q_index=categorical(q,draws['member'])
+        exact_token=torch.where(group_mass>1e-12,exact_token,q_index)
+        invalid=need_exact&(~torch.isfinite(exact_mass))
+        self.device_failures.add_(invalid.sum())
+        return torch.where(need_exact,exact_token,fast_token),decisions
 
     def tensor_body(self, q, p, ids, uniform):
         g = self.groups

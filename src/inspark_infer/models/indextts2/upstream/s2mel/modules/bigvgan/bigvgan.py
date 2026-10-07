@@ -195,7 +195,7 @@ class BigVGAN(torch.nn.Module, PyTorchModelHubMixin, library_name='bigvgan', rep
             json.dump(self.h, config_file, indent=4)
 
     @classmethod
-    def _from_pretrained(cls, *, model_id: str, revision: str, cache_dir: str, force_download: bool, proxies: Optional[Dict], resume_download: bool, local_files_only: bool, token: Union[str, bool, None], map_location: str='cpu', strict: bool=False, use_cuda_kernel: bool=False, **model_kwargs):
+    def _from_pretrained(cls, *, model_id: str, revision: str, cache_dir: str, force_download: bool, proxies: Optional[Dict]=None, resume_download: bool=False, local_files_only: bool, token: Union[str, bool, None], map_location: str='cpu', strict: bool=False, use_cuda_kernel: bool=False, **model_kwargs):
         """Load Pytorch pretrained weights and return the loaded model."""
         if os.path.isdir(model_id):
             print('Loading config.json from local directory')
@@ -218,4 +218,3 @@ class BigVGAN(torch.nn.Module, PyTorchModelHubMixin, library_name='bigvgan', rep
             model.remove_weight_norm()
             model.load_state_dict(checkpoint_dict['generator'])
         return model
-

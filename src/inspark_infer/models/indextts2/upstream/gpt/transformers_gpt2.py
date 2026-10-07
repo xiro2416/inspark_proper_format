@@ -26,9 +26,16 @@ from transformers.activations import ACT2FN
 from transformers.modeling_utils import PreTrainedModel
 from transformers.modeling_attn_mask_utils import _prepare_4d_attention_mask_for_sdpa, _prepare_4d_causal_attention_mask_for_sdpa
 from transformers.modeling_outputs import BaseModelOutputWithPastAndCrossAttentions
-from transformers.pytorch_utils import Conv1D, find_pruneable_heads_and_indices, prune_conv1d_layer
+from transformers.pytorch_utils import Conv1D
+try:
+    from transformers.pytorch_utils import find_pruneable_heads_and_indices, prune_conv1d_layer
+except ImportError:
+    from inspark_infer.ops.trtllm.transformers_compat import find_pruneable_heads_and_indices, prune_conv1d_layer
 from transformers.utils import ModelOutput, add_code_sample_docstrings, add_start_docstrings, add_start_docstrings_to_model_forward, get_torch_version, is_flash_attn_2_available, is_flash_attn_greater_or_equal_2_10, logging
-from transformers.utils.model_parallel_utils import assert_device_map, get_device_map
+try:
+    from transformers.utils.model_parallel_utils import assert_device_map, get_device_map
+except ImportError:
+    from inspark_infer.ops.trtllm.transformers_compat import assert_device_map, get_device_map
 from transformers.models.gpt2.configuration_gpt2 import GPT2Config
 if is_flash_attn_2_available():
     from transformers.modeling_flash_attention_utils import _flash_attention_forward
@@ -359,6 +366,13 @@ class GPT2PreTrainedModel(PreTrainedModel):
 
     def __init__(self, *inputs, **kwargs):
         super().__init__(*inputs, **kwargs)
+
+    def get_head_mask(self, head_mask, num_hidden_layers, is_attention_chunked=False):
+        inherited = getattr(super(), 'get_head_mask', None)
+        if inherited is not None:
+            return inherited(head_mask, num_hidden_layers, is_attention_chunked)
+        from inspark_infer.ops.trtllm.transformers_compat import get_head_mask
+        return get_head_mask(self, head_mask, num_hidden_layers, is_attention_chunked)
 
     def _init_weights(self, module):
         """Initialize the weights."""

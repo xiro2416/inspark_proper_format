@@ -63,10 +63,12 @@ class HeadGraphs:
         if engine.sessions:raise RuntimeError('Capture only before admitting requests')
         if self.sealed:raise RuntimeError('Already prepared; create a new bank explicitly')
         self._direct={'cfm':engine.student,'vocoder':engine.vocoder}
+        selected_batches=engine.config.get('head_graph_batches') or batches(engine.config['max_batch'])
+        self.flexible_batch_padding=bool(engine.config.get('head_graph_batches'))
         for voice in list(engine.model.bank.entries):
             v=engine.model.bank.get(voice)['values']
             plen=v['voice.cache_mel'].shape[-1]
-            for batch in batches(engine.config['max_batch']):
+            for batch in selected_batches:
                 key=(batch,plen)
                 if key in self.cfm:continue
                 mu=torch.cat((v['voice.cache_s2mel_prompt'],v['voice.cache_s2mel_prompt'].new_zeros(1,52,v['voice.cache_s2mel_prompt'].shape[-1])),1)
@@ -79,7 +81,12 @@ class HeadGraphs:
                 mask=(torch.arange(plen+52,device=x.device)[None,None]<plen).expand(batch,1,-1).clone()
                 args=(x,prompt,lengths,style,mu,mask)
                 route=self._describe_route('cfm',engine.student,args)
+                transformer=getattr(engine.student,'transformer',None)
+                transformer_fallbacks=getattr(transformer,'fallbacks',0)
                 self.cfm[key]=capture(engine.student,args)
+                if (route['backend']=='tensorrt113_partial' and transformer is not None and
+                        transformer.fallbacks!=transformer_fallbacks):
+                    raise RuntimeError('CFM Transformer Graph capture used eager fallback')
                 self.routes['cfm'][key]=route
                 self._record(route,'prepare')
                 if batch not in self.vocoder:
@@ -92,7 +99,23 @@ class HeadGraphs:
         self.sealed=True
     def _run(self,component,key,args):
         bank=self.cfm if component=='cfm' else self.vocoder
-        graph=bank.get(key)
+        original_args=args
+        active_batch=args[0].shape[0]
+        bucket=4 if active_batch in (2,3) else 8 if 5<=active_batch<=7 else active_batch
+        if getattr(self,'flexible_batch_padding',False):
+            available=sorted({k[0] for k in bank if k[1]==key[1]}) if component=='cfm' else sorted(bank)
+            bucket=next((b for b in available if b>=active_batch),bucket)
+        graph_key=(bucket,key[1]) if component=='cfm' else bucket
+        graph=bank.get(graph_key)
+        if graph is not None and bucket!=active_batch:
+            padding=bucket-active_batch
+            expanded=[]
+            for index,value in enumerate(args):
+                filler=value.new_zeros((padding,*value.shape[1:]))
+                if component=='cfm' and index==2:filler.fill_(value.shape[-1] if value.ndim>1 else args[0].shape[-1])
+                if component=='cfm' and index==5:filler.fill_(True)
+                expanded.append(torch.cat((value,filler),dim=0))
+            args=tuple(expanded)
         # A known batch can still have another extent/dtype. Do not replay its
         # static bindings unless the complete tensor signature matches.
         compatible=graph is not None and len(args)==len(graph.inputs) and all(
@@ -101,9 +124,14 @@ class HeadGraphs:
         if compatible:
             result=graph(*args)
             self.hits[component]+=1
-            self._record(self.routes[component][key],'replay')
-            return result
+            route=deepcopy(self.routes[component][graph_key])
+            if bucket!=active_batch:
+                route['active_batch']=active_batch
+                route['padded_batch']=bucket
+            self._record(route,'replay')
+            return result[:active_batch] if bucket!=active_batch else result
         if component not in self._direct:raise RuntimeError('Head graphs have not been prepared')
+        args=original_args
         fn=self._direct[component]
         route=self._describe_route(component,fn,args)
         route['graph_fallback']='missing_graph' if graph is None else 'input_signature'

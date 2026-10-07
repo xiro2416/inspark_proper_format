@@ -9,9 +9,8 @@ def select_gpu(index):
 class GPULease:
     def __init__(self,index):self.index=str(index);self.handle=None
     def __enter__(self):
-        root=Path(os.environ.get('ACC_GPU_LOCK_DIR','/workspace/.cache/inspark/gpu-locks'))
-        if not root.resolve().is_relative_to(Path('/workspace')):
-            raise ValueError('GPU lock directory must stay within /workspace')
+        default=Path('/workspace/.cache/inspark/gpu-locks') if Path('/workspace').is_dir() else Path(os.environ.get('XDG_CACHE_HOME',Path.home()/'.cache'))/'inspark/gpu-locks'
+        root=Path(os.environ.get('ACC_GPU_LOCK_DIR',default)).expanduser().resolve()
         root.mkdir(parents=True,exist_ok=True)
         self.handle=(root/(self.index+'.lock')).open('a+')
         try:

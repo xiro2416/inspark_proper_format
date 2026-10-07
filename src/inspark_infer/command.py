@@ -1,4 +1,4 @@
-"""Project management commands; inference keeps its existing acc-clear entry."""
+"""Pinned current release download and inference commands."""
 from __future__ import annotations
 
 import sys
@@ -6,17 +6,29 @@ import sys
 
 def main(argv: list[str] | None = None) -> int:
     args = list(sys.argv[1:] if argv is None else argv)
-    if len(args) >= 2 and args[:2] == ["trt", "build"]:
-        from inspark_infer.build.trt113 import main as build
-        return build(args[2:])
-    if len(args) >= 2 and args[:2] == ["trt", "ensure"]:
-        from inspark_infer.build.ensure import main as ensure
-        return ensure(args[2:])
-    if len(args) >= 2 and args[:2] in (["trt", "publish"], ["trt", "fetch"]):
-        from inspark_infer.build.hf_cache import main as cache
-        return cache(args[1:])
-    print("usage: inspark trt {ensure,build,publish,fetch} [options]", file=sys.stderr)
-    return 2
+    import argparse,os
+    from pathlib import Path
+    p=argparse.ArgumentParser(prog='inspark')
+    p.add_argument('command',choices=['fetch','infer'])
+    p.add_argument('--asset-dir',type=Path,required=True)
+    p.add_argument('--precision',choices=['fp8','int8_smoothquant'],default='fp8')
+    p.add_argument('--batch',type=int,choices=[1,8,64,128],default=1)
+    options,rest=p.parse_known_args(args)
+    if options.precision=='int8_smoothquant' and options.batch==128:p.error('INT8 B128 is not published')
+    from inspark_infer.api.release import fetch,materialize
+    if options.command=='fetch':
+        if rest:p.error('Unexpected fetch arguments')
+        config,deployment=fetch(options.asset_dir,options.precision,options.batch)
+        print(config);print(deployment);return 0
+    from inspark_infer.api.release import registry
+    info=registry();root=options.asset_dir.resolve()
+    bundle=root/'download'/info['engine_prefix']
+    config,deployment=materialize(bundle,root/'weights',root/'runtime',options.precision,options.batch)
+    os.environ.setdefault('MPI4PY_MPIABI','openmpi')
+    os.environ.setdefault('ACC_TRT_SITE',str(Path(sys.prefix)/'lib/python3.12/site-packages'))
+    sys.argv=['inspark infer','--config',str(config),'--deployment',str(deployment),'--batch',str(options.batch),*rest]
+    from inspark_infer.api.cli import main as infer
+    infer();return 0
 
 
 if __name__ == "__main__":

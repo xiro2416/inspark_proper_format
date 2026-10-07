@@ -107,6 +107,8 @@ class ARCore:
             self.context(context_jobs)
 
     def _latents(self, ops):
+        if ops and all(op.cached_prefix is not None for op in ops):
+            return self.latent.from_cached_prefix(ops)
         jobs = []
         gpt = self.tts.gpt
         for op in ops:

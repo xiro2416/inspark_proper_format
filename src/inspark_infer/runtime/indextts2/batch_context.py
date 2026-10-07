@@ -39,7 +39,7 @@ class BatchedContextAppend:
         scatter(keys,values,self.pool.storage,source,lengths,slots,destinations)
         bank=getattr(self.pool,'native_bank',None)
         if bank is not None and bank.enabled_for_total(prepared.shape[1]):
-            scatter(keys,values,bank.cache,source,lengths,slots,destinations)
+            scatter(keys,values,bank.cache,source,lengths,bank.slot_map[slots],destinations)
         return prepared[:, :1, :1]
 
     def _project_scatter_direct(self,prepared,positions,source,lengths,slots,destinations):
@@ -49,6 +49,9 @@ class BatchedContextAppend:
             context=m.project_context(prepared,index) if default is None else default
             key,value=(layer.context_kv(context,positions) if m.architecture=='official_qwen3' or m.random_rope_draft else layer.context_kv(context))
             scatter_layer(key,value,self.pool.storage,index,source,lengths,slots,destinations)
+            bank=getattr(self.pool,'native_bank',None)
+            if bank is not None and bank.enabled_for_total(prepared.shape[1]):
+                scatter_layer(key,value,bank.cache,index,source,lengths,bank.slot_map[slots],destinations)
         return prepared[:, :1, :1]
 
     def prepare_graphs(self,max_batch,scatter=False,totals=None,direct=False):
@@ -94,7 +97,8 @@ class BatchedContextAppend:
             for j in normalized:self.pool.attach(j['cache'])
         prepared = torch.cat([m.prepare_context(j['selected_hidden'], j.get('final_hidden')) for j in normalized], dim=1)
         positions = torch.cat([torch.arange(j['cache'].length, j['cache'].length + n, device=prepared.device) for j, n in zip(normalized, lengths)])[None]
-        total=prepared.shape[1];bucket=((total+7)//8)*8
+        total=prepared.shape[1];bucket=next((n for n in sorted(self.graphs) if n>=total),
+                                             ((total+7)//8)*8)
         if bucket in self.graphs:
             if bucket!=total:
                 prepared=torch.nn.functional.pad(prepared,(0,0,0,bucket-total))
@@ -121,8 +125,16 @@ class BatchedContextAppend:
                              if m.architecture=='official_qwen3' or m.random_rope_draft
                              else layer.context_kv(context))
         mirrored_fallback = pairs is not None and self.pool is not None and getattr(self.pool,'native_bank',None) is not None
+        import_sources=(getattr(self,'prefill_import_sources',False) and pairs is not None
+                        and all(job['cache'].length==0 for job in normalized))
+        borrow_prefill=(getattr(self,'prefill_context_views',False) and import_sources
+                        and self.pool is None and not self.persistent and bucket not in self.graphs)
+        source_keys,source_values=[],[]
+        epoch=getattr(self,'prefill_import_epoch',0)+1
+        self.prefill_import_epoch=epoch
         if pairs is not None:
          for index, (key,value) in enumerate(pairs):
+            if import_sources:source_keys.append(key);source_values.append(value)
             offset = 0
             for job, n in zip(normalized, lengths):
                 cache = job['cache']
@@ -140,8 +152,16 @@ class BatchedContextAppend:
                     cache.keys[index]=cache.storage_keys[index][:,:,:end]
                     cache.values[index]=cache.storage_values[index][:,:,:end]
                 else:
-                    cache.keys[index] = torch.cat((cache.keys[index], key[:, :, offset:offset + n]), dim=2)
-                    cache.values[index] = torch.cat((cache.values[index], value[:, :, offset:offset + n]), dim=2)
+                    if borrow_prefill:
+                        # These outputs are fresh owned tensors, not replay
+                        # buffers. Nonoverlapping views keep their storage alive;
+                        # a later append uses the ordinary concatenation path.
+                        cache.keys[index] = key[:, :, offset:offset + n]
+                        cache.values[index] = value[:, :, offset:offset + n]
+                        self.prefill_context_view_hits=getattr(self,'prefill_context_view_hits',0)+2
+                    else:
+                        cache.keys[index] = torch.cat((cache.keys[index], key[:, :, offset:offset + n]), dim=2)
+                        cache.values[index] = torch.cat((cache.values[index], value[:, :, offset:offset + n]), dim=2)
                 offset += n
         else:
             for job,n in zip(normalized,lengths):
@@ -158,6 +178,11 @@ class BatchedContextAppend:
             # fallback path; graph hits already mirror their incremental rows.
             if mirrored_fallback:
                 self.pool.native_bank.import_slot(job['cache'],job['cache'].pool_slot)
+        if import_sources:
+            offset=0
+            for job,n in zip(normalized,lengths):
+                job['cache'].prefill_source=(self,epoch,source_keys,source_values,offset)
+                offset+=n
         self.calls += 1
         self.rows += len(jobs)
         return [None] * len(jobs)

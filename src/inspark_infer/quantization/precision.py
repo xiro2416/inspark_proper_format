@@ -99,15 +99,20 @@ def prepare(engine,mode,components,convolutions=False):
     if mode not in ('bf16','fp8'):raise ValueError(mode)
     from inspark_infer.ops.planning.plan_cache import PlanCache
     caps=DeviceCaps.current();plans=PlanCache(engine,'matrices_'+mode);manifest=[]
+    from inspark_infer.runtime.graph_policy import batches as selected_batches
+    exact_batches=tuple(engine.config.get('precision_batches',selected_batches(engine.config['max_batch'])))
+    if not exact_batches or any(type(batch) is not int or batch < 1 or batch > engine.config['max_batch']
+                                for batch in exact_batches):
+        raise ValueError('Invalid precision_batches')
     if convolutions and mode=='fp8':
         from inspark_infer.ops.triton.fp8_conv import prepare_scale_kernels
         prepare_scale_kernels(next(engine.tts.gpt.parameters()).device)
     roots={'target':engine.tts.gpt.gpt.h,'draft':engine.rt.engine.draft.layers,
            'cfm':engine.student.model.transformer.layers}
-    target_extents=tuple(sorted({b*q for b in range(1,engine.config['max_batch']+1) for q in (8,64,128,256)}|{4096}))
+    target_extents=tuple(sorted({b*q for b in exact_batches for q in (8,64,128,256)}|{4096}))
     prompt_lengths={v['values']['voice.cache_mel'].shape[-1] for v in engine.model.bank.entries.values()}
-    cfm_extents=tuple(sorted({b*(p+52) for b in range(1,engine.config['max_batch']+1) for p in prompt_lengths}|{4096}))
-    draft_extents=tuple(sorted({b*7 for b in range(1,engine.config['max_batch']+1)}|{64,256,512,1024,4096}))
+    cfm_extents=tuple(sorted({b*(p+52) for b in exact_batches for p in prompt_lengths}|{4096}))
+    draft_extents=tuple(sorted({b*7 for b in exact_batches}|{64,256,512,1024,4096}))
     extents_by_component={'target':target_extents,'cfm':cfm_extents,'draft':draft_extents}
     def replace(module,prefix,precision):
         for name,child in list(module.named_children()):

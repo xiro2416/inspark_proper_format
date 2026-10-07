@@ -11,8 +11,6 @@ import sys
 
 def file_record(path, role):
     path = Path(path).resolve()
-    if not path.is_relative_to(Path("/workspace")):
-        raise ValueError(f"Provenance file must stay within /workspace: {path}")
     with path.open("rb") as stream:
         digest = hashlib.file_digest(stream, "sha256").hexdigest()
     return {"role": role, "path": str(path), "sha256": digest, "bytes": path.stat().st_size}
@@ -20,8 +18,6 @@ def file_record(path, role):
 
 def source_identity(root=None):
     root = Path(root or Path(__file__).resolve().parents[1]).resolve()
-    if not root.is_relative_to(Path("/workspace")):
-        raise ValueError("Source provenance root must stay within /workspace")
     scope = ["src", "scripts", "benchmarks", "configs", "pyproject.toml"]
 
     def git(*args):

@@ -1,0 +1,691 @@
+{
+  "hardware": "NVIDIA RTX6000D SM120 GPU7",
+  "weights": {
+    "draft": "online900",
+    "cfm": "bilingual40k stage1 step800"
+  },
+  "workload": "128 evaluation texts/four3sVAD voices, batch_text_dedup disabled",
+  "performance_profiler": false,
+  "gpu_serial": true,
+  "rows": [
+    {
+      "label": "fp8_b1",
+      "precision": "fp8",
+      "batch": 1,
+      "latency_admission_ms": {
+        "n": 30,
+        "p50": 38.86910900473595,
+        "p95": 48.07173777371644,
+        "p99": 51.50071597658098,
+        "mean": 40.29309361552199,
+        "min": 31.394212506711483,
+        "max": 52.587127313017845
+      },
+      "latency_postadmission_ms": {
+        "n": 30,
+        "p50": 38.53473998606205,
+        "p95": 47.58816706016659,
+        "p99": 51.10069063492119,
+        "mean": 39.92437170818448,
+        "min": 31.033078208565712,
+        "max": 52.199846133589745
+      },
+      "power_w": {
+        "n": 731,
+        "p50": 177.37,
+        "p95": 208.85,
+        "p99": 245.54,
+        "mean": 179.60153214774283,
+        "min": 86.22,
+        "max": 251.7
+      },
+      "memory_mib": {
+        "n": 3525,
+        "p50": 7217.0,
+        "p95": 10939.0,
+        "p99": 10939.0,
+        "mean": 7133.788368794326,
+        "min": 0.0,
+        "max": 10939.0
+      },
+      "waves": 30,
+      "warmups": 5,
+      "power_seconds": 15.031762530095875,
+      "counters": {
+        "device_round_attempts": 30,
+        "device_round_successes": 30,
+        "device_round_fallbacks": 0,
+        "device_round_status_reads": 125,
+        "device_round_status_wait_ms": 666.3669487461448,
+        "device_round_launched_rounds": 250,
+        "device_target_steps": 250,
+        "device_draft_steps": 0,
+        "native_target_steps": 250,
+        "native_draft_steps": 280,
+        "native_cfm_fallbacks": 0,
+        "native_vocoder_fallbacks": 0,
+        "device_code_direct_rows": 30,
+        "speech_codes_host_rows": 0,
+        "output_d2h_bytes": 681048,
+        "output_d2h_wait_ms": 222.77637291699648,
+        "output_d2h_transfer_ms": 0.05676800140645355,
+        "device_round_fallback_reasons": {},
+        "head_graph_hits": {
+          "cfm": 30,
+          "vocoder": 30
+        },
+        "unified_dspark": {
+          "calls": 30,
+          "failures": 0,
+          "graph_replays": 125,
+          "launched_rounds": 250,
+          "status_reads": 125,
+          "status_wait_ms": 666.3669487461448,
+          "draft_enqueues": 280,
+          "target_enqueues": 250,
+          "prime_enqueues": 30
+        },
+        "unified_prefix": {
+          "hits": {
+            "prefill": 30,
+            "latent": 30
+          },
+          "tail_eager": {
+            "prefill": 0,
+            "latent": 0
+          },
+          "graph_hits": {
+            "prefill": 30,
+            "latent": 30
+          },
+          "direct_hits": {
+            "prefill": 0,
+            "latent": 0
+          }
+        }
+      }
+    },
+    {
+      "label": "fp8_b8",
+      "precision": "fp8",
+      "batch": 8,
+      "latency_admission_ms": {
+        "n": 30,
+        "p50": 86.27561945468187,
+        "p95": 96.43581486307085,
+        "p99": 97.75784770958126,
+        "mean": 86.64810517802835,
+        "min": 77.94837653636932,
+        "max": 97.84211404621601
+      },
+      "latency_postadmission_ms": {
+        "n": 30,
+        "p50": 85.68262355402112,
+        "p95": 95.49243925139307,
+        "p99": 97.12287150323391,
+        "mean": 85.98243668675423,
+        "min": 77.26156804710627,
+        "max": 97.21362497657537
+      },
+      "power_w": {
+        "n": 736,
+        "p50": 218.09,
+        "p95": 395.02,
+        "p99": 398.15,
+        "mean": 252.64869565217393,
+        "min": 79.0,
+        "max": 399.86
+      },
+      "memory_mib": {
+        "n": 2746,
+        "p50": 8797.0,
+        "p95": 11243.0,
+        "p99": 11243.0,
+        "mean": 7674.6096139839765,
+        "min": 0.0,
+        "max": 11243.0
+      },
+      "waves": 30,
+      "warmups": 5,
+      "power_seconds": 15.075972931459546,
+      "counters": {
+        "device_round_attempts": 30,
+        "device_round_successes": 30,
+        "device_round_fallbacks": 0,
+        "device_round_status_reads": 164,
+        "device_round_status_wait_ms": 1077.2046511992812,
+        "device_round_launched_rounds": 328,
+        "device_target_steps": 328,
+        "device_draft_steps": 0,
+        "native_target_steps": 328,
+        "native_draft_steps": 358,
+        "native_cfm_fallbacks": 0,
+        "native_vocoder_fallbacks": 0,
+        "device_code_direct_rows": 240,
+        "speech_codes_host_rows": 0,
+        "output_d2h_bytes": 5446992,
+        "output_d2h_wait_ms": 717.4170119687915,
+        "output_d2h_transfer_ms": 0.3467840002849698,
+        "device_round_fallback_reasons": {},
+        "head_graph_hits": {
+          "cfm": 30,
+          "vocoder": 30
+        },
+        "unified_dspark": {
+          "calls": 30,
+          "failures": 0,
+          "graph_replays": 164,
+          "launched_rounds": 328,
+          "status_reads": 164,
+          "status_wait_ms": 1077.2046511992812,
+          "draft_enqueues": 358,
+          "target_enqueues": 328,
+          "prime_enqueues": 30
+        },
+        "unified_prefix": {
+          "hits": {
+            "prefill": 30,
+            "latent": 30
+          },
+          "tail_eager": {
+            "prefill": 0,
+            "latent": 0
+          },
+          "graph_hits": {
+            "prefill": 30,
+            "latent": 30
+          },
+          "direct_hits": {
+            "prefill": 0,
+            "latent": 0
+          }
+        }
+      }
+    },
+    {
+      "label": "fp8_b64",
+      "precision": "fp8",
+      "batch": 64,
+      "latency_admission_ms": {
+        "n": 30,
+        "p50": 346.6686625033617,
+        "p95": 350.0230370089412,
+        "p99": 350.74458504095674,
+        "mean": 346.5176761771242,
+        "min": 341.84863325208426,
+        "max": 351.02513432502747
+      },
+      "latency_postadmission_ms": {
+        "n": 30,
+        "p50": 342.046566773206,
+        "p95": 346.10839248634875,
+        "p99": 346.59465972334146,
+        "mean": 341.90633445978165,
+        "min": 336.1118230968714,
+        "max": 346.7198358848691
+      },
+      "power_w": {
+        "n": 753,
+        "p50": 414.82,
+        "p95": 475.54,
+        "p99": 477.95,
+        "mean": 373.2877689243028,
+        "min": 86.42,
+        "max": 478.51
+      },
+      "memory_mib": {
+        "n": 3561,
+        "p50": 16261.0,
+        "p95": 24159.0,
+        "p99": 24159.0,
+        "mean": 14583.758775624825,
+        "min": 0.0,
+        "max": 24159.0
+      },
+      "waves": 30,
+      "warmups": 5,
+      "power_seconds": 15.447511626407504,
+      "counters": {
+        "device_round_attempts": 30,
+        "device_round_successes": 30,
+        "device_round_fallbacks": 0,
+        "device_round_status_reads": 195,
+        "device_round_status_wait_ms": 2329.0455490350723,
+        "device_round_launched_rounds": 375,
+        "device_target_steps": 375,
+        "device_draft_steps": 0,
+        "native_target_steps": 375,
+        "native_draft_steps": 390,
+        "native_cfm_fallbacks": 0,
+        "native_vocoder_fallbacks": 0,
+        "device_code_direct_rows": 1920,
+        "speech_codes_host_rows": 0,
+        "output_d2h_bytes": 43579920,
+        "output_d2h_wait_ms": 5584.105390124023,
+        "output_d2h_transfer_ms": 2.7486080154776573,
+        "device_round_fallback_reasons": {},
+        "head_graph_hits": {
+          "cfm": 30,
+          "vocoder": 30
+        },
+        "unified_dspark": {
+          "calls": 30,
+          "failures": 0,
+          "graph_replays": 195,
+          "launched_rounds": 375,
+          "status_reads": 195,
+          "status_wait_ms": 2329.0455490350723,
+          "draft_enqueues": 390,
+          "target_enqueues": 375,
+          "prime_enqueues": 30
+        },
+        "unified_prefix": {
+          "hits": {
+            "prefill": 30,
+            "latent": 30
+          },
+          "tail_eager": {
+            "prefill": 0,
+            "latent": 0
+          },
+          "graph_hits": {
+            "prefill": 30,
+            "latent": 0
+          },
+          "direct_hits": {
+            "prefill": 0,
+            "latent": 0
+          }
+        }
+      }
+    },
+    {
+      "label": "fp8_b128",
+      "precision": "fp8",
+      "batch": 128,
+      "latency_admission_ms": {
+        "n": 30,
+        "p50": 510.3311133570969,
+        "p95": 529.3963727075607,
+        "p99": 547.1825512312353,
+        "mean": 513.0954345067343,
+        "min": 508.24088230729103,
+        "max": 554.3876299634576
+      },
+      "latency_postadmission_ms": {
+        "n": 30,
+        "p50": 500.7587126456201,
+        "p95": 520.0031576212496,
+        "p99": 535.4188779741526,
+        "mean": 502.75681071604293,
+        "min": 494.357630610466,
+        "max": 541.0516820847988
+      },
+      "power_w": {
+        "n": 730,
+        "p50": 429.2,
+        "p95": 501.77,
+        "p99": 508.78,
+        "mean": 408.7969726027397,
+        "min": 86.51,
+        "max": 510.07
+      },
+      "memory_mib": {
+        "n": 5628,
+        "p50": 34671.0,
+        "p95": 48949.0,
+        "p99": 48949.0,
+        "mean": 29904.74395877754,
+        "min": 0.0,
+        "max": 48949.0
+      },
+      "waves": 30,
+      "warmups": 5,
+      "power_seconds": 15.025318520143628,
+      "counters": {
+        "device_round_attempts": 30,
+        "device_round_successes": 30,
+        "device_round_fallbacks": 0,
+        "device_round_status_reads": 180,
+        "device_round_status_wait_ms": 3700.822780840099,
+        "device_round_launched_rounds": 360,
+        "device_target_steps": 360,
+        "device_draft_steps": 0,
+        "native_target_steps": 360,
+        "native_draft_steps": 390,
+        "native_cfm_fallbacks": 0,
+        "native_vocoder_fallbacks": 0,
+        "device_code_direct_rows": 3840,
+        "speech_codes_host_rows": 0,
+        "output_d2h_bytes": 87169200,
+        "output_d2h_wait_ms": 7627.060224302113,
+        "output_d2h_transfer_ms": 5.460928022861481,
+        "device_round_fallback_reasons": {},
+        "head_graph_hits": {
+          "cfm": 30,
+          "vocoder": 30
+        },
+        "unified_dspark": {
+          "calls": 30,
+          "failures": 0,
+          "graph_replays": 180,
+          "launched_rounds": 360,
+          "status_reads": 180,
+          "status_wait_ms": 3700.822780840099,
+          "draft_enqueues": 390,
+          "target_enqueues": 360,
+          "prime_enqueues": 30
+        },
+        "unified_prefix": {
+          "hits": {
+            "prefill": 30,
+            "latent": 30
+          },
+          "tail_eager": {
+            "prefill": 0,
+            "latent": 0
+          },
+          "graph_hits": {
+            "prefill": 30,
+            "latent": 0
+          },
+          "direct_hits": {
+            "prefill": 0,
+            "latent": 0
+          }
+        }
+      }
+    },
+    {
+      "label": "int8_smoothquant_b1",
+      "precision": "int8_smoothquant",
+      "batch": 1,
+      "latency_admission_ms": {
+        "n": 30,
+        "p50": 39.802147541195154,
+        "p95": 49.20863271690905,
+        "p99": 50.30263526365161,
+        "mean": 40.94900954514742,
+        "min": 30.554846860468388,
+        "max": 50.6923533976078
+      },
+      "latency_postadmission_ms": {
+        "n": 30,
+        "p50": 39.4579041749239,
+        "p95": 48.894046898931265,
+        "p99": 49.93774442002177,
+        "mean": 40.579341631382704,
+        "min": 30.16840200871229,
+        "max": 50.30662938952446
+      },
+      "power_w": {
+        "n": 731,
+        "p50": 188.16,
+        "p95": 212.45,
+        "p99": 218.28,
+        "mean": 188.74132694938442,
+        "min": 86.52,
+        "max": 219.74
+      },
+      "memory_mib": {
+        "n": 2720,
+        "p50": 8091.0,
+        "p95": 10945.0,
+        "p99": 10945.0,
+        "mean": 7218.694485294118,
+        "min": 0.0,
+        "max": 10945.0
+      },
+      "waves": 30,
+      "warmups": 5,
+      "power_seconds": 15.008310635574162,
+      "counters": {
+        "device_round_attempts": 30,
+        "device_round_successes": 30,
+        "device_round_fallbacks": 0,
+        "device_round_status_reads": 136,
+        "device_round_status_wait_ms": 707.1355236694217,
+        "device_round_launched_rounds": 272,
+        "device_target_steps": 272,
+        "device_draft_steps": 0,
+        "native_target_steps": 272,
+        "native_draft_steps": 302,
+        "native_cfm_fallbacks": 0,
+        "native_vocoder_fallbacks": 0,
+        "device_code_direct_rows": 30,
+        "speech_codes_host_rows": 0,
+        "output_d2h_bytes": 681080,
+        "output_d2h_wait_ms": 215.83780087530613,
+        "output_d2h_transfer_ms": 0.053248000564053655,
+        "device_round_fallback_reasons": {},
+        "head_graph_hits": {
+          "cfm": 30,
+          "vocoder": 30
+        },
+        "unified_dspark": {
+          "calls": 30,
+          "failures": 0,
+          "graph_replays": 136,
+          "launched_rounds": 272,
+          "status_reads": 136,
+          "status_wait_ms": 707.1355236694217,
+          "draft_enqueues": 302,
+          "target_enqueues": 272,
+          "prime_enqueues": 30
+        },
+        "unified_prefix": {
+          "hits": {
+            "prefill": 30,
+            "latent": 30
+          },
+          "tail_eager": {
+            "prefill": 0,
+            "latent": 0
+          },
+          "graph_hits": {
+            "prefill": 30,
+            "latent": 30
+          },
+          "direct_hits": {
+            "prefill": 0,
+            "latent": 0
+          }
+        }
+      }
+    },
+    {
+      "label": "int8_smoothquant_b8",
+      "precision": "int8_smoothquant",
+      "batch": 8,
+      "latency_admission_ms": {
+        "n": 30,
+        "p50": 86.57456887885928,
+        "p95": 94.86967013217509,
+        "p99": 98.91153637319803,
+        "mean": 86.06037084634106,
+        "min": 76.43597107380629,
+        "max": 100.48855096101761
+      },
+      "latency_postadmission_ms": {
+        "n": 30,
+        "p50": 85.8796602115035,
+        "p95": 93.85442631319165,
+        "p99": 98.17927232943475,
+        "mean": 85.36988844474156,
+        "min": 75.82624349743128,
+        "max": 99.88378174602985
+      },
+      "power_w": {
+        "n": 734,
+        "p50": 244.14,
+        "p95": 402.95,
+        "p99": 425.68,
+        "mean": 272.0960490463215,
+        "min": 91.4,
+        "max": 427.06
+      },
+      "memory_mib": {
+        "n": 2769,
+        "p50": 8775.0,
+        "p95": 11285.0,
+        "p99": 11285.0,
+        "mean": 7679.53665583243,
+        "min": 0.0,
+        "max": 11285.0
+      },
+      "waves": 30,
+      "warmups": 5,
+      "power_seconds": 15.087270963005722,
+      "counters": {
+        "device_round_attempts": 30,
+        "device_round_successes": 30,
+        "device_round_fallbacks": 0,
+        "device_round_status_reads": 166,
+        "device_round_status_wait_ms": 1089.3469545990229,
+        "device_round_launched_rounds": 332,
+        "device_target_steps": 332,
+        "device_draft_steps": 0,
+        "native_target_steps": 332,
+        "native_draft_steps": 362,
+        "native_cfm_fallbacks": 0,
+        "native_vocoder_fallbacks": 0,
+        "device_code_direct_rows": 240,
+        "speech_codes_host_rows": 0,
+        "output_d2h_bytes": 5460232,
+        "output_d2h_wait_ms": 670.5335900187492,
+        "output_d2h_transfer_ms": 0.3455680003389716,
+        "device_round_fallback_reasons": {},
+        "head_graph_hits": {
+          "cfm": 30,
+          "vocoder": 30
+        },
+        "unified_dspark": {
+          "calls": 30,
+          "failures": 0,
+          "graph_replays": 166,
+          "launched_rounds": 332,
+          "status_reads": 166,
+          "status_wait_ms": 1089.3469545990229,
+          "draft_enqueues": 362,
+          "target_enqueues": 332,
+          "prime_enqueues": 30
+        },
+        "unified_prefix": {
+          "hits": {
+            "prefill": 30,
+            "latent": 30
+          },
+          "tail_eager": {
+            "prefill": 0,
+            "latent": 0
+          },
+          "graph_hits": {
+            "prefill": 30,
+            "latent": 30
+          },
+          "direct_hits": {
+            "prefill": 0,
+            "latent": 0
+          }
+        }
+      }
+    },
+    {
+      "label": "int8_smoothquant_b64",
+      "precision": "int8_smoothquant",
+      "batch": 64,
+      "latency_admission_ms": {
+        "n": 30,
+        "p50": 439.5896610803902,
+        "p95": 444.8901290073991,
+        "p99": 449.9223286192864,
+        "mean": 436.46503028770286,
+        "min": 425.4817022010684,
+        "max": 451.65854692459106
+      },
+      "latency_postadmission_ms": {
+        "n": 30,
+        "p50": 436.53811188414693,
+        "p95": 441.76220847293735,
+        "p99": 446.8364128191024,
+        "mean": 433.36299741640687,
+        "min": 421.92957270890474,
+        "max": 448.5617559403181
+      },
+      "power_w": {
+        "n": 749,
+        "p50": 381.06,
+        "p95": 486.528,
+        "p99": 497.52,
+        "mean": 372.5894259012016,
+        "min": 92.9,
+        "max": 498.01
+      },
+      "memory_mib": {
+        "n": 3449,
+        "p50": 13835.0,
+        "p95": 19357.0,
+        "p99": 19357.0,
+        "mean": 12319.896491736736,
+        "min": 0.0,
+        "max": 19357.0
+      },
+      "waves": 30,
+      "warmups": 5,
+      "power_seconds": 15.372045911848545,
+      "counters": {
+        "device_round_attempts": 30,
+        "device_round_successes": 30,
+        "device_round_fallbacks": 0,
+        "device_round_status_reads": 195,
+        "device_round_status_wait_ms": 3014.820653013885,
+        "device_round_launched_rounds": 390,
+        "device_target_steps": 390,
+        "device_draft_steps": 0,
+        "native_target_steps": 390,
+        "native_draft_steps": 420,
+        "native_cfm_fallbacks": 0,
+        "native_vocoder_fallbacks": 0,
+        "device_code_direct_rows": 1920,
+        "speech_codes_host_rows": 0,
+        "output_d2h_bytes": 43521120,
+        "output_d2h_wait_ms": 6214.381897822022,
+        "output_d2h_transfer_ms": 2.733856000006199,
+        "device_round_fallback_reasons": {},
+        "head_graph_hits": {
+          "cfm": 30,
+          "vocoder": 30
+        },
+        "unified_dspark": {
+          "calls": 30,
+          "failures": 0,
+          "graph_replays": 195,
+          "launched_rounds": 390,
+          "status_reads": 195,
+          "status_wait_ms": 3014.820653013885,
+          "draft_enqueues": 420,
+          "target_enqueues": 390,
+          "prime_enqueues": 30
+        },
+        "unified_prefix": {
+          "hits": {
+            "prefill": 30,
+            "latent": 30
+          },
+          "tail_eager": {
+            "prefill": 0,
+            "latent": 0
+          },
+          "graph_hits": {
+            "prefill": 30,
+            "latent": 30
+          },
+          "direct_hits": {
+            "prefill": 0,
+            "latent": 0
+          }
+        }
+      }
+    }
+  ]
+}

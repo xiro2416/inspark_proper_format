@@ -1,0 +1,42 @@
+{
+  "schema": 9,
+  "status": "validated_new_checkpoint_first_chunk_short_test",
+  "precision": "fp8",
+  "batch": 64,
+  "runtime_backend": "native_dspark_worker_trt_compute",
+  "graphs": true,
+  "calibration": "bundle://artifacts/current_release/calibration/fp8.json",
+  "target_plan": "bundle://artifacts/sm120_0924/unified/fp8/b64/ar/k80/target/plan.json",
+  "draft_plan": "bundle://artifacts/current_release/fp8/b64/draft_981275689e/model.plan.json",
+  "cfm_plan": "bundle://artifacts/current_release/fp8/b64/cfm_7358a360ce/model.plan.json",
+  "vocoder_plan": "bundle://artifacts/sm120_0924/unified/fp8/b64/vocoder/gs_fir_up_pointwise/vocoder_fir_up_pointwise_l5m_aux0.plan.json",
+  "official_sources": "bundle://artifacts/official_trtllm_dspark",
+  "prefill_plan": "bundle://artifacts/sm120_0924/unified/fp8/b64/prefill/model_l5m.plan.json",
+  "latent_plan": "bundle://artifacts/sm120_0924/unified/fp8/b64/latent/model_l5m.plan.json",
+  "batch_conditions": true,
+  "rnn_graph_rewrite": "compiled",
+  "head_handoff": true,
+  "draft_identity_slots": true,
+  "condition_streams": 2,
+  "context_plan": "bundle://artifacts/current_release/fp8/b64/draft_ad57ec3610/model.plan.json",
+  "batch_text_dedup": false,
+  "draft_head_major_arena": true,
+  "latent_vector_pack": true,
+  "cpu_text_processes": true,
+  "admission_packing": true,
+  "latent_reuse_prefill_kv": true,
+  "cpu_text_workers": 8,
+  "latent_suffix_plan": "bundle://artifacts/sm120_0924/unified/gpu_inference_20261001/cached_latent/model_l5full.plan.json",
+  "late_verify_after": 12,
+  "vocoder_partition_plan": "bundle://artifacts/sm120_0924/unified/gpu_inference_20261001/vocoder_official_segments/partition_l5m.json",
+  "component_calibrations": {
+    "target": "bundle://artifacts/current_release/calibration/fp8_target_vocoder.json",
+    "vocoder": "bundle://artifacts/current_release/calibration/fp8_target_vocoder.json"
+  },
+  "model_tensor_hashes": {
+    "target": "d5e6126f86fca5a8de05fb7a3036aeecc459749d31e049ea495499c8b533aeb5",
+    "draft": "7965660f2dedc03c6713c7af19e75631dec5973c76bf04ca6b248862435bbcb2",
+    "cfm": "716c3ca945eb3b886421b14c34f456967ea37f7a93d96c385a13324d1c291dbe",
+    "vocoder": "1ae329b51eb3602c4e986fcf7e228d30a22a440deabb7d5f4d6a58c5fc9889fb"
+  }
+}

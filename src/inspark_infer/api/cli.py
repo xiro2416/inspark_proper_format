@@ -10,9 +10,9 @@ from inspark_infer.api.protocol import parse_event, audio_event
 
 def main():
     p=argparse.ArgumentParser()
-    p.add_argument('--config',default='configs/common/runtime_reference.yaml');p.add_argument('--gpu',type=int,default=0)
+    p.add_argument('--config',default='artifacts/current_release/runtime.yaml');p.add_argument('--gpu',type=int,default=0)
     p.add_argument('--workers',type=int,default=1);p.add_argument('--batch',type=int)
-    p.add_argument('--deployment',default='configs/hardware/sm89/sm89_eager_fp32.json',help='Offline deployment JSON; default is same-weight pure FP32 eager')
+    p.add_argument('--deployment',default='configs/current/reference.json',help='Offline deployment JSON; default is same-weight pure FP32 eager')
     p.add_argument('--ref-audio',required=True);p.add_argument('--voice-id',default='reference')
     mode=p.add_mutually_exclusive_group(required=True);mode.add_argument('--text');mode.add_argument('--stdin-stream',action='store_true')
     p.add_argument('--output');p.add_argument('--seed',type=int,default=0);p.add_argument('--emotion',type=float,nargs=8,default=[0.]*8)

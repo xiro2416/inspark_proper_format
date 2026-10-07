@@ -1,4 +1,4 @@
-"""Hash-pinned interval student deployment export; fixed two-step integration."""
+"""Hash-pinned interval student deployment with four fixed intervals."""
 import torch
 from torch import nn
 from inspark_infer.runtime.assets import sha256
@@ -26,14 +26,16 @@ class Solver:
         model.load_state_dict(saved['student'],strict=True);del saved
         self.model=model.float().eval().requires_grad_(False);self.model.setup_caches(max_batch,8192)
         device=next(model.parameters()).device
-        self.times=tuple(torch.tensor([[t,r]],device=device) for t,r in ((0.,.5),(.5,1.)))
-        self.identity=dict(path=str(path),sha256=actual,source=source,step=step,intervals=[[0,.5],[.5,1]],cfg=0,precision='FP32')
+        intervals=((0.,.25),(.25,.5),(.5,.75),(.75,1.))
+        self.times=tuple(torch.tensor([[t,r]],device=device) for t,r in intervals)
+        self.identity=dict(path=str(path),sha256=actual,source=source,step=step,
+                           intervals=[list(interval) for interval in intervals],cfg=0,precision='FP32')
         self.observer=None
     def __call__(self,x,prompt,lengths,style,mu,mask):
         x=x.float().masked_fill(mask,0)
         for interval,times in enumerate(self.times):
             if self.observer is not None:self.observer(interval)
             v=self.model(x,prompt,lengths,times.expand(x.shape[0],-1),style,mu)
-            x=(x+.5*v.float()).masked_fill(mask,0)
+            x=(x+.25*v.float()).masked_fill(mask,0)
         if self.observer is not None:self.observer(None)
         return x

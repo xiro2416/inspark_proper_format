@@ -1,0 +1,52 @@
+{
+  "schema": 1,
+  "repo": "xirr/index_pipeline",
+  "private": true,
+  "engine_revision": "2edb087d47eefc95c0c008c71e27c21a1158c896",
+  "engine_prefix": "engines/rtx6000d_sm120/draft900_cfm800",
+  "weights_revision": "96933af87262eec17d685050723d4f768d2f8778",
+  "deployments": {
+    "fp8_b1": {
+      "precision": "fp8",
+      "batch": 1,
+      "path": "artifacts/current_release/deployments/fp8_b1.json"
+    },
+    "fp8_b8": {
+      "precision": "fp8",
+      "batch": 8,
+      "path": "artifacts/current_release/deployments/fp8_b8.json"
+    },
+    "fp8_b64": {
+      "precision": "fp8",
+      "batch": 64,
+      "path": "artifacts/current_release/deployments/fp8_b64.json"
+    },
+    "fp8_b128": {
+      "precision": "fp8",
+      "batch": 128,
+      "path": "artifacts/current_release/deployments/fp8_b128.json"
+    },
+    "int8_smoothquant_b1": {
+      "precision": "int8_smoothquant",
+      "batch": 1,
+      "path": "artifacts/current_release/deployments/int8_smoothquant_b1.json"
+    },
+    "int8_smoothquant_b8": {
+      "precision": "int8_smoothquant",
+      "batch": 8,
+      "path": "artifacts/current_release/deployments/int8_smoothquant_b8.json"
+    },
+    "int8_smoothquant_b64": {
+      "precision": "int8_smoothquant",
+      "batch": 64,
+      "path": "artifacts/current_release/deployments/int8_smoothquant_b64.json"
+    }
+  },
+  "weights": {
+    "draft": "150k online900",
+    "cfm": "bilingual40k stage1 step800"
+  },
+  "gpu": "NVIDIA RTX6000D",
+  "sm": 120,
+  "trt": "11.3.0.99"
+}

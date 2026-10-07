@@ -5,7 +5,10 @@ import torch.nn.functional as F
 from transformers import GPT2Config, LogitsProcessorList
 from inspark_infer.models.indextts2.upstream.gpt.transformers_gpt2 import GPT2PreTrainedModel, GPT2Model
 from transformers.modeling_outputs import CausalLMOutputWithCrossAttentions
-from transformers.utils.model_parallel_utils import assert_device_map, get_device_map
+try:
+    from transformers.utils.model_parallel_utils import assert_device_map, get_device_map
+except ImportError:
+    from inspark_infer.ops.trtllm.transformers_compat import assert_device_map, get_device_map
 from inspark_infer.models.indextts2.upstream.gpt.conformer_encoder import ConformerEncoder
 from inspark_infer.models.indextts2.upstream.gpt.perceiver import PerceiverResampler
 from inspark_infer.models.indextts2.upstream.utils.arch_util import AttentionBlock
@@ -541,4 +544,3 @@ class UnifiedVoice(nn.Module):
         base_vec = self.get_emovec(speech_conditioning_latent, cond_lengths)
         out = base_vec + alpha * (emo_vec - base_vec)
         return out
-

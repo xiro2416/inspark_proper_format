@@ -13,6 +13,38 @@ def _cache_stats(pool):
                 leased=sum(leased) if leased is not None else capacity-len(free),
                 valid=valid)
 
+def _unified_stats(engine):
+    """Report the framework controller separately from native TRT-LLM claims."""
+    controller=getattr(engine,'unified_first_chunk',None)
+    if controller is None:return None
+    runtime=controller.runtime
+    enabled=runtime.graph is not None
+    burst=int(runtime.graph_burst)
+    total_rounds=int(getattr(controller,'total_launched_rounds',0))
+    graph_replays=getattr(controller,'total_graph_replays',None)
+    if graph_replays is None:
+        # The graph mode and burst are fixed when this controller is prepared.
+        graph_replays=total_rounds//burst if enabled else 0
+    provider=controller.provider
+    return dict(backend=getattr(runtime,'backend','framework_dspark_adapter'),native_executor=False,
+                calls=int(controller.calls),failures=int(getattr(controller,'failure_count',0)),
+                graph_enabled=enabled,graph_burst=burst,graph_replays=int(graph_replays),
+                launched_rounds=total_rounds,
+                draft_enqueues=int(getattr(controller,'total_draft_enqueues',total_rounds)),
+                target_enqueues=int(getattr(controller,'total_target_enqueues',total_rounds)),
+                prime_enqueues=int(getattr(controller,'total_prime_enqueues',0)),
+                status_reads=int(getattr(controller,'total_status_reads',0)),
+                status_wait_ms=float(getattr(controller,'total_status_wait_ms',0.)),
+                last_run=dict(getattr(controller,'last_run',{}) or {}),
+                last_kv_import=dict(getattr(provider,'last_import',{}) or {}),
+                batch=int(provider.batch),kv_capacity=int(provider.capacity),
+                target_engine_python_calls=int(provider.target_engine.calls),
+                draft_engine_python_calls=int(provider.draft_engine.calls),
+                counter_note='Graph replays bypass provider Python calls; those include capture/warmup and are not execution counts',
+                custom_math_kernels=bool(getattr(provider,'target_kv_fusion',False)),
+                target_kv_update_backend=('triton_masked_write' if getattr(provider,'target_kv_fusion',False)
+                                          else 'torch_gather_where_scatter'))
+
 def _engine_stats(engine):
     """Separate backend enqueues from replays, which never call Python wrappers."""
     head=getattr(engine,'head_graphs',None)
@@ -35,7 +67,16 @@ def _engine_stats(engine):
         scheduler_max_batch=engine.config['max_batch'],target_batch_counts=target_batches,
         device_round_attempts=engine.device_round_attempts,device_round_successes=engine.device_round_successes,
         device_round_fallbacks=engine.device_round_fallbacks,
+        device_round_fallback_reasons=dict(getattr(engine,'device_round_fallback_reasons',{})),
         device_target_steps=getattr(engine.rt,'device_target_steps',0),
+        device_round_status_reads=getattr(engine,'device_round_status_reads',0),
+        device_round_status_wait_ms=getattr(engine,'device_round_status_wait_ms',0.),
+        device_round_launched_rounds=getattr(engine,'device_round_launched_rounds',0),
+        device_code_direct_rows=getattr(engine,'device_code_direct_rows',0),
+        speech_codes_host_rows=getattr(engine,'speech_codes_host_rows',0),
+        output_d2h_bytes=getattr(engine,'output_d2h_bytes',0),
+        output_d2h_wait_ms=getattr(engine,'output_d2h_wait_ms',0.),
+        output_d2h_transfer_ms=getattr(engine,'output_d2h_transfer_ms',0.),
         device_draft_steps=getattr(engine.rt.backbone,'device_steps',0),
         draft_backbone_calls=getattr(engine.rt.backbone,'calls',0),
         native_target_steps=(getattr(engine.rt,'native_target_steps',0)+
@@ -51,11 +92,17 @@ def _engine_stats(engine):
         native_vocoder_fallbacks=acoustic['vocoder']['wrapper_total']['fallbacks'],
         head_graphs=graph_stats,acoustic_routes=acoustic,
         strict_request_isolation=getattr(engine,'strict_request_isolation',False),
-        rng_policy=getattr(engine,'rng_policy','legacy_per_request'),
+        rng_policy=getattr(engine,'rng_policy','legacy_per_request'),unified_dspark=_unified_stats(engine),
+        unified_prefix=(engine.unified_prefix.stats() if getattr(engine,'unified_prefix',None) is not None else None),
+        condition_graphs=(dict(hits=engine.condition_graph_bank.hits,misses=engine.condition_graph_bank.misses,
+            prepared=len(engine.condition_graph_bank.graphs)) if getattr(engine,'condition_graph_bank',None) is not None else None),
         active_rows=sum('_row' in s for s in engine.sessions.values()),
         error_sessions=sum(bool(s.get('error')) for s in engine.sessions.values()),
         target_slots=_cache_stats(engine.rt.target),
         draft_slots=_cache_stats(getattr(getattr(engine.rt,'context',None),'pool',None)))
+    guard=getattr(engine,'static_gc_guard',None)
+    if guard is not None:result['gc_policy']=guard.stats()
+    result['prefill_context_view_hits']=getattr(engine.rt.context,'prefill_context_view_hits',0)
     torch=getattr(engine,'torch',None)
     result['memory']=dict(cuda_allocated_bytes=None,cuda_reserved_bytes=None,
                           cuda_peak_allocated_bytes=None,cuda_peak_reserved_bytes=None,rss_bytes=None)
@@ -135,6 +182,34 @@ class Pool:
         w=len(self.owners)%len(self.pipes)
         self._call(w,'create_session',request_id,voice_id,seed,emotion,arrival)
         self.owners[request_id]=w
+    def admit_batch(self,requests):
+        """One admission RPC per worker; preserve request order and ownership."""
+        if self.closed:raise RuntimeError('Pool closed')
+        if not isinstance(requests,(list,tuple)) or not requests:raise ValueError('Expected a nonempty request batch')
+        identifiers=[]
+        for record in requests:
+            if not isinstance(record,dict) or 'request_id' not in record:raise ValueError('Invalid batch request fields')
+            identifier=record['request_id']
+            if identifier in self.owners or identifier in identifiers:raise ValueError('Duplicate request id')
+            identifiers.append(identifier)
+        groups={}
+        for index,record in enumerate(requests):
+            worker=(len(self.owners)+index)%len(self.pipes)
+            groups.setdefault(worker,[]).append(record)
+        committed=[];acknowledgments=[]
+        try:
+            for worker,rows in groups.items():
+                ack=self._call(worker,'admit_batch',rows)
+                # The worker transaction has succeeded before ownership appears.
+                for row in rows:
+                    self.owners[row['request_id']]=worker;committed.append(row['request_id'])
+                acknowledgments.append(dict(worker=worker,**ack))
+        except BaseException as error:
+            from inspark_infer.runtime.cleanup import cleanup_all
+            cleanup_all([('batch owner '+str(identifier),lambda rid=identifier:self.cancel(rid))
+                         for identifier in reversed(committed)],primary=error)
+            raise
+        return dict(request_ids=identifiers,admitted=len(identifiers),workers=acknowledgments)
     def push_text(self,request_id,delta):return self._call(self.owners[request_id],'push_text',request_id,delta)
     def finish_input(self,request_id):return self._call(self.owners[request_id],'finish_input',request_id)
     def run_ready(self,on_chunk=None):

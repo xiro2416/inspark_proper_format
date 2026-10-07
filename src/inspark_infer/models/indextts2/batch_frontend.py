@@ -92,7 +92,9 @@ class BatchFrontend:
             if self.cached[r['voice_id']]['path'] != self.model.bank.get(r['voice_id'])['path']:
                 raise ValueError('Reference changed; re-prime voice-only frontend cache')
         start = time.perf_counter()
-        texts = list(self.pool.map(self._text, requests))
+        pending=[(r.get('text_future') if r.get('text_future_text')==r['text'] else
+                  self.pool.submit(self._text,r)) for r in requests]
+        texts=[future.result() for future in pending]
         cpu_done = time.perf_counter()
         g = self.model.tts.gpt
         device = next(g.parameters()).device
