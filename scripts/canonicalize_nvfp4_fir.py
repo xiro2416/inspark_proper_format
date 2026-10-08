@@ -13,7 +13,7 @@ def main():
  if a.static_indices_from and a.vocoder_config:raise ValueError('Select one source of fixed geometry')
  if a.vocoder_config:
   rates=json.loads(a.vocoder_config.read_text())['upsample_rates'];frames=int(graph.inputs[0].shape[2]);windows=[n for n in graph.nodes if n.name.endswith('/single_window')]
-  if len(windows)!=76:raise ValueError('Window coverage changed')
+  if windows and len(windows)!=76:raise ValueError('Window coverage changed')
   def constant(t):
    if isinstance(t,gs.Constant):return t.values
    if len(t.inputs)==1 and t.inputs[0].op=='Constant':return t.inputs[0].attrs['value'].values
@@ -29,7 +29,7 @@ def main():
    node.inputs[1]=gs.Constant(prefix+'/static_window_indices',np.arange(count,dtype=np.int64)[:,None]+np.asarray(offsets,dtype=np.int64)[None,:])
  if a.static_indices_from:
   constants=gs.import_onnx(onnx.load(a.static_indices_from)).tensors();windows=[n for n in graph.nodes if n.name.endswith('/single_window')]
-  if len(windows)!=76:raise ValueError('Window coverage changed')
+  if windows and len(windows)!=76:raise ValueError('Window coverage changed')
   for node in windows:
    name=node.name.rsplit('/',2)[0]+'/static_window_indices';source=constants[name]
    if not isinstance(source,gs.Constant):raise ValueError('Expected audited static indices')

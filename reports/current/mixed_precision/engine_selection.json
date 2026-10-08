@@ -1,0 +1,39 @@
+{
+  "plans": {
+    "cfm": {
+      "sha256": "e76323220b0b4b925b3a052ce981013948fc04dafe8af1c52f87ffb178d333ad",
+      "optimization_level": 5,
+      "tiling_optimization_level": "full",
+      "actual_aux_streams": 0,
+      "effective_l2_limit_for_tiling": 58720256,
+      "max_num_tactics": -1,
+      "workspace_limit_bytes": 89173131264,
+      "tactic_shared_memory_limit_bytes": 1073741824
+    },
+    "vocoder_fused": {
+      "sha256": "d142e063db9d10a4d701c74d0261e409469c90760c722412245d1a073f163130",
+      "optimization_level": 5,
+      "tiling_optimization_level": "moderate",
+      "actual_aux_streams": 0,
+      "effective_l2_limit_for_tiling": 117440512,
+      "max_num_tactics": -1,
+      "workspace_limit_bytes": 89173131264,
+      "tactic_shared_memory_limit_bytes": 1073741824
+    }
+  },
+  "precision_roles": {
+    "BF16": 90,
+    "NVFP4": 135,
+    "FP8": 92
+  },
+  "stage_profile_gpu_ms": {
+    "unified/stage/text_prepare": 21.716943740844727,
+    "unified/stage/prefill": 36.024736404418945,
+    "unified/stage/unified_dspark": 100.08747482299805,
+    "unified/stage/latent": 13.10103988647461,
+    "unified/stage/condition_group": 1.221393916606903,
+    "unified/stage/condition": 0.15930725005455315,
+    "unified/stage/cfm4": 54.11622428894043,
+    "unified/stage/vocoder": 78.24566268920898
+  }
+}

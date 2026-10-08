@@ -22,7 +22,7 @@ OPTIONAL_SETTINGS = ('rnn_graph_rewrite', 'batch_conditions', 'latent_cached_pre
                      'batch_head_pcm', 'cpu_text_processes', 'latent_reuse_prefill_kv',
                      'cpu_text_workers','late_verify_after','condition_graphs','condition_graph_exact_batches',
                      'condition_flat_projection','prefill_readonly_views','prefill_context_overlap',
-                     'static_gc_freeze','prefill_context_views','condition_projected_vq','tail_compact_after','target_kv_fusion','component_calibrations','model_tensor_hashes')
+                     'static_gc_freeze','prefill_context_views','condition_projected_vq','tail_compact_after','target_kv_fusion','component_calibrations','component_precisions','model_tensor_hashes')
 BACKENDS = ('framework_dspark_adapter', 'native_dspark_worker_trt_compute')
 
 
@@ -30,9 +30,13 @@ def validate(plan):
     required = {'schema', 'status', 'precision', 'batch', 'runtime_backend', 'graphs', *PATHS}
     if set(plan)-set(OPTIONAL_PATHS)-set(OPTIONAL_SETTINGS) != required or plan['schema'] != 9:
         raise ValueError('Invalid unified deployment fields')
-    if (plan['precision'] not in ('fp8', 'int8_smoothquant','nvfp4') or type(plan['batch']) is not int
+    if (plan['precision'] not in ('fp8', 'int8_smoothquant','nvfp4','nvfp4_fp8') or type(plan['batch']) is not int
             or plan['batch'] not in (1, 8, 64, 128)):
         raise ValueError('Expected unified FP8/INT8 B1/B8/B64/B128 deployment')
+    if 'component_precisions' in plan:
+        p=plan['component_precisions']
+        if not isinstance(p,dict) or set(p)!= {'target','draft','cfm','vocoder'} or any(v not in ('fp8','nvfp4','nvfp4_fp8','int8_smoothquant') for v in p.values()):
+            raise ValueError('Explicit component precision mapping must be complete')
     if plan['runtime_backend'] not in BACKENDS:
         raise ValueError('This adapter must not be labelled as the native NVIDIA executor')
     if 'static_gc_freeze' in plan and type(plan['static_gc_freeze']) is not bool:
@@ -138,7 +142,7 @@ def load(path):
 
 
 def validate_artifact_recipes(plan):
-    from inspark_infer.runtime.asset_identity import calibration_digest,validate_component_roles
+    from inspark_infer.runtime.asset_identity import calibration_digest,validate_component_roles,component_precision
     validate_component_roles(plan)
     digest = hashlib.sha256(Path(plan['calibration']).read_bytes()).hexdigest()
     for component in ('target', 'draft', 'cfm', 'vocoder'):
@@ -149,7 +153,7 @@ def validate_artifact_recipes(plan):
         else:
             recipe = artifact.get('quantization_recipe', {})
             observed = recipe.get('calibration', {}).get('sha256')
-        if observed != calibration_digest(plan,component) or recipe.get('scheme') != plan['precision']:
+        if observed != calibration_digest(plan,component) or recipe.get('scheme') != component_precision(plan,component):
             raise ValueError(f'{component} engine does not match the declared calibration/precision')
     return digest
 
@@ -162,7 +166,7 @@ def install_reference_recipe(engine, artifact):
     """
     from inspark_infer.quantization.unified import iter_roles
     from inspark_infer.build.unified_acoustic_export import ExportWeightOp, fold_weight_norm_
-    if artifact['scheme']=='nvfp4':
+    if artifact['scheme'] in ('nvfp4','nvfp4_fp8'):
         from inspark_infer.quantization.nvfp4 import install
         return [{k:v for k,v in r.items() if k!='module'} for r in install(engine,artifact)]
     roles = list(iter_roles(engine, artifact['scheme']))
@@ -300,7 +304,7 @@ def prepare(engine, plan):
     from inspark_infer.ops.tensorrt.native113 import NativeCFMSolver113, NativeVocoder113
     plan = validate(plan)
     validate_artifact_recipes(plan)
-    from inspark_infer.runtime.asset_identity import validate_model_identities,calibration_digest,calibration_path
+    from inspark_infer.runtime.asset_identity import validate_model_identities,calibration_digest,calibration_path,component_precision
     validate_model_identities(engine,plan)
     if engine.sessions or engine.deployment_state != 'raw' or engine.config['max_batch'] != plan['batch']:
         raise ValueError('Prepare an exact-batch fresh engine before admission')
@@ -314,7 +318,7 @@ def prepare(engine, plan):
                 from inspark_infer.ops.tensorrt.unified_ar import StaticEngine
                 artifact=read_json(Path(plan['context_plan']))
                 context_recipe=artifact.get('quantization_recipe',{})
-                if (artifact.get('kind') not in ('context','context_kv') or context_recipe.get('scheme')!=plan['precision']
+                if (artifact.get('kind') not in ('context','context_kv') or context_recipe.get('scheme')!=component_precision(plan,'draft')
                         or context_recipe.get('calibration',{}).get('sha256')!=calibration_digest(plan,'draft')):
                     raise ValueError('Context engine kind/calibration/precision differs from deployment')
                 if any(hasattr(layer,'rope_inv_freq') for layer in engine.rt.engine.draft.layers):
@@ -365,7 +369,7 @@ def prepare(engine, plan):
                     artifact=read_json(Path(tail_plan[component+'_plan']))
                     recipe=artifact.get('quantization_recipe') or artifact.get('provenance',{}).get('8',{}).get('quantization_recipe',{})
                     digest=recipe.get('calibration',{}).get('sha256',recipe.get('calibration_sha256'))
-                    if digest!=calibration_digest(plan,component) or recipe.get('scheme')!=plan['precision']:
+                    if digest!=calibration_digest(plan,component) or recipe.get('scheme')!=component_precision(plan,component):
                         raise ValueError('Tail AR calibration differs from B64')
                 tail_provider=StaticARProvider(engine.rt,tail_plan['target_plan'],tail_plan['draft_plan'],8)
                 tail_provider.identity_slots=plan.get('draft_identity_slots',False)
@@ -395,7 +399,7 @@ def prepare(engine, plan):
                         recipe=artifact.get('quantization_recipe') or artifact.get('provenance',{}).get('64',{}).get('quantization_recipe',{})
                         digest=recipe.get('calibration',{}).get('sha256',recipe.get('calibration_sha256'))
                         component=artifact.get('component','target' if backend is middle.target_engine else 'draft')
-                        if digest!=calibration_digest(plan,component) or recipe.get('scheme')!=plan['precision']:
+                        if digest!=calibration_digest(plan,component) or recipe.get('scheme')!=component_precision(plan,component):
                             raise ValueError('Middle precision/calibration differs from main')
                     middle_controller=FirstChunkController(engine,middle,proposal,True,plan['runtime_backend'],2)
                     middle_controller.runtime.compact_tail=CompactTail(tail_controller.runtime,after=3)
@@ -416,7 +420,7 @@ def prepare(engine, plan):
                 from inspark_infer.ops.tensorrt.official_vocoder_segments import OfficialVocoderSegments
                 partition=read_json(Path(plan['vocoder_partition_plan']))
                 recipe=partition.get('quantization_recipe',{})
-                if (partition.get('batch')!=plan['batch'] or recipe.get('scheme')!=plan['precision'] or
+                if (partition.get('batch')!=plan['batch'] or recipe.get('scheme')!=component_precision(plan,'vocoder') or
                         recipe.get('calibration',{}).get('sha256')!=calibration_digest(plan,'vocoder')):
                     raise ValueError('Vendor vocoder partition differs in batch/precision/calibration')
                 engine.vocoder=OfficialVocoderSegments(plan['vocoder_partition_plan'],fallback=engine.vocoder)

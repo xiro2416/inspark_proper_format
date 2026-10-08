@@ -2,6 +2,9 @@
 import hashlib,json
 from pathlib import Path
 
+def component_precision(plan,component,default=None):
+    return plan.get("component_precisions",{}).get(component,plan.get("precision",default))
+
 def calibration_path(plan,component):
     return plan.get('component_calibrations',{}).get(component,plan['calibration'])
 
@@ -45,5 +48,5 @@ def validate_component_roles(plan):
         source=json.loads(Path(path).read_text())
         old={k:v for k,v in source['role_specs'].items() if k.startswith(component+'.')}
         new={k:v for k,v in composite['role_specs'].items() if k.startswith(component+'.')}
-        if source['scheme']!=composite['scheme'] or not old or old!=new:
+        if source['scheme']!=component_precision(plan,component,composite['scheme']) or not old or old!=new:
             raise ValueError(f'{component} reused calibration differs from the composite recipe')
