@@ -1,0 +1,20 @@
+{
+  "status": "isolated_candidate_source_prepared_not_validated",
+  "gate": "all7 migration accepted",
+  "sources": {
+    "a1007_graph": {
+      "source": "src/inspark_infer/runtime/zipvoice/routes/a1007.py",
+      "source_sha256": "252e58cb262d9e27f8c35cb0981be375356cdfa2dae8b0c2c435411a2960622d",
+      "candidate": "src/inspark_infer/runtime/zipvoice/routes/a1007_graph.py",
+      "candidate_sha256": "d51a647bc58f723e858d63270b74ae9f67b0a2c6a6ccb8b2e0e65ff29cde79db"
+    },
+    "a1007_delivery_graph": {
+      "source": "src/inspark_infer/runtime/zipvoice/routes/a1007_delivery.py",
+      "source_sha256": "c17f7d0e27544b80a2af2efce2d88f9428a0b5bcb0bca2cc1ba4ed6c7ed329b9",
+      "candidate": "src/inspark_infer/runtime/zipvoice/routes/a1007_delivery_graph.py",
+      "candidate_sha256": "ca6621be9c00549c7dee3f1ab44573b8ed79262faab17c8da73346f3e64b3ea8"
+    }
+  },
+  "preserved": "All engines/plugins/weights/scales/mathematics; original application modules untouched",
+  "change": "Capture text+8FM/Euler+Vocos+ISTFT/RMS as one shape-bound graph; fresh input staging and noise reset remain outside"
+}

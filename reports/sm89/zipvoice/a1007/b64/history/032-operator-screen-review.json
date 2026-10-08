@@ -1,0 +1,13 @@
+{
+  "status": "operator_screens_reviewed_normal_k16_aot_required",
+  "normal_tf32_basic_projected_percent": 0.8650861325997133,
+  "normal_tf32_k16_projected_percent": 1.1846891977639376,
+  "normal_geometry_decision": "Build independentnormtf32k16; all9stage lengths positive; fullmapping/quality/currentbestE2E required",
+  "f32_ffn_decision": "Keep source128x64x32/4warps/2stages. 180completewidth/length/geometry/pipeline/warp tests include relatedregisterpressure check; individualpositive cases do not establish a stable complete-request gain. No AOT change yet.",
+  "graph_b64_decision": "Retain verifiedbyteexactcapturedpath as current comparator, report .0493percent as noise-scale. Stop independentcapture tuning after related operatorcost review.",
+  "limits": [
+    "Synthetic fullwork JIT isnotTensorRT AOT orE2E",
+    "Rawsource comparator respected; allprobes serializedGPU1/400W and preservedknownidleexternalcontext",
+    "Remainingmajor source/nativeFloat costs require review after candidateengine execution beforefinaloptimizationcomplete"
+  ]
+}

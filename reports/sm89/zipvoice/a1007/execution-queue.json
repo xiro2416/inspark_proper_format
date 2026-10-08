@@ -1,0 +1,41 @@
+{
+  "status": "isolated_variant_adaptation_active",
+  "gpu_policy": "Only physical GPU1; all GPU jobs serial under the global lease",
+  "coordinator": {
+    "pid": 777524,
+    "script": "scripts/build_zipvoice_matrix.py",
+    "log": "outputs/build-logs/matrix-application.log",
+    "status": "all_builds_and_application_validation_complete"
+  },
+  "measurement_supervisor": {
+    "pid": 2312002,
+    "script": ".work/adaptive_migration_measurements.py",
+    "log": "outputs/build-logs/adaptive-migration-queue.log",
+    "state": "reports/sm89/zipvoice/a1007/measurement-queue.json",
+    "waits_for": "matrix exit and all7 application/quality reports",
+    "order": [
+      "initial E2E complete",
+      "all7 FM timing/profiling",
+      "small batch FFN/I8 residual/I8 value and nonlinear attention geometry",
+      "normal geometry",
+      "manual compute adaptation review before scheduling"
+    ],
+    "restart_reason": "NVML now identifies the unchanged known idle allocation as host PID1820496; stable idle observation recorded, ownership remains external/unknown.",
+    "status": "terminal"
+  },
+  "remaining_before_acceptance": [
+    "Review localized B8/B16 quality changes with source comparison/mapping evidence; additional seeded tests if unresolved",
+    "Choose source scheduling/geometry based on matched target E2E; rebuild and validate retained tile adaptations",
+    "Accept all7 migration targets before new optimization"
+  ],
+  "acceptance": "No automatic migration acceptance, optimization, remote write or deletion",
+  "adaptive_change": {
+    "reason": "B1 inherited regresses native by33-43% across all three real lengths. Prioritize compute profiles/geometry before scheduling sweeps.",
+    "retired_supervisor_pid": 2308671,
+    "uninterrupted_baseline_pid": 2308673,
+    "next_supervisor": ".work/adaptive_migration_measurements.py",
+    "then": "Manual compute adaptation review before scheduling, migration acceptance and new optimization."
+  },
+  "next_action": "compute-adaptation-review.json; isolated variant preparation/build/validation, then scheduling",
+  "details": "variant-execution.json"
+}

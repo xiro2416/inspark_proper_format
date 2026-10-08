@@ -1,0 +1,41 @@
+{
+  "status": "related_applicability_screens_reviewed",
+  "batches": {
+    "4": {
+      "source_bound_full_shape_cases": 18,
+      "all_outputs_bitwise_equal": true,
+      "estimated_savings_ms": -0.17689594626426697,
+      "estimated_e2e_potential_percent": -0.21217477048543762,
+      "decision": "Keep source; aggregate negative",
+      "scope": "Synthetic JIT currentbatch/sourcegeometry/full widths/full-half stageboundaries; doesnotestablishAOT orE2E gain"
+    },
+    "8": {
+      "source_bound_full_shape_cases": 18,
+      "all_outputs_bitwise_equal": true,
+      "estimated_savings_ms": 0.704512357711792,
+      "estimated_e2e_potential_percent": 0.4760632743903629,
+      "decision": "Focused simple existing-math cache transfer and AOT/currentbestE2E validation",
+      "scope": "Synthetic JIT currentbatch/sourcegeometry/full widths/full-half stageboundaries; doesnotestablishAOT orE2E gain"
+    },
+    "16": {
+      "source_bound_full_shape_cases": 18,
+      "all_outputs_bitwise_equal": true,
+      "estimated_savings_ms": 1.1386882066726685,
+      "estimated_e2e_potential_percent": 0.402755858596018,
+      "decision": "Focused simple existing-math cache transfer and AOT/currentbestE2E validation",
+      "scope": "Synthetic JIT currentbatch/sourcegeometry/full widths/full-half stageboundaries; doesnotestablishAOT orE2E gain"
+    },
+    "32": {
+      "source_bound_full_shape_cases": 18,
+      "all_outputs_bitwise_equal": true,
+      "estimated_savings_ms": 2.267391562461853,
+      "estimated_e2e_potential_percent": 0.371334411380042,
+      "decision": "Focused simple existing-math cache transfer and AOT/currentbestE2E validation",
+      "scope": "Synthetic JIT currentbatch/sourcegeometry/full widths/full-half stageboundaries; doesnotestablishAOT orE2E gain"
+    }
+  },
+  "not_applicable": {
+    "1": "Retained native compute has no custom FFN operand-round loop",
+    "2": "Retained geo3 omits custom FFN; preserve faster native compute"
+  }
+}

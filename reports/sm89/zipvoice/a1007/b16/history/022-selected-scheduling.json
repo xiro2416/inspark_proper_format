@@ -1,0 +1,175 @@
+{
+  "batch": 16,
+  "source_policy": {
+    "chunk": 16,
+    "workers": 4
+  },
+  "status": "matched_scheduling_measurements_complete_review_pending",
+  "shapes": {
+    "primary760": {
+      "frames": 760,
+      "stats": {
+        "16": {
+          "count": 20,
+          "median_s": 0.2883925785
+        },
+        "1": {
+          "count": 20,
+          "median_s": 0.2854978035
+        },
+        "4": {
+          "count": 20,
+          "median_s": 0.2849516975
+        }
+      },
+      "blocks": [
+        {
+          "chunk": 16,
+          "median_s": 0.2843825115,
+          "report": "/workspace/A_1007/outputs/zipvoice-benchmarks/b16/scheduling/inherited/primary760/0-chunk16/report.json"
+        },
+        {
+          "chunk": 1,
+          "median_s": 0.28607638,
+          "report": "/workspace/A_1007/outputs/zipvoice-benchmarks/b16/scheduling/inherited/primary760/1-chunk1/report.json"
+        },
+        {
+          "chunk": 4,
+          "median_s": 0.2849895955,
+          "report": "/workspace/A_1007/outputs/zipvoice-benchmarks/b16/scheduling/inherited/primary760/2-chunk4/report.json"
+        },
+        {
+          "chunk": 4,
+          "median_s": 0.2844887875,
+          "report": "/workspace/A_1007/outputs/zipvoice-benchmarks/b16/scheduling/inherited/primary760/3-chunk4/report.json"
+        },
+        {
+          "chunk": 1,
+          "median_s": 0.284370959,
+          "report": "/workspace/A_1007/outputs/zipvoice-benchmarks/b16/scheduling/inherited/primary760/4-chunk1/report.json"
+        },
+        {
+          "chunk": 16,
+          "median_s": 0.291204118,
+          "report": "/workspace/A_1007/outputs/zipvoice-benchmarks/b16/scheduling/inherited/primary760/5-chunk16/report.json"
+        }
+      ],
+      "selected_wav_exact": true
+    },
+    "short": {
+      "frames": 608,
+      "stats": {
+        "16": {
+          "count": 20,
+          "median_s": 0.237341642
+        },
+        "1": {
+          "count": 20,
+          "median_s": 0.23574436999999998
+        },
+        "4": {
+          "count": 20,
+          "median_s": 0.23520465000000002
+        }
+      },
+      "blocks": [
+        {
+          "chunk": 16,
+          "median_s": 0.237533379,
+          "report": "/workspace/A_1007/outputs/zipvoice-benchmarks/b16/scheduling/inherited/short/0-chunk16/report.json"
+        },
+        {
+          "chunk": 1,
+          "median_s": 0.234444518,
+          "report": "/workspace/A_1007/outputs/zipvoice-benchmarks/b16/scheduling/inherited/short/1-chunk1/report.json"
+        },
+        {
+          "chunk": 4,
+          "median_s": 0.2356905225,
+          "report": "/workspace/A_1007/outputs/zipvoice-benchmarks/b16/scheduling/inherited/short/2-chunk4/report.json"
+        },
+        {
+          "chunk": 4,
+          "median_s": 0.233701954,
+          "report": "/workspace/A_1007/outputs/zipvoice-benchmarks/b16/scheduling/inherited/short/3-chunk4/report.json"
+        },
+        {
+          "chunk": 1,
+          "median_s": 0.236321092,
+          "report": "/workspace/A_1007/outputs/zipvoice-benchmarks/b16/scheduling/inherited/short/4-chunk1/report.json"
+        },
+        {
+          "chunk": 16,
+          "median_s": 0.237341642,
+          "report": "/workspace/A_1007/outputs/zipvoice-benchmarks/b16/scheduling/inherited/short/5-chunk16/report.json"
+        }
+      ],
+      "selected_wav_exact": true
+    },
+    "long": {
+      "frames": 918,
+      "stats": {
+        "16": {
+          "count": 20,
+          "median_s": 0.379955021
+        },
+        "1": {
+          "count": 20,
+          "median_s": 0.37163164449999997
+        },
+        "4": {
+          "count": 20,
+          "median_s": 0.37197143200000005
+        }
+      },
+      "blocks": [
+        {
+          "chunk": 16,
+          "median_s": 0.38018304,
+          "report": "/workspace/A_1007/outputs/zipvoice-benchmarks/b16/scheduling/inherited/long/0-chunk16/report.json"
+        },
+        {
+          "chunk": 1,
+          "median_s": 0.37271365749999996,
+          "report": "/workspace/A_1007/outputs/zipvoice-benchmarks/b16/scheduling/inherited/long/1-chunk1/report.json"
+        },
+        {
+          "chunk": 4,
+          "median_s": 0.371768492,
+          "report": "/workspace/A_1007/outputs/zipvoice-benchmarks/b16/scheduling/inherited/long/2-chunk4/report.json"
+        },
+        {
+          "chunk": 4,
+          "median_s": 0.3719943455,
+          "report": "/workspace/A_1007/outputs/zipvoice-benchmarks/b16/scheduling/inherited/long/3-chunk4/report.json"
+        },
+        {
+          "chunk": 1,
+          "median_s": 0.370940506,
+          "report": "/workspace/A_1007/outputs/zipvoice-benchmarks/b16/scheduling/inherited/long/4-chunk1/report.json"
+        },
+        {
+          "chunk": 16,
+          "median_s": 0.37964533300000003,
+          "report": "/workspace/A_1007/outputs/zipvoice-benchmarks/b16/scheduling/inherited/long/5-chunk16/report.json"
+        }
+      ],
+      "selected_wav_exact": true
+    }
+  },
+  "numerical_contract": "Selected WAV bytes exact across scheduling choices",
+  "compute_evidence": {
+    "route": "inherited",
+    "engine_sha256": "676a48000cdd8dc4f31af40c0edf53ef628c6f9f3d7f5bcb2023236190fcce90",
+    "plugin_package": "inspark_infer.ops.tensorrt.zipvoice.a1007.b16",
+    "performance_evidence_sha256": "52b9d9865c7d495e77fad4e7ac1e9ef36490d519e8c54dd686c267fb85423eb1",
+    "quality_evidence_sha256": "50d812e4f0406167f1ddc63f0eafc0ca7a6c9b5204480d04d5e6a013bd3ebb36"
+  },
+  "preflight": {
+    "memory_mib": 4108.0,
+    "gpu_util_percent": 0.0,
+    "processes": "1820496, 4082",
+    "power_cap_w": 400.0,
+    "scope": "Known idle allocation retained; not exclusive device ownership"
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "status": "selected_cpu_regressions_passed",
+  "tests": 48,
+  "suite": "41 pytest cases across ZipVoice/layout/release/TRT bundles/ensure/GPU lease/API; 7 IndexTTS2 quantization unittest cases",
+  "cuda_visible_devices": "",
+  "environments": {
+    "pytest": ".venv-zipvoice",
+    "quantization": ".venv-evaluation"
+  },
+  "initial_environment_failures": [
+    "Runtime environment intentionally lacks Transformers; quantization suite rerun successfully in evaluation environment",
+    "One Index TRT bundle test requires explicit ACC_TRT113_SITE; rerun with existing local TRT site succeeded"
+  ],
+  "limits": "CPU contracts only; does not recertify IndexTTS2 GPU runtime or final ZipVoice cloud packages"
+}

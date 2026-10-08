@@ -1,0 +1,45 @@
+{
+  "status": "compute_routes_reviewed_application_scheduling_pending",
+  "batches": {
+    "1": {
+      "route": "native",
+      "compute_review": "Prefer verified native route: full inherited primary regresses43.22%, geo1/geo2 regress, geo3 formal primary gain not established (-0.59%), although 608/918 improve. Source application mechanisms remain under migration review.",
+      "custom_disposition": "Remove inherited compute plugins on target measurements; original INT8 weights/scales and source code remain intact."
+    },
+    "2": {
+      "route": "geo3",
+      "compute_review": "Retain native attention/FFN/value and source DW/residual: formal608/760/918 gains3.06/3.28/1.68% over native.",
+      "custom_disposition": "48custom=24DW+24INT8residual; source shared attention, nonlinear, floatingFFN and INT8value removed on target small-batch evidence."
+    },
+    "4": {
+      "route": "geo1",
+      "compute_review": "Retain geometry adaptation: formal608/760/918 gains4.57/4.37/2.98% over inherited.",
+      "custom_disposition": "Complete inherited120nativeINT8+120custom preserved, launch geometry adjusted."
+    },
+    "8": {
+      "route": "inherited",
+      "compute_review": "Retain inherited source compute: geo1 formal608/760/918 gains1.96/-1.24/0.27%. Main760 target regresses; target adaptation not retained.",
+      "custom_disposition": "Complete inherited coverage preserved; independent geo1 package remains experimental."
+    },
+    "64": {
+      "route": "inherited",
+      "compute_review": "Original full migration improvesprimary20.54% vs native; consequential geometry diagnostics do not establish a replacement.",
+      "custom_disposition": "Complete source compute coverage and IEEE normal-attention precision preserved; TF32 normal candidate is later optimization, not implicit migration."
+    },
+    "16": {
+      "route": "inherited",
+      "compute_review": "Retain inherited: geo1 formal608/760/918 gains0.50/-0.64/-0.85%; primary and long regress.",
+      "custom_disposition": "Complete inherited coverage preserved; candidate stage geometry not retained without net primary gain."
+    },
+    "32": {
+      "route": "inherited",
+      "compute_review": "Retain inherited: geo1 formal608/760/918 regress1.02/1.21/1.12%; geometry rejected by complete target E2E.",
+      "custom_disposition": "Complete original B32 compute and normal math preserved; reject geometry candidate with target E2E regression."
+    }
+  },
+  "pending_batches": [],
+  "entry_gate": "All seven actual compute and application schedules accepted before new optimization",
+  "quality_policy": "Mapping primary; retain explicit CER/UTMOS/SIM-o tradeoffs in candidate-quality-review.json",
+  "next": "Complete formal matrix, then measure selected-route PCM chunking and source compact delivery across three real lengths",
+  "routes_file": "reports/sm89/zipvoice/a1007/reviewed-compute-routes.json"
+}

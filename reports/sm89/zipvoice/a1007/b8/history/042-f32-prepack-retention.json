@@ -1,0 +1,29 @@
+{
+  "status": "f32_operand_prepack_retained_remaining_transfer_review_pending",
+  "route": "wp",
+  "application": "a1007_graph",
+  "pcm_policy": {
+    "chunk": 1,
+    "workers": 4
+  },
+  "performance_evidence_sha256": "84cc304475596f0852446fba37a1743bc6af67c3dd896062cc0c637bb83e8c38",
+  "application_evidence_sha256": "1049f9d09cc95fb2fdf97cac41ae8714248ff478f64a46cc1398a8ba10d3b9fd",
+  "quality_evidence_sha256": "12f103e70c74e24d36c1a788f1655f6fb90485d34963ffed11ed28329df5774d",
+  "build_evidence_sha256": "1dcf549b97def8a92acd214a80a2ae12ab9ba4e49cb9a9a389d2032cac7d2812",
+  "gains_percent": {
+    "short": -0.10621448869026817,
+    "primary760": 0.6553232002631378,
+    "long": 0.5691392956445009
+  },
+  "primary_median_ms": 147.8678685,
+  "power_w": {
+    "mean": 394.47916875,
+    "p50": 395.599,
+    "p95": 396.598,
+    "max": 396.789
+  },
+  "decision": "Retain for agreed primary760 objective after complete mapping/quality validation; other-length tradeoff explicitly disclosed. Prioritize agreed760: +0.6553%; long918 +0.5691%. Short608 pooled median regression0.1062%/0.134ms is disclosed; sourceblock125.700\u2013127.897ms andcandidate125.783\u2013126.932ms overlap. No claimed short gain. Actual state/PCM identity and source-bound engine/plugin/power reports verified.",
+  "optimization_review_complete": false,
+  "remaining": "Finish applicability screens forB4/8/16/32, finalall7execution-cost review and release/source-bound checks",
+  "shape_tradeoff_review": "Prioritize agreed760: +0.6553%; long918 +0.5691%. Short608 pooled median regression0.1062%/0.134ms is disclosed; sourceblock125.700\u2013127.897ms andcandidate125.783\u2013126.932ms overlap. No claimed short gain. Actual state/PCM identity and source-bound engine/plugin/power reports verified."
+}

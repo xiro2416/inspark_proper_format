@@ -1,0 +1,190 @@
+{
+  "status": "normal_k16_actual_engine_execution_contract_reviewed_quality_e2e_pending",
+  "engine_sha256": {
+    "control": "c7bb42fe641748e88c68851f65d3120c84b23bf40b0c8fac2b8d66c132caf6f1",
+    "candidate": "d019a5370dde8d5cc1e54718626520029fd4e0d758cca1ae43b939ae4efaa6b8"
+  },
+  "build_sha256": {
+    "control": "021c895badaca63133089dad38e8bf7bc29536845a0fb13f493b0bccd8c12d13",
+    "candidate": "89cc7ed7caf4f00e479f2979b1da826f79e2421922da18234d3ea466ee56d226"
+  },
+  "inspector_sha256": {
+    "control": "4f3c8d1f7a4321556003bb202912f734b53d5514d7b4f792de3f37580c48bf20",
+    "candidate": "28a432fd68b1c50cffe6e656eacbef64515a10ada084fb1dc0161317c3470937"
+  },
+  "same_source_graph_weights_and_profile": true,
+  "changed_source_modules": [
+    "online_branch_stats_runtime_kernel.py",
+    "online_branch_wide_aot.py",
+    "online_branch_wide_plugin.py"
+  ],
+  "native_gemm_tactics": {
+    "count": 214,
+    "changed": []
+  },
+  "layer_type_counts": {
+    "control": {
+      "NoOp": 1,
+      "shape_call": 161,
+      "kgen": 551,
+      "gemm": 214,
+      "ShapeHostToDevice": 1,
+      "Constant": 264,
+      "PluginV3": 120,
+      "CaskConvolution": 8,
+      "fusion": 36,
+      "Shuffle": 24,
+      "Reformat": 16
+    },
+    "candidate": {
+      "NoOp": 1,
+      "shape_call": 161,
+      "kgen": 551,
+      "gemm": 214,
+      "Constant": 240,
+      "PluginV3": 120,
+      "ShapeHostToDevice": 1,
+      "CaskConvolution": 8,
+      "fusion": 36,
+      "Reformat": 16
+    }
+  },
+  "normal_aot_resources": [
+    {
+      "function": "normal_stats_write_aot",
+      "ptx_sha256": "2000de5ccbf886ce67ebaf8c1377a1158223325b52ea2ee29a89ed14316b7516",
+      "num_warps": 4,
+      "num_stages": 1,
+      "shared_bytes": 12288,
+      "registers": 146,
+      "spills": 0,
+      "global_scratch_bytes": 0,
+      "rna_conversion": true,
+      "int8_mma": false,
+      "tf32_mma": true,
+      "scope": "Triton AOT cubin resources/PTX; TensorRT consumes the recorded PTX, not this diagnostic cubin."
+    },
+    {
+      "function": "normal_stats_read_aot",
+      "ptx_sha256": "3be30f577d36e07c2e0162152d7393dd2aff0d83d6e63dc7066e7f3e0a429dff",
+      "num_warps": 4,
+      "num_stages": 1,
+      "shared_bytes": 12288,
+      "registers": 128,
+      "spills": 0,
+      "global_scratch_bytes": 0,
+      "rna_conversion": true,
+      "int8_mma": false,
+      "tf32_mma": true,
+      "scope": "Triton AOT cubin resources/PTX; TensorRT consumes the recorded PTX, not this diagnostic cubin."
+    }
+  ],
+  "removed_shuffle_nodes": [
+    {
+      "name": "/fm_decoder/encoders.2/encoder/layers.0/self_attn1/Transpose_1 + /fm_decoder/encoders.2/encoder/layers.0/self_attn1/Reshape_1",
+      "metadata": "[ONNX Layer: /fm_decoder/encoders.2/encoder/layers.0/self_attn1/Transpose_1]\u001e[ONNX Layer: /fm_decoder/encoders.2/encoder/layers.0/self_attn1/Reshape_1]"
+    },
+    {
+      "name": "/fm_decoder/encoders.2/encoder/layers.0/self_attn2/Transpose_1 + /fm_decoder/encoders.2/encoder/layers.0/self_attn2/Reshape_1",
+      "metadata": "[ONNX Layer: /fm_decoder/encoders.2/encoder/layers.0/self_attn2/Transpose_1]\u001e[ONNX Layer: /fm_decoder/encoders.2/encoder/layers.0/self_attn2/Reshape_1]"
+    },
+    {
+      "name": "/fm_decoder/encoders.2/encoder/layers.1/self_attn1/Transpose_1 + /fm_decoder/encoders.2/encoder/layers.1/self_attn1/Reshape_1",
+      "metadata": "[ONNX Layer: /fm_decoder/encoders.2/encoder/layers.1/self_attn1/Transpose_1]\u001e[ONNX Layer: /fm_decoder/encoders.2/encoder/layers.1/self_attn1/Reshape_1]"
+    },
+    {
+      "name": "/fm_decoder/encoders.2/encoder/layers.1/self_attn2/Transpose_1 + /fm_decoder/encoders.2/encoder/layers.1/self_attn2/Reshape_1",
+      "metadata": "[ONNX Layer: /fm_decoder/encoders.2/encoder/layers.1/self_attn2/Transpose_1]\u001e[ONNX Layer: /fm_decoder/encoders.2/encoder/layers.1/self_attn2/Reshape_1]"
+    },
+    {
+      "name": "/fm_decoder/encoders.2/encoder/layers.2/self_attn1/Transpose_1 + /fm_decoder/encoders.2/encoder/layers.2/self_attn1/Reshape_1",
+      "metadata": "[ONNX Layer: /fm_decoder/encoders.2/encoder/layers.2/self_attn1/Transpose_1]\u001e[ONNX Layer: /fm_decoder/encoders.2/encoder/layers.2/self_attn1/Reshape_1]"
+    },
+    {
+      "name": "/fm_decoder/encoders.2/encoder/layers.2/self_attn2/Transpose_1 + /fm_decoder/encoders.2/encoder/layers.2/self_attn2/Reshape_1",
+      "metadata": "[ONNX Layer: /fm_decoder/encoders.2/encoder/layers.2/self_attn2/Transpose_1]\u001e[ONNX Layer: /fm_decoder/encoders.2/encoder/layers.2/self_attn2/Reshape_1]"
+    },
+    {
+      "name": "/fm_decoder/encoders.2/encoder/layers.3/self_attn1/Transpose_1 + /fm_decoder/encoders.2/encoder/layers.3/self_attn1/Reshape_1",
+      "metadata": "[ONNX Layer: /fm_decoder/encoders.2/encoder/layers.3/self_attn1/Transpose_1]\u001e[ONNX Layer: /fm_decoder/encoders.2/encoder/layers.3/self_attn1/Reshape_1]"
+    },
+    {
+      "name": "/fm_decoder/encoders.2/encoder/layers.3/self_attn2/Transpose_1 + /fm_decoder/encoders.2/encoder/layers.3/self_attn2/Reshape_1",
+      "metadata": "[ONNX Layer: /fm_decoder/encoders.2/encoder/layers.3/self_attn2/Transpose_1]\u001e[ONNX Layer: /fm_decoder/encoders.2/encoder/layers.3/self_attn2/Reshape_1]"
+    },
+    {
+      "name": "/fm_decoder/encoders.3/encoder/layers.0/self_attn1/Transpose_1 + /fm_decoder/encoders.3/encoder/layers.0/self_attn1/Reshape_1",
+      "metadata": "[ONNX Layer: /fm_decoder/encoders.3/encoder/layers.0/self_attn1/Transpose_1]\u001e[ONNX Layer: /fm_decoder/encoders.3/encoder/layers.0/self_attn1/Reshape_1]"
+    },
+    {
+      "name": "/fm_decoder/encoders.3/encoder/layers.0/self_attn2/Transpose_1 + /fm_decoder/encoders.3/encoder/layers.0/self_attn2/Reshape_1",
+      "metadata": "[ONNX Layer: /fm_decoder/encoders.3/encoder/layers.0/self_attn2/Transpose_1]\u001e[ONNX Layer: /fm_decoder/encoders.3/encoder/layers.0/self_attn2/Reshape_1]"
+    },
+    {
+      "name": "/fm_decoder/encoders.3/encoder/layers.1/self_attn1/Transpose_1 + /fm_decoder/encoders.3/encoder/layers.1/self_attn1/Reshape_1",
+      "metadata": "[ONNX Layer: /fm_decoder/encoders.3/encoder/layers.1/self_attn1/Transpose_1]\u001e[ONNX Layer: /fm_decoder/encoders.3/encoder/layers.1/self_attn1/Reshape_1]"
+    },
+    {
+      "name": "/fm_decoder/encoders.3/encoder/layers.1/self_attn2/Transpose_1 + /fm_decoder/encoders.3/encoder/layers.1/self_attn2/Reshape_1",
+      "metadata": "[ONNX Layer: /fm_decoder/encoders.3/encoder/layers.1/self_attn2/Transpose_1]\u001e[ONNX Layer: /fm_decoder/encoders.3/encoder/layers.1/self_attn2/Reshape_1]"
+    },
+    {
+      "name": "/fm_decoder/encoders.3/encoder/layers.2/self_attn1/Transpose_1 + /fm_decoder/encoders.3/encoder/layers.2/self_attn1/Reshape_1",
+      "metadata": "[ONNX Layer: /fm_decoder/encoders.3/encoder/layers.2/self_attn1/Transpose_1]\u001e[ONNX Layer: /fm_decoder/encoders.3/encoder/layers.2/self_attn1/Reshape_1]"
+    },
+    {
+      "name": "/fm_decoder/encoders.3/encoder/layers.2/self_attn2/Transpose_1 + /fm_decoder/encoders.3/encoder/layers.2/self_attn2/Reshape_1",
+      "metadata": "[ONNX Layer: /fm_decoder/encoders.3/encoder/layers.2/self_attn2/Transpose_1]\u001e[ONNX Layer: /fm_decoder/encoders.3/encoder/layers.2/self_attn2/Reshape_1]"
+    },
+    {
+      "name": "/fm_decoder/encoders.3/encoder/layers.3/self_attn1/Transpose_1 + /fm_decoder/encoders.3/encoder/layers.3/self_attn1/Reshape_1",
+      "metadata": "[ONNX Layer: /fm_decoder/encoders.3/encoder/layers.3/self_attn1/Transpose_1]\u001e[ONNX Layer: /fm_decoder/encoders.3/encoder/layers.3/self_attn1/Reshape_1]"
+    },
+    {
+      "name": "/fm_decoder/encoders.3/encoder/layers.3/self_attn2/Transpose_1 + /fm_decoder/encoders.3/encoder/layers.3/self_attn2/Reshape_1",
+      "metadata": "[ONNX Layer: /fm_decoder/encoders.3/encoder/layers.3/self_attn2/Transpose_1]\u001e[ONNX Layer: /fm_decoder/encoders.3/encoder/layers.3/self_attn2/Reshape_1]"
+    },
+    {
+      "name": "/fm_decoder/encoders.4/layers.0/self_attn1/Transpose_1 + /fm_decoder/encoders.4/layers.0/self_attn1/Reshape_1",
+      "metadata": "[ONNX Layer: /fm_decoder/encoders.4/layers.0/self_attn1/Transpose_1]\u001e[ONNX Layer: /fm_decoder/encoders.4/layers.0/self_attn1/Reshape_1]"
+    },
+    {
+      "name": "/fm_decoder/encoders.4/layers.0/self_attn2/Transpose_1 + /fm_decoder/encoders.4/layers.0/self_attn2/Reshape_1",
+      "metadata": "[ONNX Layer: /fm_decoder/encoders.4/layers.0/self_attn2/Transpose_1]\u001e[ONNX Layer: /fm_decoder/encoders.4/layers.0/self_attn2/Reshape_1]"
+    },
+    {
+      "name": "/fm_decoder/encoders.4/layers.1/self_attn1/Transpose_1 + /fm_decoder/encoders.4/layers.1/self_attn1/Reshape_1",
+      "metadata": "[ONNX Layer: /fm_decoder/encoders.4/layers.1/self_attn1/Transpose_1]\u001e[ONNX Layer: /fm_decoder/encoders.4/layers.1/self_attn1/Reshape_1]"
+    },
+    {
+      "name": "/fm_decoder/encoders.4/layers.1/self_attn2/Transpose_1 + /fm_decoder/encoders.4/layers.1/self_attn2/Reshape_1",
+      "metadata": "[ONNX Layer: /fm_decoder/encoders.4/layers.1/self_attn2/Transpose_1]\u001e[ONNX Layer: /fm_decoder/encoders.4/layers.1/self_attn2/Reshape_1]"
+    },
+    {
+      "name": "/fm_decoder/encoders.4/layers.2/self_attn1/Transpose_1 + /fm_decoder/encoders.4/layers.2/self_attn1/Reshape_1",
+      "metadata": "[ONNX Layer: /fm_decoder/encoders.4/layers.2/self_attn1/Transpose_1]\u001e[ONNX Layer: /fm_decoder/encoders.4/layers.2/self_attn1/Reshape_1]"
+    },
+    {
+      "name": "/fm_decoder/encoders.4/layers.2/self_attn2/Transpose_1 + /fm_decoder/encoders.4/layers.2/self_attn2/Reshape_1",
+      "metadata": "[ONNX Layer: /fm_decoder/encoders.4/layers.2/self_attn2/Transpose_1]\u001e[ONNX Layer: /fm_decoder/encoders.4/layers.2/self_attn2/Reshape_1]"
+    },
+    {
+      "name": "/fm_decoder/encoders.4/layers.3/self_attn1/Transpose_1 + /fm_decoder/encoders.4/layers.3/self_attn1/Reshape_1",
+      "metadata": "[ONNX Layer: /fm_decoder/encoders.4/layers.3/self_attn1/Transpose_1]\u001e[ONNX Layer: /fm_decoder/encoders.4/layers.3/self_attn1/Reshape_1]"
+    },
+    {
+      "name": "/fm_decoder/encoders.4/layers.3/self_attn2/Transpose_1 + /fm_decoder/encoders.4/layers.3/self_attn2/Reshape_1",
+      "metadata": "[ONNX Layer: /fm_decoder/encoders.4/layers.3/self_attn2/Transpose_1]\u001e[ONNX Layer: /fm_decoder/encoders.4/layers.3/self_attn2/Reshape_1]"
+    }
+  ],
+  "attribution_limits": [
+    "Counts include views/metadata and do not establish removed physical GPU cost",
+    "Same214GEMMtactics, but normal math+Kgeometry and optimizer layout/view changes are combined; do not label a measured gain pureTF32 alone",
+    "AOT diagnosticcubins versusJIT resources differ: actualwrite146/read128registers; no spills/scratch. TensorRT consumes recordedPTX."
+  ],
+  "protected_float_fusion_prior_review": {
+    "evidence": "source/b64/history/259-F32-native-TF32-fusion-probe.json",
+    "scope": "Samehardware/fullB64T760 originalprojection\u2192tanh/value/gate, nearestTF32 andFloat32storage",
+    "decision": "No new protectedfloatingfusion change; priorwidegeometry near1.25percent localgain requires52spills, other tested configurations regress14\u201328percent or exceedsharedcapacity. Current214nativeGEMMtactics unchanged; revisit onlywitha newmechanism/prerequisite."
+  }
+}

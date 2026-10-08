@@ -1,0 +1,120 @@
+{
+  "batch": 32,
+  "status": "delivery_reuse_measured_review_pending",
+  "shapes": {
+    "short": {
+      "frames": 608,
+      "medians_s": {
+        "a1007": 0.482862891,
+        "a1007_delivery": 0.479686429
+      },
+      "gain_percent": 0.6578393285558966,
+      "samples_per_route": 20,
+      "blocks": [
+        {
+          "application": "a1007",
+          "median_s": 0.4822968085,
+          "report": "/workspace/A_1007/outputs/zipvoice-benchmarks/b32/delivery-reuse/inherited/short/0-a1007/report.json"
+        },
+        {
+          "application": "a1007_delivery",
+          "median_s": 0.4788548525,
+          "report": "/workspace/A_1007/outputs/zipvoice-benchmarks/b32/delivery-reuse/inherited/short/1-a1007_delivery/report.json"
+        },
+        {
+          "application": "a1007_delivery",
+          "median_s": 0.47984604799999997,
+          "report": "/workspace/A_1007/outputs/zipvoice-benchmarks/b32/delivery-reuse/inherited/short/2-a1007_delivery/report.json"
+        },
+        {
+          "application": "a1007",
+          "median_s": 0.482862891,
+          "report": "/workspace/A_1007/outputs/zipvoice-benchmarks/b32/delivery-reuse/inherited/short/3-a1007/report.json"
+        }
+      ],
+      "selected_wav_exact": true
+    },
+    "primary760": {
+      "frames": 760,
+      "medians_s": {
+        "a1007": 0.6178666035,
+        "a1007_delivery": 0.6131291194999999
+      },
+      "gain_percent": 0.7667486757115316,
+      "samples_per_route": 20,
+      "blocks": [
+        {
+          "application": "a1007",
+          "median_s": 0.6178666035,
+          "report": "/workspace/A_1007/outputs/zipvoice-benchmarks/b32/delivery-reuse/inherited/primary760/0-a1007/report.json"
+        },
+        {
+          "application": "a1007_delivery",
+          "median_s": 0.6125045935,
+          "report": "/workspace/A_1007/outputs/zipvoice-benchmarks/b32/delivery-reuse/inherited/primary760/1-a1007_delivery/report.json"
+        },
+        {
+          "application": "a1007_delivery",
+          "median_s": 0.6187488655,
+          "report": "/workspace/A_1007/outputs/zipvoice-benchmarks/b32/delivery-reuse/inherited/primary760/2-a1007_delivery/report.json"
+        },
+        {
+          "application": "a1007",
+          "median_s": 0.6181358095,
+          "report": "/workspace/A_1007/outputs/zipvoice-benchmarks/b32/delivery-reuse/inherited/primary760/3-a1007/report.json"
+        }
+      ],
+      "selected_wav_exact": true
+    },
+    "long": {
+      "frames": 918,
+      "medians_s": {
+        "a1007": 0.8089900425000001,
+        "a1007_delivery": 0.801945882
+      },
+      "gain_percent": 0.8707351302163904,
+      "samples_per_route": 20,
+      "blocks": [
+        {
+          "application": "a1007",
+          "median_s": 0.8077121405000001,
+          "report": "/workspace/A_1007/outputs/zipvoice-benchmarks/b32/delivery-reuse/inherited/long/0-a1007/report.json"
+        },
+        {
+          "application": "a1007_delivery",
+          "median_s": 0.8079824,
+          "report": "/workspace/A_1007/outputs/zipvoice-benchmarks/b32/delivery-reuse/inherited/long/1-a1007_delivery/report.json"
+        },
+        {
+          "application": "a1007_delivery",
+          "median_s": 0.7995168850000001,
+          "report": "/workspace/A_1007/outputs/zipvoice-benchmarks/b32/delivery-reuse/inherited/long/2-a1007_delivery/report.json"
+        },
+        {
+          "application": "a1007",
+          "median_s": 0.8089900425000001,
+          "report": "/workspace/A_1007/outputs/zipvoice-benchmarks/b32/delivery-reuse/inherited/long/3-a1007/report.json"
+        }
+      ],
+      "selected_wav_exact": true
+    }
+  },
+  "source_mechanism": "B32 retained compact caller-row H2D, GPU broadcast/pad, first PCM overlapped with remaining D2H; same stream/event dependencies",
+  "scope": "Migration of existing mechanism; not a new optimization gain",
+  "compute_evidence": {
+    "route": "inherited",
+    "engine_sha256": "e35f636d6265eeab8916e1dea7a332413249928387b798bc73855d85c7011c54",
+    "plugin_package": "inspark_infer.ops.tensorrt.zipvoice.a1007.b32",
+    "performance_evidence_sha256": "cbd8b0c740adc7a4af6b4f616a21b7a057c82c84e1344b7b8972799d6d947b43",
+    "quality_evidence_sha256": "198e9729abf96826a21e922da2ca7333ae37cee725fb38110deb8180e6464572"
+  },
+  "preflight": {
+    "memory_mib": 4108.0,
+    "gpu_util_percent": 0.0,
+    "processes": "1820496, 4082",
+    "power_cap_w": 400.0,
+    "scope": "Known idle allocation retained; not exclusive device ownership"
+  },
+  "all_rows_delivery_exact": true,
+  "functional_report": "/workspace/A_1007/outputs/zipvoice-benchmarks/b32/delivery-reuse/inherited/functional760/report.json"
+}

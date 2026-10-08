@@ -1,0 +1,26 @@
+{
+  "status": "paired_quality_review",
+  "batch": 2,
+  "pairs": 22,
+  "metrics": {
+    "cer": {
+      "mean_delta": -0.00021645021645021694,
+      "median_delta": 0.0,
+      "min_delta": -0.13333333333333333,
+      "max_delta": 0.19999999999999998
+    },
+    "utmos": {
+      "mean_delta": -0.061948770826513115,
+      "median_delta": 0.019131898880004883,
+      "min_delta": -0.6045947074890137,
+      "max_delta": 0.3728668689727783
+    },
+    "sim_o": {
+      "mean_delta": 0.002462403340773149,
+      "median_delta": 0.002671360969543457,
+      "min_delta": -0.052968621253967285,
+      "max_delta": 0.05273890495300293
+    }
+  },
+  "interpretation": "Aggregate CER unchanged; UTMOS mean -0.062 and SIM-o +0.0025. Individual variation includes case4 row1 CER .133 to .333 (5 errors of15), requiring cross-batch/reference review; no new tolerance or quality threshold inferred. Input/noise/mask/time mapping and batch permutation checks pass."
+}

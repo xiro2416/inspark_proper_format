@@ -1,0 +1,34 @@
+{
+  "status": "full_mapping_objective_quality_reviewed_formal_e2e_power_pending",
+  "quality_report_sha256": "4ee03817cf320c44340d6f402dc8fa211331e478fa9913dae73c194da45f6e8d",
+  "application_report_sha256": "c15e6ff4baf3ba356e977000355c1f61e7a522b32da5d4714807300b61f1dd95",
+  "quality": {
+    "inherited": {
+      "count": 33,
+      "cer": 0.02046783625730994,
+      "character_errors": 14,
+      "reference_characters": 684,
+      "utmos_mean": 2.3162949590971977,
+      "sim_o_mean": 0.6573957186756711
+    },
+    "normtf32k16": {
+      "count": 33,
+      "cer": 0.021929824561403508,
+      "character_errors": 15,
+      "reference_characters": 684,
+      "utmos_mean": 2.3478170235951743,
+      "sim_o_mean": 0.6564668642752098
+    }
+  },
+  "mapping": {
+    "real_paired_cases": 11,
+    "boundary_mixed_cases": 7,
+    "initial_noise_conditions_mask_grid_exact": true,
+    "state_relative_l2_vs_inherited_range": [
+      0.14727994799613953,
+      0.18517045676708221
+    ]
+  },
+  "decision": "Mapping passes. CER increases1character/684characters; UTMOS improves.03152; SIM-o changes-.000929. No broad objective quality deterioration indicated; authorized TF32/reduction differences accepted for continued performance review. No claim of audio/numerical equivalence.",
+  "limits": "Finite11case/3selectedrow corpus, auxiliary metrics only; candidate not yet retained until matched3shapeE2E/sustainedpower/remainingexecution review complete"
+}

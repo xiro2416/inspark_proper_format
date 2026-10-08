@@ -1,0 +1,50 @@
+{
+  "status": "complete",
+  "count": 1,
+  "device": "cpu",
+  "input_inventory_sha256": "a1b6381398bfdb3979bac5235950d8bf6e9b6f1708d061c4d6de86397d592581",
+  "cer_definition": "NFKC/lowercase alphanumeric Chinese character edit distance; punctuation/spaces removed",
+  "model_assets": {
+    "/workspace/A_1007/models/evaluation/mos/utmos22_strong_step7459_v1.pt": "38aa51ab79e2a4e09a1449758a4b37e9cbb2e8235a49662a732d33a9ba1e9bff",
+    "/workspace/A_1007/models/evaluation/speaker_similarity/wavlm_large_finetune.pth": "51f07e3b94d9e0262a6a675ef5a087be3dd09e8c62e9d886827f44f82fe7f94b",
+    "/workspace/A_1007/models/evaluation/speaker_similarity/wavlm_large/wavlm_large.pt": "6fb4b3c3e6aa567f0a997b30855859cb81528ee8078802af439f7b2da0bf100f",
+    "/workspace/A_1007/models/evaluation/wer/paraformer-zh/model.pt": "3d491689244ec5dfbf9170ef3827c358aa10f1f20e42a7c59e15e688647946d1"
+  },
+  "sim_loader_mapping_fix": "Use actual wavlm_large/hubconf.py directory, instead of its parent; checkpoint and architecture unchanged",
+  "sim_unexpected_checkpoint_keys": [
+    "loss_calculator.projection.weight"
+  ],
+  "packages": {
+    "torch": "2.12.0",
+    "torchaudio": "2.11.0",
+    "funasr": "1.3.9",
+    "s3prl": "0.4.18"
+  },
+  "cer": 0.0,
+  "utmos_mean": 3.3194077014923096,
+  "sim_o_mean": 1.0,
+  "results": [
+    {
+      "path": "/workspace/A_1007/outputs/zipvoice-validation/cases/male_news-vad4s.wav",
+      "reference_wav": "/workspace/A_1007/outputs/zipvoice-validation/cases/male_news-vad4s.wav",
+      "target_text": "大家非常关注的一件事情就是市场监管总局",
+      "transcription": "大 家 非 常 关 注 的 一 件 事 情 就 是 市 场 监 管 总 局",
+      "normalized_target": "大家非常关注的一件事情就是市场监管总局",
+      "normalized_hypothesis": "大家非常关注的一件事情就是市场监管总局",
+      "character_errors": 0,
+      "reference_characters": 19,
+      "cer": 0.0,
+      "utmos": 3.3194077014923096,
+      "sim_o": 1.0
+    }
+  ],
+  "by_reference": {
+    "/workspace/A_1007/outputs/zipvoice-validation/cases/male_news-vad4s.wav": {
+      "count": 1,
+      "cer": 0.0,
+      "utmos_mean": 3.3194077014923096,
+      "sim_o_mean": 1.0
+    }
+  },
+  "scope": "Evaluator loading self-check on a reference audio against itself; not generated-model quality acceptance"
+}

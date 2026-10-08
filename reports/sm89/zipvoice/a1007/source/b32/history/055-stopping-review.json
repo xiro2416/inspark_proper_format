@@ -1,0 +1,58 @@
+{
+  "status": "completed_review_retained_source_scheme",
+  "retained": "FullsourceB24 optimized computation andapplication rebuilt forB32; originalshort6/long4CPUstrategy. No newoptimizationmechanism retained. Incremental0 by identity of completeengine/runner withmigratedB32.",
+  "actual_cost_review": "FiveinstrumentedFM profiles; nativeGEMMdominant,normal/NLattention andF32FFN costly;180/298 mapping andfullmodel/quantization boundaries intact. StrongFULL/level5/aux0/maxsupportedtactics; noartificialworkspace cap.",
+  "length_review": "ExactbuilderAOT15actualinternaldomains;19dynamicdispatchincludingboundarydomains;5NLlengths;110FFN +110protectedprojectionvariants;10actualPCMwave lengths; matched20perrouteCPUstrategy decisions includingnegativeboundaries.",
+  "rejected": {
+    "normal_geometry": "KB16 helps146/190separately but mostlargedomains lose. Actualuniformdynamicbranch sloweratall19testedshapes. Largest1750 bestnormalfragmentgain.818% maps toless.1%E2E andotherdomains regressed; no globalgeometrychange.",
+    "FFN_projection": "All110candidategeometry/layout fragments lose strongtargetnative; nofullgraph replacement.",
+    "protected_projection": "22variants×5quarterlengths;canonicalnativealreadyfast, smallcustomfragmentwins onlyshort, longslower. FourfullgraphFFMAregions diagnosticidealupper~.2-.3%E2E; fullgraphcanonicalization remainsresidual, notclaimed resolved orproved unnecessary.",
+    "NLattention": "Mostgeometry/warpslose;isolatedshortw8smallgainnotgeneralized;48KiBAOTresourceconstraint excludeslargeKB variants.",
+    "PCMdispatch": "InitialhotCPUprobesdidnotgeneralize. Formalmedian1026+.018,1381+.487,906-.267,1017-.283,1279-.081. Revertallnewpolicies ratherthanclaimstablegain.",
+    "simple_parallel_or_joint_AV": "OriginalunchangedONNX ancestryNL->normal1->normal2; consumerV notready simultaneously; preservedependencies."
+  },
+  "validation": "Finalfull70+mixed4512mainPCM verified:31changedcasefresh reruns/39identicalbody+branch reuse, native70unchanged. All32condition/transfer/PCM andGraphchecks. Every420scoredWAV hash verified; currentbyteidenticaloutputs reuseexistingactualGPU1scores.",
+  "stopping_reason": "Consequentialtargetcosts andlengthconditions reviewed,focusedprobes+E2E run; no reliableadditionalmedianimprovement supportsnewstrategy. Preservebestmigratedstack andstopcostlysubpercentpursuit. Not globaloptimality orallpossibilities exhausted.",
+  "residuals": [
+    "NativeGEMMdominant; fourprotectedFFMAfullgraphcanonicalizationmaybesmallvalue, nottestedfullgraph.",
+    "Separatespecializedengines/staticframeprofiles couldavoiduniformAOTbranchpenalty, butexpectedkernel-onlyshortgainunder.1%E2E; nohighesteffortperlengthenginefarm built.",
+    "SourceINT8value/residual/DWfusions retained bymapping/runtimeevidence; no new mechanism replacingthem."
+  ],
+  "formal_PCM_evidence": [
+    {
+      "T": 1026,
+      "gain_percent": 0.01767524672364441,
+      "candidate_runner_sha256": "8192b84e426d68cf5076c7769c2b76fdb7eb6ca2ef14530b51c496632d0ce8cf",
+      "evidence": "/workspace/zvoice_temp/optimization/int8_sm89_b32/cases/final-incremental/024/comparison.json",
+      "count_per_route": 20
+    },
+    {
+      "T": 1381,
+      "gain_percent": 0.4867410778254426,
+      "candidate_runner_sha256": "8192b84e426d68cf5076c7769c2b76fdb7eb6ca2ef14530b51c496632d0ce8cf",
+      "evidence": "/workspace/zvoice_temp/optimization/int8_sm89_b32/cases/final-incremental/022/comparison.json",
+      "count_per_route": 20
+    },
+    {
+      "T": 906,
+      "gain_percent": -0.2670488242102752,
+      "candidate_runner_sha256": "8192b84e426d68cf5076c7769c2b76fdb7eb6ca2ef14530b51c496632d0ce8cf",
+      "evidence": "/workspace/zvoice_temp/optimization/int8_sm89_b32/cases/final-incremental/048/comparison.json",
+      "count_per_route": 20
+    },
+    {
+      "T": 1017,
+      "gain_percent": -0.2828513838545613,
+      "candidate_runner_sha256": "e953fa1450a0968e72b419dfe2db0b3a7fe931ad9e8835571d953ad70f8f7a25",
+      "evidence": "/workspace/zvoice_temp/optimization/int8_sm89_b32/cases/revised-boundary/005/comparison.json",
+      "count_per_route": 20
+    },
+    {
+      "T": 1279,
+      "gain_percent": -0.08117403259627433,
+      "candidate_runner_sha256": "71960cfb441a7988d6ed2676b21ff6918984a378ee2958d58a550fed180464d6",
+      "evidence": "/workspace/zvoice_temp/optimization/int8_sm89_b32/cases/revised-boundary/017/comparison.json",
+      "count_per_route": 20
+    }
+  ]
+}

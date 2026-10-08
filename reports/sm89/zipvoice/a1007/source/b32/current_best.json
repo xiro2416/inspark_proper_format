@@ -1,0 +1,193 @@
+{
+  "status": "retained_verified",
+  "batch": 32,
+  "physical_gpu": 1,
+  "gpu_uuid": "GPU-7dab7d6b-ac8c-7ccc-6410-916d3b7689b3",
+  "configured_power_limit_w": 400,
+  "enforced_power_limit_w": 400,
+  "engine": {
+    "path": "/workspace/zvoice_temp/optimization/int8_sm89_b32/builds/normal_tf32_fm_full/engine.plan",
+    "sha256": "a14eeb0698912a43bb5b2df4f9e9ef6b850221cbdb96244ad706a09b35bc6e93"
+  },
+  "runner": {
+    "path": "/workspace/zvoice_temp/optimization/int8_sm89_b32/code/measure_delivery_gpu1.py",
+    "sha256": "00a9425a3668b3fcd5f7be4787e8d9ca16f9a244ef7107914b663c42a8de1ddf"
+  },
+  "inventory": "/workspace/zvoice_temp/optimization/int8_sm89_b32/cases/delivery/000/engines.json",
+  "recipe": "Original SmoothQuant alpha=.5 first4floating/last12INT8, unchanged weights/scales, existing authorized TF32",
+  "coverage": "180 quantized modules120native/12value/24residual/24DW;12F32FFN;48attention;8EulerGraph;B1text/fullmixed;sharedarena;cuFFTISTFT;freshcompactH2D;firstD2H/CPU overlap;all32PCM",
+  "length_policy": "Original migrated policy:wave<260000 chunk6, wave>=260000 chunk4. GPU alwaysfull32. No newoptimizationretained; incremental gain0 by unchangedengine/application.",
+  "performance": [
+    {
+      "T": 582,
+      "native_s": 0.5490887135,
+      "retained_s": 0.461937234,
+      "gain_native_percent": 15.872021652836255,
+      "power": {
+        "status": "request_windows_sampled",
+        "sample_count": 181,
+        "excluded_samples": 4,
+        "mean_w": 333.9933480662983,
+        "p95_w": 398.267,
+        "sampled_max_w": 398.267,
+        "scope": "Whole-board NVML samples within latency windows; post-PCM checks excluded; not instantaneous spike or request-only attribution."
+      }
+    },
+    {
+      "T": 760,
+      "native_s": 0.7765631829999999,
+      "retained_s": 0.6240083695,
+      "gain_native_percent": 19.644868162646322,
+      "power": {
+        "status": "request_windows_sampled",
+        "sample_count": 244,
+        "excluded_samples": 4,
+        "mean_w": 350.19700409836065,
+        "p95_w": 399.631,
+        "sampled_max_w": 399.688,
+        "scope": "Whole-board NVML samples within latency windows; post-PCM checks excluded; not instantaneous spike or request-only attribution."
+      }
+    },
+    {
+      "T": 1026,
+      "native_s": 1.190231324,
+      "retained_s": 0.9455837425,
+      "gain_native_percent": 20.554624682352923,
+      "power": {
+        "status": "request_windows_sampled",
+        "sample_count": 374,
+        "excluded_samples": 4,
+        "mean_w": 366.2505882352941,
+        "p95_w": 396.85985,
+        "sampled_max_w": 397.985,
+        "scope": "Whole-board NVML samples within latency windows; post-PCM checks excluded; not instantaneous spike or request-only attribution."
+      }
+    },
+    {
+      "T": 1398,
+      "native_s": 1.8185268295,
+      "retained_s": 1.364013689,
+      "gain_native_percent": 24.993480059074376,
+      "power": {
+        "status": "request_windows_sampled",
+        "sample_count": 537,
+        "excluded_samples": 4,
+        "mean_w": 374.81443202979517,
+        "p95_w": 399.791,
+        "sampled_max_w": 401.438,
+        "scope": "Whole-board NVML samples within latency windows; post-PCM checks excluded; not instantaneous spike or request-only attribution."
+      }
+    },
+    {
+      "T": 1750,
+      "native_s": 2.523720921,
+      "retained_s": 1.8361576575,
+      "gain_native_percent": 27.24402915468005,
+      "power": {
+        "status": "request_windows_sampled",
+        "sample_count": 723,
+        "excluded_samples": 4,
+        "mean_w": 381.188244813278,
+        "p95_w": 398.869,
+        "sampled_max_w": 402.866,
+        "scope": "Whole-board NVML samples within latency windows; post-PCM checks excluded; not instantaneous spike or request-only attribution."
+      }
+    }
+  ],
+  "incremental": [],
+  "additional_optimization_retained": false,
+  "incremental_gain_percent": 0,
+  "incremental_reason": "Retained complete engine andapplication identical to migrated B32; tested extra candidates rejected",
+  "quality": {
+    "native": {
+      "count": 210,
+      "character_errors": 85,
+      "reference_characters": 5742,
+      "cer": 0.014803204458376872,
+      "utmos": 2.5394412250745866,
+      "sim_o": 0.6995971980549041
+    },
+    "delivery": {
+      "count": 210,
+      "character_errors": 79,
+      "reference_characters": 5742,
+      "cer": 0.013758272378962034,
+      "utmos": 2.5435671238672164,
+      "sim_o": 0.6970062247344426
+    }
+  },
+  "validation": {
+    "path": "/workspace/zvoice_temp/optimization/int8_sm89_b32/history/066-retained-validation-audit.json",
+    "full_pcm_outputs": 4512,
+    "numeric_difference": "Native versus inherited/retained differences report-only; graph/direct and input/transfer/PCM synchronous reference exact"
+  },
+  "execution_differences": [
+    {
+      "source": "/fm_decoder/encoders.0/layers.0/self_attn1/out_proj/MatMul",
+      "previous": {
+        "mode": "TF32",
+        "layer": "/fm_decoder/encoders.0/layers.0/self_attn1/out_proj/MatMul_myl1_38",
+        "type": "gemm",
+        "tactic": "sm86_xmma_gemm_f32f32_tf32f32_f32_tn_n_tilesize64x64x64_stage3_warpsize2x2x1_tensor16x8x8"
+      },
+      "candidate": {
+        "mode": "Float32_FFMA",
+        "layer": "/fm_decoder/encoders.0/layers.0/self_attn1/out_proj/MatMul_myl10_2",
+        "type": "gemm",
+        "tactic": "sm80_xmma_gemm_f32f32_f32f32_f32_nn_n_tilesize32x32x8_stage3_warpsize1x2x1_ffma_aligna4_alignc4"
+      }
+    },
+    {
+      "source": "/fm_decoder/encoders.0/layers.0/self_attn2/out_proj/MatMul",
+      "previous": {
+        "mode": "TF32",
+        "layer": "/fm_decoder/encoders.0/layers.0/self_attn2/out_proj/MatMul_myl5_13",
+        "type": "gemm",
+        "tactic": "sm86_xmma_gemm_f32f32_tf32f32_f32_tn_n_tilesize64x64x64_stage3_warpsize2x2x1_tensor16x8x8"
+      },
+      "candidate": {
+        "mode": "Float32_FFMA",
+        "layer": "/fm_decoder/encoders.0/layers.0/self_attn2/out_proj/MatMul_myl18_2",
+        "type": "gemm",
+        "tactic": "sm80_xmma_gemm_f32f32_f32f32_f32_nn_n_tilesize32x32x8_stage3_warpsize1x2x1_ffma_aligna4_alignc4"
+      }
+    },
+    {
+      "source": "/fm_decoder/encoders.0/layers.1/self_attn1/out_proj/MatMul",
+      "previous": {
+        "mode": "TF32",
+        "layer": "/fm_decoder/encoders.0/layers.1/self_attn1/out_proj/MatMul_myl9_34",
+        "type": "gemm",
+        "tactic": "sm86_xmma_gemm_f32f32_tf32f32_f32_tn_n_tilesize64x64x64_stage3_warpsize2x2x1_tensor16x8x8"
+      },
+      "candidate": {
+        "mode": "Float32_FFMA",
+        "layer": "/fm_decoder/encoders.0/layers.1/self_attn1/out_proj/MatMul_myl32_2",
+        "type": "gemm",
+        "tactic": "sm80_xmma_gemm_f32f32_f32f32_f32_nn_n_tilesize32x32x8_stage3_warpsize1x2x1_ffma_aligna4_alignc4"
+      }
+    },
+    {
+      "source": "/fm_decoder/encoders.0/layers.1/self_attn2/out_proj/MatMul",
+      "previous": {
+        "mode": "TF32",
+        "layer": "/fm_decoder/encoders.0/layers.1/self_attn2/out_proj/MatMul_myl13_13",
+        "type": "gemm",
+        "tactic": "sm86_xmma_gemm_f32f32_tf32f32_f32_tn_n_tilesize64x64x64_stage3_warpsize2x2x1_tensor16x8x8"
+      },
+      "candidate": {
+        "mode": "Float32_FFMA",
+        "layer": "/fm_decoder/encoders.0/layers.1/self_attn2/out_proj/MatMul_myl40_2",
+        "type": "gemm",
+        "tactic": "sm80_xmma_gemm_f32f32_f32f32_f32_nn_n_tilesize32x32x8_stage3_warpsize1x2x1_ffma_aligna4_alignc4"
+      }
+    }
+  ],
+  "clock": "preparedCPUconditions including shaping/staging/H2D toall32orderedPCM; excludes frontend/init/warmup/capture/WAVwrites",
+  "power_scope": "Rawrequest-window wholeboardNVML, notinstantaneous/processonly; untrimmed",
+  "limits": [
+    "Measured speedups only at listed lengths, broader70+mixed correctness/quality",
+    "No global optimality claim; source performance not target evidence"
+  ],
+  "reproduction": "README.md"
+}

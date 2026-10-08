@@ -1,0 +1,444 @@
+{
+  "status": "compiler_observation_not_timing",
+  "batches": {
+    "1": {
+      "native_float_tf32_gemm_layers": 118,
+      "remaining_float_non_tf32_gemm": [
+        {
+          "name": "/fm_decoder/guidance_scale_embed/MatMul_myl1_2",
+          "tactic": "sm50_xmma_cublas_gemvx_f32f32_f32_f32_tn_n_int32_unit_n_launch_param4x32x32_strided_unit_stride",
+          "inputs": [
+            {
+              "Name": "/fm_decoder/guidance_scale_embed/MatMul_output_0.1_11_myl1",
+              "Dimensions": [
+                1,
+                192
+              ],
+              "Strides": [
+                192,
+                1
+              ],
+              "StrideOrder": [
+                1,
+                0
+              ],
+              "Datatype": "Float",
+              "Format": "(Linear) Row major linear format"
+            }
+          ],
+          "outputs": [
+            {
+              "Name": "__myln_k_arg__bb1_12_myl1",
+              "Dimensions": [
+                1,
+                192
+              ],
+              "Strides": [
+                192,
+                1
+              ],
+              "StrideOrder": [
+                1,
+                0
+              ],
+              "Datatype": "Float",
+              "Format": "(Linear) Row major linear format"
+            }
+          ]
+        },
+        {
+          "name": "/fm_decoder/time_embed/time_embed.0/Gemm_myl1_4",
+          "tactic": "sm50_xmma_cublas_gemvx_f32f32_f32_f32_nn_n_int32_unit_n_launch_param16x8x1_strided_unit_stride",
+          "inputs": [
+            {
+              "Name": "/fm_decoder/time_embed/time_embed.0/Gemm_output_0.1_13_myl1",
+              "Dimensions": [
+                1,
+                192
+              ],
+              "Strides": [
+                192,
+                1
+              ],
+              "StrideOrder": [
+                1,
+                0
+              ],
+              "Datatype": "Float",
+              "Format": "(Linear) Row major linear format"
+            }
+          ],
+          "outputs": [
+            {
+              "Name": "__myln_k_arg__bb1_14_myl1",
+              "Dimensions": [
+                1,
+                384
+              ],
+              "Strides": [
+                384,
+                1
+              ],
+              "StrideOrder": [
+                1,
+                0
+              ],
+              "Datatype": "Float",
+              "Format": "(Linear) Row major linear format"
+            }
+          ]
+        },
+        {
+          "name": "/fm_decoder/encoders.0/layers.0/self_attn1/out_proj/MatMul_myl10_2",
+          "tactic": "sm80_xmma_gemm_f32f32_f32f32_f32_nn_n_tilesize64x64x8_stage3_warpsize1x4x1_ffma_aligna4_alignc4",
+          "inputs": [
+            {
+              "Name": "/fm_decoder/encoders.0/layers.0/self_attn1/Transpose_1 + /fm_decoder/encoders.0/layers.0/self_attn1/Reshape_1_first_transpose_output.1_myl10",
+              "Dimensions": [
+                -1,
+                48
+              ],
+              "Strides": [
+                48,
+                1
+              ],
+              "StrideOrder": [
+                1,
+                0
+              ],
+              "Datatype": "Float",
+              "Format": "(Linear) Row major linear format"
+            }
+          ],
+          "outputs": [
+            {
+              "Name": "__myln_k_arg__bb1_10_myl10",
+              "Dimensions": [
+                -1,
+                512
+              ],
+              "Strides": [
+                512,
+                1
+              ],
+              "StrideOrder": [
+                1,
+                0
+              ],
+              "Datatype": "Float",
+              "Format": "(Linear) Row major linear format"
+            }
+          ]
+        },
+        {
+          "name": "/fm_decoder/encoders.0/layers.0/self_attn2/out_proj/MatMul_myl18_2",
+          "tactic": "sm80_xmma_gemm_f32f32_f32f32_f32_nn_n_tilesize64x64x8_stage3_warpsize1x4x1_ffma_aligna4_alignc4",
+          "inputs": [
+            {
+              "Name": "/fm_decoder/encoders.0/layers.0/self_attn2/Transpose_1 + /fm_decoder/encoders.0/layers.0/self_attn2/Reshape_1_first_transpose_output.1_myl18",
+              "Dimensions": [
+                -1,
+                48
+              ],
+              "Strides": [
+                48,
+                1
+              ],
+              "StrideOrder": [
+                1,
+                0
+              ],
+              "Datatype": "Float",
+              "Format": "(Linear) Row major linear format"
+            }
+          ],
+          "outputs": [
+            {
+              "Name": "__myln_k_arg__bb1_10_myl18",
+              "Dimensions": [
+                -1,
+                512
+              ],
+              "Strides": [
+                512,
+                1
+              ],
+              "StrideOrder": [
+                1,
+                0
+              ],
+              "Datatype": "Float",
+              "Format": "(Linear) Row major linear format"
+            }
+          ]
+        },
+        {
+          "name": "/fm_decoder/encoders.0/layers.1/self_attn1/out_proj/MatMul_myl32_2",
+          "tactic": "sm80_xmma_gemm_f32f32_f32f32_f32_nn_n_tilesize64x64x8_stage3_warpsize1x4x1_ffma_aligna4_alignc4",
+          "inputs": [
+            {
+              "Name": "/fm_decoder/encoders.0/layers.1/self_attn1/Transpose_1 + /fm_decoder/encoders.0/layers.1/self_attn1/Reshape_1_first_transpose_output.1_myl32",
+              "Dimensions": [
+                -1,
+                48
+              ],
+              "Strides": [
+                48,
+                1
+              ],
+              "StrideOrder": [
+                1,
+                0
+              ],
+              "Datatype": "Float",
+              "Format": "(Linear) Row major linear format"
+            }
+          ],
+          "outputs": [
+            {
+              "Name": "__myln_k_arg__bb1_10_myl32",
+              "Dimensions": [
+                -1,
+                512
+              ],
+              "Strides": [
+                512,
+                1
+              ],
+              "StrideOrder": [
+                1,
+                0
+              ],
+              "Datatype": "Float",
+              "Format": "(Linear) Row major linear format"
+            }
+          ]
+        },
+        {
+          "name": "/fm_decoder/encoders.0/layers.1/self_attn2/out_proj/MatMul_myl40_2",
+          "tactic": "sm80_xmma_gemm_f32f32_f32f32_f32_nn_n_tilesize64x64x8_stage3_warpsize1x4x1_ffma_aligna4_alignc4",
+          "inputs": [
+            {
+              "Name": "/fm_decoder/encoders.0/layers.1/self_attn2/Transpose_1 + /fm_decoder/encoders.0/layers.1/self_attn2/Reshape_1_first_transpose_output.1_myl40",
+              "Dimensions": [
+                -1,
+                48
+              ],
+              "Strides": [
+                48,
+                1
+              ],
+              "StrideOrder": [
+                1,
+                0
+              ],
+              "Datatype": "Float",
+              "Format": "(Linear) Row major linear format"
+            }
+          ],
+          "outputs": [
+            {
+              "Name": "__myln_k_arg__bb1_10_myl40",
+              "Dimensions": [
+                -1,
+                512
+              ],
+              "Strides": [
+                512,
+                1
+              ],
+              "StrideOrder": [
+                1,
+                0
+              ],
+              "Datatype": "Float",
+              "Format": "(Linear) Row major linear format"
+            }
+          ]
+        }
+      ]
+    },
+    "2": {
+      "native_float_tf32_gemm_layers": 126,
+      "remaining_float_non_tf32_gemm": [
+        {
+          "name": "/fm_decoder/encoders.1/encoder/layers.0/self_attn1/out_proj/MatMul_myl54_2",
+          "tactic": "sm80_xmma_gemm_f32f32_f32f32_f32_nn_n_tilesize64x64x8_stage3_warpsize1x4x1_ffma_aligna4_alignc4",
+          "inputs": [
+            {
+              "Name": "/fm_decoder/encoders.1/encoder/layers.0/self_attn1/Transpose_1 + /fm_decoder/encoders.1/encoder/layers.0/self_attn1/Reshape_1_first_transpose_output.1_myl54",
+              "Dimensions": [
+                -1,
+                48
+              ],
+              "Strides": [
+                48,
+                1
+              ],
+              "StrideOrder": [
+                1,
+                0
+              ],
+              "Datatype": "Float",
+              "Format": "(Linear) Row major linear format"
+            }
+          ],
+          "outputs": [
+            {
+              "Name": "__myln_k_arg__bb1_12_myl54",
+              "Dimensions": [
+                -1,
+                512
+              ],
+              "Strides": [
+                512,
+                1
+              ],
+              "StrideOrder": [
+                1,
+                0
+              ],
+              "Datatype": "Float",
+              "Format": "(Linear) Row major linear format"
+            }
+          ]
+        },
+        {
+          "name": "/fm_decoder/encoders.1/encoder/layers.0/self_attn2/out_proj/MatMul_myl62_2",
+          "tactic": "sm80_xmma_gemm_f32f32_f32f32_f32_nn_n_tilesize64x64x8_stage3_warpsize1x4x1_ffma_aligna4_alignc4",
+          "inputs": [
+            {
+              "Name": "/fm_decoder/encoders.1/encoder/layers.0/self_attn2/Transpose_1 + /fm_decoder/encoders.1/encoder/layers.0/self_attn2/Reshape_1_first_transpose_output.1_myl62",
+              "Dimensions": [
+                -1,
+                48
+              ],
+              "Strides": [
+                48,
+                1
+              ],
+              "StrideOrder": [
+                1,
+                0
+              ],
+              "Datatype": "Float",
+              "Format": "(Linear) Row major linear format"
+            }
+          ],
+          "outputs": [
+            {
+              "Name": "__myln_k_arg__bb1_12_myl62",
+              "Dimensions": [
+                -1,
+                512
+              ],
+              "Strides": [
+                512,
+                1
+              ],
+              "StrideOrder": [
+                1,
+                0
+              ],
+              "Datatype": "Float",
+              "Format": "(Linear) Row major linear format"
+            }
+          ]
+        },
+        {
+          "name": "/fm_decoder/encoders.1/encoder/layers.1/self_attn1/out_proj/MatMul_myl76_2",
+          "tactic": "sm80_xmma_gemm_f32f32_f32f32_f32_nn_n_tilesize64x64x8_stage3_warpsize1x4x1_ffma_aligna4_alignc4",
+          "inputs": [
+            {
+              "Name": "/fm_decoder/encoders.1/encoder/layers.1/self_attn1/Transpose_1 + /fm_decoder/encoders.1/encoder/layers.1/self_attn1/Reshape_1_first_transpose_output.1_myl76",
+              "Dimensions": [
+                -1,
+                48
+              ],
+              "Strides": [
+                48,
+                1
+              ],
+              "StrideOrder": [
+                1,
+                0
+              ],
+              "Datatype": "Float",
+              "Format": "(Linear) Row major linear format"
+            }
+          ],
+          "outputs": [
+            {
+              "Name": "__myln_k_arg__bb1_12_myl76",
+              "Dimensions": [
+                -1,
+                512
+              ],
+              "Strides": [
+                512,
+                1
+              ],
+              "StrideOrder": [
+                1,
+                0
+              ],
+              "Datatype": "Float",
+              "Format": "(Linear) Row major linear format"
+            }
+          ]
+        },
+        {
+          "name": "/fm_decoder/encoders.1/encoder/layers.1/self_attn2/out_proj/MatMul_myl84_2",
+          "tactic": "sm80_xmma_gemm_f32f32_f32f32_f32_nn_n_tilesize64x64x8_stage3_warpsize1x4x1_ffma_aligna4_alignc4",
+          "inputs": [
+            {
+              "Name": "/fm_decoder/encoders.1/encoder/layers.1/self_attn2/Transpose_1 + /fm_decoder/encoders.1/encoder/layers.1/self_attn2/Reshape_1_first_transpose_output.1_myl84",
+              "Dimensions": [
+                -1,
+                48
+              ],
+              "Strides": [
+                48,
+                1
+              ],
+              "StrideOrder": [
+                1,
+                0
+              ],
+              "Datatype": "Float",
+              "Format": "(Linear) Row major linear format"
+            }
+          ],
+          "outputs": [
+            {
+              "Name": "__myln_k_arg__bb1_12_myl84",
+              "Dimensions": [
+                -1,
+                512
+              ],
+              "Strides": [
+                512,
+                1
+              ],
+              "StrideOrder": [
+                1,
+                0
+              ],
+              "Datatype": "Float",
+              "Format": "(Linear) Row major linear format"
+            }
+          ]
+        }
+      ]
+    },
+    "4": {
+      "native_float_tf32_gemm_layers": 130,
+      "remaining_float_non_tf32_gemm": []
+    },
+    "8": {
+      "native_float_tf32_gemm_layers": 130,
+      "remaining_float_non_tf32_gemm": []
+    }
+  },
+  "followup": "B1/B2 each retain four K48 protected attention out-projection FFMA GEMMs, in different downsample stages. B4/B8 have no such floating GEMM FFMA layers. Profile their actual cost before considering inherited fusion rechecks; GEMV embeddings at B1 are a separate small-M case. No backend or precision change inferred."
+}

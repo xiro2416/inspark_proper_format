@@ -1,0 +1,77 @@
+{
+  "status": "minimal_compute_passed_audio_quality_pending",
+  "batch": 1,
+  "physical_gpu": 1,
+  "tests": [
+    {
+      "frames": 600,
+      "finite_all": true,
+      "all_rows_written": true,
+      "relative_l2": 0.13930588960647583,
+      "max_abs": 1.649121880531311,
+      "batch_permutation": {}
+    },
+    {
+      "frames": 601,
+      "finite_all": true,
+      "all_rows_written": true,
+      "relative_l2": 0.1389181911945343,
+      "max_abs": 1.2421977519989014,
+      "batch_permutation": {}
+    },
+    {
+      "frames": 759,
+      "finite_all": true,
+      "all_rows_written": true,
+      "relative_l2": 0.1371450424194336,
+      "max_abs": 1.204180359840393,
+      "batch_permutation": {}
+    },
+    {
+      "frames": 760,
+      "finite_all": true,
+      "all_rows_written": true,
+      "relative_l2": 0.14103618264198303,
+      "max_abs": 2.3972830772399902,
+      "batch_permutation": {}
+    },
+    {
+      "frames": 761,
+      "finite_all": true,
+      "all_rows_written": true,
+      "relative_l2": 0.1366305947303772,
+      "max_abs": 1.398895263671875,
+      "batch_permutation": {}
+    },
+    {
+      "frames": 919,
+      "finite_all": true,
+      "all_rows_written": true,
+      "relative_l2": 0.13544760644435883,
+      "max_abs": 1.1192890405654907,
+      "batch_permutation": {}
+    },
+    {
+      "frames": 920,
+      "finite_all": true,
+      "all_rows_written": true,
+      "relative_l2": 0.13342663645744324,
+      "max_abs": 1.082197666168213,
+      "batch_permutation": {}
+    }
+  ],
+  "scope": "minimal FM only, before application scheduling; numerical differences report-only, full audio quality pending",
+  "engine_sha256": {
+    "fm-native": "ca4170e7035bcdb54671dde143aabf15a22481e17524848b4d707c7663413c0d",
+    "fm-inherited": "c8a866a745b5b5f0835f93e8b9f1a24f7f6e1531d55c6a2981ba84cc4993ef02"
+  },
+  "validator_sha256": "697f6f5ba7dfc3d1e1d0fba732d096210c21c0d228c7cc8fd447ba5ccc4335e4",
+  "seed": 9100,
+  "rewrite_coverage": {
+    "dw_replacements": 24,
+    "online_replacements": 16,
+    "f32_replacements": 12,
+    "int8_nonlinear_value_replacements": 12,
+    "int8_residual_replacements": 24
+  }
+}

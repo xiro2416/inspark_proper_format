@@ -1,0 +1,28 @@
+{
+  "status": "f32_operand_prepack_retained_remaining_transfer_review_pending",
+  "route": "normtf32k16wp",
+  "application": "a1007_delivery_graph",
+  "pcm_policy": {
+    "chunk": 16,
+    "workers": 4
+  },
+  "performance_evidence_sha256": "c8948ea9492c874b428900cf3ca525c97dd2842268dd80d1ad1a115669ec07b1",
+  "application_evidence_sha256": "ceb9f6f26eb6bdd3af71056a4eacb82f062275767483789481bf0560784fb049",
+  "quality_evidence_sha256": "162eb78b4a2b1196e6ae955a452b4d59e05ec074dccd6643d130d2c3e75862ee",
+  "build_evidence_sha256": "81bbe4560790e37b99ee603f89b344ac9b0913a50c62b04b4db4c566cbe2de2c",
+  "gains_percent": {
+    "short": 0.32224428655106296,
+    "primary760": 0.4183777019772817,
+    "long": 0.4719032614795081
+  },
+  "primary_median_ms": 1314.84071,
+  "power_w": {
+    "mean": 395.51182343987824,
+    "p50": 395.687,
+    "p95": 399.117,
+    "max": 400.151
+  },
+  "decision": "Retain simple existing-math staticoperand prepack: actual12weights matchGPU RNA,33WAVs/selectedstates unchanged, directwholegraph checks andboundary/mixed/fulltext pass;20matchedsamples/route/shape improve. Original sourcecheckpoints/I8scales/1:3 untouched.",
+  "optimization_review_complete": false,
+  "remaining": "Finish applicability screens forB4/8/16/32, finalall7execution-cost review and release/source-bound checks"
+}

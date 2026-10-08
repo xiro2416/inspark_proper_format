@@ -9,3 +9,12 @@
 - GPU experiments use one physical GPU at a time, GPU7 on this server, with serial builds and validation. No automatic time limit or stopping unrelated workloads.
 - Existing approved kernels/plugins may migrate; this release task does not introduce new optimization routes or new GPU math.
 - Correctness checks follow operation logic; floating audits are reported without a fixed L2 acceptance threshold. Do not count repeated-text reuse as general performance.
+
+## Independent ZipVoice A_1007 integration
+
+- ZipVoice A_1007 targets INT8 B1/B2/B4/B8/B16/B32/B64, frames600/760/920 and tokens52/78/141. Read docs/zipvoice-a1007.md and reports/sm89/zipvoice/a1007/WHITEBOARD.md for current acceptance.
+- ZipVoice uses its own Python3.12/Torch2.11+cu130/Triton3.6 environment and private xirr/zip_pipeline assets; do not merge it with the Index pipeline environment or registry.
+- Only GPU1 is authorized for ZipVoice work. GPU7 directions above apply to Index pipeline work; this task performs no Index GPU experiments or new Index math.
+- Preserve original SmoothQuant alpha=.5 weights/scales, first4 floating/last12 INT8 and complete unsplit model batch. Baseline plugin packages/engines remain intact during independent candidate validation.
+- Complete all7 migration targets before the separately requested optimization phase. Validate private publication and fresh downloads before retiring old local/cloud ZipVoice files and obsolete history. Preserve the concurrently updated Index release.
+- Engine binaries and model weights stay outside Git. No automatic time limit and no stopping unrelated workloads.

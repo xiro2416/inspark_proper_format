@@ -6,6 +6,14 @@ import sys
 
 def main(argv: list[str] | None = None) -> int:
     args = list(sys.argv[1:] if argv is None else argv)
+    if args and args[0]=='zipvoice':
+        from inspark_infer.runtime.zipvoice.cli import main as zipvoice
+        return zipvoice(args[1:])
+    model=next((v.split('=',1)[1] for v in args if v.startswith('--model=')),None)
+    if '--model' in args and args.index('--model')+1<len(args):model=args[args.index('--model')+1]
+    if args[:2]==['trt','ensure'] and model=='zipvoice':
+        from inspark_infer.runtime.zipvoice.cli import main as zipvoice
+        return zipvoice(['ensure',*args[2:]])
     import argparse,os
     from pathlib import Path
     p=argparse.ArgumentParser(prog='inspark')

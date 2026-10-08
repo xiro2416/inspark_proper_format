@@ -1,0 +1,25 @@
+{
+  "status": "concurrent_index_release_merged_locally_not_pushed",
+  "previous_expected_head": "af3ace57c932ec10bcb126d50f3da8dc094cbea6",
+  "new_remote_head": "49254189fe426b3472711e285abb28d2a7cd2b3b",
+  "concurrent_commits": [
+    "efaa714",
+    "0282228",
+    "4925418"
+  ],
+  "preserved_index_roots_byte_exact_to_remote": [
+    "configs/current",
+    "reports/current",
+    "src/inspark_infer/api",
+    "src/inspark_infer/runtime/unified_deployment.py",
+    "benchmarks"
+  ],
+  "shared_conflicts_resolved": [
+    "AGENTS.md:current Index release/GPU7 preserved, explicit ZipVoiceA1007/GPU1 scope",
+    "README.md:current Index release and commands preserved, current ZipVoice link added",
+    "docs/zipvoice-int8.md:marked historical until authorized cleanup",
+    "tests/test_zipvoice_bundle.py:currentIndexcommand behavior andnewZipVoiceprofile/identity tests combined"
+  ],
+  "validation": "10CPUtests passed; noIndexGPUexperiment",
+  "publication_rule": "Recheck head again and preserve concurrentIndexchanges when rewriting obsoleteZipVoicehistory; force-with-lease usesactualexpectedhead, not oldaf3ace."
+}

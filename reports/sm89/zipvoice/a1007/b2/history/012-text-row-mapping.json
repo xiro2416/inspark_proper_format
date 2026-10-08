@@ -1,0 +1,27 @@
+{
+  "status": "mixed_text_row_mapping_passed",
+  "batch": 2,
+  "frames": 810,
+  "padded_tokens": 83,
+  "all_rows_match_own_complete_text": true,
+  "mask_exact": true,
+  "row_checks": [
+    {
+      "row": 0,
+      "reference_row": 0,
+      "own_relative_l2": 0.00019531787497441313,
+      "other_distance": 8.110677719116211
+    },
+    {
+      "row": 1,
+      "reference_row": 1,
+      "own_relative_l2": 0.00020225336743641707,
+      "other_distance": 8.110611915588379
+    }
+  ],
+  "permutation": {
+    "exact": true,
+    "relative_l2": 0.0
+  },
+  "scope": "Distinct complete texts; each full-batch output is closest to its own B1 text-reference result. Numerical differences reported, no output equality threshold imposed."
+}

@@ -1,0 +1,7 @@
+import triton
+import triton.language as tl
+from .linear_f32_activation_tf32_rna_kernel import linear_f32_activation
+
+@triton.jit
+def f32_tf32_rna_aot(X, W, Bias, M, Out, N: tl.constexpr):
+    linear_f32_activation(X, W, Bias, Out, M, 512, N, 128, 64, 32, 4.0, 0.07999999821186066, 0.03500000014901161, 'tf32')

@@ -1,0 +1,127 @@
+{
+  "status": "staged_variant_registration_and_actual_factory_selection_passed",
+  "cuda_initialized": false,
+  "checks": [
+    {
+      "batch": 8,
+      "stage": 0,
+      "factor": 1,
+      "nonlinear_factory": "zipvoice_int8_b8_geo1::OnlineNonlinearRNAFloat32"
+    },
+    {
+      "batch": 8,
+      "stage": 1,
+      "factor": 2,
+      "nonlinear_factory": "zipvoice_int8_b8_geo1::OnlineNonlinearRNAFloat32"
+    },
+    {
+      "batch": 8,
+      "stage": 2,
+      "factor": 4,
+      "nonlinear_factory": "zipvoice_int8_b8_geo1::OnlineNonlinearRNAQuarterFloat32"
+    },
+    {
+      "batch": 8,
+      "stage": 3,
+      "factor": 2,
+      "nonlinear_factory": "zipvoice_int8_b8_geo1::OnlineNonlinearRNAFloat32"
+    },
+    {
+      "batch": 8,
+      "stage": 4,
+      "factor": 1,
+      "nonlinear_factory": "zipvoice_int8_b8_geo1::OnlineNonlinearRNAFloat32"
+    },
+    {
+      "batch": 8,
+      "stage": 0,
+      "factor": 1,
+      "integer_factory": "zipvoice_int8_b8_geo1::OriginalInt8NonlinearValue128x32"
+    },
+    {
+      "batch": 8,
+      "stage": 1,
+      "factor": 2,
+      "integer_factory": "zipvoice_int8_b8_geo1::OriginalInt8NonlinearValue128x32"
+    },
+    {
+      "batch": 8,
+      "stage": 2,
+      "factor": 4,
+      "integer_factory": "zipvoice_int8_b8_geo1::OriginalInt8NonlinearValue64x32"
+    },
+    {
+      "batch": 8,
+      "stage": 3,
+      "factor": 2,
+      "integer_factory": "zipvoice_int8_b8_geo1::OriginalInt8NonlinearValue128x32"
+    },
+    {
+      "batch": 8,
+      "stage": 4,
+      "factor": 1,
+      "integer_factory": "zipvoice_int8_b8_geo1::OriginalInt8NonlinearValue128x32"
+    },
+    {
+      "batch": 16,
+      "stage": 0,
+      "factor": 1,
+      "nonlinear_factory": "zipvoice_int8_b16_geo1::OnlineNonlinearRNAFloat32"
+    },
+    {
+      "batch": 16,
+      "stage": 1,
+      "factor": 2,
+      "nonlinear_factory": "zipvoice_int8_b16_geo1::OnlineNonlinearRNAFloat32"
+    },
+    {
+      "batch": 16,
+      "stage": 2,
+      "factor": 4,
+      "nonlinear_factory": "zipvoice_int8_b16_geo1::OnlineNonlinearRNAQuarterFloat32"
+    },
+    {
+      "batch": 16,
+      "stage": 3,
+      "factor": 2,
+      "nonlinear_factory": "zipvoice_int8_b16_geo1::OnlineNonlinearRNAFloat32"
+    },
+    {
+      "batch": 16,
+      "stage": 4,
+      "factor": 1,
+      "nonlinear_factory": "zipvoice_int8_b16_geo1::OnlineNonlinearRNAFloat32"
+    },
+    {
+      "batch": 16,
+      "stage": 0,
+      "factor": 1,
+      "integer_factory": "zipvoice_int8_b16_geo1::OriginalInt8Residual16x64"
+    },
+    {
+      "batch": 16,
+      "stage": 1,
+      "factor": 2,
+      "integer_factory": "zipvoice_int8_b16_geo1::OriginalInt8Residual16x64"
+    },
+    {
+      "batch": 16,
+      "stage": 2,
+      "factor": 4,
+      "integer_factory": "zipvoice_int8_b16_geo1::OriginalInt8Residual64x64"
+    },
+    {
+      "batch": 16,
+      "stage": 3,
+      "factor": 2,
+      "integer_factory": "zipvoice_int8_b16_geo1::OriginalInt8Residual16x64"
+    },
+    {
+      "batch": 16,
+      "stage": 4,
+      "factor": 1,
+      "integer_factory": "zipvoice_int8_b16_geo1::OriginalInt8Residual16x64"
+    }
+  ],
+  "scope": "CPU registration and actual prepared factory expressions, checked against verified model factors1/2/4/2/1; no GPU quality/performance claim"
+}

@@ -1,0 +1,60 @@
+{
+  "status": "paired_quality_review_pending_source_comparison",
+  "by_route": {
+    "inherited": {
+      "count": 33,
+      "cer": 0.02631578947368421,
+      "character_errors": 18,
+      "reference_characters": 684,
+      "utmos_mean": 2.3811344811410615,
+      "sim_o_mean": 0.6420488673629183
+    },
+    "native": {
+      "count": 33,
+      "cer": 0.01608187134502924,
+      "character_errors": 11,
+      "reference_characters": 684,
+      "utmos_mean": 2.381202661629879,
+      "sim_o_mean": 0.6416998975204699
+    }
+  },
+  "error_changes": [
+    {
+      "case": 2,
+      "row": 1,
+      "native_errors": 0,
+      "inherited_errors": 3,
+      "target": "你进来的时候，我正好在整理那些旧照片，没注意到门口的动静。",
+      "native": "你 进 来 的 时 候 我 正 好 在 整 理 那 些 旧 照 片 没 注 意 到 门 口 的 动 静",
+      "inherited": "你 进 来 的 时 候 我 正 好 在 整 理 那 些 旧 照 片 没 注 意 到 门 哦 你 那 的 动 静"
+    },
+    {
+      "case": 3,
+      "row": 15,
+      "native_errors": 0,
+      "inherited_errors": 1,
+      "target": "你居然把这个东西带到这里来了。",
+      "native": "你 居 然 把 这 个 东 西 带 到 这 里 来 了",
+      "inherited": "嗯 居 然 把 这 个 东 西 带 到 这 里 来 了"
+    },
+    {
+      "case": 4,
+      "row": 1,
+      "native_errors": 4,
+      "inherited_errors": 8,
+      "target": "他今天没有出现在约定的那个地方。",
+      "native": "嗯 他 一 听 从 没 有 出 现 在 约 定 的 那 个 地 方",
+      "inherited": "嗯 腿 子 了 我 上 次 就 在 约 定 的 那 个 地 方"
+    },
+    {
+      "case": 4,
+      "row": 15,
+      "native_errors": 1,
+      "inherited_errors": 0,
+      "target": "他今天没有出现在约定的那个地方。",
+      "native": "他 今 今 天 没 有 出 现 在 约 定 的 那 个 地 方",
+      "inherited": "他 今 天 没 有 出 现 在 约 定 的 那 个 地 方"
+    }
+  ],
+  "next": "Same-full-batch source-engine comparison; retain individual failures, do not infer correctness solely from aggregate metrics"
+}

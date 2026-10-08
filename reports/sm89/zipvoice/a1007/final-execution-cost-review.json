@@ -1,0 +1,133 @@
+{
+  "status": "all_seven_execution_cost_reviews_complete",
+  "batches": {
+    "1": {
+      "route": "native",
+      "application": "a1007_delivery_graph",
+      "stopping_reason": "Native route retained; graph covers launch overhead. Static custom FFN prepack inapplicable. Migration delivery/PCM alternatives reviewed.",
+      "optimization_review_complete": true,
+      "primary_median_ms": 33.578834,
+      "power_w": {
+        "mean": 313.8825094043887,
+        "p50": 320.077,
+        "p95": 322.757,
+        "max": 324.087
+      },
+      "gains_percent": {
+        "short": 9.189777082440779,
+        "primary760": 2.156023756631391,
+        "long": 1.8668600820216914
+      }
+    },
+    "2": {
+      "route": "geo3",
+      "application": "a1007_delivery_graph",
+      "stopping_reason": "geo3 native attention/FFN/value retained; custom DW/residual preserved. Custom FFN prepack inapplicable. Graph and scheduling measured.",
+      "optimization_review_complete": true,
+      "primary_median_ms": 50.029033,
+      "power_w": {
+        "mean": 371.223631661442,
+        "p50": 375.459,
+        "p95": 383.39,
+        "max": 384.123
+      },
+      "gains_percent": {
+        "short": 1.209968847007756,
+        "primary760": 1.5761111023564796,
+        "long": 1.199614370261826
+      }
+    },
+    "4": {
+      "route": "geo1",
+      "application": "a1007_delivery_graph",
+      "stopping_reason": "geo1 retained; static operand prepack screen regressed aggregate full-stage cost, so retain original operand path. Graph and scheduling measured.",
+      "optimization_review_complete": true,
+      "primary_median_ms": 83.3727525,
+      "power_w": {
+        "mean": 389.671306122449,
+        "p50": 393.423,
+        "p95": 394.931,
+        "max": 395.108
+      },
+      "gains_percent": {
+        "short": 0.9140734481047421,
+        "primary760": 0.7863667380193027,
+        "long": 0.4285609329049223
+      }
+    },
+    "8": {
+      "route": "wp",
+      "application": "a1007_graph",
+      "stopping_reason": "Inherited geometry retained after migration alternative regression; simple identical-math prepack and graph retained after full E2E validation.",
+      "optimization_review_complete": true,
+      "primary_median_ms": 147.8678685,
+      "power_w": {
+        "mean": 394.47916875,
+        "p50": 395.599,
+        "p95": 396.598,
+        "max": 396.789
+      },
+      "gains_percent": {
+        "short": -0.10621448869026817,
+        "primary760": 0.6553232002631378,
+        "long": 0.5691392956445009
+      },
+      "shape_tradeoff_review": "Prioritize agreed760: +0.6553%; long918 +0.5691%. Short608 pooled median regression0.1062%/0.134ms is disclosed; sourceblock125.700\u2013127.897ms andcandidate125.783\u2013126.932ms overlap. No claimed short gain. Actual state/PCM identity and source-bound engine/plugin/power reports verified."
+    },
+    "16": {
+      "route": "wp",
+      "application": "a1007_graph",
+      "stopping_reason": "Inherited geometry retained after migration alternative regression; simple identical-math prepack and graph retained after full E2E validation.",
+      "optimization_review_complete": true,
+      "primary_median_ms": 282.671893,
+      "power_w": {
+        "mean": 396.7251277258567,
+        "p50": 396.48249999999996,
+        "p95": 398.985,
+        "max": 399.41
+      },
+      "gains_percent": {
+        "short": 0.5245190120402101,
+        "primary760": 0.4483383497814528,
+        "long": 0.2914448377986178
+      }
+    },
+    "32": {
+      "route": "wp",
+      "application": "a1007_delivery_graph",
+      "stopping_reason": "Original compact conditioning and overlapping delivery restored before optimization; inherited geometry retained; graph and prepack validated.",
+      "optimization_review_complete": true,
+      "primary_median_ms": 611.983934,
+      "power_w": {
+        "mean": 396.4186024653313,
+        "p50": 396.403,
+        "p95": 398.933,
+        "max": 400.28
+      },
+      "gains_percent": {
+        "short": 0.39404353382991975,
+        "primary760": 0.21143640142590456,
+        "long": 0.5379552320537551
+      }
+    },
+    "64": {
+      "route": "normtf32k16wp",
+      "application": "a1007_delivery_graph",
+      "stopping_reason": "Normal attention TF32 Q64/K16 retained with disclosed quality differences. FFN geometry/pipeline/warp sweeps rejected; identical-math weight prepack retained. Protected nonlinear fusion source evidence rejects spill-heavy candidates.",
+      "optimization_review_complete": true,
+      "primary_median_ms": 1314.84071,
+      "power_w": {
+        "mean": 395.51182343987824,
+        "p50": 395.687,
+        "p95": 399.117,
+        "max": 400.151
+      },
+      "gains_percent": {
+        "short": 0.32224428655106296,
+        "primary760": 0.4183777019772817,
+        "long": 0.4719032614795081
+      }
+    }
+  },
+  "limits": "Bounded evidence-based stopping, not a global optimum. Gains use matched controls named in each report; do not add gains across separate runs. Board power includes the preserved idle external allocation. Raw sampled overshoot retained."
+}

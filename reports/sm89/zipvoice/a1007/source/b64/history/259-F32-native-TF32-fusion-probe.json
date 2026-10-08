@@ -1,0 +1,644 @@
+{
+  "status": "fullB64_F32_projection_value_gate_fusion_JIT_probe_complete",
+  "hardware": "GPU-7dab7d6b-ac8c-7ccc-6410-916d3b7689b3, 400.00, 400.00",
+  "native_engine_sha256": "a3a07b43d0ddcb4c95dfdb901a59972a93fe3ff98aad6ba58cf64c3d8ccd69d1",
+  "source_preparation_sha256": "c60afeb2a42bea6d2359e0afa059a7a364c947ba16650c14124cf4327c84f69a",
+  "source_hashes": {
+    "/workspace/zvoice_temp/optimization/int8_sm89_b64/code/probe_f32_nonlinear_value.py": "3b86d9d0cdffa7f65ae0705d215969b17aba10d0e4bed7bcf160b2f951aa85fb",
+    "/workspace/zvoice_temp/optimization/int8_sm89_b64/code/f32_nonlinear_value_kernel.py": "234327dea5dbb11a97ef037e962117be91c6e1ac2fd86877ece881876663c9aa"
+  },
+  "rows": [
+    {
+      "BM": 32,
+      "BN": 32,
+      "BK": 64,
+      "warps": 4,
+      "stages": 2,
+      "B": 64,
+      "T": 760,
+      "native_custom_ms": [
+        1.2292853196461995,
+        1.575925350189209
+      ],
+      "fragment_gain_percent": -28.198500787658958,
+      "registers": 135,
+      "spills": 0,
+      "shared": 32768,
+      "checks": {
+        "value": {
+          "fullB64_nan_sentinels_overwritten": true,
+          "max_abs": 0.0,
+          "relative_l2": 0.0,
+          "bitwise_equal": true
+        },
+        "gate": {
+          "fullB64_nan_sentinels_overwritten": true,
+          "max_abs": 0.0,
+          "relative_l2": 0.0,
+          "bitwise_equal": true
+        }
+      },
+      "samples_ms": [
+        [
+          1.2352853616078694,
+          1.229482650756836,
+          1.2301653226216633,
+          1.228117307027181,
+          1.2291413148244221,
+          1.2287360032399495,
+          1.2298239866892497,
+          1.2287147045135498,
+          1.2287466526031494,
+          1.2294293244679768,
+          1.2286826769510906,
+          1.2287999788920085,
+          1.2298239866892497,
+          1.2284586429595947,
+          1.2417706648508708,
+          1.2413653532663982
+        ],
+        [
+          1.575658639272054,
+          1.572864055633545,
+          1.576192061106364,
+          1.576277256011963,
+          1.5754772822062175,
+          1.573834737141927,
+          1.577642599741618,
+          1.5766186714172363,
+          1.575658639272054,
+          1.5741440455118816,
+          1.5793493588765461,
+          1.5796693166097004,
+          1.5751892725626628,
+          1.5755947430928547,
+          1.6192213694254558,
+          1.5983893076578777
+        ]
+      ]
+    },
+    {
+      "BM": 32,
+      "BN": 64,
+      "BK": 64,
+      "warps": 4,
+      "stages": 2,
+      "B": 64,
+      "T": 760,
+      "native_custom_ms": [
+        1.1837440331776938,
+        1.3575092951456704
+      ],
+      "fragment_gain_percent": -14.679293588624358,
+      "registers": 168,
+      "spills": 0,
+      "shared": 57344,
+      "checks": {
+        "value": {
+          "fullB64_nan_sentinels_overwritten": true,
+          "max_abs": 0.0,
+          "relative_l2": 0.0,
+          "bitwise_equal": true
+        },
+        "gate": {
+          "fullB64_nan_sentinels_overwritten": true,
+          "max_abs": 0.0,
+          "relative_l2": 0.0,
+          "bitwise_equal": true
+        }
+      },
+      "samples_ms": [
+        [
+          1.1857919692993164,
+          1.1823786894480388,
+          1.1810133457183838,
+          1.1840853691101074,
+          1.1847679615020752,
+          1.1816960175832112,
+          1.184384028116862,
+          1.183029333750407,
+          1.1840853691101074,
+          1.185109297434489,
+          1.18340269724528,
+          1.1813546816507976,
+          1.1861333052317302,
+          1.1823786894480388,
+          1.1813546816507976,
+          1.185109297434489
+        ],
+        [
+          1.3568000793457031,
+          1.3563733100891113,
+          1.3458773295084636,
+          1.3316586812337239,
+          1.334506670633952,
+          1.3598720232645671,
+          1.3612799644470215,
+          1.3635627428690593,
+          1.3677226702372234,
+          1.3677973747253418,
+          1.364576021830241,
+          1.358506679534912,
+          1.3568000793457031,
+          1.357141335805257,
+          1.356042702992757,
+          1.357877254486084
+        ]
+      ]
+    },
+    {
+      "BM": 64,
+      "BN": 32,
+      "BK": 64,
+      "warps": 4,
+      "stages": 2,
+      "B": 64,
+      "T": 760,
+      "native_custom_ms": [
+        1.1828640302022297,
+        1.4954400062561035
+      ],
+      "fragment_gain_percent": -26.42535135677715,
+      "registers": 135,
+      "spills": 0,
+      "shared": 40960,
+      "checks": {
+        "value": {
+          "fullB64_nan_sentinels_overwritten": true,
+          "max_abs": 0.0,
+          "relative_l2": 0.0,
+          "bitwise_equal": true
+        },
+        "gate": {
+          "fullB64_nan_sentinels_overwritten": true,
+          "max_abs": 0.0,
+          "relative_l2": 0.0,
+          "bitwise_equal": true
+        }
+      },
+      "samples_ms": [
+        [
+          1.185109297434489,
+          1.1827200253804524,
+          1.1892053286234539,
+          1.186794678370158,
+          1.1840853691101074,
+          1.1813120047251384,
+          1.1844267050425212,
+          1.1877973079681396,
+          1.1823466618855794,
+          1.1816426912943523,
+          1.1823786894480388,
+          1.1827200253804524,
+          1.185109297434489,
+          1.1816319624582927,
+          1.1803200244903564,
+          1.183008035024007
+        ],
+        [
+          1.4966293970743816,
+          1.490495999654134,
+          1.4952853520711262,
+          1.4946986834208171,
+          1.4946773846944172,
+          1.4909332593282063,
+          1.4980160395304363,
+          1.4957226117451985,
+          1.4969813028971355,
+          1.4906026522318523,
+          1.4970240592956543,
+          1.4964052836100261,
+          1.4953813552856445,
+          1.491967995961507,
+          1.4963839848836262,
+          1.4954986572265625
+        ]
+      ]
+    },
+    {
+      "BM": 64,
+      "BN": 64,
+      "BK": 64,
+      "warps": 4,
+      "stages": 2,
+      "B": 64,
+      "T": 760,
+      "native_custom_ms": [
+        1.1895466645558677,
+        1.1746986309687295
+      ],
+      "fragment_gain_percent": 1.248209425452162,
+      "registers": 255,
+      "spills": 52,
+      "shared": 65536,
+      "checks": {
+        "value": {
+          "fullB64_nan_sentinels_overwritten": true,
+          "max_abs": 0.0,
+          "relative_l2": 0.0,
+          "bitwise_equal": true
+        },
+        "gate": {
+          "fullB64_nan_sentinels_overwritten": true,
+          "max_abs": 0.0,
+          "relative_l2": 0.0,
+          "bitwise_equal": true
+        }
+      },
+      "samples_ms": [
+        [
+          1.1864746411641438,
+          1.1846826871236165,
+          1.1874879995981853,
+          1.187498648961385,
+          1.1939733028411865,
+          1.1898880004882812,
+          1.1890880266825359,
+          1.18886399269104,
+          1.193600018819173,
+          1.1936426957448323,
+          1.1938772996266682,
+          1.193600018819173,
+          1.193984031677246,
+          1.1919146378835042,
+          1.1892053286234539,
+          1.1888426939646404
+        ],
+        [
+          1.166431983311971,
+          1.1618879636128743,
+          1.1607786814371746,
+          1.1513066291809082,
+          1.1483413378397624,
+          1.1625813643137615,
+          1.1745279630025227,
+          1.1768426895141602,
+          1.1878399848937988,
+          1.181333303451538,
+          1.1881173451741536,
+          1.1861333052317302,
+          1.1830613613128662,
+          1.1793066660563152,
+          1.173845370610555,
+          1.1748692989349365
+        ]
+      ]
+    },
+    {
+      "BM": 32,
+      "BN": 64,
+      "BK": 128,
+      "warps": 4,
+      "stages": 2,
+      "status": "resource_or_compile_failure",
+      "error": "out of resource: shared memory, Required: 114688, Hardware limit: 101376. Reducing block sizes or `num_stages` may help."
+    },
+    {
+      "BM": 64,
+      "BN": 64,
+      "BK": 128,
+      "warps": 4,
+      "stages": 2,
+      "status": "resource_or_compile_failure",
+      "error": "out of resource: shared memory, Required: 131072, Hardware limit: 101376. Reducing block sizes or `num_stages` may help."
+    },
+    {
+      "BM": 64,
+      "BN": 128,
+      "BK": 64,
+      "warps": 8,
+      "stages": 2,
+      "status": "resource_or_compile_failure",
+      "error": "out of resource: shared memory, Required: 114688, Hardware limit: 101376. Reducing block sizes or `num_stages` may help."
+    },
+    {
+      "BM": 128,
+      "BN": 32,
+      "BK": 64,
+      "warps": 4,
+      "stages": 2,
+      "B": 64,
+      "T": 760,
+      "native_custom_ms": [
+        1.186303973197937,
+        1.5029067198435466
+      ],
+      "fragment_gain_percent": -26.68816372519928,
+      "registers": 183,
+      "spills": 0,
+      "shared": 57344,
+      "checks": {
+        "value": {
+          "fullB64_nan_sentinels_overwritten": true,
+          "max_abs": 0.0,
+          "relative_l2": 0.0,
+          "bitwise_equal": true
+        },
+        "gate": {
+          "fullB64_nan_sentinels_overwritten": true,
+          "max_abs": 0.0,
+          "relative_l2": 0.0,
+          "bitwise_equal": true
+        }
+      },
+      "samples_ms": [
+        [
+          1.1925013065338135,
+          1.1861333052317302,
+          1.1871573130289714,
+          1.1895466645558674,
+          1.1861333052317302,
+          1.1864746411641438,
+          1.1871573130289714,
+          1.185109297434489,
+          1.1857919692993164,
+          1.1885226567586262,
+          1.1840853691101074,
+          1.185109297434489,
+          1.18504532178243,
+          1.185109297434489,
+          1.1878399848937988,
+          1.1878186861673992
+        ],
+        [
+          1.5029226938883464,
+          1.497770627339681,
+          1.5032320022583008,
+          1.5035413106282551,
+          1.5032320022583008,
+          1.4974826176961262,
+          1.5039146741231282,
+          1.5032320022583008,
+          1.5028907457987468,
+          1.497770627339681,
+          1.5032320022583008,
+          1.5028907457987468,
+          1.5025493303934734,
+          1.4967466990152996,
+          1.5027732849121094,
+          1.503562609354655
+        ]
+      ]
+    },
+    {
+      "BM": 32,
+      "BN": 64,
+      "BK": 64,
+      "warps": 4,
+      "stages": 3,
+      "status": "resource_or_compile_failure",
+      "error": "out of resource: shared memory, Required: 114688, Hardware limit: 101376. Reducing block sizes or `num_stages` may help."
+    }
+  ],
+  "native_inspector": [
+    {
+      "Name": "__mye1090_0_myl0_0",
+      "LayerType": "shape_call",
+      "Inputs": [],
+      "Constants": [],
+      "Outputs": [],
+      "TacticName": "",
+      "StreamId": 0,
+      "Metadata": ""
+    },
+    {
+      "Name": "/fm_decoder/encoders.0/layers.0/nonlin_attention/in_proj/MatMul_myl0_1",
+      "LayerType": "gemm",
+      "Inputs": [
+        {
+          "Name": "x",
+          "Dimensions": [
+            -1,
+            512
+          ],
+          "Strides": [
+            512,
+            1
+          ],
+          "StrideOrder": [
+            1,
+            0
+          ],
+          "Datatype": "Float",
+          "Format": "(Linear) Row major linear format"
+        }
+      ],
+      "Constants": [
+        {
+          "Name": "__mye4597dconst_myl0",
+          "Dimensions": [
+            512,
+            1152
+          ],
+          "Strides": [
+            1,
+            512
+          ],
+          "StrideOrder": [
+            0,
+            1
+          ],
+          "Datatype": "Float",
+          "Format": "(Transposed) Transposed format"
+        },
+        {
+          "Name": "__mye4396/fm_decoder/encoders.0/layers.0/nonlin_attention/in_proj/MatMul_alpha_myl0",
+          "Dimensions": [
+            1
+          ],
+          "Strides": [
+            1
+          ],
+          "StrideOrder": [
+            0
+          ],
+          "Datatype": "Float",
+          "Format": "(Linear) Row major linear format"
+        },
+        {
+          "Name": "__mye4397/fm_decoder/encoders.0/layers.0/nonlin_attention/in_proj/MatMul_beta_myl0",
+          "Dimensions": [
+            1
+          ],
+          "Strides": [
+            1
+          ],
+          "StrideOrder": [
+            0
+          ],
+          "Datatype": "Float",
+          "Format": "(Linear) Row major linear format"
+        },
+        {
+          "Name": "__mye4433_reshape_myl0",
+          "Dimensions": [
+            1,
+            1152
+          ],
+          "Strides": [
+            1152,
+            1
+          ],
+          "StrideOrder": [
+            1,
+            0
+          ],
+          "Datatype": "Float",
+          "Format": "(Linear) Row major linear format"
+        }
+      ],
+      "Outputs": [
+        {
+          "Name": "/fm_decoder/encoders.0/layers.0/nonlin_attention/in_proj/Add_output_0.1_myl0",
+          "Dimensions": [
+            -1,
+            1152
+          ],
+          "Strides": [
+            1152,
+            1
+          ],
+          "StrideOrder": [
+            1,
+            0
+          ],
+          "Datatype": "Float",
+          "Format": "(Linear) Row major linear format"
+        }
+      ],
+      "TacticName": "sm86_xmma_gemm_f32f32_tf32f32_f32_tn_n_tilesize128x128x16_stage3_warpsize2x2x1_tensor16x8x8",
+      "StreamId": 0,
+      "Metadata": "[ONNX Layer: /fm_decoder/encoders.0/layers.0/nonlin_attention/in_proj/MatMul]\u001f[ONNX Layer: /fm_decoder/encoders.0/layers.0/nonlin_attention/in_proj/Add]"
+    },
+    {
+      "Name": "__myl_Slic_myl0_2",
+      "LayerType": "kgen",
+      "Inputs": [
+        {
+          "Name": "/fm_decoder/encoders.0/layers.0/nonlin_attention/in_proj/Add_output_0.1_myl0",
+          "Dimensions": [
+            -1,
+            64,
+            1152
+          ],
+          "Strides": [
+            73728,
+            1152,
+            1
+          ],
+          "StrideOrder": [
+            2,
+            1,
+            0
+          ],
+          "Datatype": "Float",
+          "Format": "(Linear) Row major linear format"
+        }
+      ],
+      "Constants": [],
+      "Outputs": [
+        {
+          "Name": "/fm_decoder/encoders.0/layers.0/nonlin_attention/Slice_2_output_0",
+          "Dimensions": [
+            -1,
+            64,
+            384
+          ],
+          "Strides": [
+            24576,
+            384,
+            1
+          ],
+          "StrideOrder": [
+            2,
+            1,
+            0
+          ],
+          "Datatype": "Float",
+          "Format": "(Linear) Row major linear format"
+        }
+      ],
+      "TacticName": "__myl_Slic_0x8034a8ef8a65fcf92e0ab63cede4fba1_vec",
+      "StreamId": 0,
+      "Metadata": "[ONNX Layer: /fm_decoder/encoders.0/layers.0/nonlin_attention/Slice_2]"
+    },
+    {
+      "Name": "__myl_SlicSlicTanhMulReshTran_myl0_3",
+      "LayerType": "kgen",
+      "Inputs": [
+        {
+          "Name": "/fm_decoder/encoders.0/layers.0/nonlin_attention/in_proj/Add_output_0.1_myl0",
+          "Dimensions": [
+            -1,
+            64,
+            1152
+          ],
+          "Strides": [
+            73728,
+            1152,
+            1
+          ],
+          "StrideOrder": [
+            2,
+            1,
+            0
+          ],
+          "Datatype": "Float",
+          "Format": "(Linear) Row major linear format"
+        },
+        {
+          "Name": "/fm_decoder/encoders.0/layers.0/nonlin_attention/in_proj/Add_output_0.1_myl0",
+          "Dimensions": [
+            -1,
+            64,
+            1152
+          ],
+          "Strides": [
+            73728,
+            1152,
+            1
+          ],
+          "StrideOrder": [
+            2,
+            1,
+            0
+          ],
+          "Datatype": "Float",
+          "Format": "(Linear) Row major linear format"
+        }
+      ],
+      "Constants": [],
+      "Outputs": [
+        {
+          "Name": "/fm_decoder/encoders.0/layers.0/nonlin_attention/Transpose_output_0",
+          "Dimensions": [
+            1,
+            64,
+            -1,
+            384
+          ],
+          "Strides": [
+            -1,
+            -1,
+            384,
+            1
+          ],
+          "StrideOrder": [
+            3,
+            2,
+            1,
+            0
+          ],
+          "Datatype": "Float",
+          "Format": "(Linear) Row major linear format"
+        }
+      ],
+      "TacticName": "__myl_SlicSlicTanhMulReshTran_0x22b2dfb4bfa627b6f5ba78149593419c_vec",
+      "StreamId": 0,
+      "Metadata": "[ONNX Layer: /fm_decoder/encoders.0/layers.0/nonlin_attention/Slice]\u001f[ONNX Layer: /fm_decoder/encoders.0/layers.0/nonlin_attention/tanh/Tanh]\u001f[ONNX Layer: /fm_decoder/encoders.0/layers.0/nonlin_attention/Mul_3]\u001f[ONNX Layer: /fm_decoder/encoders.0/layers.0/nonlin_attention/Slice_1]\u001f[ONNX Layer: /fm_decoder/encoders.0/layers.0/nonlin_attention/Reshape_1]\u001e[ONNX Layer: /fm_decoder/encoders.0/layers.0/nonlin_attention/Transpose]"
+    }
+  ],
+  "native_mode": "TF32",
+  "baseline_precision_matches_fullengine": true,
+  "scope": "Original protected oneF32projection through tanh(z0)*z1/transposedvalue and z2gate, all64/all384 outputs. Float32 storage, authorized nearest TF32 products, original bias/tanh. Native fragment mode is recorded separately; fullengine usesTF32. Fragment topology/copies/native tactics may differ; actual fullmodel comparison required. JIT fragment only, nofullmodel/E2E/quality acceptance."
+}

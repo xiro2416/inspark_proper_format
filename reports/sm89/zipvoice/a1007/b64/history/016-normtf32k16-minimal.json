@@ -1,0 +1,95 @@
+{
+  "status": "minimal_compute_passed_audio_quality_pending",
+  "batch": 64,
+  "physical_gpu": 1,
+  "tests": [
+    {
+      "frames": 600,
+      "finite_all": true,
+      "all_rows_written": true,
+      "relative_l2": 0.1363561600446701,
+      "max_abs": 3.795391321182251,
+      "batch_permutation": {}
+    },
+    {
+      "frames": 601,
+      "finite_all": true,
+      "all_rows_written": true,
+      "relative_l2": 0.13655389845371246,
+      "max_abs": 3.444908857345581,
+      "batch_permutation": {}
+    },
+    {
+      "frames": 759,
+      "finite_all": true,
+      "all_rows_written": true,
+      "relative_l2": 0.13720601797103882,
+      "max_abs": 3.26408052444458,
+      "batch_permutation": {}
+    },
+    {
+      "frames": 760,
+      "finite_all": true,
+      "all_rows_written": true,
+      "relative_l2": 0.1379135400056839,
+      "max_abs": 3.7666378021240234,
+      "batch_permutation": {
+        "fm-native": {
+          "exact": true,
+          "relative_l2": 0.0,
+          "max_abs": 0.0
+        },
+        "fm-inherited": {
+          "exact": true,
+          "relative_l2": 0.0,
+          "max_abs": 0.0
+        }
+      }
+    },
+    {
+      "frames": 761,
+      "finite_all": true,
+      "all_rows_written": true,
+      "relative_l2": 0.13686196506023407,
+      "max_abs": 3.7530858516693115,
+      "batch_permutation": {}
+    },
+    {
+      "frames": 919,
+      "finite_all": true,
+      "all_rows_written": true,
+      "relative_l2": 0.1356816291809082,
+      "max_abs": 4.852044105529785,
+      "batch_permutation": {}
+    },
+    {
+      "frames": 920,
+      "finite_all": true,
+      "all_rows_written": true,
+      "relative_l2": 0.13552308082580566,
+      "max_abs": 4.293531894683838,
+      "batch_permutation": {}
+    }
+  ],
+  "scope": "minimal FM only, before application scheduling; numerical differences report-only, full audio quality pending",
+  "engine_sha256": {
+    "fm-native": "aafd48bfb9332098c8ae47544ad1615a4725da643d81198461d98b7b6e582c12",
+    "fm-inherited": "d019a5370dde8d5cc1e54718626520029fd4e0d758cca1ae43b939ae4efaa6b8"
+  },
+  "engine_directories": {
+    "fm-native": "/workspace/A_1007/artifacts/zipvoice/a1007/b64/fm-native",
+    "fm-inherited": "/workspace/A_1007/artifacts/zipvoice/a1007/b64/fm-normtf32k16"
+  },
+  "plugin_package": "inspark_infer.ops.tensorrt.zipvoice.a1007.b64_normtf32k16",
+  "validator_sha256": "3843115dffef74a2e00d59c129fd8e4ba8f8110e0ca63d977e91b7b9f58a6158",
+  "seed": 9100,
+  "custom_attention_branches": 48,
+  "omitted_inherited_mechanisms": [],
+  "rewrite_coverage": {
+    "dw_replacements": 24,
+    "online_replacements": 16,
+    "f32_replacements": 12,
+    "int8_nonlinear_value_replacements": 12,
+    "int8_residual_replacements": 24
+  }
+}

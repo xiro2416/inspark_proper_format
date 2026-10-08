@@ -1,0 +1,305 @@
+{
+  "status": "retained_verified",
+  "batch": 16,
+  "concurrency": 1,
+  "physical_gpu": 1,
+  "gpu_uuid": "GPU-7dab7d6b-ac8c-7ccc-6410-916d3b7689b3",
+  "configured_enforced_power_w": 400,
+  "engine": "/workspace/zvoice_temp/optimization/int8_sm89_b16/builds/normal_tf32_fm_full/engine.plan",
+  "engine_sha256": "0769a187c3b7a1f3ab675a3c2fb32a49f8a6a053fd5340762d065fbf06b097ba",
+  "runner": "/workspace/zvoice_temp/optimization/int8_sm89_b16/code/measure_normal_tf32_gpu1.py",
+  "runner_sha256": "4c9baeb3f018301f7b4d6e65b1aa1622e0e621f1e3d51d8b4c1e460ad98e56c6",
+  "manifest": "/workspace/zvoice_temp/optimization/int8_sm89_b16/cases/manifest.json",
+  "manifest_sha256": "b9bbcecf2d0094a22b89e566d8d99b6da24dc3a31f9b90a2328401b03b194175",
+  "recipe": "original SmoothQuant alpha=.5, first4 floating / last12 INT8;180 originalmodules",
+  "retained_changes": [
+    "FullB16 inherited computation/application coverage",
+    "32 normal4head QK+AV nearestTF32 TensorCore branches;16original nonlinear branches unchanged",
+    "CPU orderedPCM chunks4 atwave_samples>=260000,otherwise16;fullGPUbatch16"
+  ],
+  "quality": {
+    "count": 210,
+    "character_errors": 67,
+    "reference_characters": 5742,
+    "cer": 0.011668408220132358,
+    "utmos_mean": 2.5457223790032524,
+    "sim_o_mean": 0.697521242925099,
+    "report": "/workspace/zvoice_temp/optimization/int8_sm89_b16/history/051-normal-quality.json",
+    "sha256": "e5dad64361254a213d360eba17616c5452335809eebcd118935c17ac6883b7aa"
+  },
+  "performance": {
+    "final-native": [
+      {
+        "index": "018",
+        "frames": 582,
+        "latency": {
+          "baseline": {
+            "count": 20,
+            "median_s": 0.264170984,
+            "mean_s": 0.2647528934,
+            "p95_s": 0.267961227
+          },
+          "candidate": {
+            "count": 20,
+            "median_s": 0.225223919,
+            "mean_s": 0.22581722555,
+            "p95_s": 0.229267741
+          }
+        },
+        "median_gain_percent": 14.743127504116805,
+        "request_window_power": {
+          "baseline": {
+            "status": "request_windows_sampled",
+            "sample_count": 103,
+            "excluded_samples": 4,
+            "mean_w": 258.3663203883495,
+            "p95_w": 373.547,
+            "sampled_max_w": 373.552,
+            "scope": "Whole-board NVML samples within latency windows; post-PCM checks excluded; not instantaneous spike or request-only attribution."
+          },
+          "candidate": {
+            "status": "request_windows_sampled",
+            "sample_count": 88,
+            "excluded_samples": 4,
+            "mean_w": 269.7506022727273,
+            "p95_w": 340.32129999999984,
+            "sampled_max_w": 374.233,
+            "scope": "Whole-board NVML samples within latency windows; post-PCM checks excluded; not instantaneous spike or request-only attribution."
+          }
+        },
+        "comparison": "/workspace/zvoice_temp/optimization/int8_sm89_b16/cases/final-native/018/comparison.json",
+        "sha256": "831cdcd8e3037e75c135c8f433026eaa1a882ff98b631e09bbc429bbdd09e5da"
+      },
+      {
+        "index": "000",
+        "frames": 760,
+        "latency": {
+          "baseline": {
+            "count": 20,
+            "median_s": 0.364096293,
+            "mean_s": 0.3640235428,
+            "p95_s": 0.368018794
+          },
+          "candidate": {
+            "count": 20,
+            "median_s": 0.29372554949999996,
+            "mean_s": 0.29405140715,
+            "p95_s": 0.299330746
+          }
+        },
+        "median_gain_percent": 19.32750891808724,
+        "request_window_power": {
+          "baseline": {
+            "status": "request_windows_sampled",
+            "sample_count": 142,
+            "excluded_samples": 4,
+            "mean_w": 307.80718309859157,
+            "p95_w": 398.179,
+            "sampled_max_w": 398.179,
+            "scope": "Whole-board NVML samples within latency windows; post-PCM checks excluded; not instantaneous spike or request-only attribution."
+          },
+          "candidate": {
+            "status": "request_windows_sampled",
+            "sample_count": 115,
+            "excluded_samples": 4,
+            "mean_w": 280.7078608695652,
+            "p95_w": 397.20180000000005,
+            "sampled_max_w": 397.451,
+            "scope": "Whole-board NVML samples within latency windows; post-PCM checks excluded; not instantaneous spike or request-only attribution."
+          }
+        },
+        "comparison": "/workspace/zvoice_temp/optimization/int8_sm89_b16/cases/final-native/000/comparison.json",
+        "sha256": "0cc52787008f63e70f73a3910a4bad1ca3de41669462096049a117f1ce7f563b"
+      },
+      {
+        "index": "021",
+        "frames": 1750,
+        "latency": {
+          "baseline": {
+            "count": 20,
+            "median_s": 1.2229451225,
+            "mean_s": 1.2248841228,
+            "p95_s": 1.233833464
+          },
+          "candidate": {
+            "count": 20,
+            "median_s": 0.9023904,
+            "mean_s": 0.9018660964,
+            "p95_s": 0.909361675
+          }
+        },
+        "median_gain_percent": 26.211701294061953,
+        "request_window_power": {
+          "baseline": {
+            "status": "request_windows_sampled",
+            "sample_count": 485,
+            "excluded_samples": 4,
+            "mean_w": 388.5128886597938,
+            "p95_w": 404.501,
+            "sampled_max_w": 412.213,
+            "scope": "Whole-board NVML samples within latency windows; post-PCM checks excluded; not instantaneous spike or request-only attribution."
+          },
+          "candidate": {
+            "status": "request_windows_sampled",
+            "sample_count": 357,
+            "excluded_samples": 4,
+            "mean_w": 361.7394929971989,
+            "p95_w": 397.526,
+            "sampled_max_w": 398.031,
+            "scope": "Whole-board NVML samples within latency windows; post-PCM checks excluded; not instantaneous spike or request-only attribution."
+          }
+        },
+        "comparison": "/workspace/zvoice_temp/optimization/int8_sm89_b16/cases/final-native/021/comparison.json",
+        "sha256": "329a9b92943ba46ba727233efb5139e9d434ed30ada0dba71c91fbb01f10d469"
+      }
+    ],
+    "compare-normal": [
+      {
+        "index": "018",
+        "frames": 582,
+        "latency": {
+          "baseline": {
+            "count": 20,
+            "median_s": 0.2309225635,
+            "mean_s": 0.2311829856,
+            "p95_s": 0.234307694
+          },
+          "candidate": {
+            "count": 20,
+            "median_s": 0.225804797,
+            "mean_s": 0.2262130953,
+            "p95_s": 0.230233307
+          }
+        },
+        "median_gain_percent": 2.2162262632252516,
+        "request_window_power": {
+          "baseline": {
+            "status": "request_windows_sampled",
+            "sample_count": 87,
+            "excluded_samples": 6,
+            "mean_w": 268.63277011494256,
+            "p95_w": 342.06,
+            "sampled_max_w": 360.008,
+            "scope": "Whole-board NVML samples within latency windows; post-PCM checks excluded; not instantaneous spike or request-only attribution."
+          },
+          "candidate": {
+            "status": "request_windows_sampled",
+            "sample_count": 88,
+            "excluded_samples": 4,
+            "mean_w": 252.47461363636364,
+            "p95_w": 333.713,
+            "sampled_max_w": 376.973,
+            "scope": "Whole-board NVML samples within latency windows; post-PCM checks excluded; not instantaneous spike or request-only attribution."
+          }
+        },
+        "comparison": "/workspace/zvoice_temp/optimization/int8_sm89_b16/cases/compare-normal/018/comparison.json",
+        "sha256": "7fa1c3b09aa4f81d03826d3a9e2ddaf8d5bc76d43fcd37a17a7220d2c3662add"
+      },
+      {
+        "index": "000",
+        "frames": 760,
+        "latency": {
+          "baseline": {
+            "count": 20,
+            "median_s": 0.299907294,
+            "mean_s": 0.30141414195,
+            "p95_s": 0.307490342
+          },
+          "candidate": {
+            "count": 20,
+            "median_s": 0.29308381,
+            "mean_s": 0.2942953318,
+            "p95_s": 0.299168489
+          }
+        },
+        "median_gain_percent": 2.2751977482748353,
+        "request_window_power": {
+          "baseline": {
+            "status": "request_windows_sampled",
+            "sample_count": 118,
+            "excluded_samples": 4,
+            "mean_w": 293.45255084745764,
+            "p95_w": 394.926,
+            "sampled_max_w": 396.606,
+            "scope": "Whole-board NVML samples within latency windows; post-PCM checks excluded; not instantaneous spike or request-only attribution."
+          },
+          "candidate": {
+            "status": "request_windows_sampled",
+            "sample_count": 116,
+            "excluded_samples": 4,
+            "mean_w": 302.2965775862069,
+            "p95_w": 394.42575,
+            "sampled_max_w": 396.019,
+            "scope": "Whole-board NVML samples within latency windows; post-PCM checks excluded; not instantaneous spike or request-only attribution."
+          }
+        },
+        "comparison": "/workspace/zvoice_temp/optimization/int8_sm89_b16/cases/compare-normal/000/comparison.json",
+        "sha256": "ba07c4e0529abb9dc4c1d1eb4b8bae79018abe71922c3767878d72b089a30b74"
+      },
+      {
+        "index": "021",
+        "frames": 1750,
+        "latency": {
+          "baseline": {
+            "count": 20,
+            "median_s": 0.9427860969999999,
+            "mean_s": 0.94407771005,
+            "p95_s": 0.95161168
+          },
+          "candidate": {
+            "count": 20,
+            "median_s": 0.903531946,
+            "mean_s": 0.90272101275,
+            "p95_s": 0.908681925
+          }
+        },
+        "median_gain_percent": 4.163632782124062,
+        "request_window_power": {
+          "baseline": {
+            "status": "request_windows_sampled",
+            "sample_count": 373,
+            "excluded_samples": 4,
+            "mean_w": 364.61597587131365,
+            "p95_w": 398.6248,
+            "sampled_max_w": 398.781,
+            "scope": "Whole-board NVML samples within latency windows; post-PCM checks excluded; not instantaneous spike or request-only attribution."
+          },
+          "candidate": {
+            "status": "request_windows_sampled",
+            "sample_count": 356,
+            "excluded_samples": 4,
+            "mean_w": 361.4533426966292,
+            "p95_w": 397.788,
+            "sampled_max_w": 398.405,
+            "scope": "Whole-board NVML samples within latency windows; post-PCM checks excluded; not instantaneous spike or request-only attribution."
+          }
+        },
+        "comparison": "/workspace/zvoice_temp/optimization/int8_sm89_b16/cases/compare-normal/021/comparison.json",
+        "sha256": "a77947a3dc5368734799c0173d37790c0e1ee4ec69d3cb69c2b3232bdbdc5cd0"
+      }
+    ]
+  },
+  "final_profiles": {
+    "582": {
+      "path": "/workspace/zvoice_temp/optimization/int8_sm89_b16/history/055-final-profile-582.json",
+      "sha256": "150460041b63ebc9e1e5dfcf666d525a2dd2c9e1ef547533f1bddb317d12ec1f",
+      "instrumented_FM_ms": 30.61461328641356
+    },
+    "760": {
+      "path": "/workspace/zvoice_temp/optimization/int8_sm89_b16/history/055-final-profile-760.json",
+      "sha256": "9da41bb75620180933ead9cfe212f28559bea84426494df2e51dbeab01a54d96",
+      "instrumented_FM_ms": 38.07256540710417
+    },
+    "1750": {
+      "path": "/workspace/zvoice_temp/optimization/int8_sm89_b16/history/055-final-profile-1750.json",
+      "sha256": "f94a3e1c3e73a6bfaf9048bdb829f1ab2057131365fa59347463638d177abb49",
+      "instrumented_FM_ms": 109.54077884547102
+    }
+  },
+  "clock": "PreparedCPUconditions/H2D->all16orderedPCM; excludesfrontend/init/capture/WAVwrites",
+  "power_scope": "WholeboardNVMLwithinrequestwindows;notinstantaneousorprocessonly",
+  "performance_scope": "Three measured representative lengths, not all57 lengthperformance claim",
+  "full70_and_mixed_runtime": "/workspace/zvoice_temp/optimization/int8_sm89_b16/history/050-normal-full-validation.json",
+  "mapping": "/workspace/zvoice_temp/optimization/int8_sm89_b16/history/048-normal-mapping.json",
+  "math_audit": "/workspace/zvoice_temp/optimization/int8_sm89_b16/history/053-normal-math-audit.json"
+}

@@ -1,0 +1,46 @@
+{
+  "status": "quick_model_graph_probe_complete_not_accepted",
+  "batch": 1,
+  "frames": 760,
+  "preflight": {
+    "memory_mib": 4108.0,
+    "gpu_util_percent": 0.0,
+    "processes": "1820496, 4082",
+    "power_cap_w": 400.0,
+    "scope": "Known idle allocation retained; not exclusive device ownership"
+  },
+  "applications": {
+    "control": "a1007_delivery",
+    "candidate": "a1007_delivery_graph"
+  },
+  "current_best_baseline": "migration-baseline.json",
+  "median_s": {
+    "control": 0.034040758,
+    "candidate": 0.033395533
+  },
+  "gain_percent": 1.8954483916016187,
+  "functional_state_and_pcm_exact": true,
+  "blocks": [
+    {
+      "kind": "control",
+      "median_s": 0.03403563,
+      "report": "/workspace/A_1007/outputs/zipvoice-profiles/b1-model-graph/quick/0-control/report.json"
+    },
+    {
+      "kind": "candidate",
+      "median_s": 0.033404049,
+      "report": "/workspace/A_1007/outputs/zipvoice-profiles/b1-model-graph/quick/1-candidate/report.json"
+    },
+    {
+      "kind": "candidate",
+      "median_s": 0.033320221,
+      "report": "/workspace/A_1007/outputs/zipvoice-profiles/b1-model-graph/quick/2-candidate/report.json"
+    },
+    {
+      "kind": "control",
+      "median_s": 0.034045886,
+      "report": "/workspace/A_1007/outputs/zipvoice-profiles/b1-model-graph/quick/3-control/report.json"
+    }
+  ],
+  "scope": "10samples/route screen; complete corpus/boundaries/mixed andformal matched E2E required"
+}

@@ -1,0 +1,14 @@
+{
+  "status": "restored_b32_real_boundary_mixed_application_validated_performance_pending",
+  "source": "/workspace/zvoice_temp/optimization/int8_sm89_b32/code/measure_delivery_gpu1.py",
+  "source_sha256": "00a9425a3668b3fcd5f7be4787e8d9ca16f9a244ef7107914b663c42a8de1ddf",
+  "target": "src/inspark_infer/runtime/zipvoice/routes/a1007_delivery.py",
+  "omitted_then_restored": [
+    "compact pinned caller-row H2D followed by GPU broadcast/pad/scale",
+    "first-host pinned buffer/event; enqueue remaining D2H before first PCM processing"
+  ],
+  "default": "B32 uses restored delivery route; other source batch defaults stay unchanged until measured cross-batch reuse",
+  "acceptance": "Require source-style all-row transfer/PCM and compact condition bitwise oracle plus matched E2E; do not count restoration as new optimization",
+  "not_yet_queued": "Delivery reuse across all7 is queued in complete_migration_measurements.py after baseline and PCM scheduling measurements",
+  "target_application_evidence": "b32/history/003-application.json"
+}

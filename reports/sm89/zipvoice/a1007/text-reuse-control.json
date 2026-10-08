@@ -1,0 +1,147 @@
+{
+  "status": "partial_matrix_control_checked",
+  "scope": "T760, identical full-batch token/condition inputs; B1 unique encoder versus full-batch encoder; same noise",
+  "cases": [
+    {
+      "batch": 1,
+      "keys": {
+        "initial_state": {
+          "exact": true,
+          "relative_l2": 0.0
+        },
+        "text_condition": {
+          "exact": true,
+          "relative_l2": 0.0
+        },
+        "speech_condition": {
+          "exact": true,
+          "relative_l2": 0.0
+        },
+        "padding_mask": {
+          "exact": true
+        },
+        "time_grid": {
+          "exact": true,
+          "relative_l2": 0.0
+        },
+        "final_state": {
+          "exact": true,
+          "relative_l2": 0.0
+        }
+      }
+    },
+    {
+      "batch": 2,
+      "keys": {
+        "initial_state": {
+          "exact": true,
+          "relative_l2": 0.0
+        },
+        "text_condition": {
+          "exact": false,
+          "relative_l2": 0.00020410577417351305
+        },
+        "speech_condition": {
+          "exact": true,
+          "relative_l2": 0.0
+        },
+        "padding_mask": {
+          "exact": true
+        },
+        "time_grid": {
+          "exact": true,
+          "relative_l2": 0.0
+        },
+        "final_state": {
+          "exact": false,
+          "relative_l2": 0.16752879321575165
+        }
+      }
+    },
+    {
+      "batch": 4,
+      "keys": {
+        "initial_state": {
+          "exact": true,
+          "relative_l2": 0.0
+        },
+        "text_condition": {
+          "exact": false,
+          "relative_l2": 0.00020158068218734115
+        },
+        "speech_condition": {
+          "exact": true,
+          "relative_l2": 0.0
+        },
+        "padding_mask": {
+          "exact": true
+        },
+        "time_grid": {
+          "exact": true,
+          "relative_l2": 0.0
+        },
+        "final_state": {
+          "exact": false,
+          "relative_l2": 0.15340404212474823
+        }
+      }
+    },
+    {
+      "batch": 8,
+      "keys": {
+        "initial_state": {
+          "exact": true,
+          "relative_l2": 0.0
+        },
+        "text_condition": {
+          "exact": false,
+          "relative_l2": 0.00018860850832425058
+        },
+        "speech_condition": {
+          "exact": true,
+          "relative_l2": 0.0
+        },
+        "padding_mask": {
+          "exact": true
+        },
+        "time_grid": {
+          "exact": true,
+          "relative_l2": 0.0
+        },
+        "final_state": {
+          "exact": false,
+          "relative_l2": 0.1683460921049118
+        }
+      }
+    },
+    {
+      "batch": 16,
+      "keys": {
+        "initial_state": {
+          "exact": true,
+          "relative_l2": 0.0
+        },
+        "text_condition": {
+          "exact": false,
+          "relative_l2": 0.00019209482707083225
+        },
+        "speech_condition": {
+          "exact": true,
+          "relative_l2": 0.0
+        },
+        "padding_mask": {
+          "exact": true
+        },
+        "time_grid": {
+          "exact": true,
+          "relative_l2": 0.0
+        },
+        "final_state": {
+          "exact": false,
+          "relative_l2": 0.17201931774616241
+        }
+      }
+    }
+  ],
+  "interpretation": "Same initial noise, speech, mask and grid, same FM plan. Full-batch versus B1 text encoder yields about0.0002 text-condition relative L2 and0.15-0.17 final-state relative L2 at B2..16. This controlled result demonstrates trajectory sensitivity; it does not establish all other differences are harmless. Identical-input reuse is semantic reuse, not promised bitwise identity across separately built text engines."
+}

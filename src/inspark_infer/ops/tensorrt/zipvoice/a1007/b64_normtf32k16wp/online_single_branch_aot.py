@@ -1,0 +1,7 @@
+import triton
+import triton.language as tl
+from .online_single_branch_runtime_kernel import online_single_branch
+
+@triton.jit
+def online_single_branch_aot(Q, K, PQ, E, Mask, V, T, O, NONLIN: tl.constexpr):
+    online_single_branch(Q, K, PQ, E, Mask, V, O, T, NONLIN, 16, 16 if NONLIN else 32, 'ieee')

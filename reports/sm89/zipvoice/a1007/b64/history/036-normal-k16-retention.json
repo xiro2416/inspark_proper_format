@@ -1,0 +1,27 @@
+{
+  "status": "normal_k16_retained_remaining_operator_review_pending",
+  "route": "normtf32k16",
+  "application": "a1007_delivery_graph",
+  "pcm_policy": {
+    "chunk": 16,
+    "workers": 4
+  },
+  "performance_evidence_sha256": "2af298a5b48dcdca0eccbd22b1b8377f492c102a02a81d1019e85f8bc0e2ebe0",
+  "quality_review": "035-normal-k16-quality-review.json",
+  "engine_review": "033-normal-k16-engine-review.json",
+  "gains_percent": {
+    "short": 2.1265368791898154,
+    "primary760": 1.8590431960397862,
+    "long": 2.4009638882791227
+  },
+  "primary_median_ms": 1320.4699075,
+  "power_w": {
+    "mean": 395.7944748091603,
+    "p50": 396.042,
+    "p95": 399.191,
+    "max": 400.179
+  },
+  "decision": "Retain combined ordinaryTF32 normalQK/AV and64x16normalgeometry; all3matchedrealshapes improve, originalmapping passes, auxiliaryquality reviewed. Native214GEMMtactics unchanged; layout/view differences disclosed.",
+  "optimization_review_complete": false,
+  "remaining": "Assess simple staticFFNTF32operand prepack, review retained execution and finalall7 source-bound acceptance beforepublication"
+}

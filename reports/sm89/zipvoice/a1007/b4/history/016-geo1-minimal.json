@@ -1,0 +1,93 @@
+{
+  "status": "minimal_compute_passed_audio_quality_pending",
+  "batch": 4,
+  "physical_gpu": 1,
+  "tests": [
+    {
+      "frames": 600,
+      "finite_all": true,
+      "all_rows_written": true,
+      "relative_l2": 0.13622751832008362,
+      "max_abs": 2.6811184883117676,
+      "batch_permutation": {}
+    },
+    {
+      "frames": 601,
+      "finite_all": true,
+      "all_rows_written": true,
+      "relative_l2": 0.13503943383693695,
+      "max_abs": 2.066351890563965,
+      "batch_permutation": {}
+    },
+    {
+      "frames": 759,
+      "finite_all": true,
+      "all_rows_written": true,
+      "relative_l2": 0.1324245035648346,
+      "max_abs": 2.5134873390197754,
+      "batch_permutation": {}
+    },
+    {
+      "frames": 760,
+      "finite_all": true,
+      "all_rows_written": true,
+      "relative_l2": 0.13481777906417847,
+      "max_abs": 2.5257041454315186,
+      "batch_permutation": {
+        "fm-native": {
+          "exact": true,
+          "relative_l2": 0.0,
+          "max_abs": 0.0
+        },
+        "fm-inherited": {
+          "exact": true,
+          "relative_l2": 0.0,
+          "max_abs": 0.0
+        }
+      }
+    },
+    {
+      "frames": 761,
+      "finite_all": true,
+      "all_rows_written": true,
+      "relative_l2": 0.1314002126455307,
+      "max_abs": 1.3781651258468628,
+      "batch_permutation": {}
+    },
+    {
+      "frames": 919,
+      "finite_all": true,
+      "all_rows_written": true,
+      "relative_l2": 0.13365429639816284,
+      "max_abs": 2.4670052528381348,
+      "batch_permutation": {}
+    },
+    {
+      "frames": 920,
+      "finite_all": true,
+      "all_rows_written": true,
+      "relative_l2": 0.13163401186466217,
+      "max_abs": 1.6783033609390259,
+      "batch_permutation": {}
+    }
+  ],
+  "scope": "minimal FM only, before application scheduling; numerical differences report-only, full audio quality pending",
+  "engine_sha256": {
+    "fm-native": "9b2c49d1d02d0676fd889f82c2b1e5359ba74a0480856166faec838c8e089346",
+    "fm-inherited": "db70c42e5240a4a12892ef5a9c57724ddb946daef0f7cf98c6c7c9b26fbac36a"
+  },
+  "engine_directories": {
+    "fm-native": "/workspace/A_1007/artifacts/zipvoice/a1007/b4/fm-native",
+    "fm-inherited": "/workspace/A_1007/artifacts/zipvoice/a1007/b4/fm-geo1"
+  },
+  "plugin_package": "inspark_infer.ops.tensorrt.zipvoice.a1007.b4_geo1",
+  "validator_sha256": "a66df6601cb90a79d3759f913aeca33677ed5343d1c10a1a0b1b825464fb7142",
+  "seed": 9100,
+  "rewrite_coverage": {
+    "dw_replacements": 24,
+    "online_replacements": 16,
+    "f32_replacements": 12,
+    "int8_nonlinear_value_replacements": 12,
+    "int8_residual_replacements": 24
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "status": "running_combined_migration",
+  "pid": 3566556,
+  "exec_session_id": 8076,
+  "command": ".venv-zipvoice/bin/python scripts/measure_zipvoice_combined.py --schemes-json reports/sm89/zipvoice/a1007/reviewed-migration-combinations.json",
+  "log": "outputs/build-logs/combined-migration-resume.log",
+  "gate": "All7 combined results reviewed before optimization",
+  "launch_fix": "Direct script lacked local src in sys.path; fixed before first GPU invocation",
+  "resume_note": "Synthetic case has frames under workload; reporting key fixed. Existing timed blocks rebound to current engine/runner and reused; functional invocations use validated cache."
+}

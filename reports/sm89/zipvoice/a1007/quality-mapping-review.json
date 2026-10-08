@@ -1,0 +1,238 @@
+{
+  "status": "initial_route_mapping_verified_quality_changes_disclosed_performance_pending",
+  "scope": "Initial native and inherited engines only. Changed retained engines or arithmetic need renewed validation. Not migration acceptance.",
+  "criterion": "User prioritizes correct path mapping and permits numerical/order differences; CER/UTMOS/SIM-o are auxiliary, no invented equality or L2 cutoff.",
+  "mapping_evidence": [
+    "Original 180 INT8 module weights/scales byte mapping, protected first4 floating",
+    "FM source re-export exact after IO symbol/external-filename normalization",
+    "Full-batch boundary finite/write checks, exact batch permutation at760",
+    "Actual text rows mapped to own complete texts and exact permutation for B>1",
+    "Graph/direct state exact per route, same initial noise/conditions/masks/grid across compared routes",
+    "Original B32 compact-transfer/ordered-PCM all-row oracle passed"
+  ],
+  "quality_limits": [
+    "Metrics are paired with identical evaluator assets and case selection; absolute scores are not a production quality certificate.",
+    "B8 and B16 inherited CER increased by8 and7 edits over684 reference characters; localized cases are retained, not discarded.",
+    "B64 inherited CER increased by5/684; B2 inherited UTMOS mean dropped about.062 despite unchanged aggregate CER.",
+    "There is no demonstrated row/path mapping failure in these tests. Quality changes are not labeled equivalent or harmless; preserve per-case reports with final route decisions.",
+    "Old/new engines have nonzero random single-FM output differences (~.13-.14 relative L2); numerical values alone are not an acceptance cutoff under the agreed criterion."
+  ],
+  "batches": [
+    {
+      "batch": 1,
+      "engines": {
+        "fm-native": "ca4170e7035bcdb54671dde143aabf15a22481e17524848b4d707c7663413c0d",
+        "fm-inherited": "c8a866a745b5b5f0835f93e8b9f1a24f7f6e1531d55c6a2981ba84cc4993ef02"
+      },
+      "quality": {
+        "inherited": {
+          "count": 11,
+          "cer": 0.013157894736842105,
+          "character_errors": 3,
+          "reference_characters": 228,
+          "utmos_mean": 2.385037649761547,
+          "sim_o_mean": 0.652978853745894
+        },
+        "native": {
+          "count": 11,
+          "cer": 0.021929824561403508,
+          "character_errors": 5,
+          "reference_characters": 228,
+          "utmos_mean": 2.3844026110389014,
+          "sim_o_mean": 0.6554411487145857
+        }
+      },
+      "evidence": {
+        "reports/sm89/zipvoice/a1007/b1/history/002-minimal-compute.json": "e4faf28e6151fccd975ed76c104ae05c3d6db172a927e8ba4062b651ca937b21",
+        "reports/sm89/zipvoice/a1007/b1/history/003-application.json": "5757d5c7be68ae9cdd25ba2b6cc4165a39c2c455181d048b92321618bd02ab6d",
+        "reports/sm89/zipvoice/a1007/b1/history/004-quality.json": "6f9195846050c4c38783bce0f414dfe7652b32ed16dc1208c07a60a2c5fd368d"
+      }
+    },
+    {
+      "batch": 2,
+      "engines": {
+        "fm-native": "ecd0d77613d52435a31560ff5b807ba79799a0ca7377ce56741141d2d5f8c40f",
+        "fm-inherited": "e04135a726dee8205c79c7c6b576cd9f661bf92c9ba4402e9fc29adf669cda77"
+      },
+      "quality": {
+        "inherited": {
+          "count": 22,
+          "cer": 0.017543859649122806,
+          "character_errors": 8,
+          "reference_characters": 456,
+          "utmos_mean": 2.348905855959112,
+          "sim_o_mean": 0.6466432606632059
+        },
+        "native": {
+          "count": 22,
+          "cer": 0.017543859649122806,
+          "character_errors": 8,
+          "reference_characters": 456,
+          "utmos_mean": 2.4108546267856252,
+          "sim_o_mean": 0.6441808573224328
+        }
+      },
+      "evidence": {
+        "reports/sm89/zipvoice/a1007/b2/history/002-minimal-compute.json": "6f73cc84e388c4596e1814f9143fe38536652fe01a381c154965c8681f9c74d2",
+        "reports/sm89/zipvoice/a1007/b2/history/003-application.json": "f5defbc1665952cb6c2b998d5c83de83a4ea87a6593529b1d0d51929be82e430",
+        "reports/sm89/zipvoice/a1007/b2/history/004-quality.json": "9dacd489dbef59d4e2b50afda3ea6737090634240f591664825c9d86b67a0549",
+        "reports/sm89/zipvoice/a1007/b2/history/012-text-row-mapping.json": "a919c550e95a3a26a6d87c6e294649aa52be040b92181071e6c9c8953217e02c"
+      }
+    },
+    {
+      "batch": 4,
+      "engines": {
+        "fm-native": "9b2c49d1d02d0676fd889f82c2b1e5359ba74a0480856166faec838c8e089346",
+        "fm-inherited": "533f46be3a7d25ddd4351f14b38a7959d3300f2f6ae858c2e59af76fabff4156"
+      },
+      "quality": {
+        "inherited": {
+          "count": 33,
+          "cer": 0.019005847953216373,
+          "character_errors": 13,
+          "reference_characters": 684,
+          "utmos_mean": 2.36579070669232,
+          "sim_o_mean": 0.6452538280776052
+        },
+        "native": {
+          "count": 33,
+          "cer": 0.02046783625730994,
+          "character_errors": 14,
+          "reference_characters": 684,
+          "utmos_mean": 2.3357899008375225,
+          "sim_o_mean": 0.6431776149706407
+        }
+      },
+      "evidence": {
+        "reports/sm89/zipvoice/a1007/b4/history/002-minimal-compute.json": "63c77201a9bd1225333f46a3b1509b6e7d91f24d1db8df5a2ac06cda338d6e31",
+        "reports/sm89/zipvoice/a1007/b4/history/003-application.json": "242fbf16327ea909dc5b71564a9ace9775721f28e640e7a59da66f6c76d1c659",
+        "reports/sm89/zipvoice/a1007/b4/history/004-quality.json": "ab1d061e529a7ebe2f364a50f0a2e2aae7be1a4c34ae2427c75c0b59b81e9455",
+        "reports/sm89/zipvoice/a1007/b4/history/012-text-row-mapping.json": "7375efd6f90dadf2bdcfe71b3a4076e5da2000a3eb8299606534bb0cd37ff604"
+      }
+    },
+    {
+      "batch": 8,
+      "engines": {
+        "fm-native": "19c14da77309764388e6f9dbbc20cf447a727583d82754bd5ad4c359dcd284fe",
+        "fm-inherited": "7893518b3aec7b5737634bdeb0787414d78c5c8cf342ede2aabe8c289d74346c"
+      },
+      "quality": {
+        "inherited": {
+          "count": 33,
+          "cer": 0.027777777777777776,
+          "character_errors": 19,
+          "reference_characters": 684,
+          "utmos_mean": 2.43348211591894,
+          "sim_o_mean": 0.6446087784839399
+        },
+        "native": {
+          "count": 33,
+          "cer": 0.01608187134502924,
+          "character_errors": 11,
+          "reference_characters": 684,
+          "utmos_mean": 2.398229201634725,
+          "sim_o_mean": 0.6456809197411393
+        }
+      },
+      "evidence": {
+        "reports/sm89/zipvoice/a1007/b8/history/002-minimal-compute.json": "ab18b4b50511637551793103563ac7b25d8c9276a302f9e0c9f32b495b459639",
+        "reports/sm89/zipvoice/a1007/b8/history/003-application.json": "621ed131adb572578fbbfc25da3fe0d0820423cbae67080d799665c1a5f57cb2",
+        "reports/sm89/zipvoice/a1007/b8/history/004-quality.json": "120047d1d8acd65df0d0175498d502fd5e6953e211fc5b8d09824bf94f6c461e",
+        "reports/sm89/zipvoice/a1007/b8/history/012-text-row-mapping.json": "b665a7029e6a3813ab3645ed3f7a64afa9e1e48253f50b96a7aa45f832df3fb1"
+      }
+    },
+    {
+      "batch": 16,
+      "engines": {
+        "fm-native": "9fc43c736a95934f6d5c941c6ae54518a485eda270054c09fb5773fd4fc7c813",
+        "fm-inherited": "676a48000cdd8dc4f31af40c0edf53ef628c6f9f3d7f5bcb2023236190fcce90"
+      },
+      "quality": {
+        "inherited": {
+          "count": 33,
+          "cer": 0.02631578947368421,
+          "character_errors": 18,
+          "reference_characters": 684,
+          "utmos_mean": 2.3811344811410615,
+          "sim_o_mean": 0.6420488673629183
+        },
+        "native": {
+          "count": 33,
+          "cer": 0.01608187134502924,
+          "character_errors": 11,
+          "reference_characters": 684,
+          "utmos_mean": 2.381202661629879,
+          "sim_o_mean": 0.6416998975204699
+        }
+      },
+      "evidence": {
+        "reports/sm89/zipvoice/a1007/b16/history/002-minimal-compute.json": "1a17fc3b5e775c67735dc33bb9d2944cd0adcb7b1b0ee4ce7aa45a6d983989de",
+        "reports/sm89/zipvoice/a1007/b16/history/003-application.json": "11e866b3edbd302d8f6b8f20ab6116a1b3e0c7a649b0bb78a72bbc495ab3dcf1",
+        "reports/sm89/zipvoice/a1007/b16/history/004-quality.json": "50d812e4f0406167f1ddc63f0eafc0ca7a6c9b5204480d04d5e6a013bd3ebb36",
+        "reports/sm89/zipvoice/a1007/b16/history/012-text-row-mapping.json": "e4ce12546e65414da3d1b02c51ff96bcd09f3f0ee874d048d383b5aeac0722e5"
+      }
+    },
+    {
+      "batch": 32,
+      "engines": {
+        "fm-native": "a2574f8148055f3d19bbd47d73595572a6cb37c9d537d34ee1e08ade627c5902",
+        "fm-inherited": "e35f636d6265eeab8916e1dea7a332413249928387b798bc73855d85c7011c54"
+      },
+      "quality": {
+        "inherited": {
+          "count": 33,
+          "cer": 0.02046783625730994,
+          "character_errors": 14,
+          "reference_characters": 684,
+          "utmos_mean": 2.3676030924825957,
+          "sim_o_mean": 0.6558052888422301
+        },
+        "native": {
+          "count": 33,
+          "cer": 0.017543859649122806,
+          "character_errors": 12,
+          "reference_characters": 684,
+          "utmos_mean": 2.348774144143769,
+          "sim_o_mean": 0.6524819867177443
+        }
+      },
+      "evidence": {
+        "reports/sm89/zipvoice/a1007/b32/history/002-minimal-compute.json": "70578971538d83604c33e4464d29f539ce467fed864309393d6ed4cbec26a3dd",
+        "reports/sm89/zipvoice/a1007/b32/history/003-application.json": "51e5571e265353a77ecdf7795d47b5128714584a41823436705c65b075ef1256",
+        "reports/sm89/zipvoice/a1007/b32/history/004-quality.json": "198e9729abf96826a21e922da2ca7333ae37cee725fb38110deb8180e6464572",
+        "reports/sm89/zipvoice/a1007/b32/history/012-text-row-mapping.json": "3582def43ab38596ed62603e43478d90bf8f04d4941d05f049a1b2c98c73ee9a"
+      }
+    },
+    {
+      "batch": 64,
+      "engines": {
+        "fm-native": "aafd48bfb9332098c8ae47544ad1615a4725da643d81198461d98b7b6e582c12",
+        "fm-inherited": "c7bb42fe641748e88c68851f65d3120c84b23bf40b0c8fac2b8d66c132caf6f1"
+      },
+      "quality": {
+        "inherited": {
+          "count": 33,
+          "cer": 0.02046783625730994,
+          "character_errors": 14,
+          "reference_characters": 684,
+          "utmos_mean": 2.3162949590971977,
+          "sim_o_mean": 0.6573957186756711
+        },
+        "native": {
+          "count": 33,
+          "cer": 0.013157894736842105,
+          "character_errors": 9,
+          "reference_characters": 684,
+          "utmos_mean": 2.3482898220871435,
+          "sim_o_mean": 0.6614607455152454
+        }
+      },
+      "evidence": {
+        "reports/sm89/zipvoice/a1007/b64/history/002-minimal-compute.json": "c6d19f7b123c0447041f052d284d23206bb4f567c93118f4552963f4582ac489",
+        "reports/sm89/zipvoice/a1007/b64/history/003-application.json": "18415f79055dd07f4046f6e365b5a81f1581b5222c23ccde88fe3e3fc0edbe87",
+        "reports/sm89/zipvoice/a1007/b64/history/004-quality.json": "cb63e10957165632b7a7eb54bc02d7f23aacff1112113cf4bf6bd25d0e84dfc6",
+        "reports/sm89/zipvoice/a1007/b64/history/012-text-row-mapping.json": "b55716ac020fcc8e50557d283924dab48cca89dc20662161afe1c908eafc271d"
+      }
+    }
+  ]
+}

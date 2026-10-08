@@ -1,0 +1,63 @@
+"""Online probability normalization; original sequential AV; optionally reuse row max/denominator across normal branches."""
+import triton
+import triton.language as tl
+
+@triton.jit
+def online_branch_stats(Q, K, PQ, E, Mask, V, O, Stats, T, NONLIN: tl.constexpr, QB: tl.constexpr, KB: tl.constexpr, AV_MODE: tl.constexpr, STATS_MODE: tl.constexpr):
+    h = tl.program_id(2)
+    b = tl.program_id(1)
+    rows = tl.program_id(0) * QB + tl.arange(0, QB)
+    ks = tl.arange(0, 32)
+    q = tl.load(Q + ((h * 32 + b) * T + rows[:, None]) * 32 + ks[None, :], rows[:, None] < T, 0)
+    q = tl.inline_asm_elementwise('cvt.rna.tf32.f32 $0, $1;', constraints='=f,f', args=[q], dtype=tl.float32, is_pure=True, pack=1)
+    pq0 = tl.load(PQ + ((h * 32 + b) * T + rows) * 4, rows < T, 0)
+    pq1 = tl.load(PQ + ((h * 32 + b) * T + rows) * 4 + 1, rows < T, 0)
+    pq2 = tl.load(PQ + ((h * 32 + b) * T + rows) * 4 + 2, rows < T, 0)
+    pq3 = tl.load(PQ + ((h * 32 + b) * T + rows) * 4 + 3, rows < T, 0)
+    D: tl.constexpr = 512 if NONLIN else 16
+    ds = tl.arange(0, D)
+    m = tl.full((QB,), -float('inf'), tl.float32)
+    den = tl.zeros((QB,), tl.float32)
+    acc = tl.zeros((QB, D), tl.float32)
+    if STATS_MODE == 2:
+        m = tl.load(Stats + ((h * 32 + b) * T + rows) * 2, rows < T, 0)
+        den = tl.load(Stats + ((h * 32 + b) * T + rows) * 2 + 1, rows < T, 1)
+    for block in range(tl.cdiv(T, KB)):
+        keys = block * KB + tl.arange(0, KB)
+        k = tl.load(K + ((h * 32 + b) * 32 + ks[:, None]) * T + keys[None, :], keys[None, :] < T, 0)
+        k = tl.inline_asm_elementwise('cvt.rna.tf32.f32 $0, $1;', constraints='=f,f', args=[k], dtype=tl.float32, is_pure=True, pack=1)
+        scores = tl.dot(q, k, input_precision='tf32')
+        idx = T - 1 - rows[:, None] + keys[None, :]
+        base = h * 4 * (2 * T - 1) + idx
+        valid = (rows[:, None] < T) & (keys[None, :] < T)
+        e0 = tl.load(E + base, valid, 0)
+        e1 = tl.load(E + base + 2 * T - 1, valid, 0)
+        e2 = tl.load(E + base + 2 * (2 * T - 1), valid, 0)
+        e3 = tl.load(E + base + 3 * (2 * T - 1), valid, 0)
+        pos = tl.fma(pq3[:, None], e3, tl.fma(pq2[:, None], e2, tl.fma(pq1[:, None], e1, pq0[:, None] * e0)))
+        padding = tl.load(Mask + b * T + keys, keys < T, 1)
+        logits = tl.where(padding[None, :], -1000.0, scores + pos)
+        logits = tl.where(keys[None, :] < T, logits, -float('inf'))
+        if STATS_MODE == 2:
+            p = tl.exp(logits - m[:, None])
+        else:
+            new_m = tl.maximum(m, tl.max(logits, 1))
+            alpha = tl.exp(m - new_m)
+            p = tl.exp(logits - new_m[:, None])
+        WIDTH: tl.constexpr = 384 if NONLIN else 12
+        v = tl.load(V + ((h * 32 + b) * T + keys[:, None]) * WIDTH + ds[None, :], (keys[:, None] < T) & (ds[None, :] < WIDTH), 0)
+        p_full_sum = tl.sum(p, 1)
+        p = tl.inline_asm_elementwise('cvt.rna.tf32.f32 $0, $1;', constraints='=f,f', args=[p], dtype=tl.float32, is_pure=True, pack=1)
+        v = tl.inline_asm_elementwise('cvt.rna.tf32.f32 $0, $1;', constraints='=f,f', args=[v], dtype=tl.float32, is_pure=True, pack=1)
+        if STATS_MODE == 2:
+            acc += tl.dot(p, v, input_precision=AV_MODE)
+        else:
+            acc = acc * alpha[:, None] + tl.dot(p, v, input_precision=AV_MODE)
+            den = den * alpha + p_full_sum
+            m = new_m
+    if STATS_MODE == 1:
+        tl.store(Stats + ((h * 32 + b) * T + rows) * 2, m, rows < T)
+        tl.store(Stats + ((h * 32 + b) * T + rows) * 2 + 1, den, rows < T)
+    out = acc / den[:, None]
+    WIDTH: tl.constexpr = 384 if NONLIN else 12
+    tl.store(O + ((h * 32 + b) * T + rows[:, None]) * WIDTH + ds[None, :], out, (rows[:, None] < T) & (ds[None, :] < WIDTH))

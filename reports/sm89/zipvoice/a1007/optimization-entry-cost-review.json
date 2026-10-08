@@ -1,0 +1,117 @@
+{
+  "status": "all_seven_migrations_accepted_optimization_in_progress",
+  "verified_migration_batches": [
+    1,
+    2,
+    4,
+    8,
+    16,
+    32,
+    64
+  ],
+  "pending_batch": null,
+  "source_framework_costs": {
+    "1": {
+      "route": "native",
+      "single_fm_cuda_event_ms": 4.011417579650878,
+      "engine_sha256": "ca4170e7035bcdb54671dde143aabf15a22481e17524848b4d707c7663413c0d",
+      "evidence_sha256": "2a94da25ddbd5155a9a479f8f9ec57f02149cdc172ffa7d9fd820c3ac88e09ab",
+      "largest_instrumented_layers": [
+        {
+          "name": "__myl_MoveReshMulSumAddReshPowMulMulReshSubMulAddReshReplReshSlicSubMulAddAddMulMinMaxRounCastMulEtc_myl113_8",
+          "mean_ms": 0.04471466690301895
+        },
+        {
+          "name": "[ShapeHostToDeviceCopy 0]",
+          "mean_ms": 0.03644800124069055
+        },
+        {
+          "name": "/fm_decoder/encoders.0/layers.0/feed_forward3/out_proj/MatMul_myl9_7",
+          "mean_ms": 0.03140266612172127
+        },
+        {
+          "name": "/fm_decoder/encoders.0/layers.1/feed_forward3/in_proj/MatMul_myl17_5",
+          "mean_ms": 0.03140266612172127
+        },
+        {
+          "name": "/fm_decoder/encoders.4/layers.0/feed_forward3/out_proj/MatMul_myl123_6",
+          "mean_ms": 0.031061332672834396
+        },
+        {
+          "name": "/fm_decoder/encoders.4/layers.1/feed_forward3/out_proj/MatMul_myl133_6",
+          "mean_ms": 0.030794667080044746
+        },
+        {
+          "name": "/fm_decoder/encoders.0/layers.0/feed_forward3/in_proj/MatMul_myl9_5",
+          "mean_ms": 0.030741332719723385
+        },
+        {
+          "name": "/fm_decoder/encoders.0/layers.1/feed_forward3/out_proj/MatMul_myl17_7",
+          "mean_ms": 0.03037866639594237
+        }
+      ]
+    },
+    "64": {
+      "route": "inherited",
+      "single_fm_cuda_event_ms": 163.88095092773438,
+      "engine_sha256": "c7bb42fe641748e88c68851f65d3120c84b23bf40b0c8fac2b8d66c132caf6f1",
+      "evidence_sha256": "7b2fd2aee801e826882dbe918baa9c5b558ec485c14f9ca72749d409be2aa365",
+      "largest_instrumented_layers": [
+        {
+          "name": "/fm_decoder/encoders.0/layers.1/feed_forward3/TF32RNAOriginalActivation",
+          "mean_ms": 1.6029013395309448
+        },
+        {
+          "name": "/fm_decoder/encoders.0/layers.0/feed_forward3/TF32RNAOriginalActivation",
+          "mean_ms": 1.5967573324839275
+        },
+        {
+          "name": "/fm_decoder/encoders.0/layers.1/feed_forward2/TF32RNAOriginalActivation",
+          "mean_ms": 1.2967253128687541
+        },
+        {
+          "name": "/fm_decoder/encoders.0/layers.0/feed_forward2/TF32RNAOriginalActivation",
+          "mean_ms": 1.2895573377609253
+        },
+        {
+          "name": "/fm_decoder/encoders.4/layers.3/feed_forward3/out_proj/MatMul_myl594_6",
+          "mean_ms": 1.276256004969279
+        },
+        {
+          "name": "/fm_decoder/encoders.0/layers.1/feed_forward3/out_proj/MatMul_myl46_1",
+          "mean_ms": 1.1991040309270222
+        },
+        {
+          "name": "/fm_decoder/encoders.0/layers.0/feed_forward3/out_proj/MatMul_myl24_1",
+          "mean_ms": 1.1823786497116089
+        },
+        {
+          "name": "/fm_decoder/encoders.4/layers.0/feed_forward3/out_proj/MatMul_myl468_9",
+          "mean_ms": 1.1803306738535564
+        }
+      ]
+    }
+  },
+  "next_probes": [
+    {
+      "mechanism": "Broader shape-bound capture through text/FM/Vocos/cuFFT/RMS",
+      "scope": "New optimization after all7 migration accepted",
+      "basis": "B1 FM is about4ms; remaining request cost must be measured inside the actual retained application, without subtracting unmatched profiler/event clocks as proof of host cost."
+    },
+    {
+      "mechanism": "B64 normal attention IEEE versus authorized ordinaryTF32",
+      "scope": "New precision implementation after gate; same SmoothQuant1:3/scales/weights",
+      "basis": "Repeated IEEE normal branches exposed by migration profiling; first isolate their actual target cost and compare implementation, then complete-path quality/E2E. Keep first4 floating and all180 quantized tensor mappings."
+    },
+    {
+      "mechanism": "B64 protected F32 FFN tile K width and column width/pipeline stages",
+      "basis": "Actual inherited F32TF32RNAOriginalActivation projections are among largest instrumented FM layers. Current128x64x32/w4/stages2 JIT uses146registers. Migration009 covered BM only at N1536; half-stage BM64 gain4.3% but full-stage regressed4.06%. BK/BN and N1152/1920 remain consequential untested parameters.",
+      "scope": "Cheap actual-full-shape fusedGEMM+stableactivation screen after current serial queue; retain Float32/RNA math and epilogue. Do not repeat resolved BM32/BM64-alone trials. Require AOT+E2E for any retention."
+    }
+  ],
+  "limits": [
+    "Instrumented per-layer time is not unprofiled E2E and not additive attribution",
+    "Large framework search does not establish optimal fusion/resource distribution",
+    "No new optimization code or GPU probe started before migration gate"
+  ]
+}

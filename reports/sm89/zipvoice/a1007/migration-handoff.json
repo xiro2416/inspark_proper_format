@@ -1,0 +1,34 @@
+{
+  "status": "migration_complete_optimization_started",
+  "baseline": "migration-baseline.json",
+  "acceptance_review": "migration-final-review.json",
+  "source_mechanism_decisions": "compute-route-review.json",
+  "scheduling_decisions": [
+    "scheduling-review.json",
+    "delivery-review.json"
+  ],
+  "all_batches": [
+    1,
+    2,
+    4,
+    8,
+    16,
+    32,
+    64
+  ],
+  "frame_profile": [
+    600,
+    760,
+    920
+  ],
+  "token_profile": [
+    52,
+    78,
+    141
+  ],
+  "constraints": "Same GPU1/400W,model/backend,originalSmoothQuantalpha.5 first4floating/last12INT8 weights/scales, fullunsplitFM/Vocos; no recalibration",
+  "validation": "Actual engine/file/profile hashes, actual saved states andselectedWAV bytes, quality input/WAV hashes, boundary/mixed andallrowcounts,matchedE2E andsustainedpower audited for all7",
+  "limits": "Qualitytradeoffs disclosed, no global subjective equivalence; known idleexternalallocation retained, notexclusiveGPUcertificate",
+  "optimization_first_probe": "B1 full-model graph10/route quick+1.90%, state/wave/PCMexact; all11qualityWAVexact;formal3length/powerpending",
+  "publication": "not_started; preserveoriginalsourcesuntilnewoptimizedreleaseandfreshdownloadsverified"
+}

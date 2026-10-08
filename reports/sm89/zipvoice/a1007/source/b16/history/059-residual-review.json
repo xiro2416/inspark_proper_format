@@ -1,0 +1,20 @@
+{
+  "status": "retained_execution_review_complete",
+  "retained_geometry": "NormalTF32 QB64 KB32 4warps; measured realTensorCore path,250/248registers,0spills,16384shared",
+  "residual_candidate": "QB64 KB16 4warps:128registers,0spills,12288shared; isolatednormalpairT1750+6.769%,T760+1.969%,T146-14.652%",
+  "remaining_optimistic_E2E_estimate_percent": {
+    "582": 0.591,
+    "760": 0.571,
+    "1750": 0.818
+  },
+  "estimate_limit": "Instrumented normal-region time times largest measured localgain,8steps,divided by actual E2E. Generous screening estimate, not a strict bound or measured fullengine gain; smaller shape regressions and rebuild/dispatch costs are excluded.",
+  "investment_decision": "Target migration and retained end-to-end improvements are validated. Related low-cost geometry probes completed; this remaining shape-dependent sub1% direction would require extra engine buckets,fullquality and matchedE2E. Leave explicitly unretained; do not claim global optimality.",
+  "other_reviewed_paths": {
+    "Float32_projections": "88geometry/layout probes; only smallest fragment wins, mainshapes slower. Generous smallshapeE2E ceiling about.3% beforeintegration.",
+    "Float32_projection_residual_norm_fusion": "80config/shape probes,resource/spill limits and27..97%slower fullconsumer cases; decline those tested remedies.",
+    "NonlinearINT8_64x64": "Fullengine20/route3lengths no stable globalgain; preserve128x32.",
+    "Broad_QKTF32": "Overalllargefragment slower; branchmeasurement ledretainednormal-onlyTF32 remedy.",
+    "CPU_PCM": "Long-wave4task scheduling retained fromtwo actuallongshape20/route tests;short/mid keep16. LUTslower undertestedconditions."
+  },
+  "stop_reason": "User B16 migration/optimization objective achieved with verified fullwork,mapping,quality,measured original and incremental E2E, power and reproducible artifacts. Residual evidence and limited-value stopping choice disclosed; no pending required work or ongoing GPU job after reproduction."
+}

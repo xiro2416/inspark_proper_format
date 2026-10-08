@@ -1,0 +1,133 @@
+{
+  "batch": 4,
+  "source_policy": {
+    "chunk": 16,
+    "workers": 4
+  },
+  "status": "matched_scheduling_measurements_complete_review_pending",
+  "shapes": {
+    "primary760": {
+      "frames": 760,
+      "stats": {
+        "16": {
+          "count": 20,
+          "median_s": 0.0864368885
+        },
+        "1": {
+          "count": 20,
+          "median_s": 0.08493465
+        }
+      },
+      "blocks": [
+        {
+          "chunk": 16,
+          "median_s": 0.086343437,
+          "report": "/workspace/A_1007/outputs/zipvoice-benchmarks/b4/scheduling/geo1/primary760/0-chunk16/report.json"
+        },
+        {
+          "chunk": 1,
+          "median_s": 0.08509352449999999,
+          "report": "/workspace/A_1007/outputs/zipvoice-benchmarks/b4/scheduling/geo1/primary760/1-chunk1/report.json"
+        },
+        {
+          "chunk": 1,
+          "median_s": 0.08488369300000001,
+          "report": "/workspace/A_1007/outputs/zipvoice-benchmarks/b4/scheduling/geo1/primary760/2-chunk1/report.json"
+        },
+        {
+          "chunk": 16,
+          "median_s": 0.0865947075,
+          "report": "/workspace/A_1007/outputs/zipvoice-benchmarks/b4/scheduling/geo1/primary760/3-chunk16/report.json"
+        }
+      ],
+      "selected_wav_exact": true
+    },
+    "short": {
+      "frames": 608,
+      "stats": {
+        "16": {
+          "count": 20,
+          "median_s": 0.075736629
+        },
+        "1": {
+          "count": 20,
+          "median_s": 0.07625396000000001
+        }
+      },
+      "blocks": [
+        {
+          "chunk": 16,
+          "median_s": 0.075018841,
+          "report": "/workspace/A_1007/outputs/zipvoice-benchmarks/b4/scheduling/geo1/short/0-chunk16/report.json"
+        },
+        {
+          "chunk": 1,
+          "median_s": 0.075936475,
+          "report": "/workspace/A_1007/outputs/zipvoice-benchmarks/b4/scheduling/geo1/short/1-chunk1/report.json"
+        },
+        {
+          "chunk": 1,
+          "median_s": 0.07653599650000001,
+          "report": "/workspace/A_1007/outputs/zipvoice-benchmarks/b4/scheduling/geo1/short/2-chunk1/report.json"
+        },
+        {
+          "chunk": 16,
+          "median_s": 0.0765685575,
+          "report": "/workspace/A_1007/outputs/zipvoice-benchmarks/b4/scheduling/geo1/short/3-chunk16/report.json"
+        }
+      ],
+      "selected_wav_exact": true
+    },
+    "long": {
+      "frames": 918,
+      "stats": {
+        "16": {
+          "count": 20,
+          "median_s": 0.1048872245
+        },
+        "1": {
+          "count": 20,
+          "median_s": 0.1033493585
+        }
+      },
+      "blocks": [
+        {
+          "chunk": 16,
+          "median_s": 0.1054438575,
+          "report": "/workspace/A_1007/outputs/zipvoice-benchmarks/b4/scheduling/geo1/long/0-chunk16/report.json"
+        },
+        {
+          "chunk": 1,
+          "median_s": 0.103071074,
+          "report": "/workspace/A_1007/outputs/zipvoice-benchmarks/b4/scheduling/geo1/long/1-chunk1/report.json"
+        },
+        {
+          "chunk": 1,
+          "median_s": 0.10347479000000001,
+          "report": "/workspace/A_1007/outputs/zipvoice-benchmarks/b4/scheduling/geo1/long/2-chunk1/report.json"
+        },
+        {
+          "chunk": 16,
+          "median_s": 0.10467705699999999,
+          "report": "/workspace/A_1007/outputs/zipvoice-benchmarks/b4/scheduling/geo1/long/3-chunk16/report.json"
+        }
+      ],
+      "selected_wav_exact": true
+    }
+  },
+  "numerical_contract": "Selected WAV bytes exact across scheduling choices",
+  "compute_evidence": {
+    "route": "geo1",
+    "engine_sha256": "db70c42e5240a4a12892ef5a9c57724ddb946daef0f7cf98c6c7c9b26fbac36a",
+    "plugin_package": "inspark_infer.ops.tensorrt.zipvoice.a1007.b4_geo1",
+    "performance_evidence_sha256": "854ced1319d568754fc67342d597f63c8a9a2f1db14ad01fc334f57f2c1ba103",
+    "quality_evidence_sha256": "990a288769b78c55849580ce89f808504dd03eb74c1af0bd2a5a049a978aa74b"
+  },
+  "preflight": {
+    "memory_mib": 4108.0,
+    "gpu_util_percent": 0.0,
+    "processes": "1820496, 4082",
+    "power_cap_w": 400.0,
+    "scope": "Known idle allocation retained; not exclusive device ownership"
+  }
+}

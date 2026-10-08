@@ -1,0 +1,33 @@
+{
+  "reason": "Consolidated waiting supervisors; source-engine comparison moved ahead of decisive E2E. No GPU job interrupted.",
+  "retired": {
+    "post_matrix": {
+      "pid": 968052,
+      "script": ".work/post_matrix_measurements.py",
+      "log": "outputs/build-logs/post-matrix-measurements.log",
+      "waits_for": "matrix process exit, all7 application summaries and all7 CPU quality reports",
+      "actions": [
+        "scripts/measure_zipvoice_baselines.py",
+        "scripts/measure_zipvoice_scheduling.py"
+      ]
+    },
+    "post_measurements": {
+      "script": ".work/post_measurement_geometry.py",
+      "log": "outputs/build-logs/post-measurement-geometry.log",
+      "waits_for": "post-matrix process exit and all7 scheduling reports",
+      "actions": [
+        "scripts/recheck_zipvoice_geometry.py for B1/2/4/8/16/32"
+      ],
+      "pid": 972086
+    },
+    "post_geometry": {
+      "script": ".work/post_geometry_framework.py",
+      "log": "outputs/build-logs/post-geometry-framework.log",
+      "waits_for": "normal geometry process exit and all6 normal-geometry reports",
+      "actions": [
+        "scripts/measure_zipvoice_fm.py --profile for all7 batches",
+        "scripts/recheck_zipvoice_linear_geometry.py for B1/2/4/8"
+      ]
+    }
+  }
+}

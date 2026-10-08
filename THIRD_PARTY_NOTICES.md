@@ -22,5 +22,9 @@ private storage does not remove the downstream license obligations.
 
 Official neural weights remain external dependencies and are fetched from their
 original repositories at revisions and hashes recorded in
-`configs/common/model_sources.json`. Source normalization and pruning do not imply
+`configs/current/release.json` (Index) and the separate ZipVoice registry. Source normalization and pruning do not imply
 ownership of third-party model definitions.
+
+## ZipVoice-Distill INT8 integration
+
+ZipVoice tokenizer/normalizer source and retained inference conventions originate from k2-fsa/ZipVoice and the local xiro2416/zvoice_temp adaptation. Apache 2.0 notices are preserved; see licenses/ZipVoice.txt. Vocos is used by the retained vocoder engines; its MIT license is included in licenses/Vocos.txt. Quantized model weights and derived engine binaries are external private assets, not wheel or Git contents. Their source graph hashes and exact binary identities are recorded in each bundle manifest.

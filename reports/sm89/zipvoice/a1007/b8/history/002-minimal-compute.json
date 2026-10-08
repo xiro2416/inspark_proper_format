@@ -1,0 +1,88 @@
+{
+  "status": "minimal_compute_passed_audio_quality_pending",
+  "batch": 8,
+  "physical_gpu": 1,
+  "tests": [
+    {
+      "frames": 600,
+      "finite_all": true,
+      "all_rows_written": true,
+      "relative_l2": 0.13407187163829803,
+      "max_abs": 2.225083827972412,
+      "batch_permutation": {}
+    },
+    {
+      "frames": 601,
+      "finite_all": true,
+      "all_rows_written": true,
+      "relative_l2": 0.13460469245910645,
+      "max_abs": 3.4636240005493164,
+      "batch_permutation": {}
+    },
+    {
+      "frames": 759,
+      "finite_all": true,
+      "all_rows_written": true,
+      "relative_l2": 0.1365175098180771,
+      "max_abs": 2.8088607788085938,
+      "batch_permutation": {}
+    },
+    {
+      "frames": 760,
+      "finite_all": true,
+      "all_rows_written": true,
+      "relative_l2": 0.1345626413822174,
+      "max_abs": 2.204540491104126,
+      "batch_permutation": {
+        "fm-native": {
+          "exact": true,
+          "relative_l2": 0.0,
+          "max_abs": 0.0
+        },
+        "fm-inherited": {
+          "exact": true,
+          "relative_l2": 0.0,
+          "max_abs": 0.0
+        }
+      }
+    },
+    {
+      "frames": 761,
+      "finite_all": true,
+      "all_rows_written": true,
+      "relative_l2": 0.13437362015247345,
+      "max_abs": 3.1580069065093994,
+      "batch_permutation": {}
+    },
+    {
+      "frames": 919,
+      "finite_all": true,
+      "all_rows_written": true,
+      "relative_l2": 0.1344679892063141,
+      "max_abs": 3.2484049797058105,
+      "batch_permutation": {}
+    },
+    {
+      "frames": 920,
+      "finite_all": true,
+      "all_rows_written": true,
+      "relative_l2": 0.13526751101016998,
+      "max_abs": 3.086541175842285,
+      "batch_permutation": {}
+    }
+  ],
+  "scope": "minimal FM only, before application scheduling; numerical differences report-only, full audio quality pending",
+  "engine_sha256": {
+    "fm-native": "19c14da77309764388e6f9dbbc20cf447a727583d82754bd5ad4c359dcd284fe",
+    "fm-inherited": "7893518b3aec7b5737634bdeb0787414d78c5c8cf342ede2aabe8c289d74346c"
+  },
+  "validator_sha256": "697f6f5ba7dfc3d1e1d0fba732d096210c21c0d228c7cc8fd447ba5ccc4335e4",
+  "seed": 9100,
+  "rewrite_coverage": {
+    "dw_replacements": 24,
+    "online_replacements": 16,
+    "f32_replacements": 12,
+    "int8_nonlinear_value_replacements": 12,
+    "int8_residual_replacements": 24
+  }
+}

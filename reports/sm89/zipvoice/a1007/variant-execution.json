@@ -1,0 +1,43 @@
+{
+  "status": "isolated_variants_building_no_migration_acceptance",
+  "completed": [
+    "All initial7 baseline builds/application/quality/E2E/power and source geometry diagnostics",
+    "Independent package and artifact identity support; CPU bundle tests8passed; baseline/candidate registrars coexist without CUDA",
+    "Uniform geo1 B1/B2/B4 built/minimal passed; quick760 candidate vsinherited gains16.01/13.86/5.63%, B1/B2 remain slowernative15.38/5.92%, B4faster native9.50%",
+    "Geo2 B1/B2 native nonlinear branch while normal stats cache/otherfusions retained; both built/minimal32customattention passed; quick760 remain slowernative10.63/8.02%",
+    "Verified model downsampling1/2/4/2/1, layers2/2/4/4/4; stages760/380/190/380/760. Quarter stageonly2, half stages1/3; CPU actualfactory selections20passed",
+    "Staged geo1 B8 built/minimal passed; B16building/B32next",
+    "Geo3 B1/B2 prepared: native shared attention/FFN/value regions plus24DW/24I8residual customfusions; target coverage intentionallyexplicit, no weight/scale changes",
+    "Staged geo1 B32 built/minimal passed; all geo1 B4/8/16/32 are now built.",
+    "Geo3 B1/B2 built/minimal48customfusions passed. Quick760 vsnative +3.48%/+3.02%; formal quality/performance pending",
+    "Geo1 B4full application andCPUquality complete: CER1.61%vsnative2.05%,UTMOS2.391vs2.336,SIM.649vs.643",
+    "Concurrent GitHub Indexrelease4925418 mergedlocally,d4825d7; criticalIndexroots byteexactremote,10CPUtests passed"
+  ],
+  "live_jobs": [
+    {
+      "pid": 3132069,
+      "script": ".work/native_fusion_queue.py",
+      "log": "outputs/build-logs/native-fusion-queue.log",
+      "state": "B4done/B8applicationdone/B16applicationlive/B32next; CPUqualityasync"
+    },
+    {
+      "pid": 3499789,
+      "script": ".work/formal_candidate_queue.py",
+      "log": "outputs/build-logs/formal-candidate-queue.log",
+      "state": "Waits3132069,thenfullvalidationgeo3B1/B2; waitsall6CPUquality; formal3length20/route+power forB1/B2geo3vsnative,B4/8/16/32geo1vsinherited"
+    }
+  ],
+  "source_preservation": "All original and geo1/geo2 candidate plugin packages/engines preserved. New namespaces isolated, original weights/scales/ONNX unchanged. Initial controls have not been replaced.",
+  "failed_attempt": {
+    "path": ".work/failed-builds/b1-geo2-coverage-assertion",
+    "reason": "Inherited rewrite had its own fixed48 customattention assertion; corrected to32 iff explicit skipNL, otherwise48. Failure occurredbeforetacticsearch; failedlog retained."
+  },
+  "next_actions": [
+    "Monitor B16/B32stagedbuild and geo3quick; resolve failures without restarting live jobs",
+    "B1/B2: choose genuinely faster source-fusion hybrid or native only after targeted disposition review; no blanket claimsourceoptimizations help smallB",
+    "scripts/validate_zipvoice_variant.py is prepared for11realpairedcases +boundary/mixed/fulltext, then asyncCPUquality under018/019 independenthistory paths",
+    "scripts/measure_zipvoice_variant.py is prepared for20matched samples/route at608/760/918 and>=30ssustained760power; requires finished candidatequality and noCPUevaluators",
+    "Scheduling/delivery reuse against selectedcompute, all7migration acceptance, then newoptimization; remote publication/freshdownload/cleanup stillpending"
+  ],
+  "concurrent_index_update": "github-concurrent-update.json; current expectedremotehead49254189fe426b3472711e285abb28d2a7cd2b3b,recheckbeforefinalhistoryrewrite/push"
+}

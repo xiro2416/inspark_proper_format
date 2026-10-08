@@ -1,0 +1,31 @@
+{
+  "status": "localized_quality_regression_review_pending",
+  "weighted_cer_native": 0.01608187134502924,
+  "weighted_cer_inherited": 0.027777777777777776,
+  "extra_errors": 8,
+  "localization": [
+    {
+      "case": 3,
+      "row": 0,
+      "native_errors": 0,
+      "inherited_errors": 1,
+      "change": "added filler"
+    },
+    {
+      "case": 4,
+      "row": 0,
+      "native_errors": 0,
+      "inherited_errors": 2,
+      "change": "added fillers"
+    },
+    {
+      "case": 4,
+      "row": 1,
+      "native_errors": 2,
+      "inherited_errors": 7,
+      "change": "prefix words differ"
+    }
+  ],
+  "context": "All additional errors are on reference index2; case4 also degrades in native and inherited B1/B2/B4. Other references have no CER changes. UTMOS improves0.035, SIM-o differs-0.0011. Aggregate scores alone do not settle implementation correctness.",
+  "next": "Review source preservation and mappings; retain individual failures in final evidence, add seeded follow-up if unresolved."
+}

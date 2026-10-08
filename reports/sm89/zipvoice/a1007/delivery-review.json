@@ -1,0 +1,90 @@
+{
+  "status": "delivery_routes_reviewed_combined_confirmation_pending",
+  "batches": {
+    "1": {
+      "source_application": "a1007",
+      "candidate_application": "a1007_delivery",
+      "gain_percent_by_length": {
+        "short": 0.018773687814192863,
+        "primary760": 0.6810978827436949,
+        "long": 1.3937838531981175
+      },
+      "all_rows_delivery_exact": true,
+      "evidence_sha256": "9acdc08f4bc7f67945e0c9627f1f52b4fc09e2bb1a0ee5c0a0ee7ed77e6451a3",
+      "decision": "Retain source or confirm changed combined application; no independent gain attribution"
+    },
+    "2": {
+      "source_application": "a1007",
+      "candidate_application": "a1007_delivery",
+      "gain_percent_by_length": {
+        "short": 0.594512703071059,
+        "primary760": 0.3737393216900245,
+        "long": 0.858874023138883
+      },
+      "all_rows_delivery_exact": true,
+      "evidence_sha256": "9d9d52be8a5cff50485960138153e3b487e53ebec86da9e9871afcbc339ff5d3",
+      "decision": "Retain source or confirm changed combined application; no independent gain attribution"
+    },
+    "4": {
+      "source_application": "a1007",
+      "candidate_application": "a1007_delivery",
+      "gain_percent_by_length": {
+        "short": 1.6809559619806091,
+        "primary760": 0.9708251701848244,
+        "long": 0.587073038641799
+      },
+      "all_rows_delivery_exact": true,
+      "evidence_sha256": "3b0165b5b63b123576688cdc68a43ef5d4d90f5fc4af6707ef353a9f19d893b2",
+      "decision": "Retain source or confirm changed combined application; no independent gain attribution"
+    },
+    "8": {
+      "source_application": "a1007",
+      "candidate_application": "a1007",
+      "gain_percent_by_length": {
+        "short": 1.1235229714776251,
+        "primary760": -1.339225712668962,
+        "long": 0.3161932067444403
+      },
+      "all_rows_delivery_exact": true,
+      "evidence_sha256": "3621486151f9d758ef96ec42b9e16e6f0897f75ce2f986d807021f2fd29c2711",
+      "decision": "Preserve source application; no replacement established"
+    },
+    "16": {
+      "source_application": "a1007",
+      "candidate_application": "a1007",
+      "gain_percent_by_length": {
+        "short": -1.4448691433310938,
+        "primary760": 0.25967112724283387,
+        "long": 0.2556041104363428
+      },
+      "all_rows_delivery_exact": true,
+      "decision": "Keep base: .26% primary difference unresolved by forward/reverse blocks (both delivery blocks between base blocks), with1.45% short regression. PCMchunk4 still receives combined confirmation."
+    },
+    "32": {
+      "source_application": "a1007_delivery",
+      "candidate_application": "a1007_delivery",
+      "gain_percent_by_length": {
+        "short": 0.6578393285558966,
+        "primary760": 0.7667486757115316,
+        "long": 0.8707351302163904
+      },
+      "all_rows_delivery_exact": true,
+      "evidence_sha256": "b1629ddc14119de575e48fd6e02cdfa56bf49565af947713590315fd67a20ab8",
+      "decision": "Retain source or confirm changed combined application; no independent gain attribution"
+    },
+    "64": {
+      "source_application": "a1007",
+      "candidate_application": "a1007_delivery",
+      "gain_percent_by_length": {
+        "short": 0.457720567147249,
+        "primary760": 0.40540318060493324,
+        "long": 0.4194166934346571
+      },
+      "all_rows_delivery_exact": true,
+      "evidence_sha256": "434eb6fa7a27e4f29672594c532d4cd2aa50f3d282ddf229bb325d0a38007dbf",
+      "decision": "Retain source or confirm changed combined application; no independent gain attribution"
+    }
+  },
+  "pending_batches": [],
+  "criterion": "Main760 median; keep other-frame outcomes separate; confirm any changed complete scheme"
+}

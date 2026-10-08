@@ -1,0 +1,437 @@
+{
+  "batch": 64,
+  "source_batch": 64,
+  "plugins": {
+    "dw_int8_aot_kernel": {
+      "template_sha256": "ef5d126fce45738da938b05cdcf0f44d9bc0c18f352d867b8ed863c9c379a8b1",
+      "generated_sha256": "ef5d126fce45738da938b05cdcf0f44d9bc0c18f352d867b8ed863c9c379a8b1",
+      "batch_roles": []
+    },
+    "dw_int8_full_rewrite": {
+      "template_sha256": "8a128390b6858885283d4e0008e6d90285a7434414ce460eeaa2e465d1a90bdc",
+      "generated_sha256": "8a128390b6858885283d4e0008e6d90285a7434414ce460eeaa2e465d1a90bdc",
+      "batch_roles": []
+    },
+    "dw_int8_plugin": {
+      "template_sha256": "ae60fe1b80862b5ccaf721fa62a3a3e76ea95761e0b165faa0ac767f7e714b66",
+      "generated_sha256": "ae60fe1b80862b5ccaf721fa62a3a3e76ea95761e0b165faa0ac767f7e714b66",
+      "batch_roles": []
+    },
+    "dw_int8_probe_kernel": {
+      "template_sha256": "92e833e5497c52ec5dbdd5734abe73988d2e5cc70a60f755907c1bf1523981fc",
+      "generated_sha256": "92e833e5497c52ec5dbdd5734abe73988d2e5cc70a60f755907c1bf1523981fc",
+      "batch_roles": []
+    },
+    "f32_tf32_rna_aot": {
+      "template_sha256": "4c48491445ad90cc3ed11cdf2a8f6d28528c787bdf40b51d7f20417fd4b7aa1b",
+      "generated_sha256": "4c48491445ad90cc3ed11cdf2a8f6d28528c787bdf40b51d7f20417fd4b7aa1b",
+      "batch_roles": []
+    },
+    "f32_tf32_rna_plugin": {
+      "template_sha256": "fbe17e72c672739ed69c2326bce1b38406990f31b9b0c62f98d2d20b976aed68",
+      "generated_sha256": "fbe17e72c672739ed69c2326bce1b38406990f31b9b0c62f98d2d20b976aed68",
+      "batch_roles": []
+    },
+    "f32_tf32_rna_rewrite": {
+      "template_sha256": "b0ef7473046210469b9d895cf1a87a67f629e577835674d3093f0f60033ee05b",
+      "generated_sha256": "b0ef7473046210469b9d895cf1a87a67f629e577835674d3093f0f60033ee05b",
+      "batch_roles": []
+    },
+    "i8_residual_aot": {
+      "template_sha256": "d16c34f9733d7c9f554493be599dc712f911afb176c625cc1d1ea4560b4c7200",
+      "generated_sha256": "d16c34f9733d7c9f554493be599dc712f911afb176c625cc1d1ea4560b4c7200",
+      "batch_roles": []
+    },
+    "i8_residual_plugin": {
+      "template_sha256": "8d2b7ab72a4e0ec91002972a503dc1d5b23f3cbd2a2a20b9fbdd068491890dce",
+      "generated_sha256": "8d2b7ab72a4e0ec91002972a503dc1d5b23f3cbd2a2a20b9fbdd068491890dce",
+      "batch_roles": []
+    },
+    "i8_residual_rewrite": {
+      "template_sha256": "d8739a4e296f6efaf04ed4b6bd8aa06dc73b0ef874f75c8568b6f0a27b3abf9a",
+      "generated_sha256": "d8739a4e296f6efaf04ed4b6bd8aa06dc73b0ef874f75c8568b6f0a27b3abf9a",
+      "batch_roles": []
+    },
+    "i8_residual_runtime_kernel": {
+      "template_sha256": "c7743ff68ed4523f55f36c37c1f940bf1d4d18e023b77022b68d95a4e0fb2702",
+      "generated_sha256": "c7743ff68ed4523f55f36c37c1f940bf1d4d18e023b77022b68d95a4e0fb2702",
+      "batch_roles": []
+    },
+    "int8_nonlinear_value_aot": {
+      "template_sha256": "9f3ff632af566726af1504c82441731028a86d74110dc7bea1f3f6b4891f593e",
+      "generated_sha256": "9f3ff632af566726af1504c82441731028a86d74110dc7bea1f3f6b4891f593e",
+      "batch_roles": []
+    },
+    "int8_nonlinear_value_plugin": {
+      "template_sha256": "6674d303e735a5f4422f30e559f687c8e1db2ba309e48b1f4d382280b7192a4f",
+      "generated_sha256": "6674d303e735a5f4422f30e559f687c8e1db2ba309e48b1f4d382280b7192a4f",
+      "batch_roles": []
+    },
+    "int8_nonlinear_value_rewrite": {
+      "template_sha256": "b3758700e7a1c880a07a480419764dc06fca6777ae1b9cc2b3a84911ebb357d3",
+      "generated_sha256": "b3758700e7a1c880a07a480419764dc06fca6777ae1b9cc2b3a84911ebb357d3",
+      "batch_roles": []
+    },
+    "int8_nonlinear_value_runtime_kernel": {
+      "template_sha256": "ad68fe87969e7b278969a440ef8f9a59f74ff3f8873a3a932a92e4d405a50053",
+      "generated_sha256": "ad68fe87969e7b278969a440ef8f9a59f74ff3f8873a3a932a92e4d405a50053",
+      "batch_roles": []
+    },
+    "linear_f32_activation_tf32_rna_kernel": {
+      "template_sha256": "bfdfeb9eee2735038bae85a432ab102c30d3752e856c73600dcab755aec7c109",
+      "generated_sha256": "bfdfeb9eee2735038bae85a432ab102c30d3752e856c73600dcab755aec7c109",
+      "batch_roles": []
+    },
+    "online_branch_stats_runtime_kernel": {
+      "template_sha256": "ec71f1b1744d63fb1768feb9672c7b45f88bdb871dbcbb7f5a50dbc535dfc3a3",
+      "generated_sha256": "ec71f1b1744d63fb1768feb9672c7b45f88bdb871dbcbb7f5a50dbc535dfc3a3",
+      "batch_roles": []
+    },
+    "online_branch_wide_aot": {
+      "template_sha256": "ae4905bcfc3e2a518738ba3d335a5ac9f6e35b3e5956b01e501c6bfd5abdb739",
+      "generated_sha256": "ae4905bcfc3e2a518738ba3d335a5ac9f6e35b3e5956b01e501c6bfd5abdb739",
+      "batch_roles": []
+    },
+    "online_branch_wide_plugin": {
+      "template_sha256": "15684eeae2f08b15106c28b2d9e8e86772b0e478eea62c6085d747ac8e7391ef",
+      "generated_sha256": "15684eeae2f08b15106c28b2d9e8e86772b0e478eea62c6085d747ac8e7391ef",
+      "batch_roles": []
+    },
+    "online_nlwide_rewrite": {
+      "template_sha256": "01c590562bb751026e63e564555d16d70b808159851156801f4677d2b98fc9db",
+      "generated_sha256": "01c590562bb751026e63e564555d16d70b808159851156801f4677d2b98fc9db",
+      "batch_roles": []
+    },
+    "online_nonlinear_rna_aot": {
+      "template_sha256": "bace1dffed969bbe710508215e741df5ee94f601864974269270c4eabdc215ad",
+      "generated_sha256": "bace1dffed969bbe710508215e741df5ee94f601864974269270c4eabdc215ad",
+      "batch_roles": []
+    },
+    "online_nonlinear_rna_plugin": {
+      "template_sha256": "c2793c2712e690960e68edb5114707f9f7a9597f8b350cd2679c75caa08ed1bf",
+      "generated_sha256": "3dae52f7645656841026d8ac2122420e60246791778eaeaf773d3e3304496c5c",
+      "batch_roles": []
+    },
+    "online_nonlinear_rna_runtime_kernel": {
+      "template_sha256": "441031620671b087ab4564530a355541f84f90c3a15994608d176c04a16aa239",
+      "generated_sha256": "441031620671b087ab4564530a355541f84f90c3a15994608d176c04a16aa239",
+      "batch_roles": []
+    },
+    "online_single_branch_aot": {
+      "template_sha256": "a09e150997677a7dd15dc5bb6f0d3698fbebe5c06a36b5b713ed181e098f895b",
+      "generated_sha256": "a09e150997677a7dd15dc5bb6f0d3698fbebe5c06a36b5b713ed181e098f895b",
+      "batch_roles": []
+    },
+    "online_single_branch_plugin": {
+      "template_sha256": "3759dbeb47962d81f3528710bb3d599f6d5b9dee20efc3bcd53ecb385fc8d824",
+      "generated_sha256": "3759dbeb47962d81f3528710bb3d599f6d5b9dee20efc3bcd53ecb385fc8d824",
+      "batch_roles": []
+    },
+    "online_single_branch_runtime_kernel": {
+      "template_sha256": "0e8cdb41ebf0099e89a6cad7b4688624dfe9baa895fc2a72dc12b98a1746407f",
+      "generated_sha256": "0e8cdb41ebf0099e89a6cad7b4688624dfe9baa895fc2a72dc12b98a1746407f",
+      "batch_roles": []
+    },
+    "position_fm_rewrite": {
+      "template_sha256": "dbcac66af26a5779aa144c355392ffa07b01916e8fae6687a9a5a17e85f5a395",
+      "generated_sha256": "dbcac66af26a5779aa144c355392ffa07b01916e8fae6687a9a5a17e85f5a395",
+      "batch_roles": []
+    },
+    "position_softmax_f32_kernel": {
+      "template_sha256": "e39c8c89162a45e6ffa7ec12afaac3ba44a3e81962213fbc1fcfe1afab29d145",
+      "generated_sha256": "e39c8c89162a45e6ffa7ec12afaac3ba44a3e81962213fbc1fcfe1afab29d145",
+      "batch_roles": []
+    },
+    "position_softmax_f32_plugin": {
+      "template_sha256": "25afdcfd0ed2ae19a092bb824c329b480aba809f573837f44e4bea78e789b566",
+      "generated_sha256": "25afdcfd0ed2ae19a092bb824c329b480aba809f573837f44e4bea78e789b566",
+      "batch_roles": []
+    }
+  },
+  "graphs": {
+    "fm-native": {
+      "source_sha256": "9436312f590cb6496eedce4ea01982b1ab5783e64569983ace2156d0a994ef17",
+      "target_sha256": "9436312f590cb6496eedce4ea01982b1ab5783e64569983ace2156d0a994ef17",
+      "batch_io_changes": [],
+      "inverse_protobuf_exact": true,
+      "profile": {
+        "t": {
+          "min": [
+            64,
+            1,
+            1
+          ],
+          "opt": [
+            64,
+            1,
+            1
+          ],
+          "max": [
+            64,
+            1,
+            1
+          ]
+        },
+        "x": {
+          "min": [
+            64,
+            600,
+            100
+          ],
+          "opt": [
+            64,
+            760,
+            100
+          ],
+          "max": [
+            64,
+            920,
+            100
+          ]
+        },
+        "text_condition": {
+          "min": [
+            64,
+            600,
+            100
+          ],
+          "opt": [
+            64,
+            760,
+            100
+          ],
+          "max": [
+            64,
+            920,
+            100
+          ]
+        },
+        "speech_condition": {
+          "min": [
+            64,
+            600,
+            100
+          ],
+          "opt": [
+            64,
+            760,
+            100
+          ],
+          "max": [
+            64,
+            920,
+            100
+          ]
+        },
+        "padding_mask": {
+          "min": [
+            64,
+            600
+          ],
+          "opt": [
+            64,
+            760
+          ],
+          "max": [
+            64,
+            920
+          ]
+        },
+        "guidance_scale": {
+          "min": [
+            64,
+            1,
+            1
+          ],
+          "opt": [
+            64,
+            1,
+            1
+          ],
+          "max": [
+            64,
+            1,
+            1
+          ]
+        }
+      }
+    },
+    "fm-inherited": {
+      "source_sha256": "48c9ae113a74901952b7d3d6120071983d251b9382afb3e1ea854ae2cf11da24",
+      "target_sha256": "48c9ae113a74901952b7d3d6120071983d251b9382afb3e1ea854ae2cf11da24",
+      "batch_io_changes": [],
+      "inverse_protobuf_exact": true,
+      "profile": {
+        "t": {
+          "min": [
+            64,
+            1,
+            1
+          ],
+          "opt": [
+            64,
+            1,
+            1
+          ],
+          "max": [
+            64,
+            1,
+            1
+          ]
+        },
+        "x": {
+          "min": [
+            64,
+            600,
+            100
+          ],
+          "opt": [
+            64,
+            760,
+            100
+          ],
+          "max": [
+            64,
+            920,
+            100
+          ]
+        },
+        "text_condition": {
+          "min": [
+            64,
+            600,
+            100
+          ],
+          "opt": [
+            64,
+            760,
+            100
+          ],
+          "max": [
+            64,
+            920,
+            100
+          ]
+        },
+        "speech_condition": {
+          "min": [
+            64,
+            600,
+            100
+          ],
+          "opt": [
+            64,
+            760,
+            100
+          ],
+          "max": [
+            64,
+            920,
+            100
+          ]
+        },
+        "padding_mask": {
+          "min": [
+            64,
+            600
+          ],
+          "opt": [
+            64,
+            760
+          ],
+          "max": [
+            64,
+            920
+          ]
+        },
+        "guidance_scale": {
+          "min": [
+            64,
+            1,
+            1
+          ],
+          "opt": [
+            64,
+            1,
+            1
+          ],
+          "max": [
+            64,
+            1,
+            1
+          ]
+        }
+      }
+    },
+    "text": {
+      "source_sha256": "9cfb5933e021270ccf1a68e7e9c15db69ba26c114ad24745f79e0f88eb6df76d",
+      "target_sha256": "9cfb5933e021270ccf1a68e7e9c15db69ba26c114ad24745f79e0f88eb6df76d",
+      "batch_io_changes": [
+        "token_ids",
+        "token_lens",
+        "features_lens",
+        "text_condition",
+        "padding_mask"
+      ],
+      "inverse_protobuf_exact": true,
+      "profile": {
+        "token_ids": {
+          "min": [
+            64,
+            52
+          ],
+          "opt": [
+            64,
+            78
+          ],
+          "max": [
+            64,
+            141
+          ]
+        },
+        "frame_positions": {
+          "min": [
+            1,
+            600
+          ],
+          "opt": [
+            1,
+            760
+          ],
+          "max": [
+            1,
+            920
+          ]
+        }
+      }
+    },
+    "vocos": {
+      "source_sha256": "8650ed0cdf180977d0ab389bdefb54fa7986f0d4354d12424bf9434196707b3a",
+      "target_sha256": "8650ed0cdf180977d0ab389bdefb54fa7986f0d4354d12424bf9434196707b3a",
+      "batch_io_changes": [
+        "mel",
+        "spectral_coefficients"
+      ],
+      "inverse_protobuf_exact": true,
+      "profile": {
+        "mel": {
+          "min": [
+            64,
+            100,
+            225
+          ],
+          "opt": [
+            64,
+            100,
+            385
+          ],
+          "max": [
+            64,
+            100,
+            545
+          ]
+        }
+      }
+    }
+  }
+}

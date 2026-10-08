@@ -1,0 +1,120 @@
+{
+  "batch": 4,
+  "status": "delivery_reuse_measured_review_pending",
+  "shapes": {
+    "short": {
+      "frames": 608,
+      "medians_s": {
+        "a1007": 0.07656220799999999,
+        "a1007_delivery": 0.075275231
+      },
+      "gain_percent": 1.6809559619806091,
+      "samples_per_route": 20,
+      "blocks": [
+        {
+          "application": "a1007",
+          "median_s": 0.0769633895,
+          "report": "/workspace/A_1007/outputs/zipvoice-benchmarks/b4/delivery-reuse/geo1/short/0-a1007/report.json"
+        },
+        {
+          "application": "a1007_delivery",
+          "median_s": 0.075218703,
+          "report": "/workspace/A_1007/outputs/zipvoice-benchmarks/b4/delivery-reuse/geo1/short/1-a1007_delivery/report.json"
+        },
+        {
+          "application": "a1007_delivery",
+          "median_s": 0.07622489099999999,
+          "report": "/workspace/A_1007/outputs/zipvoice-benchmarks/b4/delivery-reuse/geo1/short/2-a1007_delivery/report.json"
+        },
+        {
+          "application": "a1007",
+          "median_s": 0.07505532,
+          "report": "/workspace/A_1007/outputs/zipvoice-benchmarks/b4/delivery-reuse/geo1/short/3-a1007/report.json"
+        }
+      ],
+      "selected_wav_exact": true
+    },
+    "primary760": {
+      "frames": 760,
+      "medians_s": {
+        "a1007": 0.086350975,
+        "a1007_delivery": 0.08551265799999999
+      },
+      "gain_percent": 0.9708251701848244,
+      "samples_per_route": 20,
+      "blocks": [
+        {
+          "application": "a1007",
+          "median_s": 0.08672902199999999,
+          "report": "/workspace/A_1007/outputs/zipvoice-benchmarks/b4/delivery-reuse/geo1/primary760/0-a1007/report.json"
+        },
+        {
+          "application": "a1007_delivery",
+          "median_s": 0.08591758899999999,
+          "report": "/workspace/A_1007/outputs/zipvoice-benchmarks/b4/delivery-reuse/geo1/primary760/1-a1007_delivery/report.json"
+        },
+        {
+          "application": "a1007_delivery",
+          "median_s": 0.0853141955,
+          "report": "/workspace/A_1007/outputs/zipvoice-benchmarks/b4/delivery-reuse/geo1/primary760/2-a1007_delivery/report.json"
+        },
+        {
+          "application": "a1007",
+          "median_s": 0.086064895,
+          "report": "/workspace/A_1007/outputs/zipvoice-benchmarks/b4/delivery-reuse/geo1/primary760/3-a1007/report.json"
+        }
+      ],
+      "selected_wav_exact": true
+    },
+    "long": {
+      "frames": 918,
+      "medians_s": {
+        "a1007": 0.1047337315,
+        "a1007_delivery": 0.104118868
+      },
+      "gain_percent": 0.587073038641799,
+      "samples_per_route": 20,
+      "blocks": [
+        {
+          "application": "a1007",
+          "median_s": 0.104689089,
+          "report": "/workspace/A_1007/outputs/zipvoice-benchmarks/b4/delivery-reuse/geo1/long/0-a1007/report.json"
+        },
+        {
+          "application": "a1007_delivery",
+          "median_s": 0.10400643500000001,
+          "report": "/workspace/A_1007/outputs/zipvoice-benchmarks/b4/delivery-reuse/geo1/long/1-a1007_delivery/report.json"
+        },
+        {
+          "application": "a1007_delivery",
+          "median_s": 0.104539537,
+          "report": "/workspace/A_1007/outputs/zipvoice-benchmarks/b4/delivery-reuse/geo1/long/2-a1007_delivery/report.json"
+        },
+        {
+          "application": "a1007",
+          "median_s": 0.104906178,
+          "report": "/workspace/A_1007/outputs/zipvoice-benchmarks/b4/delivery-reuse/geo1/long/3-a1007/report.json"
+        }
+      ],
+      "selected_wav_exact": true
+    }
+  },
+  "source_mechanism": "B32 retained compact caller-row H2D, GPU broadcast/pad, first PCM overlapped with remaining D2H; same stream/event dependencies",
+  "scope": "Migration of existing mechanism; not a new optimization gain",
+  "compute_evidence": {
+    "route": "geo1",
+    "engine_sha256": "db70c42e5240a4a12892ef5a9c57724ddb946daef0f7cf98c6c7c9b26fbac36a",
+    "plugin_package": "inspark_infer.ops.tensorrt.zipvoice.a1007.b4_geo1",
+    "performance_evidence_sha256": "854ced1319d568754fc67342d597f63c8a9a2f1db14ad01fc334f57f2c1ba103",
+    "quality_evidence_sha256": "990a288769b78c55849580ce89f808504dd03eb74c1af0bd2a5a049a978aa74b"
+  },
+  "preflight": {
+    "memory_mib": 4108.0,
+    "gpu_util_percent": 0.0,
+    "processes": "1820496, 4082",
+    "power_cap_w": 400.0,
+    "scope": "Known idle allocation retained; not exclusive device ownership"
+  },
+  "all_rows_delivery_exact": true,
+  "functional_report": "/workspace/A_1007/outputs/zipvoice-benchmarks/b4/delivery-reuse/geo1/functional760/report.json"
+}

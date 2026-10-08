@@ -1,0 +1,2038 @@
+{
+  "status": "all_seven_migrations_accepted_optimization_pending",
+  "batches": {
+    "1": {
+      "route": "native",
+      "application": "a1007_delivery",
+      "pcm_policy": {
+        "chunk": 16,
+        "workers": 4
+      },
+      "inventory": {
+        "status": "validation_inventory",
+        "physical_gpu": 1,
+        "gpu_uuid": "GPU-7dab7d6b-ac8c-7ccc-6410-916d3b7689b3",
+        "compute_capability": [
+          8,
+          9
+        ],
+        "tensorrt": "11.3.0.99",
+        "workload": {
+          "batch": 1,
+          "prompt_frames": 375,
+          "target_frames": 385,
+          "total_frames": 760,
+          "joint_tokens": 77,
+          "padded_tokens": 78,
+          "steps": 8,
+          "t_shift": 0.5,
+          "guidance": 1.0,
+          "feat_scale": 0.1
+        },
+        "engines": {
+          "fm": {
+            "path": "/workspace/A_1007/artifacts/zipvoice/a1007/b1/fm-native/engine.plan",
+            "sha256": "ca4170e7035bcdb54671dde143aabf15a22481e17524848b4d707c7663413c0d",
+            "shape_profile": {
+              "t": [
+                [
+                  1,
+                  1,
+                  1
+                ],
+                [
+                  1,
+                  1,
+                  1
+                ],
+                [
+                  1,
+                  1,
+                  1
+                ]
+              ],
+              "x": [
+                [
+                  1,
+                  600,
+                  100
+                ],
+                [
+                  1,
+                  760,
+                  100
+                ],
+                [
+                  1,
+                  920,
+                  100
+                ]
+              ],
+              "text_condition": [
+                [
+                  1,
+                  600,
+                  100
+                ],
+                [
+                  1,
+                  760,
+                  100
+                ],
+                [
+                  1,
+                  920,
+                  100
+                ]
+              ],
+              "speech_condition": [
+                [
+                  1,
+                  600,
+                  100
+                ],
+                [
+                  1,
+                  760,
+                  100
+                ],
+                [
+                  1,
+                  920,
+                  100
+                ]
+              ],
+              "padding_mask": [
+                [
+                  1,
+                  600
+                ],
+                [
+                  1,
+                  760
+                ],
+                [
+                  1,
+                  920
+                ]
+              ],
+              "guidance_scale": [
+                [
+                  1,
+                  1,
+                  1
+                ],
+                [
+                  1,
+                  1,
+                  1
+                ],
+                [
+                  1,
+                  1,
+                  1
+                ]
+              ]
+            },
+            "source_sha256": "9436312f590cb6496eedce4ea01982b1ab5783e64569983ace2156d0a994ef17",
+            "plugin_sources": {}
+          },
+          "text": {
+            "path": "/workspace/A_1007/artifacts/zipvoice/a1007/b1/text/engine.plan",
+            "sha256": "3d9d122087fe1f483b125b3e437e5a6b432835d5236cb9deb4bd0b5f1a2ecbff",
+            "shape_profile": {
+              "token_ids": [
+                [
+                  1,
+                  52
+                ],
+                [
+                  1,
+                  78
+                ],
+                [
+                  1,
+                  141
+                ]
+              ],
+              "frame_positions": [
+                [
+                  1,
+                  600
+                ],
+                [
+                  1,
+                  760
+                ],
+                [
+                  1,
+                  920
+                ]
+              ]
+            },
+            "source_sha256": "48a629d15b7847084f6ca047a7bc55568c6430ab92a627a15eaf2d9425a7b1cd",
+            "plugin_sources": {}
+          },
+          "unique": {
+            "path": "/workspace/A_1007/artifacts/zipvoice/a1007/b1/text/engine.plan",
+            "sha256": "3d9d122087fe1f483b125b3e437e5a6b432835d5236cb9deb4bd0b5f1a2ecbff",
+            "shape_profile": {
+              "token_ids": [
+                [
+                  1,
+                  52
+                ],
+                [
+                  1,
+                  78
+                ],
+                [
+                  1,
+                  141
+                ]
+              ],
+              "frame_positions": [
+                [
+                  1,
+                  600
+                ],
+                [
+                  1,
+                  760
+                ],
+                [
+                  1,
+                  920
+                ]
+              ]
+            },
+            "source_sha256": "48a629d15b7847084f6ca047a7bc55568c6430ab92a627a15eaf2d9425a7b1cd",
+            "plugin_sources": {}
+          },
+          "vocos": {
+            "path": "/workspace/A_1007/artifacts/zipvoice/a1007/b1/vocos/engine.plan",
+            "sha256": "96a8dc503df1540f779e9ce0b1364b21bb2bafd5246af5612dba5074f9e4d216",
+            "shape_profile": {
+              "mel": [
+                [
+                  1,
+                  100,
+                  225
+                ],
+                [
+                  1,
+                  100,
+                  385
+                ],
+                [
+                  1,
+                  100,
+                  545
+                ]
+              ]
+            },
+            "source_sha256": "6d6fd248cbd7f955b89c7f6fb8f893efe3d6d0b5ddaccb467d0bbb1182faa1fe",
+            "plugin_sources": {}
+          }
+        },
+        "plugin_package": "inspark_infer.ops.tensorrt.zipvoice.a1007.b1",
+        "origin_mapping_source_sha256": "662687bc64f660dd50b77eafa5d98866e1eb7310129902aa1082161464009e10"
+      },
+      "evidence": {
+        "reports/sm89/zipvoice/a1007/b1/history/024-combined-migration.json": "ae8f9b0ae656c0cabafee4cb015c496d8aefc7ec9ee617d81faf4117183751b8",
+        "reports/sm89/zipvoice/a1007/b1/history/002-minimal-compute.json": "e4faf28e6151fccd975ed76c104ae05c3d6db172a927e8ba4062b651ca937b21",
+        "reports/sm89/zipvoice/a1007/b1/history/004-quality.json": "6f9195846050c4c38783bce0f414dfe7652b32ed16dc1208c07a60a2c5fd368d",
+        "outputs/zipvoice-validation/b1/quality-inputs.json": "e08cdb4037c9bae58dfffde7dc44ea1a9e520953074b784d8a9a6f120fb105b0",
+        "outputs/zipvoice-benchmarks/b1/combined-migration/sustained760/report.json": "9d97330d4f98c0ad2a29d32240c93a915d84fe2ba0dc5149f3c8815da8684680"
+      },
+      "quality": {
+        "count": 11,
+        "cer": 0.021929824561403508,
+        "character_errors": 5,
+        "reference_characters": 228,
+        "utmos_mean": 2.3844026110389014,
+        "sim_o_mean": 0.6554411487145857
+      },
+      "primary_median_s": 0.034328139,
+      "power_w": {
+        "mean": 306.2284905956113,
+        "p50": 313.084,
+        "p95": 317.811,
+        "max": 319.149
+      },
+      "migration_accepted": true,
+      "decision": {
+        "decision": "retain_tested_combination",
+        "reason": "Native INT8 resolves inherited43% regression; compact delivery retained after positive primary matched combination comparison. Short608 regression1.75% disclosed; objective favors760, with no universal gain claim.",
+        "quality_tradeoffs_disclosed": true,
+        "other_lengths_disclosed": true
+      }
+    },
+    "2": {
+      "route": "geo3",
+      "application": "a1007_delivery",
+      "pcm_policy": {
+        "chunk": 16,
+        "workers": 4
+      },
+      "inventory": {
+        "status": "validation_inventory",
+        "physical_gpu": 1,
+        "gpu_uuid": "GPU-7dab7d6b-ac8c-7ccc-6410-916d3b7689b3",
+        "compute_capability": [
+          8,
+          9
+        ],
+        "tensorrt": "11.3.0.99",
+        "workload": {
+          "batch": 2,
+          "prompt_frames": 375,
+          "target_frames": 385,
+          "total_frames": 760,
+          "joint_tokens": 77,
+          "padded_tokens": 78,
+          "steps": 8,
+          "t_shift": 0.5,
+          "guidance": 1.0,
+          "feat_scale": 0.1
+        },
+        "engines": {
+          "fm": {
+            "path": "/workspace/A_1007/artifacts/zipvoice/a1007/b2/fm-geo3/engine.plan",
+            "sha256": "ca55f11dee05d3dc1873005719826921fa3595c7782c73a040cbf64973f452a8",
+            "shape_profile": {
+              "t": [
+                [
+                  2,
+                  1,
+                  1
+                ],
+                [
+                  2,
+                  1,
+                  1
+                ],
+                [
+                  2,
+                  1,
+                  1
+                ]
+              ],
+              "x": [
+                [
+                  2,
+                  600,
+                  100
+                ],
+                [
+                  2,
+                  760,
+                  100
+                ],
+                [
+                  2,
+                  920,
+                  100
+                ]
+              ],
+              "text_condition": [
+                [
+                  2,
+                  600,
+                  100
+                ],
+                [
+                  2,
+                  760,
+                  100
+                ],
+                [
+                  2,
+                  920,
+                  100
+                ]
+              ],
+              "speech_condition": [
+                [
+                  2,
+                  600,
+                  100
+                ],
+                [
+                  2,
+                  760,
+                  100
+                ],
+                [
+                  2,
+                  920,
+                  100
+                ]
+              ],
+              "padding_mask": [
+                [
+                  2,
+                  600
+                ],
+                [
+                  2,
+                  760
+                ],
+                [
+                  2,
+                  920
+                ]
+              ],
+              "guidance_scale": [
+                [
+                  2,
+                  1,
+                  1
+                ],
+                [
+                  2,
+                  1,
+                  1
+                ],
+                [
+                  2,
+                  1,
+                  1
+                ]
+              ]
+            },
+            "source_sha256": "48c9ae113a74901952b7d3d6120071983d251b9382afb3e1ea854ae2cf11da24",
+            "plugin_sources": {
+              "/workspace/A_1007/src/inspark_infer/ops/tensorrt/zipvoice/a1007/b2_geo3/__init__.py": "64cdad6df0f5c808ef1896eab16d594bf49e9704e7e24ef4d0632e820daa1fa5",
+              "/workspace/A_1007/src/inspark_infer/ops/tensorrt/zipvoice/a1007/b2_geo3/dw_int8_aot_kernel.py": "7effefd72d2367f4b66e3b57f09a6dcb5b0fb9407d22c361f8d07609d755d714",
+              "/workspace/A_1007/src/inspark_infer/ops/tensorrt/zipvoice/a1007/b2_geo3/dw_int8_full_rewrite.py": "8c2b67da0283da3832f228de4d725773cdff3fb94ffdf90323305effaa31b0fb",
+              "/workspace/A_1007/src/inspark_infer/ops/tensorrt/zipvoice/a1007/b2_geo3/dw_int8_plugin.py": "a4220796d2fbe46b6b94babc35134fc419450785d7b612b15259dc69087a7361",
+              "/workspace/A_1007/src/inspark_infer/ops/tensorrt/zipvoice/a1007/b2_geo3/dw_int8_probe_kernel.py": "6a16fe73b6300289f32269af0803e98f1cb5deb8698bb8bb350c5cd2099a09cd",
+              "/workspace/A_1007/src/inspark_infer/ops/tensorrt/zipvoice/a1007/b2_geo3/f32_tf32_rna_aot.py": "b8be21d6f1377330a372d6b135edc48ca902f70ea870a1baed6656a24e6b2e98",
+              "/workspace/A_1007/src/inspark_infer/ops/tensorrt/zipvoice/a1007/b2_geo3/f32_tf32_rna_plugin.py": "05a0af58d62fcdad70e18c93e75c3ee9bf62c3e0a5121a84de096c9740995904",
+              "/workspace/A_1007/src/inspark_infer/ops/tensorrt/zipvoice/a1007/b2_geo3/f32_tf32_rna_rewrite.py": "56164d4dcfdf49b5175a3519faafa7350f87faad8e854b7947dfa1d5214298ad",
+              "/workspace/A_1007/src/inspark_infer/ops/tensorrt/zipvoice/a1007/b2_geo3/i8_residual_aot.py": "8849a48e76e2d635a3a1800678908f4f5bbb026d484abf4c657215dd0d01ca97",
+              "/workspace/A_1007/src/inspark_infer/ops/tensorrt/zipvoice/a1007/b2_geo3/i8_residual_plugin.py": "fa3e9b95e83c410132fc8c6363cd348a41f20b85f15d2c2f69452c86927db8b6",
+              "/workspace/A_1007/src/inspark_infer/ops/tensorrt/zipvoice/a1007/b2_geo3/i8_residual_rewrite.py": "0ed2312421b23bf43cb5a2baa8a7afca57be96b14f5bbb19a070b9a00ffcc22f",
+              "/workspace/A_1007/src/inspark_infer/ops/tensorrt/zipvoice/a1007/b2_geo3/i8_residual_runtime_kernel.py": "8a4c6b83499b52d4d32cd5667deb1b9c7dcb41f7d69665eda10aaf2cdc24e3aa",
+              "/workspace/A_1007/src/inspark_infer/ops/tensorrt/zipvoice/a1007/b2_geo3/int8_nonlinear_value_aot.py": "bc8e9d058e1ba2f8bfd6e7c6bccfc60c08436cdf416b0e8faacb1632a39b0348",
+              "/workspace/A_1007/src/inspark_infer/ops/tensorrt/zipvoice/a1007/b2_geo3/int8_nonlinear_value_plugin.py": "2650d72f77460675a1416d90ee02d5b3a95fca1ffdd7784a2ecf2bf0445d112e",
+              "/workspace/A_1007/src/inspark_infer/ops/tensorrt/zipvoice/a1007/b2_geo3/int8_nonlinear_value_rewrite.py": "1cac7277b829cc844c0b45e6f0336d965a13f27f8a76eb23637648408aae0ba2",
+              "/workspace/A_1007/src/inspark_infer/ops/tensorrt/zipvoice/a1007/b2_geo3/int8_nonlinear_value_runtime_kernel.py": "a7aa3add5d6cd65a0124bb3eec505efe090c754c79410fb4bf759f546eba5d76",
+              "/workspace/A_1007/src/inspark_infer/ops/tensorrt/zipvoice/a1007/b2_geo3/linear_f32_activation_tf32_rna_kernel.py": "6ce21c1e12138a639cb5df29b964bb6db96f0a7ef4906185fda53432517fc0eb",
+              "/workspace/A_1007/src/inspark_infer/ops/tensorrt/zipvoice/a1007/b2_geo3/normal_tf32_aot.py": "c8739bd5411b952d353ba1a978523fe3353ed97d2399799b363bb047e8cfa468",
+              "/workspace/A_1007/src/inspark_infer/ops/tensorrt/zipvoice/a1007/b2_geo3/normal_tf32_plugin.py": "0ff0e17c756eab453aaf3b5383df6ce85dadfeab108f29e49400cdad36d68662",
+              "/workspace/A_1007/src/inspark_infer/ops/tensorrt/zipvoice/a1007/b2_geo3/normal_tf32_rewrite.py": "8d2a172951ea4e4c7edc2aace658dafe9be56699b8717b2effcdacd284353652",
+              "/workspace/A_1007/src/inspark_infer/ops/tensorrt/zipvoice/a1007/b2_geo3/normal_tf32_runtime_kernel.py": "720d73d4928aaccfe5dcc6ebcd44f4d4809c9bef202f721f66e390443b2aba96",
+              "/workspace/A_1007/src/inspark_infer/ops/tensorrt/zipvoice/a1007/b2_geo3/online_nonlinear_rna_aot.py": "b1f078ce28a7b5c5f1ad64aae78747386ff5eeec5a88a69efadfc48568c0d02a",
+              "/workspace/A_1007/src/inspark_infer/ops/tensorrt/zipvoice/a1007/b2_geo3/online_nonlinear_rna_plugin.py": "a452d35d9cea16418df6af040b91c89cd74fe2d7677504344683ec6ea1747e48",
+              "/workspace/A_1007/src/inspark_infer/ops/tensorrt/zipvoice/a1007/b2_geo3/online_nonlinear_rna_runtime_kernel.py": "e0877a8730cc2e0f6e63b0cf7ab21023eaa34d57637d0485b7f98dfefb74a806",
+              "/workspace/A_1007/src/inspark_infer/ops/tensorrt/zipvoice/a1007/b2_geo3/position_fm_rewrite.py": "ea119a28fbf1597c23e48a78e0d021697138ffd8d1723e1e26626ccc9c37bcbb"
+            }
+          },
+          "text": {
+            "path": "/workspace/A_1007/artifacts/zipvoice/a1007/b2/text/engine.plan",
+            "sha256": "924580fa71dfda8cca35fdeb66d927805d5758473037f359a6b0f5d23e3f5acd",
+            "shape_profile": {
+              "token_ids": [
+                [
+                  2,
+                  52
+                ],
+                [
+                  2,
+                  78
+                ],
+                [
+                  2,
+                  141
+                ]
+              ],
+              "frame_positions": [
+                [
+                  1,
+                  600
+                ],
+                [
+                  1,
+                  760
+                ],
+                [
+                  1,
+                  920
+                ]
+              ]
+            },
+            "source_sha256": "1ab94bcfc0add9c7c559a751c6f05b6b79f52f968a9189ed9afa30fc27e6522e",
+            "plugin_sources": {}
+          },
+          "unique": {
+            "path": "/workspace/A_1007/artifacts/zipvoice/a1007/b1/text/engine.plan",
+            "sha256": "3d9d122087fe1f483b125b3e437e5a6b432835d5236cb9deb4bd0b5f1a2ecbff",
+            "shape_profile": {
+              "token_ids": [
+                [
+                  1,
+                  52
+                ],
+                [
+                  1,
+                  78
+                ],
+                [
+                  1,
+                  141
+                ]
+              ],
+              "frame_positions": [
+                [
+                  1,
+                  600
+                ],
+                [
+                  1,
+                  760
+                ],
+                [
+                  1,
+                  920
+                ]
+              ]
+            },
+            "source_sha256": "48a629d15b7847084f6ca047a7bc55568c6430ab92a627a15eaf2d9425a7b1cd",
+            "plugin_sources": {}
+          },
+          "vocos": {
+            "path": "/workspace/A_1007/artifacts/zipvoice/a1007/b2/vocos/engine.plan",
+            "sha256": "b73c7fd14d0916a3313de78739fb4c937f75ccf5086eff944a52dda6e7f3cd16",
+            "shape_profile": {
+              "mel": [
+                [
+                  2,
+                  100,
+                  225
+                ],
+                [
+                  2,
+                  100,
+                  385
+                ],
+                [
+                  2,
+                  100,
+                  545
+                ]
+              ]
+            },
+            "source_sha256": "b5427cb569d20bda4b5510439633335c3ec838e51b92c930379bd762300afaa3",
+            "plugin_sources": {}
+          }
+        },
+        "plugin_package": "inspark_infer.ops.tensorrt.zipvoice.a1007.b2_geo3",
+        "origin_mapping_source_sha256": "662687bc64f660dd50b77eafa5d98866e1eb7310129902aa1082161464009e10"
+      },
+      "evidence": {
+        "reports/sm89/zipvoice/a1007/b2/history/024-combined-migration.json": "74010b5201f14185354dd46b27b440df8ef519aba019179daafb90501feb83a0",
+        "reports/sm89/zipvoice/a1007/b2/history/016-geo3-minimal.json": "e19bd030f557fd65dcc5476a22119f80170a2f5c3c87058a4361164894a41d29",
+        "reports/sm89/zipvoice/a1007/b2/history/019-geo3-quality.json": "feb11106c26f0ce94cfe916cba8d9f43373e18836fc176b48ff23df38e35e997",
+        "outputs/zipvoice-validation/b2/geo3-validation/quality-inputs.json": "b0244f81de1068e3d013975713930fb03d97437298b56c29bb228f756c3907d1",
+        "outputs/zipvoice-benchmarks/b2/combined-migration/sustained760/report.json": "c863138a6dbdeadbf99d3c4b78b39ea4ad78216f8631a93643fb58dc8a5b2e24"
+      },
+      "quality": {
+        "count": 22,
+        "cer": 0.02850877192982456,
+        "character_errors": 13,
+        "reference_characters": 456,
+        "utmos_mean": 2.409294892441143,
+        "sim_o_mean": 0.6553089090368964
+      },
+      "primary_median_s": 0.0507437345,
+      "power_w": {
+        "mean": 365.437197492163,
+        "p50": 371.473,
+        "p95": 374.735,
+        "max": 376.827
+      },
+      "migration_accepted": true,
+      "decision": {
+        "decision": "retain_tested_combination",
+        "reason": "Native attention/FFN/value plus inherited DW/residual resolves compute regression; compact delivery gives small positive matched primary result and positive other lengths. CER/UTMOS/SIM-o tradeoffs disclosed, original tensor mappings and quantization scales unchanged.",
+        "quality_tradeoffs_disclosed": true,
+        "other_lengths_disclosed": true
+      }
+    },
+    "4": {
+      "route": "geo1",
+      "application": "a1007_delivery",
+      "pcm_policy": {
+        "chunk": 1,
+        "workers": 4
+      },
+      "inventory": {
+        "status": "validation_inventory",
+        "physical_gpu": 1,
+        "gpu_uuid": "GPU-7dab7d6b-ac8c-7ccc-6410-916d3b7689b3",
+        "compute_capability": [
+          8,
+          9
+        ],
+        "tensorrt": "11.3.0.99",
+        "workload": {
+          "batch": 4,
+          "prompt_frames": 375,
+          "target_frames": 385,
+          "total_frames": 760,
+          "joint_tokens": 77,
+          "padded_tokens": 78,
+          "steps": 8,
+          "t_shift": 0.5,
+          "guidance": 1.0,
+          "feat_scale": 0.1
+        },
+        "engines": {
+          "fm": {
+            "path": "/workspace/A_1007/artifacts/zipvoice/a1007/b4/fm-geo1/engine.plan",
+            "sha256": "db70c42e5240a4a12892ef5a9c57724ddb946daef0f7cf98c6c7c9b26fbac36a",
+            "shape_profile": {
+              "t": [
+                [
+                  4,
+                  1,
+                  1
+                ],
+                [
+                  4,
+                  1,
+                  1
+                ],
+                [
+                  4,
+                  1,
+                  1
+                ]
+              ],
+              "x": [
+                [
+                  4,
+                  600,
+                  100
+                ],
+                [
+                  4,
+                  760,
+                  100
+                ],
+                [
+                  4,
+                  920,
+                  100
+                ]
+              ],
+              "text_condition": [
+                [
+                  4,
+                  600,
+                  100
+                ],
+                [
+                  4,
+                  760,
+                  100
+                ],
+                [
+                  4,
+                  920,
+                  100
+                ]
+              ],
+              "speech_condition": [
+                [
+                  4,
+                  600,
+                  100
+                ],
+                [
+                  4,
+                  760,
+                  100
+                ],
+                [
+                  4,
+                  920,
+                  100
+                ]
+              ],
+              "padding_mask": [
+                [
+                  4,
+                  600
+                ],
+                [
+                  4,
+                  760
+                ],
+                [
+                  4,
+                  920
+                ]
+              ],
+              "guidance_scale": [
+                [
+                  4,
+                  1,
+                  1
+                ],
+                [
+                  4,
+                  1,
+                  1
+                ],
+                [
+                  4,
+                  1,
+                  1
+                ]
+              ]
+            },
+            "source_sha256": "48c9ae113a74901952b7d3d6120071983d251b9382afb3e1ea854ae2cf11da24",
+            "plugin_sources": {
+              "/workspace/A_1007/src/inspark_infer/ops/tensorrt/zipvoice/a1007/b4_geo1/__init__.py": "64cdad6df0f5c808ef1896eab16d594bf49e9704e7e24ef4d0632e820daa1fa5",
+              "/workspace/A_1007/src/inspark_infer/ops/tensorrt/zipvoice/a1007/b4_geo1/dw_int8_aot_kernel.py": "7effefd72d2367f4b66e3b57f09a6dcb5b0fb9407d22c361f8d07609d755d714",
+              "/workspace/A_1007/src/inspark_infer/ops/tensorrt/zipvoice/a1007/b4_geo1/dw_int8_full_rewrite.py": "15ae911a51f1afcb1f965a106cbcafa99a673d1cf4af26c50e3bb7fe4d43f06b",
+              "/workspace/A_1007/src/inspark_infer/ops/tensorrt/zipvoice/a1007/b4_geo1/dw_int8_plugin.py": "81c03b9f0a4fddfc72bcd22ef2eb920ee703ed12d128a746a743e33a93f78537",
+              "/workspace/A_1007/src/inspark_infer/ops/tensorrt/zipvoice/a1007/b4_geo1/dw_int8_probe_kernel.py": "6a16fe73b6300289f32269af0803e98f1cb5deb8698bb8bb350c5cd2099a09cd",
+              "/workspace/A_1007/src/inspark_infer/ops/tensorrt/zipvoice/a1007/b4_geo1/f32_tf32_rna_aot.py": "b8be21d6f1377330a372d6b135edc48ca902f70ea870a1baed6656a24e6b2e98",
+              "/workspace/A_1007/src/inspark_infer/ops/tensorrt/zipvoice/a1007/b4_geo1/f32_tf32_rna_plugin.py": "803aa80cd1a9cf803041d6592fdf9826465348cf3e351e3ee2d6bd52ba6f4a4a",
+              "/workspace/A_1007/src/inspark_infer/ops/tensorrt/zipvoice/a1007/b4_geo1/f32_tf32_rna_rewrite.py": "5f8e12881801f4d9beba6e4c7921286840d98bdf1bb1f5c70a2c40ee3dc6181f",
+              "/workspace/A_1007/src/inspark_infer/ops/tensorrt/zipvoice/a1007/b4_geo1/i8_residual_aot.py": "dc87e9736c5b327af694d8b36f89c7e4517afc62e2bec2ed67bd7a7fa28d288f",
+              "/workspace/A_1007/src/inspark_infer/ops/tensorrt/zipvoice/a1007/b4_geo1/i8_residual_plugin.py": "b30698d321697a8d2516efb3d92325465881ca41ee777a825f8d01fbb055afe6",
+              "/workspace/A_1007/src/inspark_infer/ops/tensorrt/zipvoice/a1007/b4_geo1/i8_residual_rewrite.py": "402f166df09956c36d6f67cc530b33012579c741530bf2918975561f8df9db13",
+              "/workspace/A_1007/src/inspark_infer/ops/tensorrt/zipvoice/a1007/b4_geo1/i8_residual_runtime_kernel.py": "8a4c6b83499b52d4d32cd5667deb1b9c7dcb41f7d69665eda10aaf2cdc24e3aa",
+              "/workspace/A_1007/src/inspark_infer/ops/tensorrt/zipvoice/a1007/b4_geo1/int8_nonlinear_value_aot.py": "bc8e9d058e1ba2f8bfd6e7c6bccfc60c08436cdf416b0e8faacb1632a39b0348",
+              "/workspace/A_1007/src/inspark_infer/ops/tensorrt/zipvoice/a1007/b4_geo1/int8_nonlinear_value_plugin.py": "60a8e836dc99ab9dcd25ba8f9bf938abd923937054d602a84a05106e2c457381",
+              "/workspace/A_1007/src/inspark_infer/ops/tensorrt/zipvoice/a1007/b4_geo1/int8_nonlinear_value_rewrite.py": "7002035a9ae96124e6ff50b9f61a548e980308605426410812dbd9a4aaba9c03",
+              "/workspace/A_1007/src/inspark_infer/ops/tensorrt/zipvoice/a1007/b4_geo1/int8_nonlinear_value_runtime_kernel.py": "8a100ec37d422a52d77ff0d8460f1aed9bb4728b312f5f839c0aa35264c78a50",
+              "/workspace/A_1007/src/inspark_infer/ops/tensorrt/zipvoice/a1007/b4_geo1/linear_f32_activation_tf32_rna_kernel.py": "6ce21c1e12138a639cb5df29b964bb6db96f0a7ef4906185fda53432517fc0eb",
+              "/workspace/A_1007/src/inspark_infer/ops/tensorrt/zipvoice/a1007/b4_geo1/normal_tf32_aot.py": "c8739bd5411b952d353ba1a978523fe3353ed97d2399799b363bb047e8cfa468",
+              "/workspace/A_1007/src/inspark_infer/ops/tensorrt/zipvoice/a1007/b4_geo1/normal_tf32_plugin.py": "64f6ea217dc5de4b3e7e2e06da6073e3218dec7a93c4d88519cf561604098ff9",
+              "/workspace/A_1007/src/inspark_infer/ops/tensorrt/zipvoice/a1007/b4_geo1/normal_tf32_rewrite.py": "30186815d7980a4f20c2260ec575b720750cff1f5fe2c403a5c6ec6832a48963",
+              "/workspace/A_1007/src/inspark_infer/ops/tensorrt/zipvoice/a1007/b4_geo1/normal_tf32_runtime_kernel.py": "718780fa87391f2704950a338d396307f28cab7dffb6d99b593fc4754f0ebba5",
+              "/workspace/A_1007/src/inspark_infer/ops/tensorrt/zipvoice/a1007/b4_geo1/online_nonlinear_rna_aot.py": "b1f078ce28a7b5c5f1ad64aae78747386ff5eeec5a88a69efadfc48568c0d02a",
+              "/workspace/A_1007/src/inspark_infer/ops/tensorrt/zipvoice/a1007/b4_geo1/online_nonlinear_rna_plugin.py": "c6aa813a40ec7e9682d3b5e679b55cecac3b598e70f6397e9d7fab26f48ec9e6",
+              "/workspace/A_1007/src/inspark_infer/ops/tensorrt/zipvoice/a1007/b4_geo1/online_nonlinear_rna_runtime_kernel.py": "d68215ed3c466c76578a524493476be7f206d61776c2e16138b67a793ff6e243",
+              "/workspace/A_1007/src/inspark_infer/ops/tensorrt/zipvoice/a1007/b4_geo1/position_fm_rewrite.py": "ea119a28fbf1597c23e48a78e0d021697138ffd8d1723e1e26626ccc9c37bcbb"
+            }
+          },
+          "text": {
+            "path": "/workspace/A_1007/artifacts/zipvoice/a1007/b4/text/engine.plan",
+            "sha256": "4e2e2a49eac2bdf6b1d71f72030703d571d949217df92aadf2270ddc4314ea64",
+            "shape_profile": {
+              "token_ids": [
+                [
+                  4,
+                  52
+                ],
+                [
+                  4,
+                  78
+                ],
+                [
+                  4,
+                  141
+                ]
+              ],
+              "frame_positions": [
+                [
+                  1,
+                  600
+                ],
+                [
+                  1,
+                  760
+                ],
+                [
+                  1,
+                  920
+                ]
+              ]
+            },
+            "source_sha256": "14f2fe3fe68a540967f40fe0b6fdc41b1d08887720e65f8e6ebbe54f89af769f",
+            "plugin_sources": {}
+          },
+          "unique": {
+            "path": "/workspace/A_1007/artifacts/zipvoice/a1007/b1/text/engine.plan",
+            "sha256": "3d9d122087fe1f483b125b3e437e5a6b432835d5236cb9deb4bd0b5f1a2ecbff",
+            "shape_profile": {
+              "token_ids": [
+                [
+                  1,
+                  52
+                ],
+                [
+                  1,
+                  78
+                ],
+                [
+                  1,
+                  141
+                ]
+              ],
+              "frame_positions": [
+                [
+                  1,
+                  600
+                ],
+                [
+                  1,
+                  760
+                ],
+                [
+                  1,
+                  920
+                ]
+              ]
+            },
+            "source_sha256": "48a629d15b7847084f6ca047a7bc55568c6430ab92a627a15eaf2d9425a7b1cd",
+            "plugin_sources": {}
+          },
+          "vocos": {
+            "path": "/workspace/A_1007/artifacts/zipvoice/a1007/b4/vocos/engine.plan",
+            "sha256": "a0111fc2e4a304c89f97a5c6c80d779f4305b7e9748b8790d670da338ec8bae8",
+            "shape_profile": {
+              "mel": [
+                [
+                  4,
+                  100,
+                  225
+                ],
+                [
+                  4,
+                  100,
+                  385
+                ],
+                [
+                  4,
+                  100,
+                  545
+                ]
+              ]
+            },
+            "source_sha256": "6e0b87c452150a1fe42be1cee29481bbc08b24fae63fad9695fb77a104e3b50a",
+            "plugin_sources": {}
+          }
+        },
+        "plugin_package": "inspark_infer.ops.tensorrt.zipvoice.a1007.b4_geo1",
+        "origin_mapping_source_sha256": "662687bc64f660dd50b77eafa5d98866e1eb7310129902aa1082161464009e10"
+      },
+      "evidence": {
+        "reports/sm89/zipvoice/a1007/b4/history/024-combined-migration.json": "03d3af43edf5238cf7515b65c85a4fc710f33f3dd519f9e2902f887871f0cf58",
+        "reports/sm89/zipvoice/a1007/b4/history/016-geo1-minimal.json": "e33edee4869ead68b724d49eeed1203edbd1681419cb43df9078ec7798221e69",
+        "reports/sm89/zipvoice/a1007/b4/history/019-geo1-quality.json": "990a288769b78c55849580ce89f808504dd03eb74c1af0bd2a5a049a978aa74b",
+        "outputs/zipvoice-validation/b4/geo1-validation/quality-inputs.json": "840ecda08504e5b015aab13229afdc3b148070b8d992cf8252f859c6396d6684",
+        "outputs/zipvoice-benchmarks/b4/combined-migration/sustained760/report.json": "992119f7bbd1e149547e36f66f38108a64d16e69729f94ab445e8eb8dddc30fc"
+      },
+      "quality": {
+        "count": 33,
+        "cer": 0.01608187134502924,
+        "character_errors": 11,
+        "reference_characters": 684,
+        "utmos_mean": 2.391309268546827,
+        "sim_o_mean": 0.6485639395135822
+      },
+      "primary_median_s": 0.0841661195,
+      "power_w": {
+        "mean": 384.36165047021944,
+        "p50": 388.532,
+        "p95": 392.468,
+        "max": 393.345
+      },
+      "migration_accepted": true,
+      "decision": {
+        "decision": "retain_tested_combination",
+        "reason": "Geo1 compute preserves inherited coverage and improves all formal lengths; delivery plus chunk1 confirmed on complete application with positive three-length results.",
+        "quality_tradeoffs_disclosed": true,
+        "other_lengths_disclosed": true
+      }
+    },
+    "8": {
+      "route": "inherited",
+      "application": "a1007",
+      "pcm_policy": {
+        "chunk": 1,
+        "workers": 4
+      },
+      "inventory": {
+        "status": "validation_inventory",
+        "physical_gpu": 1,
+        "gpu_uuid": "GPU-7dab7d6b-ac8c-7ccc-6410-916d3b7689b3",
+        "compute_capability": [
+          8,
+          9
+        ],
+        "tensorrt": "11.3.0.99",
+        "workload": {
+          "batch": 8,
+          "prompt_frames": 375,
+          "target_frames": 385,
+          "total_frames": 760,
+          "joint_tokens": 77,
+          "padded_tokens": 78,
+          "steps": 8,
+          "t_shift": 0.5,
+          "guidance": 1.0,
+          "feat_scale": 0.1
+        },
+        "engines": {
+          "fm": {
+            "path": "/workspace/A_1007/artifacts/zipvoice/a1007/b8/fm-inherited/engine.plan",
+            "sha256": "7893518b3aec7b5737634bdeb0787414d78c5c8cf342ede2aabe8c289d74346c",
+            "shape_profile": {
+              "t": [
+                [
+                  8,
+                  1,
+                  1
+                ],
+                [
+                  8,
+                  1,
+                  1
+                ],
+                [
+                  8,
+                  1,
+                  1
+                ]
+              ],
+              "x": [
+                [
+                  8,
+                  600,
+                  100
+                ],
+                [
+                  8,
+                  760,
+                  100
+                ],
+                [
+                  8,
+                  920,
+                  100
+                ]
+              ],
+              "text_condition": [
+                [
+                  8,
+                  600,
+                  100
+                ],
+                [
+                  8,
+                  760,
+                  100
+                ],
+                [
+                  8,
+                  920,
+                  100
+                ]
+              ],
+              "speech_condition": [
+                [
+                  8,
+                  600,
+                  100
+                ],
+                [
+                  8,
+                  760,
+                  100
+                ],
+                [
+                  8,
+                  920,
+                  100
+                ]
+              ],
+              "padding_mask": [
+                [
+                  8,
+                  600
+                ],
+                [
+                  8,
+                  760
+                ],
+                [
+                  8,
+                  920
+                ]
+              ],
+              "guidance_scale": [
+                [
+                  8,
+                  1,
+                  1
+                ],
+                [
+                  8,
+                  1,
+                  1
+                ],
+                [
+                  8,
+                  1,
+                  1
+                ]
+              ]
+            },
+            "source_sha256": "48c9ae113a74901952b7d3d6120071983d251b9382afb3e1ea854ae2cf11da24",
+            "plugin_sources": {
+              "/workspace/A_1007/src/inspark_infer/ops/tensorrt/zipvoice/a1007/b8/__init__.py": "64cdad6df0f5c808ef1896eab16d594bf49e9704e7e24ef4d0632e820daa1fa5",
+              "/workspace/A_1007/src/inspark_infer/ops/tensorrt/zipvoice/a1007/b8/dw_int8_aot_kernel.py": "7effefd72d2367f4b66e3b57f09a6dcb5b0fb9407d22c361f8d07609d755d714",
+              "/workspace/A_1007/src/inspark_infer/ops/tensorrt/zipvoice/a1007/b8/dw_int8_full_rewrite.py": "c70f5374c525089701ec46beb2228cdf6f0401e820bdddb334fcb2a53ce6dcf9",
+              "/workspace/A_1007/src/inspark_infer/ops/tensorrt/zipvoice/a1007/b8/dw_int8_plugin.py": "7f9eac1a70bc995823d11ce8d0c7d10b7d030c0d1330c0c3640a9b26e2405f40",
+              "/workspace/A_1007/src/inspark_infer/ops/tensorrt/zipvoice/a1007/b8/dw_int8_probe_kernel.py": "6a16fe73b6300289f32269af0803e98f1cb5deb8698bb8bb350c5cd2099a09cd",
+              "/workspace/A_1007/src/inspark_infer/ops/tensorrt/zipvoice/a1007/b8/f32_tf32_rna_aot.py": "798994195ae67252c9b2af622d30c61fc0ec0338a876501f0daabb61318c0789",
+              "/workspace/A_1007/src/inspark_infer/ops/tensorrt/zipvoice/a1007/b8/f32_tf32_rna_plugin.py": "ac9ffb206b5768e9d9538f3b6aec7e2fd8d33b6992a9fa7c7fe76889d0ee832b",
+              "/workspace/A_1007/src/inspark_infer/ops/tensorrt/zipvoice/a1007/b8/f32_tf32_rna_rewrite.py": "ee93e59280eda5d178dcc1447e95fcb5ff764ea3187184c95c13edc5873e5bb8",
+              "/workspace/A_1007/src/inspark_infer/ops/tensorrt/zipvoice/a1007/b8/i8_residual_aot.py": "d3f51fdb405987c3dd6ec96f8c2484f37a151d9c45709e81d3159a133149d290",
+              "/workspace/A_1007/src/inspark_infer/ops/tensorrt/zipvoice/a1007/b8/i8_residual_plugin.py": "6d0e702a652a3bc6711651a2e8f53e3a0d835ffa294e71d2be5c71ef007f7836",
+              "/workspace/A_1007/src/inspark_infer/ops/tensorrt/zipvoice/a1007/b8/i8_residual_rewrite.py": "926ab3c0e0c24c0eb601880eccee1f367d75b2f4d4e9e1807d74ab4f0658e7c7",
+              "/workspace/A_1007/src/inspark_infer/ops/tensorrt/zipvoice/a1007/b8/i8_residual_runtime_kernel.py": "8a4c6b83499b52d4d32cd5667deb1b9c7dcb41f7d69665eda10aaf2cdc24e3aa",
+              "/workspace/A_1007/src/inspark_infer/ops/tensorrt/zipvoice/a1007/b8/int8_nonlinear_value_aot.py": "3fc7f78081b075c428e6178842ed3ff24f7ad52f640a8cdb7791a92bd9cf99de",
+              "/workspace/A_1007/src/inspark_infer/ops/tensorrt/zipvoice/a1007/b8/int8_nonlinear_value_plugin.py": "54b972c5dffb8cb561fdfd9c9527dba6c2846d6ee546b4d22160dd280d852ef2",
+              "/workspace/A_1007/src/inspark_infer/ops/tensorrt/zipvoice/a1007/b8/int8_nonlinear_value_rewrite.py": "75a734974c2a74ab2a2a5b50e63355b48fbc9c6f20b55e957769947a3886fb8d",
+              "/workspace/A_1007/src/inspark_infer/ops/tensorrt/zipvoice/a1007/b8/int8_nonlinear_value_runtime_kernel.py": "ce6659efbe56415e2853c024e5d84417f3a694ccf2eb0ceb8939a95edecfa9f1",
+              "/workspace/A_1007/src/inspark_infer/ops/tensorrt/zipvoice/a1007/b8/linear_f32_activation_tf32_rna_kernel.py": "6ce21c1e12138a639cb5df29b964bb6db96f0a7ef4906185fda53432517fc0eb",
+              "/workspace/A_1007/src/inspark_infer/ops/tensorrt/zipvoice/a1007/b8/normal_tf32_aot.py": "c8739bd5411b952d353ba1a978523fe3353ed97d2399799b363bb047e8cfa468",
+              "/workspace/A_1007/src/inspark_infer/ops/tensorrt/zipvoice/a1007/b8/normal_tf32_plugin.py": "0e3baa2a308bf926127249daae8510bb0ca5470adf9565a7aeae608e3d878292",
+              "/workspace/A_1007/src/inspark_infer/ops/tensorrt/zipvoice/a1007/b8/normal_tf32_rewrite.py": "4bb73b783cdfbfc0539dcbb560e8971a60e61bc05197ee05b19541c6e999754f",
+              "/workspace/A_1007/src/inspark_infer/ops/tensorrt/zipvoice/a1007/b8/normal_tf32_runtime_kernel.py": "fe0bc4e148b0bed76dcd9d53e012dab68cc1739c59063fd2ce66e5f3e6d5f86a",
+              "/workspace/A_1007/src/inspark_infer/ops/tensorrt/zipvoice/a1007/b8/online_nonlinear_rna_aot.py": "69a19796e7f3c94ba8f00b2ac889ed3090875217fb3de2cf389ee648be38242e",
+              "/workspace/A_1007/src/inspark_infer/ops/tensorrt/zipvoice/a1007/b8/online_nonlinear_rna_plugin.py": "b6bf6a025d6e2635b2ce8043c40ddf4418321083177ec8b619f98ee94db76d9c",
+              "/workspace/A_1007/src/inspark_infer/ops/tensorrt/zipvoice/a1007/b8/online_nonlinear_rna_runtime_kernel.py": "9ebb11ddae17420c287af49994bda629bb7a66e46961dd0dbc1e8fd844cde2aa",
+              "/workspace/A_1007/src/inspark_infer/ops/tensorrt/zipvoice/a1007/b8/position_fm_rewrite.py": "ea119a28fbf1597c23e48a78e0d021697138ffd8d1723e1e26626ccc9c37bcbb"
+            }
+          },
+          "text": {
+            "path": "/workspace/A_1007/artifacts/zipvoice/a1007/b8/text/engine.plan",
+            "sha256": "5a824c150a0e5b6a6095a772072a13a285ad9b6c523b71cbf1f8414e4b7f364d",
+            "shape_profile": {
+              "token_ids": [
+                [
+                  8,
+                  52
+                ],
+                [
+                  8,
+                  78
+                ],
+                [
+                  8,
+                  141
+                ]
+              ],
+              "frame_positions": [
+                [
+                  1,
+                  600
+                ],
+                [
+                  1,
+                  760
+                ],
+                [
+                  1,
+                  920
+                ]
+              ]
+            },
+            "source_sha256": "cbced305fba45c016d42a4c42ea7f2b6500f9bbc363815899464b7a4563d40d9",
+            "plugin_sources": {}
+          },
+          "unique": {
+            "path": "/workspace/A_1007/artifacts/zipvoice/a1007/b1/text/engine.plan",
+            "sha256": "3d9d122087fe1f483b125b3e437e5a6b432835d5236cb9deb4bd0b5f1a2ecbff",
+            "shape_profile": {
+              "token_ids": [
+                [
+                  1,
+                  52
+                ],
+                [
+                  1,
+                  78
+                ],
+                [
+                  1,
+                  141
+                ]
+              ],
+              "frame_positions": [
+                [
+                  1,
+                  600
+                ],
+                [
+                  1,
+                  760
+                ],
+                [
+                  1,
+                  920
+                ]
+              ]
+            },
+            "source_sha256": "48a629d15b7847084f6ca047a7bc55568c6430ab92a627a15eaf2d9425a7b1cd",
+            "plugin_sources": {}
+          },
+          "vocos": {
+            "path": "/workspace/A_1007/artifacts/zipvoice/a1007/b8/vocos/engine.plan",
+            "sha256": "92e41b5a0eef106ef12c32df8c25878ab904fc9018d7f923d98dce48d8e74e91",
+            "shape_profile": {
+              "mel": [
+                [
+                  8,
+                  100,
+                  225
+                ],
+                [
+                  8,
+                  100,
+                  385
+                ],
+                [
+                  8,
+                  100,
+                  545
+                ]
+              ]
+            },
+            "source_sha256": "2b0400613b5c31e8a52b1de78d40ec8ba91657b98f923d9d5425a6abb17bad26",
+            "plugin_sources": {}
+          }
+        },
+        "plugin_package": "inspark_infer.ops.tensorrt.zipvoice.a1007.b8",
+        "origin_mapping_source_sha256": "662687bc64f660dd50b77eafa5d98866e1eb7310129902aa1082161464009e10"
+      },
+      "evidence": {
+        "reports/sm89/zipvoice/a1007/b8/history/024-combined-migration.json": "df7c3436519499041c3fc639af3afdc6da064dfd598c93452effb86da07b796a",
+        "reports/sm89/zipvoice/a1007/b8/history/002-minimal-compute.json": "ab18b4b50511637551793103563ac7b25d8c9276a302f9e0c9f32b495b459639",
+        "reports/sm89/zipvoice/a1007/b8/history/004-quality.json": "120047d1d8acd65df0d0175498d502fd5e6953e211fc5b8d09824bf94f6c461e",
+        "outputs/zipvoice-validation/b8/quality-inputs.json": "b49c3bcbf4d9a1eca2897d094b77a3487cfda76ae48f4f4e0c1d610e60894eea",
+        "outputs/zipvoice-benchmarks/b8/combined-migration/sustained760/report.json": "0a964e321d8864561b388fc631d5d282889fd0f9e170b55994e5e6a965a47471"
+      },
+      "quality": {
+        "count": 33,
+        "cer": 0.027777777777777776,
+        "character_errors": 19,
+        "reference_characters": 684,
+        "utmos_mean": 2.43348211591894,
+        "sim_o_mean": 0.6446087784839399
+      },
+      "primary_median_s": 0.1491762075,
+      "power_w": {
+        "mean": 392.31569327073555,
+        "p50": 395.355,
+        "p95": 396.445,
+        "max": 396.996
+      },
+      "migration_accepted": true,
+      "decision": {
+        "decision": "retain_tested_combination",
+        "reason": "Rejected geo1 compute and compact-delivery primary regressions; preserve source compute/base application. Chunk1 confirmed positive in all three combined comparisons.",
+        "quality_tradeoffs_disclosed": true,
+        "other_lengths_disclosed": true
+      }
+    },
+    "16": {
+      "route": "inherited",
+      "application": "a1007",
+      "pcm_policy": {
+        "chunk": 4,
+        "workers": 4
+      },
+      "inventory": {
+        "status": "validation_inventory",
+        "physical_gpu": 1,
+        "gpu_uuid": "GPU-7dab7d6b-ac8c-7ccc-6410-916d3b7689b3",
+        "compute_capability": [
+          8,
+          9
+        ],
+        "tensorrt": "11.3.0.99",
+        "workload": {
+          "batch": 16,
+          "prompt_frames": 375,
+          "target_frames": 385,
+          "total_frames": 760,
+          "joint_tokens": 77,
+          "padded_tokens": 78,
+          "steps": 8,
+          "t_shift": 0.5,
+          "guidance": 1.0,
+          "feat_scale": 0.1
+        },
+        "engines": {
+          "fm": {
+            "path": "/workspace/A_1007/artifacts/zipvoice/a1007/b16/fm-inherited/engine.plan",
+            "sha256": "676a48000cdd8dc4f31af40c0edf53ef628c6f9f3d7f5bcb2023236190fcce90",
+            "shape_profile": {
+              "t": [
+                [
+                  16,
+                  1,
+                  1
+                ],
+                [
+                  16,
+                  1,
+                  1
+                ],
+                [
+                  16,
+                  1,
+                  1
+                ]
+              ],
+              "x": [
+                [
+                  16,
+                  600,
+                  100
+                ],
+                [
+                  16,
+                  760,
+                  100
+                ],
+                [
+                  16,
+                  920,
+                  100
+                ]
+              ],
+              "text_condition": [
+                [
+                  16,
+                  600,
+                  100
+                ],
+                [
+                  16,
+                  760,
+                  100
+                ],
+                [
+                  16,
+                  920,
+                  100
+                ]
+              ],
+              "speech_condition": [
+                [
+                  16,
+                  600,
+                  100
+                ],
+                [
+                  16,
+                  760,
+                  100
+                ],
+                [
+                  16,
+                  920,
+                  100
+                ]
+              ],
+              "padding_mask": [
+                [
+                  16,
+                  600
+                ],
+                [
+                  16,
+                  760
+                ],
+                [
+                  16,
+                  920
+                ]
+              ],
+              "guidance_scale": [
+                [
+                  16,
+                  1,
+                  1
+                ],
+                [
+                  16,
+                  1,
+                  1
+                ],
+                [
+                  16,
+                  1,
+                  1
+                ]
+              ]
+            },
+            "source_sha256": "48c9ae113a74901952b7d3d6120071983d251b9382afb3e1ea854ae2cf11da24",
+            "plugin_sources": {
+              "/workspace/A_1007/src/inspark_infer/ops/tensorrt/zipvoice/a1007/b16/__init__.py": "64cdad6df0f5c808ef1896eab16d594bf49e9704e7e24ef4d0632e820daa1fa5",
+              "/workspace/A_1007/src/inspark_infer/ops/tensorrt/zipvoice/a1007/b16/dw_int8_aot_kernel.py": "7effefd72d2367f4b66e3b57f09a6dcb5b0fb9407d22c361f8d07609d755d714",
+              "/workspace/A_1007/src/inspark_infer/ops/tensorrt/zipvoice/a1007/b16/dw_int8_full_rewrite.py": "14f750afd032f010ee9b6ed6a9d60f9cc91b7741eb6a17c7571cbf47d7c19712",
+              "/workspace/A_1007/src/inspark_infer/ops/tensorrt/zipvoice/a1007/b16/dw_int8_plugin.py": "c18e4392fd69866cf3253152cb00e1aae1150e1d3917e901a197c7a6b9176288",
+              "/workspace/A_1007/src/inspark_infer/ops/tensorrt/zipvoice/a1007/b16/dw_int8_probe_kernel.py": "6a16fe73b6300289f32269af0803e98f1cb5deb8698bb8bb350c5cd2099a09cd",
+              "/workspace/A_1007/src/inspark_infer/ops/tensorrt/zipvoice/a1007/b16/f32_tf32_rna_aot.py": "798994195ae67252c9b2af622d30c61fc0ec0338a876501f0daabb61318c0789",
+              "/workspace/A_1007/src/inspark_infer/ops/tensorrt/zipvoice/a1007/b16/f32_tf32_rna_plugin.py": "17dee11fdfe2b9ab174089db6ff01e066cf8341b5a0f0d11a75144a96ace0392",
+              "/workspace/A_1007/src/inspark_infer/ops/tensorrt/zipvoice/a1007/b16/f32_tf32_rna_rewrite.py": "18fa7ea4e20910f93dc75ece4ecbece6820bd2c07033f228fd1bcb5393f8bebb",
+              "/workspace/A_1007/src/inspark_infer/ops/tensorrt/zipvoice/a1007/b16/i8_residual_aot.py": "9c8b366a4020fa71f9c8e8b8f3ed3084bf22ff3239d3dccf4caba9075dc8aecb",
+              "/workspace/A_1007/src/inspark_infer/ops/tensorrt/zipvoice/a1007/b16/i8_residual_plugin.py": "af77bf81e575c825c39724642046ebec56c54ae7ae4b086ac5ec98f55a801640",
+              "/workspace/A_1007/src/inspark_infer/ops/tensorrt/zipvoice/a1007/b16/i8_residual_rewrite.py": "476123bdd7d6155049840d0460f60629ab0082f06e1d330f113826f86ec0cb2e",
+              "/workspace/A_1007/src/inspark_infer/ops/tensorrt/zipvoice/a1007/b16/i8_residual_runtime_kernel.py": "8a4c6b83499b52d4d32cd5667deb1b9c7dcb41f7d69665eda10aaf2cdc24e3aa",
+              "/workspace/A_1007/src/inspark_infer/ops/tensorrt/zipvoice/a1007/b16/int8_nonlinear_value_aot.py": "3fc7f78081b075c428e6178842ed3ff24f7ad52f640a8cdb7791a92bd9cf99de",
+              "/workspace/A_1007/src/inspark_infer/ops/tensorrt/zipvoice/a1007/b16/int8_nonlinear_value_plugin.py": "36b422c3755b08f32760d5d62b2c943ded123ab93fa1ec5c2ea3d3b643475fbc",
+              "/workspace/A_1007/src/inspark_infer/ops/tensorrt/zipvoice/a1007/b16/int8_nonlinear_value_rewrite.py": "caabd4ebac61fa92615e5d698325b890d630e2f6229dcffffbf74f41d0c1dd2b",
+              "/workspace/A_1007/src/inspark_infer/ops/tensorrt/zipvoice/a1007/b16/int8_nonlinear_value_runtime_kernel.py": "04a833175b73eec9fee87378b08c34744a771485678235c768ca650c668be991",
+              "/workspace/A_1007/src/inspark_infer/ops/tensorrt/zipvoice/a1007/b16/linear_f32_activation_tf32_rna_kernel.py": "6ce21c1e12138a639cb5df29b964bb6db96f0a7ef4906185fda53432517fc0eb",
+              "/workspace/A_1007/src/inspark_infer/ops/tensorrt/zipvoice/a1007/b16/normal_tf32_aot.py": "c8739bd5411b952d353ba1a978523fe3353ed97d2399799b363bb047e8cfa468",
+              "/workspace/A_1007/src/inspark_infer/ops/tensorrt/zipvoice/a1007/b16/normal_tf32_plugin.py": "82a75838ff361cf07395b71e6d77dcbc1c69aa9c477b73b226353bf20a6cf5be",
+              "/workspace/A_1007/src/inspark_infer/ops/tensorrt/zipvoice/a1007/b16/normal_tf32_rewrite.py": "b477e69f0a67a044888edfff41a30c4a9354ec2403badaa6947180c1b4769e92",
+              "/workspace/A_1007/src/inspark_infer/ops/tensorrt/zipvoice/a1007/b16/normal_tf32_runtime_kernel.py": "dd987d9da000caf733a4b55097cd1839d0849bff437183d9e48ed3ee5fd7a367",
+              "/workspace/A_1007/src/inspark_infer/ops/tensorrt/zipvoice/a1007/b16/online_nonlinear_rna_aot.py": "69a19796e7f3c94ba8f00b2ac889ed3090875217fb3de2cf389ee648be38242e",
+              "/workspace/A_1007/src/inspark_infer/ops/tensorrt/zipvoice/a1007/b16/online_nonlinear_rna_plugin.py": "e68f65567027659a774366a0678a2205d6acfd46fb501a17743f7c8f42db24da",
+              "/workspace/A_1007/src/inspark_infer/ops/tensorrt/zipvoice/a1007/b16/online_nonlinear_rna_runtime_kernel.py": "de4b36be8848a94fe39b6de8d31184f8adf811acb5a046c771da0e7d5630ba87",
+              "/workspace/A_1007/src/inspark_infer/ops/tensorrt/zipvoice/a1007/b16/position_fm_rewrite.py": "ea119a28fbf1597c23e48a78e0d021697138ffd8d1723e1e26626ccc9c37bcbb"
+            }
+          },
+          "text": {
+            "path": "/workspace/A_1007/artifacts/zipvoice/a1007/b16/text/engine.plan",
+            "sha256": "0d3c1b75683c0a906fd8b556175be41e754c7ccb0af30fd8a5e0e26e3e4ac8a0",
+            "shape_profile": {
+              "token_ids": [
+                [
+                  16,
+                  52
+                ],
+                [
+                  16,
+                  78
+                ],
+                [
+                  16,
+                  141
+                ]
+              ],
+              "frame_positions": [
+                [
+                  1,
+                  600
+                ],
+                [
+                  1,
+                  760
+                ],
+                [
+                  1,
+                  920
+                ]
+              ]
+            },
+            "source_sha256": "3bad4c09c013a1fe2d4a450f157d841a39adbc8ee6030e90fe28baa9f5cdc39f",
+            "plugin_sources": {}
+          },
+          "unique": {
+            "path": "/workspace/A_1007/artifacts/zipvoice/a1007/b1/text/engine.plan",
+            "sha256": "3d9d122087fe1f483b125b3e437e5a6b432835d5236cb9deb4bd0b5f1a2ecbff",
+            "shape_profile": {
+              "token_ids": [
+                [
+                  1,
+                  52
+                ],
+                [
+                  1,
+                  78
+                ],
+                [
+                  1,
+                  141
+                ]
+              ],
+              "frame_positions": [
+                [
+                  1,
+                  600
+                ],
+                [
+                  1,
+                  760
+                ],
+                [
+                  1,
+                  920
+                ]
+              ]
+            },
+            "source_sha256": "48a629d15b7847084f6ca047a7bc55568c6430ab92a627a15eaf2d9425a7b1cd",
+            "plugin_sources": {}
+          },
+          "vocos": {
+            "path": "/workspace/A_1007/artifacts/zipvoice/a1007/b16/vocos/engine.plan",
+            "sha256": "ec244f7e646f6588d870c584f4d5ada25c87b7a39a2c52b749c96259d8f68196",
+            "shape_profile": {
+              "mel": [
+                [
+                  16,
+                  100,
+                  225
+                ],
+                [
+                  16,
+                  100,
+                  385
+                ],
+                [
+                  16,
+                  100,
+                  545
+                ]
+              ]
+            },
+            "source_sha256": "4ca5a55efd97e5f6151a36929277eb73ba1dd9ebee8372906aac820623f4e54b",
+            "plugin_sources": {}
+          }
+        },
+        "plugin_package": "inspark_infer.ops.tensorrt.zipvoice.a1007.b16",
+        "origin_mapping_source_sha256": "662687bc64f660dd50b77eafa5d98866e1eb7310129902aa1082161464009e10"
+      },
+      "evidence": {
+        "reports/sm89/zipvoice/a1007/b16/history/024-combined-migration.json": "73041151b5fb4ebe10e9cb70932a556446d807408200768fc1d83cec42aa06c2",
+        "reports/sm89/zipvoice/a1007/b16/history/002-minimal-compute.json": "1a17fc3b5e775c67735dc33bb9d2944cd0adcb7b1b0ee4ce7aa45a6d983989de",
+        "reports/sm89/zipvoice/a1007/b16/history/004-quality.json": "50d812e4f0406167f1ddc63f0eafc0ca7a6c9b5204480d04d5e6a013bd3ebb36",
+        "outputs/zipvoice-validation/b16/quality-inputs.json": "1b526962a1b94530000696e9b7d4babbeb2b2fc122f79825b1330ba86ef9ad17",
+        "outputs/zipvoice-benchmarks/b16/combined-migration/sustained760/report.json": "d9971f23725cb5287fb979179457f16213f07c2f617403b32241cf0a15411205"
+      },
+      "quality": {
+        "count": 33,
+        "cer": 0.02631578947368421,
+        "character_errors": 18,
+        "reference_characters": 684,
+        "utmos_mean": 2.3811344811410615,
+        "sim_o_mean": 0.6420488673629183
+      },
+      "primary_median_s": 0.28412107350000004,
+      "power_w": {
+        "mean": 395.87168701095464,
+        "p50": 396.246,
+        "p95": 398.841,
+        "max": 399.69
+      },
+      "migration_accepted": true,
+      "decision": {
+        "decision": "retain_tested_combination",
+        "reason": "Rejected geometry/compact-delivery replacements on target regressions or unresolved marginal result; retain source compute/base application, chunk4 gives positive matched primary and other-length results.",
+        "quality_tradeoffs_disclosed": true,
+        "other_lengths_disclosed": true
+      }
+    },
+    "32": {
+      "route": "inherited",
+      "application": "a1007_delivery",
+      "pcm_policy": {
+        "chunk": 6,
+        "workers": 4
+      },
+      "inventory": {
+        "status": "validation_inventory",
+        "physical_gpu": 1,
+        "gpu_uuid": "GPU-7dab7d6b-ac8c-7ccc-6410-916d3b7689b3",
+        "compute_capability": [
+          8,
+          9
+        ],
+        "tensorrt": "11.3.0.99",
+        "workload": {
+          "batch": 32,
+          "prompt_frames": 375,
+          "target_frames": 385,
+          "total_frames": 760,
+          "joint_tokens": 77,
+          "padded_tokens": 78,
+          "steps": 8,
+          "t_shift": 0.5,
+          "guidance": 1.0,
+          "feat_scale": 0.1
+        },
+        "engines": {
+          "fm": {
+            "path": "/workspace/A_1007/artifacts/zipvoice/a1007/b32/fm-inherited/engine.plan",
+            "sha256": "e35f636d6265eeab8916e1dea7a332413249928387b798bc73855d85c7011c54",
+            "shape_profile": {
+              "t": [
+                [
+                  32,
+                  1,
+                  1
+                ],
+                [
+                  32,
+                  1,
+                  1
+                ],
+                [
+                  32,
+                  1,
+                  1
+                ]
+              ],
+              "x": [
+                [
+                  32,
+                  600,
+                  100
+                ],
+                [
+                  32,
+                  760,
+                  100
+                ],
+                [
+                  32,
+                  920,
+                  100
+                ]
+              ],
+              "text_condition": [
+                [
+                  32,
+                  600,
+                  100
+                ],
+                [
+                  32,
+                  760,
+                  100
+                ],
+                [
+                  32,
+                  920,
+                  100
+                ]
+              ],
+              "speech_condition": [
+                [
+                  32,
+                  600,
+                  100
+                ],
+                [
+                  32,
+                  760,
+                  100
+                ],
+                [
+                  32,
+                  920,
+                  100
+                ]
+              ],
+              "padding_mask": [
+                [
+                  32,
+                  600
+                ],
+                [
+                  32,
+                  760
+                ],
+                [
+                  32,
+                  920
+                ]
+              ],
+              "guidance_scale": [
+                [
+                  32,
+                  1,
+                  1
+                ],
+                [
+                  32,
+                  1,
+                  1
+                ],
+                [
+                  32,
+                  1,
+                  1
+                ]
+              ]
+            },
+            "source_sha256": "48c9ae113a74901952b7d3d6120071983d251b9382afb3e1ea854ae2cf11da24",
+            "plugin_sources": {
+              "/workspace/A_1007/src/inspark_infer/ops/tensorrt/zipvoice/a1007/b32/__init__.py": "64cdad6df0f5c808ef1896eab16d594bf49e9704e7e24ef4d0632e820daa1fa5",
+              "/workspace/A_1007/src/inspark_infer/ops/tensorrt/zipvoice/a1007/b32/dw_int8_aot_kernel.py": "7effefd72d2367f4b66e3b57f09a6dcb5b0fb9407d22c361f8d07609d755d714",
+              "/workspace/A_1007/src/inspark_infer/ops/tensorrt/zipvoice/a1007/b32/dw_int8_full_rewrite.py": "f4484bfed38ec0338c8d7bdcfa41894b994de9d88a46d356df5f997c4c294b00",
+              "/workspace/A_1007/src/inspark_infer/ops/tensorrt/zipvoice/a1007/b32/dw_int8_plugin.py": "cfb9c2973180f53c09898de4c807d814e33a678103cdb8cc1815d93cb3162249",
+              "/workspace/A_1007/src/inspark_infer/ops/tensorrt/zipvoice/a1007/b32/dw_int8_probe_kernel.py": "6a16fe73b6300289f32269af0803e98f1cb5deb8698bb8bb350c5cd2099a09cd",
+              "/workspace/A_1007/src/inspark_infer/ops/tensorrt/zipvoice/a1007/b32/f32_tf32_rna_aot.py": "798994195ae67252c9b2af622d30c61fc0ec0338a876501f0daabb61318c0789",
+              "/workspace/A_1007/src/inspark_infer/ops/tensorrt/zipvoice/a1007/b32/f32_tf32_rna_plugin.py": "fa2f8e20a2964e37f8fa8cc05aa10575faf547fe23a556d307020629632f91fc",
+              "/workspace/A_1007/src/inspark_infer/ops/tensorrt/zipvoice/a1007/b32/f32_tf32_rna_rewrite.py": "be593958bb63987d3990390409b449485c43b70fe1f6684fd1e9ad55daae99ab",
+              "/workspace/A_1007/src/inspark_infer/ops/tensorrt/zipvoice/a1007/b32/i8_residual_aot.py": "dc2999224b07e7ff152dd8aa312a12662bdd8dc7a65db504b466d02c8f951d8a",
+              "/workspace/A_1007/src/inspark_infer/ops/tensorrt/zipvoice/a1007/b32/i8_residual_plugin.py": "19adf16014be61b3f640482a65ecf0c4d192a15332ae96b6beb5ccd481c6b7b2",
+              "/workspace/A_1007/src/inspark_infer/ops/tensorrt/zipvoice/a1007/b32/i8_residual_rewrite.py": "8339e6e2c71d819e1ae2a2ddd4987f1e9c35a405401fdd78abfef5ce42c1dc35",
+              "/workspace/A_1007/src/inspark_infer/ops/tensorrt/zipvoice/a1007/b32/i8_residual_runtime_kernel.py": "8a4c6b83499b52d4d32cd5667deb1b9c7dcb41f7d69665eda10aaf2cdc24e3aa",
+              "/workspace/A_1007/src/inspark_infer/ops/tensorrt/zipvoice/a1007/b32/int8_nonlinear_value_aot.py": "3fc7f78081b075c428e6178842ed3ff24f7ad52f640a8cdb7791a92bd9cf99de",
+              "/workspace/A_1007/src/inspark_infer/ops/tensorrt/zipvoice/a1007/b32/int8_nonlinear_value_plugin.py": "ad4fb2bb0fd8d9cd097f7fa1d92aedfa1f3f63db00e1e862c803deffb5dbd95e",
+              "/workspace/A_1007/src/inspark_infer/ops/tensorrt/zipvoice/a1007/b32/int8_nonlinear_value_rewrite.py": "d7eac5385d155aec1351c9d0ed9976f65a888db9189949b12e833c81f059e0cb",
+              "/workspace/A_1007/src/inspark_infer/ops/tensorrt/zipvoice/a1007/b32/int8_nonlinear_value_runtime_kernel.py": "3aa7f366c36826e1b77fe4aac7268344bc1f38c0f285c28d84e356dd96d9851e",
+              "/workspace/A_1007/src/inspark_infer/ops/tensorrt/zipvoice/a1007/b32/linear_f32_activation_tf32_rna_kernel.py": "6ce21c1e12138a639cb5df29b964bb6db96f0a7ef4906185fda53432517fc0eb",
+              "/workspace/A_1007/src/inspark_infer/ops/tensorrt/zipvoice/a1007/b32/normal_tf32_aot.py": "c8739bd5411b952d353ba1a978523fe3353ed97d2399799b363bb047e8cfa468",
+              "/workspace/A_1007/src/inspark_infer/ops/tensorrt/zipvoice/a1007/b32/normal_tf32_plugin.py": "93d67974c73b8b0081d452a71068733e7af7f6163f938b76844c3e32002f872e",
+              "/workspace/A_1007/src/inspark_infer/ops/tensorrt/zipvoice/a1007/b32/normal_tf32_rewrite.py": "fc36f9848b82f74e5d9c9c66e13fa92e6eaaca1646f52ea667ffdec0333aa305",
+              "/workspace/A_1007/src/inspark_infer/ops/tensorrt/zipvoice/a1007/b32/normal_tf32_runtime_kernel.py": "f6c0246ac2ae41d35714cf2492bf756e7b83f479eb4202c9abe18e9981d41780",
+              "/workspace/A_1007/src/inspark_infer/ops/tensorrt/zipvoice/a1007/b32/online_nonlinear_rna_aot.py": "69a19796e7f3c94ba8f00b2ac889ed3090875217fb3de2cf389ee648be38242e",
+              "/workspace/A_1007/src/inspark_infer/ops/tensorrt/zipvoice/a1007/b32/online_nonlinear_rna_plugin.py": "78b0ac06f12517257d44e5d8f4e24d63f46b0d8ed56d2c1fa65d042610254ffc",
+              "/workspace/A_1007/src/inspark_infer/ops/tensorrt/zipvoice/a1007/b32/online_nonlinear_rna_runtime_kernel.py": "648b6a2f1408066db59ec120ae7d14e94d18092af3f6ec269e9fe371fd80edb0",
+              "/workspace/A_1007/src/inspark_infer/ops/tensorrt/zipvoice/a1007/b32/position_fm_rewrite.py": "ea119a28fbf1597c23e48a78e0d021697138ffd8d1723e1e26626ccc9c37bcbb"
+            }
+          },
+          "text": {
+            "path": "/workspace/A_1007/artifacts/zipvoice/a1007/b32/text/engine.plan",
+            "sha256": "8165d9183e408c2d7dd16e8b10e8b36ce50cf73272b443121e4abce49f531847",
+            "shape_profile": {
+              "token_ids": [
+                [
+                  32,
+                  52
+                ],
+                [
+                  32,
+                  78
+                ],
+                [
+                  32,
+                  141
+                ]
+              ],
+              "frame_positions": [
+                [
+                  1,
+                  600
+                ],
+                [
+                  1,
+                  760
+                ],
+                [
+                  1,
+                  920
+                ]
+              ]
+            },
+            "source_sha256": "fa9f98e05d4ab4b138413f49ab561c6d156f98b1098aed59e5818b39bf5f3141",
+            "plugin_sources": {}
+          },
+          "unique": {
+            "path": "/workspace/A_1007/artifacts/zipvoice/a1007/b1/text/engine.plan",
+            "sha256": "3d9d122087fe1f483b125b3e437e5a6b432835d5236cb9deb4bd0b5f1a2ecbff",
+            "shape_profile": {
+              "token_ids": [
+                [
+                  1,
+                  52
+                ],
+                [
+                  1,
+                  78
+                ],
+                [
+                  1,
+                  141
+                ]
+              ],
+              "frame_positions": [
+                [
+                  1,
+                  600
+                ],
+                [
+                  1,
+                  760
+                ],
+                [
+                  1,
+                  920
+                ]
+              ]
+            },
+            "source_sha256": "48a629d15b7847084f6ca047a7bc55568c6430ab92a627a15eaf2d9425a7b1cd",
+            "plugin_sources": {}
+          },
+          "vocos": {
+            "path": "/workspace/A_1007/artifacts/zipvoice/a1007/b32/vocos/engine.plan",
+            "sha256": "1f91360333d483418619832d68722fbf98aa493914e254d291844543d0fc65cf",
+            "shape_profile": {
+              "mel": [
+                [
+                  32,
+                  100,
+                  225
+                ],
+                [
+                  32,
+                  100,
+                  385
+                ],
+                [
+                  32,
+                  100,
+                  545
+                ]
+              ]
+            },
+            "source_sha256": "de227fc513df3375c14426e58d734c326a2fdfbcc1092ea1e62989935af3e119",
+            "plugin_sources": {}
+          }
+        },
+        "plugin_package": "inspark_infer.ops.tensorrt.zipvoice.a1007.b32",
+        "origin_mapping_source_sha256": "662687bc64f660dd50b77eafa5d98866e1eb7310129902aa1082161464009e10"
+      },
+      "evidence": {
+        "reports/sm89/zipvoice/a1007/b32/history/024-combined-migration.json": "dfd34efdf0137a6039e3f6ff0a4ae8260e4eb99159a26f2b8f78e228924fa9fb",
+        "reports/sm89/zipvoice/a1007/b32/history/002-minimal-compute.json": "70578971538d83604c33e4464d29f539ce467fed864309393d6ed4cbec26a3dd",
+        "reports/sm89/zipvoice/a1007/b32/history/004-quality.json": "198e9729abf96826a21e922da2ca7333ae37cee725fb38110deb8180e6464572",
+        "outputs/zipvoice-validation/b32/quality-inputs.json": "8f36a9c493c7f6a28f712dab3184080a5e97be4526852420dcecea20872b8bde",
+        "outputs/zipvoice-benchmarks/b32/combined-migration/sustained760/report.json": "ec98458e2d59b5aa4f9a86a99731a22fbc06e0cb8ec9d34090d4854074886d7d"
+      },
+      "quality": {
+        "count": 33,
+        "cer": 0.02046783625730994,
+        "character_errors": 14,
+        "reference_characters": 684,
+        "utmos_mean": 2.3676030924825957,
+        "sim_o_mean": 0.6558052888422301
+      },
+      "primary_median_s": 0.6131291194999999,
+      "power_w": {
+        "mean": 396.40810849056606,
+        "p50": 396.243,
+        "p95": 398.548,
+        "max": 399.515
+      },
+      "migration_accepted": true,
+      "decision": {
+        "decision": "retain_tested_combination",
+        "reason": "Preserve own inherited compute, compact delivery and chunk6. No self-comparison gain claimed; recent same-source matched measurements rebound to current engine/runner, final boundary/mixed and sustained power checks complete.",
+        "quality_tradeoffs_disclosed": true,
+        "other_lengths_disclosed": true
+      }
+    },
+    "64": {
+      "route": "inherited",
+      "application": "a1007_delivery",
+      "pcm_policy": {
+        "chunk": 16,
+        "workers": 4
+      },
+      "inventory": {
+        "status": "validation_inventory",
+        "physical_gpu": 1,
+        "gpu_uuid": "GPU-7dab7d6b-ac8c-7ccc-6410-916d3b7689b3",
+        "compute_capability": [
+          8,
+          9
+        ],
+        "tensorrt": "11.3.0.99",
+        "workload": {
+          "batch": 64,
+          "prompt_frames": 375,
+          "target_frames": 385,
+          "total_frames": 760,
+          "joint_tokens": 77,
+          "padded_tokens": 78,
+          "steps": 8,
+          "t_shift": 0.5,
+          "guidance": 1.0,
+          "feat_scale": 0.1
+        },
+        "engines": {
+          "fm": {
+            "path": "/workspace/A_1007/artifacts/zipvoice/a1007/b64/fm-inherited/engine.plan",
+            "sha256": "c7bb42fe641748e88c68851f65d3120c84b23bf40b0c8fac2b8d66c132caf6f1",
+            "shape_profile": {
+              "t": [
+                [
+                  64,
+                  1,
+                  1
+                ],
+                [
+                  64,
+                  1,
+                  1
+                ],
+                [
+                  64,
+                  1,
+                  1
+                ]
+              ],
+              "x": [
+                [
+                  64,
+                  600,
+                  100
+                ],
+                [
+                  64,
+                  760,
+                  100
+                ],
+                [
+                  64,
+                  920,
+                  100
+                ]
+              ],
+              "text_condition": [
+                [
+                  64,
+                  600,
+                  100
+                ],
+                [
+                  64,
+                  760,
+                  100
+                ],
+                [
+                  64,
+                  920,
+                  100
+                ]
+              ],
+              "speech_condition": [
+                [
+                  64,
+                  600,
+                  100
+                ],
+                [
+                  64,
+                  760,
+                  100
+                ],
+                [
+                  64,
+                  920,
+                  100
+                ]
+              ],
+              "padding_mask": [
+                [
+                  64,
+                  600
+                ],
+                [
+                  64,
+                  760
+                ],
+                [
+                  64,
+                  920
+                ]
+              ],
+              "guidance_scale": [
+                [
+                  64,
+                  1,
+                  1
+                ],
+                [
+                  64,
+                  1,
+                  1
+                ],
+                [
+                  64,
+                  1,
+                  1
+                ]
+              ]
+            },
+            "source_sha256": "48c9ae113a74901952b7d3d6120071983d251b9382afb3e1ea854ae2cf11da24",
+            "plugin_sources": {
+              "/workspace/A_1007/src/inspark_infer/ops/tensorrt/zipvoice/a1007/b64/__init__.py": "64cdad6df0f5c808ef1896eab16d594bf49e9704e7e24ef4d0632e820daa1fa5",
+              "/workspace/A_1007/src/inspark_infer/ops/tensorrt/zipvoice/a1007/b64/dw_int8_aot_kernel.py": "7effefd72d2367f4b66e3b57f09a6dcb5b0fb9407d22c361f8d07609d755d714",
+              "/workspace/A_1007/src/inspark_infer/ops/tensorrt/zipvoice/a1007/b64/dw_int8_full_rewrite.py": "91d93af421aceb7f038f80d8d2daa20a2a6feb6ce6084c783b6f20251bf8a610",
+              "/workspace/A_1007/src/inspark_infer/ops/tensorrt/zipvoice/a1007/b64/dw_int8_plugin.py": "2ef27a785843e5918419e65120a4104bbbfdc8f10bc25fcbf5b6e9fd71014660",
+              "/workspace/A_1007/src/inspark_infer/ops/tensorrt/zipvoice/a1007/b64/dw_int8_probe_kernel.py": "6a16fe73b6300289f32269af0803e98f1cb5deb8698bb8bb350c5cd2099a09cd",
+              "/workspace/A_1007/src/inspark_infer/ops/tensorrt/zipvoice/a1007/b64/f32_tf32_rna_aot.py": "798994195ae67252c9b2af622d30c61fc0ec0338a876501f0daabb61318c0789",
+              "/workspace/A_1007/src/inspark_infer/ops/tensorrt/zipvoice/a1007/b64/f32_tf32_rna_plugin.py": "99973bebc4650b241b01806e08509f8f0b0e22e22f8b0168cc3404d097d3eda2",
+              "/workspace/A_1007/src/inspark_infer/ops/tensorrt/zipvoice/a1007/b64/f32_tf32_rna_rewrite.py": "1d905224a2ea12d9590f8c6647eb42522d3278e1d5d34bc54fbd111906cbbb25",
+              "/workspace/A_1007/src/inspark_infer/ops/tensorrt/zipvoice/a1007/b64/i8_residual_aot.py": "3547a3c41dd5fe506f049b3bc0d3fc66a87e876ad4dcd0b4a8904e6904e6048b",
+              "/workspace/A_1007/src/inspark_infer/ops/tensorrt/zipvoice/a1007/b64/i8_residual_plugin.py": "5b01ff7f1d5b5a0b7446c0f7e5718d8e6538701d4f63d0ca79932ae2ad16f536",
+              "/workspace/A_1007/src/inspark_infer/ops/tensorrt/zipvoice/a1007/b64/i8_residual_rewrite.py": "37a95c06cdcc07a07733aea1df865023dfd97713e10a40a17af5743afada8e6c",
+              "/workspace/A_1007/src/inspark_infer/ops/tensorrt/zipvoice/a1007/b64/i8_residual_runtime_kernel.py": "8a4c6b83499b52d4d32cd5667deb1b9c7dcb41f7d69665eda10aaf2cdc24e3aa",
+              "/workspace/A_1007/src/inspark_infer/ops/tensorrt/zipvoice/a1007/b64/int8_nonlinear_value_aot.py": "3fc7f78081b075c428e6178842ed3ff24f7ad52f640a8cdb7791a92bd9cf99de",
+              "/workspace/A_1007/src/inspark_infer/ops/tensorrt/zipvoice/a1007/b64/int8_nonlinear_value_plugin.py": "9e53fe6bd1c0bbbb8c7d44ff31e0fb3d641892c805df67aa91195fb3917b5a55",
+              "/workspace/A_1007/src/inspark_infer/ops/tensorrt/zipvoice/a1007/b64/int8_nonlinear_value_rewrite.py": "fcbd5fef6439787803c429871decdd15f3bda2fbc860667a713047afeceb38de",
+              "/workspace/A_1007/src/inspark_infer/ops/tensorrt/zipvoice/a1007/b64/int8_nonlinear_value_runtime_kernel.py": "30ad7ac418c52c8485d6fb244e186f9d0ff0743157725107b9bdb28a193a3e90",
+              "/workspace/A_1007/src/inspark_infer/ops/tensorrt/zipvoice/a1007/b64/linear_f32_activation_tf32_rna_kernel.py": "6ce21c1e12138a639cb5df29b964bb6db96f0a7ef4906185fda53432517fc0eb",
+              "/workspace/A_1007/src/inspark_infer/ops/tensorrt/zipvoice/a1007/b64/online_branch_stats_runtime_kernel.py": "14c58fe1847a2d1c49b2fd216a7bde0b7595e4171844a0ee2f073604883dd54c",
+              "/workspace/A_1007/src/inspark_infer/ops/tensorrt/zipvoice/a1007/b64/online_branch_wide_aot.py": "56daa6dfa9c99159f147bcf115d9695f64c77e92d009f879b1c1b45a9d082def",
+              "/workspace/A_1007/src/inspark_infer/ops/tensorrt/zipvoice/a1007/b64/online_branch_wide_plugin.py": "fd72d46c12d64d3ac14ab07a30992227a64b58c82601467c8a4d5163be58fdf9",
+              "/workspace/A_1007/src/inspark_infer/ops/tensorrt/zipvoice/a1007/b64/online_nlwide_rewrite.py": "4b3cf0b713d33482fd30af1d8167b602f42d5bb5b52848e2d6b7ae00007d34dd",
+              "/workspace/A_1007/src/inspark_infer/ops/tensorrt/zipvoice/a1007/b64/online_nonlinear_rna_aot.py": "69a19796e7f3c94ba8f00b2ac889ed3090875217fb3de2cf389ee648be38242e",
+              "/workspace/A_1007/src/inspark_infer/ops/tensorrt/zipvoice/a1007/b64/online_nonlinear_rna_plugin.py": "c64313d569139a023656d0380806a67633b41863e9d8d5388b1c0bfc78b1ec65",
+              "/workspace/A_1007/src/inspark_infer/ops/tensorrt/zipvoice/a1007/b64/online_nonlinear_rna_runtime_kernel.py": "a58c7a9c513f55dde846493080e0edbae5c2d021d41e0a4e522ad1b4029402a8",
+              "/workspace/A_1007/src/inspark_infer/ops/tensorrt/zipvoice/a1007/b64/online_single_branch_aot.py": "7d3f41fc5fff4c23338fdda6afdd8dcec7ae2a88d212c350cd9952102b75a8c2",
+              "/workspace/A_1007/src/inspark_infer/ops/tensorrt/zipvoice/a1007/b64/online_single_branch_plugin.py": "4e33ecb232bd582d8cb676c69e6141f7d5df27a4c301dad12f50a0d875ea36f6",
+              "/workspace/A_1007/src/inspark_infer/ops/tensorrt/zipvoice/a1007/b64/online_single_branch_runtime_kernel.py": "eb81bd50bf770a205ee45afd22baaefb9deb7020918bdd3629113c508075b9f3",
+              "/workspace/A_1007/src/inspark_infer/ops/tensorrt/zipvoice/a1007/b64/position_fm_rewrite.py": "544832f0b75e58c2efbd43737888bf35aced9d514b01eb26195c29b49c8e2d2b",
+              "/workspace/A_1007/src/inspark_infer/ops/tensorrt/zipvoice/a1007/b64/position_softmax_f32_kernel.py": "2f94c112c2cbd79adbfca99cbac5bc589162710e4626e42841dd2e26892ae101",
+              "/workspace/A_1007/src/inspark_infer/ops/tensorrt/zipvoice/a1007/b64/position_softmax_f32_plugin.py": "358587abee0f2341a49a767e7d4492d4b222f8edccd6d4594d0b989fc2532e20"
+            }
+          },
+          "text": {
+            "path": "/workspace/A_1007/artifacts/zipvoice/a1007/b64/text/engine.plan",
+            "sha256": "ad9f040eb0144d28e0cafb1ca8b657507f0cdfede016e7019346ebb68f11c303",
+            "shape_profile": {
+              "token_ids": [
+                [
+                  64,
+                  52
+                ],
+                [
+                  64,
+                  78
+                ],
+                [
+                  64,
+                  141
+                ]
+              ],
+              "frame_positions": [
+                [
+                  1,
+                  600
+                ],
+                [
+                  1,
+                  760
+                ],
+                [
+                  1,
+                  920
+                ]
+              ]
+            },
+            "source_sha256": "9cfb5933e021270ccf1a68e7e9c15db69ba26c114ad24745f79e0f88eb6df76d",
+            "plugin_sources": {}
+          },
+          "unique": {
+            "path": "/workspace/A_1007/artifacts/zipvoice/a1007/b1/text/engine.plan",
+            "sha256": "3d9d122087fe1f483b125b3e437e5a6b432835d5236cb9deb4bd0b5f1a2ecbff",
+            "shape_profile": {
+              "token_ids": [
+                [
+                  1,
+                  52
+                ],
+                [
+                  1,
+                  78
+                ],
+                [
+                  1,
+                  141
+                ]
+              ],
+              "frame_positions": [
+                [
+                  1,
+                  600
+                ],
+                [
+                  1,
+                  760
+                ],
+                [
+                  1,
+                  920
+                ]
+              ]
+            },
+            "source_sha256": "48a629d15b7847084f6ca047a7bc55568c6430ab92a627a15eaf2d9425a7b1cd",
+            "plugin_sources": {}
+          },
+          "vocos": {
+            "path": "/workspace/A_1007/artifacts/zipvoice/a1007/b64/vocos/engine.plan",
+            "sha256": "d3cc00e05fc8adf5ba8fda1be23883e83482156dbe017ac04fcb89ce6ea61055",
+            "shape_profile": {
+              "mel": [
+                [
+                  64,
+                  100,
+                  225
+                ],
+                [
+                  64,
+                  100,
+                  385
+                ],
+                [
+                  64,
+                  100,
+                  545
+                ]
+              ]
+            },
+            "source_sha256": "8650ed0cdf180977d0ab389bdefb54fa7986f0d4354d12424bf9434196707b3a",
+            "plugin_sources": {}
+          }
+        },
+        "plugin_package": "inspark_infer.ops.tensorrt.zipvoice.a1007.b64",
+        "origin_mapping_source_sha256": "dbcac66af26a5779aa144c355392ffa07b01916e8fae6687a9a5a17e85f5a395"
+      },
+      "evidence": {
+        "reports/sm89/zipvoice/a1007/b64/history/024-combined-migration.json": "378a7b88983121c51ead08908dc948b75dade4341097074e56a2fe327604b732",
+        "reports/sm89/zipvoice/a1007/b64/history/002-minimal-compute.json": "c6d19f7b123c0447041f052d284d23206bb4f567c93118f4552963f4582ac489",
+        "reports/sm89/zipvoice/a1007/b64/history/004-quality.json": "cb63e10957165632b7a7eb54bc02d7f23aacff1112113cf4bf6bd25d0e84dfc6",
+        "outputs/zipvoice-validation/b64/quality-inputs.json": "eed5afdedc6f09b0fdedc2f3ceee1233c54c2b3e530e10261b857859067d9bec",
+        "outputs/zipvoice-benchmarks/b64/combined-migration/sustained760/report.json": "2af51103a1c95a2602ce8fb358b34227402c146df4dc9ff4eacc6d75088b4d63"
+      },
+      "quality": {
+        "count": 33,
+        "cer": 0.02046783625730994,
+        "character_errors": 14,
+        "reference_characters": 684,
+        "utmos_mean": 2.3162949590971977,
+        "sim_o_mean": 0.6573957186756711
+      },
+      "primary_median_s": 1.347565682,
+      "power_w": {
+        "mean": 395.7339171875,
+        "p50": 395.696,
+        "p95": 400.02,
+        "max": 400.566
+      },
+      "migration_accepted": true,
+      "decision": {
+        "decision": "retain_tested_combination",
+        "reason": "Preserve original IEEE normal-attention compute and chunk16; inherited compact-delivery mechanism gives small positive complete-application gain at all three lengths. No new math or recalibration introduced.",
+        "quality_tradeoffs_disclosed": true,
+        "other_lengths_disclosed": true
+      }
+    }
+  },
+  "missing": [],
+  "selection_sha256": "433bcdb4772bfae264f2290b0ef38872cf48208b20436e7dd042cd341eac3276",
+  "review_sha256": "aadd688d30a37cbfe8dbcdd9c35bf674b88eab1d27505e8a7845c8a01564318f"
+}

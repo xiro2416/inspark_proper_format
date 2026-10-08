@@ -1,0 +1,189 @@
+{
+  "status": "pcm_selection_review_complete_delivery_pending",
+  "candidate_chunks": {
+    "1": 16,
+    "2": 16,
+    "4": 1,
+    "8": 1,
+    "16": 4,
+    "32": 6,
+    "64": 16
+  },
+  "batches": {
+    "1": {
+      "status": "not_applicable",
+      "route": "native",
+      "candidate_chunk": 16,
+      "shapes": {},
+      "decision": "Same work partition for all positive chunk sizes; keep source"
+    },
+    "2": {
+      "status": "not_applicable",
+      "route": "geo3",
+      "candidate_chunk": 16,
+      "shapes": {},
+      "decision": "Same work partition for all positive chunk sizes; keep source"
+    },
+    "4": {
+      "status": "matched_scheduling_measurements_complete_review_pending",
+      "route": "geo1",
+      "candidate_chunk": 1,
+      "shapes": {
+        "primary760": {
+          "frames": 760,
+          "source_chunk": 16,
+          "source_ms": 86.43688850000001,
+          "candidate_ms": 84.93465,
+          "gain_percent": 1.7379599451916905,
+          "selected_wav_exact": true
+        },
+        "short": {
+          "frames": 608,
+          "source_chunk": 16,
+          "source_ms": 75.736629,
+          "candidate_ms": 76.25396,
+          "gain_percent": -0.6830657857771961,
+          "selected_wav_exact": true
+        },
+        "long": {
+          "frames": 918,
+          "source_chunk": 16,
+          "source_ms": 104.8872245,
+          "candidate_ms": 103.34935850000001,
+          "gain_percent": 1.4662090710580284,
+          "selected_wav_exact": true
+        }
+      },
+      "decision": "Candidate for combined application confirmation; no invented frame cutoff or universal improvement claim"
+    },
+    "8": {
+      "status": "matched_scheduling_measurements_complete_review_pending",
+      "route": "inherited",
+      "candidate_chunk": 1,
+      "shapes": {
+        "primary760": {
+          "frames": 760,
+          "source_chunk": 16,
+          "source_ms": 152.1271355,
+          "candidate_ms": 148.78763550000002,
+          "gain_percent": 2.1952033665946433,
+          "selected_wav_exact": true
+        },
+        "short": {
+          "frames": 608,
+          "source_chunk": 16,
+          "source_ms": 128.45168950000001,
+          "candidate_ms": 128.729931,
+          "gain_percent": -0.21661178695510303,
+          "selected_wav_exact": true
+        },
+        "long": {
+          "frames": 918,
+          "source_chunk": 16,
+          "source_ms": 190.789756,
+          "candidate_ms": 186.56336899999997,
+          "gain_percent": 2.2152064600365784,
+          "selected_wav_exact": true
+        }
+      },
+      "decision": "Candidate for combined application confirmation; no invented frame cutoff or universal improvement claim"
+    },
+    "16": {
+      "status": "matched_scheduling_measurements_complete_review_pending",
+      "route": "inherited",
+      "candidate_chunk": 4,
+      "shapes": {
+        "primary760": {
+          "frames": 760,
+          "source_chunk": 16,
+          "source_ms": 288.3925785,
+          "candidate_ms": 284.95169749999997,
+          "gain_percent": 1.193123976316196,
+          "selected_wav_exact": true
+        },
+        "short": {
+          "frames": 608,
+          "source_chunk": 16,
+          "source_ms": 237.34164199999998,
+          "candidate_ms": 235.20465000000002,
+          "gain_percent": 0.9003864564145792,
+          "selected_wav_exact": true
+        },
+        "long": {
+          "frames": 918,
+          "source_chunk": 16,
+          "source_ms": 379.955021,
+          "candidate_ms": 371.97143200000005,
+          "gain_percent": 2.101193183074151,
+          "selected_wav_exact": true
+        }
+      },
+      "decision": "Candidate for combined application confirmation; no invented frame cutoff or universal improvement claim"
+    },
+    "32": {
+      "status": "matched_scheduling_measurements_complete_review_pending",
+      "route": "inherited",
+      "candidate_chunk": 6,
+      "shapes": {
+        "primary760": {
+          "frames": 760,
+          "source_chunk": 6,
+          "source_ms": 614.1595964999999,
+          "candidate_ms": 614.1595964999999,
+          "gain_percent": 0.0,
+          "selected_wav_exact": true
+        },
+        "short": {
+          "frames": 608,
+          "source_chunk": 6,
+          "source_ms": 479.272721,
+          "candidate_ms": 479.272721,
+          "gain_percent": 0.0,
+          "selected_wav_exact": true
+        },
+        "long": {
+          "frames": 918,
+          "source_chunk": 6,
+          "source_ms": 802.383149,
+          "candidate_ms": 802.383149,
+          "gain_percent": 0.0,
+          "selected_wav_exact": true
+        }
+      },
+      "decision": "Keep source chunk; alternatives do not establish primary760 improvement"
+    },
+    "64": {
+      "status": "matched_scheduling_measurements_complete_review_pending",
+      "route": "inherited",
+      "candidate_chunk": 16,
+      "shapes": {
+        "primary760": {
+          "frames": 760,
+          "source_chunk": 16,
+          "source_ms": 1353.481165,
+          "candidate_ms": 1353.481165,
+          "gain_percent": 0.0,
+          "selected_wav_exact": true
+        },
+        "short": {
+          "frames": 608,
+          "source_chunk": 16,
+          "source_ms": 1053.74122,
+          "candidate_ms": 1053.74122,
+          "gain_percent": 0.0,
+          "selected_wav_exact": true
+        },
+        "long": {
+          "frames": 918,
+          "source_chunk": 16,
+          "source_ms": 1727.754362,
+          "candidate_ms": 1727.754362,
+          "gain_percent": 0.0,
+          "selected_wav_exact": true
+        }
+      },
+      "decision": "Keep source chunk; alternatives do not establish primary760 improvement"
+    }
+  },
+  "criterion": "Main760 median and source retention when gains are unresolved; other shapes separately disclosed; combined application confirmation required"
+}

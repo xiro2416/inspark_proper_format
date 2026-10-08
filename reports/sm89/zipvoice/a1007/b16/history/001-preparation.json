@@ -1,0 +1,412 @@
+{
+  "batch": 16,
+  "source_batch": 16,
+  "plugins": {
+    "dw_int8_aot_kernel": {
+      "template_sha256": "ef5d126fce45738da938b05cdcf0f44d9bc0c18f352d867b8ed863c9c379a8b1",
+      "generated_sha256": "ef5d126fce45738da938b05cdcf0f44d9bc0c18f352d867b8ed863c9c379a8b1",
+      "batch_roles": []
+    },
+    "dw_int8_full_rewrite": {
+      "template_sha256": "eaf1f010d0302717e048b5a6eefbfc5fb31dd90081a986f66c769d4a4ab05d2b",
+      "generated_sha256": "eaf1f010d0302717e048b5a6eefbfc5fb31dd90081a986f66c769d4a4ab05d2b",
+      "batch_roles": []
+    },
+    "dw_int8_plugin": {
+      "template_sha256": "b520d6a7544b6608cd869264898b89f0112d2e34801221a849cc79c5002baa65",
+      "generated_sha256": "b520d6a7544b6608cd869264898b89f0112d2e34801221a849cc79c5002baa65",
+      "batch_roles": []
+    },
+    "dw_int8_probe_kernel": {
+      "template_sha256": "92e833e5497c52ec5dbdd5734abe73988d2e5cc70a60f755907c1bf1523981fc",
+      "generated_sha256": "92e833e5497c52ec5dbdd5734abe73988d2e5cc70a60f755907c1bf1523981fc",
+      "batch_roles": []
+    },
+    "f32_tf32_rna_aot": {
+      "template_sha256": "4c48491445ad90cc3ed11cdf2a8f6d28528c787bdf40b51d7f20417fd4b7aa1b",
+      "generated_sha256": "4c48491445ad90cc3ed11cdf2a8f6d28528c787bdf40b51d7f20417fd4b7aa1b",
+      "batch_roles": []
+    },
+    "f32_tf32_rna_plugin": {
+      "template_sha256": "c3cf54b0f290a2107ea99a15230d0952c64a5b53c93a763f183f092c25553afe",
+      "generated_sha256": "c3cf54b0f290a2107ea99a15230d0952c64a5b53c93a763f183f092c25553afe",
+      "batch_roles": []
+    },
+    "f32_tf32_rna_rewrite": {
+      "template_sha256": "0dd52d47495989641cf99c326a292a1655e77236481a5f0d1066e8c27da22881",
+      "generated_sha256": "0dd52d47495989641cf99c326a292a1655e77236481a5f0d1066e8c27da22881",
+      "batch_roles": []
+    },
+    "i8_residual_aot": {
+      "template_sha256": "b060abc0015ad9b530c9f5c1e32c187213d8942a5205e1956ce08ccfb522b4e2",
+      "generated_sha256": "b060abc0015ad9b530c9f5c1e32c187213d8942a5205e1956ce08ccfb522b4e2",
+      "batch_roles": []
+    },
+    "i8_residual_plugin": {
+      "template_sha256": "a33f3afed7fd1684596342dfe2d20206b4e648aadfa2697b5fa8d30a4eb2e7bd",
+      "generated_sha256": "a33f3afed7fd1684596342dfe2d20206b4e648aadfa2697b5fa8d30a4eb2e7bd",
+      "batch_roles": []
+    },
+    "i8_residual_rewrite": {
+      "template_sha256": "c03ec51c23524ae1025024942e039620887dc879e3b45bff379be1116339295d",
+      "generated_sha256": "c03ec51c23524ae1025024942e039620887dc879e3b45bff379be1116339295d",
+      "batch_roles": []
+    },
+    "i8_residual_runtime_kernel": {
+      "template_sha256": "c7743ff68ed4523f55f36c37c1f940bf1d4d18e023b77022b68d95a4e0fb2702",
+      "generated_sha256": "c7743ff68ed4523f55f36c37c1f940bf1d4d18e023b77022b68d95a4e0fb2702",
+      "batch_roles": []
+    },
+    "int8_nonlinear_value_aot": {
+      "template_sha256": "9f3ff632af566726af1504c82441731028a86d74110dc7bea1f3f6b4891f593e",
+      "generated_sha256": "9f3ff632af566726af1504c82441731028a86d74110dc7bea1f3f6b4891f593e",
+      "batch_roles": []
+    },
+    "int8_nonlinear_value_plugin": {
+      "template_sha256": "c908450cc50269ca37f073f91fee1e3591d2da677ca709085c111530ccf5cd91",
+      "generated_sha256": "c908450cc50269ca37f073f91fee1e3591d2da677ca709085c111530ccf5cd91",
+      "batch_roles": []
+    },
+    "int8_nonlinear_value_rewrite": {
+      "template_sha256": "3d51ada03aabd2113e17b8ed38b0798be6f6618f72df150b8535316d3b37e09d",
+      "generated_sha256": "3d51ada03aabd2113e17b8ed38b0798be6f6618f72df150b8535316d3b37e09d",
+      "batch_roles": []
+    },
+    "int8_nonlinear_value_runtime_kernel": {
+      "template_sha256": "7728448844f271cf07619eb39263bfddfef80bc09ba66c6b69b3db370e1a7a18",
+      "generated_sha256": "7728448844f271cf07619eb39263bfddfef80bc09ba66c6b69b3db370e1a7a18",
+      "batch_roles": []
+    },
+    "linear_f32_activation_tf32_rna_kernel": {
+      "template_sha256": "bfdfeb9eee2735038bae85a432ab102c30d3752e856c73600dcab755aec7c109",
+      "generated_sha256": "bfdfeb9eee2735038bae85a432ab102c30d3752e856c73600dcab755aec7c109",
+      "batch_roles": []
+    },
+    "normal_tf32_aot": {
+      "template_sha256": "9a3be872bb5358f0617f902040f5540446d681a32250cfdf879c10236a79fd08",
+      "generated_sha256": "9a3be872bb5358f0617f902040f5540446d681a32250cfdf879c10236a79fd08",
+      "batch_roles": []
+    },
+    "normal_tf32_plugin": {
+      "template_sha256": "3fd166f023bb66a20b492de9d23a2c11a0ebc248ddd2045281bf32d5fcb25dc6",
+      "generated_sha256": "3fd166f023bb66a20b492de9d23a2c11a0ebc248ddd2045281bf32d5fcb25dc6",
+      "batch_roles": []
+    },
+    "normal_tf32_rewrite": {
+      "template_sha256": "49d69a807ba98f37320f53e30353ccd34fbc4df677106ff2e2e6966fa998ddbb",
+      "generated_sha256": "49d69a807ba98f37320f53e30353ccd34fbc4df677106ff2e2e6966fa998ddbb",
+      "batch_roles": []
+    },
+    "normal_tf32_runtime_kernel": {
+      "template_sha256": "58720d0a739caaf524c45659d5899d25b7b44bda30cab279a44c60b2687d90bf",
+      "generated_sha256": "58720d0a739caaf524c45659d5899d25b7b44bda30cab279a44c60b2687d90bf",
+      "batch_roles": []
+    },
+    "online_nonlinear_rna_aot": {
+      "template_sha256": "bace1dffed969bbe710508215e741df5ee94f601864974269270c4eabdc215ad",
+      "generated_sha256": "bace1dffed969bbe710508215e741df5ee94f601864974269270c4eabdc215ad",
+      "batch_roles": []
+    },
+    "online_nonlinear_rna_plugin": {
+      "template_sha256": "6a11ab5e18dbd1baab895dcad5f98deb4b6c147d703293717d55dcbae456e57f",
+      "generated_sha256": "0bdc13d486a6e3f82de58225595356b33ded954f1bb28b25a9b6a8e6a60b5cca",
+      "batch_roles": []
+    },
+    "online_nonlinear_rna_runtime_kernel": {
+      "template_sha256": "8acef29eb419aee62f54229e5f77b9c7afe435336f59c78848b405ca11bb34f3",
+      "generated_sha256": "8acef29eb419aee62f54229e5f77b9c7afe435336f59c78848b405ca11bb34f3",
+      "batch_roles": []
+    },
+    "position_fm_rewrite": {
+      "template_sha256": "662687bc64f660dd50b77eafa5d98866e1eb7310129902aa1082161464009e10",
+      "generated_sha256": "662687bc64f660dd50b77eafa5d98866e1eb7310129902aa1082161464009e10",
+      "batch_roles": []
+    }
+  },
+  "graphs": {
+    "fm-native": {
+      "source_sha256": "9436312f590cb6496eedce4ea01982b1ab5783e64569983ace2156d0a994ef17",
+      "target_sha256": "9436312f590cb6496eedce4ea01982b1ab5783e64569983ace2156d0a994ef17",
+      "batch_io_changes": [],
+      "inverse_protobuf_exact": true,
+      "profile": {
+        "t": {
+          "min": [
+            16,
+            1,
+            1
+          ],
+          "opt": [
+            16,
+            1,
+            1
+          ],
+          "max": [
+            16,
+            1,
+            1
+          ]
+        },
+        "x": {
+          "min": [
+            16,
+            600,
+            100
+          ],
+          "opt": [
+            16,
+            760,
+            100
+          ],
+          "max": [
+            16,
+            920,
+            100
+          ]
+        },
+        "text_condition": {
+          "min": [
+            16,
+            600,
+            100
+          ],
+          "opt": [
+            16,
+            760,
+            100
+          ],
+          "max": [
+            16,
+            920,
+            100
+          ]
+        },
+        "speech_condition": {
+          "min": [
+            16,
+            600,
+            100
+          ],
+          "opt": [
+            16,
+            760,
+            100
+          ],
+          "max": [
+            16,
+            920,
+            100
+          ]
+        },
+        "padding_mask": {
+          "min": [
+            16,
+            600
+          ],
+          "opt": [
+            16,
+            760
+          ],
+          "max": [
+            16,
+            920
+          ]
+        },
+        "guidance_scale": {
+          "min": [
+            16,
+            1,
+            1
+          ],
+          "opt": [
+            16,
+            1,
+            1
+          ],
+          "max": [
+            16,
+            1,
+            1
+          ]
+        }
+      }
+    },
+    "fm-inherited": {
+      "source_sha256": "48c9ae113a74901952b7d3d6120071983d251b9382afb3e1ea854ae2cf11da24",
+      "target_sha256": "48c9ae113a74901952b7d3d6120071983d251b9382afb3e1ea854ae2cf11da24",
+      "batch_io_changes": [],
+      "inverse_protobuf_exact": true,
+      "profile": {
+        "t": {
+          "min": [
+            16,
+            1,
+            1
+          ],
+          "opt": [
+            16,
+            1,
+            1
+          ],
+          "max": [
+            16,
+            1,
+            1
+          ]
+        },
+        "x": {
+          "min": [
+            16,
+            600,
+            100
+          ],
+          "opt": [
+            16,
+            760,
+            100
+          ],
+          "max": [
+            16,
+            920,
+            100
+          ]
+        },
+        "text_condition": {
+          "min": [
+            16,
+            600,
+            100
+          ],
+          "opt": [
+            16,
+            760,
+            100
+          ],
+          "max": [
+            16,
+            920,
+            100
+          ]
+        },
+        "speech_condition": {
+          "min": [
+            16,
+            600,
+            100
+          ],
+          "opt": [
+            16,
+            760,
+            100
+          ],
+          "max": [
+            16,
+            920,
+            100
+          ]
+        },
+        "padding_mask": {
+          "min": [
+            16,
+            600
+          ],
+          "opt": [
+            16,
+            760
+          ],
+          "max": [
+            16,
+            920
+          ]
+        },
+        "guidance_scale": {
+          "min": [
+            16,
+            1,
+            1
+          ],
+          "opt": [
+            16,
+            1,
+            1
+          ],
+          "max": [
+            16,
+            1,
+            1
+          ]
+        }
+      }
+    },
+    "text": {
+      "source_sha256": "9cfb5933e021270ccf1a68e7e9c15db69ba26c114ad24745f79e0f88eb6df76d",
+      "target_sha256": "3bad4c09c013a1fe2d4a450f157d841a39adbc8ee6030e90fe28baa9f5cdc39f",
+      "batch_io_changes": [
+        "token_ids",
+        "token_lens",
+        "features_lens",
+        "text_condition",
+        "padding_mask"
+      ],
+      "inverse_protobuf_exact": true,
+      "profile": {
+        "token_ids": {
+          "min": [
+            16,
+            52
+          ],
+          "opt": [
+            16,
+            78
+          ],
+          "max": [
+            16,
+            141
+          ]
+        },
+        "frame_positions": {
+          "min": [
+            1,
+            600
+          ],
+          "opt": [
+            1,
+            760
+          ],
+          "max": [
+            1,
+            920
+          ]
+        }
+      }
+    },
+    "vocos": {
+      "source_sha256": "8650ed0cdf180977d0ab389bdefb54fa7986f0d4354d12424bf9434196707b3a",
+      "target_sha256": "4ca5a55efd97e5f6151a36929277eb73ba1dd9ebee8372906aac820623f4e54b",
+      "batch_io_changes": [
+        "mel",
+        "spectral_coefficients"
+      ],
+      "inverse_protobuf_exact": true,
+      "profile": {
+        "mel": {
+          "min": [
+            16,
+            100,
+            225
+          ],
+          "opt": [
+            16,
+            100,
+            385
+          ],
+          "max": [
+            16,
+            100,
+            545
+          ]
+        }
+      }
+    }
+  }
+}

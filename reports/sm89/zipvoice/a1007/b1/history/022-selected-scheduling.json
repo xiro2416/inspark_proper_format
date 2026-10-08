@@ -1,0 +1,25 @@
+{
+  "batch": 1,
+  "source_policy": {
+    "chunk": 16,
+    "workers": 4
+  },
+  "status": "not_applicable",
+  "shapes": {},
+  "numerical_contract": "Selected WAV bytes exact across scheduling choices",
+  "compute_evidence": {
+    "route": "native",
+    "engine_sha256": "ca4170e7035bcdb54671dde143aabf15a22481e17524848b4d707c7663413c0d",
+    "plugin_package": "inspark_infer.ops.tensorrt.zipvoice.a1007.b1",
+    "performance_evidence_sha256": "4b26ec6755f849342f9abf4dc31223ad38e477a26bbaf7ebdf914da9c67a4d90",
+    "quality_evidence_sha256": "6f9195846050c4c38783bce0f414dfe7652b32ed16dc1208c07a60a2c5fd368d"
+  },
+  "preflight": {
+    "memory_mib": 4108.0,
+    "gpu_util_percent": 0.0,
+    "processes": "1820496, 4082",
+    "power_cap_w": 400.0,
+    "scope": "Known idle allocation retained; not exclusive device ownership"
+  },
+  "reason": "After original first PCM there are zero or one remaining rows; all positive chunk sizes execute identical work partition."
+}

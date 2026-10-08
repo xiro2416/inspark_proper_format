@@ -1,0 +1,580 @@
+{
+  "batch": 8,
+  "source_batch": 16,
+  "plugins": {
+    "dw_int8_aot_kernel": {
+      "template_sha256": "ef5d126fce45738da938b05cdcf0f44d9bc0c18f352d867b8ed863c9c379a8b1",
+      "generated_sha256": "ef5d126fce45738da938b05cdcf0f44d9bc0c18f352d867b8ed863c9c379a8b1",
+      "batch_roles": []
+    },
+    "dw_int8_full_rewrite": {
+      "template_sha256": "eaf1f010d0302717e048b5a6eefbfc5fb31dd90081a986f66c769d4a4ab05d2b",
+      "generated_sha256": "f0ba523e3253346fb46ab7b5bd2768997c31ae1db9d692d73ddc71266653d0a3",
+      "batch_roles": [
+        {
+          "role": "(-1,16)",
+          "replacement": "(-1,8)",
+          "count": 1
+        }
+      ]
+    },
+    "dw_int8_plugin": {
+      "template_sha256": "b520d6a7544b6608cd869264898b89f0112d2e34801221a849cc79c5002baa65",
+      "generated_sha256": "6a11a221b4b15c8ae88b99780664c39ca82ee43c42831fa306ff8e1bc53944e0",
+      "batch_roles": [
+        {
+          "role": "grid_y=16*512",
+          "replacement": "grid_y=8*512",
+          "count": 1
+        }
+      ]
+    },
+    "dw_int8_probe_kernel": {
+      "template_sha256": "92e833e5497c52ec5dbdd5734abe73988d2e5cc70a60f755907c1bf1523981fc",
+      "generated_sha256": "92e833e5497c52ec5dbdd5734abe73988d2e5cc70a60f755907c1bf1523981fc",
+      "batch_roles": []
+    },
+    "f32_tf32_rna_aot": {
+      "template_sha256": "4c48491445ad90cc3ed11cdf2a8f6d28528c787bdf40b51d7f20417fd4b7aa1b",
+      "generated_sha256": "4c48491445ad90cc3ed11cdf2a8f6d28528c787bdf40b51d7f20417fd4b7aa1b",
+      "batch_roles": []
+    },
+    "f32_tf32_rna_plugin": {
+      "template_sha256": "c3cf54b0f290a2107ea99a15230d0952c64a5b53c93a763f183f092c25553afe",
+      "generated_sha256": "debfb77111b6ea5154c7b5295e5f55143da12fc3f11625208ab481460a8ecd72",
+      "batch_roles": []
+    },
+    "f32_tf32_rna_rewrite": {
+      "template_sha256": "0dd52d47495989641cf99c326a292a1655e77236481a5f0d1066e8c27da22881",
+      "generated_sha256": "85ece0422b6a843f9a2991c875be70351797a786fe563e7e99b9f06fd1b2dcee",
+      "batch_roles": []
+    },
+    "i8_residual_aot": {
+      "template_sha256": "b060abc0015ad9b530c9f5c1e32c187213d8942a5205e1956ce08ccfb522b4e2",
+      "generated_sha256": "4030dd47ee30e05dd23c64fce8da64992e68e8e7dfc8c89b2cebee6c18c8c229",
+      "batch_roles": [
+        {
+          "role": "T*16",
+          "replacement": "T*8",
+          "count": 2
+        }
+      ]
+    },
+    "i8_residual_plugin": {
+      "template_sha256": "a33f3afed7fd1684596342dfe2d20206b4e648aadfa2697b5fa8d30a4eb2e7bd",
+      "generated_sha256": "4428eca72d6f1b80ba03658048f0e3a2a6b86c64bfccccc6f42b776e63901bc1",
+      "batch_roles": [
+        {
+          "role": "(16,48)",
+          "replacement": "(8,48)",
+          "count": 1
+        },
+        {
+          "role": "(16,512)",
+          "replacement": "(8,512)",
+          "count": 1
+        },
+        {
+          "role": "shape[1]=16",
+          "replacement": "shape[1]=8",
+          "count": 1
+        },
+        {
+          "role": "q.shape_expr[0]*16",
+          "replacement": "q.shape_expr[0]*8",
+          "count": 1
+        }
+      ]
+    },
+    "i8_residual_rewrite": {
+      "template_sha256": "c03ec51c23524ae1025024942e039620887dc879e3b45bff379be1116339295d",
+      "generated_sha256": "3a5e5f3fe6d86c70af130e88bec2b00747060932b898683d0855ed39da543fb8",
+      "batch_roles": [
+        {
+          "role": "(-1,16)",
+          "replacement": "(-1,8)",
+          "count": 2
+        },
+        {
+          "role": "(-1,16,48)",
+          "replacement": "(-1,8,48)",
+          "count": 1
+        },
+        {
+          "role": "(-1,16,512)",
+          "replacement": "(-1,8,512)",
+          "count": 1
+        },
+        {
+          "role": "[-1,16,48]",
+          "replacement": "[-1,8,48]",
+          "count": 1
+        },
+        {
+          "role": "[-1,16,512]",
+          "replacement": "[-1,8,512]",
+          "count": 1
+        },
+        {
+          "role": "B16_view",
+          "replacement": "B8_view",
+          "count": 2
+        }
+      ]
+    },
+    "i8_residual_runtime_kernel": {
+      "template_sha256": "c7743ff68ed4523f55f36c37c1f940bf1d4d18e023b77022b68d95a4e0fb2702",
+      "generated_sha256": "c7743ff68ed4523f55f36c37c1f940bf1d4d18e023b77022b68d95a4e0fb2702",
+      "batch_roles": []
+    },
+    "int8_nonlinear_value_aot": {
+      "template_sha256": "9f3ff632af566726af1504c82441731028a86d74110dc7bea1f3f6b4891f593e",
+      "generated_sha256": "9f3ff632af566726af1504c82441731028a86d74110dc7bea1f3f6b4891f593e",
+      "batch_roles": []
+    },
+    "int8_nonlinear_value_plugin": {
+      "template_sha256": "c908450cc50269ca37f073f91fee1e3591d2da677ca709085c111530ccf5cd91",
+      "generated_sha256": "524421aa46480b25aa5a081dba720331e485a6b79ac8f2af6fcd36ea075d970e",
+      "batch_roles": [
+        {
+          "role": "(16,512)",
+          "replacement": "(8,512)",
+          "count": 1
+        },
+        {
+          "role": "vd[1]=16",
+          "replacement": "vd[1]=8",
+          "count": 1
+        },
+        {
+          "role": "gd[1]=16",
+          "replacement": "gd[1]=8",
+          "count": 1
+        },
+        {
+          "role": "q.shape_expr[0]*16",
+          "replacement": "q.shape_expr[0]*8",
+          "count": 1
+        }
+      ]
+    },
+    "int8_nonlinear_value_rewrite": {
+      "template_sha256": "3d51ada03aabd2113e17b8ed38b0798be6f6618f72df150b8535316d3b37e09d",
+      "generated_sha256": "9dfd19f6836ba1c459f51157352510aa44bd632fc68779855b61560b3f7f978d",
+      "batch_roles": [
+        {
+          "role": "(-1,16)",
+          "replacement": "(-1,8)",
+          "count": 1
+        },
+        {
+          "role": "(-1,16,512)",
+          "replacement": "(-1,8,512)",
+          "count": 1
+        },
+        {
+          "role": "[-1,16,512]",
+          "replacement": "[-1,8,512]",
+          "count": 1
+        },
+        {
+          "role": "B16_view",
+          "replacement": "B8_view",
+          "count": 1
+        }
+      ]
+    },
+    "int8_nonlinear_value_runtime_kernel": {
+      "template_sha256": "7728448844f271cf07619eb39263bfddfef80bc09ba66c6b69b3db370e1a7a18",
+      "generated_sha256": "f936cb04e8fdbdc7822e7f11156440a92c1b135bd0c9e3de77474d0766409eea",
+      "batch_roles": [
+        {
+          "role": "T*16",
+          "replacement": "T*8",
+          "count": 3
+        },
+        {
+          "role": "m%16",
+          "replacement": "m%8",
+          "count": 1
+        },
+        {
+          "role": "m//16",
+          "replacement": "m//8",
+          "count": 1
+        }
+      ]
+    },
+    "linear_f32_activation_tf32_rna_kernel": {
+      "template_sha256": "bfdfeb9eee2735038bae85a432ab102c30d3752e856c73600dcab755aec7c109",
+      "generated_sha256": "bfdfeb9eee2735038bae85a432ab102c30d3752e856c73600dcab755aec7c109",
+      "batch_roles": []
+    },
+    "normal_tf32_aot": {
+      "template_sha256": "9a3be872bb5358f0617f902040f5540446d681a32250cfdf879c10236a79fd08",
+      "generated_sha256": "9a3be872bb5358f0617f902040f5540446d681a32250cfdf879c10236a79fd08",
+      "batch_roles": []
+    },
+    "normal_tf32_plugin": {
+      "template_sha256": "3fd166f023bb66a20b492de9d23a2c11a0ebc248ddd2045281bf32d5fcb25dc6",
+      "generated_sha256": "8b527b986383c76dac669060b6140031a2561648a336477afd4f7c2b07016b08",
+      "batch_roles": [
+        {
+          "role": "grid_y=16",
+          "replacement": "grid_y=8",
+          "count": 1
+        }
+      ]
+    },
+    "normal_tf32_rewrite": {
+      "template_sha256": "49d69a807ba98f37320f53e30353ccd34fbc4df677106ff2e2e6966fa998ddbb",
+      "generated_sha256": "de14273fd35731fb50a71c2883882a73810f3bce88024563b980bd9d96307abe",
+      "batch_roles": [
+        {
+          "role": "(4,16,",
+          "replacement": "(4,8,",
+          "count": 4
+        },
+        {
+          "role": "(1,16,",
+          "replacement": "(1,8,",
+          "count": 1
+        },
+        {
+          "role": "(16,-1)",
+          "replacement": "(8,-1)",
+          "count": 1
+        }
+      ]
+    },
+    "normal_tf32_runtime_kernel": {
+      "template_sha256": "58720d0a739caaf524c45659d5899d25b7b44bda30cab279a44c60b2687d90bf",
+      "generated_sha256": "54ad37695a30e81062ddbe1528e696d9490275c92d613e76056f7b7a751c3a23",
+      "batch_roles": [
+        {
+          "role": "h*16+b",
+          "replacement": "h*8+b",
+          "count": 12
+        }
+      ]
+    },
+    "online_nonlinear_rna_aot": {
+      "template_sha256": "bace1dffed969bbe710508215e741df5ee94f601864974269270c4eabdc215ad",
+      "generated_sha256": "bace1dffed969bbe710508215e741df5ee94f601864974269270c4eabdc215ad",
+      "batch_roles": []
+    },
+    "online_nonlinear_rna_plugin": {
+      "template_sha256": "6a11ab5e18dbd1baab895dcad5f98deb4b6c147d703293717d55dcbae456e57f",
+      "generated_sha256": "4c67690081c0ca71b771184882d0644ac665fa9ae6e0355e67265019701e60c5",
+      "batch_roles": [
+        {
+          "role": "grid_y=16",
+          "replacement": "grid_y=8",
+          "count": 1
+        }
+      ]
+    },
+    "online_nonlinear_rna_runtime_kernel": {
+      "template_sha256": "8acef29eb419aee62f54229e5f77b9c7afe435336f59c78848b405ca11bb34f3",
+      "generated_sha256": "1455cc85cad3426c688931f80f0634a1676130686f098dc3f257fc0a9ff93c97",
+      "batch_roles": [
+        {
+          "role": "h*16+b",
+          "replacement": "h*8+b",
+          "count": 8
+        }
+      ]
+    },
+    "position_fm_rewrite": {
+      "template_sha256": "662687bc64f660dd50b77eafa5d98866e1eb7310129902aa1082161464009e10",
+      "generated_sha256": "662687bc64f660dd50b77eafa5d98866e1eb7310129902aa1082161464009e10",
+      "batch_roles": []
+    }
+  },
+  "graphs": {
+    "fm-native": {
+      "source_sha256": "9436312f590cb6496eedce4ea01982b1ab5783e64569983ace2156d0a994ef17",
+      "target_sha256": "9436312f590cb6496eedce4ea01982b1ab5783e64569983ace2156d0a994ef17",
+      "batch_io_changes": [],
+      "inverse_protobuf_exact": true,
+      "profile": {
+        "t": {
+          "min": [
+            8,
+            1,
+            1
+          ],
+          "opt": [
+            8,
+            1,
+            1
+          ],
+          "max": [
+            8,
+            1,
+            1
+          ]
+        },
+        "x": {
+          "min": [
+            8,
+            600,
+            100
+          ],
+          "opt": [
+            8,
+            760,
+            100
+          ],
+          "max": [
+            8,
+            920,
+            100
+          ]
+        },
+        "text_condition": {
+          "min": [
+            8,
+            600,
+            100
+          ],
+          "opt": [
+            8,
+            760,
+            100
+          ],
+          "max": [
+            8,
+            920,
+            100
+          ]
+        },
+        "speech_condition": {
+          "min": [
+            8,
+            600,
+            100
+          ],
+          "opt": [
+            8,
+            760,
+            100
+          ],
+          "max": [
+            8,
+            920,
+            100
+          ]
+        },
+        "padding_mask": {
+          "min": [
+            8,
+            600
+          ],
+          "opt": [
+            8,
+            760
+          ],
+          "max": [
+            8,
+            920
+          ]
+        },
+        "guidance_scale": {
+          "min": [
+            8,
+            1,
+            1
+          ],
+          "opt": [
+            8,
+            1,
+            1
+          ],
+          "max": [
+            8,
+            1,
+            1
+          ]
+        }
+      }
+    },
+    "fm-inherited": {
+      "source_sha256": "48c9ae113a74901952b7d3d6120071983d251b9382afb3e1ea854ae2cf11da24",
+      "target_sha256": "48c9ae113a74901952b7d3d6120071983d251b9382afb3e1ea854ae2cf11da24",
+      "batch_io_changes": [],
+      "inverse_protobuf_exact": true,
+      "profile": {
+        "t": {
+          "min": [
+            8,
+            1,
+            1
+          ],
+          "opt": [
+            8,
+            1,
+            1
+          ],
+          "max": [
+            8,
+            1,
+            1
+          ]
+        },
+        "x": {
+          "min": [
+            8,
+            600,
+            100
+          ],
+          "opt": [
+            8,
+            760,
+            100
+          ],
+          "max": [
+            8,
+            920,
+            100
+          ]
+        },
+        "text_condition": {
+          "min": [
+            8,
+            600,
+            100
+          ],
+          "opt": [
+            8,
+            760,
+            100
+          ],
+          "max": [
+            8,
+            920,
+            100
+          ]
+        },
+        "speech_condition": {
+          "min": [
+            8,
+            600,
+            100
+          ],
+          "opt": [
+            8,
+            760,
+            100
+          ],
+          "max": [
+            8,
+            920,
+            100
+          ]
+        },
+        "padding_mask": {
+          "min": [
+            8,
+            600
+          ],
+          "opt": [
+            8,
+            760
+          ],
+          "max": [
+            8,
+            920
+          ]
+        },
+        "guidance_scale": {
+          "min": [
+            8,
+            1,
+            1
+          ],
+          "opt": [
+            8,
+            1,
+            1
+          ],
+          "max": [
+            8,
+            1,
+            1
+          ]
+        }
+      }
+    },
+    "text": {
+      "source_sha256": "9cfb5933e021270ccf1a68e7e9c15db69ba26c114ad24745f79e0f88eb6df76d",
+      "target_sha256": "cbced305fba45c016d42a4c42ea7f2b6500f9bbc363815899464b7a4563d40d9",
+      "batch_io_changes": [
+        "token_ids",
+        "token_lens",
+        "features_lens",
+        "text_condition",
+        "padding_mask"
+      ],
+      "inverse_protobuf_exact": true,
+      "profile": {
+        "token_ids": {
+          "min": [
+            8,
+            52
+          ],
+          "opt": [
+            8,
+            78
+          ],
+          "max": [
+            8,
+            141
+          ]
+        },
+        "frame_positions": {
+          "min": [
+            1,
+            600
+          ],
+          "opt": [
+            1,
+            760
+          ],
+          "max": [
+            1,
+            920
+          ]
+        }
+      }
+    },
+    "vocos": {
+      "source_sha256": "8650ed0cdf180977d0ab389bdefb54fa7986f0d4354d12424bf9434196707b3a",
+      "target_sha256": "2b0400613b5c31e8a52b1de78d40ec8ba91657b98f923d9d5425a6abb17bad26",
+      "batch_io_changes": [
+        "mel",
+        "spectral_coefficients"
+      ],
+      "inverse_protobuf_exact": true,
+      "profile": {
+        "mel": {
+          "min": [
+            8,
+            100,
+            225
+          ],
+          "opt": [
+            8,
+            100,
+            385
+          ],
+          "max": [
+            8,
+            100,
+            545
+          ]
+        }
+      }
+    }
+  }
+}

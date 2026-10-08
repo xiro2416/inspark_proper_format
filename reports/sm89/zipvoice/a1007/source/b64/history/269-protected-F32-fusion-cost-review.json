@@ -1,0 +1,131 @@
+{
+  "status": "actual_fullengine_source_boundary_cost_reviewed",
+  "rows": [
+    {
+      "module": "/fm_decoder/encoders.0/layers.0/nonlin_attention/",
+      "sum_including_any_shared_layers_ms": 1.7428480138381324,
+      "exclusive_layers_ms": 1.5165440142154694,
+      "layers": [
+        {
+          "layer": "/fm_decoder/encoders.0/layers.0/nonlin_attention/in_proj/MatMul_myl6_8",
+          "ms": 0.7632213433583578,
+          "has_other_source_nodes": false,
+          "metadata": "[ONNX Layer: /fm_decoder/encoders.0/layers.0/nonlin_attention/in_proj/MatMul]\u001f[ONNX Layer: /fm_decoder/encoders.0/layers.0/nonlin_attention/in_proj/Add]"
+        },
+        {
+          "layer": "__myl_Resh_myl6_9",
+          "ms": 0.4553386668364207,
+          "has_other_source_nodes": false,
+          "metadata": "[ONNX Layer: /fm_decoder/encoders.0/layers.0/nonlin_attention/in_proj/Add]"
+        },
+        {
+          "layer": "__myl_SlicSlicTanhMulReshTran_myl6_10",
+          "ms": 0.2979840040206909,
+          "has_other_source_nodes": false,
+          "metadata": "[ONNX Layer: /fm_decoder/encoders.0/layers.0/nonlin_attention/Slice]\u001f[ONNX Layer: /fm_decoder/encoders.0/layers.0/nonlin_attention/tanh/Tanh]\u001f[ONNX Layer: /fm_decoder/encoders.0/layers.0/nonlin_attention/Mul_3]\u001f[ONNX Layer: /fm_decoder/encoders.0/layers.0/nonlin_attention/Slice_1]\u001f[ONNX Layer: /fm_decoder/encoders.0/layers.0/nonlin_attention/Reshape_1]\u001e[ONNX Layer: /fm_decoder/encoders.0/layers.0/nonlin_attention/Transpose]"
+        },
+        {
+          "layer": "__myl_SlicTranReshMul_myl8_1",
+          "ms": 0.22630399962266287,
+          "has_other_source_nodes": true,
+          "metadata": "[ONNX Layer: /fm_decoder/encoders.0/layers.0/nonlin_attention/Transpose_1]\u001e[ONNX Layer: /fm_decoder/encoders.0/layers.0/nonlin_attention/Reshape_2]\u001f[ONNX Layer: /fm_decoder/encoders.0/layers.0/nonlin_attention/Mul_4]\u001f[ONNX Layer: /fm_decoder/encoders.0/layers.0/nonlin_attention/Slice_2]"
+        }
+      ]
+    },
+    {
+      "module": "/fm_decoder/encoders.0/layers.1/nonlin_attention/",
+      "sum_including_any_shared_layers_ms": 1.7428480088710785,
+      "exclusive_layers_ms": 1.515861342350642,
+      "layers": [
+        {
+          "layer": "/fm_decoder/encoders.0/layers.1/nonlin_attention/in_proj/MatMul_myl28_10",
+          "ms": 0.7621973355611166,
+          "has_other_source_nodes": false,
+          "metadata": "[ONNX Layer: /fm_decoder/encoders.0/layers.1/nonlin_attention/in_proj/MatMul]\u001f[ONNX Layer: /fm_decoder/encoders.0/layers.1/nonlin_attention/in_proj/Add]"
+        },
+        {
+          "layer": "__myl_Resh_myl28_11",
+          "ms": 0.45499734083811444,
+          "has_other_source_nodes": false,
+          "metadata": "[ONNX Layer: /fm_decoder/encoders.0/layers.1/nonlin_attention/in_proj/Add]"
+        },
+        {
+          "layer": "__myl_SlicSlicTanhMulReshTran_myl28_12",
+          "ms": 0.29866666595141095,
+          "has_other_source_nodes": false,
+          "metadata": "[ONNX Layer: /fm_decoder/encoders.0/layers.1/nonlin_attention/Slice]\u001f[ONNX Layer: /fm_decoder/encoders.0/layers.1/nonlin_attention/tanh/Tanh]\u001f[ONNX Layer: /fm_decoder/encoders.0/layers.1/nonlin_attention/Mul_3]\u001f[ONNX Layer: /fm_decoder/encoders.0/layers.1/nonlin_attention/Slice_1]\u001f[ONNX Layer: /fm_decoder/encoders.0/layers.1/nonlin_attention/Reshape_1]\u001e[ONNX Layer: /fm_decoder/encoders.0/layers.1/nonlin_attention/Transpose]"
+        },
+        {
+          "layer": "__myl_SlicTranReshMul_myl30_1",
+          "ms": 0.22698666652043661,
+          "has_other_source_nodes": true,
+          "metadata": "[ONNX Layer: /fm_decoder/encoders.0/layers.1/nonlin_attention/Transpose_1]\u001e[ONNX Layer: /fm_decoder/encoders.0/layers.1/nonlin_attention/Reshape_2]\u001f[ONNX Layer: /fm_decoder/encoders.0/layers.1/nonlin_attention/Mul_4]\u001f[ONNX Layer: /fm_decoder/encoders.0/layers.1/nonlin_attention/Slice_2]"
+        }
+      ]
+    },
+    {
+      "module": "/fm_decoder/encoders.1/encoder/layers.0/nonlin_attention/",
+      "sum_including_any_shared_layers_ms": 0.8537599990765254,
+      "exclusive_layers_ms": 0.7581866631905239,
+      "layers": [
+        {
+          "layer": "/fm_decoder/encoders.1/encoder/layers.0/nonlin_attention/in_proj/MatMul_myl50_12",
+          "ms": 0.40243200461069745,
+          "has_other_source_nodes": false,
+          "metadata": "[ONNX Layer: /fm_decoder/encoders.1/encoder/layers.0/nonlin_attention/in_proj/MatMul]\u001f[ONNX Layer: /fm_decoder/encoders.1/encoder/layers.0/nonlin_attention/in_proj/Add]"
+        },
+        {
+          "layer": "__myl_Resh_myl50_13",
+          "ms": 0.21947733064492544,
+          "has_other_source_nodes": false,
+          "metadata": "[ONNX Layer: /fm_decoder/encoders.1/encoder/layers.0/nonlin_attention/in_proj/Add]"
+        },
+        {
+          "layer": "__myl_SlicSlicTanhMulReshTran_myl50_14",
+          "ms": 0.1362773279349009,
+          "has_other_source_nodes": false,
+          "metadata": "[ONNX Layer: /fm_decoder/encoders.1/encoder/layers.0/nonlin_attention/Slice]\u001f[ONNX Layer: /fm_decoder/encoders.1/encoder/layers.0/nonlin_attention/tanh/Tanh]\u001f[ONNX Layer: /fm_decoder/encoders.1/encoder/layers.0/nonlin_attention/Mul_3]\u001f[ONNX Layer: /fm_decoder/encoders.1/encoder/layers.0/nonlin_attention/Slice_1]\u001f[ONNX Layer: /fm_decoder/encoders.1/encoder/layers.0/nonlin_attention/Reshape_1]\u001e[ONNX Layer: /fm_decoder/encoders.1/encoder/layers.0/nonlin_attention/Transpose]"
+        },
+        {
+          "layer": "__myl_SlicTranReshMul_myl52_1",
+          "ms": 0.09557333588600159,
+          "has_other_source_nodes": true,
+          "metadata": "[ONNX Layer: /fm_decoder/encoders.1/encoder/layers.0/nonlin_attention/Transpose_1]\u001e[ONNX Layer: /fm_decoder/encoders.1/encoder/layers.0/nonlin_attention/Reshape_2]\u001f[ONNX Layer: /fm_decoder/encoders.1/encoder/layers.0/nonlin_attention/Mul_4]\u001f[ONNX Layer: /fm_decoder/encoders.1/encoder/layers.0/nonlin_attention/Slice_2]"
+        }
+      ]
+    },
+    {
+      "module": "/fm_decoder/encoders.1/encoder/layers.1/nonlin_attention/",
+      "sum_including_any_shared_layers_ms": 0.85504000633955,
+      "exclusive_layers_ms": 0.7591253370046616,
+      "layers": [
+        {
+          "layer": "/fm_decoder/encoders.1/encoder/layers.1/nonlin_attention/in_proj/MatMul_myl72_10",
+          "ms": 0.4017493426799774,
+          "has_other_source_nodes": false,
+          "metadata": "[ONNX Layer: /fm_decoder/encoders.1/encoder/layers.1/nonlin_attention/in_proj/MatMul]\u001f[ONNX Layer: /fm_decoder/encoders.1/encoder/layers.1/nonlin_attention/in_proj/Add]"
+        },
+        {
+          "layer": "__myl_Resh_myl72_11",
+          "ms": 0.21947733064492544,
+          "has_other_source_nodes": false,
+          "metadata": "[ONNX Layer: /fm_decoder/encoders.1/encoder/layers.1/nonlin_attention/in_proj/Add]"
+        },
+        {
+          "layer": "__myl_SlicSlicTanhMulReshTran_myl72_12",
+          "ms": 0.1378986636797587,
+          "has_other_source_nodes": false,
+          "metadata": "[ONNX Layer: /fm_decoder/encoders.1/encoder/layers.1/nonlin_attention/Slice]\u001f[ONNX Layer: /fm_decoder/encoders.1/encoder/layers.1/nonlin_attention/tanh/Tanh]\u001f[ONNX Layer: /fm_decoder/encoders.1/encoder/layers.1/nonlin_attention/Mul_3]\u001f[ONNX Layer: /fm_decoder/encoders.1/encoder/layers.1/nonlin_attention/Slice_1]\u001f[ONNX Layer: /fm_decoder/encoders.1/encoder/layers.1/nonlin_attention/Reshape_1]\u001e[ONNX Layer: /fm_decoder/encoders.1/encoder/layers.1/nonlin_attention/Transpose]"
+        },
+        {
+          "layer": "__myl_SlicTranReshMul_myl74_1",
+          "ms": 0.09591466933488846,
+          "has_other_source_nodes": true,
+          "metadata": "[ONNX Layer: /fm_decoder/encoders.1/encoder/layers.1/nonlin_attention/Transpose_1]\u001e[ONNX Layer: /fm_decoder/encoders.1/encoder/layers.1/nonlin_attention/Reshape_2]\u001f[ONNX Layer: /fm_decoder/encoders.1/encoder/layers.1/nonlin_attention/Mul_4]\u001f[ONNX Layer: /fm_decoder/encoders.1/encoder/layers.1/nonlin_attention/Slice_2]"
+        }
+      ]
+    }
+  ],
+  "TF32_fragment_evidence": "259-F32-native-TF32-fusion-probe.json",
+  "scope": "Diagnostic fullB64T760 actualsource-region mapping. Sum of shared layers is upper bound, cannot assume entire cost removable or extrapolate fragment tofullE2E."
+}

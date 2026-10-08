@@ -1,0 +1,83 @@
+{
+  "status": "same_full_batch_source_comparison_complete",
+  "batch": 32,
+  "scope": "Original retained source engine and new engines at identical actual B/T/inputs; no output slicing. Diagnostic numerical evidence under approved mapping/quality criteria, not E2E.",
+  "source_path": "/workspace/zvoice_temp/optimization/int8_sm89_b32/builds/normal_tf32_fm_full/engine.plan",
+  "cases": [
+    {
+      "frames": 600,
+      "engine_sha256": {
+        "source_inherited": "a14eeb0698912a43bb5b2df4f9e9ef6b850221cbdb96244ad706a09b35bc6e93",
+        "target_inherited": "e35f636d6265eeab8916e1dea7a332413249928387b798bc73855d85c7011c54",
+        "target_native": "a2574f8148055f3d19bbd47d73595572a6cb37c9d537d34ee1e08ade627c5902"
+      },
+      "comparisons": {
+        "source_inherited_vs_target_inherited": {
+          "exact": false,
+          "relative_l2": 0.1369839608669281,
+          "max_abs": 3.6908602714538574
+        },
+        "source_inherited_vs_target_native": {
+          "exact": false,
+          "relative_l2": 0.1373039036989212,
+          "max_abs": 3.730046510696411
+        },
+        "target_native_vs_target_inherited": {
+          "exact": false,
+          "relative_l2": 0.13716550171375275,
+          "max_abs": 3.5831832885742188
+        }
+      }
+    },
+    {
+      "frames": 760,
+      "engine_sha256": {
+        "source_inherited": "a14eeb0698912a43bb5b2df4f9e9ef6b850221cbdb96244ad706a09b35bc6e93",
+        "target_inherited": "e35f636d6265eeab8916e1dea7a332413249928387b798bc73855d85c7011c54",
+        "target_native": "a2574f8148055f3d19bbd47d73595572a6cb37c9d537d34ee1e08ade627c5902"
+      },
+      "comparisons": {
+        "source_inherited_vs_target_inherited": {
+          "exact": false,
+          "relative_l2": 0.13666202127933502,
+          "max_abs": 3.203873634338379
+        },
+        "source_inherited_vs_target_native": {
+          "exact": false,
+          "relative_l2": 0.13719426095485687,
+          "max_abs": 3.3687591552734375
+        },
+        "target_native_vs_target_inherited": {
+          "exact": false,
+          "relative_l2": 0.1372213065624237,
+          "max_abs": 3.4106717109680176
+        }
+      }
+    },
+    {
+      "frames": 920,
+      "engine_sha256": {
+        "source_inherited": "a14eeb0698912a43bb5b2df4f9e9ef6b850221cbdb96244ad706a09b35bc6e93",
+        "target_inherited": "e35f636d6265eeab8916e1dea7a332413249928387b798bc73855d85c7011c54",
+        "target_native": "a2574f8148055f3d19bbd47d73595572a6cb37c9d537d34ee1e08ade627c5902"
+      },
+      "comparisons": {
+        "source_inherited_vs_target_inherited": {
+          "exact": false,
+          "relative_l2": 0.13607154786586761,
+          "max_abs": 3.8539464473724365
+        },
+        "source_inherited_vs_target_native": {
+          "exact": false,
+          "relative_l2": 0.13611680269241333,
+          "max_abs": 3.7130846977233887
+        },
+        "target_native_vs_target_inherited": {
+          "exact": false,
+          "relative_l2": 0.13567650318145752,
+          "max_abs": 3.4986720085144043
+        }
+      }
+    }
+  ]
+}

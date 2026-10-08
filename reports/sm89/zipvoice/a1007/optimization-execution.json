@@ -1,0 +1,99 @@
+{
+  "status": "optimization_active_publication_pending",
+  "graph_validation": {
+    "queue_pid": 3601270,
+    "child_pid": 3601273,
+    "session_id": 31430,
+    "log": "outputs/build-logs/model-graph-remaining-validation.log",
+    "retained_batches": [
+      "1",
+      "2",
+      "4",
+      "8",
+      "16",
+      "32",
+      "64"
+    ],
+    "remaining_batches": [],
+    "status": "all_seven_graph_candidates_reviewed"
+  },
+  "b64_normal_tf32_microprobe": {
+    "pid": 3612048,
+    "session_id": 17654,
+    "status": "complete",
+    "log": "outputs/build-logs/normal-tf32-microprobe.log",
+    "script": "scripts/probe_zipvoice_normal_tf32.py",
+    "requirement": "Synthetic JIT screen only; AOT rebuild, full mapping/quality and current-best matched application E2E before retention"
+  },
+  "remote_mutations": false,
+  "old_assets_deleted": false,
+  "b64_normal_tf32_coordinator": {
+    "pid": 3615291,
+    "session_id": 63676,
+    "status": "terminal_basic_normtf32_deferred_after_0.865pct_synthetic_screen",
+    "script": "scripts/queue_zipvoice_normal_tf32.py",
+    "log": "outputs/build-logs/normal-tf32-coordinator.log"
+  },
+  "b64_f32_ffn_tiles": {
+    "pid": 3619184,
+    "session_id": 26450,
+    "status": "complete_related_warp8_also_complete_no_new_ffn_retained",
+    "script": "scripts/probe_zipvoice_f32_ffn_tiles.py",
+    "log": "outputs/build-logs/f32-ffn-tiles.log",
+    "scope": "All3FFN widths1152/1536/1920 and6stage-boundary lengths300/380/460/600/760/920. BK/BN/pipeline candidates; preserve full fused projection+bias+stableactivation and original TF32RNA. JIT screenonly."
+  },
+  "publication_validation_scripts": [
+    "scripts/prepare_zipvoice_expected_runs.py",
+    "scripts/validate_zipvoice_download.py",
+    "scripts/validate_zipvoice_github_release.py"
+  ],
+  "b64_normal_k16": {
+    "pid": 3639932,
+    "session_id": 81496,
+    "status": "full_quality_e2e_power_complete_retained_operator_review_pending",
+    "builder_pid": 3639953,
+    "log": "outputs/build-logs/normal-k16-coordinator.log",
+    "synthetic_potential_percent": 1.1846891977639376,
+    "actual_e2e_gain": "pending_full_candidate_validation",
+    "formal_pid": 3755943
+  },
+  "b64_f32_weight_prepack": {
+    "pid": 3756544,
+    "session_id": 41391,
+    "status": "retained_all3_e2e_power_actual_fulltext_and_model_identity_reviewed",
+    "script": "scripts/probe_zipvoice_f32_weight_prepack.py",
+    "log": "outputs/build-logs/f32-prepack-coordinator.log",
+    "scope": "Cheap related prologue screen: same existing TF32RNA weight round movedonce tosetup, rawsourceW retained; no new quantization/calibration/math. JIT only, AOT/exactderivedweightmapping/fullE2E required if useful.",
+    "coordinator_pid": 3764020,
+    "coordinator_session_id": 88404,
+    "formal_pid": 3877672,
+    "fulltext_finalizer_pid": 3879973,
+    "fulltext_finalizer_session_id": 52286,
+    "primary_median_ms": 1314.84071,
+    "primary_gain_percent": 0.4183777019772817
+  },
+  "publication_scripts_prepared": [
+    "scripts/publish_zipvoice_github.py",
+    "scripts/retire_zipvoice_local_trees.py",
+    "scripts/retire_zipvoice_git_history.py"
+  ],
+  "prepack_transfer_screens": {
+    "status": "complete",
+    "not_retained": [
+      4
+    ],
+    "positive_to_validate": [
+      8,
+      16,
+      32
+    ],
+    "evidence": "prepack-transfer-screen-review.json"
+  },
+  "prepack_transfer_queue": {
+    "pid": 3884362,
+    "session_id": 71042,
+    "status": "B8_aot_build_running_then_B16_B32_serial",
+    "script": "scripts/queue_zipvoice_prepack_transfer.py",
+    "log": "outputs/build-logs/prepack-transfer-coordinator.log"
+  }
+}

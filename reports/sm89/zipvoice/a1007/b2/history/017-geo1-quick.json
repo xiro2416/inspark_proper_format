@@ -1,0 +1,48 @@
+{
+  "status": "quick_geometry_diagnostic_complete_not_accepted",
+  "batch": 2,
+  "frames": 760,
+  "samples_per_route": 6,
+  "medians_s": {
+    "native": 0.05277264,
+    "inherited": 0.064890173,
+    "geo1": 0.0558958395
+  },
+  "blocks": [
+    {
+      "route": "native",
+      "report": "/workspace/A_1007/outputs/zipvoice-benchmarks/b2/quick-geo1/0-native/report.json",
+      "median_s": 0.05279492
+    },
+    {
+      "route": "inherited",
+      "report": "/workspace/A_1007/outputs/zipvoice-benchmarks/b2/quick-geo1/1-inherited/report.json",
+      "median_s": 0.06475182
+    },
+    {
+      "route": "geo1",
+      "report": "/workspace/A_1007/outputs/zipvoice-benchmarks/b2/quick-geo1/2-geo1/report.json",
+      "median_s": 0.056030479
+    },
+    {
+      "route": "geo1",
+      "report": "/workspace/A_1007/outputs/zipvoice-benchmarks/b2/quick-geo1/3-geo1/report.json",
+      "median_s": 0.055303889
+    },
+    {
+      "route": "inherited",
+      "report": "/workspace/A_1007/outputs/zipvoice-benchmarks/b2/quick-geo1/4-inherited/report.json",
+      "median_s": 0.065003216
+    },
+    {
+      "route": "native",
+      "report": "/workspace/A_1007/outputs/zipvoice-benchmarks/b2/quick-geo1/5-native/report.json",
+      "median_s": 0.05275036
+    }
+  ],
+  "gains_percent": {
+    "native": -5.918217280772764,
+    "inherited": 13.86085609603783
+  },
+  "scope": "Provisional functional timings, six matched samples per route. Not migration acceptance; final quality, important lengths and formal matched E2E still required."
+}

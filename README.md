@@ -2,6 +2,8 @@
 
 当前仓库只发布选定实现：**Draft：150k 在线 step900；CFM：双语40k第一阶段 step800、四步推理**。Target 和 BigVGAN 沿用原始权重。历史优化路线、淘汰候选及旧实验报告从当前目录移除，旧版本可通过 Git 历史查看。
 
+ZipVoice-Distill 的 A_1007 INT8 B1/B2/B4/B8/B16/B32/B64 使用独立环境和私有 `xirr/zip_pipeline`，七档本地迁移和优化验证已完成，云端发布与独立下载验证正在推进。输入约定、首轮对照和验收状态见 [ZipVoice A_1007](docs/zipvoice-a1007.md)。下表及 Index 命令属于 IndexTTS2 当前发布。
+
 | 精度 | 发布 batch |
 |---|---|
 | FP8 E4M3FN，1:3保护策略 | 1、8、64、128 |
@@ -41,3 +43,7 @@ inspark infer --asset-dir ./local_assets --precision fp8 --batch 1 \
 许可证与来源见 `LICENSE`、`THIRD_PARTY_NOTICES.md`、`licenses/`。
 
 量化与权重导出入口：`scripts/calibrate_weights.py`、`scripts/export_weights.py`。运行前提供下载后的模型目录、推理用student checkpoint与完整组件校准清单；INT8使用SmoothQuant alpha=1.0。
+
+## 独立的 ZipVoice INT8 实现
+
+ZipVoice-Distill INT8 已在独立的 `/workspace/A_1007` 中完成 batch 1/2/4/8/16/32/64 的本地迁移与优化验证，主优化点为 760 帧，动态 profile 为 600/760/920。使用独立的 SM89 资产、Python 环境和私有 `xirr/zip_pipeline` 仓库。当前验证状态和发布流程见 [ZipVoice A_1007](docs/zipvoice-a1007.md)。旧 B16/24/32/64 资产将在新发布完成下载验证后清理；上面的 IndexTTS2 发布保留。

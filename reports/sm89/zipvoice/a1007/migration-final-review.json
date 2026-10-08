@@ -1,0 +1,47 @@
+{
+  "status": "all_seven_migration_combinations_reviewed",
+  "batches": {
+    "1": {
+      "decision": "retain_tested_combination",
+      "reason": "Native INT8 resolves inherited43% regression; compact delivery retained after positive primary matched combination comparison. Short608 regression1.75% disclosed; objective favors760, with no universal gain claim.",
+      "quality_tradeoffs_disclosed": true,
+      "other_lengths_disclosed": true
+    },
+    "2": {
+      "decision": "retain_tested_combination",
+      "reason": "Native attention/FFN/value plus inherited DW/residual resolves compute regression; compact delivery gives small positive matched primary result and positive other lengths. CER/UTMOS/SIM-o tradeoffs disclosed, original tensor mappings and quantization scales unchanged.",
+      "quality_tradeoffs_disclosed": true,
+      "other_lengths_disclosed": true
+    },
+    "4": {
+      "decision": "retain_tested_combination",
+      "reason": "Geo1 compute preserves inherited coverage and improves all formal lengths; delivery plus chunk1 confirmed on complete application with positive three-length results.",
+      "quality_tradeoffs_disclosed": true,
+      "other_lengths_disclosed": true
+    },
+    "8": {
+      "decision": "retain_tested_combination",
+      "reason": "Rejected geo1 compute and compact-delivery primary regressions; preserve source compute/base application. Chunk1 confirmed positive in all three combined comparisons.",
+      "quality_tradeoffs_disclosed": true,
+      "other_lengths_disclosed": true
+    },
+    "16": {
+      "decision": "retain_tested_combination",
+      "reason": "Rejected geometry/compact-delivery replacements on target regressions or unresolved marginal result; retain source compute/base application, chunk4 gives positive matched primary and other-length results.",
+      "quality_tradeoffs_disclosed": true,
+      "other_lengths_disclosed": true
+    },
+    "32": {
+      "decision": "retain_tested_combination",
+      "reason": "Preserve own inherited compute, compact delivery and chunk6. No self-comparison gain claimed; recent same-source matched measurements rebound to current engine/runner, final boundary/mixed and sustained power checks complete.",
+      "quality_tradeoffs_disclosed": true,
+      "other_lengths_disclosed": true
+    },
+    "64": {
+      "decision": "retain_tested_combination",
+      "reason": "Preserve original IEEE normal-attention compute and chunk16; inherited compact-delivery mechanism gives small positive complete-application gain at all three lengths. No new math or recalibration introduced.",
+      "quality_tradeoffs_disclosed": true,
+      "other_lengths_disclosed": true
+    }
+  }
+}

@@ -1,0 +1,65 @@
+{
+  "status": "remaining_execution_and_investment_reviewed",
+  "engine_sha256": "111876229cb83525826628a5c1fe3df1990678fc99122f2d395c092a760cc635",
+  "retained_candidate_T760_median_s": 1.3607320010000001,
+  "remaining_pure_Resh_named_layers": [
+    {
+      "name": "__myl_Resh_myl6_9",
+      "mean_ms": 0.45499733090400696,
+      "calls": 3
+    },
+    {
+      "name": "__myl_Resh_myl28_11",
+      "mean_ms": 0.4546560049057007,
+      "calls": 3
+    },
+    {
+      "name": "__myl_Resh_myl72_11",
+      "mean_ms": 0.21981866161028543,
+      "calls": 3
+    },
+    {
+      "name": "__myl_Resh_myl50_13",
+      "mean_ms": 0.21947733064492544,
+      "calls": 3
+    }
+  ],
+  "remaining_copy_ms_per_profiled_FM": 1.3489493280649185,
+  "ideal_copy_only_E2E_ceiling_percent": 0.7930727444190788,
+  "ceiling_assumptions": "Diagnostic random fullB64T760; assumes all4 copies removed with no added work and same runtime costs. Ceiling is neither measured E2E benefit nor all-shape guarantee. Actual inspector evidence239/269 maps protected first4 Float32 nonlinear projections.",
+  "F32_complex_fusion_probe": {
+    "tested_configurations": 9,
+    "best_tile": [
+      64,
+      64,
+      64
+    ],
+    "best_single_fragment_gain_percent": 1.248209425452162,
+    "native_custom_ms": [
+      1.1895466645558677,
+      1.1746986309687295
+    ],
+    "spills": 52,
+    "full64_value_gate_bitwise_nativeTF32": true,
+    "hypothetical_four_fullsize_fragments_8steps_percent": 0.03491775562265335,
+    "scope": "OnlyT760 fragment measured; two protected regions actually use shorter lengths. This hypothetical number is not fullmodel proof and does not resolve a different standalone epilogue implementation."
+  },
+  "resolved_tested_mechanisms": [
+    "209–214 explicitflatviews acrossall16 nonlinear projections retainedcopies/noE2Egain; no retention",
+    "115 actualattention dependencies require48 sequentialbranches; combinedsynthetic branch invalid",
+    "142 existing36INT8 FFN activations already fused",
+    "065/103/116 tested TF32x3GEMM/IEEEFFN/attention candidates slower",
+    "204 tested nonlinearQKRNA candidates slower",
+    "24INT8 outputprojection residualcopy removal successfully integrated;265/266 mapping and274actualexecution proof"
+  ],
+  "investment_decision": "Do not launch another costly full-engine build for the protected Float32 GEMM fusion in this round. Its nine measured configurations give at most1.248%fragment gain, most are slower/resource-failing, while the exposed copy-only ceiling is below1%E2E. Two inexpensive layout/fusion investigations and actual consumer mapping are available; preserve the remaining copy/standalone-epilogue route as a future option. This is an investment decision for tested workload/recipe, not a claim of universal exhaustion or global optimality.",
+  "finish_condition": "Finish only after277–280formalreview,283retention,README/reproduction update and requirement-by-requirement final audit.",
+  "evidence_sha256": {
+    "/workspace/zvoice_temp/optimization/int8_sm89_b64/history/267-online-i8res-FM-profile.json": "fd7e939f122afa3e5cc0750fd208aadc08e5b16245ca7b823da4ef7d9981fd9c",
+    "/workspace/zvoice_temp/optimization/int8_sm89_b64/history/274-i8res-copy-execution-review.json": "6cf4172272fb7d3a9bd645757cf3c61bb373e69a9b0e7426568f62006bb99bea",
+    "/workspace/zvoice_temp/optimization/int8_sm89_b64/history/259-F32-native-TF32-fusion-probe.json": "d1c8de00eff6d4f497df19d8abade1341e8b6e228ceb57668fd18b7474dd8dbe",
+    "/workspace/zvoice_temp/optimization/int8_sm89_b64/history/269-protected-F32-fusion-cost-review.json": "8c3b16bad5fb207fd187d1124e4c26bb75680401a62992611fa22d88e8bebcdb",
+    "/workspace/zvoice_temp/optimization/int8_sm89_b64/history/250-residual-norm-copy-dependencies.json": "903eb4158d31f846294ab50898ea33e9099c100bfee7adaaaca647888a1d1b07",
+    "/workspace/zvoice_temp/optimization/int8_sm89_b64/history/214-online-flatwide-weighted-execution.json": "fb63e95b482067266c3b5804d03ae9bdfb9fdd71106f72934cf9313e9ab4e308"
+  }
+}

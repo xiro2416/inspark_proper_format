@@ -1,0 +1,69 @@
+"""Replace quantized DW only, consuming the original QuantizeLinear tensor."""
+import hashlib
+from pathlib import Path
+import numpy as np
+import onnx
+
+def rewrite(network, source, trt):
+    import tensorrt.plugin as trtp
+    from . import dw_int8_plugin
+    model = onnx.load(source, load_external_data=False)
+    producers = {o: n for n in model.graph.node for o in n.output}
+    initial = {t.name: t for t in model.graph.initializer}
+
+    def constant(name):
+        if name in initial:
+            t = initial[name]
+            if t.external_data:
+                onnx.external_data_helper.load_external_data_for_tensor(t, str(Path(source).parent))
+            return onnx.numpy_helper.to_array(t).copy()
+        n = producers[name]
+        assert n.op_type in ('Identity', 'Cast')
+        return constant(n.input[0])
+    layers = [network.get_layer(i) for i in range(network.num_layers)]
+    tensors = {layer.get_output(i).name: layer.get_output(i) for layer in layers for i in range(layer.num_outputs)}
+    changes = []
+    for node in model.graph.node:
+        if node.op_type != 'Conv' or '/depthwise_conv/' not in node.name:
+            continue
+        dq = producers.get(node.input[0])
+        wdq = producers.get(node.input[1])
+        if dq is None or wdq is None or dq.op_type != 'DequantizeLinear' or (wdq.op_type != 'DequantizeLinear'):
+            continue
+        quant = producers[dq.input[0]]
+        assert quant.op_type == 'QuantizeLinear'
+        x = tensors[quant.output[0]]
+        assert x.dtype == trt.int8 and x.shape[0] in (-1, 64) and (tuple(x.shape[1:3]) == (512, 1)), (node.name, str(x.dtype), tuple(x.shape))
+        original = tensors[node.output[0]]
+        assert original.dtype == trt.float32
+        w = constant(wdq.input[0])
+        ws = constant(wdq.input[1])
+        bias = constant(node.input[2])
+        xs = constant(dq.input[1])
+        assert w.dtype == np.int8 and w.shape[:3] == (512, 1, 1)
+        assert ws.shape == bias.shape == (512,) and ws.dtype == bias.dtype == np.float32
+        assert np.all(constant(dq.input[2]) == 0) and np.all(constant(wdq.input[2]) == 0)
+        assert np.array_equal(constant(quant.input[1]), xs) and np.all(constant(quant.input[2]) == 0)
+        args = [x]
+        hashes = {}
+        for label, array in [('weight', w.reshape(512, -1)), ('scale', ws), ('bias', bias)]:
+            c = network.add_constant(array.shape, array)
+            c.name = node.name + '/original_' + label
+            args.append(c.get_output(0))
+            hashes[label] = hashlib.sha256(array.tobytes()).hexdigest()
+        factory = trtp.op.zipvoice_int8_b64.DepthwiseOriginalInt8(*args, input_scale=float(xs), kernel=int(w.shape[3]))
+        plugin = network.add_plugin_v3(*factory(trt.QuickPluginCreationRequest.STRICT_AOT))
+        plugin.name = node.name + '/OriginalInt8Plugin'
+        replacement = plugin.get_output(0)
+        replacement.name = node.name + '/original_quantized_DW_output'
+        consumers = []
+        for layer in layers:
+            for slot in range(layer.num_inputs):
+                value = layer.get_input(slot)
+                if value is not None and value.name == original.name:
+                    layer.set_input(slot, replacement)
+                    consumers.append({'layer': layer.name, 'slot': slot})
+        assert consumers
+        changes.append({'original_node': node.name, 'quantized_input': quant.output[0], 'original_output': node.output[0], 'kernel': int(w.shape[3]), 'input_scale': float(xs), 'original_parameter_hashes': hashes, 'consumers': consumers})
+    assert changes
+    return changes

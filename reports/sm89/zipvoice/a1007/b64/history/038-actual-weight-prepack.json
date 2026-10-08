@@ -1,0 +1,148 @@
+{
+  "status": "all12_actual_float32_ffn_weight_operands_gpu_rna_exact",
+  "preflight": {
+    "memory_mib": 4108.0,
+    "gpu_util_percent": 0.0,
+    "processes": "1820496, 4082",
+    "power_cap_w": 400.0,
+    "scope": "Known idle allocation retained; not exclusive device ownership"
+  },
+  "source_graph_sha256": "48c9ae113a74901952b7d3d6120071983d251b9382afb3e1ea854ae2cf11da24",
+  "helper_sha256": "483db497bfea131fcae706d959ac01fae25fffe11f86cd01372e5cecc5316492",
+  "gpu_reference_kernel_sha256": "e543cefe116b8874f6645e20d8ea887b6f04235e9577bd0fcd0a4b0b57e91d2b",
+  "rows": [
+    {
+      "module": "/fm_decoder/encoders.0/layers.0/feed_forward1/",
+      "shape": [
+        512,
+        1152
+      ],
+      "source_weight_sha256": "b7998dfe95de7f8a94a5d35d484ef53b3c5ffd0c590d6fbf8ae7317108fcf1ee",
+      "packed_weight_sha256": "346fc2bdd420b5546b345c0fcb9a0f434db8116744b097a4611b58d4a2db0cd3",
+      "cpu_pack_gpu_rna_all_bits_exact": true,
+      "source_weight_unchanged": true
+    },
+    {
+      "module": "/fm_decoder/encoders.0/layers.0/feed_forward2/",
+      "shape": [
+        512,
+        1536
+      ],
+      "source_weight_sha256": "9891b9556530ef79a5ed40c74d58c3a2a283e8f4bcd81266663d160dbf9df28f",
+      "packed_weight_sha256": "6ecf43b6ba3d6510e52bad6a673f06055a3aeee519a16c4906fe655fb6dbaef0",
+      "cpu_pack_gpu_rna_all_bits_exact": true,
+      "source_weight_unchanged": true
+    },
+    {
+      "module": "/fm_decoder/encoders.0/layers.0/feed_forward3/",
+      "shape": [
+        512,
+        1920
+      ],
+      "source_weight_sha256": "8d2f1d45255868677ffbfb151e645295cc29b6567ea0b205c82af2ed483c2272",
+      "packed_weight_sha256": "e54f97a0a9e3a94a6bd0987bde169fb17ba5541992db46a64829975ae8ba75e1",
+      "cpu_pack_gpu_rna_all_bits_exact": true,
+      "source_weight_unchanged": true
+    },
+    {
+      "module": "/fm_decoder/encoders.0/layers.1/feed_forward1/",
+      "shape": [
+        512,
+        1152
+      ],
+      "source_weight_sha256": "cc425a10bb1ee671a876c90ac2b555c1c71c1cfad49ca069473bb85dbbb9372f",
+      "packed_weight_sha256": "88fbd95abecf1e97f1a00f4c8049a6150d44e2420a5cfd4fce6b3f55062e39a2",
+      "cpu_pack_gpu_rna_all_bits_exact": true,
+      "source_weight_unchanged": true
+    },
+    {
+      "module": "/fm_decoder/encoders.0/layers.1/feed_forward2/",
+      "shape": [
+        512,
+        1536
+      ],
+      "source_weight_sha256": "465799d331413511d3766a1697953da4211c2d035ff71c65ae10bad53b3fa0f7",
+      "packed_weight_sha256": "ed4fd3611233ab1b4e8a35d7a2c7cb09b7d5cb8ce78c12c76b74b4b46dccfa2a",
+      "cpu_pack_gpu_rna_all_bits_exact": true,
+      "source_weight_unchanged": true
+    },
+    {
+      "module": "/fm_decoder/encoders.0/layers.1/feed_forward3/",
+      "shape": [
+        512,
+        1920
+      ],
+      "source_weight_sha256": "f20bcb798432777df4a52b11a50b5c147597aee3a3cc30536642db2654b8dde3",
+      "packed_weight_sha256": "aba54c1d79fe3719623651ca0d10a064154058e0d49d01b87dbe39a2a0a09605",
+      "cpu_pack_gpu_rna_all_bits_exact": true,
+      "source_weight_unchanged": true
+    },
+    {
+      "module": "/fm_decoder/encoders.1/encoder/layers.0/feed_forward1/",
+      "shape": [
+        512,
+        1152
+      ],
+      "source_weight_sha256": "111d344316e9d04a11c8f0a0bb3fc386d736a90b94b20d59cce5a0325d5ea513",
+      "packed_weight_sha256": "4bd0e1835e5989bff4c28d21b7abb2ef428c2708fa6a16eda30cf3c54686fa55",
+      "cpu_pack_gpu_rna_all_bits_exact": true,
+      "source_weight_unchanged": true
+    },
+    {
+      "module": "/fm_decoder/encoders.1/encoder/layers.0/feed_forward2/",
+      "shape": [
+        512,
+        1536
+      ],
+      "source_weight_sha256": "1ec5e0a70b687eef34e8eb01d3637b291225af3689f6bac8c022e3163aecb358",
+      "packed_weight_sha256": "3aa2d9a99d24cfc5fd18a6f7f99eea83b2b673e425ee7337a83ac0e7d3cb77d8",
+      "cpu_pack_gpu_rna_all_bits_exact": true,
+      "source_weight_unchanged": true
+    },
+    {
+      "module": "/fm_decoder/encoders.1/encoder/layers.0/feed_forward3/",
+      "shape": [
+        512,
+        1920
+      ],
+      "source_weight_sha256": "bf6f214581ea698d4f06bc445b19d97a74dc432dd190be2704e40bdf379222fe",
+      "packed_weight_sha256": "0e52f772afdf3fb02c4c15ec42cefd9f628f5d904af93bddf38f80b6a86aacb3",
+      "cpu_pack_gpu_rna_all_bits_exact": true,
+      "source_weight_unchanged": true
+    },
+    {
+      "module": "/fm_decoder/encoders.1/encoder/layers.1/feed_forward1/",
+      "shape": [
+        512,
+        1152
+      ],
+      "source_weight_sha256": "cd287d0d40cb518f8398cd7a046796df1cc49842a9a5c978000047bfadede681",
+      "packed_weight_sha256": "ee7d9f7bc6d3d2bd93ccea461970890220d8c47ad37f17f846be1f6921da921a",
+      "cpu_pack_gpu_rna_all_bits_exact": true,
+      "source_weight_unchanged": true
+    },
+    {
+      "module": "/fm_decoder/encoders.1/encoder/layers.1/feed_forward2/",
+      "shape": [
+        512,
+        1536
+      ],
+      "source_weight_sha256": "e8a7cc4ac7dc954ae9364c63d3ce369007882849ff751c4709d56320439441fa",
+      "packed_weight_sha256": "bbb562d4242258d9bf1382280432d684fb85a0fed9d195a1cf9e5590cd5aacb3",
+      "cpu_pack_gpu_rna_all_bits_exact": true,
+      "source_weight_unchanged": true
+    },
+    {
+      "module": "/fm_decoder/encoders.1/encoder/layers.1/feed_forward3/",
+      "shape": [
+        512,
+        1920
+      ],
+      "source_weight_sha256": "8a84e593006b2c2a04566e8512ef8e95706cf5662d0267facbc7bcf7e7f55dbb",
+      "packed_weight_sha256": "b2f89800483019717484ea3bc4474487c7324654e68bfea775155679809b1451",
+      "cpu_pack_gpu_rna_all_bits_exact": true,
+      "source_weight_unchanged": true
+    }
+  ],
+  "scope": "Derived existing TF32 operand only; original checkpoint, source graph, INT8 weights/scales and recipe untouched. No new rounding/quantization math."
+}

@@ -1,0 +1,49 @@
+{
+  "status": "hypotheses_only_not_executed",
+  "entry_gate": "all seven migration routes accepted",
+  "leads": [
+    {
+      "mechanism": "Extend shape-bound CUDA Graph through text conditioning, FM, Vocos and cuFFT/RMS",
+      "reason": "Current FM-only capture still pays application enqueue and conversion launch costs; likely more exposed at small batch",
+      "constraints": [
+        "same serial arena dependencies",
+        "fresh noise reset and fresh CPU conditions remain outside graph",
+        "capture key includes actual frame length, token length, text-reuse eligibility and buffer identities",
+        "no omitted PCM/output work"
+      ],
+      "probe": "First measure exposed launch/transfer costs; paired direct/graph full-state and all-PCM checks before E2E comparison",
+      "skill_phase": "optimization; new execution-domain design"
+    },
+    {
+      "mechanism": "Recheck inherited normal-attention Q/K tile geometry in bounded domains",
+      "reason": "B1/2/4/8 have fewer CTAs; downsampled lengths now150..230 and300..460 instead of broad source range",
+      "constraints": [
+        "preserve normal/NL math modes per source",
+        "retain sequential stats dependencies",
+        "distinguish compile-time domain choice from costly runtime dispatch"
+      ],
+      "skill_phase": "migration conditional recheck or optimization deeper search"
+    },
+    {
+      "mechanism": "PCM workers and chunk sizes for small batches and225..545 target frames",
+      "reason": "B1 has no remaining rows; source chunks16 or6 may not minimize new delivery overhead",
+      "constraints": [
+        "all ordered PCM exact",
+        "no GPU batch splitting",
+        "compare end-to-end, not CPU fragment alone"
+      ],
+      "skill_phase": "migration scheduling adaptation"
+    },
+    {
+      "mechanism": "Fuse compact conditioning broadcast/pad/scale after evaluating inherited B32 delivery scheme",
+      "reason": "Source B32 already has compact pinned staging + GPU broadcast/pad and first-PCM/D2H overlap; it was omitted by the first unified scaffold and is now restored as a1007_delivery.py. Reusing the existing scheme across batches is migration, not new optimization. Only additional fusion/capture changes belong in optimization.",
+      "constraints": [
+        "Fresh CPU conditioning every request",
+        "Original Float32 scaling/prompt boundary/RMS",
+        "All-row transport and ordered PCM oracle"
+      ],
+      "probe": "Complete scripts/measure_zipvoice_delivery_reuse.py before accepting migration; profile any remaining GPU placement/launch costs for later fusion.",
+      "skill_phase": "migration restore/recheck first; new fusion only in optimization"
+    }
+  ]
+}

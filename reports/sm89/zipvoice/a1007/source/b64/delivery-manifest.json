@@ -1,0 +1,66 @@
+{
+  "status": "retained_local_SM89_B64_optimized_TensorRT_delivery",
+  "physical_gpu": 1,
+  "gpu_uuid": "GPU-7dab7d6b-ac8c-7ccc-6410-916d3b7689b3",
+  "batch": 64,
+  "concurrency": 1,
+  "power_limit_configured_and_enforced_w": 400,
+  "recipe": "Original SmoothQuant alpha.5/first4floating-last12INT8/originalweights-scales",
+  "quantized_onnx": {
+    "path": "/workspace/zvoice_temp/optimization/int8_sm89_b64/builds/dw_layout_graph/fm-int8-smoothquant.onnx",
+    "sha256": "a4d15aff4e560dcb63fb3285e2d1d44e2f03df63894527b3e3a491c5b52d9064",
+    "external_data_files": [
+      {
+        "path": "/workspace/zvoice_temp/optimization/int8_sm89_b64/builds/dw_layout_graph/fm-int8-smoothquant.onnx.data",
+        "sha256": "762358bede718faa4b3a55e5f62c066cff8025c02e01b0212e33cc3f534a0687"
+      }
+    ]
+  },
+  "optimized_engine": {
+    "path": "/workspace/zvoice_temp/optimization/int8_sm89_b64/builds/online_i8res_f32rna_full/engine.plan",
+    "sha256": "111876229cb83525826628a5c1fe3df1990678fc99122f2d395c092a760cc635"
+  },
+  "runner": {
+    "path": "/workspace/zvoice_temp/optimization/int8_sm89_b64/code/measure_online_i8res_gpu1.py",
+    "sha256": "0664feb3e8ad0cde33d231eabdf1434a0b839cd541e4cdfbadcb9eff4940ef79"
+  },
+  "engine_inventories": [
+    "/workspace/zvoice_temp/optimization/int8_sm89_b64/cases/gpu1/online-i8res/000/engines.json",
+    "/workspace/zvoice_temp/optimization/int8_sm89_b64/cases/gpu1/online-i8res/018/engines.json",
+    "/workspace/zvoice_temp/optimization/int8_sm89_b64/cases/gpu1/online-i8res/021/engines.json"
+  ],
+  "plugin_sources": {
+    "/workspace/zvoice_temp/optimization/int8_sm89_b64/code/position_softmax_f32_plugin.py": "25afdcfd0ed2ae19a092bb824c329b480aba809f573837f44e4bea78e789b566",
+    "/workspace/zvoice_temp/optimization/int8_sm89_b64/code/position_softmax_f32_kernel.py": "e39c8c89162a45e6ffa7ec12afaac3ba44a3e81962213fbc1fcfe1afab29d145",
+    "/workspace/zvoice_temp/optimization/int8_sm89_b64/code/dw_int8_plugin.py": "ae60fe1b80862b5ccaf721fa62a3a3e76ea95761e0b165faa0ac767f7e714b66",
+    "/workspace/zvoice_temp/optimization/int8_sm89_b64/code/dw_int8_aot_kernel.py": "ef5d126fce45738da938b05cdcf0f44d9bc0c18f352d867b8ed863c9c379a8b1",
+    "/workspace/zvoice_temp/optimization/int8_sm89_b64/code/dw_int8_probe_kernel.py": "92e833e5497c52ec5dbdd5734abe73988d2e5cc70a60f755907c1bf1523981fc",
+    "/workspace/zvoice_temp/optimization/int8_sm89_b64/code/dw_int8_rewrite.py": "7a0056b083193da8dd70856ca9de732ebde501928d8ac147550b954fca1bb5ba",
+    "/workspace/zvoice_temp/optimization/int8_sm89_b64/code/dw_int8_full_rewrite.py": "8a128390b6858885283d4e0008e6d90285a7434414ce460eeaa2e465d1a90bdc",
+    "/workspace/zvoice_temp/optimization/int8_sm89_b64/code/online_single_branch_aot.py": "a09e150997677a7dd15dc5bb6f0d3698fbebe5c06a36b5b713ed181e098f895b",
+    "/workspace/zvoice_temp/optimization/int8_sm89_b64/code/online_single_branch_plugin.py": "3759dbeb47962d81f3528710bb3d599f6d5b9dee20efc3bcd53ecb385fc8d824",
+    "/workspace/zvoice_temp/optimization/int8_sm89_b64/code/online_single_branch_runtime_kernel.py": "0e8cdb41ebf0099e89a6cad7b4688624dfe9baa895fc2a72dc12b98a1746407f",
+    "/workspace/zvoice_temp/optimization/int8_sm89_b64/code/online_branch_wide_aot.py": "ae4905bcfc3e2a518738ba3d335a5ac9f6e35b3e5956b01e501c6bfd5abdb739",
+    "/workspace/zvoice_temp/optimization/int8_sm89_b64/code/online_branch_wide_plugin.py": "15684eeae2f08b15106c28b2d9e8e86772b0e478eea62c6085d747ac8e7391ef",
+    "/workspace/zvoice_temp/optimization/int8_sm89_b64/code/online_branch_stats_runtime_kernel.py": "ec71f1b1744d63fb1768feb9672c7b45f88bdb871dbcbb7f5a50dbc535dfc3a3",
+    "/workspace/zvoice_temp/optimization/int8_sm89_b64/code/online_nonlinear_rna_aot.py": "bace1dffed969bbe710508215e741df5ee94f601864974269270c4eabdc215ad",
+    "/workspace/zvoice_temp/optimization/int8_sm89_b64/code/online_nonlinear_rna_plugin.py": "c2793c2712e690960e68edb5114707f9f7a9597f8b350cd2679c75caa08ed1bf",
+    "/workspace/zvoice_temp/optimization/int8_sm89_b64/code/online_nonlinear_rna_runtime_kernel.py": "441031620671b087ab4564530a355541f84f90c3a15994608d176c04a16aa239",
+    "/workspace/zvoice_temp/optimization/int8_sm89_b64/code/online_nlwide_rewrite.py": "01c590562bb751026e63e564555d16d70b808159851156801f4677d2b98fc9db",
+    "/workspace/zvoice_temp/optimization/int8_sm89_b64/code/f32_tf32_rna_aot.py": "4c48491445ad90cc3ed11cdf2a8f6d28528c787bdf40b51d7f20417fd4b7aa1b",
+    "/workspace/zvoice_temp/optimization/int8_sm89_b64/code/f32_tf32_rna_plugin.py": "fbe17e72c672739ed69c2326bce1b38406990f31b9b0c62f98d2d20b976aed68",
+    "/workspace/zvoice_temp/optimization/int8_sm89_b64/code/f32_tf32_rna_rewrite.py": "b0ef7473046210469b9d895cf1a87a67f629e577835674d3093f0f60033ee05b",
+    "/workspace/zvoice_temp/optimization/int8_sm89_b64/code/linear_f32_activation_tf32_rna_kernel.py": "bfdfeb9eee2735038bae85a432ab102c30d3752e856c73600dcab755aec7c109",
+    "/workspace/zvoice_temp/optimization/int8_sm89_b64/code/int8_nonlinear_value_runtime_kernel.py": "ad68fe87969e7b278969a440ef8f9a59f74ff3f8873a3a932a92e4d405a50053",
+    "/workspace/zvoice_temp/optimization/int8_sm89_b64/code/int8_nonlinear_value_aot.py": "9f3ff632af566726af1504c82441731028a86d74110dc7bea1f3f6b4891f593e",
+    "/workspace/zvoice_temp/optimization/int8_sm89_b64/code/int8_nonlinear_value_plugin.py": "6674d303e735a5f4422f30e559f687c8e1db2ba309e48b1f4d382280b7192a4f",
+    "/workspace/zvoice_temp/optimization/int8_sm89_b64/code/int8_nonlinear_value_rewrite.py": "b3758700e7a1c880a07a480419764dc06fca6777ae1b9cc2b3a84911ebb357d3",
+    "/workspace/zvoice_temp/optimization/int8_sm89_b64/code/i8_residual_runtime_kernel.py": "c7743ff68ed4523f55f36c37c1f940bf1d4d18e023b77022b68d95a4e0fb2702",
+    "/workspace/zvoice_temp/optimization/int8_sm89_b64/code/i8_residual_aot.py": "d16c34f9733d7c9f554493be599dc712f911afb176c625cc1d1ea4560b4c7200",
+    "/workspace/zvoice_temp/optimization/int8_sm89_b64/code/i8_residual_plugin.py": "8d2b7ab72a4e0ec91002972a503dc1d5b23f3cbd2a2a20b9fbdd068491890dce",
+    "/workspace/zvoice_temp/optimization/int8_sm89_b64/code/i8_residual_rewrite.py": "d8739a4e296f6efaf04ed4b6bd8aa06dc73b0ef874f75c8568b6f0a27b3abf9a"
+  },
+  "retention_evidence": "/workspace/zvoice_temp/optimization/int8_sm89_b64/history/283-online-i8res-retention.json",
+  "readme_sha256": "1c16fbfb71e6062f47b218712d79999daa1833ba65b88a0970b0ad438123ef9f",
+  "validation_scope": "70 full texts/5VAD4s-ASR refs/57 lengths andmixed64, complete4544PCM; matched original3length20requests/route; selected210WAVs/routequality. Localpaths only, no external publication requested or performed."
+}

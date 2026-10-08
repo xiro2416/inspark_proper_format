@@ -1,0 +1,30 @@
+{
+  "observations": [
+    {
+      "gpu": "4108, 0, 0, 26.07, 400.00, 400.00",
+      "processes": "1820496, [Not Found], 4082"
+    },
+    {
+      "gpu": "4108, 0, 0, 26.06, 400.00, 400.00",
+      "processes": "1820496, [Not Found], 4082"
+    },
+    {
+      "gpu": "4108, 0, 0, 26.16, 400.00, 400.00",
+      "processes": "1820496, [Not Found], 4082"
+    },
+    {
+      "gpu": "4108, 0, 0, 26.18, 400.00, 400.00",
+      "processes": "1820496, [Not Found], 4082"
+    },
+    {
+      "gpu": "4108, 0, 0, 26.13, 400.00, 400.00",
+      "processes": "1820496, [Not Found], 4082"
+    }
+  ],
+  "pid_visible_in_namespace": false,
+  "interpretation": "Same4108MiB pre-existing allocation now reported as4082MiB by NVML under host PID1820496; idle observation, not exclusive device ownership. External state untouched.",
+  "process_activity_monitor": {
+    "log": "outputs/build-logs/gpu1-process-activity.log",
+    "result": "pmon returned no per-process rows even while our known inference child was running; unavailable attribution, not proof of no external work. Monitor stopped."
+  }
+}

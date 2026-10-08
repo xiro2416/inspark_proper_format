@@ -1,0 +1,542 @@
+{
+  "status": "completed_target_length_review",
+  "profiles": [
+    {
+      "T": 582,
+      "single_FM_instrumented_ms": 58.32533340920539,
+      "families_ms": {
+        "F32FFN": 4.567104006807009,
+        "native": 42.852992047749865,
+        "nonlinear_attention": 3.3017920119067035,
+        "normal_attention": 3.9561919743816065,
+        "INT8value": 1.164288020382325,
+        "INT8DW": 1.738208014828463,
+        "INT8residual": 0.7447573331495128
+      }
+    },
+    {
+      "T": 760,
+      "single_FM_instrumented_ms": 76.81028281862382,
+      "families_ms": {
+        "F32FFN": 5.824853345751762,
+        "native": 56.71768547187096,
+        "nonlinear_attention": 4.594463964303335,
+        "normal_attention": 5.433440015961726,
+        "INT8value": 1.4458879977464676,
+        "INT8DW": 1.7321493358661728,
+        "INT8residual": 1.061802687123418
+      }
+    },
+    {
+      "T": 1026,
+      "single_FM_instrumented_ms": 115.23319471604191,
+      "families_ms": {
+        "nonlinear_attention": 8.994464037319025,
+        "F32FFN": 7.901621321837107,
+        "native": 81.5694506544775,
+        "normal_attention": 10.386666697760424,
+        "INT8value": 2.0271893367171288,
+        "INT8DW": 2.7575893470396595,
+        "INT8residual": 1.596213320891062
+      }
+    },
+    {
+      "T": 1398,
+      "single_FM_instrumented_ms": 164.6184749744134,
+      "families_ms": {
+        "nonlinear_attention": 14.487445369362833,
+        "F32FFN": 10.592746675014494,
+        "native": 114.57564814307256,
+        "normal_attention": 16.938784164687,
+        "INT8value": 2.47399465739727,
+        "INT8DW": 3.195231971641382,
+        "INT8residual": 2.354623993237813
+      }
+    },
+    {
+      "T": 1750,
+      "single_FM_instrumented_ms": 220.45651218438675,
+      "families_ms": {
+        "nonlinear_attention": 22.387722551822666,
+        "F32FFN": 12.998304049173989,
+        "normal_attention": 26.49004799624285,
+        "native": 148.67956288675043,
+        "INT8value": 2.9729920153816547,
+        "INT8DW": 3.82626135709385,
+        "INT8residual": 3.101621327921748
+      }
+    }
+  ],
+  "normal_actual_AOT": {
+    "actual_internal_domains": [
+      {
+        "T_internal": 146,
+        "best_geometry": "64x16w4",
+        "gain_vs64x32_percent": 10.60148068927966
+      },
+      {
+        "T_internal": 190,
+        "best_geometry": "64x16w4",
+        "gain_vs64x32_percent": 6.030753109910807
+      },
+      {
+        "T_internal": 257,
+        "best_geometry": "64x32w4",
+        "gain_vs64x32_percent": 0.0
+      },
+      {
+        "T_internal": 291,
+        "best_geometry": "64x32w4",
+        "gain_vs64x32_percent": 0.0
+      },
+      {
+        "T_internal": 350,
+        "best_geometry": "64x32w4",
+        "gain_vs64x32_percent": 0.0
+      },
+      {
+        "T_internal": 380,
+        "best_geometry": "64x32w4",
+        "gain_vs64x32_percent": 0.0
+      },
+      {
+        "T_internal": 438,
+        "best_geometry": "64x32w4",
+        "gain_vs64x32_percent": 0.0
+      },
+      {
+        "T_internal": 513,
+        "best_geometry": "64x32w4",
+        "gain_vs64x32_percent": 0.0
+      },
+      {
+        "T_internal": 582,
+        "best_geometry": "64x32w4",
+        "gain_vs64x32_percent": 0.0
+      },
+      {
+        "T_internal": 699,
+        "best_geometry": "64x32w4",
+        "gain_vs64x32_percent": 0.0
+      },
+      {
+        "T_internal": 760,
+        "best_geometry": "64x32w4",
+        "gain_vs64x32_percent": 0.0
+      },
+      {
+        "T_internal": 875,
+        "best_geometry": "64x32w4",
+        "gain_vs64x32_percent": 0.0
+      },
+      {
+        "T_internal": 1026,
+        "best_geometry": "64x32w4",
+        "gain_vs64x32_percent": 0.0
+      },
+      {
+        "T_internal": 1398,
+        "best_geometry": "64x32w4",
+        "gain_vs64x32_percent": 0.0
+      },
+      {
+        "T_internal": 1750,
+        "best_geometry": "128x32w4",
+        "gain_vs64x32_percent": 0.8180814650124485
+      }
+    ],
+    "resources": {
+      "64x32w4": [
+        {
+          "regs": 250,
+          "spills": 0,
+          "shared": 16384,
+          "tf32_mma": true
+        },
+        {
+          "regs": 250,
+          "spills": 0,
+          "shared": 16384,
+          "tf32_mma": true
+        }
+      ],
+      "32x32w4": [
+        {
+          "regs": 164,
+          "spills": 0,
+          "shared": 8192,
+          "tf32_mma": true
+        },
+        {
+          "regs": 190,
+          "spills": 0,
+          "shared": 8192,
+          "tf32_mma": true
+        }
+      ],
+      "32x64w4": [
+        {
+          "regs": 255,
+          "spills": 6,
+          "shared": 12288,
+          "tf32_mma": true
+        },
+        {
+          "regs": 255,
+          "spills": 4,
+          "shared": 12288,
+          "tf32_mma": true
+        }
+      ],
+      "64x64w4": [
+        {
+          "regs": 255,
+          "spills": 76,
+          "shared": 24576,
+          "tf32_mma": true
+        },
+        {
+          "regs": 255,
+          "spills": 80,
+          "shared": 24576,
+          "tf32_mma": true
+        }
+      ],
+      "64x16w4": [
+        {
+          "regs": 146,
+          "spills": 0,
+          "shared": 12288,
+          "tf32_mma": true
+        },
+        {
+          "regs": 128,
+          "spills": 0,
+          "shared": 12288,
+          "tf32_mma": true
+        }
+      ],
+      "128x32w4": [
+        {
+          "regs": 255,
+          "spills": 50,
+          "shared": 32768,
+          "tf32_mma": true
+        },
+        {
+          "regs": 255,
+          "spills": 50,
+          "shared": 32768,
+          "tf32_mma": true
+        }
+      ],
+      "64x32w8": [
+        {
+          "regs": 175,
+          "spills": 0,
+          "shared": 16384,
+          "tf32_mma": true
+        },
+        {
+          "regs": 174,
+          "spills": 0,
+          "shared": 16384,
+          "tf32_mma": true
+        }
+      ]
+    },
+    "conclusion": "KB16 helps actual146/190, but most larger domains retainKB32. Largest1750 best gain.818% only within normal fragment, no global policy inference."
+  },
+  "normal_uniform_runtime_dispatch": {
+    "rows": [
+      {
+        "T_internal": 146,
+        "gain_percent": -32.73565515109183
+      },
+      {
+        "T_internal": 190,
+        "gain_percent": -40.350867936609134
+      },
+      {
+        "T_internal": 191,
+        "gain_percent": -37.41981821950438
+      },
+      {
+        "T_internal": 192,
+        "gain_percent": -41.37930460166784
+      },
+      {
+        "T_internal": 193,
+        "gain_percent": -21.179705860180352
+      },
+      {
+        "T_internal": 200,
+        "gain_percent": -18.756909745031127
+      },
+      {
+        "T_internal": 257,
+        "gain_percent": -33.14839820755932
+      },
+      {
+        "T_internal": 291,
+        "gain_percent": -32.2220439103436
+      },
+      {
+        "T_internal": 350,
+        "gain_percent": -22.906397473476517
+      },
+      {
+        "T_internal": 380,
+        "gain_percent": -23.293468627151686
+      },
+      {
+        "T_internal": 438,
+        "gain_percent": -28.908798892468642
+      },
+      {
+        "T_internal": 513,
+        "gain_percent": -28.271013632765946
+      },
+      {
+        "T_internal": 582,
+        "gain_percent": -25.049467702435514
+      },
+      {
+        "T_internal": 699,
+        "gain_percent": -28.11476185835891
+      },
+      {
+        "T_internal": 760,
+        "gain_percent": -25.62276843368509
+      },
+      {
+        "T_internal": 875,
+        "gain_percent": -25.85532074284372
+      },
+      {
+        "T_internal": 1026,
+        "gain_percent": -27.55919003788341
+      },
+      {
+        "T_internal": 1398,
+        "gain_percent": -26.37167073192629
+      },
+      {
+        "T_internal": 1750,
+        "gain_percent": -25.41781399662558
+      }
+    ],
+    "resources": {
+      "64x32w4": [
+        {
+          "regs": 250,
+          "spills": 0,
+          "shared": 16384,
+          "tf32_mma": true
+        },
+        {
+          "regs": 250,
+          "spills": 0,
+          "shared": 16384,
+          "tf32_mma": true
+        }
+      ],
+      "64x16w4": [
+        {
+          "regs": 247,
+          "spills": 0,
+          "shared": 16384,
+          "tf32_mma": true
+        },
+        {
+          "regs": 247,
+          "spills": 0,
+          "shared": 16384,
+          "tf32_mma": true
+        }
+      ]
+    },
+    "conclusion": "Actual unspecialized builder AOT uniform short/long branch is slower at every tested shape; intervention written allfull32outputs andStats, so rejected. This does not exclude separate specialized engines."
+  },
+  "PCM_target_actual_waves": [
+    {
+      "evidence": "/workspace/zvoice_temp/optimization/int8_sm89_b32/history/027-pcm-000.json",
+      "raw_wave_samples": 98304,
+      "fragment_best_chunk": 2,
+      "median_ms": 9.5944515,
+      "all_pcm_exact": true
+    },
+    {
+      "evidence": "/workspace/zvoice_temp/optimization/int8_sm89_b32/history/027-pcm-002.json",
+      "raw_wave_samples": 261632,
+      "fragment_best_chunk": 4,
+      "median_ms": 22.119108,
+      "all_pcm_exact": true
+    },
+    {
+      "evidence": "/workspace/zvoice_temp/optimization/int8_sm89_b32/history/027-pcm-018.json",
+      "raw_wave_samples": 52736,
+      "fragment_best_chunk": 8,
+      "median_ms": 5.9674615,
+      "all_pcm_exact": true
+    },
+    {
+      "evidence": "/workspace/zvoice_temp/optimization/int8_sm89_b32/history/027-pcm-021.json",
+      "raw_wave_samples": 351744,
+      "fragment_best_chunk": 1,
+      "median_ms": 26.6722265,
+      "all_pcm_exact": true
+    },
+    {
+      "evidence": "/workspace/zvoice_temp/optimization/int8_sm89_b32/history/027-pcm-022.json",
+      "raw_wave_samples": 257280,
+      "fragment_best_chunk": 1,
+      "median_ms": 20.1974595,
+      "all_pcm_exact": true
+    },
+    {
+      "evidence": "/workspace/zvoice_temp/optimization/int8_sm89_b32/history/027-pcm-024.json",
+      "raw_wave_samples": 166400,
+      "fragment_best_chunk": 1,
+      "median_ms": 16.410142999999998,
+      "all_pcm_exact": true
+    },
+    {
+      "evidence": "/workspace/zvoice_temp/optimization/int8_sm89_b32/history/031-boundary-pcm-008.json",
+      "raw_wave_samples": 62720,
+      "fragment_best_chunk": 8,
+      "median_ms": 6.977318,
+      "all_pcm_exact": true
+    },
+    {
+      "evidence": "/workspace/zvoice_temp/optimization/int8_sm89_b32/history/031-boundary-pcm-038.json",
+      "raw_wave_samples": 66048,
+      "fragment_best_chunk": 2,
+      "median_ms": 7.5147655,
+      "all_pcm_exact": true
+    },
+    {
+      "evidence": "/workspace/zvoice_temp/optimization/int8_sm89_b32/history/031-boundary-pcm-048.json",
+      "raw_wave_samples": 135680,
+      "fragment_best_chunk": 2,
+      "median_ms": 12.729802,
+      "all_pcm_exact": true
+    },
+    {
+      "evidence": "/workspace/zvoice_temp/optimization/int8_sm89_b32/history/031-boundary-pcm-059.json",
+      "raw_wave_samples": 129792,
+      "fragment_best_chunk": 2,
+      "median_ms": 18.370109499999998,
+      "all_pcm_exact": true
+    }
+  ],
+  "projection_probes": [
+    {
+      "evidence": "036-f32-out-JIT-probe.json",
+      "T_internal": 582,
+      "variants": 22,
+      "best_fragment_gain_percent": -17.940006798412195
+    },
+    {
+      "evidence": "036-f32-out-JIT-probe.json",
+      "T_internal": 760,
+      "variants": 22,
+      "best_fragment_gain_percent": -20.01942259873474
+    },
+    {
+      "evidence": "036-f32-out-JIT-probe.json",
+      "T_internal": 1026,
+      "variants": 22,
+      "best_fragment_gain_percent": -38.80454672720193
+    },
+    {
+      "evidence": "036-f32-out-JIT-probe.json",
+      "T_internal": 1398,
+      "variants": 22,
+      "best_fragment_gain_percent": -36.608706095897794
+    },
+    {
+      "evidence": "036-f32-out-JIT-probe.json",
+      "T_internal": 1750,
+      "variants": 22,
+      "best_fragment_gain_percent": -25.795599294064925
+    },
+    {
+      "evidence": "038-attention-out-probe.json",
+      "T_internal": 146,
+      "variants": 22,
+      "best_fragment_gain_percent": 5.04761885755321
+    },
+    {
+      "evidence": "038-attention-out-probe.json",
+      "T_internal": 190,
+      "variants": 22,
+      "best_fragment_gain_percent": 2.6615974443911434
+    },
+    {
+      "evidence": "038-attention-out-probe.json",
+      "T_internal": 257,
+      "variants": 22,
+      "best_fragment_gain_percent": 3.7063939592631017
+    },
+    {
+      "evidence": "038-attention-out-probe.json",
+      "T_internal": 350,
+      "variants": 22,
+      "best_fragment_gain_percent": -0.3550323004308952
+    },
+    {
+      "evidence": "038-attention-out-probe.json",
+      "T_internal": 438,
+      "variants": 22,
+      "best_fragment_gain_percent": -1.686509242660569
+    }
+  ],
+  "policy": "Retain original migration PCMchunk6 T<=1391/chunk4 T>=1392; no newlower/middlethreshold. NormalKB32 retained.",
+  "boundaries": "Corpus883/906 around lower threshold;1381/1398 around upper;621/634 short8 proposal examined/rejected onE2E. Boundary correctness validated all70. Performance scope limited to explicit comparisons.",
+  "framework_representation_review": "180/298 actual source-weight mappings intact, quantization boundaries/layouts/plugins audited. NativeGEMM dominates. Strong nativeFFN out projection defeats110 variants. Four protected48->512 fullgraph FFMA regions total~.2-.3% diagnostic E2E upper bound; standalone canonical native alreadyTF32 and faster than most custom variants, no fullgraph replacement claim.",
+  "dependency_review": "Source B24 original ONNX ancestry: NL->normal1->normal2 value producers; same graph inverse batch-only provenance2 preserves dependencies. DirectjointAVfusion/parallelbranch invalid.",
+  "limits": [
+    "Different lengths were evaluated independently. A common implementation is retained only under its measured conditions; no requirement to force different kernels.",
+    "Fragment/profiling numbers are not unprofiled E2E.",
+    "Only formal lengths carry speedup claims; no all57 length optimum."
+  ],
+  "formal_PCM_decisions": [
+    {
+      "T": 1026,
+      "gain_percent": 0.01767524672364441,
+      "candidate_runner_sha256": "8192b84e426d68cf5076c7769c2b76fdb7eb6ca2ef14530b51c496632d0ce8cf",
+      "evidence": "/workspace/zvoice_temp/optimization/int8_sm89_b32/cases/final-incremental/024/comparison.json",
+      "count_per_route": 20
+    },
+    {
+      "T": 1381,
+      "gain_percent": 0.4867410778254426,
+      "candidate_runner_sha256": "8192b84e426d68cf5076c7769c2b76fdb7eb6ca2ef14530b51c496632d0ce8cf",
+      "evidence": "/workspace/zvoice_temp/optimization/int8_sm89_b32/cases/final-incremental/022/comparison.json",
+      "count_per_route": 20
+    },
+    {
+      "T": 906,
+      "gain_percent": -0.2670488242102752,
+      "candidate_runner_sha256": "8192b84e426d68cf5076c7769c2b76fdb7eb6ca2ef14530b51c496632d0ce8cf",
+      "evidence": "/workspace/zvoice_temp/optimization/int8_sm89_b32/cases/final-incremental/048/comparison.json",
+      "count_per_route": 20
+    },
+    {
+      "T": 1017,
+      "gain_percent": -0.2828513838545613,
+      "candidate_runner_sha256": "e953fa1450a0968e72b419dfe2db0b3a7fe931ad9e8835571d953ad70f8f7a25",
+      "evidence": "/workspace/zvoice_temp/optimization/int8_sm89_b32/cases/revised-boundary/005/comparison.json",
+      "count_per_route": 20
+    },
+    {
+      "T": 1279,
+      "gain_percent": -0.08117403259627433,
+      "candidate_runner_sha256": "71960cfb441a7988d6ed2676b21ff6918984a378ee2958d58a550fed180464d6",
+      "evidence": "/workspace/zvoice_temp/optimization/int8_sm89_b32/cases/revised-boundary/017/comparison.json",
+      "count_per_route": 20
+    }
+  ],
+  "decision": "RejectaddedPCMdispatch:1381+.487% but906-.267%,1017-.283% mixedgroups,1279median-.081%;1026+.0177% negligible. No stable mediangain supports broadernewband. Follow agreedmedianobjective rather than selectingpositivefragment or groupmean."
+}

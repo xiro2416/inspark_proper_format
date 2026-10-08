@@ -1,0 +1,60 @@
+{
+  "status": "normal_tf32_full_evidence_complete_review_pending",
+  "graph_pid": 3601270,
+  "probe_pid": 3639032,
+  "suffix": "normtf32k16",
+  "commands": [
+    [
+      "/workspace/A_1007/.venv-zipvoice/bin/python",
+      "/workspace/A_1007/scripts/review_zipvoice_model_graph.py"
+    ],
+    [
+      "/workspace/A_1007/.venv-zipvoice/bin/python",
+      "/workspace/A_1007/scripts/build_zipvoice_variants.py",
+      "--batches",
+      "64",
+      "--suffix",
+      "normtf32k16"
+    ],
+    [
+      "/workspace/A_1007/.venv-zipvoice/bin/python",
+      "/workspace/A_1007/scripts/validate_zipvoice_variant.py",
+      "--batch",
+      "64",
+      "--route",
+      "normtf32k16",
+      "--control",
+      "inherited",
+      "--application",
+      "a1007_delivery_graph",
+      "--pcm-chunk",
+      "16",
+      "--pcm-workers",
+      "4"
+    ],
+    [
+      "/workspace/A_1007/.venv-zipvoice/bin/python",
+      "/workspace/A_1007/scripts/measure_zipvoice_variant.py",
+      "--batch",
+      "64",
+      "--route",
+      "normtf32k16",
+      "--control",
+      "inherited",
+      "--application",
+      "a1007_delivery_graph",
+      "--control-application",
+      "a1007_delivery_graph",
+      "--pcm-chunk",
+      "16",
+      "--pcm-workers",
+      "4",
+      "--current-best-review",
+      "/workspace/A_1007/reports/sm89/zipvoice/a1007/model-graph-review.json"
+    ]
+  ],
+  "synthetic_stage_weighted_savings_ms": 15.946752548217773,
+  "synthetic_potential_percent": 1.1846891977639376,
+  "potential_limits": "Synthetic JIT serial stage estimate, not AOT/E2E attribution. Eight FM steps, stage layer counts2/2/4/4/4. Used only to decide deeper investment.",
+  "quality_pid": 3755529
+}

@@ -1,0 +1,84 @@
+{
+  "status": "accepted_B1_trace_review_complete_candidate_probe_running",
+  "capture": "10B1 requests,760frames,78tokens; NVTX encloses postPCM guards as well",
+  "kernel_groups": [
+    {
+      "graph_id": null,
+      "count": 2950,
+      "instrumented_sum_ms": 9.098441
+    },
+    {
+      "graph_id": 2,
+      "count": 86880,
+      "instrumented_sum_ms": 340.679692
+    }
+  ],
+  "runtime_api": [
+    {
+      "name": "cudaEventSynchronize_v3020",
+      "count": 10,
+      "instrumented_sum_ms": 174.626952
+    },
+    {
+      "name": "cudaGraphLaunch_v10000",
+      "count": 10,
+      "instrumented_sum_ms": 169.020447
+    },
+    {
+      "name": "cuLaunchKernel",
+      "count": 1500,
+      "instrumented_sum_ms": 8.719194
+    },
+    {
+      "name": "cuLaunchKernelEx",
+      "count": 1230,
+      "instrumented_sum_ms": 6.527332
+    },
+    {
+      "name": "cudaLaunchKernel_v7000",
+      "count": 220,
+      "instrumented_sum_ms": 1.832867
+    },
+    {
+      "name": "cudaMemcpyAsync_v3020",
+      "count": 120,
+      "instrumented_sum_ms": 1.543684
+    },
+    {
+      "name": "cudaMemsetAsync_v3020",
+      "count": 80,
+      "instrumented_sum_ms": 0.419144
+    },
+    {
+      "name": "cudaStreamIsCapturing_v10000",
+      "count": 320,
+      "instrumented_sum_ms": 0.204537
+    },
+    {
+      "name": "cudaStreamSynchronize_v3020",
+      "count": 40,
+      "instrumented_sum_ms": 0.178326
+    },
+    {
+      "name": "cuKernelGetName",
+      "count": 220,
+      "instrumented_sum_ms": 0.07007
+    },
+    {
+      "name": "cudaEventRecordWithFlags_v11010",
+      "count": 10,
+      "instrumented_sum_ms": 0.053345
+    },
+    {
+      "name": "cuStreamGetGreenCtx",
+      "count": 20,
+      "instrumented_sum_ms": 0.012199
+    }
+  ],
+  "observation": "295kernels/request outside FM graph; includes text/Vocos/FFT/RMS, input/noise andvalidation guards. Only required GPUmodel domain is candidate capture; fresh H2D/noise andPCM remain outside.",
+  "limits": "Node-level graph tracing materially increasesGraphLaunch time. API waits overlap producer execution; durations notadditive orproductionE2E. No busy-pipeline/free-SM claim.",
+  "source": "outputs/zipvoice-profiles/b1-accepted-trace/trace.sqlite",
+  "source_sha256": "d5d84e057d02285b635110f2919322813628f991a34f9c29a341776b72d16fc3",
+  "official_capture_reference": "https://docs.nvidia.com/nsight-systems/UserGuide/index.html",
+  "capture_fix": "Enable NSYS_NVTX_PROFILER_REGISTER_ONLY=0 for plain NVTX strings; failed no-report attempt archived."
+}

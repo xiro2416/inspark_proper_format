@@ -1,0 +1,134 @@
+{
+  "status": "existing_math_f32_prepack_candidate_prepared_not_built",
+  "batch": 16,
+  "suffix": "wp",
+  "plugin_package": "inspark_infer.ops.tensorrt.zipvoice.a1007.b16_wp",
+  "code": ".work/zipvoice/b16_wp/code",
+  "source_graph": ".work/zipvoice/b16/graphs/fm-inherited.onnx",
+  "files": [
+    {
+      "file": "dw_int8_aot_kernel.py",
+      "source_sha256": "ef5d126fce45738da938b05cdcf0f44d9bc0c18f352d867b8ed863c9c379a8b1",
+      "candidate_sha256": "ef5d126fce45738da938b05cdcf0f44d9bc0c18f352d867b8ed863c9c379a8b1"
+    },
+    {
+      "file": "dw_int8_full_rewrite.py",
+      "source_sha256": "eaf1f010d0302717e048b5a6eefbfc5fb31dd90081a986f66c769d4a4ab05d2b",
+      "candidate_sha256": "8876dfaafe9e3f9c42d38a0deccc660de8d61bd54f6921c37b8a851f627b5092"
+    },
+    {
+      "file": "dw_int8_plugin.py",
+      "source_sha256": "b520d6a7544b6608cd869264898b89f0112d2e34801221a849cc79c5002baa65",
+      "candidate_sha256": "942bf78f4422703bcd9ae4039f532a5d0425a6fcb55ee8d48c37d6fa76f4b7a5"
+    },
+    {
+      "file": "dw_int8_probe_kernel.py",
+      "source_sha256": "92e833e5497c52ec5dbdd5734abe73988d2e5cc70a60f755907c1bf1523981fc",
+      "candidate_sha256": "92e833e5497c52ec5dbdd5734abe73988d2e5cc70a60f755907c1bf1523981fc"
+    },
+    {
+      "file": "f32_tf32_rna_aot.py",
+      "source_sha256": "4c48491445ad90cc3ed11cdf2a8f6d28528c787bdf40b51d7f20417fd4b7aa1b",
+      "candidate_sha256": "4c48491445ad90cc3ed11cdf2a8f6d28528c787bdf40b51d7f20417fd4b7aa1b"
+    },
+    {
+      "file": "f32_tf32_rna_plugin.py",
+      "source_sha256": "c3cf54b0f290a2107ea99a15230d0952c64a5b53c93a763f183f092c25553afe",
+      "candidate_sha256": "a9aa44b6b118c8ab81f54a9244e19f3338ca9c0a76b09dc627cac7df77756f21"
+    },
+    {
+      "file": "f32_tf32_rna_rewrite.py",
+      "source_sha256": "0dd52d47495989641cf99c326a292a1655e77236481a5f0d1066e8c27da22881",
+      "candidate_sha256": "b7fa930c057ebbb835d66a579130fc9b81170a789566c3794a94467570ee5df8"
+    },
+    {
+      "file": "i8_residual_aot.py",
+      "source_sha256": "b060abc0015ad9b530c9f5c1e32c187213d8942a5205e1956ce08ccfb522b4e2",
+      "candidate_sha256": "b060abc0015ad9b530c9f5c1e32c187213d8942a5205e1956ce08ccfb522b4e2"
+    },
+    {
+      "file": "i8_residual_plugin.py",
+      "source_sha256": "a33f3afed7fd1684596342dfe2d20206b4e648aadfa2697b5fa8d30a4eb2e7bd",
+      "candidate_sha256": "c219b649a6c98840bbf5005ac56af891480efee236b412ecd30f5b1c5db7074b"
+    },
+    {
+      "file": "i8_residual_rewrite.py",
+      "source_sha256": "c03ec51c23524ae1025024942e039620887dc879e3b45bff379be1116339295d",
+      "candidate_sha256": "ab9054559bc8b9152c95a96ac685728b58194976592fa3c28db6bc36dbbb3d76"
+    },
+    {
+      "file": "i8_residual_runtime_kernel.py",
+      "source_sha256": "c7743ff68ed4523f55f36c37c1f940bf1d4d18e023b77022b68d95a4e0fb2702",
+      "candidate_sha256": "c7743ff68ed4523f55f36c37c1f940bf1d4d18e023b77022b68d95a4e0fb2702"
+    },
+    {
+      "file": "int8_nonlinear_value_aot.py",
+      "source_sha256": "9f3ff632af566726af1504c82441731028a86d74110dc7bea1f3f6b4891f593e",
+      "candidate_sha256": "9f3ff632af566726af1504c82441731028a86d74110dc7bea1f3f6b4891f593e"
+    },
+    {
+      "file": "int8_nonlinear_value_plugin.py",
+      "source_sha256": "c908450cc50269ca37f073f91fee1e3591d2da677ca709085c111530ccf5cd91",
+      "candidate_sha256": "8dfb8909550dbee917484cbcda6655b99518d42b1d0343a0dec4dd2a529a5056"
+    },
+    {
+      "file": "int8_nonlinear_value_rewrite.py",
+      "source_sha256": "3d51ada03aabd2113e17b8ed38b0798be6f6618f72df150b8535316d3b37e09d",
+      "candidate_sha256": "8205a429e010a118a6989918438ba27cb2f4f994c893e8c720ea1b207d00e7cc"
+    },
+    {
+      "file": "int8_nonlinear_value_runtime_kernel.py",
+      "source_sha256": "7728448844f271cf07619eb39263bfddfef80bc09ba66c6b69b3db370e1a7a18",
+      "candidate_sha256": "7728448844f271cf07619eb39263bfddfef80bc09ba66c6b69b3db370e1a7a18"
+    },
+    {
+      "file": "linear_f32_activation_tf32_rna_kernel.py",
+      "source_sha256": "bfdfeb9eee2735038bae85a432ab102c30d3752e856c73600dcab755aec7c109",
+      "candidate_sha256": "24aa7ddf2641fc440b317fa0342b903c543be96e0c90e70c25d4d3852f3eda67"
+    },
+    {
+      "file": "normal_tf32_aot.py",
+      "source_sha256": "9a3be872bb5358f0617f902040f5540446d681a32250cfdf879c10236a79fd08",
+      "candidate_sha256": "9a3be872bb5358f0617f902040f5540446d681a32250cfdf879c10236a79fd08"
+    },
+    {
+      "file": "normal_tf32_plugin.py",
+      "source_sha256": "3fd166f023bb66a20b492de9d23a2c11a0ebc248ddd2045281bf32d5fcb25dc6",
+      "candidate_sha256": "fdae94225874aca733417a1f6c58de2e41d9522457a531f6b0b4a863b1eae4c8"
+    },
+    {
+      "file": "normal_tf32_rewrite.py",
+      "source_sha256": "49d69a807ba98f37320f53e30353ccd34fbc4df677106ff2e2e6966fa998ddbb",
+      "candidate_sha256": "c906a42ff74c65579795066a699e9388a25744711b6eeb4f7dbcd26095ea6f56"
+    },
+    {
+      "file": "normal_tf32_runtime_kernel.py",
+      "source_sha256": "58720d0a739caaf524c45659d5899d25b7b44bda30cab279a44c60b2687d90bf",
+      "candidate_sha256": "58720d0a739caaf524c45659d5899d25b7b44bda30cab279a44c60b2687d90bf"
+    },
+    {
+      "file": "online_nonlinear_rna_aot.py",
+      "source_sha256": "bace1dffed969bbe710508215e741df5ee94f601864974269270c4eabdc215ad",
+      "candidate_sha256": "bace1dffed969bbe710508215e741df5ee94f601864974269270c4eabdc215ad"
+    },
+    {
+      "file": "online_nonlinear_rna_plugin.py",
+      "source_sha256": "0bdc13d486a6e3f82de58225595356b33ded954f1bb28b25a9b6a8e6a60b5cca",
+      "candidate_sha256": "9ff610f92622bf5c18edacb8b58d7299207c80d7da6116634c5091268aa57081"
+    },
+    {
+      "file": "online_nonlinear_rna_runtime_kernel.py",
+      "source_sha256": "8acef29eb419aee62f54229e5f77b9c7afe435336f59c78848b405ca11bb34f3",
+      "candidate_sha256": "8acef29eb419aee62f54229e5f77b9c7afe435336f59c78848b405ca11bb34f3"
+    },
+    {
+      "file": "position_fm_rewrite.py",
+      "source_sha256": "662687bc64f660dd50b77eafa5d98866e1eb7310129902aa1082161464009e10",
+      "candidate_sha256": "662687bc64f660dd50b77eafa5d98866e1eb7310129902aa1082161464009e10"
+    }
+  ],
+  "helper_sha256": "483db497bfea131fcae706d959ac01fae25fffe11f86cd01372e5cecc5316492",
+  "screen_sha256": "b7c6af02536e0e714aba96ef527319bac4503b0b6e6204ecf520aef521b57e22",
+  "preserved": "Original checkpoints and all INT8 weights/scales/1:3; normalTF32k16, nonlinear and other kernels unchanged. Float32 FFN IO/accum/bias/activation and exact preexisting TF32 operands.",
+  "next": "GPU RNA validation of all12actual weights before AOT; full source/candidate model state/PCM identity and matched currentbest E2E required"
+}

@@ -1,0 +1,10 @@
+import triton
+from .i8_residual_runtime_kernel import i8_residual
+
+@triton.jit
+def residual_64x64(Q, W, AS, WS, Bias, R, T, Y):
+    i8_residual(Q, W, AS, WS, Bias, R, Y, T * 16, 48, 512, 64, 64, 64)
+
+@triton.jit
+def residual_16x64(Q, W, AS, WS, Bias, R, T, Y):
+    i8_residual(Q, W, AS, WS, Bias, R, Y, T * 16, 48, 512, 16, 64, 64)

@@ -1,0 +1,28 @@
+{
+  "status": "build_coordinator_waiting_actual_microprobe",
+  "stage_count_evidence": "artifacts/zipvoice/a1007/b64/fm-inherited/build.json",
+  "normal_write_read_pairs_by_factor": {
+    "1": 6,
+    "2": 6,
+    "4": 4
+  },
+  "primary_stage_frames": [
+    760,
+    380,
+    190
+  ],
+  "fm_steps": 8,
+  "investment_gate": "At least1percent synthetic weighted potential versus current760 request prompts deeper AOT build; screen is not E2E gain or acceptance. Smaller signal requires cheap related review.",
+  "commands": [
+    "scripts/build_zipvoice_variants.py --batches 64 --suffix normtf32",
+    "scripts/validate_zipvoice_variant.py --batch 64 --route normtf32 --control inherited --application CURRENT_BEST --pcm-chunk 16 --pcm-workers 4",
+    "scripts/measure_zipvoice_variant.py --batch 64 --route normtf32 --control inherited --application CURRENT_BEST --control-application CURRENT_BEST --pcm-chunk 16 --pcm-workers 4 --current-best-review reports/sm89/zipvoice/a1007/model-graph-review.json"
+  ],
+  "coordinator_pid": 3615291,
+  "coordinator_session_id": 63676,
+  "log": "outputs/build-logs/normal-tf32-coordinator.log",
+  "limits": [
+    "Source graph has no plugins; source graph plugin rewrites occur in TensorRT builder, actual16 write/read pair count checked in retained build record",
+    "No artifact deployed until complete path/quality/currentbestE2E decision"
+  ]
+}

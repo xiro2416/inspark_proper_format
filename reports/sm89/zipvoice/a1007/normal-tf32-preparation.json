@@ -1,0 +1,197 @@
+{
+  "status": "normal_tf32_candidate_prepared_not_built",
+  "batch": 64,
+  "suffix": "normtf32",
+  "plugin_package": "inspark_infer.ops.tensorrt.zipvoice.a1007.b64_normtf32",
+  "code": ".work/zipvoice/b64_normtf32/code",
+  "source_graph": ".work/zipvoice/b64/graphs/fm-inherited.onnx",
+  "files": [
+    {
+      "file": "dw_int8_aot_kernel.py",
+      "source_sha256": "ef5d126fce45738da938b05cdcf0f44d9bc0c18f352d867b8ed863c9c379a8b1",
+      "candidate_sha256": "ef5d126fce45738da938b05cdcf0f44d9bc0c18f352d867b8ed863c9c379a8b1",
+      "edits": []
+    },
+    {
+      "file": "dw_int8_full_rewrite.py",
+      "source_sha256": "8a128390b6858885283d4e0008e6d90285a7434414ce460eeaa2e465d1a90bdc",
+      "candidate_sha256": "6222440223b52a25c2b18aea05f26efbf5658be4a152bb66bde2cd13d9117db7",
+      "edits": []
+    },
+    {
+      "file": "dw_int8_plugin.py",
+      "source_sha256": "ae60fe1b80862b5ccaf721fa62a3a3e76ea95761e0b165faa0ac767f7e714b66",
+      "candidate_sha256": "ad594b87374bf949a7a04cbb78150771f71d23d2a40d5867c83d0e4d7d58f4b5",
+      "edits": []
+    },
+    {
+      "file": "dw_int8_probe_kernel.py",
+      "source_sha256": "92e833e5497c52ec5dbdd5734abe73988d2e5cc70a60f755907c1bf1523981fc",
+      "candidate_sha256": "92e833e5497c52ec5dbdd5734abe73988d2e5cc70a60f755907c1bf1523981fc",
+      "edits": []
+    },
+    {
+      "file": "f32_tf32_rna_aot.py",
+      "source_sha256": "4c48491445ad90cc3ed11cdf2a8f6d28528c787bdf40b51d7f20417fd4b7aa1b",
+      "candidate_sha256": "4c48491445ad90cc3ed11cdf2a8f6d28528c787bdf40b51d7f20417fd4b7aa1b",
+      "edits": []
+    },
+    {
+      "file": "f32_tf32_rna_plugin.py",
+      "source_sha256": "fbe17e72c672739ed69c2326bce1b38406990f31b9b0c62f98d2d20b976aed68",
+      "candidate_sha256": "e62eb8241a1dce869052a8aa5af379f261f2053a8c3a180b80daefd78569ee9a",
+      "edits": []
+    },
+    {
+      "file": "f32_tf32_rna_rewrite.py",
+      "source_sha256": "b0ef7473046210469b9d895cf1a87a67f629e577835674d3093f0f60033ee05b",
+      "candidate_sha256": "21d51ea232dca705fae84686658f938a6e60e917e56073f08303821188965487",
+      "edits": []
+    },
+    {
+      "file": "i8_residual_aot.py",
+      "source_sha256": "d16c34f9733d7c9f554493be599dc712f911afb176c625cc1d1ea4560b4c7200",
+      "candidate_sha256": "d16c34f9733d7c9f554493be599dc712f911afb176c625cc1d1ea4560b4c7200",
+      "edits": []
+    },
+    {
+      "file": "i8_residual_plugin.py",
+      "source_sha256": "8d2b7ab72a4e0ec91002972a503dc1d5b23f3cbd2a2a20b9fbdd068491890dce",
+      "candidate_sha256": "36d709391879e46397b1269d12cb50a4415a710aa002510854ecd9c32be30aa3",
+      "edits": []
+    },
+    {
+      "file": "i8_residual_rewrite.py",
+      "source_sha256": "d8739a4e296f6efaf04ed4b6bd8aa06dc73b0ef874f75c8568b6f0a27b3abf9a",
+      "candidate_sha256": "833b42c71abcdfe1c3c43a47874191eaaf5fa4b354a12b58c9ff2e91953c31eb",
+      "edits": []
+    },
+    {
+      "file": "i8_residual_runtime_kernel.py",
+      "source_sha256": "c7743ff68ed4523f55f36c37c1f940bf1d4d18e023b77022b68d95a4e0fb2702",
+      "candidate_sha256": "c7743ff68ed4523f55f36c37c1f940bf1d4d18e023b77022b68d95a4e0fb2702",
+      "edits": []
+    },
+    {
+      "file": "int8_nonlinear_value_aot.py",
+      "source_sha256": "9f3ff632af566726af1504c82441731028a86d74110dc7bea1f3f6b4891f593e",
+      "candidate_sha256": "9f3ff632af566726af1504c82441731028a86d74110dc7bea1f3f6b4891f593e",
+      "edits": []
+    },
+    {
+      "file": "int8_nonlinear_value_plugin.py",
+      "source_sha256": "6674d303e735a5f4422f30e559f687c8e1db2ba309e48b1f4d382280b7192a4f",
+      "candidate_sha256": "6a9d3792c7b5ac71d98854b52d7a65cba555eb3348d62f7fc11802d87bde0f58",
+      "edits": []
+    },
+    {
+      "file": "int8_nonlinear_value_rewrite.py",
+      "source_sha256": "b3758700e7a1c880a07a480419764dc06fca6777ae1b9cc2b3a84911ebb357d3",
+      "candidate_sha256": "318d583243b54547740f283bdaa01a8df5b4c5252e373fe51f566ed1c1bb9615",
+      "edits": []
+    },
+    {
+      "file": "int8_nonlinear_value_runtime_kernel.py",
+      "source_sha256": "ad68fe87969e7b278969a440ef8f9a59f74ff3f8873a3a932a92e4d405a50053",
+      "candidate_sha256": "ad68fe87969e7b278969a440ef8f9a59f74ff3f8873a3a932a92e4d405a50053",
+      "edits": []
+    },
+    {
+      "file": "linear_f32_activation_tf32_rna_kernel.py",
+      "source_sha256": "bfdfeb9eee2735038bae85a432ab102c30d3752e856c73600dcab755aec7c109",
+      "candidate_sha256": "bfdfeb9eee2735038bae85a432ab102c30d3752e856c73600dcab755aec7c109",
+      "edits": []
+    },
+    {
+      "file": "online_branch_stats_runtime_kernel.py",
+      "source_sha256": "ec71f1b1744d63fb1768feb9672c7b45f88bdb871dbcbb7f5a50dbc535dfc3a3",
+      "candidate_sha256": "a336e408eff829df6593877ee19a855a51a323b9ea9b4c7a760f2fe92e4271a5",
+      "edits": [
+        "Q RNA",
+        "K RNA",
+        "QK TF32",
+        "P/V RNA; keep full F32 sum",
+        "denominator remains unrounded F32 probability sum"
+      ]
+    },
+    {
+      "file": "online_branch_wide_aot.py",
+      "source_sha256": "ae4905bcfc3e2a518738ba3d335a5ac9f6e35b3e5956b01e501c6bfd5abdb739",
+      "candidate_sha256": "520f42418f84f0d7522dd8649e2ad52fa2e58d83909f24656002570fc7d71627",
+      "edits": [
+        "All3 normal wrappers AV TF32; geometry64x32 unchanged"
+      ]
+    },
+    {
+      "file": "online_branch_wide_plugin.py",
+      "source_sha256": "15684eeae2f08b15106c28b2d9e8e86772b0e478eea62c6085d747ac8e7391ef",
+      "candidate_sha256": "8361898369ab35265747730bff3730b96f27e9b2c7659b3fa122323e95cd9982",
+      "edits": [
+        "Require actual RNA and TF32 MMA PTX; retain scratch/shared limits"
+      ]
+    },
+    {
+      "file": "online_nlwide_rewrite.py",
+      "source_sha256": "01c590562bb751026e63e564555d16d70b808159851156801f4677d2b98fc9db",
+      "candidate_sha256": "bec8c7ca4c970c39055f51c15e85ce9bab9caf1b4653c3471083071cbc6990ee",
+      "edits": []
+    },
+    {
+      "file": "online_nonlinear_rna_aot.py",
+      "source_sha256": "bace1dffed969bbe710508215e741df5ee94f601864974269270c4eabdc215ad",
+      "candidate_sha256": "bace1dffed969bbe710508215e741df5ee94f601864974269270c4eabdc215ad",
+      "edits": []
+    },
+    {
+      "file": "online_nonlinear_rna_plugin.py",
+      "source_sha256": "3dae52f7645656841026d8ac2122420e60246791778eaeaf773d3e3304496c5c",
+      "candidate_sha256": "d42b09d4d9502e5631ba6b8dddb811432bc0bb4a7f396e8341936445e37d5447",
+      "edits": []
+    },
+    {
+      "file": "online_nonlinear_rna_runtime_kernel.py",
+      "source_sha256": "441031620671b087ab4564530a355541f84f90c3a15994608d176c04a16aa239",
+      "candidate_sha256": "441031620671b087ab4564530a355541f84f90c3a15994608d176c04a16aa239",
+      "edits": []
+    },
+    {
+      "file": "online_single_branch_aot.py",
+      "source_sha256": "a09e150997677a7dd15dc5bb6f0d3698fbebe5c06a36b5b713ed181e098f895b",
+      "candidate_sha256": "a09e150997677a7dd15dc5bb6f0d3698fbebe5c06a36b5b713ed181e098f895b",
+      "edits": []
+    },
+    {
+      "file": "online_single_branch_plugin.py",
+      "source_sha256": "3759dbeb47962d81f3528710bb3d599f6d5b9dee20efc3bcd53ecb385fc8d824",
+      "candidate_sha256": "c631a3e99ac4152157cadd39f3e6c77509dd5171b98281cb0ee6db718ed0adb0",
+      "edits": []
+    },
+    {
+      "file": "online_single_branch_runtime_kernel.py",
+      "source_sha256": "0e8cdb41ebf0099e89a6cad7b4688624dfe9baa895fc2a72dc12b98a1746407f",
+      "candidate_sha256": "0e8cdb41ebf0099e89a6cad7b4688624dfe9baa895fc2a72dc12b98a1746407f",
+      "edits": []
+    },
+    {
+      "file": "position_fm_rewrite.py",
+      "source_sha256": "dbcac66af26a5779aa144c355392ffa07b01916e8fae6687a9a5a17e85f5a395",
+      "candidate_sha256": "1faadbe5079e9741f2ebdbc784dc72c6a7a8934cac9f341229a343fa1809a46f",
+      "edits": []
+    },
+    {
+      "file": "position_softmax_f32_kernel.py",
+      "source_sha256": "e39c8c89162a45e6ffa7ec12afaac3ba44a3e81962213fbc1fcfe1afab29d145",
+      "candidate_sha256": "e39c8c89162a45e6ffa7ec12afaac3ba44a3e81962213fbc1fcfe1afab29d145",
+      "edits": []
+    },
+    {
+      "file": "position_softmax_f32_plugin.py",
+      "source_sha256": "25afdcfd0ed2ae19a092bb824c329b480aba809f573837f44e4bea78e789b566",
+      "candidate_sha256": "e7f28f89c78fe136850838ecd04cba1180cd222ccc62aec5325dcf9f583ed0fb",
+      "edits": []
+    }
+  ],
+  "changes": "Normal QK/AV multiply becomes authorized ordinary TF32 RNA; Float32 IO/accum/stats. Original mask/position/online stats dependencies unchanged.",
+  "preserved": "All geometry, first4floating/last12INT8, source180weights/scales, nonlinear QK/AV, FFN/value/residual/DW implementations",
+  "next": "Matched samebatch 2-normal-branch write/read microprobe first; rebuild+mapping/quality/E2E required for retention"
+}

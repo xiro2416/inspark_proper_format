@@ -1,0 +1,28 @@
+"""INT8 depthwise with original scales, INT32 accumulation, Float32 output."""
+import triton
+import triton.language as tl
+from triton.language.extra.cuda import libdevice
+
+@triton.jit
+def quantize_original(X, Q, N, XS: tl.constexpr, BLOCK: tl.constexpr):
+    i = tl.program_id(0) * BLOCK + tl.arange(0, BLOCK)
+    x = tl.load(X + i, i < N, 0)
+    q = libdevice.nearbyint(tl.div_rn(x, XS))
+    q = tl.minimum(127.0, tl.maximum(-128.0, q)).to(tl.int8)
+    tl.store(Q + i, q, i < N)
+
+@triton.jit
+def dw_int8(X, W, WS, Bias, Y, T, XS: tl.constexpr, K: tl.constexpr, C: tl.constexpr, BLOCK: tl.constexpr):
+    bc = tl.program_id(1)
+    c = bc % C
+    pos = tl.program_id(0) * BLOCK + tl.arange(0, BLOCK)
+    acc = tl.full((BLOCK,), 0, tl.int32)
+    for k in tl.static_range(K):
+        index = pos + k - K // 2
+        x = tl.load(X + bc * T + index, (index >= 0) & (index < T), 0).to(tl.int32)
+        w = tl.load(W + c * K + k).to(tl.int32)
+        acc = acc + x * w
+    scale = tl.load(WS + c) * XS
+    bias = tl.load(Bias + c)
+    y = acc.to(tl.float32) * scale + bias
+    tl.store(Y + bc * T + pos, y, pos < T)

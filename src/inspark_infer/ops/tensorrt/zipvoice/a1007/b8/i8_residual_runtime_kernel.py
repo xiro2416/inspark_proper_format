@@ -1,0 +1,21 @@
+"""Original integer dot, scales, bias and residual in original row order."""
+import triton
+import triton.language as tl
+
+@triton.jit
+def i8_residual(Q, W, AS, WS, Bias, R, Y, M, K: tl.constexpr, N: tl.constexpr, BM, BN: tl.constexpr, BK: tl.constexpr):
+    m = tl.program_id(0) * BM + tl.arange(0, BM)
+    n = tl.program_id(1) * BN + tl.arange(0, BN)
+    ks = tl.arange(0, BK)
+    acc = tl.zeros((BM, BN), tl.int32)
+    for b in range(tl.cdiv(K, BK)):
+        k = b * BK + ks
+        x = tl.load(Q + m[:, None] * K + k[None, :], (m[:, None] < M) & (k[None, :] < K), 0)
+        w = tl.load(W + n[None, :] * K + k[:, None], (n[None, :] < N) & (k[:, None] < K), 0)
+        acc = tl.dot(x, w, acc, out_dtype=tl.int32)
+    mask = (m[:, None] < M) & (n[None, :] < N)
+    scale = tl.load(AS) * tl.load(WS + n, n < N, 0)
+    bias = tl.load(Bias + n, n < N, 0)
+    r = tl.load(R + m[:, None] * N + n[None, :], mask, 0)
+    y = acc.to(tl.float32) * scale[None, :] + bias[None, :] + r
+    tl.store(Y + m[:, None] * N + n[None, :], y, mask)

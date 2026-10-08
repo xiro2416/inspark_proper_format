@@ -1,0 +1,34 @@
+{
+  "status": "compute_diagnostics_complete_adaptive_migration_review_required",
+  "completed": [
+    "b16-source-preservation",
+    "b32-source-preservation",
+    "b64-source-preservation",
+    "migration-e2e",
+    "b1-framework-timing",
+    "b2-framework-timing",
+    "b4-framework-timing",
+    "b8-framework-timing",
+    "b16-framework-timing",
+    "b32-framework-timing",
+    "b64-framework-timing",
+    "b1-linear-geometry",
+    "b2-linear-geometry",
+    "b4-linear-geometry",
+    "b8-linear-geometry",
+    "b1-normal-geometry",
+    "b2-normal-geometry",
+    "b4-normal-geometry",
+    "b8-normal-geometry",
+    "b16-normal-geometry",
+    "b32-normal-geometry"
+  ],
+  "active": null,
+  "command": [
+    "/workspace/A_1007/.venv-builder/bin/python",
+    "/workspace/A_1007/scripts/recheck_zipvoice_geometry.py",
+    "--batch",
+    "32"
+  ],
+  "returncode": 1
+}
