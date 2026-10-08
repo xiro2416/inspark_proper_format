@@ -1,6 +1,6 @@
 # ZipVoice SM120 FP8
 
-七档最终路线已在 GPU3（RTX6000D／SM120，现有600W上限）完成本机验收，并发布私有 HF 资产。GitHub 以普通 main 提交发布；最终新 checkout 复验证据单独记录。
+七档最终路线已在 GPU3（RTX6000D／SM120，现有600W上限）完成本机验收，并发布私有 HF 资产。GitHub 以普通 main 提交及合并发布；新 GitHub checkout 和独立空缓存的七档48项形状／混合文本复验均通过。
 
 完整模型 batch、并发1；动态总帧600/760/920、padded tokens52/78/141。参考375帧来自连续4秒 VAD 窗口及准确转写；时长按完整原文自然推导，保留8步Euler、t_shift=.5、guidance=1、feat_scale=.1。
 
@@ -65,3 +65,5 @@ TensorRT level5/FULL tiling搜索和207个FP8 GEMM tactics覆盖全部216投影�
 公开证据：`reports/sm120/zipvoice/fp8/history/007-all-target-migration.json`、`012-retained-compute-profiles.json`、`013-protected-ffn-review.json`、`014-final-route-review.json`、`015-private-publication.json`及各batch历史。原始音频、文本、转写、状态、profile dump留在忽略的`outputs/fp8`，不发布。
 
 HF使用新增`bundles/zipvoice/sm120/fp8/`、`fp8/sm120/`、`onnx/sm120/fp8/`，保留旧SM89文件与历史。每个bundle附许可证和来源说明。
+
+最终新 checkout 复验证据：`reports/sm120/zipvoice/fp8/history/016-fresh-github-checkout.json`；验证源码提交`15e856e4de42ba540cb6849b57b6aa56a1cc6112`，源码／插件／引擎身份保持一致。

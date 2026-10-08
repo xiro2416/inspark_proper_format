@@ -1,4 +1,4 @@
-# ZipVoice SM120 FP8 — seven targets published privately
+# ZipVoice SM120 FP8 — deployment complete
 
 Goal: /workspace/A_1007, B1/2/4/8/16/32/64 complete unsplit batch,
 concurrency1. Median prepared CPU conditions (shaping/H2D included) through
@@ -74,6 +74,12 @@ INSPARK_REPO_ROOT="$PWD" PYTHONPATH="$PWD/src" .venv-zipvoice-fp8/bin/python
 Registryconfigs/hardware/sm120/
 zipvoice_fp8_registry.json pinsprivateHF revision; HF_TOKEN viaenvironment.
 
-Remaining: normalGitHubmain commit/push, then newGitHubcheckout withnew
-emptycache, independent sourceimport path and allsevenshape/mixed PCM checks.
-Only afterthat mark taskcomplete; retainhistory/oldassets, no forcepush/delete.
+Completed: normalGitHubmain source commit15e856e4de42ba540cb6849b57b6aa56a1cc6112, preserving
+concurrentIndex mixed release519095506b69db4c860926c10ab460dcc441e4cc.
+NewGitHubcheckout/newemptycache verified allseven,48shape/mixed cases,
+PCMexact. Existing pinned dependencies reused;42privateinputdata files,
+zero projectsource files copied; sourceimport exclusivelyfreshcheckout.
+Finalreceipt history/016-fresh-github-checkout.json. No remainingtaskwork;
+stop after accepted retainedartifacts/executionreview and publication.
+Future newprecisions/backends/concurrency or corpus expansion require a new
+scope; retainedsource/caches/history are preserved, no forcepush/delete.
