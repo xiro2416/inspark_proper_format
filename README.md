@@ -9,6 +9,7 @@ ZipVoice-Distill 的 A_1007 INT8 B1/B2/B4/B8/B16/B32/B64 使用独立环境和�
 | FP8 E4M3FN，1:3保护策略 | 1、8、64、128 |
 | INT8 SmoothQuant，alpha=1.0，同一保护策略 | 1、8、64 |
 | NVFP4 E2M1，沿用同一保护策略 | 64 |
+| NVFP4 GEMM + FP8 Conv，同一保护策略 | 64 |
 
 ## 执行方案
 
@@ -62,3 +63,13 @@ inspark fetch --asset-dir ./nvfp4_assets --precision nvfp4 --batch 64
 推理使用现有 Pool/NDJSON 组批接口；仅发布 B64。权重位于 HF 的 `nvfp4/`，采用官方 max PTQ、16元素 K block、E4M3 block scale 和 FP32 global scale；无需重新训练。RNN、KV、embedding/norm 与其他角色外参数保持原精度。权重布局及加载说明见该目录 README；原生执行由配套 engines 的 inspector/CUDA trace 确认。
 
 当前测量、实际搜索结果和浮点审计见 [NVFP4 B64 验证](reports/current/nvfp4/RESULTS.md)。未采用的候选与原始日志只留在本地实验归档。
+
+## 按算子混合精度 B64
+
+`nvfp4_fp8` 是独立选项：135个NVFP4 GEMM、92个FP8卷积、90个BF16保护角色，其他参数保持原精度。CFM完整四步单engine；Vocoder直接FP8卷积与已有FP32 FIR插件合成一个engine，避免FP4显式窗口。原FP8/INT8/NVFP4配置保留。
+
+```bash
+inspark fetch --asset-dir ./mixed_assets --precision nvfp4_fp8 --batch 64
+```
+
+权重位于HF `nvfp4_fp8/`，需要匹配布局清单。同期30波测试受理后首chunk P50为278.69ms，采用同款新Vocoder的FP8对照295.67ms；含受理分别283.17ms及报告中对应值。参数、功率和浮点差异见[混合精度报告](reports/current/mixed_precision/RESULTS.md)。

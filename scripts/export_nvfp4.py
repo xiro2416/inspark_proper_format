@@ -67,8 +67,8 @@ def main():
                 manifest=[{k:v for k,v in r.items() if k!='module'} for r in roles if r['component']==component]
                 result={'component':component,'kind':kind,'batch':b,'frames':frames,'kv_limit':80,'prompt_frames':258 if args.component=='cfm' else None,
                     'onnx':str(args.output.resolve()),'onnx_sha256':artifact['sha256'],'onnx_artifact':artifact,'provenance':provenance,'plugins':[],
-                    'export_settings':{'precision':'nvfp4_dynamic_w4a4_fp32_interfaces','cfm_intervals':[[0,.25],[.25,.5],[.5,.75],[.75,1]]},
-                    'quantization_recipe':{'scheme':'nvfp4','calibration':file_record(args.calibration,'calibration_artifact'),'role_manifest':{'roles':manifest},
+                    'export_settings':{'precision':('nvfp4_dynamic_w4a4_fp32_interfaces' if recipe['scheme']=='nvfp4' else 'nvfp4_fp8_fp32_interfaces'),'cfm_intervals':[[0,.25],[.25,.5],[.5,.75],[.75,1]]},
+                    'quantization_recipe':{'scheme':recipe['scheme'],'calibration':file_record(args.calibration,'calibration_artifact'),'role_manifest':{'roles':manifest},
                         'role_specs_sha256':hashlib.sha256(json.dumps({k:v for k,v in recipe['role_specs'].items() if k.startswith(component+'.')},sort_keys=True).encode()).hexdigest()}}
                 args.output.with_suffix('.export.json').write_text(json.dumps(result,indent=2)+'\n');print(json.dumps({'component':args.component,'onnx':str(args.output)}),flush=True)
         finally:engine.close()

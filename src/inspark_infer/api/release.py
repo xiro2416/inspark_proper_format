@@ -18,7 +18,7 @@ def engine_release(info,precision,batch):
 
 def fetch(destination,precision='fp8',batch=1):
     from huggingface_hub import snapshot_download
-    info=registry();label=f'{precision}_b{batch}'
+    info=registry()
     prefix,revision=engine_release(info,precision,batch)
     destination=Path(destination).resolve();destination.mkdir(parents=True,exist_ok=True)
     # The published bundle contains only the seven selected dependency graphs.

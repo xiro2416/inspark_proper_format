@@ -25,6 +25,14 @@ def install(engine,artifact):
             protected_spec=dict(spec)
             if isinstance(module,nn.ConvTranspose1d):protected_spec['conv_transpose_rewrite']='zero_insert_conv'
             replacement=ExportWeightOp(module,protected_spec)
+        elif spec['precision']=='fp8' and artifact['scheme']=='nvfp4_fp8':
+            module=role.module
+            if type(module).__name__=='Conv1D':
+                w=role.weight();linear=nn.Linear(w.shape[1],w.shape[0],bias=module.bias is not None,device=w.device)
+                linear.weight.data.copy_(w)
+                if module.bias is not None:linear.bias.data.copy_(module.bias.detach())
+                module=linear
+            replacement=ExportWeightOp(module,spec)
         else:
             if spec['precision']!='nvfp4':raise ValueError('A required native NVFP4 role was changed')
             replacement=MatrixWeightOp(role.module,conv_layout=spec.get("conv_layout","channel_tap")).apply_nvfp4(spec['activation_amax'])
@@ -33,7 +41,10 @@ def install(engine,artifact):
         role.parent.add_module(role.child_name,replacement)
         manifest.append({'path':role.path,'component':role.component,'precision':spec['precision'],'module':replacement})
     counts=Counter(row['precision'] for row in manifest)
-    if counts!={'bf16':90,'nvfp4':227}:raise ValueError('Role policy changed: '+str(counts))
+    expected=Counter(s['precision'] for s in artifact['role_specs'].values())
+    if counts!=expected or counts['bf16']!=90 or sum(counts.values())!=317:
+        raise ValueError('Role policy changed: '+str(counts))
+    if artifact['scheme']=='nvfp4' and counts!={'bf16':90,'nvfp4':227}:raise ValueError('Native NVFP4 role policy changed')
     from inspark_infer.build.unified_acoustic_export import CFMBF16SDPAAttention,StaticAliasFree
     from inspark_infer.models.indextts2.upstream.s2mel.modules.gpt_fast.model import Attention
     for parent in engine.student.model.modules():
