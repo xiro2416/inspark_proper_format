@@ -1,7 +1,7 @@
 # Current InSpark release
 
 - Keep src/inspark_infer, configs/current, benchmarks, scripts, tests and reports/current layout.
-- Publish only current selected FP8 B1/B8/B64/B128 and INT8 SmoothQuant B1/B8/B64 routes, plus the plain FP32 semantic reference.
+- Publish current selected FP8 B1/B8/B64/B128, INT8 SmoothQuant B1/B8/B64 and newly authorized native NVFP4 B64, plus the plain FP32 semantic reference. NVFP4 retains the current protected-role list; unsupported 16-bit/FP8 fallback must not be labelled native NVFP4.
 - Draft is selected online step900; CFM is bilingual40k stage1 step800 with four quarter intervals. Keep checkpoint, per-component calibration and engine identities consistent.
 - Keep weights, ONNX, engines, environments and caches out of Git. Pinned assets live in private xirr/index_pipeline.
 - Preserve request-owned RNG, PCG residual law, committed-hidden isolation, KV ownership, EOS, cancellation and streaming outputs.

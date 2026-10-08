@@ -39,7 +39,7 @@ class RoleBinding:
 
 
 def iter_roles(engine, quant_format='fp8', components=('target', 'draft', 'cfm', 'vocoder')):
-    if quant_format not in ('fp8', 'int8', 'int8_smoothquant'):
+    if quant_format not in ('fp8', 'int8', 'int8_smoothquant','nvfp4'):
         raise ValueError(f'Unknown quantization format: {quant_format}')
     quant_format = 'int8' if quant_format == 'int8_smoothquant' else quant_format
     # U-ViT constructs this projection on every block but only calls it in
@@ -213,8 +213,11 @@ def load_artifact(path, quant_format=None):
     if quant_format and payload['scheme'] != quant_format:
         raise ValueError('Quantization artifact precision mismatch')
     for name, spec in payload['role_specs'].items():
-        if spec.get('precision') not in ('bf16', 'fp8', 'int8'):
+        if spec.get('precision') not in ('bf16', 'fp8', 'int8','nvfp4'):
             raise ValueError(f'Invalid role precision: {name}')
+        if spec['precision']=='nvfp4':
+            if not math.isfinite(spec['activation_amax']) or spec['activation_amax']<=0 or spec['block_size']!=16:
+                raise ValueError(f'Invalid NVFP4 role: {name}')
         if spec['precision'] in ('fp8', 'int8'):
             if not math.isfinite(spec['input_scale']) or spec['input_scale'] <= 0:
                 raise ValueError(f'Invalid activation scale: {name}')

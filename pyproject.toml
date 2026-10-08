@@ -34,6 +34,9 @@ dependencies = [
     "psutil==7.2.2",
 ]
 
+[project.optional-dependencies]
+nvfp4 = ["nvidia-modelopt==0.47.0"]
+
 [project.scripts]
 acc-clear = "inspark_infer.cli:main"
 inspark = "inspark_infer.command:main"

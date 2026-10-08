@@ -8,15 +8,23 @@ def sha256(path):
 def registry():
     return json.loads((Path(__file__).resolve().parents[3]/'configs/current/release.json').read_text())
 
+def engine_release(info,precision,batch):
+    """A new precision can have its own pinned bundle without moving defaults."""
+    label=f'{precision}_b{batch}'
+    if label not in info['deployments']:raise ValueError('No published deployment for '+label)
+    selected=info['deployments'][label]
+    return (selected.get('engine_prefix',info['engine_prefix']),
+            selected.get('engine_revision',info['engine_revision']))
+
 def fetch(destination,precision='fp8',batch=1):
     from huggingface_hub import snapshot_download
     info=registry();label=f'{precision}_b{batch}'
-    if label not in info['deployments']:raise ValueError('No published deployment for '+label)
+    prefix,revision=engine_release(info,precision,batch)
     destination=Path(destination).resolve();destination.mkdir(parents=True,exist_ok=True)
     # The published bundle contains only the seven selected dependency graphs.
-    cache=snapshot_download(info['repo'],revision=info['engine_revision'],
-        allow_patterns=[info['engine_prefix']+'/**'],local_dir=destination/'download')
-    bundle=Path(cache)/info['engine_prefix']
+    cache=snapshot_download(info['repo'],revision=revision,
+        allow_patterns=[prefix+'/**'],local_dir=destination/'download')
+    bundle=Path(cache)/prefix
     snapshot_download(info['repo'],revision=info['weights_revision'],
         allow_patterns=['unquantized/**','shared/**','training_provenance.json','manifest.json'],local_dir=destination/'weights')
     verify_bundle(bundle)

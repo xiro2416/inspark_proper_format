@@ -1,0 +1,130 @@
+{
+  "gpu": "RTX6000D SM120 GPU7",
+  "weights": "Draft150k online900 /CFM bilingual40k stage1 step800,four steps",
+  "rows": [
+    {
+      "configuration": "NVFP4 original",
+      "batch": 64,
+      "postadmission_ms": {
+        "n": 30,
+        "p50": 498.00887797027826,
+        "p95": 502.9334255028516,
+        "p99": 816.2444280274217,
+        "mean": 512.317323187987,
+        "min": 491.2772001698613,
+        "max": 944.1317794844508
+      },
+      "admission_ms": {
+        "n": 30,
+        "p50": 502.89910938590765,
+        "p95": 506.6452741622925,
+        "p99": 820.2983767073606,
+        "mean": 516.604983371993,
+        "min": 496.262863278389,
+        "max": 948.2782250270247
+      },
+      "power_w": {
+        "n": 742,
+        "p50": 403.92,
+        "p95": 486.6,
+        "p99": 493.18,
+        "mean": 382.167628032345,
+        "min": 86.42,
+        "max": 499.36
+      },
+      "peak_memory_gib": 21.7822265625,
+      "waves": 30,
+      "text_dedup": false
+    },
+    {
+      "configuration": "NVFP4 selected",
+      "batch": 64,
+      "postadmission_ms": {
+        "n": 30,
+        "p50": 357.11738420650363,
+        "p95": 361.93251414224505,
+        "p99": 362.1987167093903,
+        "mean": 357.3069937216739,
+        "min": 353.1700596213341,
+        "max": 362.2859166935086
+      },
+      "admission_ms": {
+        "n": 30,
+        "p50": 361.85726895928383,
+        "p95": 366.0738533362746,
+        "p99": 366.5641002636403,
+        "mean": 361.7743288166821,
+        "min": 357.43045434355736,
+        "max": 366.73243064433336
+      },
+      "power_w": {
+        "n": 747,
+        "p50": 406.31,
+        "p95": 493.67,
+        "p99": 501.17,
+        "mean": 386.00465863453815,
+        "min": 90.91,
+        "max": 506.84
+      },
+      "peak_memory_gib": 20.4013671875,
+      "waves": 30,
+      "text_dedup": false
+    },
+    {
+      "configuration": "FP8 matched",
+      "batch": 64,
+      "postadmission_ms": {
+        "n": 30,
+        "p50": 343.3314524590969,
+        "p95": 347.30376680381596,
+        "p99": 347.75353957898915,
+        "mean": 343.3096676754455,
+        "min": 338.79209589213133,
+        "max": 347.91452530771494
+      },
+      "admission_ms": {
+        "n": 30,
+        "p50": 347.44292264804244,
+        "p95": 350.94824652187526,
+        "p99": 351.49369995109737,
+        "mean": 347.3305835388601,
+        "min": 342.8305657580495,
+        "max": 351.6327878460288
+      },
+      "power_w": {
+        "n": 739,
+        "p50": 398.95,
+        "p95": 483.36,
+        "p99": 488.42,
+        "mean": 380.8365358592693,
+        "min": 90.42,
+        "max": 488.48
+      },
+      "peak_memory_gib": 23.5927734375,
+      "waves": 30,
+      "text_dedup": false
+    }
+  ],
+  "unquantized_role_protection": {
+    "bf16": 90,
+    "nvfp4": 227
+  },
+  "numerical_gate": null,
+  "gc_guard": {
+    "mode": "static_setup_permanent_generation",
+    "active": true,
+    "automatic_gc_enabled": true,
+    "frozen_objects": 1199817,
+    "dynamic_requests_collected": true
+  },
+  "native_required_math": "E2M1xE2M1 GEMM,not FP8 or dequantized16bit math",
+  "remaining_fp8_gap_percent": 4.0153419235743115,
+  "publication": {
+    "repo": "xirr/index_pipeline",
+    "revision": "d3fa9e80e2997a7007c839c07a386297141f6b6a",
+    "prefix": "engines/rtx6000d_sm120/draft900_cfm800_nvfp4/b64",
+    "private": true,
+    "remote_identity_verified": true,
+    "files": 52
+  }
+}

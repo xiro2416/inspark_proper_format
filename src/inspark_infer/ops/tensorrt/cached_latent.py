@@ -20,7 +20,7 @@ class OnePassLatentPrefixReplay:
             raise ValueError('Cached-latent calibration differs from prefill')
         if a.get('role_specs_sha256')!=r.get('role_specs_sha256'):
             raise ValueError('Cached-latent precision role manifest differs from prefill')
-        if engine.plan.get('precision')!='fp8_static_qdq_fp32_attention_and_interfaces':
+        if engine.plan.get('precision') not in ('fp8_static_qdq_fp32_attention_and_interfaces','nvfp4_dynamic_w4a4_fp32_interfaces'):
             raise ValueError('Cached-latent attention/interface precision differs from the approved graph')
         self.suffix=torch.zeros(b,40,1280,device=self.device)
         self.prefix_lengths=torch.full((b,),38,device=self.device,dtype=torch.long)

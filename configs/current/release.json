@@ -40,6 +40,13 @@
       "precision": "int8_smoothquant",
       "batch": 64,
       "path": "artifacts/current_release/deployments/int8_smoothquant_b64.json"
+    },
+    "nvfp4_b64": {
+      "precision": "nvfp4",
+      "batch": 64,
+      "path": "artifacts/current_release/deployments/nvfp4_b64.json",
+      "engine_revision": "d3fa9e80e2997a7007c839c07a386297141f6b6a",
+      "engine_prefix": "engines/rtx6000d_sm120/draft900_cfm800_nvfp4/b64"
     }
   },
   "weights": {

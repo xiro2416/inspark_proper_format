@@ -4,16 +4,24 @@ NAME='inspark_custom::small_fir_activation_tiled'
 
 
 def register():
+    import tensorrt as trt
     import tensorrt.plugin as trtp
     try:getattr(trtp.op.inspark_custom,'small_fir_activation_tiled');return
     except AttributeError:pass
     @trtp.register(NAME)
     def desc(x:trtp.TensorDesc,up:trtp.TensorDesc,down:trtp.TensorDesc,alpha:trtp.TensorDesc,beta:trtp.TensorDesc)->trtp.TensorDesc:
+        if any(v.dtype!=trt.float32 for v in (x,up,down,alpha,beta)):
+            raise ValueError("Tiled FIR requires FP32 inputs and output; BF16 cannot use fp32 pointers")
         return x.like()
+    @trtp.autotune(NAME)
+    def formats(x,up,down,alpha,beta,outputs):
+        return [trtp.AutoTuneCombination(",".join(["FP32"]*6), ",".join(["LINEAR"]*6))]
     @trtp.aot_impl(NAME)
     def aot(x,up,down,alpha,beta,outputs,tactic:int)->Tuple[Union[str,bytes],Union[str,bytes],trtp.KernelLaunchParams,trtp.SymExprs]:
         import triton
         from inspark_infer.ops.triton.vocoder_tiled_fir import _tiled
+        if any(v.dtype!=trt.float32 for v in (x,up,down,alpha,beta,*outputs)):
+            raise ValueError("Tiled FIR AOT ABI requires FP32")
         c,f=int(x.shape[1]),int(x.shape[2])
         if int(up.shape[0])!=12 or int(down.shape[0])!=12 or int(alpha.shape[0])!=c or int(beta.shape[0])!=c:
             raise ValueError('Tiled FIR filter/channel geometry mismatch')

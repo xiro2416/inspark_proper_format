@@ -30,7 +30,7 @@ def validate(plan):
     required = {'schema', 'status', 'precision', 'batch', 'runtime_backend', 'graphs', *PATHS}
     if set(plan)-set(OPTIONAL_PATHS)-set(OPTIONAL_SETTINGS) != required or plan['schema'] != 9:
         raise ValueError('Invalid unified deployment fields')
-    if (plan['precision'] not in ('fp8', 'int8_smoothquant') or type(plan['batch']) is not int
+    if (plan['precision'] not in ('fp8', 'int8_smoothquant','nvfp4') or type(plan['batch']) is not int
             or plan['batch'] not in (1, 8, 64, 128)):
         raise ValueError('Expected unified FP8/INT8 B1/B8/B64/B128 deployment')
     if plan['runtime_backend'] not in BACKENDS:
@@ -162,6 +162,9 @@ def install_reference_recipe(engine, artifact):
     """
     from inspark_infer.quantization.unified import iter_roles
     from inspark_infer.build.unified_acoustic_export import ExportWeightOp, fold_weight_norm_
+    if artifact['scheme']=='nvfp4':
+        from inspark_infer.quantization.nvfp4 import install
+        return [{k:v for k,v in r.items() if k!='module'} for r in install(engine,artifact)]
     roles = list(iter_roles(engine, artifact['scheme']))
     fold_weight_norm_(engine.student.model)
     manifest = []
@@ -312,7 +315,7 @@ def prepare(engine, plan):
                 artifact=read_json(Path(plan['context_plan']))
                 context_recipe=artifact.get('quantization_recipe',{})
                 if (artifact.get('kind') not in ('context','context_kv') or context_recipe.get('scheme')!=plan['precision']
-                        or context_recipe.get('calibration',{}).get('sha256')!=hashlib.sha256(Path(plan['calibration']).read_bytes()).hexdigest()):
+                        or context_recipe.get('calibration',{}).get('sha256')!=calibration_digest(plan,'draft')):
                     raise ValueError('Context engine kind/calibration/precision differs from deployment')
                 if any(hasattr(layer,'rope_inv_freq') for layer in engine.rt.engine.draft.layers):
                     raise ValueError('Context engine does not implement position-dependent RoPE')

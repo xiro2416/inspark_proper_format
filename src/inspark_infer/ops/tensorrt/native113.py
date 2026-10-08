@@ -297,6 +297,10 @@ class NativeVocoder113:
                     raise ValueError('Missing unchanged NVIDIA plugin provenance')
                 if hashlib.sha256(Path(vendor['module']).read_bytes()).hexdigest()!=vendor.get('module_sha256'):
                     raise ValueError('NVIDIA activation binary identity changed')
+            elif set(self.plugins)<= {'inspark_custom::small_fir_activation','inspark_custom::small_fir_activation_tiled'}:
+                from inspark_infer.ops.tensorrt.vocoder_small_fir_plugin import register
+                # Legacy flag means custom arithmetic is present, including reuse.
+                self.new_gpu_math=True
             else:
                 from inspark_infer.ops.tensorrt.vocoder_plugin import register
             register()
