@@ -45,7 +45,7 @@ def main():
     # themselves must remain unchanged for their existing hash-bound bundles.
     subprocess.run(['git','diff','--exit-code',remote,'HEAD','--','src/inspark_infer/runtime/zipvoice',
                     'src/inspark_infer/build/zipvoice.py','configs/hardware/sm89'],cwd=ROOT,env=env,check=True)
-    secret=re.compile(r'(?:hf_|ghp_|github_pat_)[A-Za-z0-9_]{20,}')
+    secret=re.compile(r'(?:hf_[A-Za-z0-9]{30,}|gh[pousr]_[A-Za-z0-9]{30,}|github_pat_[A-Za-z0-9_]{50,})')
     for name in git('ls-files').splitlines():
         path=ROOT/name
         if path.is_file() and secret.search(path.read_text(errors='ignore')):raise ValueError('Credential-shaped content in tracked file: '+name)
