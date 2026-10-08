@@ -6,12 +6,20 @@ import sys
 
 def main(argv: list[str] | None = None) -> int:
     args = list(sys.argv[1:] if argv is None else argv)
+    precision=next((v.split('=',1)[1] for v in args if v.startswith('--precision=')),None)
+    if '--precision' in args and args.index('--precision')+1<len(args):precision=args[args.index('--precision')+1]
     if args and args[0]=='zipvoice':
+        if precision=='fp8':
+            from inspark_infer.runtime.zipvoice_fp8.cli import main as zipvoice_fp8
+            return zipvoice_fp8(args[1:])
         from inspark_infer.runtime.zipvoice.cli import main as zipvoice
         return zipvoice(args[1:])
     model=next((v.split('=',1)[1] for v in args if v.startswith('--model=')),None)
     if '--model' in args and args.index('--model')+1<len(args):model=args[args.index('--model')+1]
     if args[:2]==['trt','ensure'] and model=='zipvoice':
+        if precision=='fp8':
+            from inspark_infer.runtime.zipvoice_fp8.cli import main as zipvoice_fp8
+            return zipvoice_fp8(['ensure',*args[2:]])
         from inspark_infer.runtime.zipvoice.cli import main as zipvoice
         return zipvoice(['ensure',*args[2:]])
     import argparse,os

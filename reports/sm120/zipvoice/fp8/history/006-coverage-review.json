@@ -1,0 +1,13 @@
+{
+  "status": "baseline_coverage_repair_before_migration",
+  "initial_linear_modules": 156,
+  "additional_activation_linear_modules": 60,
+  "retained_candidate_modules": 216,
+  "protected_fm_layers": 4,
+  "fp8_fm_layers": 12,
+  "floating_depthwise_modules": 24,
+  "reason": "nn.Linear-only selection omitted linear projections wrapped by ActivationDropoutAndLinear; original activations remain floating before FP8 projection",
+  "prototype": "artifacts/fp8-prototypes/linear156",
+  "same_calibration_inputs": true,
+  "all_batch_migration_accepted": false
+}

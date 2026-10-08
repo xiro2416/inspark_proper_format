@@ -18,3 +18,11 @@
 - Preserve original SmoothQuant alpha=.5 weights/scales, first4 floating/last12 INT8 and complete unsplit model batch. Baseline plugin packages/engines remain intact during independent candidate validation.
 - Complete all7 migration targets before the separately requested optimization phase. Validate private publication and fresh downloads before retiring old local/cloud ZipVoice files and obsolete history. Preserve the concurrently updated Index release.
 - Engine binaries and model weights stay outside Git. No automatic time limit and no stopping unrelated workloads.
+
+## Current authorized SM120 FP8 work
+
+- User-approved SM120 FP8 work uses only physical GPU3, serially, at its existing 600W limit. The historical GPU1/INT8 instructions above describe the preserved SM89 release.
+- Build only FP8 targets B1/B2/B4/B8/B16/B32/B64: FM first4 floating/last12 eligible Linear/Conv W8A8 E4M3 with frozen per-tensor max calibration. Text/Vocos and sensitive operations stay floating.
+- Read reports/sm120/zipvoice/fp8/WHITEBOARD.md before experiments. Complete seven migrations before new optimization.
+- Use independent bilingual calibration and test data; keep original model/checkpoint, duration and full unsplit batch. Preserve SM89 hashed source closures and Index routes.
+- Publish by normal GitHub commits and additive private HF sm120/fp8 paths, without history rewrite or asset deletion. Credentials must never enter tracked files or logs.

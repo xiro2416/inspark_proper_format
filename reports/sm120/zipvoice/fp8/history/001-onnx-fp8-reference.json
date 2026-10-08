@@ -1,0 +1,12 @@
+{
+  "status": "canonical_onnx_fp8_reference_passed",
+  "batch": 7,
+  "max_abs": 3.5762786865234375e-07,
+  "onnx_ops": [
+    "QuantizeLinear",
+    "DequantizeLinear",
+    "DequantizeLinear",
+    "Gemm"
+  ],
+  "scope": "CPU projection reference and dynamic batch; full-model/GPU acceptance pending"
+}

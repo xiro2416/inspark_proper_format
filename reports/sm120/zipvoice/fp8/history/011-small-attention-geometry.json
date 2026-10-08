@@ -1,0 +1,36 @@
+{
+  "status": "small_geometry_performance_and_application_complete_quality_pending_b4",
+  "geometry": {
+    "nonlinear_qb": 16,
+    "nonlinear_kb": 16,
+    "normal_qb": 32,
+    "normal_kb": 64
+  },
+  "batches": [
+    {
+      "batch": 1,
+      "status": "candidate_regressed_native_retained",
+      "baseline_ms": 28.89407525,
+      "candidate_ms": 35.063458499999996,
+      "gain_percent": -21.351724173972297,
+      "evidence_sha256": "cdd8de9f82f1b78363e29ca5ab236d8d0faf21d07f38bbfe820b38ba3f831958"
+    },
+    {
+      "batch": 2,
+      "status": "candidate_regressed_native_retained",
+      "baseline_ms": 41.033379,
+      "candidate_ms": 43.7179235,
+      "gain_percent": -6.542343246945374,
+      "evidence_sha256": "031acd8ba46c55f7cf69473a5ae78f713eb3abe143992649212fb19873f2b3f9"
+    },
+    {
+      "batch": 4,
+      "status": "candidate_application_lengths_passed_quality_pending",
+      "baseline_ms": 65.09926225000001,
+      "candidate_ms": 63.443222750000004,
+      "gain_percent": 2.5438683062802383,
+      "evidence_sha256": "1d03c56c920817bce9cf6f355ed897387edf27fc63bf2dc1c51b60fe48feda68"
+    }
+  ],
+  "limits": "Matched prepared760 full-text E2E. B1/B2 native retained; B4 candidate pending original FP32 quality. Not final deployment selection."
+}

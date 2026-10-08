@@ -1,0 +1,34 @@
+{
+  "status": "bilingual_inputs_prepared_gpu_calibration_pending",
+  "calibration_requests": 128,
+  "calibration_languages": {
+    "zh": 64,
+    "en": 64
+  },
+  "quality_cases": 16,
+  "quality_languages": {
+    "zh": 10,
+    "en": 6
+  },
+  "primary_workload": {
+    "batch": 1,
+    "prompt_frames": 375,
+    "target_frames": 385,
+    "total_frames": 760,
+    "joint_tokens": 77,
+    "padded_tokens": 78,
+    "steps": 8,
+    "t_shift": 0.5,
+    "guidance": 1.0,
+    "feat_scale": 0.1
+  },
+  "calibration_frame_range": [
+    600,
+    920
+  ],
+  "reference_seconds": 4,
+  "split_disjoint": true,
+  "audio_hashes_disjoint": true,
+  "manifest_sha256": "c1d83a89f157ef4402675c281a295d55aff930b5e06b6ab0c418cc2f76d53cbe",
+  "private_data_published": false
+}

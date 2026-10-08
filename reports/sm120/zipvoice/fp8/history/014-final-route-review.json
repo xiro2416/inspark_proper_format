@@ -1,0 +1,84 @@
+{
+  "status": "all_seven_compute_reviews_complete",
+  "batches": {
+    "1": {
+      "variant": "native",
+      "pcm_policy": {
+        "chunk": 16,
+        "workers": 4
+      },
+      "delivery_evidence_sha256": "2ba8f06aaab326d2d1aecdf4717e6040fc5b8279d0a40d8e8878981b89b7647a",
+      "quality_evidence_sha256": "f614e2c4ad331175ee53f29e81e54d98b996dd059ff9280b763dccb62bd3bc4c",
+      "compute_review_complete": true,
+      "notes": "Native retained B1/B2 after attention and geometry regressions; tiny PCM differences ignored."
+    },
+    "2": {
+      "variant": "native",
+      "pcm_policy": {
+        "chunk": 16,
+        "workers": 4
+      },
+      "delivery_evidence_sha256": "78eab0e558d0dfc893807fddc873342135d90974fa1ab66024993676631177c1",
+      "quality_evidence_sha256": "2b73fde2812ac1c3b7482673df6d1e5bcb91fb12a88176489b5bb183d652a2ba",
+      "compute_review_complete": true,
+      "notes": "Native retained B1/B2 after attention and geometry regressions; tiny PCM differences ignored."
+    },
+    "4": {
+      "variant": "attentiongeo",
+      "pcm_policy": {
+        "chunk": 1,
+        "workers": 4
+      },
+      "delivery_evidence_sha256": "e11a90eec7dc615533f3d48455f7e8c4f6b506d203b49a8fb7ee84d48f047918",
+      "quality_evidence_sha256": "1305252bf07e5bf7ac66f394aaf825a9e764493106ff4dcd20097793108382ae",
+      "compute_review_complete": true,
+      "notes": "Selected attention and PCM choices supported by target ABBA, full cases, bounds, paired quality and retained regime profiles."
+    },
+    "8": {
+      "variant": "attentiongeo",
+      "pcm_policy": {
+        "chunk": 16,
+        "workers": 4
+      },
+      "delivery_evidence_sha256": "07fa7f6c8b14ee545011704b9a1d9ffa303ff66207c47152a7bcd8090849bd55",
+      "quality_evidence_sha256": "9e60294d87a274211d95aa0810746da88b7d9ae6d26368f55ed144541494ce1d",
+      "compute_review_complete": true,
+      "notes": "Selected attention and PCM choices supported by target ABBA, full cases, bounds, paired quality and retained regime profiles."
+    },
+    "16": {
+      "variant": "attention",
+      "pcm_policy": {
+        "chunk": 32,
+        "workers": 4
+      },
+      "delivery_evidence_sha256": "3041b3490d3f5426578ff0edb044ecae3fc98f2103561420ca6072244a61cd27",
+      "quality_evidence_sha256": "1da886e678f520bbb1bd6faebff1c7a50608613029241f6ac6a7e844e4ed77e2",
+      "compute_review_complete": true,
+      "notes": "Selected attention and PCM choices supported by target ABBA, full cases, bounds, paired quality and retained regime profiles."
+    },
+    "32": {
+      "variant": "attention",
+      "pcm_policy": {
+        "chunk": 16,
+        "workers": 8
+      },
+      "delivery_evidence_sha256": "f1e9e528bb93f308a65581043753bd7d2ab2e0102357f49a9db370c8fd43de3e",
+      "quality_evidence_sha256": "e19a0da2a6858a9ad985b5f71d0ab0daea97bfd92adc0ea3a7593217e7119a4f",
+      "compute_review_complete": true,
+      "notes": "Selected attention and PCM choices supported by target ABBA, full cases, bounds, paired quality and retained regime profiles."
+    },
+    "64": {
+      "variant": "attention",
+      "pcm_policy": {
+        "chunk": 32,
+        "workers": 4
+      },
+      "delivery_evidence_sha256": "b25df5b8140e559aa47c64f5569689d279d0aec9eb50e6fa00395ce80edc3286",
+      "quality_evidence_sha256": "e31045020bc74662fccd63fad52618988c1b2d9375c96b33def741cdc79971d2",
+      "compute_review_complete": true,
+      "notes": "Selected attention and PCM choices supported by target ABBA, full cases, bounds, paired quality and retained regime profiles."
+    }
+  },
+  "stopping_reason": "Frozen recipe and native TensorRT level5/FULL tactic search retained. Major attention materialization fixed where E2E beneficial; two geometry families and PCM scheduling screened and matched. Protected floating FFN full fusion regresses; selective760 FF1 gross <.1% after checking380. Remaining native GEMM/floating compute is not claimed globally optimal.",
+  "protected_ffn_review_sha256": "552c6d21e4ff6d8c498934daacab2b07ada3a2b073821f1004d4757a0842775c"
+}

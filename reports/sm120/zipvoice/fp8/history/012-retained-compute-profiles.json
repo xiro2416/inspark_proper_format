@@ -1,0 +1,277 @@
+{
+  "status": "retained_route_profiles_recorded_ffn_delivery_review_pending",
+  "profiles": [
+    {
+      "batch": 1,
+      "variant": "native",
+      "diagnostic_scope": "three prepared760/full-text CUDA Graph node traces, not unprofiled E2E",
+      "kernel_summary_sha256": "773803521333b9b4b65b8f973db796e7655f949ba05ecd82fd03ee813b39a96b",
+      "top_kernels": [
+        {
+          "Time (%)": "14.1",
+          "Total Time (ns)": "10746457",
+          "Instances": "2856",
+          "Name": "sm89_xmma_gemm_e4m3f32_e4m3f32_f32_tn_n_tilesize32x64x64_stage5_warpsize2x2x1_tensor16x8x32_bias_f32_execute_kernel_trt"
+        },
+        {
+          "Time (%)": "5.8",
+          "Total Time (ns)": "4433142",
+          "Instances": "960",
+          "Name": "sm89_xmma_gemm_e4m3f32_e4m3f32_f32_tn_n_tilesize64x64x64_stage4_warpsize2x2x1_tensor16x8x32_bias_f32_execute_kernel_trt"
+        },
+        {
+          "Time (%)": "4.9",
+          "Total Time (ns)": "3727398",
+          "Instances": "504",
+          "Name": "sm86_xmma_gemm_f32f32_tf32f32_f32_tn_n_tilesize64x64x64_stage3_warpsize2x2x1_tensor16x8x8_execute_kernel_trt"
+        },
+        {
+          "Time (%)": "4.8",
+          "Total Time (ns)": "3653368",
+          "Instances": "288",
+          "Name": "sm80_xmma_gemm_f32f32_tf32f32_f32_tn_n_tilesize64x128x16_stage4_warpsize2x2x1_tensor16x8x8_execute_kernel_trt"
+        },
+        {
+          "Time (%)": "3.6",
+          "Total Time (ns)": "2772942",
+          "Instances": "144",
+          "Name": "__myl_SlicSlicSlicSlicSlicSlicSlicSlicMulMulMulMulAddAddAdd_0xcdd3c35e6b9dc840b43ea92e30e28792_com"
+        },
+        {
+          "Time (%)": "3.6",
+          "Total Time (ns)": "2709454",
+          "Instances": "384",
+          "Name": "sm80_xmma_gemm_f32f32_tf32f32_f32_nn_n_tilesize64x32x64_stage4_warpsize2x1x2_tensor16x8x8_execute_kernel_trt"
+        },
+        {
+          "Time (%)": "3.0",
+          "Total Time (ns)": "2289682",
+          "Instances": "216",
+          "Name": "sm80_xmma_gemm_f32f32_tf32f32_f32_tn_n_tilesize128x64x16_stage6_warpsize2x2x1_tensor16x8x8_execute_kernel_trt"
+        },
+        {
+          "Time (%)": "2.8",
+          "Total Time (ns)": "2125153",
+          "Instances": "384",
+          "Name": "sm89_xmma_gemm_e4m3f32_e4m3f32_f32_tn_n_tilesize64x128x64_stage4_warpsize2x2x1_tensor16x8x32_bias_f32_execute_kernel_trt"
+        },
+        {
+          "Time (%)": "2.7",
+          "Total Time (ns)": "2041554",
+          "Instances": "480",
+          "Name": "sm89_xmma_gemm_e4m3f32_e4m3f32_f32_tn_n_tilesize64x64x64_stage6_warpsize2x2x1_tensor16x8x32_bias_f32_execute_kernel_trt"
+        },
+        {
+          "Time (%)": "2.5",
+          "Total Time (ns)": "1898325",
+          "Instances": "312",
+          "Name": "sm86_xmma_gemm_f32f32_tf32f32_f32_nn_n_tilesize32x32x64_stage6_warpsize2x2x1_tensor16x8x8_execute_kernel_trt"
+        }
+      ]
+    },
+    {
+      "batch": 4,
+      "variant": "attentiongeo",
+      "diagnostic_scope": "three prepared760/full-text CUDA Graph node traces, not unprofiled E2E",
+      "kernel_summary_sha256": "db7d1ade79802a78ef5b6099c8cf11cc4fd7b528d902c392029ba1033b41b495",
+      "top_kernels": [
+        {
+          "Time (%)": "13.7",
+          "Total Time (ns)": "23728581",
+          "Instances": "384",
+          "Name": "nonlinear_rna_aot"
+        },
+        {
+          "Time (%)": "13.6",
+          "Total Time (ns)": "23711140",
+          "Instances": "888",
+          "Name": "sm86_xmma_gemm_f32f32_tf32f32_f32_tn_n_tilesize128x128x16_stage3_warpsize2x2x1_tensor16x8x8_execute_kernel_trt"
+        },
+        {
+          "Time (%)": "11.6",
+          "Total Time (ns)": "20087600",
+          "Instances": "1848",
+          "Name": "sm89_xmma_gemm_e4m3f32_e4m3f32_f32_tn_n_tilesize128x128x64_stage3_warpsize2x2x1_tensor16x8x32_bias_f32_execute_kernel_trt"
+        },
+        {
+          "Time (%)": "8.9",
+          "Total Time (ns)": "15549432",
+          "Instances": "384",
+          "Name": "normal_stats_write_aot"
+        },
+        {
+          "Time (%)": "8.7",
+          "Total Time (ns)": "15102879",
+          "Instances": "384",
+          "Name": "normal_stats_read_aot"
+        },
+        {
+          "Time (%)": "4.5",
+          "Total Time (ns)": "7898975",
+          "Instances": "480",
+          "Name": "sm80_xmma_gemm_f32f32_tf32f32_f32_tn_n_tilesize128x64x16_stage6_warpsize2x2x1_tensor16x8x8_execute_kernel_trt"
+        },
+        {
+          "Time (%)": "4.0",
+          "Total Time (ns)": "7030647",
+          "Instances": "1104",
+          "Name": "sm89_xmma_gemm_e4m3f32_e4m3f32_f32_tn_n_tilesize128x64x64_stage4_warpsize2x2x1_tensor16x8x32_bias_f32_execute_kernel_trt"
+        },
+        {
+          "Time (%)": "2.6",
+          "Total Time (ns)": "4440770",
+          "Instances": "504",
+          "Name": "sm50_xmma_fprop_conv1d_c1_k1_f32f32_f32_f32_nchwkcrs_nchw_exec_conv1d_c1_k1_kernel_8_kernel_trt"
+        },
+        {
+          "Time (%)": "1.7",
+          "Total Time (ns)": "2885498",
+          "Instances": "192",
+          "Name": "__myl_TranReshMulAddSubAbsNegExpMaxAddLogAddSubAddMulCast_0x2f6e120054832d03ebe574675214ba49_com"
+        },
+        {
+          "Time (%)": "1.5",
+          "Total Time (ns)": "2624470",
+          "Instances": "24",
+          "Name": "sm80_xmma_gemm_f32f32_tf32f32_f32_nn_n_tilesize64x128x16_stage4_warpsize2x2x1_tensor16x8x8_execute_kernel_trt"
+        }
+      ]
+    },
+    {
+      "batch": 16,
+      "variant": "attention",
+      "diagnostic_scope": "three prepared760/full-text CUDA Graph node traces, not unprofiled E2E",
+      "kernel_summary_sha256": "b0cb7b8b1b55aec6f858b9eca97b539599d8f58fe49a2065cf88edc5bbe5b7c4",
+      "top_kernels": [
+        {
+          "Time (%)": "16.9",
+          "Total Time (ns)": "92309522",
+          "Instances": "3936",
+          "Name": "sm89_xmma_gemm_e4m3f32_e4m3f32_f32_tn_n_tilesize128x128x64_stage3_warpsize2x2x1_tensor16x8x32_bias_f32_execute_kernel_trt"
+        },
+        {
+          "Time (%)": "14.2",
+          "Total Time (ns)": "77587301",
+          "Instances": "984",
+          "Name": "sm86_xmma_gemm_f32f32_tf32f32_f32_tn_n_tilesize128x128x16_stage3_warpsize2x2x1_tensor16x8x8_execute_kernel_trt"
+        },
+        {
+          "Time (%)": "11.6",
+          "Total Time (ns)": "63425136",
+          "Instances": "384",
+          "Name": "nonlinear_rna_aot"
+        },
+        {
+          "Time (%)": "7.6",
+          "Total Time (ns)": "41150852",
+          "Instances": "384",
+          "Name": "normal_stats_read_aot"
+        },
+        {
+          "Time (%)": "7.2",
+          "Total Time (ns)": "38988464",
+          "Instances": "384",
+          "Name": "normal_stats_write_aot"
+        },
+        {
+          "Time (%)": "3.0",
+          "Total Time (ns)": "16270825",
+          "Instances": "144",
+          "Name": "sm86_xmma_gemm_f32f32_tf32f32_f32_nn_n_tilesize128x128x16_stage3_warpsize2x2x1_tensor16x8x8_execute_kernel_trt"
+        },
+        {
+          "Time (%)": "2.5",
+          "Total Time (ns)": "13740655",
+          "Instances": "504",
+          "Name": "sm50_xmma_fprop_conv1d_c1_k1_f32f32_f32_f32_nchwkcrs_nchw_exec_conv1d_c1_k1_kernel_11_kernel_trt"
+        },
+        {
+          "Time (%)": "2.0",
+          "Total Time (ns)": "11107801",
+          "Instances": "96",
+          "Name": "sm86_xmma_gemm_f32f32_tf32f32_f32_tn_n_tilesize256x128x32_stage2_warpsize4x2x1_tensor16x8x8_execute_kernel_trt"
+        },
+        {
+          "Time (%)": "2.0",
+          "Total Time (ns)": "10747249",
+          "Instances": "192",
+          "Name": "__myl_TranReshMulAddSubAbsNegExpMaxAddLogAddSubAddMulCast_0x26fde3a33e334effda584f5ec7d076d8_com"
+        },
+        {
+          "Time (%)": "1.8",
+          "Total Time (ns)": "9905766",
+          "Instances": "384",
+          "Name": "__myl_AddMulCast_0x847a054c33f19bebc0a0f0a20cd21d68_com_vec"
+        }
+      ]
+    },
+    {
+      "batch": 64,
+      "variant": "attention",
+      "diagnostic_scope": "three prepared760/full-text CUDA Graph node traces, not unprofiled E2E",
+      "kernel_summary_sha256": "652752a8523d97fa76e0e888c845674b17f881e393a0e17d91db552c07e9ae67",
+      "top_kernels": [
+        {
+          "Time (%)": "7.4",
+          "Total Time (ns)": "182462047",
+          "Instances": "384",
+          "Name": "nonlinear_rna_aot"
+        },
+        {
+          "Time (%)": "5.7",
+          "Total Time (ns)": "142014311",
+          "Instances": "2832",
+          "Name": "sm89_xmma_gemm_e4m3f32_e4m3f32_f32_tn_n_tilesize128x128x64_stage3_warpsize2x2x1_tensor16x8x32_bias_f32_execute_kernel_trt"
+        },
+        {
+          "Time (%)": "5.3",
+          "Total Time (ns)": "130342787",
+          "Instances": "384",
+          "Name": "normal_stats_read_aot"
+        },
+        {
+          "Time (%)": "5.2",
+          "Total Time (ns)": "128823845",
+          "Instances": "384",
+          "Name": "normal_stats_write_aot"
+        },
+        {
+          "Time (%)": "4.7",
+          "Total Time (ns)": "117169750",
+          "Instances": "696",
+          "Name": "sm86_xmma_gemm_f32f32_tf32f32_f32_tn_n_tilesize128x128x16_stage3_warpsize2x2x1_tensor16x8x8_execute_kernel_trt"
+        },
+        {
+          "Time (%)": "3.7",
+          "Total Time (ns)": "91898106",
+          "Instances": "384",
+          "Name": "__myl_AddMulCast_0xcb39f1ae41183b3f987aa125f25da6d9_com_vec"
+        },
+        {
+          "Time (%)": "3.6",
+          "Total Time (ns)": "88505172",
+          "Instances": "720",
+          "Name": "sm89_xmma_gemm_e4m3f32_e4m3f32_f32_tn_n_tilesize64x128x64_stage4_warpsize2x2x1_tensor16x8x32_bias_f32_execute_kernel_trt"
+        },
+        {
+          "Time (%)": "3.1",
+          "Total Time (ns)": "76663716",
+          "Instances": "195",
+          "Name": "sm80_xmma_gemm_f32f32_tf32f32_f32_tn_n_tilesize64x128x16_stage4_warpsize2x2x1_tensor16x8x8_execute_kernel_trt"
+        },
+        {
+          "Time (%)": "2.8",
+          "Total Time (ns)": "70032619",
+          "Instances": "912",
+          "Name": "sm89_xmma_gemm_e4m3f32_e4m3f32_f32_tn_n_tilesize128x64x64_stage4_warpsize2x2x1_tensor16x8x32_bias_f32_execute_kernel_trt"
+        },
+        {
+          "Time (%)": "2.7",
+          "Total Time (ns)": "66742666",
+          "Instances": "288",
+          "Name": "__myl_SlicSigmSlicMul_0x1e412dc403f314a875f9c913725951a2_com_vec"
+        }
+      ]
+    }
+  ]
+}

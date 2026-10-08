@@ -1,0 +1,11 @@
+{
+  "status": "modern_fp8_linear_export_passed",
+  "ops": [
+    "QuantizeLinear",
+    "DequantizeLinear",
+    "DequantizeLinear",
+    "Gemm"
+  ],
+  "batch_dim": "batch",
+  "scope": "CPU isolated projection only; not model correctness or calibration"
+}

@@ -62,3 +62,13 @@ inspark fetch --asset-dir ./nvfp4_assets --precision nvfp4 --batch 64
 推理使用现有 Pool/NDJSON 组批接口；仅发布 B64。权重位于 HF 的 `nvfp4/`，采用官方 max PTQ、16元素 K block、E4M3 block scale 和 FP32 global scale；无需重新训练。RNN、KV、embedding/norm 与其他角色外参数保持原精度。权重布局及加载说明见该目录 README；原生执行由配套 engines 的 inspector/CUDA trace 确认。
 
 当前测量、实际搜索结果和浮点审计见 [NVFP4 B64 验证](reports/current/nvfp4/RESULTS.md)。未采用的候选与原始日志只留在本地实验归档。
+
+## 独立的 ZipVoice SM120 FP8 实现
+
+ZipVoice-Distill 的 SM120 FP8 路线使用独立环境和 `xirr/zip_pipeline`
+私有资产，支持完整 batch 1/2/4/8/16/32/64，动态总帧600/760/920、
+padded token52/78/141。FM 前4层浮点，后12层216个线性投影使用冻结的
+W8A8 E4M3FN 静态校准；Text/Vocos、depthwise conv 和敏感运算保持浮点。
+七档最终路线已通过本机与私有资产空缓存下载验证；各档性能与配对质量见下方说明。
+安装、运行、质量和性能证据见 [ZipVoice SM120 FP8](docs/zipvoice-sm120-fp8.md)。
+既有 SM89 INT8 和 Index/NVFP4 路线保留。
