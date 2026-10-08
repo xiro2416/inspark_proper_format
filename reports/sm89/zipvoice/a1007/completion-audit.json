@@ -1,0 +1,91 @@
+{
+  "status": "runtime_assets_and_cleanup_requirements_directly_verified",
+  "checks": [
+    {
+      "requirement": "All seven batch routes migrate before optimization and retain required profiles",
+      "status": "proved",
+      "evidence": {
+        "selection_sha256": "4c7e4e7407376e6b6d5c3b30dc1da33cfbef4018c2319e2e60d482e95d59010e",
+        "migration_review": "aadd688d30a37cbfe8dbcdd9c35bf674b88eab1d27505e8a7845c8a01564318f"
+      }
+    },
+    {
+      "requirement": "Actual fresh published code plus final private revision execute complete batches, boundary/mixed inputs and expected PCM",
+      "status": "proved",
+      "evidence": {
+        "tested_commit": "ebc5e2924caef70e72575de541acb868d6b410f5",
+        "hub_revision": "f6da21d25400d1b3e0b9a70de333503b3374df76",
+        "cases": 48,
+        "raw_validation_sha256": "8ec92c474de5c037dd9934cdaf7f9910e316fbc95020ec088a37278eb7cbc200"
+      }
+    },
+    {
+      "requirement": "Original eager/INT8 weights, recipe and all180 mappings preserved; no FP8 release",
+      "status": "proved",
+      "evidence": {
+        "weights_manifest_sha256": "64474027dcccf4fc094140c0b26ba9d5ae0795b641b192a09b16cea4b4f50aa9",
+        "mapping_sha256": "642fb53061e3efe02055011bf0fa4aa1846c36a07131fb06e65a472bf8871d2c"
+      }
+    },
+    {
+      "requirement": "Retained E2E/quality/power, length-specific tradeoffs and execution stopping review",
+      "status": "proved",
+      "evidence": {
+        "results_sha256": "a5f7e6e24d68723668e9c68da385a805305b117ac395d619c89b42241ee0ba73",
+        "cost_review_sha256": "39bc780e680a14c57f234d016cfe884711cddcab09816b2815a40d39b161013b"
+      }
+    },
+    {
+      "requirement": "Confirmed old local ZipVoice code, projects and reachable Git history removed",
+      "status": "proved",
+      "evidence": {
+        "retired_tracked_paths": 103,
+        "old_project_paths": [
+          "/workspace/zvoice_temp",
+          "/workspace/inspark_proper_format",
+          "/workspace/zip_pipeline"
+        ]
+      }
+    },
+    {
+      "requirement": "IndexTTS2 source and ancestry, raw audio/text and workspace Codex preserved",
+      "status": "proved",
+      "evidence": {
+        "status": "five_index_scopes_identical_to_previous_main",
+        "previous_main": "49254189fe426b3472711e285abb28d2a7cd2b3b",
+        "published_commit": "ebc5e2924caef70e72575de541acb868d6b410f5",
+        "tree_objects": {
+          "configs/current": "39a778d29d5464e69eae47d6d6d5f987296b4867",
+          "reports/current": "6f1b1d42fe84393956cd846b617c2a386a82aecf",
+          "api/release": null,
+          "runtime/unified_deployment": null,
+          "benchmarks": "d3b4da2fe3894a3301e0cc2084d74913b2cfcabb"
+        },
+        "originally_absent_scopes": [
+          "api/release",
+          "runtime/unified_deployment"
+        ]
+      }
+    },
+    {
+      "requirement": "Private final Hub assets, main history and LFS checked directly; private Index project exists",
+      "status": "proved",
+      "evidence": {
+        "revision": "f6da21d25400d1b3e0b9a70de333503b3374df76",
+        "files": 93,
+        "retired_lfs_absent": 14
+      }
+    },
+    {
+      "requirement": "Actual GitHub main remains the published clean source",
+      "status": "proved",
+      "evidence": {
+        "commit": "ebc5e2924caef70e72575de541acb868d6b410f5"
+      }
+    }
+  ],
+  "tested_github_commit": "ebc5e2924caef70e72575de541acb868d6b410f5",
+  "hub_revision": "f6da21d25400d1b3e0b9a70de333503b3374df76",
+  "limits": "Final metadata commit must still be pushed and its diff confined to docs/reports/registry status. Git history cleanup proves reachable history removal, not provider physical object retention.",
+  "metadata_publication": "Metadata identity is bound in metadata-identity-proof.json; actual final main commit is recorded separately in outputs/publication/final-metadata-publication.json."
+}

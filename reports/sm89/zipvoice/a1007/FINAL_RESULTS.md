@@ -1,4 +1,4 @@
-# A_1007 本地最终选择
+# A_1007 已发布最终选择
 
 参考音频4秒；760总帧的原始生成波形4.096秒，最终WAV时长由原有静音处理和尾部停顿决定。
 
@@ -26,4 +26,4 @@
 
 真实音频测速采用608/760/918帧；引擎600/760/920边界另作接口验证。
 
-完整证据与长度取舍见 [最终审核](final-execution-cost-review.json) 和 [机器可读结果](final-results.json)。云端发布及清理完成情况须另行核对发布回执。
+完整证据与长度取舍见 [最终审核](final-execution-cost-review.json) 和 [机器可读结果](final-results.json)。最终版本已通过全新GitHub checkout及空缓存下载验证，见[发布验证](published-fresh-validation.json)。旧ZipVoice目录及历史已清理。
