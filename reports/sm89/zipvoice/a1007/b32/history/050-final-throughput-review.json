@@ -1,0 +1,162 @@
+{
+  "status": "complete",
+  "retained_bundle_id": "270f2c741d495edac7b0",
+  "original_bundle_id": "d1542a79cd19d660c8fa",
+  "bundle_file_hashes_verified": true,
+  "plugin_runner_hashes_verified": true,
+  "public_worker_entry_verified": true,
+  "all32_ordered_pcm_verified": true,
+  "direct_graph_guards": true,
+  "rejected_total_frames": [
+    600,
+    759,
+    761,
+    920
+  ],
+  "parameter_mapping_review": "static-parameter-review.json",
+  "full32_mapping_review": "static-mapping-review.json",
+  "evidence_sha256": {
+    "final-summary.json": "f7843e4753806ef7f1e7f8324d7d64ec6df7897099f34885b4d7ec2f1ad23241",
+    "static-mapping-review.json": "a28625815d6cc3e77e7fde1b5ca4d6e2eceff2a26c36ed9d224304cdbcc46bba",
+    "static-parameter-review.json": "4cc21e853e69611e4109b8e3c419f8cde84218a5c32467f847e68f72895d3797",
+    "static-corpus-quality.json": "3aa0760367e7cca933a2178d158b9eda8b17ae72eafd6b2e9e23ea4fc1e8d9d0",
+    "retained-worker-check/report.json": "1bbdc523f380b40a305dd808169c7714bea133f55cfc579dcdfc04af36dddcc2",
+    "run_steady_final.py": "8f22ea5f41a90c3e7aa5baa121cf25e9bf8dd02436f2a6c92866f2ce8aef1141",
+    "steady-final/0-control/report.json": "782d30ea9f26e5c2812ac5adf8a27231e8e3a657ed6c37f0b34ed11378aaca7a",
+    "steady-final/1-candidate/report.json": "48ddd5927707dc30a478bc6c970e5ac3298c958627112b6e22afa4bf2a7d1f33",
+    "steady-final/2-candidate/report.json": "1be4de838d063f3783b86ea7962c090b3bc50a8f228520d0fb8e27107489cffd",
+    "steady-final/3-control/report.json": "68a08065a4b4aff83fe907155ed0705596230177fa02e473ef9610f43692d43a"
+  },
+  "remaining_work": "none within bounded B32/760 GPU6 investigation",
+  "stopping_reason": "Static-shape rebuild delivers small repeatable matched gain. Tested tile/fusion/scheduling alternatives lack E2E benefit. No claim of global optimum or power-only bottleneck.",
+  "summary": {
+    "status": "measured_local_candidate_retained",
+    "gpu": 6,
+    "batch": 32,
+    "total_frames": 760,
+    "configured_power_w": 400,
+    "blocks": [
+      {
+        "block": "0-control",
+        "role": "control",
+        "requests": 100,
+        "span_s": 62.436294907,
+        "throughput_rows_s": 51.25224045991932,
+        "mean_ms": 623.58637283,
+        "median_ms": 623.3443195,
+        "p99_ms": 629.6317530900001,
+        "power_mean_w": 396.80473198380565,
+        "power_max_sampled_w": 400.868,
+        "power_samples": 1235,
+        "clock_mean_mhz": 2518.3292978208233,
+        "memory_peak_mib": 18754.3125,
+        "graph_guards_pass": true
+      },
+      {
+        "block": "1-candidate",
+        "role": "candidate",
+        "requests": 100,
+        "span_s": 61.872195025,
+        "throughput_rows_s": 51.71951631434786,
+        "mean_ms": 618.08897993,
+        "median_ms": 617.6569595,
+        "p99_ms": 624.4093995200001,
+        "power_mean_w": 396.62794698205545,
+        "power_max_sampled_w": 399.985,
+        "power_samples": 1226,
+        "clock_mean_mhz": 2484.507729861676,
+        "memory_peak_mib": 18672.3125,
+        "graph_guards_pass": true
+      },
+      {
+        "block": "2-candidate",
+        "role": "candidate",
+        "requests": 100,
+        "span_s": 62.099671111,
+        "throughput_rows_s": 51.530063569582566,
+        "mean_ms": 620.21775608,
+        "median_ms": 619.951003,
+        "p99_ms": 626.18563906,
+        "power_mean_w": 396.4047681041497,
+        "power_max_sampled_w": 401.827,
+        "power_samples": 1229,
+        "clock_mean_mhz": 2484.3141233766232,
+        "memory_peak_mib": 18672.3125,
+        "graph_guards_pass": true
+      },
+      {
+        "block": "3-control",
+        "role": "control",
+        "requests": 100,
+        "span_s": 62.605001789,
+        "throughput_rows_s": 51.11412680387872,
+        "mean_ms": 625.3420133,
+        "median_ms": 625.2173755,
+        "p99_ms": 630.97328178,
+        "power_mean_w": 396.83741901692184,
+        "power_max_sampled_w": 399.795,
+        "power_samples": 1241,
+        "clock_mean_mhz": 2490.978260869565,
+        "memory_peak_mib": 18754.3125,
+        "graph_guards_pass": true
+      }
+    ],
+    "pooled": {
+      "control": {
+        "requests": 200,
+        "mean_ms": 624.464193065,
+        "median_ms": 624.394907,
+        "p95_ms": 629.2722720499999,
+        "p99_ms": 630.64714563,
+        "throughput_rows_s": 51.183090459783536,
+        "power_mean_w": 396.82111510500806,
+        "power_max_sampled_w": 400.868,
+        "memory_peak_mib": 18754.3125
+      },
+      "candidate": {
+        "requests": 200,
+        "mean_ms": 619.153368005,
+        "median_ms": 618.6734524999999,
+        "p95_ms": 624.4094444000001,
+        "p99_ms": 625.8888931800001,
+        "throughput_rows_s": 51.62461612846137,
+        "power_mean_w": 396.51622118126267,
+        "power_max_sampled_w": 401.827,
+        "memory_peak_mib": 18672.3125
+      }
+    },
+    "throughput_gain_percent": 0.862639720875702,
+    "quality": {
+      "control": {
+        "count": 12,
+        "cer": 0.03418803418803419,
+        "character_errors": 8,
+        "reference_characters": 234,
+        "utmos_mean": 2.491593370834986,
+        "sim_o_mean": 0.6524669453501701
+      },
+      "static": {
+        "count": 12,
+        "cer": 0.029914529914529916,
+        "character_errors": 7,
+        "reference_characters": 234,
+        "utmos_mean": 2.4011442263921103,
+        "sim_o_mean": 0.6393406391143799
+      }
+    },
+    "retained_bundle": "artifacts/trt113_bundles/zipvoice/sm89/int8/b32/270f2c741d495edac7b0",
+    "retained_fm_sha256": "f28711d5ebfe7bad0422dffb74c9dd71af4e657255e5cb826e50df63eb71b799",
+    "published_original_preserved": true,
+    "registry_unchanged": true,
+    "remote_updated": false,
+    "limitation": "Small measured gain on GPU6; ABBA repetition does not establish cross-GPU or long-term improvement. Quality samples show small UTMOS/SIM-o declines; no new universal tolerance applied."
+  },
+  "archived_rejected_public_sources": [
+    "src/inspark_infer/ops/tensorrt/zipvoice/a1007/b32_attnsplitwp",
+    "src/inspark_infer/ops/tensorrt/zipvoice/a1007/b32_attnsplitfixwp",
+    "src/inspark_infer/ops/tensorrt/zipvoice/a1007/b32_normk16wp",
+    "src/inspark_infer/runtime/zipvoice/b32_pcm_lut.py"
+  ],
+  "result_report": "reports/sm89/zipvoice/a1007/b32/THROUGHPUT_REOPTIMIZATION.md",
+  "report_sha256": "e05f7da24f6b8d0519f1acd9cb3ea234a7c12a1c068b8db777274f61d6e90d2b"
+}

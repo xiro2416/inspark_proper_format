@@ -1,0 +1,32 @@
+{
+  "status": "complete",
+  "retained_bundle_id": "270f2c741d495edac7b0",
+  "original_bundle_id": "d1542a79cd19d660c8fa",
+  "bundle_file_hashes_verified": true,
+  "plugin_runner_hashes_verified": true,
+  "public_worker_entry_verified": true,
+  "all32_ordered_pcm_verified": true,
+  "direct_graph_guards": true,
+  "rejected_total_frames": [
+    600,
+    759,
+    761,
+    920
+  ],
+  "parameter_mapping_review": "static-parameter-review.json",
+  "full32_mapping_review": "static-mapping-review.json",
+  "evidence_sha256": {
+    "final-summary.json": "f7843e4753806ef7f1e7f8324d7d64ec6df7897099f34885b4d7ec2f1ad23241",
+    "static-mapping-review.json": "a28625815d6cc3e77e7fde1b5ca4d6e2eceff2a26c36ed9d224304cdbcc46bba",
+    "static-parameter-review.json": "4cc21e853e69611e4109b8e3c419f8cde84218a5c32467f847e68f72895d3797",
+    "static-corpus-quality.json": "3aa0760367e7cca933a2178d158b9eda8b17ae72eafd6b2e9e23ea4fc1e8d9d0",
+    "retained-worker-check/report.json": "1bbdc523f380b40a305dd808169c7714bea133f55cfc579dcdfc04af36dddcc2",
+    "run_steady_final.py": "8f22ea5f41a90c3e7aa5baa121cf25e9bf8dd02436f2a6c92866f2ce8aef1141",
+    "steady-final/0-control/report.json": "782d30ea9f26e5c2812ac5adf8a27231e8e3a657ed6c37f0b34ed11378aaca7a",
+    "steady-final/1-candidate/report.json": "48ddd5927707dc30a478bc6c970e5ac3298c958627112b6e22afa4bf2a7d1f33",
+    "steady-final/2-candidate/report.json": "1be4de838d063f3783b86ea7962c090b3bc50a8f228520d0fb8e27107489cffd",
+    "steady-final/3-control/report.json": "68a08065a4b4aff83fe907155ed0705596230177fa02e473ef9610f43692d43a"
+  },
+  "remaining_work": "none within bounded B32/760 GPU6 investigation",
+  "stopping_reason": "Static-shape rebuild delivers small repeatable matched gain. Tested tile/fusion/scheduling alternatives lack E2E benefit. No claim of global optimum or power-only bottleneck."
+}
