@@ -13,7 +13,7 @@ from torch import nn
 PATHS = ('calibration', 'target_plan', 'draft_plan', 'cfm_plan', 'vocoder_plan', 'official_sources')
 OPTIONAL_PATHS = ('prefill_plan', 'latent_plan', 'tail_target_plan', 'tail_draft_plan','context_plan',
                   'latent_suffix_plan','tail_context_plan','vocoder_partition_plan','condition_trt_plan',
-                  'middle_target_plan','middle_draft_plan','middle_context_plan','cfm_microbatch_plan','vocoder_microbatch_plan')
+                  'middle_target_plan','middle_draft_plan','middle_context_plan','cfm_microbatch_plan','vocoder_microbatch_plan','vocoder_serial_plan')
 OPTIONAL_SETTINGS = ('rnn_graph_rewrite', 'batch_conditions', 'latent_cached_prefix',
                      'latent_gpu_scalar_lengths', 'condition_per_row_lengths',
                      'graph_burst_rounds', 'head_handoff', 'admission_packing',
@@ -46,6 +46,10 @@ def validate(plan):
     if 'cfm_microbatch_plan' in plan and (plan['batch'] != 128 or not plan.get('graphs')
             or not isinstance(plan['cfm_microbatch_plan'], str) or not plan['cfm_microbatch_plan']):
         raise ValueError('CFM microbatch needs an explicit B64 plan and graphed B128 deployment')
+    if 'vocoder_serial_plan' in plan and (plan['batch']!=128 or not plan.get('graphs')
+            or 'vocoder_partition_plan' in plan or 'vocoder_microbatch_plan' in plan
+            or not isinstance(plan['vocoder_serial_plan'],str) or not plan['vocoder_serial_plan']):
+        raise ValueError('Native vocoder serial plan needs a complete graphed B128 native deployment')
     if 'vocoder_microbatch_plan' in plan and (plan['batch']!=128 or not plan.get('graphs')
             or plan['runtime_backend']!='native_dspark_worker_trt_compute'
             or not plan.get('vocoder_partition_plan') or not isinstance(plan['vocoder_microbatch_plan'],str)
@@ -429,6 +433,9 @@ def prepare(engine, plan):
                 engine.vocoder=VocoderSerialMicrobatch(plan['vocoder_microbatch_plan'],engine.vocoder)
             engine.head_batch_barrier = True
             engine.config['batch_conditions'] = plan.get('batch_conditions', False)
+            if 'vocoder_serial_plan' in plan:
+                from inspark_infer.ops.tensorrt.native_vocoder_microbatch import NativeVocoderSerialMicrobatch
+                engine.vocoder=NativeVocoderSerialMicrobatch(plan['vocoder_serial_plan'],engine.vocoder)
             if plan.get('condition_projected_vq',False):
                 from inspark_infer.runtime.projected_vq import ProjectedVQTable
                 engine.tts.projected_vq_table=ProjectedVQTable(engine.tts.semantic_codec.quantizer)

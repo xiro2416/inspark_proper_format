@@ -9,7 +9,7 @@ ZipVoice-Distill 的 A_1007 INT8 B1/B2/B4/B8/B16/B32/B64 使用独立环境和�
 | FP8 E4M3FN，1:3保护策略 | 1、8、64、128 |
 | INT8 SmoothQuant，alpha=1.0，同一保护策略 | 1、8、64 |
 | NVFP4 E2M1，沿用同一保护策略 | 64 |
-| NVFP4 GEMM + FP8 Conv，同一保护策略 | 64 |
+| NVFP4 GEMM + FP8 Conv，同一保护策略 | 64、128 |
 
 ## 执行方案
 
@@ -83,3 +83,13 @@ W8A8 E4M3FN 静态校准；Text/Vocos、depthwise conv 和敏感运算保持浮�
 七档最终路线已通过本机与私有资产空缓存下载验证；各档性能与配对质量见下方说明。
 安装、运行、质量和性能证据见 [ZipVoice SM120 FP8](docs/zipvoice-sm120-fp8.md)。
 既有 SM89 INT8 和 Index/NVFP4 路线保留。
+
+## 混合精度 B128
+
+B128先迁移同一NVFP4 GEMM / FP8 Conv配方，再优化。AR使用精确B128/B64/B8引擎及后段请求压缩；CFM和Vocoder使用同一完整B64引擎分别串行两次，Graph覆盖完整工作及输出保存。CFM仍是完整四步solver。保留GPU PCG、独立KV/RNG、只提交接受hidden、KV80/head-major、prefix复用与已有FIR/KV融合；不跨请求复用相同文本计算。
+
+```bash
+inspark fetch --asset-dir ./mixed128_assets --precision nvfp4_fp8 --batch 128
+```
+
+同期30波：迁移基线受理后P50 559.03ms，优化后493.89ms，降低11.65%。功率、P95/P99、实际engine覆盖、浮点审计及不保留的候选见[B128报告](reports/current/mixed_precision_b128/RESULTS.md)。B64、FP8、INT8和未量化权重保留。

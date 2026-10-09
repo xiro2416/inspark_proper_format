@@ -1,13 +1,13 @@
 # Current InSpark release
 
 - Keep src/inspark_infer, configs/current, benchmarks, scripts, tests and reports/current layout.
-- Publish current selected FP8 B1/B8/B64/B128, INT8 SmoothQuant B1/B8/B64 and newly authorized native NVFP4 B64 and reviewed NVFP4-GEMM/FP8-Conv mixed B64, plus the plain FP32 semantic reference. NVFP4 retains the current protected-role list; unsupported 16-bit/FP8 fallback must not be labelled native NVFP4.
+- Publish current selected FP8 B1/B8/B64/B128, INT8 SmoothQuant B1/B8/B64 and newly authorized native NVFP4 B64 and reviewed NVFP4-GEMM/FP8-Conv mixed B64/B128, plus the plain FP32 semantic reference. NVFP4 retains the current protected-role list; unsupported 16-bit/FP8 fallback must not be labelled native NVFP4.
 - Draft is selected online step900; CFM is bilingual40k stage1 step800 with four quarter intervals. Keep checkpoint, per-component calibration and engine identities consistent.
 - Keep weights, ONNX, engines, environments and caches out of Git. Pinned assets live in private xirr/index_pipeline.
 - Preserve request-owned RNG, PCG residual law, committed-hidden isolation, KV ownership, EOS, cancellation and streaming outputs.
 - Source code must not import another workspace project. Downloaded model assets are data dependencies.
 - GPU experiments use one physical GPU at a time, GPU7 on this server, with serial builds and validation. No automatic time limit or stopping unrelated workloads.
-- Existing approved kernels/plugins may migrate; the reviewed mixed B64 route is authorized; no new GPU math is needed for this route.
+- Existing approved kernels/plugins may migrate; the reviewed mixed B64/B128 route is authorized; no new GPU math is needed for this route.
 - Correctness checks follow operation logic; floating audits are reported without a fixed L2 acceptance threshold. Do not count repeated-text reuse as general performance.
 
 ## Independent ZipVoice A_1007 integration

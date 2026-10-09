@@ -1,0 +1,162 @@
+[
+  {
+    "component": "target",
+    "batch": 128,
+    "engine_sha256": "77d6747475938fc3f24ed9314a3418d875a4fb12bd4f8190015d49dc0d46e872",
+    "native_fp4_gemms": 72,
+    "native_fp8_conv_implementation_layers": 0,
+    "fp32_fir_plugins": 0,
+    "tiling": "full",
+    "actual_aux_streams": 0
+  },
+  {
+    "component": "draft",
+    "batch": 128,
+    "engine_sha256": "fe329b49383b2e1dbbb60c498232af65bb382afae984dd2c66e2d5e4696351d6",
+    "native_fp4_gemms": 12,
+    "native_fp8_conv_implementation_layers": 0,
+    "fp32_fir_plugins": 0,
+    "tiling": "full",
+    "actual_aux_streams": 0
+  },
+  {
+    "component": "context",
+    "batch": 128,
+    "engine_sha256": "480259f238ff6e561e15142a0e9ec928c5683b46b6ef769d6d8b11083e346574",
+    "native_fp4_gemms": 4,
+    "native_fp8_conv_implementation_layers": 0,
+    "fp32_fir_plugins": 0,
+    "tiling": "full",
+    "actual_aux_streams": 0
+  },
+  {
+    "component": "prefill",
+    "batch": 128,
+    "engine_sha256": "60404399afde28976af1bbf213827b4ff259c477e931256ab18b97aa08dbf301",
+    "native_fp4_gemms": 72,
+    "native_fp8_conv_implementation_layers": 0,
+    "fp32_fir_plugins": 0,
+    "tiling": "full",
+    "actual_aux_streams": 0
+  },
+  {
+    "component": "latent",
+    "batch": 128,
+    "engine_sha256": "e6097c34971da0d020a517531977971dcc1e5da167e2830e8b5dceb7769b7c61",
+    "native_fp4_gemms": 72,
+    "native_fp8_conv_implementation_layers": 0,
+    "fp32_fir_plugins": 0,
+    "tiling": "full",
+    "actual_aux_streams": 0
+  },
+  {
+    "component": "latent_suffix",
+    "batch": 128,
+    "engine_sha256": "b551b515c6c060c891b284045ba0ccbc957306af4c5c2c8799a50db8d8ea5b33",
+    "native_fp4_gemms": 72,
+    "native_fp8_conv_implementation_layers": 0,
+    "fp32_fir_plugins": 0,
+    "tiling": "full",
+    "actual_aux_streams": 0
+  },
+  {
+    "component": "cfm",
+    "batch": 128,
+    "engine_sha256": "a55d9653fd016dad7b383184f7dbd8c7e95dd87a741ee66845a32a06532f9a6f",
+    "native_fp4_gemms": 168,
+    "native_fp8_conv_implementation_layers": 64,
+    "fp32_fir_plugins": 0,
+    "tiling": "full",
+    "actual_aux_streams": 0
+  },
+  {
+    "component": "vocoder",
+    "batch": 128,
+    "engine_sha256": "a5d05bee82a06e6842d48bb93c949c105692aba764c1f3895c7cefcc24b6ce14",
+    "native_fp4_gemms": 0,
+    "native_fp8_conv_implementation_layers": 411,
+    "fp32_fir_plugins": 109,
+    "tiling": "full",
+    "actual_aux_streams": 0
+  },
+  {
+    "component": "cfm_microbatch",
+    "batch": 64,
+    "engine_sha256": "e76323220b0b4b925b3a052ce981013948fc04dafe8af1c52f87ffb178d333ad",
+    "native_fp4_gemms": 168,
+    "native_fp8_conv_implementation_layers": 64,
+    "fp32_fir_plugins": 0,
+    "tiling": "full",
+    "actual_aux_streams": 0
+  },
+  {
+    "component": "vocoder_serial",
+    "batch": 64,
+    "engine_sha256": "d142e063db9d10a4d701c74d0261e409469c90760c722412245d1a073f163130",
+    "native_fp4_gemms": 0,
+    "native_fp8_conv_implementation_layers": 96,
+    "fp32_fir_plugins": 109,
+    "tiling": "moderate",
+    "actual_aux_streams": 0
+  },
+  {
+    "component": "middle_target",
+    "batch": 64,
+    "engine_sha256": "36199524e8875f5f53746202384963bf6d589f15c905692ecbfd0f7c141c9d21",
+    "native_fp4_gemms": 72,
+    "native_fp8_conv_implementation_layers": 0,
+    "fp32_fir_plugins": 0,
+    "tiling": "full",
+    "actual_aux_streams": 0
+  },
+  {
+    "component": "middle_draft",
+    "batch": 64,
+    "engine_sha256": "eb7318399edffc6075d459c4e21619d5203c2ea2734ee0278442275374b5307c",
+    "native_fp4_gemms": 12,
+    "native_fp8_conv_implementation_layers": 0,
+    "fp32_fir_plugins": 0,
+    "tiling": "full",
+    "actual_aux_streams": 0
+  },
+  {
+    "component": "middle_context",
+    "batch": 64,
+    "engine_sha256": "233887f9d7f5ee205d4d4bae61588b39505bc22d3cb7bf5fb3fac23c4eda76fc",
+    "native_fp4_gemms": 4,
+    "native_fp8_conv_implementation_layers": 0,
+    "fp32_fir_plugins": 0,
+    "tiling": "full",
+    "actual_aux_streams": 0
+  },
+  {
+    "component": "tail_target",
+    "batch": 8,
+    "engine_sha256": "29721e6b5d8d7fc2d5bacff664f018bb0d35a1235e0bd4ab27d213f0554490df",
+    "native_fp4_gemms": 72,
+    "native_fp8_conv_implementation_layers": 0,
+    "fp32_fir_plugins": 0,
+    "tiling": "full",
+    "actual_aux_streams": 0
+  },
+  {
+    "component": "tail_draft",
+    "batch": 8,
+    "engine_sha256": "f2c39c7d95b8254b0e3bef2f52646d459f6e6432b4c2f86cee8f92ca1ed61d57",
+    "native_fp4_gemms": 12,
+    "native_fp8_conv_implementation_layers": 0,
+    "fp32_fir_plugins": 0,
+    "tiling": "full",
+    "actual_aux_streams": 0
+  },
+  {
+    "component": "tail_context",
+    "batch": 8,
+    "engine_sha256": "92673a01471d27dceba2e11979578cd97a0faf087ccad5ba7ebfd7a3fc5a4d73",
+    "native_fp4_gemms": 4,
+    "native_fp8_conv_implementation_layers": 0,
+    "fp32_fir_plugins": 0,
+    "tiling": "full",
+    "actual_aux_streams": 0
+  }
+]

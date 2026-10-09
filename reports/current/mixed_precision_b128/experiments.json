@@ -1,0 +1,552 @@
+{
+  "short_candidates": [
+    {
+      "candidate": "cfm_serial",
+      "comparator": "baseline_short",
+      "before_ms": 558.5140092298388,
+      "candidate_ms": 537.1052953414619,
+      "keep_provisional": true,
+      "gain_ms": 21.40871388837695
+    },
+    {
+      "candidate": "vocoder_serial",
+      "comparator": "cfm_serial",
+      "before_ms": 537.1052953414619,
+      "candidate_ms": 530.2209821529686,
+      "keep_provisional": true,
+      "gain_ms": 6.884313188493252
+    },
+    {
+      "candidate": "prefix_views",
+      "comparator": "vocoder_serial",
+      "before_ms": 530.2209821529686,
+      "candidate_ms": 517.3647203482687,
+      "keep_provisional": true,
+      "gain_ms": 12.856261804699898
+    },
+    {
+      "candidate": "cpu32",
+      "comparator": "prefix_views",
+      "before_ms": 517.3647203482687,
+      "candidate_ms": 506.7810299806297,
+      "keep_provisional": true,
+      "gain_ms": 10.583690367639065
+    },
+    {
+      "candidate": "kv_fusion",
+      "comparator": "cpu32",
+      "before_ms": 506.7810299806297,
+      "candidate_ms": 499.2827409878373,
+      "keep_provisional": true,
+      "gain_ms": 7.498288992792368
+    }
+  ],
+  "ar_compaction": {
+    "candidate_ms": 493.889891076833,
+    "before_ms": 499.2827409878373,
+    "gain_ms": 5.392849911004305,
+    "keep_provisional": true
+  },
+  "overlap_microprobe": {
+    "scope": "one independent complete CFM B64 + Vocoder B64, real inputs, CUDA Graph full fork/join; microprobe not E2E",
+    "medians_ms": {
+      "serial": [
+        128.2457275390625,
+        128.2256317138672
+      ],
+      "parallel": [
+        135.01759338378906,
+        135.0359344482422
+      ]
+    },
+    "outputs_equal": true,
+    "finite": true
+  },
+  "vocoder_full64": {
+    "candidate_ms": 494.4986212067306,
+    "before_ms": 493.88899002224207,
+    "gain_ms": -0.6096311844885349,
+    "keep_provisional": false
+  },
+  "stage_diagnostic_gpu_ms": {
+    "unified/stage/cfm4": 105.38729476928711,
+    "unified/stage/condition": 0.125471249983093,
+    "unified/stage/condition_group": 0.9791213199496269,
+    "unified/stage/latent": 27.4148006439209,
+    "unified/stage/prefill": 57.34697723388672,
+    "unified/stage/text_prepare": 21.832783699035645,
+    "unified/stage/unified_dspark": 168.03937530517578,
+    "unified/stage/vocoder": 156.57762908935547
+  },
+  "kernel_hotspots": [
+    {
+      "name": "_tiled",
+      "sum_ms": 120.52287099999997,
+      "count": 436
+    },
+    {
+      "name": "cutlass3x_sm120_bstensorop_s16864gemm_block_scaled_ue4m3xe2m1_ue4m3xe2m1_f32_f16_f16_128x128x128_1x1x1_0_tnn_align32_o_vs16_pingpong_bias_f16_relu",
+      "sum_ms": 66.05055699999993,
+      "count": 3344
+    },
+    {
+      "name": "sm86_xmma_fprop_implicit_gemm_bf16bf16_bf16f32_f32_nhwckrsc_nhwc_tilesize256x64x32_stage2_warpsize4x1x1_g1_tensor16x8x16_execute_kernel_trt",
+      "sum_ms": 40.927778999999994,
+      "count": 112
+    },
+    {
+      "name": "__myl_CastAddReshSlicCastReshTranConcSlicCastReshTranConcSlicCastReshTranReshMoveReshReshMoveMoveEtc_0xfa800fc387122328fbcf6af9fa3aeb06",
+      "sum_ms": 24.26346900000001,
+      "count": 360
+    },
+    {
+      "name": "sm86_xmma_fprop_implicit_gemm_bf16bf16_bf16f32_f32_nhwckrsc_nhwc_tilesize128x128x32_stage3_warpsize2x2x1_g1_tensor16x8x16_execute_kernel_trt",
+      "sum_ms": 21.909191999999994,
+      "count": 36
+    },
+    {
+      "name": "sm80_xmma_gemm_f16f16_f16f16_f16_nn_n_tilesize128x256x32_stage3_warpsize2x4x1_tensor16x8x16_execute_kernel_trt",
+      "sum_ms": 15.828758999999998,
+      "count": 144
+    },
+    {
+      "name": "_gemm_mha_v2_0x143cb0edaae8094e05244dc78b11d612",
+      "sum_ms": 15.623613,
+      "count": 208
+    },
+    {
+      "name": "sm80_xmma_gemm_bf16bf16_bf16f32_f32_tn_n_tilesize192x128x32_stage3_warpsize4x2x1_tensor16x8x16_execute_kernel_trt",
+      "sum_ms": 15.094706000000002,
+      "count": 86
+    },
+    {
+      "name": "__myl_CastCastSiluMulCast_0x5baeadce169b627b9e32285775b3d7a1",
+      "sum_ms": 14.869366000000001,
+      "count": 144
+    },
+    {
+      "name": "_gemm_mha_v2_0x19599f2cec8d421155a262d548b10a46",
+      "sum_ms": 13.858079999999994,
+      "count": 360
+    },
+    {
+      "name": "sm80_xmma_gemm_f32f32_f32f32_f32_nn_n_tilesize128x256x8_stage3_warpsize2x4x1_ffma_aligna4_alignc4_execute_kernel_trt",
+      "sum_ms": 13.115125,
+      "count": 58
+    },
+    {
+      "name": "sm89_xmma_fprop_implicit_gemm_e4m3f32_e4m3f32_f32_nhwckrsc_nhwc_tilesize128x64x64_stage4_warpsize2x2x1_g1_tensor16x8x32_bias_f32_execute_kernel_trt",
+      "sum_ms": 12.830301000000002,
+      "count": 132
+    },
+    {
+      "name": "void cutlass::Kernel2<cutlass_80_simt_sgemm_256x128_8x4_tn_align1>(cutlass_80_simt_sgemm_256x128_8x4_tn_align1::Params)",
+      "sum_ms": 11.472233000000001,
+      "count": 52
+    },
+    {
+      "name": "void at::native::elementwise_kernel<128, 2, at::native::gpu_kernel_impl_nocast<at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#3}::operator()() const::{lambda()#7}::operator()() const::{lambda(float)#1}>(at::TensorIteratorBase&, at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#3}::operator()() const::{lambda()#7}::operator()() const::{lambda(float)#1} const&)::{lambda(int)#1}>(int, at::native::gpu_kernel_impl_nocast<at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#3}::operator()() const::{lambda()#7}::operator()() const::{lambda(float)#1}>(at::TensorIteratorBase&, at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#3}::operator()() const::{lambda()#7}::operator()() const::{lambda(float)#1} const&)::{lambda(int)#1})",
+      "sum_ms": 11.327353000000011,
+      "count": 1264
+    },
+    {
+      "name": "sm80_xmma_gemm_f32f32_f32f32_f32_nn_n_tilesize64x64x8_stage3_warpsize1x4x1_ffma_aligna4_alignc4_execute_kernel_trt",
+      "sum_ms": 10.157133000000002,
+      "count": 176
+    },
+    {
+      "name": "sm80_xmma_fprop_implicit_gemm_bf16bf16_bf16f32_f32_nhwckrsc_nhwc_tilesize256x128x32_stage3_warpsize4x2x1_g1_tensor16x8x16_execute_kernel_trt",
+      "sum_ms": 9.99672,
+      "count": 4
+    },
+    {
+      "name": "sm89_xmma_fprop_implicit_gemm_e4m3f32_e4m3f32_f32_nhwckrsc_nhwc_tilesize256x64x64_stage4_warpsize4x1x1_g1_tensor16x8x32_bias_f32_execute_kernel_trt",
+      "sum_ms": 9.723859000000004,
+      "count": 108
+    },
+    {
+      "name": "sm80_xmma_gemm_f32f32_f32f32_f32_nn_n_tilesize64x128x8_stage3_warpsize1x4x1_ffma_aligna4_alignc4_execute_kernel_trt",
+      "sum_ms": 9.694412,
+      "count": 36
+    },
+    {
+      "name": "sm80_xmma_gemm_bf16bf16_bf16f32_f32_tn_n_tilesize192x128x32_stage4_warpsize4x2x1_tensor16x8x16_execute_kernel_trt",
+      "sum_ms": 9.502055,
+      "count": 76
+    },
+    {
+      "name": "sm89_xmma_fprop_implicit_gemm_e4m3f32_e4m3f32_f32_nhwckrsc_nhwc_tilesize128x128x64_stage3_warpsize2x2x1_g1_tensor16x8x32_bias_f32_execute_kernel_trt",
+      "sum_ms": 9.420915999999995,
+      "count": 204
+    },
+    {
+      "name": "sm80_xmma_gemm_bf16bf16_bf16f32_f32_tn_n_tilesize96x128x32_stage4_warpsize2x2x1_tensor16x8x16_execute_kernel_trt",
+      "sum_ms": 9.020409,
+      "count": 240
+    },
+    {
+      "name": "__myl_CastReshSlicCastReshTranConcSlicCastReshTranConcSlicCastReshTranReshMoveReshReshMoveMoveEtc_0x8c7e47176d4cb29114a01e899218a65a",
+      "sum_ms": 8.233465999999998,
+      "count": 120
+    },
+    {
+      "name": "sm80_xmma_gemm_bf16bf16_bf16f32_f32_nn_n_tilesize128x128x64_stage3_warpsize2x2x1_tensor16x8x16_fused",
+      "sum_ms": 7.859370999999999,
+      "count": 64
+    },
+    {
+      "name": "void cutlass::Kernel2<cutlass_100_simt_cgemm_32x32_16x5_nt_align1>(cutlass_100_simt_cgemm_32x32_16x5_nt_align1::Params)",
+      "sum_ms": 7.737101999999998,
+      "count": 200
+    },
+    {
+      "name": "sm80_xmma_gemm_bf16bf16_bf16f32_f32_tn_n_tilesize128x128x32_stage4_warpsize2x2x1_tensor16x8x16_fused",
+      "sum_ms": 7.687366,
+      "count": 62
+    },
+    {
+      "name": "__myl_ReshTranReshCastAddReshConcCast_0xe85968fee3697f419e2539c70ef0e4f0",
+      "sum_ms": 7.274766999999999,
+      "count": 80
+    },
+    {
+      "name": "__myl_ReshCastReshCastSiluMulCast_0x46e7db34a4ca624e00434bcc431fcb72",
+      "sum_ms": 6.722834000000001,
+      "count": 64
+    },
+    {
+      "name": "sm80_xmma_gemm_bf16bf16_bf16f32_f32_nn_n_tilesize160x128x32_stage3_warpsize2x2x1_tensor16x8x16_execute_kernel_trt",
+      "sum_ms": 6.419629000000004,
+      "count": 120
+    },
+    {
+      "name": "__myl_ReshCastSlicReshMulMulSlicReshMulAddReshMulSubReshConcCastReshTranReshMove_0x8d292066dd810a7b03c58dc696f2eccd",
+      "sum_ms": 5.75323,
+      "count": 108
+    },
+    {
+      "name": "sm80_xmma_gemm_bf16bf16_bf16f32_f32_tn_n_tilesize64x96x32_stage3_warpsize2x2x1_tensor16x8x16_execute_kernel_trt",
+      "sum_ms": 5.505608,
+      "count": 10
+    }
+  ],
+  "fir_schedule_probe": {
+    "scope": "existing FIR schedule microprobe on real quantized-reference intermediates; same math and FP32 ABI, not E2E",
+    "shapes": [
+      {
+        "shape": [
+          64,
+          768,
+          208
+        ],
+        "instances": 18,
+        "ms": {
+          "256x4": 0.17112000286579132,
+          "64x4": 0.2773439884185791,
+          "128x4": 0.19604799896478653,
+          "512x4": 0.374783992767334,
+          "64x8": 0.5069920122623444,
+          "128x8": 0.25732800364494324,
+          "256x8": 0.18535999953746796,
+          "512x8": 0.29975999891757965
+        },
+        "checks": {
+          "256x4": {
+            "finite": true,
+            "equal_baseline": true
+          },
+          "64x4": {
+            "finite": true,
+            "equal_baseline": true
+          },
+          "128x4": {
+            "finite": true,
+            "equal_baseline": true
+          },
+          "512x4": {
+            "finite": true,
+            "equal_baseline": true
+          },
+          "64x8": {
+            "finite": true,
+            "equal_baseline": true
+          },
+          "128x8": {
+            "finite": true,
+            "equal_baseline": true
+          },
+          "256x8": {
+            "finite": true,
+            "equal_baseline": true
+          },
+          "512x8": {
+            "finite": true,
+            "equal_baseline": true
+          }
+        }
+      },
+      {
+        "shape": [
+          64,
+          384,
+          832
+        ],
+        "instances": 18,
+        "ms": {
+          "256x4": 0.34409599006175995,
+          "64x4": 0.5270240008831024,
+          "128x4": 0.34838399291038513,
+          "512x4": 0.44046400487422943,
+          "64x8": 0.9592640101909637,
+          "128x8": 0.4570399969816208,
+          "256x8": 0.37406399846076965,
+          "512x8": 0.36268799006938934
+        },
+        "checks": {
+          "256x4": {
+            "finite": true,
+            "equal_baseline": true
+          },
+          "64x4": {
+            "finite": true,
+            "equal_baseline": true
+          },
+          "128x4": {
+            "finite": true,
+            "equal_baseline": true
+          },
+          "512x4": {
+            "finite": true,
+            "equal_baseline": true
+          },
+          "64x8": {
+            "finite": true,
+            "equal_baseline": true
+          },
+          "128x8": {
+            "finite": true,
+            "equal_baseline": true
+          },
+          "256x8": {
+            "finite": true,
+            "equal_baseline": true
+          },
+          "512x8": {
+            "finite": true,
+            "equal_baseline": true
+          }
+        }
+      },
+      {
+        "shape": [
+          64,
+          192,
+          1664
+        ],
+        "instances": 18,
+        "ms": {
+          "256x4": 0.30457599461078644,
+          "64x4": 0.5276640057563782,
+          "128x4": 0.3471360057592392,
+          "512x4": 0.44276799261569977,
+          "64x8": 0.959551990032196,
+          "128x8": 0.4575839936733246,
+          "256x8": 0.33212798833847046,
+          "512x8": 0.36049599945545197
+        },
+        "checks": {
+          "256x4": {
+            "finite": true,
+            "equal_baseline": true
+          },
+          "64x4": {
+            "finite": true,
+            "equal_baseline": true
+          },
+          "128x4": {
+            "finite": true,
+            "equal_baseline": true
+          },
+          "512x4": {
+            "finite": true,
+            "equal_baseline": true
+          },
+          "64x8": {
+            "finite": true,
+            "equal_baseline": true
+          },
+          "128x8": {
+            "finite": true,
+            "equal_baseline": true
+          },
+          "256x8": {
+            "finite": true,
+            "equal_baseline": true
+          },
+          "512x8": {
+            "finite": true,
+            "equal_baseline": true
+          }
+        }
+      },
+      {
+        "shape": [
+          64,
+          96,
+          3328
+        ],
+        "instances": 18,
+        "ms": {
+          "256x4": 0.3049599975347519,
+          "64x4": 0.5295040011405945,
+          "128x4": 0.3489599972963333,
+          "512x4": 0.3883199989795685,
+          "64x8": 0.9591040015220642,
+          "128x8": 0.4588639885187149,
+          "256x8": 0.33086399734020233,
+          "512x8": 0.3187360018491745
+        },
+        "checks": {
+          "256x4": {
+            "finite": true,
+            "equal_baseline": true
+          },
+          "64x4": {
+            "finite": true,
+            "equal_baseline": true
+          },
+          "128x4": {
+            "finite": true,
+            "equal_baseline": true
+          },
+          "512x4": {
+            "finite": true,
+            "equal_baseline": true
+          },
+          "64x8": {
+            "finite": true,
+            "equal_baseline": true
+          },
+          "128x8": {
+            "finite": true,
+            "equal_baseline": true
+          },
+          "256x8": {
+            "finite": true,
+            "equal_baseline": true
+          },
+          "512x8": {
+            "finite": true,
+            "equal_baseline": true
+          }
+        }
+      },
+      {
+        "shape": [
+          64,
+          48,
+          6656
+        ],
+        "instances": 18,
+        "ms": {
+          "256x4": 0.2943519949913025,
+          "64x4": 0.5245600044727325,
+          "128x4": 0.34910400211811066,
+          "512x4": 0.38892799615859985,
+          "64x8": 0.9526240229606628,
+          "128x8": 0.45665600895881653,
+          "256x8": 0.319472000002861,
+          "512x8": 0.3189280033111572
+        },
+        "checks": {
+          "256x4": {
+            "finite": true,
+            "equal_baseline": true
+          },
+          "64x4": {
+            "finite": true,
+            "equal_baseline": true
+          },
+          "128x4": {
+            "finite": true,
+            "equal_baseline": true
+          },
+          "512x4": {
+            "finite": true,
+            "equal_baseline": true
+          },
+          "64x8": {
+            "finite": true,
+            "equal_baseline": true
+          },
+          "128x8": {
+            "finite": true,
+            "equal_baseline": true
+          },
+          "256x8": {
+            "finite": true,
+            "equal_baseline": true
+          },
+          "512x8": {
+            "finite": true,
+            "equal_baseline": true
+          }
+        }
+      },
+      {
+        "shape": [
+          64,
+          24,
+          13312
+        ],
+        "instances": 19,
+        "ms": {
+          "256x4": 0.2945280075073242,
+          "64x4": 0.522271990776062,
+          "128x4": 0.34375999867916107,
+          "512x4": 0.37404799461364746,
+          "64x8": 0.9489440023899078,
+          "128x8": 0.45423999428749084,
+          "256x8": 0.3186879903078079,
+          "512x8": 0.30641598999500275
+        },
+        "checks": {
+          "256x4": {
+            "finite": true,
+            "equal_baseline": true
+          },
+          "64x4": {
+            "finite": true,
+            "equal_baseline": true
+          },
+          "128x4": {
+            "finite": true,
+            "equal_baseline": true
+          },
+          "512x4": {
+            "finite": true,
+            "equal_baseline": true
+          },
+          "64x8": {
+            "finite": true,
+            "equal_baseline": true
+          },
+          "128x8": {
+            "finite": true,
+            "equal_baseline": true
+          },
+          "256x8": {
+            "finite": true,
+            "equal_baseline": true
+          },
+          "512x8": {
+            "finite": true,
+            "equal_baseline": true
+          }
+        }
+      }
+    ],
+    "total_baseline_ms_per_B64": 31.139903783798218,
+    "total_best_ms_per_B64": 31.139903783798218
+  }
+}

@@ -15,13 +15,13 @@ from scripts.audit_unified_acoustics import freeze_head_graphs,metrics
 
 def main():
     p=argparse.ArgumentParser();p.add_argument('--deployment',required=True);p.add_argument('--config',required=True);p.add_argument('--manifest',required=True);p.add_argument('--out',type=Path,required=True);args=p.parse_args()
-    manifest=load_manifest(args.manifest);plan=load_plan(args.deployment);cfg=load(args.config);cfg['max_batch']=64
+    manifest=load_manifest(args.manifest);plan=load_plan(args.deployment);cfg=load(args.config);batch=plan['batch'];cfg['max_batch']=batch
     with GPULease(7):
         engine=Engine(cfg)
         try:
             prepare_references(engine,manifest);engine.prepare_deployment(plan)
-            before=dict(engine.head_graphs.hits);wave=run_wave(engine,wave_cases(manifest['splits']['evaluation'],64,0),'nvfp4-acoustic-audit',admission_mode='batch')
-            frozen=freeze_head_graphs(engine.head_graphs,64,before)
+            before=dict(engine.head_graphs.hits);wave=run_wave(engine,wave_cases(manifest['splits']['evaluation'],batch,0),'nvfp4-acoustic-audit',admission_mode='batch')
+            frozen=freeze_head_graphs(engine.head_graphs,batch,before)
         finally:engine.close()
         torch.cuda.empty_cache()
         reference=Engine(cfg)
@@ -32,7 +32,7 @@ def main():
                 recipe=json.loads(Path(plan['calibration']).read_text());install(reference,recipe)
                 same_mel=reference.student(*inputs).cpu();same_pcm=reference.tts.bigvgan(mel_input).cpu()
                 actual_mel=frozen['cfm_output'];actual_pcm=frozen['vocoder_output']
-                report={'waveform_diagnostics':{'unique_pcm_rows':int(torch.unique(actual_pcm.reshape(64,-1),dim=0).shape[0]),'saturated_fraction':float((actual_pcm.abs()>=.999).float().mean()),'unique_reference_rows':int(torch.unique(same_pcm.reshape(64,-1),dim=0).shape[0])},'scope':'one real B64 head; reporting only, no numerical thresholds','routes':frozen['routes'],
+                report={'waveform_diagnostics':{'unique_pcm_rows':int(torch.unique(actual_pcm.reshape(batch,-1),dim=0).shape[0]),'saturated_fraction':float((actual_pcm.abs()>=.999).float().mean()),'unique_reference_rows':int(torch.unique(same_pcm.reshape(batch,-1),dim=0).shape[0])},'scope':f'one real B{batch} head; reporting only, no numerical thresholds','routes':frozen['routes'],
                     'CFM_same_recipe':metrics(same_mel,actual_mel),'CFM_unquantized':metrics(high_mel,actual_mel),
                     'Vocoder_same_recipe':metrics(same_pcm,actual_pcm),'Vocoder_unquantized':metrics(high_pcm,actual_pcm),
                     'native_rounds':[row['rounds'] for row in wave['rows']]}

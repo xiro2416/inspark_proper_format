@@ -1,0 +1,869 @@
+{
+  "baseline_final": {
+    "summary": {
+      "waves": 30,
+      "requests": 3840,
+      "statistics_unit": "wave for batch latency; requests within a wave are correlated",
+      "request_admission_to_pcm_ms": {
+        "n": 3840,
+        "p50": 565.4111849144101,
+        "p95": 568.7208624090999,
+        "p99": 570.1680732239038,
+        "mean": 565.3276260898565,
+        "min": 559.2782841995358,
+        "max": 571.1188297718763
+      },
+      "request_postadmission_to_pcm_ms": {
+        "n": 3840,
+        "p50": 556.3540011644363,
+        "p95": 560.0927897263318,
+        "p99": 561.0992072243243,
+        "mean": 556.2860070994551,
+        "min": 549.4797779247165,
+        "max": 562.5561103224754
+      },
+      "wave_admission_to_last_pcm_ms": {
+        "n": 30,
+        "p50": 568.1511126458645,
+        "p95": 570.2109714504331,
+        "p99": 571.0392830334604,
+        "mean": 567.9049057265123,
+        "min": 565.0788024067879,
+        "max": 571.1649404838681
+      },
+      "wave_postadmission_to_last_pcm_ms": {
+        "n": 30,
+        "p50": 559.0308136306703,
+        "p95": 561.1564720980823,
+        "p99": 562.1629010885954,
+        "mean": 558.8199845825633,
+        "min": 555.2374059334397,
+        "max": 562.5561103224754
+      },
+      "admission_phase_ms": {
+        "n": 30,
+        "p50": 8.96732835099101,
+        "p95": 10.47827135771513,
+        "p99": 10.63616787083447,
+        "mean": 9.084921143949032,
+        "min": 6.361323408782482,
+        "max": 10.687051340937614
+      },
+      "delivery_ms": {
+        "n": 3840,
+        "p50": 0.08286815136671066,
+        "p95": 0.6658287718892097,
+        "p99": 0.8149131014943125,
+        "mean": 0.2093136019539088,
+        "min": 0.03888178616762161,
+        "max": 1.0800277814269066
+      },
+      "rounds": {
+        "n": 3840,
+        "p50": 9.0,
+        "p95": 12.0,
+        "p99": 13.0,
+        "mean": 8.4375,
+        "min": 5.0,
+        "max": 13.0
+      },
+      "kv_at_head": {
+        "n": 3840,
+        "p50": 71.0,
+        "p95": 76.0,
+        "p99": 78.0,
+        "mean": 71.3828125,
+        "min": 64.0,
+        "max": 78.0
+      },
+      "postadmission_requests_per_second": {
+        "n": 30,
+        "p50": 228.96770103155484,
+        "p95": 230.26811028122765,
+        "p99": 230.48330070463152,
+        "mean": 229.05668399383904,
+        "min": 227.53285876963676,
+        "max": 230.53201861429392
+      },
+      "admission_requests_per_second": {
+        "n": 30,
+        "p50": 225.29217537477734,
+        "p95": 226.33331320284245,
+        "p99": 226.5143207793994,
+        "mean": 225.39142470002295,
+        "min": 224.10339103020488,
+        "max": 226.51707948488146
+      },
+      "accepted_tokens": 90840,
+      "proposed_tokens": 226800,
+      "acceptance_rate": 0.4005291005291005,
+      "logical_target_verified_positions": 259200,
+      "work_count_note": "Logical active-request rounds exclude extra physical work on ready/padded rows; inspect device step counters and profile trajectory",
+      "voices": {
+        "mingxiang_gao.wav": 960,
+        "paimeng_5s_calm_vocal.wav": 960,
+        "positive.wav": 960,
+        "xiaoyuan_gao.wav": 960
+      },
+      "strata": {
+        "short": 1290,
+        "medium": 1290,
+        "long": 1260
+      }
+    },
+    "sustained_power": {
+      "duration_seconds": 15.027880952693522,
+      "requested_seconds": 15.0,
+      "waves": 26,
+      "requests": 3328,
+      "requests_per_second": 221.45504149761754,
+      "power_w": {
+        "n": 732,
+        "p50": 415.77,
+        "p95": 501.7,
+        "p99": 513.64,
+        "mean": 388.3844398907103,
+        "min": 92.41,
+        "max": 520.83
+      },
+      "board_memory_mib": {
+        "n": 732,
+        "p50": 28001.0,
+        "p95": 28001.0,
+        "p99": 28001.0,
+        "mean": 28001.0,
+        "min": 28001.0,
+        "max": 28001.0
+      },
+      "utilization_percent": {
+        "n": 732,
+        "p50": 96.0,
+        "p95": 100.0,
+        "p99": 100.0,
+        "mean": 86.55464480874316,
+        "min": 0.0,
+        "max": 100.0
+      },
+      "board_joules_per_request": 1.7537845933161502,
+      "timing_scope": "continuous full waves including admission, delivery, cancellation; separate from latency"
+    },
+    "memory": {
+      "cuda_allocated_bytes": 13553670144,
+      "cuda_reserved_bytes": 20872953856,
+      "cuda_peak_allocated_bytes": 19617143296,
+      "cuda_peak_reserved_bytes": 20872953856,
+      "rss_bytes": 6228889600
+    },
+    "board_lifecycle": {
+      "samples": 3879,
+      "sample_interval_ms": 20,
+      "memory_mib": {
+        "n": 3879,
+        "p50": 22031.0,
+        "p95": 28001.0,
+        "p99": 28001.0,
+        "mean": 17880.74658417118,
+        "min": 0.0,
+        "max": 28001.0
+      },
+      "scope": "sampled whole process: model/reference preparation, deployment/capture, warmup, measured waves, power and teardown",
+      "note": "NVML sampled peak; may miss allocations shorter than20ms; Torch allocator peaks are reported separately"
+    },
+    "counters": {
+      "device_round_attempts": 30,
+      "device_round_successes": 30,
+      "device_round_fallbacks": 0,
+      "device_round_status_reads": 210,
+      "device_round_status_wait_ms": 4136.697322130203,
+      "device_round_launched_rounds": 390,
+      "device_target_steps": 390,
+      "device_draft_steps": 0,
+      "native_target_steps": 390,
+      "native_draft_steps": 390,
+      "native_cfm_fallbacks": 0,
+      "native_vocoder_fallbacks": 0,
+      "device_code_direct_rows": 3840,
+      "speech_codes_host_rows": 0,
+      "output_d2h_bytes": 87520800,
+      "output_d2h_wait_ms": 8577.178713865578,
+      "output_d2h_transfer_ms": 5.527167975902557,
+      "device_round_fallback_reasons": {},
+      "head_graph_hits": {
+        "cfm": 30,
+        "vocoder": 30
+      },
+      "unified_dspark": {
+        "calls": 30,
+        "failures": 0,
+        "graph_replays": 210,
+        "launched_rounds": 390,
+        "status_reads": 210,
+        "status_wait_ms": 4136.697322130203,
+        "draft_enqueues": 390,
+        "target_enqueues": 390,
+        "prime_enqueues": 30
+      },
+      "unified_prefix": {
+        "hits": {
+          "prefill": 30,
+          "latent": 30
+        },
+        "tail_eager": {
+          "prefill": 0,
+          "latent": 0
+        },
+        "graph_hits": {
+          "prefill": 30,
+          "latent": 0
+        },
+        "direct_hits": {
+          "prefill": 0,
+          "latent": 0
+        }
+      }
+    },
+    "last_ar_route": {
+      "backend": "native_dspark_worker_trt_compute",
+      "launched_rounds": 13,
+      "late_verify_rounds": 1,
+      "skipped_final_proposals": 1,
+      "graph_replays": 7,
+      "parent_graph_replays": 6,
+      "verify_graph_replays": 1,
+      "proposal_graph_replays": 0,
+      "compacted_tail": null,
+      "status_reads": 7,
+      "status_wait_ms": 137.79897894710302,
+      "graph": true,
+      "native_executor": false,
+      "rng": "request_scoped_domain_separated_preallocated_uniform_v1",
+      "pcg_coarse": "torch_sparse_csr",
+      "proposal_provenance": "installed_official_module; graph_rewrite=zero_rank_prune_token_fold_hidden_batch",
+      "target_enqueues_by_batch": {
+        "128": 13
+      },
+      "target_enqueues": 13,
+      "draft_enqueues": 13,
+      "prime_enqueues": 1,
+      "native_dspark_worker": true,
+      "draft_cache_backend": "NVIDIA DSparkWorker head-major backing with strided logical slots",
+      "draft_cache_layout_copies": false,
+      "draft_cache_native_strides": [
+        102400,
+        13209600,
+        64,
+        5120,
+        1
+      ],
+      "draft_cache_slot_gather": false,
+      "context_compute": "TensorRT K/V layers1/2; Torch projection and protected K/V0"
+    },
+    "execution_pass": true,
+    "deployment_sha256": "a2c98d9e72adb2140dc430330cfc64fd3abe13e0c1cd8ad5e08464a9a80b4ca0"
+  },
+  "no_compact_final": {
+    "summary": {
+      "waves": 30,
+      "requests": 3840,
+      "statistics_unit": "wave for batch latency; requests within a wave are correlated",
+      "request_admission_to_pcm_ms": {
+        "n": 3840,
+        "p50": 503.67519073188305,
+        "p95": 507.6115001924336,
+        "p99": 508.5887886583805,
+        "mean": 503.66907300825306,
+        "min": 497.6083682850003,
+        "max": 508.9853024110198
+      },
+      "request_postadmission_to_pcm_ms": {
+        "n": 3840,
+        "p50": 495.5318020656705,
+        "p95": 499.85960819758475,
+        "p99": 501.3198463898152,
+        "mean": 495.52254472946515,
+        "min": 487.61765006929636,
+        "max": 502.20238137990236
+      },
+      "wave_admission_to_last_pcm_ms": {
+        "n": 30,
+        "p50": 506.00268272683024,
+        "p95": 508.95385816693306,
+        "p99": 509.01473437435925,
+        "mean": 506.0944304180642,
+        "min": 502.87983007729053,
+        "max": 509.0290820226073
+      },
+      "wave_postadmission_to_last_pcm_ms": {
+        "n": 30,
+        "p50": 497.84579453989863,
+        "p95": 501.3601531740278,
+        "p99": 502.09080770611763,
+        "mean": 497.9038121799628,
+        "min": 492.8414523601532,
+        "max": 502.20238137990236
+      },
+      "admission_phase_ms": {
+        "n": 30,
+        "p50": 8.246057666838169,
+        "p95": 9.420386701822279,
+        "p99": 9.967907788231969,
+        "mean": 8.190618238101402,
+        "min": 6.777225993573666,
+        "max": 10.038377717137337
+      },
+      "delivery_ms": {
+        "n": 3840,
+        "p50": 0.05214102566242218,
+        "p95": 0.6945748813450335,
+        "p99": 0.8522859960794452,
+        "mean": 0.2006890565098729,
+        "min": 0.038421712815761566,
+        "max": 1.0097445920109749
+      },
+      "rounds": {
+        "n": 3840,
+        "p50": 9.0,
+        "p95": 12.0,
+        "p99": 13.0,
+        "mean": 8.4375,
+        "min": 5.0,
+        "max": 13.0
+      },
+      "kv_at_head": {
+        "n": 3840,
+        "p50": 71.0,
+        "p95": 76.0,
+        "p99": 78.0,
+        "mean": 71.3828125,
+        "min": 64.0,
+        "max": 78.0
+      },
+      "postadmission_requests_per_second": {
+        "n": 30,
+        "p50": 257.1077338232174,
+        "p95": 258.41127522491547,
+        "p99": 259.35419552223834,
+        "mean": 257.0819867951795,
+        "min": 254.87732584679145,
+        "max": 259.7184132686582
+      },
+      "admission_requests_per_second": {
+        "n": 30,
+        "p50": 252.9630860290208,
+        "p95": 254.0993227658337,
+        "p99": 254.4310221211553,
+        "mean": 252.92021513255753,
+        "min": 251.45911013845605,
+        "max": 254.53397083022188
+      },
+      "accepted_tokens": 90840,
+      "proposed_tokens": 226800,
+      "acceptance_rate": 0.4005291005291005,
+      "logical_target_verified_positions": 259200,
+      "work_count_note": "Logical active-request rounds exclude extra physical work on ready/padded rows; inspect device step counters and profile trajectory",
+      "voices": {
+        "mingxiang_gao.wav": 960,
+        "paimeng_5s_calm_vocal.wav": 960,
+        "positive.wav": 960,
+        "xiaoyuan_gao.wav": 960
+      },
+      "strata": {
+        "short": 1290,
+        "medium": 1290,
+        "long": 1260
+      }
+    },
+    "sustained_power": {
+      "duration_seconds": 15.507769104093313,
+      "requested_seconds": 15.0,
+      "waves": 30,
+      "requests": 3840,
+      "requests_per_second": 247.6178213787322,
+      "power_w": {
+        "n": 759,
+        "p50": 430.12,
+        "p95": 504.28,
+        "p99": 512.3,
+        "mean": 405.5316996047431,
+        "min": 108.01,
+        "max": 514.75
+      },
+      "board_memory_mib": {
+        "n": 759,
+        "p50": 29397.0,
+        "p95": 29397.0,
+        "p99": 29397.0,
+        "mean": 29397.0,
+        "min": 29397.0,
+        "max": 29397.0
+      },
+      "utilization_percent": {
+        "n": 759,
+        "p50": 95.0,
+        "p95": 100.0,
+        "p99": 100.0,
+        "mean": 88.48880105401845,
+        "min": 31.0,
+        "max": 100.0
+      },
+      "board_joules_per_request": 1.6377322817346056,
+      "timing_scope": "continuous full waves including admission, delivery, cancellation; separate from latency"
+    },
+    "memory": {
+      "cuda_allocated_bytes": 13616494592,
+      "cuda_reserved_bytes": 20573061120,
+      "cuda_peak_allocated_bytes": 19525476864,
+      "cuda_peak_reserved_bytes": 20573061120,
+      "rss_bytes": 6244261888
+    },
+    "board_lifecycle": {
+      "samples": 4042,
+      "sample_interval_ms": 20,
+      "memory_mib": {
+        "n": 4042,
+        "p50": 23295.0,
+        "p95": 29397.0,
+        "p99": 29397.0,
+        "mean": 18118.070262246412,
+        "min": 0.0,
+        "max": 29397.0
+      },
+      "scope": "sampled whole process: model/reference preparation, deployment/capture, warmup, measured waves, power and teardown",
+      "note": "NVML sampled peak; may miss allocations shorter than20ms; Torch allocator peaks are reported separately"
+    },
+    "counters": {
+      "device_round_attempts": 30,
+      "device_round_successes": 30,
+      "device_round_fallbacks": 0,
+      "device_round_status_reads": 210,
+      "device_round_status_wait_ms": 3896.8703420832753,
+      "device_round_launched_rounds": 390,
+      "device_target_steps": 390,
+      "device_draft_steps": 0,
+      "native_target_steps": 390,
+      "native_draft_steps": 390,
+      "native_cfm_fallbacks": 0,
+      "native_vocoder_fallbacks": 0,
+      "device_code_direct_rows": 3840,
+      "speech_codes_host_rows": 0,
+      "output_d2h_bytes": 87520800,
+      "output_d2h_wait_ms": 7533.4727903828025,
+      "output_d2h_transfer_ms": 5.49753600358963,
+      "device_round_fallback_reasons": {},
+      "head_graph_hits": {
+        "cfm": 30,
+        "vocoder": 30
+      },
+      "unified_dspark": {
+        "calls": 30,
+        "failures": 0,
+        "graph_replays": 210,
+        "launched_rounds": 390,
+        "status_reads": 210,
+        "status_wait_ms": 3896.8703420832753,
+        "draft_enqueues": 390,
+        "target_enqueues": 390,
+        "prime_enqueues": 30
+      },
+      "unified_prefix": {
+        "hits": {
+          "prefill": 30,
+          "latent": 30
+        },
+        "tail_eager": {
+          "prefill": 0,
+          "latent": 0
+        },
+        "graph_hits": {
+          "prefill": 30,
+          "latent": 0
+        },
+        "direct_hits": {
+          "prefill": 0,
+          "latent": 0
+        }
+      }
+    },
+    "last_ar_route": {
+      "backend": "native_dspark_worker_trt_compute",
+      "launched_rounds": 13,
+      "late_verify_rounds": 1,
+      "skipped_final_proposals": 1,
+      "graph_replays": 7,
+      "parent_graph_replays": 6,
+      "verify_graph_replays": 1,
+      "proposal_graph_replays": 0,
+      "compacted_tail": null,
+      "status_reads": 7,
+      "status_wait_ms": 129.8287296667695,
+      "graph": true,
+      "native_executor": false,
+      "rng": "request_scoped_domain_separated_preallocated_uniform_v1",
+      "pcg_coarse": "torch_sparse_csr",
+      "proposal_provenance": "installed_official_module; graph_rewrite=zero_rank_prune_token_fold_hidden_batch",
+      "target_enqueues_by_batch": {
+        "128": 13
+      },
+      "target_enqueues": 13,
+      "draft_enqueues": 13,
+      "prime_enqueues": 1,
+      "native_dspark_worker": true,
+      "draft_cache_backend": "NVIDIA DSparkWorker head-major backing with strided logical slots",
+      "draft_cache_layout_copies": false,
+      "draft_cache_native_strides": [
+        102400,
+        13209600,
+        64,
+        5120,
+        1
+      ],
+      "draft_cache_slot_gather": false,
+      "context_compute": "TensorRT K/V layers1/2; Torch projection and protected K/V0"
+    },
+    "execution_pass": true,
+    "deployment_sha256": "6e4fc1cc40f8bfca65dec9d71160cbea0fbdb0ea6d14ecaf433a617aff308afc"
+  },
+  "selected_final": {
+    "summary": {
+      "waves": 30,
+      "requests": 3840,
+      "statistics_unit": "wave for batch latency; requests within a wave are correlated",
+      "request_admission_to_pcm_ms": {
+        "n": 3840,
+        "p50": 500.6871335208416,
+        "p95": 503.99403823539615,
+        "p99": 505.2253423631191,
+        "mean": 500.6395229089928,
+        "min": 495.0507367029786,
+        "max": 506.5224068239331
+      },
+      "request_postadmission_to_pcm_ms": {
+        "n": 3840,
+        "p50": 491.5734310634434,
+        "p95": 495.8761866670102,
+        "p99": 497.41535973735154,
+        "mean": 491.4181626974217,
+        "min": 481.42528161406517,
+        "max": 498.8900003954768
+      },
+      "wave_admission_to_last_pcm_ms": {
+        "n": 30,
+        "p50": 503.03471833467484,
+        "p95": 505.25882998481393,
+        "p99": 506.2435811944306,
+        "mean": 503.204509926339,
+        "min": 501.4396505430341,
+        "max": 506.56657572835684
+      },
+      "wave_postadmission_to_last_pcm_ms": {
+        "n": 30,
+        "p50": 493.88899002224207,
+        "p95": 497.2741562873125,
+        "p99": 498.46058106049895,
+        "mean": 493.93468890339136,
+        "min": 487.5531466677785,
+        "max": 498.8900003954768
+      },
+      "admission_phase_ms": {
+        "n": 30,
+        "p50": 8.580556139349937,
+        "p95": 11.992989387363192,
+        "p99": 13.7531896494329,
+        "mean": 9.26982102294763,
+        "min": 6.788344122469425,
+        "max": 14.253523200750351
+      },
+      "delivery_ms": {
+        "n": 3840,
+        "p50": 0.06107054650783539,
+        "p95": 0.6790476851165292,
+        "p99": 0.8227323926985269,
+        "mean": 0.20539192943639742,
+        "min": 0.04024151712656021,
+        "max": 0.9396141394972801
+      },
+      "rounds": {
+        "n": 3840,
+        "p50": 9.0,
+        "p95": 11.0,
+        "p99": 12.0,
+        "mean": 8.4375,
+        "min": 5.0,
+        "max": 15.0
+      },
+      "kv_at_head": {
+        "n": 3840,
+        "p50": 71.0,
+        "p95": 77.0,
+        "p99": 78.0,
+        "mean": 71.390625,
+        "min": 64.0,
+        "max": 78.0
+      },
+      "postadmission_requests_per_second": {
+        "n": 30,
+        "p50": 259.16755208283087,
+        "p95": 260.9802559468883,
+        "p99": 262.0950462447844,
+        "mean": 259.14973961138116,
+        "min": 256.56958427415395,
+        "max": 262.5354812594819
+      },
+      "admission_requests_per_second": {
+        "n": 30,
+        "p50": 254.4556015089616,
+        "p95": 255.1205231353329,
+        "p99": 255.22373431083398,
+        "mean": 254.3713654918999,
+        "min": 252.68149564735435,
+        "max": 255.26501516460135
+      },
+      "accepted_tokens": 90870,
+      "proposed_tokens": 226800,
+      "acceptance_rate": 0.40066137566137566,
+      "logical_target_verified_positions": 259200,
+      "work_count_note": "Logical active-request rounds exclude extra physical work on ready/padded rows; inspect device step counters and profile trajectory",
+      "voices": {
+        "mingxiang_gao.wav": 960,
+        "paimeng_5s_calm_vocal.wav": 960,
+        "positive.wav": 960,
+        "xiaoyuan_gao.wav": 960
+      },
+      "strata": {
+        "short": 1290,
+        "medium": 1290,
+        "long": 1260
+      }
+    },
+    "sustained_power": {
+      "duration_seconds": 15.37745192181319,
+      "requested_seconds": 15.0,
+      "waves": 30,
+      "requests": 3840,
+      "requests_per_second": 249.7162741606684,
+      "power_w": {
+        "n": 754,
+        "p50": 413.3,
+        "p95": 506.42,
+        "p99": 513.6,
+        "mean": 395.8824801061008,
+        "min": 88.46,
+        "max": 515.86
+      },
+      "board_memory_mib": {
+        "n": 754,
+        "p50": 32395.0,
+        "p95": 32395.0,
+        "p99": 32395.0,
+        "mean": 32395.0,
+        "min": 32395.0,
+        "max": 32395.0
+      },
+      "utilization_percent": {
+        "n": 754,
+        "p50": 96.0,
+        "p95": 100.0,
+        "p99": 100.0,
+        "mean": 88.74403183023873,
+        "min": 9.0,
+        "max": 100.0
+      },
+      "board_joules_per_request": 1.5853291157603466,
+      "timing_scope": "continuous full waves including admission, delivery, cancellation; separate from latency"
+    },
+    "memory": {
+      "cuda_allocated_bytes": 15008633856,
+      "cuda_reserved_bytes": 22319988736,
+      "cuda_peak_allocated_bytes": 20917616128,
+      "cuda_peak_reserved_bytes": 22319988736,
+      "rss_bytes": 6262976512
+    },
+    "board_lifecycle": {
+      "samples": 4105,
+      "sample_interval_ms": 20,
+      "memory_mib": {
+        "n": 4105,
+        "p50": 26295.0,
+        "p95": 32395.0,
+        "p99": 32395.0,
+        "mean": 19846.76443361754,
+        "min": 0.0,
+        "max": 32395.0
+      },
+      "scope": "sampled whole process: model/reference preparation, deployment/capture, warmup, measured waves, power and teardown",
+      "note": "NVML sampled peak; may miss allocations shorter than20ms; Torch allocator peaks are reported separately"
+    },
+    "counters": {
+      "device_round_attempts": 30,
+      "device_round_successes": 30,
+      "device_round_fallbacks": 0,
+      "device_round_status_reads": 240,
+      "device_round_status_wait_ms": 3793.0044941604137,
+      "device_round_launched_rounds": 450,
+      "device_target_steps": 450,
+      "device_draft_steps": 0,
+      "native_target_steps": 450,
+      "native_draft_steps": 480,
+      "native_cfm_fallbacks": 0,
+      "native_vocoder_fallbacks": 0,
+      "device_code_direct_rows": 3840,
+      "speech_codes_host_rows": 0,
+      "output_d2h_bytes": 87521280,
+      "output_d2h_wait_ms": 7549.883125349879,
+      "output_d2h_transfer_ms": 5.601792007684708,
+      "device_round_fallback_reasons": {},
+      "head_graph_hits": {
+        "cfm": 30,
+        "vocoder": 30
+      },
+      "unified_dspark": {
+        "calls": 30,
+        "failures": 0,
+        "graph_replays": 240,
+        "launched_rounds": 450,
+        "status_reads": 240,
+        "status_wait_ms": 3793.0044941604137,
+        "draft_enqueues": 480,
+        "target_enqueues": 450,
+        "prime_enqueues": 60
+      },
+      "unified_prefix": {
+        "hits": {
+          "prefill": 30,
+          "latent": 30
+        },
+        "tail_eager": {
+          "prefill": 0,
+          "latent": 0
+        },
+        "graph_hits": {
+          "prefill": 30,
+          "latent": 0
+        },
+        "direct_hits": {
+          "prefill": 0,
+          "latent": 0
+        }
+      }
+    },
+    "last_ar_route": {
+      "backend": "native_dspark_worker_trt_compute",
+      "launched_rounds": 15,
+      "late_verify_rounds": 0,
+      "skipped_final_proposals": 0,
+      "graph_replays": 8,
+      "parent_graph_replays": 5,
+      "verify_graph_replays": 0,
+      "proposal_graph_replays": 0,
+      "compacted_tail": {
+        "backend": "native_dspark_worker_trt_compute",
+        "launched_rounds": 5,
+        "late_verify_rounds": 1,
+        "skipped_final_proposals": 0,
+        "graph_replays": 3,
+        "parent_graph_replays": 1,
+        "verify_graph_replays": 1,
+        "proposal_graph_replays": 0,
+        "compacted_tail": {
+          "backend": "native_dspark_worker_trt_compute",
+          "launched_rounds": 2,
+          "late_verify_rounds": 0,
+          "skipped_final_proposals": 0,
+          "graph_replays": 1,
+          "parent_graph_replays": 1,
+          "verify_graph_replays": 0,
+          "proposal_graph_replays": 0,
+          "compacted_tail": null,
+          "status_reads": 1,
+          "status_wait_ms": 7.014207541942596,
+          "graph": true,
+          "native_executor": false,
+          "rng": "request_scoped_domain_separated_preallocated_uniform_v1",
+          "pcg_coarse": "torch_sparse_csr",
+          "proposal_provenance": "installed_official_module; graph_rewrite=zero_rank_prune_token_fold_hidden_batch",
+          "target_enqueues_by_batch": {
+            "8": 2
+          },
+          "target_enqueues": 2,
+          "draft_enqueues": 3,
+          "prime_enqueues": 1,
+          "native_dspark_worker": true,
+          "draft_cache_backend": "NVIDIA DSparkWorker head-major backing with strided logical slots",
+          "draft_cache_layout_copies": false,
+          "draft_cache_native_strides": [
+            102400,
+            921600,
+            64,
+            5120,
+            1
+          ],
+          "draft_cache_slot_gather": false,
+          "context_compute": "TensorRT K/V layers1/2; Torch projection and protected K/V0",
+          "active_rows": 1,
+          "tail_batch": 8,
+          "entry_prime_enqueues": 1,
+          "row_rounds": 16
+        },
+        "status_reads": 3,
+        "status_wait_ms": 23.800820112228394,
+        "graph": true,
+        "native_executor": false,
+        "rng": "request_scoped_domain_separated_preallocated_uniform_v1",
+        "pcg_coarse": "torch_sparse_csr",
+        "proposal_provenance": "installed_official_module; graph_rewrite=zero_rank_prune_token_fold_hidden_batch",
+        "target_enqueues_by_batch": {
+          "64": 3,
+          "8": 2
+        },
+        "target_enqueues": 5,
+        "draft_enqueues": 5,
+        "prime_enqueues": 1,
+        "native_dspark_worker": true,
+        "draft_cache_backend": "NVIDIA DSparkWorker head-major backing with strided logical slots",
+        "draft_cache_layout_copies": false,
+        "draft_cache_native_strides": [
+          102400,
+          6656000,
+          64,
+          5120,
+          1
+        ],
+        "draft_cache_slot_gather": false,
+        "context_compute": "TensorRT K/V layers1/2; Torch projection and protected K/V0",
+        "active_rows": 18,
+        "tail_batch": 64,
+        "entry_prime_enqueues": 0,
+        "row_rounds": 320
+      },
+      "status_reads": 8,
+      "status_wait_ms": 126.36470515280962,
+      "graph": true,
+      "native_executor": false,
+      "rng": "request_scoped_domain_separated_preallocated_uniform_v1",
+      "pcg_coarse": "torch_sparse_csr",
+      "proposal_provenance": "installed_official_module; graph_rewrite=zero_rank_prune_token_fold_hidden_batch",
+      "target_enqueues_by_batch": {
+        "128": 10,
+        "64": 3,
+        "8": 2
+      },
+      "target_enqueues": 15,
+      "draft_enqueues": 16,
+      "prime_enqueues": 2,
+      "native_dspark_worker": true,
+      "draft_cache_backend": "NVIDIA DSparkWorker head-major backing with strided logical slots",
+      "draft_cache_layout_copies": false,
+      "draft_cache_native_strides": [
+        102400,
+        13209600,
+        64,
+        5120,
+        1
+      ],
+      "draft_cache_slot_gather": false,
+      "context_compute": "TensorRT K/V layers1/2; Torch projection and protected K/V0"
+    },
+    "execution_pass": true,
+    "deployment_sha256": "d2026f614cb63e108a43f17c6f9eda2a1fb0c318a7294e67d40d296f0b567df8"
+  }
+}

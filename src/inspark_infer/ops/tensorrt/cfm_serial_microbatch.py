@@ -24,9 +24,11 @@ class CFMSerialMicrobatch:
         if candidate['kind'] != 'full_solver':
             raise ValueError('Microbatch requires complete four-step solver')
         a, b = original['quantization_recipe'], candidate['quantization_recipe']
-        for key in ('scheme', 'calibration', 'role_manifest'):
+        for key in ('scheme', 'role_manifest','role_specs_sha256'):
             if a[key] != b[key]:
                 raise ValueError('Microbatch CFM changes quantization ' + key)
+        if a['calibration']['sha256']!=b['calibration']['sha256']:
+            raise ValueError('Microbatch CFM changes calibration content')
         sources = lambda plan: sorted((v['role'], v['sha256']) for v in plan['provenance']['model_sources'])
         if sources(original) != sources(candidate):
             raise ValueError('Microbatch CFM changes source checkpoints')

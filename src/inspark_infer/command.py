@@ -31,7 +31,8 @@ def main(argv: list[str] | None = None) -> int:
     p.add_argument('--batch',type=int,choices=[1,8,64,128],default=1)
     options,rest=p.parse_known_args(args)
     if options.precision=='int8_smoothquant' and options.batch==128:p.error('INT8 B128 is not published')
-    if options.precision in ('nvfp4','nvfp4_fp8') and options.batch!=64:p.error('NVFP4 and mixed NVFP4/FP8 are supported only at B64')
+    if options.precision=='nvfp4' and options.batch!=64:p.error('NVFP4 is supported only at B64')
+    if options.precision=='nvfp4_fp8' and options.batch not in (64,128):p.error('Mixed NVFP4/FP8 supports B64/B128')
     from inspark_infer.api.release import fetch,materialize
     if options.command=='fetch':
         if rest:p.error('Unexpected fetch arguments')
