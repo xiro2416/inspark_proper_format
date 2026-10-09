@@ -1,0 +1,39 @@
+{
+  "source_commit_tested": "3202c4f",
+  "cpu_tests_passed": 10,
+  "portable_after_merge": [
+    {
+      "batch": 4,
+      "waves": 3,
+      "requests": 12,
+      "execution_pass": true,
+      "fallbacks": 0,
+      "sessions_after": 0,
+      "gpu": 4,
+      "scope": "postmerge functional proof, excluded from performance summary"
+    },
+    {
+      "batch": 16,
+      "waves": 3,
+      "requests": 48,
+      "execution_pass": true,
+      "fallbacks": 0,
+      "sessions_after": 0,
+      "gpu": 5,
+      "scope": "postmerge functional proof, excluded from performance summary"
+    },
+    {
+      "batch": 32,
+      "waves": 3,
+      "requests": 96,
+      "execution_pass": true,
+      "fallbacks": 0,
+      "sessions_after": 0,
+      "gpu": 6,
+      "scope": "postmerge functional proof, excluded from performance summary"
+    }
+  ],
+  "worker_verified_code_PCM_equal_formal": true,
+  "preserved_concurrent_route": "SM89 INT8 Index",
+  "assets_revision": "1d1a9ca24b998c14aba3c59db9b119231ff70895"
+}
