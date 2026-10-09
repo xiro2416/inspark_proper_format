@@ -75,8 +75,12 @@ cases pass allorderedPCM and exactWAVhashes. Publichistory007receipt.
 ConcurrentIndexB128 main2942952b67b6729c60b0c11b29a2190e9b9cfc9c merged
 without conflicts; Indexrelease preserved, noIndexGPUexperiments.
 
-Remaining normalGitHubmain publication, then newGitHubcheckout/newemptycache
-B128 verification. Stopafterfinalsource/artifact/execution/publication review;
-no globaloptimality claim. Relatedprotected shapes/families,attentiongeometry,
-residualfusion andPCMmechanisms probed; remaining selectivegross<.1%.
-Alloriginalsource/history/caches/engines kept; noforcepush/deletion.
+Completed: normalGitHubmain source commit9ca4691c545c8c71212056ca993ddf441a88359f, preserving
+concurrentIndex128 release2942952b67b6729c60b0c11b29a2190e9b9cfc9c.
+NewGitHubcheckout/newemptycacheB128 sevenprimary/shape/mixed cases pass
+ordered128PCM/exactWAV hashes. Existingpinnedlibraries reused,7privateinput
+files/zero projectsource files copied; sourceimport freshcheckout only.
+Finalreceipt history/008-fresh-github-checkout.json. Taskcomplete; stopafter
+acceptedretainedartifact/executionreview/publication. No globaloptimality
+claim; relatedmechanisms probed, remaining selectivegross<.1%.
+Allsource/history/caches/engines preserved; noforcepush/deletion.

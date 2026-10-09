@@ -1,0 +1,163 @@
+{
+  "status": "b128_migrated_optimized_published_fresh_github_verified",
+  "tested_github_commit": "9ca4691c545c8c71212056ca993ddf441a88359f",
+  "hf_revision": "a1b6f97ee4ef58221b4c1062516f66de51602dd1",
+  "source_import": "/workspace/A_1007_zipvoice_b128_fresh_20261009/src/inspark_infer/__init__.py",
+  "project_source_files_copied": 0,
+  "private_condition_data_files_copied": 7,
+  "dependency_environment": "Existing pinned libraries reused; project source imported solely from fresh checkout",
+  "physical_gpu": 3,
+  "full_unsplit_batch": 128,
+  "shape_and_mixed_cases": 7,
+  "pcm_exact": true,
+  "proof_sha256": "b201326ab4b0e59a8f27f8d68eaafdb5e3bbff65f7c8ce862065ea99922e0a56",
+  "cases": [
+    {
+      "workload": {
+        "batch": 128,
+        "prompt_frames": 375,
+        "target_frames": 385,
+        "total_frames": 760,
+        "joint_tokens": 77,
+        "padded_tokens": 78,
+        "steps": 8,
+        "t_shift": 0.5,
+        "guidance": 1.0,
+        "feat_scale": 0.1
+      },
+      "rows": [
+        "0",
+        "1",
+        "127"
+      ],
+      "pcm_exact": true,
+      "report_sha256": "6e6ea412f2531f73cfe1907f9e13aa64033cedc2a7396cac6f8249f527fbb868"
+    },
+    {
+      "workload": {
+        "batch": 128,
+        "prompt_frames": 375,
+        "target_frames": 225,
+        "total_frames": 600,
+        "joint_tokens": 51,
+        "padded_tokens": 52,
+        "steps": 8,
+        "t_shift": 0.5,
+        "guidance": 1.0,
+        "feat_scale": 0.1
+      },
+      "rows": [
+        "0",
+        "1",
+        "127"
+      ],
+      "pcm_exact": true,
+      "report_sha256": "2b8d8700829da56829f983cba65a18c35553556531468d74599c32aad6caa169"
+    },
+    {
+      "workload": {
+        "batch": 128,
+        "prompt_frames": 375,
+        "target_frames": 225,
+        "total_frames": 600,
+        "joint_tokens": 140,
+        "padded_tokens": 141,
+        "steps": 8,
+        "t_shift": 0.5,
+        "guidance": 1.0,
+        "feat_scale": 0.1
+      },
+      "rows": [
+        "0",
+        "1",
+        "127"
+      ],
+      "pcm_exact": true,
+      "report_sha256": "a4450788e3cb023bd6a97b735845041b4873e11b09537ee26b18b490878d6f4f"
+    },
+    {
+      "workload": {
+        "batch": 128,
+        "prompt_frames": 375,
+        "target_frames": 385,
+        "total_frames": 760,
+        "joint_tokens": 77,
+        "padded_tokens": 78,
+        "steps": 8,
+        "t_shift": 0.5,
+        "guidance": 1.0,
+        "feat_scale": 0.1
+      },
+      "rows": [
+        "0",
+        "1",
+        "127"
+      ],
+      "pcm_exact": true,
+      "report_sha256": "5a3cbca09e4c14879da7cdac1d9298f63f695a2446050cd010081e6e12661832"
+    },
+    {
+      "workload": {
+        "batch": 128,
+        "prompt_frames": 375,
+        "target_frames": 545,
+        "total_frames": 920,
+        "joint_tokens": 51,
+        "padded_tokens": 52,
+        "steps": 8,
+        "t_shift": 0.5,
+        "guidance": 1.0,
+        "feat_scale": 0.1
+      },
+      "rows": [
+        "0",
+        "1",
+        "127"
+      ],
+      "pcm_exact": true,
+      "report_sha256": "2208d45e1873f1ab7911ba78a0cebcb9d9be6dd21b8830e2f381dcc795b45392"
+    },
+    {
+      "workload": {
+        "batch": 128,
+        "prompt_frames": 375,
+        "target_frames": 545,
+        "total_frames": 920,
+        "joint_tokens": 140,
+        "padded_tokens": 141,
+        "steps": 8,
+        "t_shift": 0.5,
+        "guidance": 1.0,
+        "feat_scale": 0.1
+      },
+      "rows": [
+        "0",
+        "1",
+        "127"
+      ],
+      "pcm_exact": true,
+      "report_sha256": "cf3ef61901df2be389bbcc96be728aac18b2b43530d92336ba3e297892136b7f"
+    },
+    {
+      "workload": {
+        "batch": 128,
+        "prompt_frames": 375,
+        "target_frames": 385,
+        "total_frames": 760,
+        "joint_tokens": 77,
+        "padded_tokens": 78,
+        "steps": 8,
+        "t_shift": 0.5,
+        "guidance": 1.0,
+        "feat_scale": 0.1
+      },
+      "rows": [
+        "0",
+        "1",
+        "127"
+      ],
+      "pcm_exact": true,
+      "report_sha256": "4ef525d793657718b19012d8182af54d50ea7963ba033f81860d2968c68334ee"
+    }
+  ]
+}

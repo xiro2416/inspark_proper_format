@@ -49,3 +49,5 @@ INSPARK_REPO_ROOT="$PWD" PYTHONPATH="$PWD/src" .venv-zipvoice-fp8/bin/python -m 
 B128注册表`configs/hardware/sm120/zipvoice_fp8_b128_registry.json`，私有HF revision `a1b6f97ee4ef58221b4c1062516f66de51602dd1`；`HF_TOKEN`通过环境注入。新增路径只有`bundles/zipvoice/sm120/fp8/b128/`及整合README，原权重／尺度／ONNX复用，旧资产／LFS规则／历史保留。验证每个源码／插件／binary SHA，不兼容时不静默重建。
 
 公开证据在`reports/sm120/zipvoice/fp8/b128/history/`：003迁移、004候选、005最终取舍、002最终性能、007私有发布。原始文字／转写／音频／状态／profile dump保持本机忽略目录。新源码命名空间`zipvoice_fp8_b128`保持原七档源码哈希；GPU始终单张GPU3、串行lease。
+
+最终GitHub新checkout及独立空缓存的7项128行/形状/混合文本复验通过，PCM哈希一致。证据`reports/sm120/zipvoice/fp8/b128/history/008-fresh-github-checkout.json`；源码验证提交`9ca4691c545c8c71212056ca993ddf441a88359f`。
