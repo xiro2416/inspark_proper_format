@@ -1,0 +1,26 @@
+{
+  "status": "rejected_quality_degradation",
+  "throughput_gain_percent": 1.7007770065056382,
+  "quality": {
+    "candidate": {
+      "count": 3,
+      "cer": 0.45614035087719296,
+      "character_errors": 26,
+      "reference_characters": 57,
+      "utmos_mean": 1.23970894018809,
+      "sim_o_mean": 0.2963130871454875
+    },
+    "control": {
+      "count": 3,
+      "cer": 0.0,
+      "character_errors": 0,
+      "reference_characters": 57,
+      "utmos_mean": 3.363155206044515,
+      "sim_o_mean": 0.6790584921836853
+    }
+  },
+  "power_cap_w": 400,
+  "reference_and_candidate_weights_scales_hashes_match": true,
+  "numerical_l2_is_not_acceptance_threshold": true,
+  "next": "Independent K16 candidate and static760 original kernels; investigate compound candidate mapping before any reuse."
+}

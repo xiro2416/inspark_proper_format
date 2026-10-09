@@ -215,7 +215,7 @@ def replay_wave_record(original, cfm_output, vocoder_on_source_mel, pcm_output, 
 def replay(args):
     """Run selected engine files; a prior capture's outputs are never relabelled."""
     sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "benchmarks"))
-    from compare_unified_acoustic_candidates import load_capture, validate_plan
+    from deployment.b32.replay_validation import load_capture, validate_plan
     from inspark_infer.runtime.device import GPULease, select_gpu
     from inspark_infer.ops.tensorrt.native113 import NativeCFMSolver113, NativeVocoder113
 

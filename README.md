@@ -111,3 +111,9 @@ inspark fetch --asset-dir ./mixed32_assets --precision nvfp4_fp8 --batch 32
 ```
 
 完整参数、功率/显存/P95/P99、浮点审计和拒绝候选见[三档汇总](reports/current/mixed_small_batches/RESULTS.md)。引擎包和最新未量化加载权重由fetch下载并校验，Graph在新进程捕获；如自行使用低精度safetensors，需配套role/layout/scale manifest。
+
+## IndexTTS SM89 INT8
+
+RTX4090 SM89 独立路线支持 B1/2/4/8/16/32/64/128，保持原 SmoothQuant alpha1.0 和保护浮点策略。已验收 engine 通过私有 HF 固定 revision 分发，下载验证文件哈希；既有 SM120 路线保持独立。
+部署见 [SM89 安装与资产下载](deployment/README.md)，性能见 [各 batch 汇总](deployment/multibatch/RESULTS.md) 与 [B32](deployment/b32/RESULTS.md)。
+[B64 就绪流水线](deployment/ready_pipeline/RESULTS.md) 实验支持提前16条声学交付与剩余 AR 缩批；保留 C，D 重叠可显式复测。原生产调度默认不变。

@@ -1,0 +1,7 @@
+{
+  "status": "implementation_error_identified_corrected_candidate_not_built",
+  "error": "Initial text replacement missed compact source assignments; split wrapperQ64/value128 retained launchQ32/z1, leaving2/3 channels unwritten",
+  "evidence": "/workspace/A_1007/outputs/zipvoice-benchmarks/b32/throughput-reoptimization/nonlinear-aot-diagnosis.json",
+  "correction": "AST changes assert exactly1 grid_x=(T+63)//64 and1 grid_z=3 assignment; new namespace preserves invalid artifact evidence. Original normal K32 retained, quarter-factor original nonlinear retained.",
+  "next": "NaN sentinel real TensorRT AOT mini parity before full build"
+}

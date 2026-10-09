@@ -3,7 +3,7 @@
   "model": "zipvoice",
   "precision": "int8",
   "repo_id": "xirr/zip_pipeline",
-  "revision": "f6da21d25400d1b3e0b9a70de333503b3374df76",
+  "revision": "3b01ce67d75e11a9174da29ef5b802b18305c610",
   "frame_profile": [
     600,
     760,
@@ -14,7 +14,7 @@
     78,
     141
   ],
-  "status": "published_fresh_download_validated",
+  "status": "published_b32_static760_fresh_download_validated",
   "bundles": {
     "1": {
       "bundle_id": "1505de05a16cf9881cf5",
@@ -42,14 +42,26 @@
       "bundle_path": "bundles/zipvoice/sm89/int8/b16/c66cf7c6d3aa14ad8d78"
     },
     "32": {
-      "bundle_id": "d1542a79cd19d660c8fa",
-      "local_path": "artifacts/trt113_bundles/zipvoice/sm89/int8/b32/d1542a79cd19d660c8fa",
-      "bundle_path": "bundles/zipvoice/sm89/int8/b32/d1542a79cd19d660c8fa"
+      "bundle_id": "270f2c741d495edac7b0",
+      "local_path": "artifacts/trt113_bundles/zipvoice/sm89/int8/b32/270f2c741d495edac7b0",
+      "bundle_path": "bundles/zipvoice/sm89/int8/b32/270f2c741d495edac7b0",
+      "frame_profile": [
+        760,
+        760,
+        760
+      ]
     },
     "64": {
       "bundle_id": "80c56e460ef30512a013",
       "local_path": "artifacts/trt113_bundles/zipvoice/sm89/int8/b64/80c56e460ef30512a013",
       "bundle_path": "bundles/zipvoice/sm89/int8/b64/80c56e460ef30512a013"
     }
+  },
+  "frame_profile_overrides": {
+    "32": [
+      760,
+      760,
+      760
+    ]
   }
 }

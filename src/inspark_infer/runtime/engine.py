@@ -276,6 +276,15 @@ class Engine(StreamingCore):
                         s['_row']=row
                 rows=[s['_row'] for s in group]
                 owner={id(s['_row']):s for s in group}
+                pipeline=getattr(self,'head_ready_pipeline',None)
+                if pipeline is not None and index==0 and max_rounds is None:
+                    try:return pipeline.run(rows,owner,on_chunk)
+                    except Exception as error:
+                        self.unified_first_chunk.failure_count+=1
+                        # The controller may already own tentative KV. Retain
+                        # cleanup handles, but never retry from stale row caches.
+                        for row in rows:owner[id(row)]['error']='Ready pipeline failed: '+str(error)
+                        raise
                 def is_ready(row):
                     return row.done or (index==0 and head_ready(len(row.codes),False))
                 barrier=getattr(self,'head_batch_barrier',False) and index==0
@@ -370,6 +379,8 @@ class Engine(StreamingCore):
         if guard is not None:guard.close()
         self.closed=True
         actions=[]
+        pipeline=getattr(self,'head_ready_pipeline',None)
+        if pipeline is not None:actions.append(('ready pipeline',pipeline.close))
         for s in self.sessions.values():self._cancel_text_futures(s)
         # Only final shutdown drains streams; normal cancel/reuse relies on owner-stream order.
         for name,stream in (('model',getattr(self.model,'stream',None)),
@@ -381,6 +392,7 @@ class Engine(StreamingCore):
         try:cleanup_all(actions)
         finally:
             self.sessions.clear();self.head_graphs=None
+            self.head_ready_pipeline=None
             self.unified_first_chunk=None
             if hasattr(self,'prefix_graphs'):self.prefix_graphs=None
             self.device_round_bank=None

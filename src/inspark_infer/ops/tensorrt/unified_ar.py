@@ -21,6 +21,9 @@ class StaticEngine:
         plan = read_json(path)
         if plan['trt'] != trt.__version__:
             raise ValueError('TensorRT runtime and plan versions differ')
+        observed_sm = int(''.join(map(str, torch.cuda.get_device_capability())))
+        if plan.get('sm') != observed_sm or plan.get('gpu_name') != torch.cuda.get_device_name():
+            raise ValueError('Static engine GPU hardware identity mismatch')
         if 'engines' in plan:
             engine_path = Path(plan['engines'][str(batch)])
             expected_hash = plan['engine_sha256'][str(batch)]
@@ -43,6 +46,21 @@ class StaticEngine:
             register()
         if any(name in plan.get('plugins',[]) for name in ('inspark_custom::small_fir_activation','inspark_custom::small_fir_activation_tiled')):
             from inspark_infer.ops.tensorrt.vocoder_small_fir_plugin import register
+            register()
+        if 'inspark_custom::implicit_int8_conv_1d' in plan.get('plugins',[]):
+            from deployment.b32.implicit_int8_plugin import register
+            register()
+        if 'inspark_custom::implicit_int8_conv_1d_tuned' in plan.get('plugins',[]):
+            from deployment.b32.implicit_int8_plugin import register
+            register(tuned=True)
+        if "inspark_custom::implicit_int8_conv_1d_migrated" in plan.get("plugins",[]):
+            from deployment.b32.implicit_int8_plugin import register
+            register(migrated=True)
+        if "inspark_custom::implicit_int8_conv_1d_schedule" in plan.get("plugins",[]):
+            from deployment.multibatch.schedule_plugin import register
+            register()
+        if 'inspark_custom::small_fir_activation_quantized' in plan.get('plugins',[]):
+            from deployment.multibatch.fir_quant_plugin import register
             register()
         self.engine = self.runtime.deserialize_cuda_engine(blob)
         if self.engine is None:

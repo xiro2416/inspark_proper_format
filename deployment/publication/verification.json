@@ -1,0 +1,56 @@
+{
+  "status": "validated_for_publication",
+  "assets_revision": "8ab746b036b53833bb1a5806278c5990752dbe19",
+  "manifest_sha256": "db5057b46b15b5f8f9794685255d49750ab399eed0bd115aebd14870a7e54cce",
+  "weights_revision": "96933af87262eec17d685050723d4f768d2f8778",
+  "source_revision": "2edb087d47eefc95c0c008c71e27c21a1158c896",
+  "weights_changed": false,
+  "fresh_download": {
+    "files": 1042,
+    "downloaded_engines": 50,
+    "bytes": 20677406381,
+    "fresh_network_cache": true,
+    "materialized_engine_files_are_regular": true
+  },
+  "weights_validation": "Existing pinned archive manifest verified; loader containers reconstructed in independent directory.",
+  "gpu": {
+    "physical_gpu": 1,
+    "sequential_deserialized_engines": 50,
+    "full_first_pcm_modes": [
+      "baseline",
+      "C"
+    ],
+    "waves_per_mode": 2,
+    "frozen_same_route_output_replay_passed": true,
+    "lifecycle": [
+      {
+        "requests": 1,
+        "serial_overlap_identical": true,
+        "cancelled_and_clean": true
+      },
+      {
+        "requests": 15,
+        "serial_overlap_identical": true,
+        "cancelled_and_clean": true
+      },
+      {
+        "requests": 17,
+        "serial_overlap_identical": true,
+        "cancelled_and_clean": true
+      },
+      {
+        "synthetic_early_eos": true,
+        "serial_overlap_pcm_identical": true,
+        "cancelled_and_clean": true,
+        "scope": "handoff and short PCM crop, not model-generated EOS or quality"
+      },
+      {
+        "noncontiguous_gpu_transfer": "64->48 after2 real rounds, all KV/token/accepted/draw/counters checked; continue to48 ready",
+        "cancelled_and_clean": true
+      }
+    ],
+    "no_remaining_requests": true
+  },
+  "cpu_tests": 96,
+  "scope": "Publication integrity/runtime compatibility check. Two-wave replay is functional validation, not a new performance claim; measured performance remains in readiness RESULTS.md."
+}

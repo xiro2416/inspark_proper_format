@@ -34,7 +34,7 @@ def create_manifest(args):
 
 def add_run_arguments(parser, *, profile=False):
     parser.add_argument("--gpu", type=int, default=7)
-    parser.add_argument("--batch", type=int, choices=(1, 4, 8, 16, 32, 64, 128), required=True)
+    parser.add_argument("--batch", type=int, choices=(1, 2, 4, 8, 16, 32, 64, 128), required=True)
     parser.add_argument("--manifest", type=Path, required=True)
     parser.add_argument("--split", choices=("calibration", "evaluation"), default="evaluation")
     parser.add_argument("--deployment", type=Path, required=True)
@@ -128,7 +128,8 @@ def run(args):
     plan = load_deployment(str(args.deployment))
     # Benchmark the ordinary path even if a deployment contains the optional
     # repeated-text optimization. Do not attribute content-reuse gains to it.
-    plan=dict(plan,batch_text_dedup=False)
+    if plan.get('schema') == 9:
+        plan=dict(plan,batch_text_dedup=False)
     report = dict(schema=1, kind="unified_first_chunk_benchmark", label=args.label, batch=args.batch,
                   gpu=args.gpu, quant_recipe=args.quant_recipe, runtime_backend_label=args.runtime_backend,
                   backend_label_is_attestation=False, manifest_sha256=manifest["manifest_sha256"],

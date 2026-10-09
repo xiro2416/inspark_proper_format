@@ -1,0 +1,15 @@
+{
+  "status": "prepared_not_built",
+  "batch": 32,
+  "package": "inspark_infer.ops.tensorrt.zipvoice.a1007.b32_attnsplitwp",
+  "mechanisms": [
+    "normal Q64 K32\u2192K16",
+    "nonlinear factor1/2 head0 full384:3 disjoint128-value tiles, Q64; factor4 unchanged"
+  ],
+  "original_weights_scales_and_int8_1to3_preserved": true,
+  "probe_files": [
+    "mechanism-probes.json",
+    "nonlinear-split128q64-probes.json"
+  ],
+  "limits": "Synthetic gains only; full AOT, mapping/quality and matched E2E needed. Retain compound scheme if verified, no single-factor attribution."
+}

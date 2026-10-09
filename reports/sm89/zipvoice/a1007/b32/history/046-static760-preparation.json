@@ -1,0 +1,112 @@
+{
+  "mechanism": "Specialize FM IO batch32/frame760 only; original graph ops, external weights, quantization unchanged; text tokens remain dynamic.",
+  "changes": [
+    {
+      "tensor": "t",
+      "axis": 0,
+      "old": "batch",
+      "new": 32
+    },
+    {
+      "tensor": "x",
+      "axis": 0,
+      "old": "batch",
+      "new": 32
+    },
+    {
+      "tensor": "x",
+      "axis": 1,
+      "old": "frames",
+      "new": 760
+    },
+    {
+      "tensor": "text_condition",
+      "axis": 0,
+      "old": "batch",
+      "new": 32
+    },
+    {
+      "tensor": "text_condition",
+      "axis": 1,
+      "old": "frames",
+      "new": 760
+    },
+    {
+      "tensor": "speech_condition",
+      "axis": 0,
+      "old": "batch",
+      "new": 32
+    },
+    {
+      "tensor": "speech_condition",
+      "axis": 1,
+      "old": "frames",
+      "new": 760
+    },
+    {
+      "tensor": "padding_mask",
+      "axis": 0,
+      "old": "batch",
+      "new": 32
+    },
+    {
+      "tensor": "padding_mask",
+      "axis": 1,
+      "old": "frames",
+      "new": 760
+    },
+    {
+      "tensor": "guidance_scale",
+      "axis": 0,
+      "old": "batch",
+      "new": 32
+    },
+    {
+      "tensor": "velocity",
+      "axis": 0,
+      "old": "batch",
+      "new": 32
+    },
+    {
+      "tensor": "velocity",
+      "axis": 1,
+      "old": "frames",
+      "new": 760
+    }
+  ],
+  "source_sha256": "48c9ae113a74901952b7d3d6120071983d251b9382afb3e1ea854ae2cf11da24",
+  "candidate_sha256": "7bf6ebf490c5a34081eed7febf34b5c20a8aebdae03abccbcc938678de1ef19b",
+  "input_shapes": {
+    "t": [
+      32,
+      1,
+      1
+    ],
+    "x": [
+      32,
+      760,
+      100
+    ],
+    "text_condition": [
+      32,
+      760,
+      100
+    ],
+    "speech_condition": [
+      32,
+      760,
+      100
+    ],
+    "padding_mask": [
+      32,
+      760
+    ],
+    "guidance_scale": [
+      32,
+      1,
+      1
+    ]
+  },
+  "frame_scope": 760,
+  "original_preserved": true
+}

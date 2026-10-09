@@ -170,6 +170,25 @@ class ExportWeightOp(nn.Module):
                 value = value[..., :-(stride - 1)]
             pad = self.dilation[0] * (self.kernel_size[0] - 1) - self.padding[0]
             value = F.pad(value, (pad, pad + self.output_padding[0]))
+        matrix_conv = getattr(self, 'conv1d_as_gemm', False) and self.kind != 'linear'
+        if matrix_conv:
+            if self.groups != 1 or not self.quantized or self.weight_axis != 0:
+                raise ValueError('Matrix convolution requires group1 and unchanged output-channel Q/DQ')
+            if self.kind != 'conv1d' and not self.deconv_as_conv:
+                raise ValueError('Matrix convolution requires the existing zero-insertion deconvolution')
+            stride = 1 if self.deconv_as_conv else self.stride[0]
+            padding = 0 if self.deconv_as_conv else self.padding[0]
+            if padding:value=F.pad(value,(padding,padding))
+            width=(value.shape[-1]-self.dilation[0]*(self.kernel_size[0]-1)-1)//stride+1
+            columns=torch.stack([value[..., k*self.dilation[0]:k*self.dilation[0]+width*stride:stride]
+                                 for k in range(self.kernel_size[0])],dim=-1)
+            value=columns.permute(0,2,1,3).reshape(value.shape[0],width,-1)
+            weight=weight.reshape(weight.shape[0],-1)
+        lift_conv = getattr(self, 'conv1d_as_2d', False) and self.kind != 'linear'
+        if lift_conv:
+            if self.kind != 'conv1d' and not self.deconv_as_conv:
+                raise ValueError('Conv2d lifting requires Conv1d or an existing zero-insertion rewrite')
+            value, weight = value.unsqueeze(2), weight.unsqueeze(2)
         if self.quantized:
             if getattr(self,'modern_export',False):
                 from inspark_infer.build.modern_qdq_export import qdq
@@ -177,9 +196,16 @@ class ExportWeightOp(nn.Module):
             else:quantize=_QDQ.apply
             value = quantize(value, self.input_scale, self.input_zero, 0)
             if not self.weight_quantization_folded:
-                weight = quantize(weight, self.weight_scale, self.weight_zero, self.weight_axis)
-        if self.kind == "linear":
+                axis = self.weight_axis + int(lift_conv and self.weight_axis >= 2)
+                weight = quantize(weight, self.weight_scale, self.weight_zero, axis)
+        if matrix_conv:
+            out = F.linear(value, weight, self.bias).transpose(1,2)
+        elif self.kind == "linear":
             out = F.linear(value, weight, self.bias)
+        elif lift_conv:
+            stride = (1, 1 if self.deconv_as_conv else self.stride[0])
+            padding = (0, 0 if self.deconv_as_conv else self.padding[0])
+            out = F.conv2d(value, weight, self.bias, stride, padding, (1,self.dilation[0]), self.groups).squeeze(2)
         elif self.kind == "conv1d":
             out = F.conv1d(value, weight, self.bias, self.stride, self.padding, self.dilation, self.groups)
         elif self.deconv_as_conv:

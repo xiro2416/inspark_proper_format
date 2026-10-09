@@ -132,6 +132,14 @@ def load_manifest(path, *, verify_references=True):
         raise ValueError("Manifest content hash mismatch")
     if manifest.get("cfm_steps") != 4 or manifest.get("reference_seconds") != 3:
         raise ValueError("Expected four CFM steps and three VAD seconds")
+    import os
+    reference_root=os.environ.get('INSPARK_REFERENCE_ROOT')
+    if reference_root:
+        root=Path(reference_root).resolve()
+        for reference in manifest['references']:
+            candidate=(root/reference['voice_id']).resolve()
+            if not candidate.is_relative_to(root):raise ValueError('Reference path escapes explicit root')
+            reference['path']=str(candidate)
     if verify_references:
         for reference in manifest["references"]:
             if sha256_file(reference["path"]) != reference["sha256"]:
@@ -154,8 +162,8 @@ def distribution(values):
 
 
 def wave_cases(cases, batch, wave):
-    if batch not in (1, 4, 8, 16, 32, 64, 128) or not cases:
-        raise ValueError("Expected B1/B4/B8/B16/B32/B64/B128 and nonempty cases")
+    if batch not in (1, 2, 4, 8, 16, 32, 64, 128) or not cases:
+        raise ValueError("Expected B1/B2/B4/B8/B16/B32/B64/B128 and nonempty cases")
     return [cases[(wave * batch + i) % len(cases)] for i in range(batch)]
 
 

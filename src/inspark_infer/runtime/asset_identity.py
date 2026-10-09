@@ -33,8 +33,12 @@ def checkpoint_states(config):
     }
 
 def validate_model_identities(engine,plan):
-    if getattr(engine,'torch',None) is not None and engine.torch.cuda.get_device_name()!='NVIDIA RTX 6000D':
-        raise ValueError('Published optimized engines require NVIDIA RTX 6000D')
+    if getattr(engine,'torch',None) is not None:
+        expected_hardware = plan.get('hardware', {'gpu_name': 'NVIDIA RTX 6000D', 'sm': 120})
+        observed = dict(gpu_name=engine.torch.cuda.get_device_name(),
+                        sm=int(''.join(map(str, engine.torch.cuda.get_device_capability()))))
+        if observed != expected_hardware:
+            raise ValueError('Deployment GPU hardware identity mismatch')
     expected=plan.get('model_tensor_hashes')
     if expected is None:return # Historical inputs remain usable for local migration diagnostics.
     if set(expected)!={'target','draft','cfm','vocoder'}:raise ValueError('Incomplete release model identities')

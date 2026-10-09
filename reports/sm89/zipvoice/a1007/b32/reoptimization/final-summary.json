@@ -1,0 +1,122 @@
+{
+  "status": "measured_local_candidate_retained",
+  "gpu": 6,
+  "batch": 32,
+  "total_frames": 760,
+  "configured_power_w": 400,
+  "blocks": [
+    {
+      "block": "0-control",
+      "role": "control",
+      "requests": 100,
+      "span_s": 62.436294907,
+      "throughput_rows_s": 51.25224045991932,
+      "mean_ms": 623.58637283,
+      "median_ms": 623.3443195,
+      "p99_ms": 629.6317530900001,
+      "power_mean_w": 396.80473198380565,
+      "power_max_sampled_w": 400.868,
+      "power_samples": 1235,
+      "clock_mean_mhz": 2518.3292978208233,
+      "memory_peak_mib": 18754.3125,
+      "graph_guards_pass": true
+    },
+    {
+      "block": "1-candidate",
+      "role": "candidate",
+      "requests": 100,
+      "span_s": 61.872195025,
+      "throughput_rows_s": 51.71951631434786,
+      "mean_ms": 618.08897993,
+      "median_ms": 617.6569595,
+      "p99_ms": 624.4093995200001,
+      "power_mean_w": 396.62794698205545,
+      "power_max_sampled_w": 399.985,
+      "power_samples": 1226,
+      "clock_mean_mhz": 2484.507729861676,
+      "memory_peak_mib": 18672.3125,
+      "graph_guards_pass": true
+    },
+    {
+      "block": "2-candidate",
+      "role": "candidate",
+      "requests": 100,
+      "span_s": 62.099671111,
+      "throughput_rows_s": 51.530063569582566,
+      "mean_ms": 620.21775608,
+      "median_ms": 619.951003,
+      "p99_ms": 626.18563906,
+      "power_mean_w": 396.4047681041497,
+      "power_max_sampled_w": 401.827,
+      "power_samples": 1229,
+      "clock_mean_mhz": 2484.3141233766232,
+      "memory_peak_mib": 18672.3125,
+      "graph_guards_pass": true
+    },
+    {
+      "block": "3-control",
+      "role": "control",
+      "requests": 100,
+      "span_s": 62.605001789,
+      "throughput_rows_s": 51.11412680387872,
+      "mean_ms": 625.3420133,
+      "median_ms": 625.2173755,
+      "p99_ms": 630.97328178,
+      "power_mean_w": 396.83741901692184,
+      "power_max_sampled_w": 399.795,
+      "power_samples": 1241,
+      "clock_mean_mhz": 2490.978260869565,
+      "memory_peak_mib": 18754.3125,
+      "graph_guards_pass": true
+    }
+  ],
+  "pooled": {
+    "control": {
+      "requests": 200,
+      "mean_ms": 624.464193065,
+      "median_ms": 624.394907,
+      "p95_ms": 629.2722720499999,
+      "p99_ms": 630.64714563,
+      "throughput_rows_s": 51.183090459783536,
+      "power_mean_w": 396.82111510500806,
+      "power_max_sampled_w": 400.868,
+      "memory_peak_mib": 18754.3125
+    },
+    "candidate": {
+      "requests": 200,
+      "mean_ms": 619.153368005,
+      "median_ms": 618.6734524999999,
+      "p95_ms": 624.4094444000001,
+      "p99_ms": 625.8888931800001,
+      "throughput_rows_s": 51.62461612846137,
+      "power_mean_w": 396.51622118126267,
+      "power_max_sampled_w": 401.827,
+      "memory_peak_mib": 18672.3125
+    }
+  },
+  "throughput_gain_percent": 0.862639720875702,
+  "quality": {
+    "control": {
+      "count": 12,
+      "cer": 0.03418803418803419,
+      "character_errors": 8,
+      "reference_characters": 234,
+      "utmos_mean": 2.491593370834986,
+      "sim_o_mean": 0.6524669453501701
+    },
+    "static": {
+      "count": 12,
+      "cer": 0.029914529914529916,
+      "character_errors": 7,
+      "reference_characters": 234,
+      "utmos_mean": 2.4011442263921103,
+      "sim_o_mean": 0.6393406391143799
+    }
+  },
+  "retained_bundle": "artifacts/trt113_bundles/zipvoice/sm89/int8/b32/270f2c741d495edac7b0",
+  "retained_fm_sha256": "f28711d5ebfe7bad0422dffb74c9dd71af4e657255e5cb826e50df63eb71b799",
+  "published_original_preserved": true,
+  "registry_unchanged": true,
+  "remote_updated": false,
+  "limitation": "Small measured gain on GPU6; ABBA repetition does not establish cross-GPU or long-term improvement. Quality samples show small UTMOS/SIM-o declines; no new universal tolerance applied."
+}

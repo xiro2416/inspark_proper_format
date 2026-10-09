@@ -1,0 +1,125 @@
+{
+  "scope": "Full batch first PCM then cancellation; private raw records; matched comparisons within each batch only.",
+  "hardware": "RTX4090 SM89 GPU1",
+  "batches": [
+    {
+      "batch": 1,
+      "original": {
+        "p50_ms": 38.16567547619343,
+        "p95_ms": 47.677166387438774,
+        "mean_power_w": 216.2750067658999,
+        "peak_power_w": 227.35,
+        "first_chunk_requests_s": 24.585991081446593
+      },
+      "best": {
+        "p50_ms": 37.52870671451092,
+        "p95_ms": 47.324426006525755,
+        "mean_power_w": 210.84810774410775,
+        "peak_power_w": 216.72,
+        "first_chunk_requests_s": 26.297568565238805
+      }
+    },
+    {
+      "batch": 2,
+      "original": {
+        "p50_ms": 49.65244885534048,
+        "p95_ms": 56.00023623555899,
+        "mean_power_w": 251.64764942914707,
+        "peak_power_w": 269.6,
+        "first_chunk_requests_s": 40.19267151848014
+      },
+      "best": {
+        "p50_ms": 44.55637186765671,
+        "p95_ms": 51.11711518839002,
+        "mean_power_w": 239.4034989926125,
+        "peak_power_w": 256.2,
+        "first_chunk_requests_s": 45.013352439093126
+      }
+    },
+    {
+      "batch": 4,
+      "original": {
+        "p50_ms": 66.53824262320995,
+        "p95_ms": 77.20598885789514,
+        "mean_power_w": 285.2203353454058,
+        "peak_power_w": 316.73,
+        "first_chunk_requests_s": 59.75963587540456
+      },
+      "best": {
+        "p50_ms": 57.16556403785944,
+        "p95_ms": 65.1674603112042,
+        "mean_power_w": 271.607311827957,
+        "peak_power_w": 288.9,
+        "first_chunk_requests_s": 69.19279053426267
+      }
+    },
+    {
+      "batch": 8,
+      "original": {
+        "p50_ms": 103.63679472357035,
+        "p95_ms": 109.5516356639564,
+        "mean_power_w": 314.2468977119785,
+        "peak_power_w": 344.16,
+        "first_chunk_requests_s": 75.62829700583072
+      },
+      "best": {
+        "p50_ms": 86.2180357798934,
+        "p95_ms": 93.03527064621449,
+        "mean_power_w": 296.065722932078,
+        "peak_power_w": 344.49,
+        "first_chunk_requests_s": 89.31771789035284
+      }
+    },
+    {
+      "batch": 16,
+      "original": {
+        "p50_ms": 174.33980014175177,
+        "p95_ms": 190.70143261924386,
+        "mean_power_w": 338.5490652320108,
+        "peak_power_w": 436.42,
+        "first_chunk_requests_s": 86.92461109020773
+      },
+      "best": {
+        "p50_ms": 140.1493502780795,
+        "p95_ms": 145.7042726688087,
+        "mean_power_w": 320.4068905305574,
+        "peak_power_w": 386.91,
+        "first_chunk_requests_s": 112.9909317787212
+      }
+    },
+    {
+      "batch": 64,
+      "original": {
+        "p50_ms": 500.18527545034885,
+        "p95_ms": 539.1586698591709,
+        "mean_power_w": 352.5432505036938,
+        "peak_power_w": 417.3,
+        "first_chunk_requests_s": 125.60195991547981
+      },
+      "best": {
+        "p50_ms": 476.97207517921925,
+        "p95_ms": 507.4336789548397,
+        "mean_power_w": 327.1940266666667,
+        "peak_power_w": 442.19,
+        "first_chunk_requests_s": 131.04768256077404
+      }
+    },
+    {
+      "batch": 128,
+      "original": {
+        "p50_ms": 1066.4104614406824,
+        "p95_ms": 1203.3361535519357,
+        "mean_power_w": 359.7065154503616,
+        "peak_power_w": 434.76,
+        "first_chunk_requests_s": 116.89724706311603
+      },
+      "best": {
+        "p50_ms": 1031.3191525638103,
+        "p95_ms": 1179.937036056071,
+        "mean_power_w": 360.9851596091205,
+        "peak_power_w": 465.32,
+        "first_chunk_requests_s": 119.73232182562109
+      }
+    }
+  ]
+}
