@@ -26,3 +26,8 @@
 - Read reports/sm120/zipvoice/fp8/WHITEBOARD.md before experiments. Complete seven migrations before new optimization.
 - Use independent bilingual calibration and test data; keep original model/checkpoint, duration and full unsplit batch. Preserve SM89 hashed source closures and Index routes.
 - Publish by normal GitHub commits and additive private HF sm120/fp8 paths, without history rewrite or asset deletion. Credentials must never enter tracked files or logs.
+
+## Authorized B128 continuation
+
+- User requests ZipVoice SM120 FP8 B128 migration first, then optimization. Keep frozen model/scales/backend and unsplit batch, single GPU3 at existing600W.
+- B128 uses independent namespaces and writable cache copies; preserve published seven-batch source closures. Read reports/sm120/zipvoice/fp8/b128/WHITEBOARD.md before experiments.

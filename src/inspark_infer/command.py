@@ -10,7 +10,14 @@ def main(argv: list[str] | None = None) -> int:
     if '--precision' in args and args.index('--precision')+1<len(args):precision=args[args.index('--precision')+1]
     if args and args[0]=='zipvoice':
         if precision=='fp8':
-            from inspark_infer.runtime.zipvoice_fp8.cli import main as zipvoice_fp8
+            batch=next((v.split('=',1)[1] for v in args if v.startswith('--batch=')),None)
+            if '--batch' in args and args.index('--batch')+1<len(args):batch=args[args.index('--batch')+1]
+            batches=next((v.split('=',1)[1] for v in args if v.startswith('--batches=')),None)
+            if '--batches' in args and args.index('--batches')+1<len(args):batches=args[args.index('--batches')+1]
+            if batch=='128' or (batches and '128' in [v.strip() for v in batches.split(',')]):
+                from inspark_infer.runtime.zipvoice_fp8_b128.cli import main as zipvoice_fp8
+            else:
+                from inspark_infer.runtime.zipvoice_fp8.cli import main as zipvoice_fp8
             return zipvoice_fp8(args[1:])
         from inspark_infer.runtime.zipvoice.cli import main as zipvoice
         return zipvoice(args[1:])
@@ -18,7 +25,12 @@ def main(argv: list[str] | None = None) -> int:
     if '--model' in args and args.index('--model')+1<len(args):model=args[args.index('--model')+1]
     if args[:2]==['trt','ensure'] and model=='zipvoice':
         if precision=='fp8':
-            from inspark_infer.runtime.zipvoice_fp8.cli import main as zipvoice_fp8
+            batches=next((v.split('=',1)[1] for v in args if v.startswith('--batches=')),None)
+            if '--batches' in args and args.index('--batches')+1<len(args):batches=args[args.index('--batches')+1]
+            if batches and '128' in [v.strip() for v in batches.split(',')]:
+                from inspark_infer.runtime.zipvoice_fp8_b128.cli import main as zipvoice_fp8
+            else:
+                from inspark_infer.runtime.zipvoice_fp8.cli import main as zipvoice_fp8
             return zipvoice_fp8(['ensure',*args[2:]])
         from inspark_infer.runtime.zipvoice.cli import main as zipvoice
         return zipvoice(['ensure',*args[2:]])

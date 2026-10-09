@@ -93,3 +93,7 @@ inspark fetch --asset-dir ./mixed128_assets --precision nvfp4_fp8 --batch 128
 ```
 
 同期30波：迁移基线受理后P50 559.03ms，优化后493.89ms，降低11.65%。功率、P95/P99、实际engine覆盖、浮点审计及不保留的候选见[B128报告](reports/current/mixed_precision_b128/RESULTS.md)。B64、FP8、INT8和未量化权重保留。
+
+## ZipVoice SM120 FP8 B128 续迁移
+
+B128沿用冻结模型与量化尺度，先迁移验收，再进行优化；不拆分模型batch。原七档保持独立。性能、质量、功耗、部署和证据见 [B128报告](docs/zipvoice-sm120-fp8-b128.md)。

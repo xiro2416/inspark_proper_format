@@ -1,0 +1,16 @@
+{
+  "status": "b128_compute_review_complete",
+  "batches": {
+    "128": {
+      "variant": "attentionprotected",
+      "pcm_policy": {
+        "chunk": 32,
+        "workers": 4
+      },
+      "migration_accepted": true,
+      "quality_sha256": "70f66f5f78107606fa34bfc7faacea69aaa8403c8d76dbedc3390c3da64608dc",
+      "matched_gain_over_inherited_percent": 0.06495232492966374
+    }
+  },
+  "stopping_reason": "Validated source online attention retained. Geometry/full residual/FFN-only residual/PCM alternatives regressed. Selected four protected floating FFN regions have small positive paired E2E at primary and short/long guards; all six representative protected shape/family combinations and residual fusion feasibility reviewed. No claim of global optimum; no new quantization/calibration/precision/concurrency. Gross remaining unprobed related selective opportunities below0.1%; native GEMM and already fused conversion costs remain."
+}

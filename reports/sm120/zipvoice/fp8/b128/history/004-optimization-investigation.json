@@ -1,0 +1,108 @@
+{
+  "status": "major_candidate_reviews_complete_protected_candidate_pending",
+  "rejected_candidates": [
+    {
+      "variant": "attentiongeo",
+      "baseline_variant": "attention",
+      "baseline_ms": 1813.9099035,
+      "candidate_ms": 1894.715357,
+      "gain_percent": -4.454766653188413,
+      "retained": false,
+      "evidence_sha256": "42ce79c5e4e6e3037bc6d96dd7208932a9bc991f68690568197fb4b45f9a2179"
+    },
+    {
+      "variant": "attentionres",
+      "baseline_variant": "attention",
+      "baseline_ms": 1813.20585825,
+      "candidate_ms": 1840.53612925,
+      "gain_percent": -1.5072900231183688,
+      "retained": false,
+      "evidence_sha256": "70638208c6c04c988c67ae78a4144af9c0b71c299669a22d04a3e548d5fb6ce2"
+    },
+    {
+      "variant": "attentionff",
+      "baseline_variant": "attention",
+      "baseline_ms": 1812.8578767499998,
+      "candidate_ms": 1829.8596985,
+      "gain_percent": -0.937846367773744,
+      "retained": false,
+      "evidence_sha256": "7aaf08b3c14f1cc7bb9ab167614fe1ccc5b9524b08a8d79b81c0a04e1002e891"
+    }
+  ],
+  "delivery": {
+    "retained_policy": {
+      "chunk": 32,
+      "workers": 4
+    },
+    "matched_gain_percent": -0.07042845518612009,
+    "evidence_sha256": "8e76c3a3ee8c4ee750c5b24e030fde54433aebdff0ff07b25362b2bbd209e9a7"
+  },
+  "profile_scope": "Three node-traced prepared760/full-text requests, diagnostic timings only",
+  "top_kernels": [
+    {
+      "Time (%)": "9.2",
+      "Instances": "1968",
+      "Name": "sm89_xmma_gemm_e4m3f32_e4m3f32_f32_tn_n_tilesize64x128x64_stage4_warpsize2x2x1_tensor16x8x32_bias_f32_execute_kernel_trt"
+    },
+    {
+      "Time (%)": "7.2",
+      "Instances": "432",
+      "Name": "sm80_xmma_gemm_f32f32_tf32f32_f32_tn_n_tilesize128x64x16_stage6_warpsize2x2x1_tensor16x8x8_execute_kernel_trt"
+    },
+    {
+      "Time (%)": "6.7",
+      "Instances": "384",
+      "Name": "nonlinear_rna_aot"
+    },
+    {
+      "Time (%)": "4.8",
+      "Instances": "384",
+      "Name": "normal_stats_read_aot"
+    },
+    {
+      "Time (%)": "4.8",
+      "Instances": "384",
+      "Name": "normal_stats_write_aot"
+    },
+    {
+      "Time (%)": "3.5",
+      "Instances": "384",
+      "Name": "__myl_AddMulCast_0xf5c2fc79822c124f9413a08c73c317db_com_vec"
+    },
+    {
+      "Time (%)": "3.0",
+      "Instances": "192",
+      "Name": "sm80_xmma_gemm_f32f32_tf32f32_f32_tn_n_tilesize128x128x16_stage4_warpsize2x2x1_tensor16x8x8_execute_kernel_trt"
+    },
+    {
+      "Time (%)": "2.8",
+      "Instances": "192",
+      "Name": "sm86_xmma_gemm_f32f32_tf32f32_f32_tn_n_tilesize128x64x32_stage4_warpsize2x2x1_tensor16x8x8_execute_kernel_trt"
+    },
+    {
+      "Time (%)": "2.7",
+      "Instances": "192",
+      "Name": "__myl_TranReshMulAddSubAbsNegExpMaxAddLogAddSubAddMulCast_0xa2e86bba09d200aa1018545713f704e1_com"
+    },
+    {
+      "Time (%)": "2.5",
+      "Instances": "288",
+      "Name": "__myl_SlicSigmSlicMul_0x7575af8ccfadbbc0048c915823ae9a41_com_vec"
+    },
+    {
+      "Time (%)": "1.9",
+      "Instances": "504",
+      "Name": "sm50_xmma_fprop_conv1d_c1_k1_f32f32_f32_f32_nchwkcrs_nchw_exec_conv1d_c1_k1_kernel_11_kernel_trt"
+    },
+    {
+      "Time (%)": "1.9",
+      "Instances": "288",
+      "Name": "__myl_TranSele_0x46ce1917610b5d6ce49095fe41b34b33_com"
+    }
+  ],
+  "micro_residual_probe": {
+    "evidence_sha256": "bc216dce5fd721809dbb514e4a0c7099def6bb1efd6dda49f4d0c9450a1a7b77",
+    "limits": "35-40% isolated gain did not transfer to whole-model E2E; full and FFN-only candidates regressed"
+  },
+  "prototype_failures": "Constant lookup and AOT input/extra/output argument ordering repaired before successful smoke; invalid builds archived. Exclusive GPU3 healthcheck restored stale utilization without reset or touching unrelated workloads."
+}
