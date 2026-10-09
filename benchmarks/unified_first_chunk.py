@@ -154,8 +154,8 @@ def distribution(values):
 
 
 def wave_cases(cases, batch, wave):
-    if batch not in (1, 8, 64, 128) or not cases:
-        raise ValueError("Expected B1/B8/B64/B128 and nonempty cases")
+    if batch not in (1, 4, 8, 16, 32, 64, 128) or not cases:
+        raise ValueError("Expected B1/B4/B8/B16/B32/B64/B128 and nonempty cases")
     return [cases[(wave * batch + i) % len(cases)] for i in range(batch)]
 
 

@@ -31,3 +31,10 @@
 
 - User requests ZipVoice SM120 FP8 B128 migration first, then optimization. Keep frozen model/scales/backend and unsplit batch, single GPU3 at existing600W.
 - B128 uses independent namespaces and writable cache copies; preserve published seven-batch source closures. Read reports/sm120/zipvoice/fp8/b128/WHITEBOARD.md before experiments.
+
+## Authorized parallel Index mixed migration
+
+- Latest user authorization: mixed NVFP4 GEMM/FP8 Conv B4/B16/B32 migration first, optimization second, using three agents concurrently. This overrides the older GPU7-only serial rule for this task. B4 owns physicalGPU4, B16 GPU5, B32 GPU6; each experiment sees and uses oneGPU. Preserve external workloads.
+- All three migrations must validate before optimization begins. Final baseline/selected measurements run in coordinated exclusive windows while other agents pause GPU work.
+- Separate worktrees, artifacts and writable caches. All worktrees share /workspace/.cache/inspark/gpu-locks; do not use sharedGPU escape hatches. Frozen source checkpoints/calibration/engines are readonly.
+- Parent integrates common code, deployment registry and Git/HF releases. Workers do not publish. Existing90BF16 protection and4stepCFM remain; floating audits are reporting-only. No repeated-textcompute reuse.

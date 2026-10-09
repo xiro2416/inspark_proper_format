@@ -1,22 +1,22 @@
 """One actual native/hybrid head vs the same latest unquantized and NVFP4 models."""
 import os
-os.environ['CUDA_VISIBLE_DEVICES']='7'
 import argparse,json
 from pathlib import Path
-import torch
-from inspark_infer.runtime.config import load
-from inspark_infer.runtime.deployment import load as load_plan
-from inspark_infer.runtime.engine import Engine
-from inspark_infer.runtime.device import GPULease
-from inspark_infer.quantization.nvfp4 import install
-from benchmarks.unified_first_chunk import load_manifest,wave_cases,run_wave
-from benchmarks.benchmark_unified_first_chunk import prepare_references
-from scripts.audit_unified_acoustics import freeze_head_graphs,metrics
 
 def main():
-    p=argparse.ArgumentParser();p.add_argument('--deployment',required=True);p.add_argument('--config',required=True);p.add_argument('--manifest',required=True);p.add_argument('--out',type=Path,required=True);args=p.parse_args()
+    p=argparse.ArgumentParser();p.add_argument('--gpu',type=int,default=7);p.add_argument('--deployment',required=True);p.add_argument('--config',required=True);p.add_argument('--manifest',required=True);p.add_argument('--out',type=Path,required=True);args=p.parse_args()
+    os.environ['CUDA_VISIBLE_DEVICES']=str(args.gpu)
+    import torch
+    from inspark_infer.runtime.config import load
+    from inspark_infer.runtime.deployment import load as load_plan
+    from inspark_infer.runtime.engine import Engine
+    from inspark_infer.runtime.device import GPULease
+    from inspark_infer.quantization.nvfp4 import install
+    from benchmarks.unified_first_chunk import load_manifest,wave_cases,run_wave
+    from benchmarks.benchmark_unified_first_chunk import prepare_references
+    from scripts.audit_unified_acoustics import freeze_head_graphs,metrics
     manifest=load_manifest(args.manifest);plan=load_plan(args.deployment);cfg=load(args.config);batch=plan['batch'];cfg['max_batch']=batch
-    with GPULease(7):
+    with GPULease(args.gpu):
         engine=Engine(cfg)
         try:
             prepare_references(engine,manifest);engine.prepare_deployment(plan)

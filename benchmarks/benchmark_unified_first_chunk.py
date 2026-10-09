@@ -34,7 +34,7 @@ def create_manifest(args):
 
 def add_run_arguments(parser, *, profile=False):
     parser.add_argument("--gpu", type=int, default=7)
-    parser.add_argument("--batch", type=int, choices=(1, 8, 64, 128), required=True)
+    parser.add_argument("--batch", type=int, choices=(1, 4, 8, 16, 32, 64, 128), required=True)
     parser.add_argument("--manifest", type=Path, required=True)
     parser.add_argument("--split", choices=("calibration", "evaluation"), default="evaluation")
     parser.add_argument("--deployment", type=Path, required=True)

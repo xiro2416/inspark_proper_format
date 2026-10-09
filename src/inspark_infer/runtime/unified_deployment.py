@@ -31,8 +31,8 @@ def validate(plan):
     if set(plan)-set(OPTIONAL_PATHS)-set(OPTIONAL_SETTINGS) != required or plan['schema'] != 9:
         raise ValueError('Invalid unified deployment fields')
     if (plan['precision'] not in ('fp8', 'int8_smoothquant','nvfp4','nvfp4_fp8') or type(plan['batch']) is not int
-            or plan['batch'] not in (1, 8, 64, 128)):
-        raise ValueError('Expected unified FP8/INT8 B1/B8/B64/B128 deployment')
+            or plan['batch'] not in (1, 4, 8, 16, 32, 64, 128)):
+        raise ValueError('Expected unified FP8/INT8 B1/B4/B8/B16/B32/B64/B128 deployment')
     if 'component_precisions' in plan:
         p=plan['component_precisions']
         if not isinstance(p,dict) or set(p)!= {'target','draft','cfm','vocoder'} or any(v not in ('fp8','nvfp4','nvfp4_fp8','int8_smoothquant') for v in p.values()):
@@ -92,11 +92,11 @@ def validate(plan):
             and plan['late_verify_after'] in (8,10,12) and plan['graphs']
             and plan['runtime_backend']=='native_dspark_worker_trt_compute'
             and ('tail_target_plan' not in plan or
-                 plan.get('batch')==128 and type(plan.get('tail_compact_after')) is int
+                 plan.get('batch') in (16,32,128) and type(plan.get('tail_compact_after')) is int
                  and plan['tail_compact_after']>=13)):
         raise ValueError('Verify-only rounds require native Graphs and a standalone late threshold8/10/12')
     if any(k in plan for k in ('tail_target_plan','tail_draft_plan')):
-        if not (plan['batch'] in (64,128) and plan['runtime_backend']=='native_dspark_worker_trt_compute'
+        if not (plan['batch'] in (16,32,64,128) and plan['runtime_backend']=='native_dspark_worker_trt_compute'
                 and plan['graphs'] and all(isinstance(plan.get(k),str) and plan[k]
                 for k in ('tail_target_plan','tail_draft_plan'))):
             raise ValueError('B8 tail requires a graphed native B64 deployment and both AR plans')
