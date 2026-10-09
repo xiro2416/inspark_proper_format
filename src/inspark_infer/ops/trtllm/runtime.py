@@ -207,6 +207,40 @@ class FrameworkRoundRuntime:
         self.status.zero_(); self.failures.zero_(); self.capacity_failures.zero_()
         self.graph_burst = burst_rounds
 
+    def advance_burst(self, on_wait=None):
+        """One captured parent burst and a compact status/ready observation.
+
+        This opt-in scheduling primitive preserves request state. The legacy
+        run path and native verify-only/tail scheduling are unchanged.
+        """
+        if self.graph is None or getattr(self, 'verify_graph', None) is not None:
+            raise ValueError('Incremental heads require a captured parent graph')
+        self.graph.replay()
+        started = time.perf_counter()
+        packed = torch.cat((self.status.reshape(1), self.ready.int()))
+        if on_wait is None:
+            observation = packed.cpu().tolist()
+        else:
+            if not hasattr(self, '_ready_host'):
+                self._ready_host = torch.empty(self.batch + 1, dtype=torch.int32,
+                                              device='cpu', pin_memory=True)
+            self._ready_host.copy_(packed, non_blocking=True)
+            copied = torch.cuda.Event()
+            copied.record()
+            while not copied.query():
+                if not on_wait():
+                    copied.synchronize()
+                    break
+                # Yield the CPU while awaiting actual GPU dependencies. Keep
+                # publication on the owner thread rather than a callback worker.
+                time.sleep(0.00005)
+            observation = self._ready_host.tolist()
+        wait_ms = (time.perf_counter() - started) * 1000
+        if observation[0] & 6:
+            raise RuntimeError(f'Framework DSpark failed: status={observation[0]}')
+        return dict(ready=observation[1:], status=observation[0],
+                    launched_rounds=self.graph_burst, status_wait_ms=wait_ms)
+
     def run(self):
         launched, reads, wait_ms = 0, 0, 0.0
         compacted=None

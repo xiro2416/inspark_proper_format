@@ -97,3 +97,9 @@ inspark fetch --asset-dir ./mixed128_assets --precision nvfp4_fp8 --batch 128
 ## ZipVoice SM120 FP8 B128 续迁移
 
 B128沿用冻结模型与量化尺度，先迁移验收，再进行优化；不拆分模型batch。原七档保持独立。性能、质量、功耗、部署和证据见 [B128报告](docs/zipvoice-sm120-fp8-b128.md)。
+
+## IndexTTS SM89 INT8
+
+RTX4090 SM89 独立路线支持 B1/2/4/8/16/32/64/128，保持原 SmoothQuant alpha1.0 和保护浮点策略。已验收 engine 通过私有 HF 固定 revision 分发，下载验证文件哈希；既有 SM120 路线保持独立。
+部署见 [SM89 安装与资产下载](deployment/README.md)，性能见 [各 batch 汇总](deployment/multibatch/RESULTS.md) 与 [B32](deployment/b32/RESULTS.md)。
+[B64 就绪流水线](deployment/ready_pipeline/RESULTS.md) 实验支持提前16条声学交付与剩余 AR 缩批；保留 C，D 重叠可显式复测。原生产调度默认不变。

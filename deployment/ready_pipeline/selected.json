@@ -1,0 +1,84 @@
+{
+  "schema": "ready_pipeline_trial_v1",
+  "status": "validated_experimental_first_chunk",
+  "mode": "C",
+  "physical_gpu": 1,
+  "batch": 64,
+  "acoustic_batch": 16,
+  "acoustic_priority": 0,
+  "graph_burst_rounds": 2,
+  "runtime_backend": "framework_dspark_adapter",
+  "quantization": "original_int8_smoothquant_alpha1.0",
+  "source_plan": "bundle://configs/hardware/sm89/indextts/int8_b64_selected.json",
+  "source_sha256": "40af164f20b9ac03c5c5938fb98f9f2adbb3d1d8ad6df9f0041aac836400425a",
+  "ar_profiles": {
+    "64": {
+      "target": {
+        "plan": "bundle://artifacts/sm89/int8_smoothquant/b64/target/model.plan.json",
+        "engine_sha256": "48f60a0d4b1412b90370aadff1eec79a89209604a5439ecd25f83f68301536d3",
+        "optimization_level": 5,
+        "tiling": "full",
+        "int8_bearing_layers": 126
+      },
+      "draft": {
+        "plan": "bundle://artifacts/sm89/int8_smoothquant/b64/draft/model.plan.json",
+        "engine_sha256": "2d5767e04af4765e62b67ae8095002f317f946d9c66569bf0687fe6d2e03ba00",
+        "optimization_level": 5,
+        "tiling": "full",
+        "int8_bearing_layers": 18
+      }
+    },
+    "48": {
+      "target": {
+        "plan": "bundle://artifacts/sm89/int8_smoothquant/b48/target/model.plan.json",
+        "engine_sha256": "550ff8aaff582640fce030f279c67f7c829f0b47061a714a77659b715e35ec94",
+        "optimization_level": 5,
+        "tiling": "full",
+        "int8_bearing_layers": 126
+      },
+      "draft": {
+        "plan": "bundle://artifacts/sm89/int8_smoothquant/b48/draft/model.plan.json",
+        "engine_sha256": "7185f8e05be1b2523e4a3c938b1526d1bc9ca4b6a55e051692ea0487656d208d",
+        "optimization_level": 5,
+        "tiling": "full",
+        "int8_bearing_layers": 18
+      }
+    },
+    "32": {
+      "target": {
+        "plan": "bundle://artifacts/sm89/int8_smoothquant/b32/target/model.plan.json",
+        "engine_sha256": "67579ffde06ea222109b5809636ccb254d80aaaf7ec6613fcec508c4e978d657",
+        "optimization_level": 5,
+        "tiling": "full",
+        "int8_bearing_layers": 126
+      },
+      "draft": {
+        "plan": "bundle://artifacts/sm89/int8_smoothquant/b32/draft/model.plan.json",
+        "engine_sha256": "026eebe82dd452811e79114fd357b3b26cf7158236de46d638dca18fafb2ba24",
+        "optimization_level": 5,
+        "tiling": "full",
+        "int8_bearing_layers": 18
+      }
+    },
+    "16": {
+      "target": {
+        "plan": "bundle://artifacts/sm89/int8_smoothquant/b16/target/model.plan.json",
+        "engine_sha256": "200340f4c5be1bddf7b80458a9678c7c743fa6216a843d138f7cd8902c5bdf71",
+        "optimization_level": 5,
+        "tiling": "full",
+        "int8_bearing_layers": 126
+      },
+      "draft": {
+        "plan": "bundle://artifacts/sm89/int8_smoothquant/b16/draft/model.plan.json",
+        "engine_sha256": "f9d5d11f77995dcef86197cc223b2ac5e9a46b580487936e867eb876d7b62256",
+        "optimization_level": 5,
+        "tiling": "full",
+        "int8_bearing_layers": 18
+      }
+    }
+  },
+  "acoustic_source_plan": "bundle://configs/hardware/sm89/indextts/int8_b16_selected.json",
+  "production_defaults_changed": false,
+  "selection": "C: early16 delivery + AR compaction; D retained as explicit overlap experiment, its additional per-request benefit was not stable across matched repeats.",
+  "original_source_sha256": "9e47118c93c2de12aacb73d313ee37b89e3258312c67453afd0a0792fb5b4c93"
+}

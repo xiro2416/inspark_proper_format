@@ -1,6 +1,6 @@
 """Small, explicit offline graph inventory for first-packet service."""
 
-BATCHES=(1,4,8,16,24,32,40,48,56,64,128)
+BATCHES=(1,2,4,8,16,24,32,40,48,56,64,128)
 FIRST_KV_LIMITS=(64,128)
 
 def batches(max_batch):

@@ -18,7 +18,7 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--gpu", type=int, required=True)
     parser.add_argument("--component", choices=("cfm", "vocoder"), required=True)
-    parser.add_argument("--batch", type=int, choices=(1, 8, 64, 128), required=True)
+    parser.add_argument("--batch", type=int, choices=(1, 2, 4, 8, 16, 32, 64, 128), required=True)
     parser.add_argument("--kind", choices=("estimator", "full_solver"), default="estimator")
     parser.add_argument("--calibration", type=Path, required=True)
     parser.add_argument("--config", default="artifacts/current_release/runtime.yaml")

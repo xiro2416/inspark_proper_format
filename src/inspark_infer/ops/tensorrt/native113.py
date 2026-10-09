@@ -274,7 +274,7 @@ class NativeVocoder113:
         import json
         plan_file=Path(plan_path).resolve();plan=read_json(plan_file)
         if (plan.get("format") != 1 or type(plan.get("batch")) is not int or
-                plan["batch"] not in (1, 4, 8, 16, 24, 64, 128) or plan.get("frames") != 52):
+                plan["batch"] not in (1, 2, 4, 8, 16, 24, 32, 64, 128) or plan.get("frames") != 52):
             raise ValueError("Expected static TensorRT 11.3 B1/B4/B8/B16/B24/B64, F52 Vocoder plan")
         self.batch=plan["batch"];self.frames=52;self.component="vocoder"
         self.plugins=plan.get("plugins",["Quick Plugins (inventory unspecified)"])

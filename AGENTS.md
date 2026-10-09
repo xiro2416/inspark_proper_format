@@ -31,3 +31,18 @@
 
 - User requests ZipVoice SM120 FP8 B128 migration first, then optimization. Keep frozen model/scales/backend and unsplit batch, single GPU3 at existing600W.
 - B128 uses independent namespaces and writable cache copies; preserve published seven-batch source closures. Read reports/sm120/zipvoice/fp8/b128/WHITEBOARD.md before experiments.
+
+## Authorized local SM89 deployment (2026-10-08)
+
+- User requests independent IndexTTS2 FP32 reference and INT8 engines for batch1/2/4/8/16 on this server RTX4090 SM89, rebuilt using gpu-inference-optimization.
+- User explicitly authorizes physical GPU1 for this Index task; this supersedes the earlier GPU7 requirement. Use exactly one GPU and serial builds/validation; preserve unrelated allocations.
+- User authorizes direct official HF download only for private Index assets because hf-mirror strips private authentication; use domestic pip mirrors.
+- Keep the pinned Draft900/CFM800 weights and SmoothQuant alpha1.0 calibration unchanged. SM120 engine binaries are not reusable. New local batch/hardware support must not weaken model, calibration or engine identity validation.
+
+## Authorized B32 extension (2026-10-08)
+
+- User additionally requests INT8 batch32, migration first and optimization only after migration validation; retain GPU1 single-card serial authorization and unchanged weights/calibration/backend. Preserve prior B1/2/4/8/16 source artifacts and records. Independent B32 workboard/history are deployment/b32/.
+
+## Authorized multi-batch optimization extension
+
+- User requests INT8 B1/B2/B4/B8/B16/B64/B128, migration first then optimization per target using both GPU skills. Source is validated optimized B32. Physical GPU1 remains the sole authorized GPU; serial builds and validation. Preserve original artifacts, histories and caches; target records in deployment/multibatch/. Keep model/backend/quantization/calibration fixed; new optimization routes are authorized within that scope.

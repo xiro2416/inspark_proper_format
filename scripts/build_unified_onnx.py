@@ -29,6 +29,11 @@ def main():
     ap.add_argument('--cfm-gated-up-layout',choices=('paired','interleaved'),default='paired')
     ap.add_argument('--small-fir-plugin',action='store_true',help='Permit the explicit custom short FIR activation')
     ap.add_argument('--small-fir-layout',choices=('whole','tiled_mix','all_tiled'),default='whole')
+    ap.add_argument('--implicit-int8-conv',action='store_true',help='Explicit B32 source-recipe custom INT8 convolution inventory')
+    ap.add_argument('--tuned-implicit-int8-conv',action='store_true',help='Measured B32/C192/K11 custom convolution schedule')
+    ap.add_argument('--migrated-implicit-int8-conv',action='store_true',help='B32 schedule migrated to authorized target batches')
+    ap.add_argument('--target-implicit-int8-schedule',action='store_true',help='Target measured source-recipe INT8 schedules')
+    ap.add_argument('--fir-int8-quant-plugin',action='store_true',help='Fuse unchanged FP32 FIR math with original terminal signed INT8 quantization')
     args = ap.parse_args()
     os.environ['CUDA_VISIBLE_DEVICES'] = str(args.gpu)
     import torch
@@ -46,6 +51,22 @@ def main():
         plugins=['inspark_custom::small_fir_activation']
         if args.small_fir_layout=='tiled_mix':plugins.append('inspark_custom::small_fir_activation_tiled')
         if args.small_fir_layout=='all_tiled':plugins=['inspark_custom::small_fir_activation_tiled']
+    if args.implicit_int8_conv:
+        if not args.small_fir_plugin or export['component']!='vocoder' or export['quantization_recipe']['scheme']!='int8_smoothquant' or export['batch'] not in (1,2,4,8,16,32,64,128):
+            raise ValueError('Implicit INT8 convolution requires the explicit B32 INT8 Vocoder candidate')
+        plugins.append('inspark_custom::implicit_int8_conv_1d')
+    if args.tuned_implicit_int8_conv:
+        if not args.implicit_int8_conv:raise ValueError('Tuned schedule requires explicit implicit INT8 candidate')
+        plugins.append('inspark_custom::implicit_int8_conv_1d_tuned')
+    if args.migrated_implicit_int8_conv:
+        if not args.implicit_int8_conv or args.tuned_implicit_int8_conv or export['batch'] not in (1,2,4,8,16,64,128):raise ValueError('Invalid migrated INT8 schedule inventory')
+        plugins.append('inspark_custom::implicit_int8_conv_1d_migrated')
+    if args.target_implicit_int8_schedule:
+        if not args.implicit_int8_conv or args.tuned_implicit_int8_conv or args.migrated_implicit_int8_conv or export['batch'] not in (1,2,4,8,16,64,128):raise ValueError('Invalid target schedule inventory')
+        plugins.append('inspark_custom::implicit_int8_conv_1d_schedule')
+    if args.fir_int8_quant_plugin:
+        if not args.implicit_int8_conv or not args.small_fir_plugin or export['batch'] not in (1,2,4,8,16,64,128):raise ValueError('FIR quant fusion requires explicit source-recipe INT8 Vocoder')
+        plugins.append('inspark_custom::small_fir_activation_quantized')
     if not export or export.get('plugins') != plugins or not export.get('quantization_recipe'):
         raise ValueError('Expected calibrated export with the explicitly selected plugin inventory')
     with GPULease(args.gpu):
@@ -59,6 +80,17 @@ def main():
         if args.small_fir_plugin:
             from inspark_infer.ops.tensorrt.vocoder_small_fir_plugin import register
             register()
+        if args.implicit_int8_conv:
+            from deployment.b32.implicit_int8_plugin import register
+            register()
+            if args.tuned_implicit_int8_conv:register(tuned=True)
+            if args.migrated_implicit_int8_conv:register(migrated=True)
+        if args.target_implicit_int8_schedule:
+            from deployment.multibatch.schedule_plugin import register
+            register()
+        if args.fir_int8_quant_plugin:
+            from deployment.multibatch.fir_quant_plugin import register
+            register()
         logger = trt.Logger(trt.Logger.WARNING)
         builder = trt.Builder(logger)
         network = builder.create_network(1 << int(trt.NetworkDefinitionCreationFlag.STRONGLY_TYPED))
@@ -71,6 +103,9 @@ def main():
         config = builder.create_builder_config()
         config.clear_flag(trt.BuilderFlag.TF32)
         config.builder_optimization_level = args.optimization_level
+        config.max_num_tactics = 2147483646
+        if config.max_num_tactics != 2147483646:
+            raise RuntimeError('TensorRT did not accept the supported maximum tactic search count')
         config.profiling_verbosity = trt.ProfilingVerbosity.DETAILED
         cache, _ = prepare(config, trt, component='unified_' + export['component'],
                            tiling=args.tiling, workspace_bytes=0,

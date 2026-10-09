@@ -12,7 +12,7 @@ from pathlib import Path
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--gpu", type=int, required=True)
-    parser.add_argument("--batch", type=int, choices=(1, 8, 64, 128), required=True)
+    parser.add_argument("--batch", type=int, choices=(1, 2, 4, 8, 16, 32, 64, 128), required=True)
     parser.add_argument("--kv-limit", type=int, default=80)
     parser.add_argument("--calibration", type=Path, required=True)
     parser.add_argument("--config", default="artifacts/current_release/runtime.yaml")

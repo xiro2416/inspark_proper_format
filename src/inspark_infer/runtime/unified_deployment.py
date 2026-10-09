@@ -22,7 +22,7 @@ OPTIONAL_SETTINGS = ('rnn_graph_rewrite', 'batch_conditions', 'latent_cached_pre
                      'batch_head_pcm', 'cpu_text_processes', 'latent_reuse_prefill_kv',
                      'cpu_text_workers','late_verify_after','condition_graphs','condition_graph_exact_batches',
                      'condition_flat_projection','prefill_readonly_views','prefill_context_overlap',
-                     'static_gc_freeze','prefill_context_views','condition_projected_vq','tail_compact_after','target_kv_fusion','component_calibrations','component_precisions','model_tensor_hashes')
+                     'static_gc_freeze','prefill_context_views','condition_projected_vq','tail_compact_after','target_kv_fusion','component_calibrations','component_precisions','model_tensor_hashes','hardware')
 BACKENDS = ('framework_dspark_adapter', 'native_dspark_worker_trt_compute')
 
 
@@ -30,8 +30,9 @@ def validate(plan):
     required = {'schema', 'status', 'precision', 'batch', 'runtime_backend', 'graphs', *PATHS}
     if set(plan)-set(OPTIONAL_PATHS)-set(OPTIONAL_SETTINGS) != required or plan['schema'] != 9:
         raise ValueError('Invalid unified deployment fields')
-    if (plan['precision'] not in ('fp8', 'int8_smoothquant','nvfp4','nvfp4_fp8') or type(plan['batch']) is not int
-            or plan['batch'] not in (1, 8, 64, 128)):
+    allowed_batches=((1,2,4,8,16,32,64,128) if plan['precision'] in ('fp8','int8_smoothquant') else (1,8,64,128))
+    if (plan['precision'] not in ('fp8','int8_smoothquant','nvfp4','nvfp4_fp8') or type(plan['batch']) is not int
+            or plan['batch'] not in allowed_batches):
         raise ValueError('Expected unified FP8/INT8 B1/B8/B64/B128 deployment')
     if 'component_precisions' in plan:
         p=plan['component_precisions']
@@ -39,6 +40,12 @@ def validate(plan):
             raise ValueError('Explicit component precision mapping must be complete')
     if plan['runtime_backend'] not in BACKENDS:
         raise ValueError('This adapter must not be labelled as the native NVIDIA executor')
+    if 'hardware' in plan:
+        hardware = plan['hardware']
+        if (not isinstance(hardware, dict) or set(hardware) != {'gpu_name', 'sm'}
+                or not isinstance(hardware['gpu_name'], str) or not hardware['gpu_name']
+                or type(hardware['sm']) is not int or hardware['sm'] <= 0):
+            raise ValueError('Expected exact target GPU name and SM identity')
     if 'static_gc_freeze' in plan and type(plan['static_gc_freeze']) is not bool:
         raise ValueError('static_gc_freeze must be an explicit bool')
     if 'target_kv_fusion' in plan and type(plan['target_kv_fusion']) is not bool:
@@ -238,7 +245,7 @@ class FirstChunkController:
                 all(max(r.past_length,r.cache.length)+max(0,31-len(r.codes))+8 <= self.provider.capacity
                     for r in rows))
 
-    def run(self, rows):
+    def begin(self, rows):
         self.provider.import_rows(rows)
         width = max(len(row.codes) for row in rows)
         padding = self.provider.batch-len(rows)
@@ -262,6 +269,8 @@ class FirstChunkController:
                            past_lengths=vectors[1], draft_lengths=vectors[2],
                            mel_lengths=vectors[3],
                            seeds=[r.request['seed'] for r in rows]+[0]*padding)
+    def run(self, rows):
+        self.begin(rows)
         stats = self.runtime.run()
         self.last_run = stats
         self.total_launched_rounds += stats['launched_rounds']

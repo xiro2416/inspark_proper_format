@@ -14,7 +14,7 @@ from inspark_infer.runtime.prefix_graphs import PackedKV, PrefixGraphs
 
 
 def validate_plan(plan, kind, batch, calibration_sha256, scheme):
-    if kind not in EXTENTS or batch not in (1, 8, 64, 128):
+    if kind not in EXTENTS or batch not in (1, 2, 4, 8, 16, 32, 64, 128):
         raise ValueError("Expected prefill/latent at B1/B8/B64/B128")
     if (plan.get("component"), plan.get("kind"), plan.get("batch"), plan.get("frames")) != (
             "target", kind, batch, EXTENTS[kind]):
