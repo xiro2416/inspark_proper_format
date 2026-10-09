@@ -50,3 +50,16 @@ def validate_component_roles(plan):
         new={k:v for k,v in composite['role_specs'].items() if k.startswith(component+'.')}
         if source['scheme']!=component_precision(plan,component,composite['scheme']) or not old or old!=new:
             raise ValueError(f'{component} reused calibration differs from the composite recipe')
+
+
+def same_quantization_recipe(left,right):
+    """Calibration storage location is not its semantic identity."""
+    from copy import deepcopy
+    if not all(isinstance(x.get('calibration'),dict) and x['calibration'].get('sha256') for x in (left,right)):
+        return False
+    values=[]
+    for recipe in (left,right):
+        normalized=deepcopy(recipe)
+        normalized['calibration'].pop('path',None)
+        values.append(normalized)
+    return values[0]==values[1]

@@ -93,7 +93,7 @@ def validate(plan):
             and plan['runtime_backend']=='native_dspark_worker_trt_compute'
             and ('tail_target_plan' not in plan or
                  plan.get('batch') in (16,32,128) and type(plan.get('tail_compact_after')) is int
-                 and plan['tail_compact_after']>=13)):
+                 and plan['tail_compact_after']>=(13 if plan.get('batch')==128 else 12))):
         raise ValueError('Verify-only rounds require native Graphs and a standalone late threshold8/10/12')
     if any(k in plan for k in ('tail_target_plan','tail_draft_plan')):
         if not (plan['batch'] in (16,32,64,128) and plan['runtime_backend']=='native_dspark_worker_trt_compute'
@@ -382,9 +382,10 @@ def prepare(engine, plan):
                 if 'tail_context_plan' in plan:
                     tail_context=read_json(Path(plan['tail_context_plan']))
                     main_context=read_json(Path(plan['context_plan']))
+                    from inspark_infer.runtime.asset_identity import same_quantization_recipe
                     if (tail_context.get('kind')!='context_kv' or tail_context.get('batch')!=8 or
                             main_context.get('kind')!='context_kv' or tail_context.get('tf32') is not False or
-                            tail_context.get('quantization_recipe')!=main_context.get('quantization_recipe')):
+                            not same_quantization_recipe(tail_context.get('quantization_recipe',{}),main_context.get('quantization_recipe',{}))):
                         raise ValueError('Tail context differs in precision/calibration/role policy')
                     tail_provider.context_engine=StaticEngine(plan['tail_context_plan'],8)
                 tail_controller=FirstChunkController(engine,tail_provider,proposal,True,plan['runtime_backend'],2)
