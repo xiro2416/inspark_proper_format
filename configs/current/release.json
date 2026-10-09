@@ -53,14 +53,36 @@
       "batch": 64,
       "path": "artifacts/current_release/deployments/nvfp4_fp8_b64.json",
       "engine_revision": "016e112814f35156e6259592c983833d1222f015",
-      "engine_prefix": "engines/rtx6000d_sm120/draft900_cfm800_nvfp4_fp8/b64"
+      "engine_prefix": "engines/rtx6000d_sm120/draft900_cfm800_nvfp4_fp8/b64",
+      "scheduler_variants": {
+        "barrier": {
+          "engine_prefix": "engines/rtx6000d_sm120/draft900_cfm800_nvfp4_fp8/b64",
+          "engine_revision": "016e112814f35156e6259592c983833d1222f015"
+        },
+        "ready_c": {
+          "engine_prefix": "engines/rtx6000d_sm120/draft900_cfm800_nvfp4_fp8/ready_c/b64",
+          "engine_revision": "8da4e9ce3c7ad08a2af94c2be6106c56c8c97630"
+        }
+      },
+      "default_scheduler": "ready_c"
     },
     "nvfp4_fp8_b128": {
       "precision": "nvfp4_fp8",
       "batch": 128,
       "path": "artifacts/current_release/deployments/nvfp4_fp8_b128.json",
       "engine_revision": "e631a08b313fc66f8638a19698d53f91c7406689",
-      "engine_prefix": "engines/rtx6000d_sm120/draft900_cfm800_nvfp4_fp8/b128"
+      "engine_prefix": "engines/rtx6000d_sm120/draft900_cfm800_nvfp4_fp8/b128",
+      "scheduler_variants": {
+        "barrier": {
+          "engine_prefix": "engines/rtx6000d_sm120/draft900_cfm800_nvfp4_fp8/b128",
+          "engine_revision": "e631a08b313fc66f8638a19698d53f91c7406689"
+        },
+        "ready_c": {
+          "engine_prefix": "engines/rtx6000d_sm120/draft900_cfm800_nvfp4_fp8/ready_c/b128",
+          "engine_revision": "8da4e9ce3c7ad08a2af94c2be6106c56c8c97630"
+        }
+      },
+      "default_scheduler": "ready_c"
     },
     "nvfp4_fp8_b4": {
       "precision": "nvfp4_fp8",
@@ -102,7 +124,18 @@
         "bf16": 90,
         "nvfp4": 135,
         "fp8": 92
-      }
+      },
+      "scheduler_variants": {
+        "barrier": {
+          "engine_prefix": "engines/rtx6000d_sm120/draft900_cfm800_nvfp4_fp8/b32",
+          "engine_revision": "1d1a9ca24b998c14aba3c59db9b119231ff70895"
+        },
+        "ready_c": {
+          "engine_prefix": "engines/rtx6000d_sm120/draft900_cfm800_nvfp4_fp8/ready_c/b32",
+          "engine_revision": "8da4e9ce3c7ad08a2af94c2be6106c56c8c97630"
+        }
+      },
+      "default_scheduler": "ready_c"
     }
   },
   "weights": {

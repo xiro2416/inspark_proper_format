@@ -24,7 +24,7 @@ def capture(fn,args):
     for _ in range(3):fn(*static)
     torch.cuda.current_stream().synchronize()
     graph=torch.cuda.CUDAGraph()
-    with torch.cuda.graph(graph):outputs=fn(*static)
+    with torch.cuda.graph(graph, stream=torch.cuda.current_stream()):outputs=fn(*static)
     return Captured(static,outputs,graph)
 
 class HeadGraphs:

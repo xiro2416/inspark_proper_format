@@ -8,18 +8,23 @@ def sha256(path):
 def registry():
     return json.loads((Path(__file__).resolve().parents[3]/'configs/current/release.json').read_text())
 
-def engine_release(info,precision,batch):
+def engine_release(info,precision,batch,scheduler='auto'):
     """A new precision can have its own pinned bundle without moving defaults."""
     label=f'{precision}_b{batch}'
     if label not in info['deployments']:raise ValueError('No published deployment for '+label)
     selected=info['deployments'][label]
+    if scheduler not in ('auto','barrier','ready_c'):raise ValueError('Unknown scheduler')
+    scheduler=selected.get('default_scheduler','barrier') if scheduler=='auto' else scheduler
+    variants=selected.get('scheduler_variants',{})
+    if scheduler in variants:selected={**selected,**variants[scheduler]}
+    elif scheduler!='barrier':raise ValueError('No published '+scheduler+' deployment for '+label)
     return (selected.get('engine_prefix',info['engine_prefix']),
             selected.get('engine_revision',info['engine_revision']))
 
-def fetch(destination,precision='fp8',batch=1):
+def fetch(destination,precision='fp8',batch=1,scheduler='auto'):
     from huggingface_hub import snapshot_download
     info=registry()
-    prefix,revision=engine_release(info,precision,batch)
+    prefix,revision=engine_release(info,precision,batch,scheduler)
     destination=Path(destination).resolve();destination.mkdir(parents=True,exist_ok=True)
     # The published bundle contains only the seven selected dependency graphs.
     cache=snapshot_download(info['repo'],revision=revision,

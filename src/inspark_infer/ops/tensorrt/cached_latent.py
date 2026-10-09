@@ -35,8 +35,8 @@ class OnePassLatentPrefixReplay:
 
     def capture(self):
         for _ in range(2):self.body()
-        torch.cuda.synchronize();self.graph=torch.cuda.CUDAGraph()
-        with torch.cuda.graph(self.graph):self.body()
+        torch.cuda.current_stream().synchronize();self.graph=torch.cuda.CUDAGraph()
+        with torch.cuda.graph(self.graph, stream=torch.cuda.current_stream()):self.body()
 
     def run_embedded(self,suffix,prefix_lengths,suffix_lengths):
         if suffix.shape!=self.suffix.shape:raise ValueError('Exact padded suffix shape required')

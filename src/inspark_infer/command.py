@@ -41,6 +41,7 @@ def main(argv: list[str] | None = None) -> int:
     p.add_argument('--asset-dir',type=Path,required=True)
     p.add_argument('--precision',choices=['fp8','int8_smoothquant','nvfp4','nvfp4_fp8'],default='fp8')
     p.add_argument('--batch',type=int,choices=[1,4,8,16,32,64,128],default=1)
+    p.add_argument('--scheduler',choices=['auto','barrier','ready_c'],default='auto')
     options,rest=p.parse_known_args(args)
     if options.precision=='int8_smoothquant' and options.batch==128:p.error('INT8 B128 is not published')
     if options.precision=='nvfp4' and options.batch!=64:p.error('NVFP4 is supported only at B64')
@@ -48,11 +49,11 @@ def main(argv: list[str] | None = None) -> int:
     from inspark_infer.api.release import fetch,materialize
     if options.command=='fetch':
         if rest:p.error('Unexpected fetch arguments')
-        config,deployment=fetch(options.asset_dir,options.precision,options.batch)
+        config,deployment=fetch(options.asset_dir,options.precision,options.batch,options.scheduler)
         print(config);print(deployment);return 0
     from inspark_infer.api.release import registry,engine_release
     info=registry();root=options.asset_dir.resolve()
-    prefix,_=engine_release(info,options.precision,options.batch)
+    prefix,_=engine_release(info,options.precision,options.batch,options.scheduler)
     bundle=root/'download'/prefix
     config,deployment=materialize(bundle,root/'weights',root/'runtime',options.precision,options.batch)
     os.environ.setdefault('MPI4PY_MPIABI','openmpi')

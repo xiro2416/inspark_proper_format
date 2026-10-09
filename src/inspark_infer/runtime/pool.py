@@ -103,6 +103,15 @@ def _engine_stats(engine):
     guard=getattr(engine,'static_gc_guard',None)
     if guard is not None:result['gc_policy']=guard.stats()
     result['prefill_context_view_hits']=getattr(engine.rt.context,'prefill_context_view_hits',0)
+    ready=getattr(engine,'head_ready_pipeline',None)
+    result['first_chunk_scheduler']='barrier' if ready is None else 'ready_'+ready.mode.lower()
+    if ready is not None:
+        result['ready_pipeline']=dict(mode=ready.mode,admission_batch=ready.batch,
+            acoustic_batch=ready.acoustic_batch,waves=len(ready.waves),
+            last_wave=dict(ready.waves[-1]) if ready.waves else None,
+            acoustic_graphs=ready.acoustic.head_graphs.stats(),
+            acoustic_cfm_fallbacks=int(getattr(ready.acoustic.student,'fallbacks',0)),
+            acoustic_vocoder_fallbacks=int(getattr(ready.acoustic.vocoder,'fallbacks',0)))
     torch=getattr(engine,'torch',None)
     result['memory']=dict(cuda_allocated_bytes=None,cuda_reserved_bytes=None,
                           cuda_peak_allocated_bytes=None,cuda_peak_reserved_bytes=None,rss_bytes=None)

@@ -13,7 +13,7 @@ from torch import nn
 PATHS = ('calibration', 'target_plan', 'draft_plan', 'cfm_plan', 'vocoder_plan', 'official_sources')
 OPTIONAL_PATHS = ('prefill_plan', 'latent_plan', 'tail_target_plan', 'tail_draft_plan','context_plan',
                   'latent_suffix_plan','tail_context_plan','vocoder_partition_plan','condition_trt_plan',
-                  'middle_target_plan','middle_draft_plan','middle_context_plan','cfm_microbatch_plan','vocoder_microbatch_plan','vocoder_serial_plan')
+                  'middle_target_plan','middle_draft_plan','middle_context_plan','cfm_microbatch_plan','vocoder_microbatch_plan','vocoder_serial_plan','ready_scheduler_plan')
 OPTIONAL_SETTINGS = ('rnn_graph_rewrite', 'batch_conditions', 'latent_cached_prefix',
                      'latent_gpu_scalar_lengths', 'condition_per_row_lengths',
                      'graph_burst_rounds', 'head_handoff', 'admission_packing',
@@ -22,7 +22,7 @@ OPTIONAL_SETTINGS = ('rnn_graph_rewrite', 'batch_conditions', 'latent_cached_pre
                      'batch_head_pcm', 'cpu_text_processes', 'latent_reuse_prefill_kv',
                      'cpu_text_workers','late_verify_after','condition_graphs','condition_graph_exact_batches',
                      'condition_flat_projection','prefill_readonly_views','prefill_context_overlap',
-                     'static_gc_freeze','prefill_context_views','condition_projected_vq','tail_compact_after','target_kv_fusion','component_calibrations','component_precisions','model_tensor_hashes','hardware')
+                     'static_gc_freeze','prefill_context_views','condition_projected_vq','tail_compact_after','target_kv_fusion','component_calibrations','component_precisions','model_tensor_hashes','hardware','first_chunk_scheduler')
 BACKENDS = ('framework_dspark_adapter', 'native_dspark_worker_trt_compute')
 
 
@@ -41,6 +41,14 @@ def validate(plan):
             raise ValueError('Explicit component precision mapping must be complete')
     if plan['runtime_backend'] not in BACKENDS:
         raise ValueError('This adapter must not be labelled as the native NVIDIA executor')
+    scheduler = plan.get('first_chunk_scheduler', 'barrier')
+    if scheduler not in ('barrier', 'ready_c'):
+        raise ValueError('Unknown first-chunk scheduler')
+    if scheduler == 'ready_c' and not (plan['precision'] == 'nvfp4_fp8'
+            and plan['batch'] in (32, 64, 128) and plan['graphs']
+            and plan['runtime_backend'] == 'native_dspark_worker_trt_compute'
+            and isinstance(plan.get('ready_scheduler_plan'), str) and plan['ready_scheduler_plan']):
+        raise ValueError('Ready C requires mixed native graphed B32/B64/B128 and a manifest')
     if 'hardware' in plan:
         hardware = plan['hardware']
         if (not isinstance(hardware, dict) or set(hardware) != {'gpu_name', 'sm'}
@@ -469,6 +477,10 @@ def prepare(engine, plan):
                                  calibration_path(plan,'target'), capture_graph=plan['graphs']).install()
             if plan['graphs']:
                 engine.prepare_head_graphs()
+        engine.ready_scheduler_root_plan = plan
+        if plan.get('first_chunk_scheduler', 'barrier') == 'ready_c':
+            from .ready_scheduler import ReadyPipeline
+            engine.head_ready_pipeline = ReadyPipeline(engine, read_json(plan['ready_scheduler_plan']), mode='C')
         engine.deployment_state = 'ready'
         return dict(requested=plan, resolved_precision=plan['precision'],
                     runtime_backend=plan['runtime_backend'], native_trtllm_executor=False,

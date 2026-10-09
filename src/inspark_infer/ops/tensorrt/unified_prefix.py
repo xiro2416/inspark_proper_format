@@ -101,7 +101,7 @@ class NativePrefixEngine:
             self._enqueue()
         torch.cuda.current_stream(self.device).synchronize()
         graph = torch.cuda.CUDAGraph()
-        with torch.cuda.graph(graph):
+        with torch.cuda.graph(graph, stream=torch.cuda.current_stream()):
             self._enqueue()
         self.graph = graph
 
