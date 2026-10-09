@@ -1,0 +1,119 @@
+{
+  "wave_postadmission_to_last_pcm_ms": {
+    "n": 30,
+    "p50": 155.7193249464035,
+    "p95": 158.7270226329565,
+    "p99": 160.93979310244322,
+    "mean": 154.85166553407907,
+    "min": 149.25818983465433,
+    "max": 161.74461506307125
+  },
+  "wave_admission_to_last_pcm_ms": {
+    "n": 30,
+    "p50": 157.4613330885768,
+    "p95": 160.51969276741147,
+    "p99": 162.83742238767445,
+    "mean": 156.88068786015114,
+    "min": 152.07188855856657,
+    "max": 163.6724891141057
+  },
+  "admission_phase_ms": {
+    "n": 30,
+    "p50": 1.844160258769989,
+    "p95": 3.4580731298774445,
+    "p99": 4.183166977018118,
+    "mean": 2.0290223260720572,
+    "min": 1.7319824546575546,
+    "max": 4.263990558683872
+  },
+  "rounds": {
+    "n": 960,
+    "p50": 8.0,
+    "p95": 12.0,
+    "p99": 13.0,
+    "mean": 8.671875,
+    "min": 4.0,
+    "max": 13.0
+  },
+  "kv_at_head": {
+    "n": 960,
+    "p50": 71.0,
+    "p95": 77.0,
+    "p99": 78.0,
+    "mean": 71.33958333333334,
+    "min": 65.0,
+    "max": 78.0
+  },
+  "acceptance_rate": 0.38515658515658513,
+  "accepted_tokens": 22445,
+  "proposed_tokens": 58275,
+  "power": {
+    "n": 737,
+    "p50": 281.0,
+    "p95": 479.21,
+    "p99": 484.21,
+    "mean": 333.14766621438264,
+    "min": 88.07,
+    "max": 485.66
+  },
+  "memory_peak_GiB": 15.6162109375,
+  "counters": {
+    "device_round_attempts": 30,
+    "device_round_successes": 30,
+    "device_round_fallbacks": 0,
+    "device_round_status_reads": 194,
+    "device_round_status_wait_ms": 1610.4766391217709,
+    "device_round_launched_rounds": 374,
+    "device_target_steps": 374,
+    "device_draft_steps": 0,
+    "native_target_steps": 374,
+    "native_draft_steps": 390,
+    "native_cfm_fallbacks": 0,
+    "native_vocoder_fallbacks": 0,
+    "device_code_direct_rows": 960,
+    "speech_codes_host_rows": 0,
+    "output_d2h_bytes": 21879400,
+    "output_d2h_wait_ms": 1780.7555589824915,
+    "output_d2h_transfer_ms": 1.3496959954500198,
+    "device_round_fallback_reasons": {},
+    "head_graph_hits": {
+      "cfm": 30,
+      "vocoder": 30
+    },
+    "unified_dspark": {
+      "calls": 30,
+      "failures": 0,
+      "graph_replays": 194,
+      "launched_rounds": 374,
+      "status_reads": 194,
+      "status_wait_ms": 1610.4766391217709,
+      "draft_enqueues": 390,
+      "target_enqueues": 374,
+      "prime_enqueues": 30
+    },
+    "unified_prefix": {
+      "hits": {
+        "prefill": 30,
+        "latent": 30
+      },
+      "tail_eager": {
+        "prefill": 0,
+        "latent": 0
+      },
+      "graph_hits": {
+        "prefill": 30,
+        "latent": 0
+      },
+      "direct_hits": {
+        "prefill": 0,
+        "latent": 0
+      }
+    }
+  },
+  "execution_pass": true,
+  "deployment_sha256_measured": "063b42800666d15e79da49aaeb46ab03242c6d3e6d6e752fc48906f9258aabaa",
+  "warmups": 5,
+  "waves": 30,
+  "power_seconds": 15.041106746532023,
+  "statistical_unit": "wave;30wavesnot960independentsamples"
+}

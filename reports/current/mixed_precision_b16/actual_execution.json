@@ -1,0 +1,101 @@
+{
+  "backend": "native_dspark_worker_trt_compute",
+  "full_trtllm_executor": false,
+  "precision_role_counts": {
+    "nvfp4": 135,
+    "fp8": 92,
+    "bf16": 90
+  },
+  "engines": [
+    {
+      "component": "target",
+      "batch": 16,
+      "engine_sha256": "57440763cdb9176f9eb473056bb4380cc0e1050e0d1394b5b8b7ba955aeadd9d",
+      "native_fp4_gemms": 72,
+      "native_fp8_conv_implementation_layers": 0,
+      "fp32_fir_plugins": 0,
+      "tiling": "full",
+      "actual_aux_streams": 0
+    },
+    {
+      "component": "draft",
+      "batch": 16,
+      "engine_sha256": "a5bc30575b87779084e30c218bce629868fe5960805af822e455bb3b2cb38684",
+      "native_fp4_gemms": 12,
+      "native_fp8_conv_implementation_layers": 0,
+      "fp32_fir_plugins": 0,
+      "tiling": "full",
+      "actual_aux_streams": 0
+    },
+    {
+      "component": "context",
+      "batch": 16,
+      "engine_sha256": "ab6d158ae8351afb5ef0339e311bcec06d1a0fd42e5553ba4a656002ff2e0eff",
+      "native_fp4_gemms": 4,
+      "native_fp8_conv_implementation_layers": 0,
+      "fp32_fir_plugins": 0,
+      "tiling": "full",
+      "actual_aux_streams": 0
+    },
+    {
+      "component": "prefill",
+      "batch": 16,
+      "engine_sha256": "b81a8e1eab529e5ccedfdccaf2653ab1a6da8fe62c26edae47bbca1886f6a6ff",
+      "native_fp4_gemms": 72,
+      "native_fp8_conv_implementation_layers": 0,
+      "fp32_fir_plugins": 0,
+      "tiling": "full",
+      "actual_aux_streams": 0
+    },
+    {
+      "component": "latent",
+      "batch": 16,
+      "engine_sha256": "688e7ba13df80e1c643834e3bc2b5c9005aa0d2ed7e91ee59f75c0dda2d91e0c",
+      "native_fp4_gemms": 72,
+      "native_fp8_conv_implementation_layers": 0,
+      "fp32_fir_plugins": 0,
+      "tiling": "full",
+      "actual_aux_streams": 0
+    },
+    {
+      "component": "latent_suffix",
+      "batch": 16,
+      "engine_sha256": "20aeabf88d6805ace009e1f4364e41e998d8e5c5fc4999de35f21f50417258d7",
+      "native_fp4_gemms": 72,
+      "native_fp8_conv_implementation_layers": 0,
+      "fp32_fir_plugins": 0,
+      "tiling": "full",
+      "actual_aux_streams": 0
+    },
+    {
+      "component": "cfm",
+      "batch": 16,
+      "engine_sha256": "ed60a7ff2899d3b56da214200d45ded3f17ccb8cb29ef4a7742f3ddd39878524",
+      "native_fp4_gemms": 168,
+      "native_fp8_conv_implementation_layers": 64,
+      "fp32_fir_plugins": 0,
+      "tiling": "full",
+      "actual_aux_streams": 0
+    },
+    {
+      "component": "vocoder",
+      "batch": 16,
+      "engine_sha256": "7c2dfd86d34326ca01e9acccb9ea4666fec1c4ea52ae2c52248e8261cb4ad45c",
+      "native_fp4_gemms": 0,
+      "native_fp8_conv_implementation_layers": 72,
+      "fp32_fir_plugins": 109,
+      "tiling": "full",
+      "actual_aux_streams": 0
+    }
+  ],
+  "fusion": [
+    "Target official Attention GS",
+    "CFM existing full4step solver and paired nativeNVFP4 GEMMs",
+    "Vocoder existing109FP32 FIR/Snake/FIR plugins",
+    "existing targetKVwrite fused copy under target_kv_fusion"
+  ],
+  "graph_burst_rounds": 1,
+  "late_verify_after": 10,
+  "cpu_text_workers": 8,
+  "known_gap": "4 declaredFP8QDQ low-precision ConvTranspose use actualFP32 FFMA, inheritedsourcegap"
+}

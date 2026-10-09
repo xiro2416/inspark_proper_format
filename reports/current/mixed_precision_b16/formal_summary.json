@@ -1,0 +1,157 @@
+{
+  "status": "formal_complete_selected_retained_GPU_released",
+  "batch": 16,
+  "gpu": 5,
+  "scope": "singlephysicalRTX6000D; othertaskagentsGPU4/6paused; backgroundoutsideprojectpreserved",
+  "warmups": 5,
+  "waves": 30,
+  "power_seconds": 15,
+  "all_outliers_retained": true,
+  "matched_rows": {
+    "scope": "formal5warm30wave480request matched row comparison",
+    "bitwise_code_PCM_state_identical": true,
+    "rows": 480,
+    "checked_fields": [
+      "case_id",
+      "seed",
+      "code_sha256",
+      "pcm_sha256",
+      "accepted",
+      "rounds",
+      "generated_codes",
+      "eos"
+    ]
+  },
+  "runs": [
+    {
+      "label": "migration_baseline",
+      "postadmission_ms": {
+        "n": 30,
+        "p50": 108.6368435062468,
+        "p95": 120.37666062824428,
+        "p99": 127.33702866360547,
+        "mean": 109.96837026129167,
+        "min": 96.96394950151443,
+        "max": 130.11575676500797
+      },
+      "admission_ms": {
+        "n": 30,
+        "p50": 109.8213060759008,
+        "p95": 121.4406727347523,
+        "p99": 128.37480733171105,
+        "mean": 111.20566946143906,
+        "min": 99.56406522542238,
+        "max": 131.15775305777788
+      },
+      "power_w": {
+        "n": 736,
+        "p50": 223.41,
+        "p95": 401.57,
+        "p99": 406.89,
+        "mean": 260.8408695652174,
+        "min": 84.47,
+        "max": 414.41
+      },
+      "power_duration_seconds": 15.042408770881593,
+      "power_waves": 137,
+      "memory_sampled_peak_gib": 13.7451171875,
+      "memory_sampled_peak_mib": 14075.0,
+      "acceptance_rate": 0.3872992751361287,
+      "logical_request_rounds": {
+        "n": 480,
+        "p50": 8.0,
+        "p95": 12.0,
+        "p99": 13.0,
+        "mean": 8.58125,
+        "min": 6.0,
+        "max": 15.0
+      },
+      "physical_target_enqueues": 371,
+      "physical_draft_enqueues": 390,
+      "status_reads": 195,
+      "graph_hits": {
+        "cfm": 30,
+        "vocoder": 30
+      },
+      "prefix_hits": {
+        "prefill": 30,
+        "latent": 30
+      },
+      "fallbacks": {
+        "device_round_fallbacks": 0,
+        "native_cfm_fallbacks": 0,
+        "native_vocoder_fallbacks": 0
+      },
+      "deployment_sha256": "a52a699c30295c0f5f45a28ee94defd988154f31d0be128f1d6fbb1ff72546e8",
+      "benchmark_sha256": "f5c633bf54f92729526afd66384ec0d184df735d332f5dfb8796cc8614cb5465"
+    },
+    {
+      "label": "optimized_selected",
+      "postadmission_ms": {
+        "n": 30,
+        "p50": 105.82661675289273,
+        "p95": 117.49095492996275,
+        "p99": 119.21056068502367,
+        "mean": 106.84098899364471,
+        "min": 96.96526266634464,
+        "max": 119.87161636352539
+      },
+      "admission_ms": {
+        "n": 30,
+        "p50": 106.97050904855132,
+        "p95": 118.60211296007037,
+        "p99": 120.38547652773559,
+        "mean": 108.0061864728729,
+        "min": 97.97798935323954,
+        "max": 121.06942664831877
+      },
+      "power_w": {
+        "n": 737,
+        "p50": 219.12,
+        "p95": 411.24,
+        "p99": 417.79,
+        "mean": 258.275223880597,
+        "min": 82.61,
+        "max": 418.53
+      },
+      "power_duration_seconds": 15.097519039176404,
+      "power_waves": 135,
+      "memory_sampled_peak_gib": 13.7255859375,
+      "memory_sampled_peak_mib": 14055.0,
+      "acceptance_rate": 0.3872992751361287,
+      "logical_request_rounds": {
+        "n": 480,
+        "p50": 8.0,
+        "p95": 12.0,
+        "p99": 13.0,
+        "mean": 8.58125,
+        "min": 6.0,
+        "max": 15.0
+      },
+      "physical_target_enqueues": 364,
+      "physical_draft_enqueues": 368,
+      "status_reads": 364,
+      "graph_hits": {
+        "cfm": 30,
+        "vocoder": 30
+      },
+      "prefix_hits": {
+        "prefill": 30,
+        "latent": 30
+      },
+      "fallbacks": {
+        "device_round_fallbacks": 0,
+        "native_cfm_fallbacks": 0,
+        "native_vocoder_fallbacks": 0
+      },
+      "deployment_sha256": "bbced26acac14aa750c4ee27c7e25c8c86340c7f2563f53e7ad6173d9f927398",
+      "benchmark_sha256": "fa265b166a39db1b21dfc0799debf5806f1c07d05d6699804019a7cf58aa74fa"
+    }
+  ],
+  "p50_gain_ms": 2.8102267533540726,
+  "p50_gain_percent": 2.5868081791169493,
+  "selected_final_deployment": "/workspace/inspark_mixed_b16/artifacts/mixed_b16/selected_final_deployment.json",
+  "selected_runtime": "/workspace/inspark_mixed_b16/artifacts/mixed_b16/runtime.yaml",
+  "publication_by_worker": false,
+  "complete_semantic_route": "fullB16 AR/4stepCFM/Vocoder, no tail/microbatch"
+}

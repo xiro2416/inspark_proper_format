@@ -1,0 +1,187 @@
+[
+  {
+    "component": "target",
+    "plan": "/workspace/inspark_mixed_b4/artifacts/mixed_b4/optimization/ar_fp8/target_attention/model.plan.json",
+    "engine_sha256": "d3b0f3d218cb47d1737ddf586ca0139978e4c8be6e69b1f8e7b2269183715621",
+    "native_fp4_gemms": 0,
+    "native_fp8_gemms": 72,
+    "native_fp8_conv_layers": 0,
+    "fp32_fir": 0,
+    "float_deconvs": [],
+    "builder": 5,
+    "tiling": "full",
+    "actual_aux": 0,
+    "l2_actual": 117440512,
+    "workspace_bytes": 89173131264,
+    "tactic_shared_memory_bytes": 1073741824,
+    "max_num_tactics": -1,
+    "calibration_sha256": "acf2705676ce405abaa9fa414afb010cb38d3791c232e5770e12b1aa88bc3c71",
+    "role_specs_sha256": "1662b2417c7c5ae8dc7bc5daabe40f4439fcfedc0d7b15ff6bc7d18af1ae325f"
+  },
+  {
+    "component": "draft",
+    "plan": "/workspace/inspark_mixed_b4/artifacts/mixed_b4/draft/model.plan.json",
+    "engine_sha256": "e46e432d57a58d1848cf41c71e86dbeb355cb0c75899c362788a67be21c14c6c",
+    "native_fp4_gemms": 12,
+    "native_fp8_gemms": 0,
+    "native_fp8_conv_layers": 0,
+    "fp32_fir": 0,
+    "float_deconvs": [],
+    "builder": 5,
+    "tiling": "full",
+    "actual_aux": 0,
+    "l2_actual": 117440512,
+    "workspace_bytes": 89173131264,
+    "tactic_shared_memory_bytes": 1073741824,
+    "max_num_tactics": -1,
+    "calibration_sha256": "c568cbebe6e26b31169c57a988db84e2be16e38abd02daa02153c43028e6c4e0",
+    "role_specs_sha256": "e09fe79784a66475b7ea436fe14fcf864a0e8c587bcd878863a5ec6d3265676b"
+  },
+  {
+    "component": "context",
+    "plan": "/workspace/inspark_mixed_b4/artifacts/mixed_b4/context/model.plan.json",
+    "engine_sha256": "4f4a2615f49c25e88a286734ee33373a87e15be1338a9a96926ffc19bc625a9b",
+    "native_fp4_gemms": 4,
+    "native_fp8_gemms": 0,
+    "native_fp8_conv_layers": 0,
+    "fp32_fir": 0,
+    "float_deconvs": [],
+    "builder": 5,
+    "tiling": "full",
+    "actual_aux": 0,
+    "l2_actual": 117440512,
+    "workspace_bytes": 89173131264,
+    "tactic_shared_memory_bytes": 1073741824,
+    "max_num_tactics": -1,
+    "calibration_sha256": "c568cbebe6e26b31169c57a988db84e2be16e38abd02daa02153c43028e6c4e0",
+    "role_specs_sha256": "e09fe79784a66475b7ea436fe14fcf864a0e8c587bcd878863a5ec6d3265676b"
+  },
+  {
+    "component": "prefill",
+    "plan": "/workspace/inspark_mixed_b4/artifacts/mixed_b4/optimization/ar_fp8/prefill/model.plan.json",
+    "engine_sha256": "450b64f7b2b8e05956a70b2e1c7b83a851003b6690dd74ef99fa459fa1dc763b",
+    "native_fp4_gemms": 0,
+    "native_fp8_gemms": 72,
+    "native_fp8_conv_layers": 0,
+    "fp32_fir": 0,
+    "float_deconvs": [],
+    "builder": 5,
+    "tiling": "full",
+    "actual_aux": 0,
+    "l2_actual": 117440512,
+    "workspace_bytes": 89173131264,
+    "tactic_shared_memory_bytes": 1073741824,
+    "max_num_tactics": -1,
+    "calibration_sha256": "acf2705676ce405abaa9fa414afb010cb38d3791c232e5770e12b1aa88bc3c71",
+    "role_specs_sha256": "1662b2417c7c5ae8dc7bc5daabe40f4439fcfedc0d7b15ff6bc7d18af1ae325f"
+  },
+  {
+    "component": "latent",
+    "plan": "/workspace/inspark_mixed_b4/artifacts/mixed_b4/optimization/ar_fp8/latent/model.plan.json",
+    "engine_sha256": "a97591d11a28b87c38c5ac8092448ef61dded4f93d977de4428b8d8fb9229711",
+    "native_fp4_gemms": 0,
+    "native_fp8_gemms": 72,
+    "native_fp8_conv_layers": 0,
+    "fp32_fir": 0,
+    "float_deconvs": [],
+    "builder": 5,
+    "tiling": "full",
+    "actual_aux": 0,
+    "l2_actual": 117440512,
+    "workspace_bytes": 89173131264,
+    "tactic_shared_memory_bytes": 1073741824,
+    "max_num_tactics": -1,
+    "calibration_sha256": "acf2705676ce405abaa9fa414afb010cb38d3791c232e5770e12b1aa88bc3c71",
+    "role_specs_sha256": "1662b2417c7c5ae8dc7bc5daabe40f4439fcfedc0d7b15ff6bc7d18af1ae325f"
+  },
+  {
+    "component": "latent_suffix",
+    "plan": "/workspace/inspark_mixed_b4/artifacts/mixed_b4/optimization/ar_fp8/latent_suffix/model.plan.json",
+    "engine_sha256": "a5822b9de65c8665c27999aafdb51cc594da5edf1291ca9ef5ed535e686e46b7",
+    "native_fp4_gemms": 0,
+    "native_fp8_gemms": 72,
+    "native_fp8_conv_layers": 0,
+    "fp32_fir": 0,
+    "float_deconvs": [],
+    "builder": 5,
+    "tiling": "full",
+    "actual_aux": 0,
+    "l2_actual": 117440512,
+    "workspace_bytes": 89173131264,
+    "tactic_shared_memory_bytes": 1073741824,
+    "max_num_tactics": -1,
+    "calibration_sha256": "acf2705676ce405abaa9fa414afb010cb38d3791c232e5770e12b1aa88bc3c71",
+    "role_specs_sha256": "1662b2417c7c5ae8dc7bc5daabe40f4439fcfedc0d7b15ff6bc7d18af1ae325f"
+  },
+  {
+    "component": "cfm",
+    "plan": "/workspace/inspark_mixed_b4/artifacts/mixed_b4/cfm/model.plan.json",
+    "engine_sha256": "28527b43b9ee49b38daf234026fe3b79b059d11550a30c024afed696fe4d854a",
+    "native_fp4_gemms": 168,
+    "native_fp8_gemms": 0,
+    "native_fp8_conv_layers": 64,
+    "fp32_fir": 0,
+    "float_deconvs": [],
+    "builder": 5,
+    "tiling": "full",
+    "actual_aux": 0,
+    "l2_actual": 58720256,
+    "workspace_bytes": 89173131264,
+    "tactic_shared_memory_bytes": 1073741824,
+    "max_num_tactics": -1,
+    "calibration_sha256": "c568cbebe6e26b31169c57a988db84e2be16e38abd02daa02153c43028e6c4e0",
+    "role_specs_sha256": "61e8fc4b890145aa4cdab52a0e08ef3b91d8fdf50f6561ff82e715b2bf39e3ce"
+  },
+  {
+    "component": "vocoder",
+    "plan": "/workspace/inspark_mixed_b4/artifacts/mixed_b4/vocoder_fused/model.plan.json",
+    "engine_sha256": "b8a613612b0bab1cbc7003282b2ff05c3d8485dbf0800bba5829bdbe724cdb0a",
+    "native_fp4_gemms": 0,
+    "native_fp8_gemms": 0,
+    "native_fp8_conv_layers": 72,
+    "fp32_fir": 109,
+    "float_deconvs": [
+      {
+        "name": "/ups.2.0/ConvTranspose_myl0_149",
+        "tactic": "sm70_xmma_deconv_implicit_gemm_indexed_f32f32_f32f32_f32_nhwckrsc_nhwc_tilesize64x64x8_stage1_warpsize1x4x1_g1_ffma_strided_aligna4_alignc4",
+        "inputs": [
+          "Float",
+          "Float"
+        ]
+      },
+      {
+        "name": "/ups.3.0/ConvTranspose_myl0_222",
+        "tactic": "sm70_xmma_deconv_implicit_gemm_indexed_f32f32_f32f32_f32_nhwckrsc_nhwc_tilesize64x32x8_stage1_warpsize1x2x1_g1_ffma_strided_aligna4_alignc4",
+        "inputs": [
+          "Float",
+          "Float"
+        ]
+      },
+      {
+        "name": "/ups.4.0/ConvTranspose_myl0_295",
+        "tactic": "sm70_xmma_deconv_implicit_gemm_indexed_f32f32_f32f32_f32_nhwckrsc_nhwc_tilesize64x64x8_stage1_warpsize1x4x1_g1_ffma_strided_aligna4_alignc4",
+        "inputs": [
+          "Float",
+          "Float"
+        ]
+      },
+      {
+        "name": "/ups.5.0/ConvTranspose_myl0_368",
+        "tactic": "sm70_xmma_deconv_implicit_gemm_indexed_f32f32_f32f32_f32_nhwckrsc_nhwc_tilesize128x32x8_stage1_warpsize2x2x1_g1_ffma_strided_aligna4_alignc4",
+        "inputs": [
+          "Float",
+          "Float"
+        ]
+      }
+    ],
+    "builder": 5,
+    "tiling": "full",
+    "actual_aux": 0,
+    "l2_actual": 117440512,
+    "workspace_bytes": 89173131264,
+    "tactic_shared_memory_bytes": 1073741824,
+    "max_num_tactics": -1,
+    "calibration_sha256": "c568cbebe6e26b31169c57a988db84e2be16e38abd02daa02153c43028e6c4e0",
+    "role_specs_sha256": "17a8468a619c3468968312c424be8b7270e2e3b478e5e54d1be7653c12730607"
+  }
+]

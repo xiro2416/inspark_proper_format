@@ -1,0 +1,473 @@
+{
+  "screening": [
+    {
+      "candidate": "prefix_views",
+      "comparator": "baseline",
+      "before_ms": 113.49113658070564,
+      "candidate_ms": 111.27505823969841,
+      "gain_ms": 2.2160783410072327,
+      "keep_provisional": true,
+      "changes": {
+        "prefill_readonly_views": true,
+        "prefill_context_views": true,
+        "prefill_context_overlap": true
+      },
+      "matched_exclusive_confirmation_pending": true
+    },
+    {
+      "candidate": "kv_fusion",
+      "comparator": "prefix_views",
+      "before_ms": 111.27505823969841,
+      "candidate_ms": 108.73069008812308,
+      "gain_ms": 2.544368151575327,
+      "keep_provisional": true,
+      "changes": {
+        "target_kv_fusion": true
+      },
+      "matched_exclusive_confirmation_pending": true
+    },
+    {
+      "candidate": "cpu16",
+      "comparator": "kv_fusion",
+      "before_ms": 108.73069008812308,
+      "candidate_ms": 113.2515505887568,
+      "gain_ms": -4.520860500633717,
+      "keep_provisional": false,
+      "changes": {
+        "cpu_text_workers": 16
+      },
+      "matched_exclusive_confirmation_pending": true
+    },
+    {
+      "candidate": "late10",
+      "comparator": "kv_fusion",
+      "before_ms": 108.73069008812308,
+      "candidate_ms": 107.96666983515024,
+      "gain_ms": 0.7640202529728413,
+      "keep_provisional": true,
+      "changes": {
+        "late_verify_after": 10
+      },
+      "matched_exclusive_confirmation_pending": true
+    },
+    {
+      "candidate": "burst1",
+      "comparator": "late10",
+      "before_ms": 107.96666983515024,
+      "candidate_ms": 105.62878893688321,
+      "gain_ms": 2.3378808982670307,
+      "keep_provisional": true,
+      "changes": {
+        "graph_burst_rounds": 1
+      },
+      "matched_exclusive_confirmation_pending": true
+    },
+    {
+      "candidate": "burst4",
+      "comparator": "burst1",
+      "before_ms": 105.62878893688321,
+      "candidate_ms": 108.94104884937406,
+      "gain_ms": -3.3122599124908447,
+      "keep_provisional": false,
+      "changes": {
+        "graph_burst_rounds": 4
+      },
+      "matched_exclusive_confirmation_pending": true
+    }
+  ],
+  "matched_confirmation": {
+    "scope": "3warm10wave matched ABBA during parallel exploration, no profiler/power, exclusive final pending",
+    "runs": [
+      {
+        "label": "confirm_A1",
+        "p50_ms": 108.86361543089151,
+        "p95_ms": 114.21167687512934
+      },
+      {
+        "label": "confirm_B1",
+        "p50_ms": 106.77443444728851,
+        "p95_ms": 115.68013606593013
+      },
+      {
+        "label": "confirm_B2",
+        "p50_ms": 108.54349751025438,
+        "p95_ms": 156.59918636083597
+      },
+      {
+        "label": "confirm_A2",
+        "p50_ms": 109.6407687291503,
+        "p95_ms": 119.33991466648877
+      }
+    ],
+    "baseline_average_p50_ms": 109.2521920800209,
+    "selected_average_p50_ms": 107.65896597877145,
+    "gain_ms": 1.5932261012494564,
+    "gain_percent": 1.458301266927908,
+    "retained": true
+  },
+  "fir_probe": {
+    "scope": "existing FIR schedule microprobe on real quantized-reference intermediates; same math and FP32 ABI, not E2E",
+    "shapes": [
+      {
+        "shape": [
+          16,
+          768,
+          208
+        ],
+        "instances": 18,
+        "ms": {
+          "256x4": 0.046799998730421066,
+          "64x4": 0.07054400071501732,
+          "128x4": 0.05159999988973141,
+          "512x4": 0.09513599798083305,
+          "64x8": 0.12782400101423264,
+          "128x8": 0.0660960003733635,
+          "256x8": 0.04902399890124798,
+          "512x8": 0.076688002794981
+        },
+        "checks": {
+          "256x4": {
+            "finite": true,
+            "equal_baseline": true
+          },
+          "64x4": {
+            "finite": true,
+            "equal_baseline": true
+          },
+          "128x4": {
+            "finite": true,
+            "equal_baseline": true
+          },
+          "512x4": {
+            "finite": true,
+            "equal_baseline": true
+          },
+          "64x8": {
+            "finite": true,
+            "equal_baseline": true
+          },
+          "128x8": {
+            "finite": true,
+            "equal_baseline": true
+          },
+          "256x8": {
+            "finite": true,
+            "equal_baseline": true
+          },
+          "512x8": {
+            "finite": true,
+            "equal_baseline": true
+          }
+        }
+      },
+      {
+        "shape": [
+          16,
+          384,
+          832
+        ],
+        "instances": 18,
+        "ms": {
+          "256x4": 0.08649600297212601,
+          "64x4": 0.12971200048923492,
+          "128x4": 0.08673600107431412,
+          "512x4": 0.11072000116109848,
+          "64x8": 0.2338080033659935,
+          "128x8": 0.1130400002002716,
+          "256x8": 0.09343999996781349,
+          "512x8": 0.09227200224995613
+        },
+        "checks": {
+          "256x4": {
+            "finite": true,
+            "equal_baseline": true
+          },
+          "64x4": {
+            "finite": true,
+            "equal_baseline": true
+          },
+          "128x4": {
+            "finite": true,
+            "equal_baseline": true
+          },
+          "512x4": {
+            "finite": true,
+            "equal_baseline": true
+          },
+          "64x8": {
+            "finite": true,
+            "equal_baseline": true
+          },
+          "128x8": {
+            "finite": true,
+            "equal_baseline": true
+          },
+          "256x8": {
+            "finite": true,
+            "equal_baseline": true
+          },
+          "512x8": {
+            "finite": true,
+            "equal_baseline": true
+          }
+        }
+      },
+      {
+        "shape": [
+          16,
+          192,
+          1664
+        ],
+        "instances": 18,
+        "ms": {
+          "256x4": 0.0759199969470501,
+          "64x4": 0.12905599921941757,
+          "128x4": 0.08657599985599518,
+          "512x4": 0.11076800152659416,
+          "64x8": 0.23368000239133835,
+          "128x8": 0.11310399696230888,
+          "256x8": 0.08212799951434135,
+          "512x8": 0.0923360027372837
+        },
+        "checks": {
+          "256x4": {
+            "finite": true,
+            "equal_baseline": true
+          },
+          "64x4": {
+            "finite": true,
+            "equal_baseline": true
+          },
+          "128x4": {
+            "finite": true,
+            "equal_baseline": true
+          },
+          "512x4": {
+            "finite": true,
+            "equal_baseline": true
+          },
+          "64x8": {
+            "finite": true,
+            "equal_baseline": true
+          },
+          "128x8": {
+            "finite": true,
+            "equal_baseline": true
+          },
+          "256x8": {
+            "finite": true,
+            "equal_baseline": true
+          },
+          "512x8": {
+            "finite": true,
+            "equal_baseline": true
+          }
+        }
+      },
+      {
+        "shape": [
+          16,
+          96,
+          3328
+        ],
+        "instances": 18,
+        "ms": {
+          "256x4": 0.07631999999284744,
+          "64x4": 0.12937599420547485,
+          "128x4": 0.08683199808001518,
+          "512x4": 0.09748799726366997,
+          "64x8": 0.23393600434064865,
+          "128x8": 0.11286400258541107,
+          "256x8": 0.08260799944400787,
+          "512x8": 0.08224000036716461
+        },
+        "checks": {
+          "256x4": {
+            "finite": true,
+            "equal_baseline": true
+          },
+          "64x4": {
+            "finite": true,
+            "equal_baseline": true
+          },
+          "128x4": {
+            "finite": true,
+            "equal_baseline": true
+          },
+          "512x4": {
+            "finite": true,
+            "equal_baseline": true
+          },
+          "64x8": {
+            "finite": true,
+            "equal_baseline": true
+          },
+          "128x8": {
+            "finite": true,
+            "equal_baseline": true
+          },
+          "256x8": {
+            "finite": true,
+            "equal_baseline": true
+          },
+          "512x8": {
+            "finite": true,
+            "equal_baseline": true
+          }
+        }
+      },
+      {
+        "shape": [
+          16,
+          48,
+          6656
+        ],
+        "instances": 18,
+        "ms": {
+          "256x4": 0.07411199808120728,
+          "64x4": 0.12751999497413635,
+          "128x4": 0.0865279994904995,
+          "512x4": 0.09684799984097481,
+          "64x8": 0.23177599906921387,
+          "128x8": 0.11270400136709213,
+          "256x8": 0.08036800101399422,
+          "512x8": 0.08118399977684021
+        },
+        "checks": {
+          "256x4": {
+            "finite": true,
+            "equal_baseline": true
+          },
+          "64x4": {
+            "finite": true,
+            "equal_baseline": true
+          },
+          "128x4": {
+            "finite": true,
+            "equal_baseline": true
+          },
+          "512x4": {
+            "finite": true,
+            "equal_baseline": true
+          },
+          "64x8": {
+            "finite": true,
+            "equal_baseline": true
+          },
+          "128x8": {
+            "finite": true,
+            "equal_baseline": true
+          },
+          "256x8": {
+            "finite": true,
+            "equal_baseline": true
+          },
+          "512x8": {
+            "finite": true,
+            "equal_baseline": true
+          }
+        }
+      },
+      {
+        "shape": [
+          16,
+          24,
+          13312
+        ],
+        "instances": 19,
+        "ms": {
+          "256x4": 0.07412799820303917,
+          "64x4": 0.12759999930858612,
+          "128x4": 0.08622400090098381,
+          "512x4": 0.09411200135946274,
+          "64x8": 0.2319839969277382,
+          "128x8": 0.1114719994366169,
+          "256x8": 0.08022399991750717,
+          "512x8": 0.07840000092983246
+        },
+        "checks": {
+          "256x4": {
+            "finite": true,
+            "equal_baseline": true
+          },
+          "64x4": {
+            "finite": true,
+            "equal_baseline": true
+          },
+          "128x4": {
+            "finite": true,
+            "equal_baseline": true
+          },
+          "512x4": {
+            "finite": true,
+            "equal_baseline": true
+          },
+          "64x8": {
+            "finite": true,
+            "equal_baseline": true
+          },
+          "128x8": {
+            "finite": true,
+            "equal_baseline": true
+          },
+          "256x8": {
+            "finite": true,
+            "equal_baseline": true
+          },
+          "512x8": {
+            "finite": true,
+            "equal_baseline": true
+          }
+        }
+      }
+    ],
+    "total_baseline_ms_per_B16": 7.882095906883478,
+    "total_best_ms_per_B16": 7.882095906883478
+  },
+  "logic": {
+    "prefix_views": {
+      "matched_rows": 160,
+      "bitwise_code_PCM_and_state_identical": true
+    },
+    "kv_fusion": {
+      "matched_rows": 160,
+      "bitwise_code_PCM_and_state_identical": true
+    },
+    "cpu16": {
+      "matched_rows": 160,
+      "bitwise_code_PCM_and_state_identical": true
+    },
+    "late10": {
+      "matched_rows": 160,
+      "bitwise_code_PCM_and_state_identical": true
+    },
+    "burst1": {
+      "matched_rows": 160,
+      "bitwise_code_PCM_and_state_identical": true
+    },
+    "burst4": {
+      "matched_rows": 160,
+      "bitwise_code_PCM_and_state_identical": true
+    },
+    "burst1_late12": {
+      "requests": 160,
+      "bitwise_code_PCM_and_state_identical": true
+    },
+    "confirm_A1": {
+      "requests": 160,
+      "bitwise_code_PCM_and_state_identical": true
+    },
+    "confirm_B1": {
+      "requests": 160,
+      "bitwise_code_PCM_and_state_identical": true
+    },
+    "confirm_B2": {
+      "requests": 160,
+      "bitwise_code_PCM_and_state_identical": true
+    },
+    "confirm_A2": {
+      "requests": 160,
+      "bitwise_code_PCM_and_state_identical": true
+    }
+  }
+}

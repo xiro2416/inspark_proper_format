@@ -1,0 +1,144 @@
+{
+  "status": "formal_validation_complete_selected_target_fp8",
+  "gpu": 4,
+  "exclusive": true,
+  "warmups": 5,
+  "waves": 30,
+  "power_seconds": 15,
+  "rows": [
+    {
+      "name": "migration",
+      "source": "/workspace/inspark_mixed_b4/artifacts/mixed_b4/formal_migration.json",
+      "postadmission_ms": {
+        "n": 30,
+        "p50": 65.1533817872405,
+        "p95": 72.18684954568744,
+        "p99": 73.13194258138537,
+        "mean": 65.7415480663379,
+        "min": 59.292406775057316,
+        "max": 73.44956137239933
+      },
+      "including_admission_ms": {
+        "n": 30,
+        "p50": 65.75140496715903,
+        "p95": 72.71980824880302,
+        "p99": 73.67361600510776,
+        "mean": 66.31708728770415,
+        "min": 59.85981971025467,
+        "max": 73.98334052413702
+      },
+      "power_w": {
+        "n": 733,
+        "p50": 184.15,
+        "p95": 284.53,
+        "p99": 300.24,
+        "mean": 202.796207366985,
+        "min": 85.53,
+        "max": 319.44
+      },
+      "peak_memory_mib": 12629.0,
+      "peak_memory_gib": 12.3330078125,
+      "physical_rounds": 320,
+      "acceptance": 0.3857283326309875,
+      "requests": 120,
+      "waves": 30,
+      "fallbacks": 0,
+      "outliers_above_1_1_p95": []
+    },
+    {
+      "name": "all_f4",
+      "source": "/workspace/inspark_mixed_b4/artifacts/mixed_b4/formal_all_f4.json",
+      "postadmission_ms": {
+        "n": 30,
+        "p50": 60.935713816434145,
+        "p95": 69.12049162201583,
+        "p99": 73.4688016679138,
+        "mean": 61.442165138820805,
+        "min": 56.01873621344566,
+        "max": 74.79889318346977
+      },
+      "including_admission_ms": {
+        "n": 30,
+        "p50": 61.63180433213711,
+        "p95": 70.95978087745607,
+        "p99": 74.10181330516934,
+        "mean": 62.12993422523141,
+        "min": 56.650557555258274,
+        "max": 75.31539537012577
+      },
+      "power_w": {
+        "n": 734,
+        "p50": 181.24,
+        "p95": 275.1,
+        "p99": 282.59,
+        "mean": 194.9876430517711,
+        "min": 80.17,
+        "max": 283.05
+      },
+      "peak_memory_mib": 12663.0,
+      "peak_memory_gib": 12.3662109375,
+      "physical_rounds": 304,
+      "acceptance": 0.3857283326309875,
+      "requests": 120,
+      "waves": 30,
+      "fallbacks": 0,
+      "outliers_above_1_1_p95": []
+    },
+    {
+      "name": "target_fp8",
+      "source": "/workspace/inspark_mixed_b4/artifacts/mixed_b4/formal_target_fp8.json",
+      "postadmission_ms": {
+        "n": 30,
+        "p50": 56.93880328908563,
+        "p95": 65.83752534352243,
+        "p99": 67.93215834535658,
+        "mean": 57.57350899899999,
+        "min": 47.44953755289316,
+        "max": 68.32518149167299
+      },
+      "including_admission_ms": {
+        "n": 30,
+        "p50": 57.51641048118472,
+        "p95": 66.39563110657035,
+        "p99": 68.45282189548016,
+        "mean": 58.13375919436415,
+        "min": 48.20318054407835,
+        "max": 68.82605142891407
+      },
+      "power_w": {
+        "n": 736,
+        "p50": 198.8,
+        "p95": 269.94,
+        "p99": 290.44,
+        "mean": 212.05558423913044,
+        "min": 80.61,
+        "max": 290.62
+      },
+      "peak_memory_mib": 13841.0,
+      "peak_memory_gib": 13.5166015625,
+      "physical_rounds": 325,
+      "acceptance": 0.37918367346938775,
+      "requests": 120,
+      "waves": 30,
+      "fallbacks": 0,
+      "outliers_above_1_1_p95": []
+    }
+  ],
+  "gains": {
+    "scheduling_p50_percent": 6.4734444400433855,
+    "target_precision_p50_percent": 6.559224922496216,
+    "combined_p50_percent": 12.60806158148433
+  },
+  "outliers_deleted": false,
+  "selected_precision_counts": {
+    "nvfp4": 63,
+    "fp8": 164,
+    "bf16": 90
+  },
+  "selected_deployment": "/workspace/inspark_mixed_b4/artifacts/mixed_b4/selected_deployment.json",
+  "runtime_config": "/workspace/inspark_mixed_b4/artifacts/mixed_b4/runtime.yaml",
+  "selected_calibration": "/workspace/inspark_mixed_b4/artifacts/mixed_b4/optimization/ar_fp8/target_only_calibration.json",
+  "selected_kept_reason": "P50/P95/P99 improve over same-scheduling allF4;6.56%P50 exceeds observed shortprobe drift, allzero fallback; no extra measurement needed",
+  "gpu_work_stopped": true,
+  "remaining": "Parent portable/packedweight/publication integration only"
+}

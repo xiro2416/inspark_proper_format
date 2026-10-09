@@ -1,0 +1,16 @@
+# Mixed B4 migration
+
+Source: `reports/current/mixed_precision` B64 frozen mixed weights/calibration. Target: exact B4 on physical GPU4, exclusive lease; TRT11.3.0.99/Torch2.13 CUDA13.2. Hardware `/workspace/.codex/skills/gpu_parameters/rtx6000d-sm120.md`:156SM/112MiB L2/83GiB/600W. User authorizes three separate migration agents; this agent only GPU4. No new math/no recalibration/no source edits/no publication.
+
+Inherited:135NVFP4/92FP8/90BF16 protected roles, Draftonline900/CFM800 fourstep, Target official Attention, direct FP8Conv Vocode109FP32FIR, KV80/headmajor/requestPCG/commit, RNN zero round state, compiled RNN/2round Graph, prefixKV/latent suffix reuse, admission packing, CPU8/conditionstreams2/staticGCguard. B128 microbatch/ARcompaction inapplicable. Baseline adapts all8 exact static engines before application stack. L5FULL/aux0/tacticsauto/TimingCache; CFM L2=56MiB, othersauto. Source timingcache copied writable, source calibration copied bytewise; all caches isolated.
+
+Correctness: operation logic/ownership/masks/commit/EOS/ABI; report floating differences with no fixedL2gate. Evaluation existing128 bilingual texts/four3secVADrefs, no repeated-textreuse. Minimal realwave then3warm10wave baseline, acoustic andARfrozen-reference audit. Power/final5warm30wave deferred to coordinator exclusivewindow. Optimization waits until all three migrations validated.
+
+Current: migration validated;8 exactB4engines built+executed finite, zero fallback realwaves. ShortdiagnosticP50/P95/P99=67.45/70.01/70.80ms (notcoordinatedfinal);4uniquePCM/saturation0. CFM native168F4+64F8,Vocode72F8+109FP32FIR; four lowprecision ups2–5 ConvTranspose remainFP32deconv as sourceB64, detailedproof deconv_precision_evidence.json. Acoustic+ARaudits finite/logicchecked, no fixedL2gate. See MIGRATION.md/native_coverage.json/floating_audit.json/summary.json. GPU4work stopped; waitparentphase2gate. Reproduce `python artifacts/mixed_b4/migrate.py`; native/export environments in script; logs/history and migration_status.json under artifacts/mixed_b4. Next: parentmigrationgate, thenprofile smallbatch fixedcost and inheritedFloatdeconv before focusedoptimization.
+
+
+## Optimization handoff
+Selected targetFP8+CPU4+burst1+late8+existingKV/prefillviewfusion;63F4/164F8/90BF16. ExactTarget4newplans, Draft/context/CFM/Voco originalB4. Short20wave selected59.01ms vs same-schedulingF4 controls62.80/60.78, hostdriftneedsparentexclusivecheck; originalmigration67.45ms. All8IO finite/zero realfallback;AR/acoustic auditscompleted;4uniquePCM/no saturation. Nativecoverage/precisionidentity and fullreport OPTIMIZATION.md/optimization_summary.json. RejectConditionGraph (real74hits butslower),burst4;norm/GELU/Attention/FIR/KVfusion review done. Floatdeconv~0.133ms/wave andDraftremainingonlyfewms, obeyuserstoprule. GPU4stopped, final5/30+power15/publish parentonly. Source/backup preserved.
+
+
+Formalexclusive window completed: migration65.15/72.19/73.13ms→allF4scheduled60.94/69.12/73.47→selected56.94/65.84/67.93;combinedP50gain12.61%,pureTargetprecisiongain6.56%. Selectedincludingadmission57.52/66.40/68.45ms,power198.80/269.94/290.44W,peak13.52GiB. Allzero fallback, all30wavesretained/no>P95×1.1latencyoutlier, GPU4free. formal_summary.json/RESULTS.md supersede shortparallelmetrics. Parentpackaging/publication only remains.

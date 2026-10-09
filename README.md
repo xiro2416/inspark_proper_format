@@ -9,7 +9,7 @@ ZipVoice-Distill 的 A_1007 INT8 B1/B2/B4/B8/B16/B32/B64 使用独立环境和�
 | FP8 E4M3FN，1:3保护策略 | 1、8、64、128 |
 | INT8 SmoothQuant，alpha=1.0，同一保护策略 | 1、8、64 |
 | NVFP4 E2M1，沿用同一保护策略 | 64 |
-| NVFP4 GEMM + FP8 Conv，同一保护策略 | 64、128 |
+| NVFP4/FP8 混合，同一BF16保护策略 | 4、16、32、64、128 |
 
 ## 执行方案
 
@@ -97,3 +97,17 @@ inspark fetch --asset-dir ./mixed128_assets --precision nvfp4_fp8 --batch 128
 ## ZipVoice SM120 FP8 B128 续迁移
 
 B128沿用冻结模型与量化尺度，先迁移验收，再进行优化；不拆分模型batch。原七档保持独立。性能、质量、功耗、部署和证据见 [B128报告](docs/zipvoice-sm120-fp8-b128.md)。
+
+## 混合精度 B4 / B16 / B32
+
+三档按独立GPU并行迁移，再优化，最终使用排他窗口测量：预热5波、30波首chunk、另15秒功率。受理后P50分别56.94/105.83/155.72ms。权重仍为Draft900/CFM800、完整四步；CPU/KV/prefill/Graph选择按batch实测，未套用B128特有微批。
+
+B4原生GEMM候选比较后Target采用FP8，Draft/CFM继续NVFP4，Vocoder低精度角色FP8：63NVFP4/164FP8/90BF16。专属权重在HF `nvfp4_fp8/b4/`，避免与原135/92/90混用；B16/B32仍复用原混合权重。四个ConvTranspose虽FP8Q/DQ、实际TRT是FP32 deconv的源例外已在覆盖报告中列出。
+
+```bash
+inspark fetch --asset-dir ./mixed4_assets --precision nvfp4_fp8 --batch 4
+inspark fetch --asset-dir ./mixed16_assets --precision nvfp4_fp8 --batch 16
+inspark fetch --asset-dir ./mixed32_assets --precision nvfp4_fp8 --batch 32
+```
+
+完整参数、功率/显存/P95/P99、浮点审计和拒绝候选见[三档汇总](reports/current/mixed_small_batches/RESULTS.md)。引擎包和最新未量化加载权重由fetch下载并校验，Graph在新进程捕获；如自行使用低精度safetensors，需配套role/layout/scale manifest。

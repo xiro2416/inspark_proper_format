@@ -1,0 +1,5433 @@
+{
+  "phase": "migration_validated_waiting_all_batches_barrier",
+  "batch": 32,
+  "gpu": 6,
+  "identity": {
+    "source_calibration_sha256": "c568cbebe6e26b31169c57a988db84e2be16e38abd02daa02153c43028e6c4e0",
+    "target_calibration_sha256": "c568cbebe6e26b31169c57a988db84e2be16e38abd02daa02153c43028e6c4e0",
+    "roles": {
+      "bf16": 90,
+      "nvfp4": 135,
+      "fp8": 92
+    },
+    "gpu": "6, GPU-9fd98d5c-be68-58a2-086c-26f6d5e59aa1, NVIDIA RTX 6000D, 600.00 W, 2430 MHz, 85651 MiB",
+    "timing_cache_policy": "fresh independent full search; no copied source cache",
+    "measurement": "parallel provisional migration run; final exclusive run pending parent"
+  },
+  "warmups": 3,
+  "waves": 10,
+  "power_seconds": 0,
+  "execution_pass": true,
+  "latency": {
+    "n": 10,
+    "p50": 159.15940329432487,
+    "p95": 163.92247546464205,
+    "p99": 164.88736528903246,
+    "mean": 159.09032337367535,
+    "min": 153.5643683746457,
+    "max": 165.12858774513006
+  },
+  "latency_including_admission": {
+    "n": 10,
+    "p50": 161.54845710843801,
+    "p95": 165.73615269735456,
+    "p99": 166.68187210336328,
+    "mean": 161.30106337368488,
+    "min": 155.43273463845253,
+    "max": 166.91830195486546
+  },
+  "memory_peak_GiB": 15.6767578125,
+  "acceptance_rate": 0.3853281853281853,
+  "counters": {
+    "device_round_attempts": 10,
+    "device_round_successes": 10,
+    "device_round_fallbacks": 0,
+    "device_round_status_reads": 64,
+    "device_round_status_wait_ms": 551.2695098295808,
+    "device_round_launched_rounds": 124,
+    "device_target_steps": 124,
+    "device_draft_steps": 0,
+    "native_target_steps": 124,
+    "native_draft_steps": 130,
+    "native_cfm_fallbacks": 0,
+    "native_vocoder_fallbacks": 0,
+    "device_code_direct_rows": 320,
+    "speech_codes_host_rows": 0,
+    "output_d2h_bytes": 7293160,
+    "output_d2h_wait_ms": 597.7374315261841,
+    "output_d2h_transfer_ms": 0.4520320035517216,
+    "device_round_fallback_reasons": {},
+    "head_graph_hits": {
+      "cfm": 10,
+      "vocoder": 10
+    },
+    "unified_dspark": {
+      "calls": 10,
+      "failures": 0,
+      "graph_replays": 64,
+      "launched_rounds": 124,
+      "status_reads": 64,
+      "status_wait_ms": 551.2695098295808,
+      "draft_enqueues": 130,
+      "target_enqueues": 124,
+      "prime_enqueues": 10
+    },
+    "unified_prefix": {
+      "hits": {
+        "prefill": 10,
+        "latent": 10
+      },
+      "tail_eager": {
+        "prefill": 0,
+        "latent": 0
+      },
+      "graph_hits": {
+        "prefill": 10,
+        "latent": 0
+      },
+      "direct_hits": {
+        "prefill": 0,
+        "latent": 0
+      }
+    }
+  },
+  "diagnostic_stage_ms": {
+    "unified/stage/cfm4": 28.240703582763672,
+    "unified/stage/condition": 0.17375699919648468,
+    "unified/stage/condition_group": 1.5453894640270032,
+    "unified/stage/latent": 7.325999975204468,
+    "unified/stage/prefill": 21.805776596069336,
+    "unified/stage/text_prepare": 13.746047973632812,
+    "unified/stage/unified_dspark": 68.92436981201172,
+    "unified/stage/vocoder": 36.66110420227051
+  },
+  "hot_kernels_ms_two_profiled_waves": [
+    [
+      "_tiled",
+      30.068677000000008
+    ],
+    [
+      "cutlass3x_sm120_bstensorop_s16864gemm_block_scaled_ue4m3xe2m1_ue4m3xe2m1_f32_f16_f16_128x128x128_1x1x1_0_tnn_align32_o_vs16_pingpong_bias_f16_relu",
+      24.166987999999918
+    ],
+    [
+      "sm86_xmma_fprop_implicit_gemm_bf16bf16_bf16f32_f32_nhwckrsc_nhwc_tilesize256x64x32_stage2_warpsize4x1x1_g1_tensor16x8x16_execute_kernel_trt",
+      10.404240999999997
+    ],
+    [
+      "cutlass3x_sm120_bstensorop_s16864gemm_block_scaled_ue4m3xe2m1_ue4m3xe2m1_f32_f16_f16_128x128x256_1x1x1_0_tnn_align32_o_vs16_bias_f16_relu_stream_k",
+      9.547822999999998
+    ],
+    [
+      "sm86_xmma_fprop_implicit_gemm_bf16bf16_bf16f32_f32_nhwckrsc_nhwc_tilesize128x128x32_stage3_warpsize2x2x1_g1_tensor16x8x16_execute_kernel_trt",
+      6.697338999999999
+    ],
+    [
+      "sm80_xmma_gemm_f32f32_f32f32_f32_nn_n_tilesize64x256x8_stage3_warpsize1x4x1_ffma_aligna4_alignc4_execute_kernel_trt",
+      5.8395790000000005
+    ],
+    [
+      "__myl_CastAddReshSlicCastReshTranConcSlicCastReshTranConcSlicCastReshTranReshMoveReshReshMoveMoveEtc_0x7f1c5d015479c0ce99e6bc2007720ff7",
+      5.325239999999993
+    ],
+    [
+      "sm80_xmma_gemm_bf16bf16_bf16f32_f32_tn_n_tilesize128x256x32_stage3_warpsize2x4x1_tensor16x8x16_execute_kernel_trt",
+      4.698385999999999
+    ],
+    [
+      "sm80_xmma_gemm_bf16bf16_bf16f32_f32_tn_n_tilesize96x64x32_stage3_warpsize2x2x1_tensor16x8x16_execute_kernel_trt",
+      4.646932999999999
+    ],
+    [
+      "void cutlass::Kernel2<cutlass_80_simt_sgemm_128x256_8x4_tn_align1>(cutlass_80_simt_sgemm_128x256_8x4_tn_align1::Params)",
+      4.465175
+    ],
+    [
+      "_gemm_mha_v2_0x823fb2706bec927f5c05195a33a245f7",
+      4.399190000000001
+    ],
+    [
+      "sm80_xmma_gemm_f16f16_f16f16_f16_nn_n_tilesize256x128x32_stage3_warpsize4x2x1_tensor16x8x16_execute_kernel_trt",
+      4.227702
+    ],
+    [
+      "sm89_xmma_fprop_implicit_gemm_e4m3f32_e4m3f32_f32_nhwckrsc_nhwc_tilesize128x64x64_stage4_warpsize2x2x1_g1_tensor16x8x32_bias_f32_execute_kernel_trt",
+      4.1684969999999995
+    ],
+    [
+      "sm80_xmma_gemm_bf16bf16_bf16f32_f32_tn_n_tilesize96x128x32_stage4_warpsize2x2x1_tensor16x8x16_execute_kernel_trt",
+      4.0974330000000005
+    ],
+    [
+      "_gemm_mha_v2_0x744b5be0d4eaf934439b4f4840b33d4a",
+      4.086009000000006
+    ],
+    [
+      "void cutlass::Kernel2<cutlass_100_simt_cgemm_32x32_16x5_nt_align1>(cutlass_100_simt_cgemm_32x32_16x5_nt_align1::Params)",
+      3.9074700000000004
+    ],
+    [
+      "sm80_xmma_gemm_bf16bf16_bf16f32_f32_tn_n_tilesize64x64x64_stage4_warpsize2x2x1_tensor16x8x16_execute_kernel_trt",
+      3.3956350000000026
+    ],
+    [
+      "__myl_CastAddAddMeanSubMulMeanAddSqrtDivMulMulAddCastResh_0x4b06c4e6a876f3050b70ac7c15e818de",
+      3.0840879999999955
+    ],
+    [
+      "void at::native::elementwise_kernel<128, 2, at::native::gpu_kernel_impl_nocast<at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#3}::operator()() const::{lambda()#7}::operator()() const::{lambda(float)#1}>(at::TensorIteratorBase&, at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#3}::operator()() const::{lambda()#7}::operator()() const::{lambda(float)#1} const&)::{lambda(int)#1}>(int, at::native::gpu_kernel_impl_nocast<at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#3}::operator()() const::{lambda()#7}::operator()() const::{lambda(float)#1}>(at::TensorIteratorBase&, at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#3}::operator()() const::{lambda()#7}::operator()() const::{lambda(float)#1} const&)::{lambda(int)#1})",
+      2.9522920000000097
+    ],
+    [
+      "void magma_sgemmEx_kernel<float, float, float, true, false, 6, 4, 6, 3, 4>(int, int, int, BatchedTensor, int, BatchedTensor, int, BatchedTensor, int, BatchedTensor, int, int, int, float const*, float const*, float, float, int, cublasLtEpilogue_t, int, void const*, long)",
+      2.7479100000000005
+    ]
+  ],
+  "deconv_ms_two_profiled_waves": 1.457287,
+  "native_coverage": {
+    "draft": {
+      "batch": 32,
+      "kind": "backbone",
+      "frames": 7,
+      "kv_limit": 80,
+      "prompt_frames": null,
+      "precision": "nvfp4_fp8_fp32_interfaces",
+      "sha256": "5275d390512251528ec21c694177d8a93ade8f2a6e17ce62c7df3b5a411199e2",
+      "bytes": 104510588,
+      "build_seconds": 11.992490117438138,
+      "optimization_level": 5,
+      "tiling_optimization_level": "full",
+      "actual_aux_streams": 0,
+      "effective_l2_limit_for_tiling": 117440512,
+      "workspace_limit_bytes": 89173131264,
+      "tactic_shared_memory_limit_bytes": 1073741824,
+      "plan": "/workspace/inspark_mixed_b32/artifacts/mixed_b32/draft/model.plan.json",
+      "native_fp4_gemm_layers": 12,
+      "native_fp8_conv_layers": 0,
+      "existing_fir_plugin_layers": 0,
+      "deconvolution_actual_layers": [],
+      "layer_type_counts": {
+        "custom_layer": 2,
+        "kgen": 59,
+        "gemm": 23
+      },
+      "tensors": [
+        {
+          "name": "x",
+          "shape": [
+            32,
+            7,
+            1280
+          ],
+          "dtype": "DataType.FLOAT",
+          "mode": "TensorIOMode.INPUT"
+        },
+        {
+          "name": "mask",
+          "shape": [
+            32,
+            1,
+            7,
+            87
+          ],
+          "dtype": "DataType.BOOL",
+          "mode": "TensorIOMode.INPUT"
+        },
+        {
+          "name": "k_cache_0",
+          "shape": [
+            32,
+            20,
+            80,
+            64
+          ],
+          "dtype": "DataType.FLOAT",
+          "mode": "TensorIOMode.INPUT"
+        },
+        {
+          "name": "v_cache_0",
+          "shape": [
+            32,
+            20,
+            80,
+            64
+          ],
+          "dtype": "DataType.FLOAT",
+          "mode": "TensorIOMode.INPUT"
+        },
+        {
+          "name": "k_cache_1",
+          "shape": [
+            32,
+            20,
+            80,
+            64
+          ],
+          "dtype": "DataType.FLOAT",
+          "mode": "TensorIOMode.INPUT"
+        },
+        {
+          "name": "v_cache_1",
+          "shape": [
+            32,
+            20,
+            80,
+            64
+          ],
+          "dtype": "DataType.FLOAT",
+          "mode": "TensorIOMode.INPUT"
+        },
+        {
+          "name": "k_cache_2",
+          "shape": [
+            32,
+            20,
+            80,
+            64
+          ],
+          "dtype": "DataType.FLOAT",
+          "mode": "TensorIOMode.INPUT"
+        },
+        {
+          "name": "v_cache_2",
+          "shape": [
+            32,
+            20,
+            80,
+            64
+          ],
+          "dtype": "DataType.FLOAT",
+          "mode": "TensorIOMode.INPUT"
+        },
+        {
+          "name": "hidden",
+          "shape": [
+            32,
+            7,
+            1280
+          ],
+          "dtype": "DataType.FLOAT",
+          "mode": "TensorIOMode.OUTPUT"
+        },
+        {
+          "name": "base",
+          "shape": [
+            32,
+            7,
+            8194
+          ],
+          "dtype": "DataType.FLOAT",
+          "mode": "TensorIOMode.OUTPUT"
+        }
+      ],
+      "quantization_recipe": {
+        "scheme": "nvfp4_fp8",
+        "calibration": {
+          "role": "calibration_artifact",
+          "path": "/workspace/inspark_mixed_b32/artifacts/mixed_b32/calibration.json",
+          "sha256": "c568cbebe6e26b31169c57a988db84e2be16e38abd02daa02153c43028e6c4e0",
+          "bytes": 891997
+        },
+        "role_manifest": {
+          "roles": [
+            {
+              "path": "draft.blocks.0.q_proj",
+              "component": "draft",
+              "precision": "bf16"
+            },
+            {
+              "path": "draft.blocks.0.k_proj",
+              "component": "draft",
+              "precision": "bf16"
+            },
+            {
+              "path": "draft.blocks.0.v_proj",
+              "component": "draft",
+              "precision": "bf16"
+            },
+            {
+              "path": "draft.blocks.0.o_proj",
+              "component": "draft",
+              "precision": "bf16"
+            },
+            {
+              "path": "draft.blocks.0.mlp.0",
+              "component": "draft",
+              "precision": "bf16"
+            },
+            {
+              "path": "draft.blocks.0.mlp.2",
+              "component": "draft",
+              "precision": "bf16"
+            },
+            {
+              "path": "draft.blocks.1.q_proj",
+              "component": "draft",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "draft.blocks.1.k_proj",
+              "component": "draft",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "draft.blocks.1.v_proj",
+              "component": "draft",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "draft.blocks.1.o_proj",
+              "component": "draft",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "draft.blocks.1.mlp.0",
+              "component": "draft",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "draft.blocks.1.mlp.2",
+              "component": "draft",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "draft.blocks.2.q_proj",
+              "component": "draft",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "draft.blocks.2.k_proj",
+              "component": "draft",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "draft.blocks.2.v_proj",
+              "component": "draft",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "draft.blocks.2.o_proj",
+              "component": "draft",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "draft.blocks.2.mlp.0",
+              "component": "draft",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "draft.blocks.2.mlp.2",
+              "component": "draft",
+              "precision": "nvfp4"
+            }
+          ]
+        },
+        "role_specs_sha256": "e09fe79784a66475b7ea436fe14fcf864a0e8c587bcd878863a5ec6d3265676b"
+      }
+    },
+    "context": {
+      "batch": 32,
+      "kind": "context_kv",
+      "frames": 8,
+      "kv_limit": 80,
+      "prompt_frames": null,
+      "precision": "nvfp4_fp8_fp32_interfaces",
+      "sha256": "161b2bee6daeb8fb4993d41e1c875c351e994f47d3d755acdcbca88b517b7948",
+      "bytes": 3817884,
+      "build_seconds": 3.3659050129354,
+      "optimization_level": 5,
+      "tiling_optimization_level": "full",
+      "actual_aux_streams": 0,
+      "effective_l2_limit_for_tiling": 117440512,
+      "workspace_limit_bytes": 89173131264,
+      "tactic_shared_memory_limit_bytes": 1073741824,
+      "plan": "/workspace/inspark_mixed_b32/artifacts/mixed_b32/context/model.plan.json",
+      "native_fp4_gemm_layers": 4,
+      "native_fp8_conv_layers": 0,
+      "existing_fir_plugin_layers": 0,
+      "deconvolution_actual_layers": [],
+      "layer_type_counts": {
+        "custom_layer": 2,
+        "kgen": 4,
+        "gemm": 4
+      },
+      "tensors": [
+        {
+          "name": "projected_context",
+          "shape": [
+            256,
+            1280
+          ],
+          "dtype": "DataType.FLOAT",
+          "mode": "TensorIOMode.INPUT"
+        },
+        {
+          "name": "keys",
+          "shape": [
+            256,
+            2,
+            20,
+            64
+          ],
+          "dtype": "DataType.FLOAT",
+          "mode": "TensorIOMode.OUTPUT"
+        },
+        {
+          "name": "values",
+          "shape": [
+            256,
+            2,
+            20,
+            64
+          ],
+          "dtype": "DataType.FLOAT",
+          "mode": "TensorIOMode.OUTPUT"
+        }
+      ],
+      "quantization_recipe": {
+        "scheme": "nvfp4_fp8",
+        "calibration": {
+          "role": "calibration_artifact",
+          "path": "/workspace/inspark_mixed_b32/artifacts/mixed_b32/calibration.json",
+          "sha256": "c568cbebe6e26b31169c57a988db84e2be16e38abd02daa02153c43028e6c4e0",
+          "bytes": 891997
+        },
+        "role_manifest": {
+          "roles": [
+            {
+              "path": "draft.blocks.0.q_proj",
+              "component": "draft",
+              "precision": "bf16"
+            },
+            {
+              "path": "draft.blocks.0.k_proj",
+              "component": "draft",
+              "precision": "bf16"
+            },
+            {
+              "path": "draft.blocks.0.v_proj",
+              "component": "draft",
+              "precision": "bf16"
+            },
+            {
+              "path": "draft.blocks.0.o_proj",
+              "component": "draft",
+              "precision": "bf16"
+            },
+            {
+              "path": "draft.blocks.0.mlp.0",
+              "component": "draft",
+              "precision": "bf16"
+            },
+            {
+              "path": "draft.blocks.0.mlp.2",
+              "component": "draft",
+              "precision": "bf16"
+            },
+            {
+              "path": "draft.blocks.1.q_proj",
+              "component": "draft",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "draft.blocks.1.k_proj",
+              "component": "draft",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "draft.blocks.1.v_proj",
+              "component": "draft",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "draft.blocks.1.o_proj",
+              "component": "draft",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "draft.blocks.1.mlp.0",
+              "component": "draft",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "draft.blocks.1.mlp.2",
+              "component": "draft",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "draft.blocks.2.q_proj",
+              "component": "draft",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "draft.blocks.2.k_proj",
+              "component": "draft",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "draft.blocks.2.v_proj",
+              "component": "draft",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "draft.blocks.2.o_proj",
+              "component": "draft",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "draft.blocks.2.mlp.0",
+              "component": "draft",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "draft.blocks.2.mlp.2",
+              "component": "draft",
+              "precision": "nvfp4"
+            }
+          ]
+        },
+        "role_specs_sha256": "e09fe79784a66475b7ea436fe14fcf864a0e8c587bcd878863a5ec6d3265676b"
+      }
+    },
+    "prefill": {
+      "batch": 32,
+      "kind": "prefill",
+      "frames": 48,
+      "kv_limit": 80,
+      "prompt_frames": null,
+      "precision": "nvfp4_fp8_fp32_interfaces",
+      "sha256": "6601b36e654769884382ba8544c3cdff0de7e363b48fbd399eae84314ef2e309",
+      "bytes": 483844604,
+      "build_seconds": 36.96759701427072,
+      "optimization_level": 5,
+      "tiling_optimization_level": "full",
+      "actual_aux_streams": 0,
+      "effective_l2_limit_for_tiling": 117440512,
+      "workspace_limit_bytes": 89173131264,
+      "tactic_shared_memory_limit_bytes": 1073741824,
+      "plan": "/workspace/inspark_mixed_b32/artifacts/mixed_b32/prefill/model.plan.json",
+      "native_fp4_gemm_layers": 72,
+      "native_fp8_conv_layers": 0,
+      "existing_fir_plugin_layers": 0,
+      "deconvolution_actual_layers": [],
+      "layer_type_counts": {
+        "custom_layer": 2,
+        "kgen": 384,
+        "gemm": 135,
+        "fusion": 10
+      },
+      "tensors": [
+        {
+          "name": "x",
+          "shape": [
+            32,
+            48,
+            1280
+          ],
+          "dtype": "DataType.FLOAT",
+          "mode": "TensorIOMode.INPUT"
+        },
+        {
+          "name": "keep",
+          "shape": [
+            32,
+            48
+          ],
+          "dtype": "DataType.INT64",
+          "mode": "TensorIOMode.INPUT"
+        },
+        {
+          "name": "last_logits",
+          "shape": [
+            32,
+            1,
+            8194
+          ],
+          "dtype": "DataType.FLOAT",
+          "mode": "TensorIOMode.OUTPUT"
+        },
+        {
+          "name": "packed_kv",
+          "shape": [
+            24,
+            2,
+            32,
+            20,
+            48,
+            64
+          ],
+          "dtype": "DataType.FLOAT",
+          "mode": "TensorIOMode.OUTPUT"
+        },
+        {
+          "name": "selected",
+          "shape": [
+            32,
+            48,
+            6400
+          ],
+          "dtype": "DataType.FLOAT",
+          "mode": "TensorIOMode.OUTPUT"
+        },
+        {
+          "name": "final",
+          "shape": [
+            32,
+            48,
+            1280
+          ],
+          "dtype": "DataType.FLOAT",
+          "mode": "TensorIOMode.OUTPUT"
+        }
+      ],
+      "quantization_recipe": {
+        "scheme": "nvfp4_fp8",
+        "calibration": {
+          "role": "calibration_artifact",
+          "path": "/workspace/inspark_mixed_b32/artifacts/mixed_b32/calibration.json",
+          "sha256": "c568cbebe6e26b31169c57a988db84e2be16e38abd02daa02153c43028e6c4e0",
+          "bytes": 891997
+        },
+        "role_manifest": {
+          "roles": [
+            {
+              "path": "target.blocks.0.attn.c_attn",
+              "component": "target",
+              "precision": "bf16"
+            },
+            {
+              "path": "target.blocks.0.attn.c_proj",
+              "component": "target",
+              "precision": "bf16"
+            },
+            {
+              "path": "target.blocks.0.mlp.c_fc",
+              "component": "target",
+              "precision": "bf16"
+            },
+            {
+              "path": "target.blocks.0.mlp.c_proj",
+              "component": "target",
+              "precision": "bf16"
+            },
+            {
+              "path": "target.blocks.1.attn.c_attn",
+              "component": "target",
+              "precision": "bf16"
+            },
+            {
+              "path": "target.blocks.1.attn.c_proj",
+              "component": "target",
+              "precision": "bf16"
+            },
+            {
+              "path": "target.blocks.1.mlp.c_fc",
+              "component": "target",
+              "precision": "bf16"
+            },
+            {
+              "path": "target.blocks.1.mlp.c_proj",
+              "component": "target",
+              "precision": "bf16"
+            },
+            {
+              "path": "target.blocks.2.attn.c_attn",
+              "component": "target",
+              "precision": "bf16"
+            },
+            {
+              "path": "target.blocks.2.attn.c_proj",
+              "component": "target",
+              "precision": "bf16"
+            },
+            {
+              "path": "target.blocks.2.mlp.c_fc",
+              "component": "target",
+              "precision": "bf16"
+            },
+            {
+              "path": "target.blocks.2.mlp.c_proj",
+              "component": "target",
+              "precision": "bf16"
+            },
+            {
+              "path": "target.blocks.3.attn.c_attn",
+              "component": "target",
+              "precision": "bf16"
+            },
+            {
+              "path": "target.blocks.3.attn.c_proj",
+              "component": "target",
+              "precision": "bf16"
+            },
+            {
+              "path": "target.blocks.3.mlp.c_fc",
+              "component": "target",
+              "precision": "bf16"
+            },
+            {
+              "path": "target.blocks.3.mlp.c_proj",
+              "component": "target",
+              "precision": "bf16"
+            },
+            {
+              "path": "target.blocks.4.attn.c_attn",
+              "component": "target",
+              "precision": "bf16"
+            },
+            {
+              "path": "target.blocks.4.attn.c_proj",
+              "component": "target",
+              "precision": "bf16"
+            },
+            {
+              "path": "target.blocks.4.mlp.c_fc",
+              "component": "target",
+              "precision": "bf16"
+            },
+            {
+              "path": "target.blocks.4.mlp.c_proj",
+              "component": "target",
+              "precision": "bf16"
+            },
+            {
+              "path": "target.blocks.5.attn.c_attn",
+              "component": "target",
+              "precision": "bf16"
+            },
+            {
+              "path": "target.blocks.5.attn.c_proj",
+              "component": "target",
+              "precision": "bf16"
+            },
+            {
+              "path": "target.blocks.5.mlp.c_fc",
+              "component": "target",
+              "precision": "bf16"
+            },
+            {
+              "path": "target.blocks.5.mlp.c_proj",
+              "component": "target",
+              "precision": "bf16"
+            },
+            {
+              "path": "target.blocks.6.attn.c_attn",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.6.attn.c_proj",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.6.mlp.c_fc",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.6.mlp.c_proj",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.7.attn.c_attn",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.7.attn.c_proj",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.7.mlp.c_fc",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.7.mlp.c_proj",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.8.attn.c_attn",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.8.attn.c_proj",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.8.mlp.c_fc",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.8.mlp.c_proj",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.9.attn.c_attn",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.9.attn.c_proj",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.9.mlp.c_fc",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.9.mlp.c_proj",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.10.attn.c_attn",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.10.attn.c_proj",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.10.mlp.c_fc",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.10.mlp.c_proj",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.11.attn.c_attn",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.11.attn.c_proj",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.11.mlp.c_fc",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.11.mlp.c_proj",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.12.attn.c_attn",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.12.attn.c_proj",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.12.mlp.c_fc",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.12.mlp.c_proj",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.13.attn.c_attn",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.13.attn.c_proj",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.13.mlp.c_fc",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.13.mlp.c_proj",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.14.attn.c_attn",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.14.attn.c_proj",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.14.mlp.c_fc",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.14.mlp.c_proj",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.15.attn.c_attn",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.15.attn.c_proj",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.15.mlp.c_fc",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.15.mlp.c_proj",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.16.attn.c_attn",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.16.attn.c_proj",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.16.mlp.c_fc",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.16.mlp.c_proj",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.17.attn.c_attn",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.17.attn.c_proj",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.17.mlp.c_fc",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.17.mlp.c_proj",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.18.attn.c_attn",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.18.attn.c_proj",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.18.mlp.c_fc",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.18.mlp.c_proj",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.19.attn.c_attn",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.19.attn.c_proj",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.19.mlp.c_fc",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.19.mlp.c_proj",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.20.attn.c_attn",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.20.attn.c_proj",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.20.mlp.c_fc",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.20.mlp.c_proj",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.21.attn.c_attn",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.21.attn.c_proj",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.21.mlp.c_fc",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.21.mlp.c_proj",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.22.attn.c_attn",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.22.attn.c_proj",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.22.mlp.c_fc",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.22.mlp.c_proj",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.23.attn.c_attn",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.23.attn.c_proj",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.23.mlp.c_fc",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.23.mlp.c_proj",
+              "component": "target",
+              "precision": "nvfp4"
+            }
+          ]
+        },
+        "role_specs_sha256": "ad45359cddbdb973f864e49b1d62b958a8440627ed14869bed939ae7403f7ede"
+      }
+    },
+    "latent": {
+      "batch": 32,
+      "kind": "latent",
+      "frames": 80,
+      "kv_limit": 80,
+      "prompt_frames": null,
+      "precision": "nvfp4_fp8_fp32_interfaces",
+      "sha256": "ce3fe1b700a0483d23de1ff94cb34781658379287fbeb6123396d35c76c6211d",
+      "bytes": 440807444,
+      "build_seconds": 29.388106564059854,
+      "optimization_level": 5,
+      "tiling_optimization_level": "full",
+      "actual_aux_streams": 0,
+      "effective_l2_limit_for_tiling": 117440512,
+      "workspace_limit_bytes": 89173131264,
+      "tactic_shared_memory_limit_bytes": 1073741824,
+      "plan": "/workspace/inspark_mixed_b32/artifacts/mixed_b32/latent/model.plan.json",
+      "native_fp4_gemm_layers": 72,
+      "native_fp8_conv_layers": 0,
+      "existing_fir_plugin_layers": 0,
+      "deconvolution_actual_layers": [],
+      "layer_type_counts": {
+        "custom_layer": 2,
+        "kgen": 385,
+        "gemm": 138,
+        "fusion": 6
+      },
+      "tensors": [
+        {
+          "name": "x",
+          "shape": [
+            32,
+            80,
+            1280
+          ],
+          "dtype": "DataType.FLOAT",
+          "mode": "TensorIOMode.INPUT"
+        },
+        {
+          "name": "keep",
+          "shape": [
+            32,
+            80
+          ],
+          "dtype": "DataType.INT64",
+          "mode": "TensorIOMode.INPUT"
+        },
+        {
+          "name": "latent",
+          "shape": [
+            32,
+            80,
+            1280
+          ],
+          "dtype": "DataType.FLOAT",
+          "mode": "TensorIOMode.OUTPUT"
+        }
+      ],
+      "quantization_recipe": {
+        "scheme": "nvfp4_fp8",
+        "calibration": {
+          "role": "calibration_artifact",
+          "path": "/workspace/inspark_mixed_b32/artifacts/mixed_b32/calibration.json",
+          "sha256": "c568cbebe6e26b31169c57a988db84e2be16e38abd02daa02153c43028e6c4e0",
+          "bytes": 891997
+        },
+        "role_manifest": {
+          "roles": [
+            {
+              "path": "target.blocks.0.attn.c_attn",
+              "component": "target",
+              "precision": "bf16"
+            },
+            {
+              "path": "target.blocks.0.attn.c_proj",
+              "component": "target",
+              "precision": "bf16"
+            },
+            {
+              "path": "target.blocks.0.mlp.c_fc",
+              "component": "target",
+              "precision": "bf16"
+            },
+            {
+              "path": "target.blocks.0.mlp.c_proj",
+              "component": "target",
+              "precision": "bf16"
+            },
+            {
+              "path": "target.blocks.1.attn.c_attn",
+              "component": "target",
+              "precision": "bf16"
+            },
+            {
+              "path": "target.blocks.1.attn.c_proj",
+              "component": "target",
+              "precision": "bf16"
+            },
+            {
+              "path": "target.blocks.1.mlp.c_fc",
+              "component": "target",
+              "precision": "bf16"
+            },
+            {
+              "path": "target.blocks.1.mlp.c_proj",
+              "component": "target",
+              "precision": "bf16"
+            },
+            {
+              "path": "target.blocks.2.attn.c_attn",
+              "component": "target",
+              "precision": "bf16"
+            },
+            {
+              "path": "target.blocks.2.attn.c_proj",
+              "component": "target",
+              "precision": "bf16"
+            },
+            {
+              "path": "target.blocks.2.mlp.c_fc",
+              "component": "target",
+              "precision": "bf16"
+            },
+            {
+              "path": "target.blocks.2.mlp.c_proj",
+              "component": "target",
+              "precision": "bf16"
+            },
+            {
+              "path": "target.blocks.3.attn.c_attn",
+              "component": "target",
+              "precision": "bf16"
+            },
+            {
+              "path": "target.blocks.3.attn.c_proj",
+              "component": "target",
+              "precision": "bf16"
+            },
+            {
+              "path": "target.blocks.3.mlp.c_fc",
+              "component": "target",
+              "precision": "bf16"
+            },
+            {
+              "path": "target.blocks.3.mlp.c_proj",
+              "component": "target",
+              "precision": "bf16"
+            },
+            {
+              "path": "target.blocks.4.attn.c_attn",
+              "component": "target",
+              "precision": "bf16"
+            },
+            {
+              "path": "target.blocks.4.attn.c_proj",
+              "component": "target",
+              "precision": "bf16"
+            },
+            {
+              "path": "target.blocks.4.mlp.c_fc",
+              "component": "target",
+              "precision": "bf16"
+            },
+            {
+              "path": "target.blocks.4.mlp.c_proj",
+              "component": "target",
+              "precision": "bf16"
+            },
+            {
+              "path": "target.blocks.5.attn.c_attn",
+              "component": "target",
+              "precision": "bf16"
+            },
+            {
+              "path": "target.blocks.5.attn.c_proj",
+              "component": "target",
+              "precision": "bf16"
+            },
+            {
+              "path": "target.blocks.5.mlp.c_fc",
+              "component": "target",
+              "precision": "bf16"
+            },
+            {
+              "path": "target.blocks.5.mlp.c_proj",
+              "component": "target",
+              "precision": "bf16"
+            },
+            {
+              "path": "target.blocks.6.attn.c_attn",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.6.attn.c_proj",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.6.mlp.c_fc",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.6.mlp.c_proj",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.7.attn.c_attn",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.7.attn.c_proj",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.7.mlp.c_fc",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.7.mlp.c_proj",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.8.attn.c_attn",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.8.attn.c_proj",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.8.mlp.c_fc",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.8.mlp.c_proj",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.9.attn.c_attn",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.9.attn.c_proj",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.9.mlp.c_fc",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.9.mlp.c_proj",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.10.attn.c_attn",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.10.attn.c_proj",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.10.mlp.c_fc",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.10.mlp.c_proj",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.11.attn.c_attn",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.11.attn.c_proj",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.11.mlp.c_fc",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.11.mlp.c_proj",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.12.attn.c_attn",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.12.attn.c_proj",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.12.mlp.c_fc",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.12.mlp.c_proj",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.13.attn.c_attn",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.13.attn.c_proj",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.13.mlp.c_fc",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.13.mlp.c_proj",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.14.attn.c_attn",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.14.attn.c_proj",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.14.mlp.c_fc",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.14.mlp.c_proj",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.15.attn.c_attn",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.15.attn.c_proj",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.15.mlp.c_fc",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.15.mlp.c_proj",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.16.attn.c_attn",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.16.attn.c_proj",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.16.mlp.c_fc",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.16.mlp.c_proj",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.17.attn.c_attn",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.17.attn.c_proj",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.17.mlp.c_fc",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.17.mlp.c_proj",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.18.attn.c_attn",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.18.attn.c_proj",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.18.mlp.c_fc",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.18.mlp.c_proj",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.19.attn.c_attn",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.19.attn.c_proj",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.19.mlp.c_fc",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.19.mlp.c_proj",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.20.attn.c_attn",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.20.attn.c_proj",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.20.mlp.c_fc",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.20.mlp.c_proj",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.21.attn.c_attn",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.21.attn.c_proj",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.21.mlp.c_fc",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.21.mlp.c_proj",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.22.attn.c_attn",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.22.attn.c_proj",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.22.mlp.c_fc",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.22.mlp.c_proj",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.23.attn.c_attn",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.23.attn.c_proj",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.23.mlp.c_fc",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.23.mlp.c_proj",
+              "component": "target",
+              "precision": "nvfp4"
+            }
+          ]
+        },
+        "role_specs_sha256": "ad45359cddbdb973f864e49b1d62b958a8440627ed14869bed939ae7403f7ede"
+      }
+    },
+    "latent_suffix": {
+      "batch": 32,
+      "kind": "latent_cached_suffix",
+      "frames": 40,
+      "kv_limit": 80,
+      "prompt_frames": null,
+      "precision": "nvfp4_fp8_fp32_interfaces",
+      "sha256": "54abefb99f51cb8c84b2b8d043f648719f0b8c1e94d28f9ccf172b08f5f80242",
+      "bytes": 440975836,
+      "build_seconds": 25.411862001754344,
+      "optimization_level": 5,
+      "tiling_optimization_level": "full",
+      "actual_aux_streams": 0,
+      "effective_l2_limit_for_tiling": 117440512,
+      "workspace_limit_bytes": 89173131264,
+      "tactic_shared_memory_limit_bytes": 1073741824,
+      "plan": "/workspace/inspark_mixed_b32/artifacts/mixed_b32/latent_suffix/model.plan.json",
+      "native_fp4_gemm_layers": 72,
+      "native_fp8_conv_layers": 0,
+      "existing_fir_plugin_layers": 0,
+      "deconvolution_actual_layers": [],
+      "layer_type_counts": {
+        "custom_layer": 2,
+        "kgen": 361,
+        "gemm": 138,
+        "fusion": 6
+      },
+      "tensors": [
+        {
+          "name": "x",
+          "shape": [
+            32,
+            40,
+            1280
+          ],
+          "dtype": "DataType.FLOAT",
+          "mode": "TensorIOMode.INPUT"
+        },
+        {
+          "name": "prefix_keep",
+          "shape": [
+            32,
+            48
+          ],
+          "dtype": "DataType.INT64",
+          "mode": "TensorIOMode.INPUT"
+        },
+        {
+          "name": "past",
+          "shape": [
+            24,
+            2,
+            32,
+            20,
+            48,
+            64
+          ],
+          "dtype": "DataType.FLOAT",
+          "mode": "TensorIOMode.INPUT"
+        },
+        {
+          "name": "latent_suffix",
+          "shape": [
+            32,
+            40,
+            1280
+          ],
+          "dtype": "DataType.FLOAT",
+          "mode": "TensorIOMode.OUTPUT"
+        }
+      ],
+      "quantization_recipe": {
+        "scheme": "nvfp4_fp8",
+        "calibration": {
+          "role": "calibration_artifact",
+          "path": "/workspace/inspark_mixed_b32/artifacts/mixed_b32/calibration.json",
+          "sha256": "c568cbebe6e26b31169c57a988db84e2be16e38abd02daa02153c43028e6c4e0",
+          "bytes": 891997
+        },
+        "role_manifest": {
+          "roles": [
+            {
+              "path": "target.blocks.0.attn.c_attn",
+              "component": "target",
+              "precision": "bf16"
+            },
+            {
+              "path": "target.blocks.0.attn.c_proj",
+              "component": "target",
+              "precision": "bf16"
+            },
+            {
+              "path": "target.blocks.0.mlp.c_fc",
+              "component": "target",
+              "precision": "bf16"
+            },
+            {
+              "path": "target.blocks.0.mlp.c_proj",
+              "component": "target",
+              "precision": "bf16"
+            },
+            {
+              "path": "target.blocks.1.attn.c_attn",
+              "component": "target",
+              "precision": "bf16"
+            },
+            {
+              "path": "target.blocks.1.attn.c_proj",
+              "component": "target",
+              "precision": "bf16"
+            },
+            {
+              "path": "target.blocks.1.mlp.c_fc",
+              "component": "target",
+              "precision": "bf16"
+            },
+            {
+              "path": "target.blocks.1.mlp.c_proj",
+              "component": "target",
+              "precision": "bf16"
+            },
+            {
+              "path": "target.blocks.2.attn.c_attn",
+              "component": "target",
+              "precision": "bf16"
+            },
+            {
+              "path": "target.blocks.2.attn.c_proj",
+              "component": "target",
+              "precision": "bf16"
+            },
+            {
+              "path": "target.blocks.2.mlp.c_fc",
+              "component": "target",
+              "precision": "bf16"
+            },
+            {
+              "path": "target.blocks.2.mlp.c_proj",
+              "component": "target",
+              "precision": "bf16"
+            },
+            {
+              "path": "target.blocks.3.attn.c_attn",
+              "component": "target",
+              "precision": "bf16"
+            },
+            {
+              "path": "target.blocks.3.attn.c_proj",
+              "component": "target",
+              "precision": "bf16"
+            },
+            {
+              "path": "target.blocks.3.mlp.c_fc",
+              "component": "target",
+              "precision": "bf16"
+            },
+            {
+              "path": "target.blocks.3.mlp.c_proj",
+              "component": "target",
+              "precision": "bf16"
+            },
+            {
+              "path": "target.blocks.4.attn.c_attn",
+              "component": "target",
+              "precision": "bf16"
+            },
+            {
+              "path": "target.blocks.4.attn.c_proj",
+              "component": "target",
+              "precision": "bf16"
+            },
+            {
+              "path": "target.blocks.4.mlp.c_fc",
+              "component": "target",
+              "precision": "bf16"
+            },
+            {
+              "path": "target.blocks.4.mlp.c_proj",
+              "component": "target",
+              "precision": "bf16"
+            },
+            {
+              "path": "target.blocks.5.attn.c_attn",
+              "component": "target",
+              "precision": "bf16"
+            },
+            {
+              "path": "target.blocks.5.attn.c_proj",
+              "component": "target",
+              "precision": "bf16"
+            },
+            {
+              "path": "target.blocks.5.mlp.c_fc",
+              "component": "target",
+              "precision": "bf16"
+            },
+            {
+              "path": "target.blocks.5.mlp.c_proj",
+              "component": "target",
+              "precision": "bf16"
+            },
+            {
+              "path": "target.blocks.6.attn.c_attn",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.6.attn.c_proj",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.6.mlp.c_fc",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.6.mlp.c_proj",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.7.attn.c_attn",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.7.attn.c_proj",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.7.mlp.c_fc",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.7.mlp.c_proj",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.8.attn.c_attn",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.8.attn.c_proj",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.8.mlp.c_fc",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.8.mlp.c_proj",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.9.attn.c_attn",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.9.attn.c_proj",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.9.mlp.c_fc",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.9.mlp.c_proj",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.10.attn.c_attn",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.10.attn.c_proj",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.10.mlp.c_fc",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.10.mlp.c_proj",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.11.attn.c_attn",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.11.attn.c_proj",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.11.mlp.c_fc",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.11.mlp.c_proj",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.12.attn.c_attn",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.12.attn.c_proj",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.12.mlp.c_fc",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.12.mlp.c_proj",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.13.attn.c_attn",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.13.attn.c_proj",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.13.mlp.c_fc",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.13.mlp.c_proj",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.14.attn.c_attn",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.14.attn.c_proj",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.14.mlp.c_fc",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.14.mlp.c_proj",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.15.attn.c_attn",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.15.attn.c_proj",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.15.mlp.c_fc",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.15.mlp.c_proj",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.16.attn.c_attn",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.16.attn.c_proj",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.16.mlp.c_fc",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.16.mlp.c_proj",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.17.attn.c_attn",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.17.attn.c_proj",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.17.mlp.c_fc",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.17.mlp.c_proj",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.18.attn.c_attn",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.18.attn.c_proj",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.18.mlp.c_fc",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.18.mlp.c_proj",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.19.attn.c_attn",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.19.attn.c_proj",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.19.mlp.c_fc",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.19.mlp.c_proj",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.20.attn.c_attn",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.20.attn.c_proj",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.20.mlp.c_fc",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.20.mlp.c_proj",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.21.attn.c_attn",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.21.attn.c_proj",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.21.mlp.c_fc",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.21.mlp.c_proj",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.22.attn.c_attn",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.22.attn.c_proj",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.22.mlp.c_fc",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.22.mlp.c_proj",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.23.attn.c_attn",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.23.attn.c_proj",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.23.mlp.c_fc",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.23.mlp.c_proj",
+              "component": "target",
+              "precision": "nvfp4"
+            }
+          ]
+        },
+        "role_specs_sha256": "ad45359cddbdb973f864e49b1d62b958a8440627ed14869bed939ae7403f7ede"
+      }
+    },
+    "target": {
+      "batch": 32,
+      "kind": "full_verification",
+      "frames": 8,
+      "kv_limit": 80,
+      "prompt_frames": null,
+      "precision": "nvfp4_fp8_fp32_interfaces",
+      "sha256": "f70afc3eb6a5e0b3f6f618df42b4d8350f40b8d0748d7b048100e37842a57c25",
+      "bytes": 483903284,
+      "build_seconds": 32.406860892660916,
+      "optimization_level": 5,
+      "tiling_optimization_level": "full",
+      "actual_aux_streams": 0,
+      "effective_l2_limit_for_tiling": 117440512,
+      "workspace_limit_bytes": 89173131264,
+      "tactic_shared_memory_limit_bytes": 1073741824,
+      "plan": "/workspace/inspark_mixed_b32/artifacts/mixed_b32/target_attention/model.plan.json",
+      "native_fp4_gemm_layers": 72,
+      "native_fp8_conv_layers": 0,
+      "existing_fir_plugin_layers": 0,
+      "deconvolution_actual_layers": [],
+      "layer_type_counts": {
+        "custom_layer": 2,
+        "kgen": 371,
+        "fusion": 10,
+        "gemm": 87
+      },
+      "tensors": [
+        {
+          "name": "x",
+          "shape": [
+            32,
+            8,
+            1280
+          ],
+          "dtype": "DataType.FLOAT",
+          "mode": "TensorIOMode.INPUT"
+        },
+        {
+          "name": "mask",
+          "shape": [
+            32,
+            1,
+            8,
+            88
+          ],
+          "dtype": "DataType.BOOL",
+          "mode": "TensorIOMode.INPUT"
+        },
+        {
+          "name": "k_cache_in_0",
+          "shape": [
+            32,
+            20,
+            80,
+            64
+          ],
+          "dtype": "DataType.BF16",
+          "mode": "TensorIOMode.INPUT"
+        },
+        {
+          "name": "v_cache_in_0",
+          "shape": [
+            32,
+            20,
+            80,
+            64
+          ],
+          "dtype": "DataType.BF16",
+          "mode": "TensorIOMode.INPUT"
+        },
+        {
+          "name": "k_cache_in_1",
+          "shape": [
+            32,
+            20,
+            80,
+            64
+          ],
+          "dtype": "DataType.BF16",
+          "mode": "TensorIOMode.INPUT"
+        },
+        {
+          "name": "v_cache_in_1",
+          "shape": [
+            32,
+            20,
+            80,
+            64
+          ],
+          "dtype": "DataType.BF16",
+          "mode": "TensorIOMode.INPUT"
+        },
+        {
+          "name": "k_cache_in_2",
+          "shape": [
+            32,
+            20,
+            80,
+            64
+          ],
+          "dtype": "DataType.BF16",
+          "mode": "TensorIOMode.INPUT"
+        },
+        {
+          "name": "v_cache_in_2",
+          "shape": [
+            32,
+            20,
+            80,
+            64
+          ],
+          "dtype": "DataType.BF16",
+          "mode": "TensorIOMode.INPUT"
+        },
+        {
+          "name": "k_cache_in_3",
+          "shape": [
+            32,
+            20,
+            80,
+            64
+          ],
+          "dtype": "DataType.BF16",
+          "mode": "TensorIOMode.INPUT"
+        },
+        {
+          "name": "v_cache_in_3",
+          "shape": [
+            32,
+            20,
+            80,
+            64
+          ],
+          "dtype": "DataType.BF16",
+          "mode": "TensorIOMode.INPUT"
+        },
+        {
+          "name": "k_cache_in_4",
+          "shape": [
+            32,
+            20,
+            80,
+            64
+          ],
+          "dtype": "DataType.BF16",
+          "mode": "TensorIOMode.INPUT"
+        },
+        {
+          "name": "v_cache_in_4",
+          "shape": [
+            32,
+            20,
+            80,
+            64
+          ],
+          "dtype": "DataType.BF16",
+          "mode": "TensorIOMode.INPUT"
+        },
+        {
+          "name": "k_cache_in_5",
+          "shape": [
+            32,
+            20,
+            80,
+            64
+          ],
+          "dtype": "DataType.BF16",
+          "mode": "TensorIOMode.INPUT"
+        },
+        {
+          "name": "v_cache_in_5",
+          "shape": [
+            32,
+            20,
+            80,
+            64
+          ],
+          "dtype": "DataType.BF16",
+          "mode": "TensorIOMode.INPUT"
+        },
+        {
+          "name": "k_cache_in_6",
+          "shape": [
+            32,
+            20,
+            80,
+            64
+          ],
+          "dtype": "DataType.BF16",
+          "mode": "TensorIOMode.INPUT"
+        },
+        {
+          "name": "v_cache_in_6",
+          "shape": [
+            32,
+            20,
+            80,
+            64
+          ],
+          "dtype": "DataType.BF16",
+          "mode": "TensorIOMode.INPUT"
+        },
+        {
+          "name": "k_cache_in_7",
+          "shape": [
+            32,
+            20,
+            80,
+            64
+          ],
+          "dtype": "DataType.BF16",
+          "mode": "TensorIOMode.INPUT"
+        },
+        {
+          "name": "v_cache_in_7",
+          "shape": [
+            32,
+            20,
+            80,
+            64
+          ],
+          "dtype": "DataType.BF16",
+          "mode": "TensorIOMode.INPUT"
+        },
+        {
+          "name": "k_cache_in_8",
+          "shape": [
+            32,
+            20,
+            80,
+            64
+          ],
+          "dtype": "DataType.BF16",
+          "mode": "TensorIOMode.INPUT"
+        },
+        {
+          "name": "v_cache_in_8",
+          "shape": [
+            32,
+            20,
+            80,
+            64
+          ],
+          "dtype": "DataType.BF16",
+          "mode": "TensorIOMode.INPUT"
+        },
+        {
+          "name": "k_cache_in_9",
+          "shape": [
+            32,
+            20,
+            80,
+            64
+          ],
+          "dtype": "DataType.BF16",
+          "mode": "TensorIOMode.INPUT"
+        },
+        {
+          "name": "v_cache_in_9",
+          "shape": [
+            32,
+            20,
+            80,
+            64
+          ],
+          "dtype": "DataType.BF16",
+          "mode": "TensorIOMode.INPUT"
+        },
+        {
+          "name": "k_cache_in_10",
+          "shape": [
+            32,
+            20,
+            80,
+            64
+          ],
+          "dtype": "DataType.BF16",
+          "mode": "TensorIOMode.INPUT"
+        },
+        {
+          "name": "v_cache_in_10",
+          "shape": [
+            32,
+            20,
+            80,
+            64
+          ],
+          "dtype": "DataType.BF16",
+          "mode": "TensorIOMode.INPUT"
+        },
+        {
+          "name": "k_cache_in_11",
+          "shape": [
+            32,
+            20,
+            80,
+            64
+          ],
+          "dtype": "DataType.BF16",
+          "mode": "TensorIOMode.INPUT"
+        },
+        {
+          "name": "v_cache_in_11",
+          "shape": [
+            32,
+            20,
+            80,
+            64
+          ],
+          "dtype": "DataType.BF16",
+          "mode": "TensorIOMode.INPUT"
+        },
+        {
+          "name": "k_cache_in_12",
+          "shape": [
+            32,
+            20,
+            80,
+            64
+          ],
+          "dtype": "DataType.BF16",
+          "mode": "TensorIOMode.INPUT"
+        },
+        {
+          "name": "v_cache_in_12",
+          "shape": [
+            32,
+            20,
+            80,
+            64
+          ],
+          "dtype": "DataType.BF16",
+          "mode": "TensorIOMode.INPUT"
+        },
+        {
+          "name": "k_cache_in_13",
+          "shape": [
+            32,
+            20,
+            80,
+            64
+          ],
+          "dtype": "DataType.BF16",
+          "mode": "TensorIOMode.INPUT"
+        },
+        {
+          "name": "v_cache_in_13",
+          "shape": [
+            32,
+            20,
+            80,
+            64
+          ],
+          "dtype": "DataType.BF16",
+          "mode": "TensorIOMode.INPUT"
+        },
+        {
+          "name": "k_cache_in_14",
+          "shape": [
+            32,
+            20,
+            80,
+            64
+          ],
+          "dtype": "DataType.BF16",
+          "mode": "TensorIOMode.INPUT"
+        },
+        {
+          "name": "v_cache_in_14",
+          "shape": [
+            32,
+            20,
+            80,
+            64
+          ],
+          "dtype": "DataType.BF16",
+          "mode": "TensorIOMode.INPUT"
+        },
+        {
+          "name": "k_cache_in_15",
+          "shape": [
+            32,
+            20,
+            80,
+            64
+          ],
+          "dtype": "DataType.BF16",
+          "mode": "TensorIOMode.INPUT"
+        },
+        {
+          "name": "v_cache_in_15",
+          "shape": [
+            32,
+            20,
+            80,
+            64
+          ],
+          "dtype": "DataType.BF16",
+          "mode": "TensorIOMode.INPUT"
+        },
+        {
+          "name": "k_cache_in_16",
+          "shape": [
+            32,
+            20,
+            80,
+            64
+          ],
+          "dtype": "DataType.BF16",
+          "mode": "TensorIOMode.INPUT"
+        },
+        {
+          "name": "v_cache_in_16",
+          "shape": [
+            32,
+            20,
+            80,
+            64
+          ],
+          "dtype": "DataType.BF16",
+          "mode": "TensorIOMode.INPUT"
+        },
+        {
+          "name": "k_cache_in_17",
+          "shape": [
+            32,
+            20,
+            80,
+            64
+          ],
+          "dtype": "DataType.BF16",
+          "mode": "TensorIOMode.INPUT"
+        },
+        {
+          "name": "v_cache_in_17",
+          "shape": [
+            32,
+            20,
+            80,
+            64
+          ],
+          "dtype": "DataType.BF16",
+          "mode": "TensorIOMode.INPUT"
+        },
+        {
+          "name": "k_cache_in_18",
+          "shape": [
+            32,
+            20,
+            80,
+            64
+          ],
+          "dtype": "DataType.BF16",
+          "mode": "TensorIOMode.INPUT"
+        },
+        {
+          "name": "v_cache_in_18",
+          "shape": [
+            32,
+            20,
+            80,
+            64
+          ],
+          "dtype": "DataType.BF16",
+          "mode": "TensorIOMode.INPUT"
+        },
+        {
+          "name": "k_cache_in_19",
+          "shape": [
+            32,
+            20,
+            80,
+            64
+          ],
+          "dtype": "DataType.BF16",
+          "mode": "TensorIOMode.INPUT"
+        },
+        {
+          "name": "v_cache_in_19",
+          "shape": [
+            32,
+            20,
+            80,
+            64
+          ],
+          "dtype": "DataType.BF16",
+          "mode": "TensorIOMode.INPUT"
+        },
+        {
+          "name": "k_cache_in_20",
+          "shape": [
+            32,
+            20,
+            80,
+            64
+          ],
+          "dtype": "DataType.BF16",
+          "mode": "TensorIOMode.INPUT"
+        },
+        {
+          "name": "v_cache_in_20",
+          "shape": [
+            32,
+            20,
+            80,
+            64
+          ],
+          "dtype": "DataType.BF16",
+          "mode": "TensorIOMode.INPUT"
+        },
+        {
+          "name": "k_cache_in_21",
+          "shape": [
+            32,
+            20,
+            80,
+            64
+          ],
+          "dtype": "DataType.BF16",
+          "mode": "TensorIOMode.INPUT"
+        },
+        {
+          "name": "v_cache_in_21",
+          "shape": [
+            32,
+            20,
+            80,
+            64
+          ],
+          "dtype": "DataType.BF16",
+          "mode": "TensorIOMode.INPUT"
+        },
+        {
+          "name": "k_cache_in_22",
+          "shape": [
+            32,
+            20,
+            80,
+            64
+          ],
+          "dtype": "DataType.BF16",
+          "mode": "TensorIOMode.INPUT"
+        },
+        {
+          "name": "v_cache_in_22",
+          "shape": [
+            32,
+            20,
+            80,
+            64
+          ],
+          "dtype": "DataType.BF16",
+          "mode": "TensorIOMode.INPUT"
+        },
+        {
+          "name": "k_cache_in_23",
+          "shape": [
+            32,
+            20,
+            80,
+            64
+          ],
+          "dtype": "DataType.BF16",
+          "mode": "TensorIOMode.INPUT"
+        },
+        {
+          "name": "v_cache_in_23",
+          "shape": [
+            32,
+            20,
+            80,
+            64
+          ],
+          "dtype": "DataType.BF16",
+          "mode": "TensorIOMode.INPUT"
+        },
+        {
+          "name": "logits",
+          "shape": [
+            32,
+            8,
+            8194
+          ],
+          "dtype": "DataType.FLOAT",
+          "mode": "TensorIOMode.OUTPUT"
+        },
+        {
+          "name": "selected",
+          "shape": [
+            32,
+            8,
+            6400
+          ],
+          "dtype": "DataType.FLOAT",
+          "mode": "TensorIOMode.OUTPUT"
+        },
+        {
+          "name": "final",
+          "shape": [
+            32,
+            8,
+            1280
+          ],
+          "dtype": "DataType.FLOAT",
+          "mode": "TensorIOMode.OUTPUT"
+        },
+        {
+          "name": "k_append_0",
+          "shape": [
+            32,
+            20,
+            8,
+            64
+          ],
+          "dtype": "DataType.BF16",
+          "mode": "TensorIOMode.OUTPUT"
+        },
+        {
+          "name": "v_append_0",
+          "shape": [
+            32,
+            20,
+            8,
+            64
+          ],
+          "dtype": "DataType.BF16",
+          "mode": "TensorIOMode.OUTPUT"
+        },
+        {
+          "name": "k_append_1",
+          "shape": [
+            32,
+            20,
+            8,
+            64
+          ],
+          "dtype": "DataType.BF16",
+          "mode": "TensorIOMode.OUTPUT"
+        },
+        {
+          "name": "v_append_1",
+          "shape": [
+            32,
+            20,
+            8,
+            64
+          ],
+          "dtype": "DataType.BF16",
+          "mode": "TensorIOMode.OUTPUT"
+        },
+        {
+          "name": "k_append_2",
+          "shape": [
+            32,
+            20,
+            8,
+            64
+          ],
+          "dtype": "DataType.BF16",
+          "mode": "TensorIOMode.OUTPUT"
+        },
+        {
+          "name": "v_append_2",
+          "shape": [
+            32,
+            20,
+            8,
+            64
+          ],
+          "dtype": "DataType.BF16",
+          "mode": "TensorIOMode.OUTPUT"
+        },
+        {
+          "name": "k_append_3",
+          "shape": [
+            32,
+            20,
+            8,
+            64
+          ],
+          "dtype": "DataType.BF16",
+          "mode": "TensorIOMode.OUTPUT"
+        },
+        {
+          "name": "v_append_3",
+          "shape": [
+            32,
+            20,
+            8,
+            64
+          ],
+          "dtype": "DataType.BF16",
+          "mode": "TensorIOMode.OUTPUT"
+        },
+        {
+          "name": "k_append_4",
+          "shape": [
+            32,
+            20,
+            8,
+            64
+          ],
+          "dtype": "DataType.BF16",
+          "mode": "TensorIOMode.OUTPUT"
+        },
+        {
+          "name": "v_append_4",
+          "shape": [
+            32,
+            20,
+            8,
+            64
+          ],
+          "dtype": "DataType.BF16",
+          "mode": "TensorIOMode.OUTPUT"
+        },
+        {
+          "name": "k_append_5",
+          "shape": [
+            32,
+            20,
+            8,
+            64
+          ],
+          "dtype": "DataType.BF16",
+          "mode": "TensorIOMode.OUTPUT"
+        },
+        {
+          "name": "v_append_5",
+          "shape": [
+            32,
+            20,
+            8,
+            64
+          ],
+          "dtype": "DataType.BF16",
+          "mode": "TensorIOMode.OUTPUT"
+        },
+        {
+          "name": "k_append_6",
+          "shape": [
+            32,
+            20,
+            8,
+            64
+          ],
+          "dtype": "DataType.BF16",
+          "mode": "TensorIOMode.OUTPUT"
+        },
+        {
+          "name": "v_append_6",
+          "shape": [
+            32,
+            20,
+            8,
+            64
+          ],
+          "dtype": "DataType.BF16",
+          "mode": "TensorIOMode.OUTPUT"
+        },
+        {
+          "name": "k_append_7",
+          "shape": [
+            32,
+            20,
+            8,
+            64
+          ],
+          "dtype": "DataType.BF16",
+          "mode": "TensorIOMode.OUTPUT"
+        },
+        {
+          "name": "v_append_7",
+          "shape": [
+            32,
+            20,
+            8,
+            64
+          ],
+          "dtype": "DataType.BF16",
+          "mode": "TensorIOMode.OUTPUT"
+        },
+        {
+          "name": "k_append_8",
+          "shape": [
+            32,
+            20,
+            8,
+            64
+          ],
+          "dtype": "DataType.BF16",
+          "mode": "TensorIOMode.OUTPUT"
+        },
+        {
+          "name": "v_append_8",
+          "shape": [
+            32,
+            20,
+            8,
+            64
+          ],
+          "dtype": "DataType.BF16",
+          "mode": "TensorIOMode.OUTPUT"
+        },
+        {
+          "name": "k_append_9",
+          "shape": [
+            32,
+            20,
+            8,
+            64
+          ],
+          "dtype": "DataType.BF16",
+          "mode": "TensorIOMode.OUTPUT"
+        },
+        {
+          "name": "v_append_9",
+          "shape": [
+            32,
+            20,
+            8,
+            64
+          ],
+          "dtype": "DataType.BF16",
+          "mode": "TensorIOMode.OUTPUT"
+        },
+        {
+          "name": "k_append_10",
+          "shape": [
+            32,
+            20,
+            8,
+            64
+          ],
+          "dtype": "DataType.BF16",
+          "mode": "TensorIOMode.OUTPUT"
+        },
+        {
+          "name": "v_append_10",
+          "shape": [
+            32,
+            20,
+            8,
+            64
+          ],
+          "dtype": "DataType.BF16",
+          "mode": "TensorIOMode.OUTPUT"
+        },
+        {
+          "name": "k_append_11",
+          "shape": [
+            32,
+            20,
+            8,
+            64
+          ],
+          "dtype": "DataType.BF16",
+          "mode": "TensorIOMode.OUTPUT"
+        },
+        {
+          "name": "v_append_11",
+          "shape": [
+            32,
+            20,
+            8,
+            64
+          ],
+          "dtype": "DataType.BF16",
+          "mode": "TensorIOMode.OUTPUT"
+        },
+        {
+          "name": "k_append_12",
+          "shape": [
+            32,
+            20,
+            8,
+            64
+          ],
+          "dtype": "DataType.BF16",
+          "mode": "TensorIOMode.OUTPUT"
+        },
+        {
+          "name": "v_append_12",
+          "shape": [
+            32,
+            20,
+            8,
+            64
+          ],
+          "dtype": "DataType.BF16",
+          "mode": "TensorIOMode.OUTPUT"
+        },
+        {
+          "name": "k_append_13",
+          "shape": [
+            32,
+            20,
+            8,
+            64
+          ],
+          "dtype": "DataType.BF16",
+          "mode": "TensorIOMode.OUTPUT"
+        },
+        {
+          "name": "v_append_13",
+          "shape": [
+            32,
+            20,
+            8,
+            64
+          ],
+          "dtype": "DataType.BF16",
+          "mode": "TensorIOMode.OUTPUT"
+        },
+        {
+          "name": "k_append_14",
+          "shape": [
+            32,
+            20,
+            8,
+            64
+          ],
+          "dtype": "DataType.BF16",
+          "mode": "TensorIOMode.OUTPUT"
+        },
+        {
+          "name": "v_append_14",
+          "shape": [
+            32,
+            20,
+            8,
+            64
+          ],
+          "dtype": "DataType.BF16",
+          "mode": "TensorIOMode.OUTPUT"
+        },
+        {
+          "name": "k_append_15",
+          "shape": [
+            32,
+            20,
+            8,
+            64
+          ],
+          "dtype": "DataType.BF16",
+          "mode": "TensorIOMode.OUTPUT"
+        },
+        {
+          "name": "v_append_15",
+          "shape": [
+            32,
+            20,
+            8,
+            64
+          ],
+          "dtype": "DataType.BF16",
+          "mode": "TensorIOMode.OUTPUT"
+        },
+        {
+          "name": "k_append_16",
+          "shape": [
+            32,
+            20,
+            8,
+            64
+          ],
+          "dtype": "DataType.BF16",
+          "mode": "TensorIOMode.OUTPUT"
+        },
+        {
+          "name": "v_append_16",
+          "shape": [
+            32,
+            20,
+            8,
+            64
+          ],
+          "dtype": "DataType.BF16",
+          "mode": "TensorIOMode.OUTPUT"
+        },
+        {
+          "name": "k_append_17",
+          "shape": [
+            32,
+            20,
+            8,
+            64
+          ],
+          "dtype": "DataType.BF16",
+          "mode": "TensorIOMode.OUTPUT"
+        },
+        {
+          "name": "v_append_17",
+          "shape": [
+            32,
+            20,
+            8,
+            64
+          ],
+          "dtype": "DataType.BF16",
+          "mode": "TensorIOMode.OUTPUT"
+        },
+        {
+          "name": "k_append_18",
+          "shape": [
+            32,
+            20,
+            8,
+            64
+          ],
+          "dtype": "DataType.BF16",
+          "mode": "TensorIOMode.OUTPUT"
+        },
+        {
+          "name": "v_append_18",
+          "shape": [
+            32,
+            20,
+            8,
+            64
+          ],
+          "dtype": "DataType.BF16",
+          "mode": "TensorIOMode.OUTPUT"
+        },
+        {
+          "name": "k_append_19",
+          "shape": [
+            32,
+            20,
+            8,
+            64
+          ],
+          "dtype": "DataType.BF16",
+          "mode": "TensorIOMode.OUTPUT"
+        },
+        {
+          "name": "v_append_19",
+          "shape": [
+            32,
+            20,
+            8,
+            64
+          ],
+          "dtype": "DataType.BF16",
+          "mode": "TensorIOMode.OUTPUT"
+        },
+        {
+          "name": "k_append_20",
+          "shape": [
+            32,
+            20,
+            8,
+            64
+          ],
+          "dtype": "DataType.BF16",
+          "mode": "TensorIOMode.OUTPUT"
+        },
+        {
+          "name": "v_append_20",
+          "shape": [
+            32,
+            20,
+            8,
+            64
+          ],
+          "dtype": "DataType.BF16",
+          "mode": "TensorIOMode.OUTPUT"
+        },
+        {
+          "name": "k_append_21",
+          "shape": [
+            32,
+            20,
+            8,
+            64
+          ],
+          "dtype": "DataType.BF16",
+          "mode": "TensorIOMode.OUTPUT"
+        },
+        {
+          "name": "v_append_21",
+          "shape": [
+            32,
+            20,
+            8,
+            64
+          ],
+          "dtype": "DataType.BF16",
+          "mode": "TensorIOMode.OUTPUT"
+        },
+        {
+          "name": "k_append_22",
+          "shape": [
+            32,
+            20,
+            8,
+            64
+          ],
+          "dtype": "DataType.BF16",
+          "mode": "TensorIOMode.OUTPUT"
+        },
+        {
+          "name": "v_append_22",
+          "shape": [
+            32,
+            20,
+            8,
+            64
+          ],
+          "dtype": "DataType.BF16",
+          "mode": "TensorIOMode.OUTPUT"
+        },
+        {
+          "name": "k_append_23",
+          "shape": [
+            32,
+            20,
+            8,
+            64
+          ],
+          "dtype": "DataType.BF16",
+          "mode": "TensorIOMode.OUTPUT"
+        },
+        {
+          "name": "v_append_23",
+          "shape": [
+            32,
+            20,
+            8,
+            64
+          ],
+          "dtype": "DataType.BF16",
+          "mode": "TensorIOMode.OUTPUT"
+        }
+      ],
+      "quantization_recipe": {
+        "scheme": "nvfp4_fp8",
+        "calibration": {
+          "role": "calibration_artifact",
+          "path": "/workspace/inspark_mixed_b32/artifacts/mixed_b32/calibration.json",
+          "sha256": "c568cbebe6e26b31169c57a988db84e2be16e38abd02daa02153c43028e6c4e0",
+          "bytes": 891997
+        },
+        "role_manifest": {
+          "roles": [
+            {
+              "path": "target.blocks.0.attn.c_attn",
+              "component": "target",
+              "precision": "bf16"
+            },
+            {
+              "path": "target.blocks.0.attn.c_proj",
+              "component": "target",
+              "precision": "bf16"
+            },
+            {
+              "path": "target.blocks.0.mlp.c_fc",
+              "component": "target",
+              "precision": "bf16"
+            },
+            {
+              "path": "target.blocks.0.mlp.c_proj",
+              "component": "target",
+              "precision": "bf16"
+            },
+            {
+              "path": "target.blocks.1.attn.c_attn",
+              "component": "target",
+              "precision": "bf16"
+            },
+            {
+              "path": "target.blocks.1.attn.c_proj",
+              "component": "target",
+              "precision": "bf16"
+            },
+            {
+              "path": "target.blocks.1.mlp.c_fc",
+              "component": "target",
+              "precision": "bf16"
+            },
+            {
+              "path": "target.blocks.1.mlp.c_proj",
+              "component": "target",
+              "precision": "bf16"
+            },
+            {
+              "path": "target.blocks.2.attn.c_attn",
+              "component": "target",
+              "precision": "bf16"
+            },
+            {
+              "path": "target.blocks.2.attn.c_proj",
+              "component": "target",
+              "precision": "bf16"
+            },
+            {
+              "path": "target.blocks.2.mlp.c_fc",
+              "component": "target",
+              "precision": "bf16"
+            },
+            {
+              "path": "target.blocks.2.mlp.c_proj",
+              "component": "target",
+              "precision": "bf16"
+            },
+            {
+              "path": "target.blocks.3.attn.c_attn",
+              "component": "target",
+              "precision": "bf16"
+            },
+            {
+              "path": "target.blocks.3.attn.c_proj",
+              "component": "target",
+              "precision": "bf16"
+            },
+            {
+              "path": "target.blocks.3.mlp.c_fc",
+              "component": "target",
+              "precision": "bf16"
+            },
+            {
+              "path": "target.blocks.3.mlp.c_proj",
+              "component": "target",
+              "precision": "bf16"
+            },
+            {
+              "path": "target.blocks.4.attn.c_attn",
+              "component": "target",
+              "precision": "bf16"
+            },
+            {
+              "path": "target.blocks.4.attn.c_proj",
+              "component": "target",
+              "precision": "bf16"
+            },
+            {
+              "path": "target.blocks.4.mlp.c_fc",
+              "component": "target",
+              "precision": "bf16"
+            },
+            {
+              "path": "target.blocks.4.mlp.c_proj",
+              "component": "target",
+              "precision": "bf16"
+            },
+            {
+              "path": "target.blocks.5.attn.c_attn",
+              "component": "target",
+              "precision": "bf16"
+            },
+            {
+              "path": "target.blocks.5.attn.c_proj",
+              "component": "target",
+              "precision": "bf16"
+            },
+            {
+              "path": "target.blocks.5.mlp.c_fc",
+              "component": "target",
+              "precision": "bf16"
+            },
+            {
+              "path": "target.blocks.5.mlp.c_proj",
+              "component": "target",
+              "precision": "bf16"
+            },
+            {
+              "path": "target.blocks.6.attn.c_attn",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.6.attn.c_proj",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.6.mlp.c_fc",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.6.mlp.c_proj",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.7.attn.c_attn",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.7.attn.c_proj",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.7.mlp.c_fc",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.7.mlp.c_proj",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.8.attn.c_attn",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.8.attn.c_proj",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.8.mlp.c_fc",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.8.mlp.c_proj",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.9.attn.c_attn",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.9.attn.c_proj",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.9.mlp.c_fc",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.9.mlp.c_proj",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.10.attn.c_attn",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.10.attn.c_proj",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.10.mlp.c_fc",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.10.mlp.c_proj",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.11.attn.c_attn",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.11.attn.c_proj",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.11.mlp.c_fc",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.11.mlp.c_proj",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.12.attn.c_attn",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.12.attn.c_proj",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.12.mlp.c_fc",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.12.mlp.c_proj",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.13.attn.c_attn",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.13.attn.c_proj",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.13.mlp.c_fc",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.13.mlp.c_proj",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.14.attn.c_attn",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.14.attn.c_proj",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.14.mlp.c_fc",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.14.mlp.c_proj",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.15.attn.c_attn",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.15.attn.c_proj",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.15.mlp.c_fc",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.15.mlp.c_proj",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.16.attn.c_attn",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.16.attn.c_proj",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.16.mlp.c_fc",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.16.mlp.c_proj",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.17.attn.c_attn",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.17.attn.c_proj",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.17.mlp.c_fc",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.17.mlp.c_proj",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.18.attn.c_attn",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.18.attn.c_proj",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.18.mlp.c_fc",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.18.mlp.c_proj",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.19.attn.c_attn",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.19.attn.c_proj",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.19.mlp.c_fc",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.19.mlp.c_proj",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.20.attn.c_attn",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.20.attn.c_proj",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.20.mlp.c_fc",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.20.mlp.c_proj",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.21.attn.c_attn",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.21.attn.c_proj",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.21.mlp.c_fc",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.21.mlp.c_proj",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.22.attn.c_attn",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.22.attn.c_proj",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.22.mlp.c_fc",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.22.mlp.c_proj",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.23.attn.c_attn",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.23.attn.c_proj",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.23.mlp.c_fc",
+              "component": "target",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "target.blocks.23.mlp.c_proj",
+              "component": "target",
+              "precision": "nvfp4"
+            }
+          ]
+        },
+        "role_specs_sha256": "ad45359cddbdb973f864e49b1d62b958a8440627ed14869bed939ae7403f7ede"
+      }
+    },
+    "cfm": {
+      "batch": 32,
+      "kind": "full_solver",
+      "frames": 310,
+      "kv_limit": 80,
+      "prompt_frames": 258,
+      "precision": "nvfp4_fp8_fp32_interfaces",
+      "sha256": "b94b4c48ff333fbd480f5d100a98e73bbeb6254878023978aa91ed6488c92c1e",
+      "bytes": 179686724,
+      "build_seconds": 51.19598512258381,
+      "optimization_level": 5,
+      "tiling_optimization_level": "full",
+      "actual_aux_streams": 0,
+      "effective_l2_limit_for_tiling": 58720256,
+      "workspace_limit_bytes": 89173131264,
+      "tactic_shared_memory_limit_bytes": 1073741824,
+      "plan": "/workspace/inspark_mixed_b32/artifacts/mixed_b32/cfm/model.plan.json",
+      "native_fp4_gemm_layers": 168,
+      "native_fp8_conv_layers": 64,
+      "existing_fir_plugin_layers": 0,
+      "deconvolution_actual_layers": [],
+      "layer_type_counts": {
+        "custom_layer": 2,
+        "gemm": 302,
+        "kgen": 1153,
+        "correlation": 72
+      },
+      "tensors": [
+        {
+          "name": "x",
+          "shape": [
+            32,
+            80,
+            310
+          ],
+          "dtype": "DataType.FLOAT",
+          "mode": "TensorIOMode.INPUT"
+        },
+        {
+          "name": "prompt",
+          "shape": [
+            32,
+            80,
+            310
+          ],
+          "dtype": "DataType.FLOAT",
+          "mode": "TensorIOMode.INPUT"
+        },
+        {
+          "name": "lengths",
+          "shape": [
+            32
+          ],
+          "dtype": "DataType.INT64",
+          "mode": "TensorIOMode.INPUT"
+        },
+        {
+          "name": "style",
+          "shape": [
+            32,
+            192
+          ],
+          "dtype": "DataType.FLOAT",
+          "mode": "TensorIOMode.INPUT"
+        },
+        {
+          "name": "mu",
+          "shape": [
+            32,
+            310,
+            512
+          ],
+          "dtype": "DataType.FLOAT",
+          "mode": "TensorIOMode.INPUT"
+        },
+        {
+          "name": "mask",
+          "shape": [
+            32,
+            1,
+            310
+          ],
+          "dtype": "DataType.BOOL",
+          "mode": "TensorIOMode.INPUT"
+        },
+        {
+          "name": "output",
+          "shape": [
+            32,
+            80,
+            310
+          ],
+          "dtype": "DataType.FLOAT",
+          "mode": "TensorIOMode.OUTPUT"
+        }
+      ],
+      "quantization_recipe": {
+        "scheme": "nvfp4_fp8",
+        "calibration": {
+          "role": "calibration_artifact",
+          "path": "/workspace/inspark_mixed_b32/artifacts/mixed_b32/calibration.json",
+          "sha256": "c568cbebe6e26b31169c57a988db84e2be16e38abd02daa02153c43028e6c4e0",
+          "bytes": 891997
+        },
+        "role_manifest": {
+          "roles": [
+            {
+              "path": "cfm.blocks.0.attention.wqkv",
+              "component": "cfm",
+              "precision": "bf16"
+            },
+            {
+              "path": "cfm.blocks.0.attention.wo",
+              "component": "cfm",
+              "precision": "bf16"
+            },
+            {
+              "path": "cfm.blocks.0.feed_forward.w1",
+              "component": "cfm",
+              "precision": "bf16"
+            },
+            {
+              "path": "cfm.blocks.0.feed_forward.w3",
+              "component": "cfm",
+              "precision": "bf16"
+            },
+            {
+              "path": "cfm.blocks.0.feed_forward.w2",
+              "component": "cfm",
+              "precision": "bf16"
+            },
+            {
+              "path": "cfm.blocks.1.attention.wqkv",
+              "component": "cfm",
+              "precision": "bf16"
+            },
+            {
+              "path": "cfm.blocks.1.attention.wo",
+              "component": "cfm",
+              "precision": "bf16"
+            },
+            {
+              "path": "cfm.blocks.1.feed_forward.w1",
+              "component": "cfm",
+              "precision": "bf16"
+            },
+            {
+              "path": "cfm.blocks.1.feed_forward.w3",
+              "component": "cfm",
+              "precision": "bf16"
+            },
+            {
+              "path": "cfm.blocks.1.feed_forward.w2",
+              "component": "cfm",
+              "precision": "bf16"
+            },
+            {
+              "path": "cfm.blocks.2.attention.wqkv",
+              "component": "cfm",
+              "precision": "bf16"
+            },
+            {
+              "path": "cfm.blocks.2.attention.wo",
+              "component": "cfm",
+              "precision": "bf16"
+            },
+            {
+              "path": "cfm.blocks.2.feed_forward.w1",
+              "component": "cfm",
+              "precision": "bf16"
+            },
+            {
+              "path": "cfm.blocks.2.feed_forward.w3",
+              "component": "cfm",
+              "precision": "bf16"
+            },
+            {
+              "path": "cfm.blocks.2.feed_forward.w2",
+              "component": "cfm",
+              "precision": "bf16"
+            },
+            {
+              "path": "cfm.blocks.3.attention.wqkv",
+              "component": "cfm",
+              "precision": "bf16"
+            },
+            {
+              "path": "cfm.blocks.3.attention.wo",
+              "component": "cfm",
+              "precision": "bf16"
+            },
+            {
+              "path": "cfm.blocks.3.feed_forward.w1",
+              "component": "cfm",
+              "precision": "bf16"
+            },
+            {
+              "path": "cfm.blocks.3.feed_forward.w3",
+              "component": "cfm",
+              "precision": "bf16"
+            },
+            {
+              "path": "cfm.blocks.3.feed_forward.w2",
+              "component": "cfm",
+              "precision": "bf16"
+            },
+            {
+              "path": "cfm.blocks.4.attention.wqkv",
+              "component": "cfm",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "cfm.blocks.4.attention.wo",
+              "component": "cfm",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "cfm.blocks.4.feed_forward.w1",
+              "component": "cfm",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "cfm.blocks.4.feed_forward.w3",
+              "component": "cfm",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "cfm.blocks.4.feed_forward.w2",
+              "component": "cfm",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "cfm.blocks.5.attention.wqkv",
+              "component": "cfm",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "cfm.blocks.5.attention.wo",
+              "component": "cfm",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "cfm.blocks.5.feed_forward.w1",
+              "component": "cfm",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "cfm.blocks.5.feed_forward.w3",
+              "component": "cfm",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "cfm.blocks.5.feed_forward.w2",
+              "component": "cfm",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "cfm.blocks.6.attention.wqkv",
+              "component": "cfm",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "cfm.blocks.6.attention.wo",
+              "component": "cfm",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "cfm.blocks.6.feed_forward.w1",
+              "component": "cfm",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "cfm.blocks.6.feed_forward.w3",
+              "component": "cfm",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "cfm.blocks.6.feed_forward.w2",
+              "component": "cfm",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "cfm.blocks.7.attention.wqkv",
+              "component": "cfm",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "cfm.blocks.7.attention.wo",
+              "component": "cfm",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "cfm.blocks.7.feed_forward.w1",
+              "component": "cfm",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "cfm.blocks.7.feed_forward.w3",
+              "component": "cfm",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "cfm.blocks.7.feed_forward.w2",
+              "component": "cfm",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "cfm.blocks.7.skip_in_linear",
+              "component": "cfm",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "cfm.blocks.8.attention.wqkv",
+              "component": "cfm",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "cfm.blocks.8.attention.wo",
+              "component": "cfm",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "cfm.blocks.8.feed_forward.w1",
+              "component": "cfm",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "cfm.blocks.8.feed_forward.w3",
+              "component": "cfm",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "cfm.blocks.8.feed_forward.w2",
+              "component": "cfm",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "cfm.blocks.8.skip_in_linear",
+              "component": "cfm",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "cfm.blocks.9.attention.wqkv",
+              "component": "cfm",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "cfm.blocks.9.attention.wo",
+              "component": "cfm",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "cfm.blocks.9.feed_forward.w1",
+              "component": "cfm",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "cfm.blocks.9.feed_forward.w3",
+              "component": "cfm",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "cfm.blocks.9.feed_forward.w2",
+              "component": "cfm",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "cfm.blocks.9.skip_in_linear",
+              "component": "cfm",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "cfm.blocks.10.attention.wqkv",
+              "component": "cfm",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "cfm.blocks.10.attention.wo",
+              "component": "cfm",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "cfm.blocks.10.feed_forward.w1",
+              "component": "cfm",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "cfm.blocks.10.feed_forward.w3",
+              "component": "cfm",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "cfm.blocks.10.feed_forward.w2",
+              "component": "cfm",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "cfm.blocks.10.skip_in_linear",
+              "component": "cfm",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "cfm.blocks.11.attention.wqkv",
+              "component": "cfm",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "cfm.blocks.11.attention.wo",
+              "component": "cfm",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "cfm.blocks.11.feed_forward.w1",
+              "component": "cfm",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "cfm.blocks.11.feed_forward.w3",
+              "component": "cfm",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "cfm.blocks.11.feed_forward.w2",
+              "component": "cfm",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "cfm.blocks.11.skip_in_linear",
+              "component": "cfm",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "cfm.blocks.12.attention.wqkv",
+              "component": "cfm",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "cfm.blocks.12.attention.wo",
+              "component": "cfm",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "cfm.blocks.12.feed_forward.w1",
+              "component": "cfm",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "cfm.blocks.12.feed_forward.w3",
+              "component": "cfm",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "cfm.blocks.12.feed_forward.w2",
+              "component": "cfm",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "cfm.blocks.12.skip_in_linear",
+              "component": "cfm",
+              "precision": "nvfp4"
+            },
+            {
+              "path": "cfm.wavenet.in_layers.0.conv.conv",
+              "component": "cfm",
+              "precision": "fp8"
+            },
+            {
+              "path": "cfm.wavenet.in_layers.1.conv.conv",
+              "component": "cfm",
+              "precision": "fp8"
+            },
+            {
+              "path": "cfm.wavenet.in_layers.2.conv.conv",
+              "component": "cfm",
+              "precision": "fp8"
+            },
+            {
+              "path": "cfm.wavenet.in_layers.3.conv.conv",
+              "component": "cfm",
+              "precision": "fp8"
+            },
+            {
+              "path": "cfm.wavenet.in_layers.4.conv.conv",
+              "component": "cfm",
+              "precision": "fp8"
+            },
+            {
+              "path": "cfm.wavenet.in_layers.5.conv.conv",
+              "component": "cfm",
+              "precision": "fp8"
+            },
+            {
+              "path": "cfm.wavenet.in_layers.6.conv.conv",
+              "component": "cfm",
+              "precision": "fp8"
+            },
+            {
+              "path": "cfm.wavenet.in_layers.7.conv.conv",
+              "component": "cfm",
+              "precision": "fp8"
+            },
+            {
+              "path": "cfm.wavenet.res_skip_layers.0.conv.conv",
+              "component": "cfm",
+              "precision": "fp8"
+            },
+            {
+              "path": "cfm.wavenet.res_skip_layers.1.conv.conv",
+              "component": "cfm",
+              "precision": "fp8"
+            },
+            {
+              "path": "cfm.wavenet.res_skip_layers.2.conv.conv",
+              "component": "cfm",
+              "precision": "fp8"
+            },
+            {
+              "path": "cfm.wavenet.res_skip_layers.3.conv.conv",
+              "component": "cfm",
+              "precision": "fp8"
+            },
+            {
+              "path": "cfm.wavenet.res_skip_layers.4.conv.conv",
+              "component": "cfm",
+              "precision": "fp8"
+            },
+            {
+              "path": "cfm.wavenet.res_skip_layers.5.conv.conv",
+              "component": "cfm",
+              "precision": "fp8"
+            },
+            {
+              "path": "cfm.wavenet.res_skip_layers.6.conv.conv",
+              "component": "cfm",
+              "precision": "fp8"
+            },
+            {
+              "path": "cfm.wavenet.res_skip_layers.7.conv.conv",
+              "component": "cfm",
+              "precision": "fp8"
+            }
+          ]
+        },
+        "role_specs_sha256": "61e8fc4b890145aa4cdab52a0e08ef3b91d8fdf50f6561ff82e715b2bf39e3ce"
+      }
+    },
+    "vocoder": {
+      "batch": 32,
+      "kind": "vocoder",
+      "frames": 52,
+      "kv_limit": 80,
+      "prompt_frames": null,
+      "precision": "nvfp4_fp8_fp32_interfaces",
+      "sha256": "04dabc9585bb9c0ff3e439fc0e46d0b39dc0d6f980e461584e7ec5604f61ca23",
+      "bytes": 230828380,
+      "build_seconds": 86.81964298617095,
+      "optimization_level": 5,
+      "tiling_optimization_level": "full",
+      "actual_aux_streams": 0,
+      "effective_l2_limit_for_tiling": 117440512,
+      "workspace_limit_bytes": 89173131264,
+      "tactic_shared_memory_limit_bytes": 1073741824,
+      "plan": "/workspace/inspark_mixed_b32/artifacts/mixed_b32/vocoder_fused/model.plan.json",
+      "native_fp4_gemm_layers": 0,
+      "native_fp8_conv_layers": 72,
+      "existing_fir_plugin_layers": 109,
+      "deconvolution_actual_layers": [
+        {
+          "Name": "/ups.2.0/ConvTranspose_myl0_149",
+          "LayerType": "deconv",
+          "TacticName": "sm70_xmma_deconv_implicit_gemm_indexed_f32f32_f32f32_f32_nhwckrsc_nhwc_tilesize128x64x8_stage1_warpsize2x2x1_g1_ffma_strided_aligna4_alignc4",
+          "Inputs": [
+            {
+              "Name": "/ups.2.0/ConvTranspose_output.1_151_myl0",
+              "Dimensions": [
+                32,
+                384,
+                832,
+                1
+              ],
+              "Strides": [
+                319488,
+                1,
+                384,
+                384
+              ],
+              "StrideOrder": [
+                3,
+                0,
+                2,
+                1
+              ],
+              "Datatype": "Float",
+              "Format": "(NHWC) Channel major format"
+            },
+            {
+              "Name": "/ups.2.0/ConvTranspose_output.1_150_myl0",
+              "Dimensions": [
+                384,
+                192,
+                4,
+                1
+              ],
+              "Strides": [
+                768,
+                1,
+                192,
+                192
+              ],
+              "StrideOrder": [
+                3,
+                0,
+                2,
+                1
+              ],
+              "Datatype": "Float",
+              "Format": "(NHWC) Channel major format"
+            }
+          ],
+          "Outputs": [
+            {
+              "Name": "/ups.2.0/ConvTranspose_output.1_myl0",
+              "Dimensions": [
+                32,
+                192,
+                1664,
+                1
+              ],
+              "Strides": [
+                319488,
+                1,
+                192,
+                192
+              ],
+              "StrideOrder": [
+                3,
+                0,
+                2,
+                1
+              ],
+              "Datatype": "Float",
+              "Format": "(NHWC) Channel major format"
+            }
+          ]
+        },
+        {
+          "Name": "/ups.3.0/ConvTranspose_myl0_222",
+          "LayerType": "deconv",
+          "TacticName": "sm70_xmma_deconv_implicit_gemm_indexed_f32f32_f32f32_f32_nhwckrsc_nhwc_tilesize64x128x8_stage1_warpsize1x4x1_g1_ffma_strided_aligna4_alignc4",
+          "Inputs": [
+            {
+              "Name": "/ups.3.0/ConvTranspose_output.1_224_myl0",
+              "Dimensions": [
+                32,
+                192,
+                1664,
+                1
+              ],
+              "Strides": [
+                319488,
+                1,
+                192,
+                192
+              ],
+              "StrideOrder": [
+                3,
+                0,
+                2,
+                1
+              ],
+              "Datatype": "Float",
+              "Format": "(NHWC) Channel major format"
+            },
+            {
+              "Name": "/ups.3.0/ConvTranspose_output.1_223_myl0",
+              "Dimensions": [
+                192,
+                96,
+                4,
+                1
+              ],
+              "Strides": [
+                384,
+                1,
+                96,
+                96
+              ],
+              "StrideOrder": [
+                3,
+                0,
+                2,
+                1
+              ],
+              "Datatype": "Float",
+              "Format": "(NHWC) Channel major format"
+            }
+          ],
+          "Outputs": [
+            {
+              "Name": "/ups.3.0/ConvTranspose_output.1_myl0",
+              "Dimensions": [
+                32,
+                96,
+                3328,
+                1
+              ],
+              "Strides": [
+                319488,
+                1,
+                96,
+                96
+              ],
+              "StrideOrder": [
+                3,
+                0,
+                2,
+                1
+              ],
+              "Datatype": "Float",
+              "Format": "(NHWC) Channel major format"
+            }
+          ]
+        },
+        {
+          "Name": "/ups.4.0/ConvTranspose_myl0_295",
+          "LayerType": "deconv",
+          "TacticName": "sm70_xmma_deconv_implicit_gemm_indexed_f32f32_f32f32_f32_nhwckrsc_nhwc_tilesize128x64x8_stage1_warpsize2x2x1_g1_ffma_strided_aligna4_alignc4",
+          "Inputs": [
+            {
+              "Name": "/ups.4.0/ConvTranspose_output.1_297_myl0",
+              "Dimensions": [
+                32,
+                96,
+                3328,
+                1
+              ],
+              "Strides": [
+                319488,
+                1,
+                96,
+                96
+              ],
+              "StrideOrder": [
+                3,
+                0,
+                2,
+                1
+              ],
+              "Datatype": "Float",
+              "Format": "(NHWC) Channel major format"
+            },
+            {
+              "Name": "/ups.4.0/ConvTranspose_output.1_296_myl0",
+              "Dimensions": [
+                96,
+                48,
+                4,
+                1
+              ],
+              "Strides": [
+                192,
+                1,
+                48,
+                48
+              ],
+              "StrideOrder": [
+                3,
+                0,
+                2,
+                1
+              ],
+              "Datatype": "Float",
+              "Format": "(NHWC) Channel major format"
+            }
+          ],
+          "Outputs": [
+            {
+              "Name": "/ups.4.0/ConvTranspose_output.1_myl0",
+              "Dimensions": [
+                32,
+                48,
+                6656,
+                1
+              ],
+              "Strides": [
+                319488,
+                1,
+                48,
+                48
+              ],
+              "StrideOrder": [
+                3,
+                0,
+                2,
+                1
+              ],
+              "Datatype": "Float",
+              "Format": "(NHWC) Channel major format"
+            }
+          ]
+        },
+        {
+          "Name": "/ups.5.0/ConvTranspose_myl0_368",
+          "LayerType": "deconv",
+          "TacticName": "sm70_xmma_deconv_implicit_gemm_indexed_f32f32_f32f32_f32_nhwckrsc_nhwc_tilesize128x32x8_stage1_warpsize2x2x1_g1_ffma_strided_aligna4_alignc4",
+          "Inputs": [
+            {
+              "Name": "/ups.5.0/ConvTranspose_output.1_370_myl0",
+              "Dimensions": [
+                32,
+                48,
+                6656,
+                1
+              ],
+              "Strides": [
+                319488,
+                1,
+                48,
+                48
+              ],
+              "StrideOrder": [
+                3,
+                0,
+                2,
+                1
+              ],
+              "Datatype": "Float",
+              "Format": "(NHWC) Channel major format"
+            },
+            {
+              "Name": "/ups.5.0/ConvTranspose_output.1_369_myl0",
+              "Dimensions": [
+                48,
+                24,
+                4,
+                1
+              ],
+              "Strides": [
+                96,
+                1,
+                24,
+                24
+              ],
+              "StrideOrder": [
+                3,
+                0,
+                2,
+                1
+              ],
+              "Datatype": "Float",
+              "Format": "(NHWC) Channel major format"
+            }
+          ],
+          "Outputs": [
+            {
+              "Name": "/ups.5.0/ConvTranspose_output.1_myl0",
+              "Dimensions": [
+                32,
+                24,
+                13312,
+                1
+              ],
+              "Strides": [
+                319488,
+                1,
+                24,
+                24
+              ],
+              "StrideOrder": [
+                3,
+                0,
+                2,
+                1
+              ],
+              "Datatype": "Float",
+              "Format": "(NHWC) Channel major format"
+            }
+          ]
+        }
+      ],
+      "layer_type_counts": {
+        "custom_layer": 111,
+        "kgen": 236,
+        "correlation": 112,
+        "deconv": 4
+      },
+      "tensors": [
+        {
+          "name": "mel",
+          "shape": [
+            32,
+            80,
+            52
+          ],
+          "dtype": "DataType.FLOAT",
+          "mode": "TensorIOMode.INPUT"
+        },
+        {
+          "name": "pcm",
+          "shape": [
+            32,
+            1,
+            13312
+          ],
+          "dtype": "DataType.FLOAT",
+          "mode": "TensorIOMode.OUTPUT"
+        }
+      ],
+      "quantization_recipe": {
+        "scheme": "nvfp4_fp8",
+        "calibration": {
+          "role": "calibration_artifact",
+          "path": "/workspace/inspark_mixed_b32/artifacts/mixed_b32/calibration.json",
+          "sha256": "c568cbebe6e26b31169c57a988db84e2be16e38abd02daa02153c43028e6c4e0",
+          "bytes": 891997
+        },
+        "role_manifest": {
+          "roles": [
+            {
+              "path": "vocoder.stages.0.ups.0",
+              "component": "vocoder",
+              "precision": "bf16"
+            },
+            {
+              "path": "vocoder.stages.0.resblock0.convs1.0",
+              "component": "vocoder",
+              "precision": "bf16"
+            },
+            {
+              "path": "vocoder.stages.0.resblock0.convs1.1",
+              "component": "vocoder",
+              "precision": "bf16"
+            },
+            {
+              "path": "vocoder.stages.0.resblock0.convs1.2",
+              "component": "vocoder",
+              "precision": "bf16"
+            },
+            {
+              "path": "vocoder.stages.0.resblock0.convs2.0",
+              "component": "vocoder",
+              "precision": "bf16"
+            },
+            {
+              "path": "vocoder.stages.0.resblock0.convs2.1",
+              "component": "vocoder",
+              "precision": "bf16"
+            },
+            {
+              "path": "vocoder.stages.0.resblock0.convs2.2",
+              "component": "vocoder",
+              "precision": "bf16"
+            },
+            {
+              "path": "vocoder.stages.0.resblock1.convs1.0",
+              "component": "vocoder",
+              "precision": "bf16"
+            },
+            {
+              "path": "vocoder.stages.0.resblock1.convs1.1",
+              "component": "vocoder",
+              "precision": "bf16"
+            },
+            {
+              "path": "vocoder.stages.0.resblock1.convs1.2",
+              "component": "vocoder",
+              "precision": "bf16"
+            },
+            {
+              "path": "vocoder.stages.0.resblock1.convs2.0",
+              "component": "vocoder",
+              "precision": "bf16"
+            },
+            {
+              "path": "vocoder.stages.0.resblock1.convs2.1",
+              "component": "vocoder",
+              "precision": "bf16"
+            },
+            {
+              "path": "vocoder.stages.0.resblock1.convs2.2",
+              "component": "vocoder",
+              "precision": "bf16"
+            },
+            {
+              "path": "vocoder.stages.0.resblock2.convs1.0",
+              "component": "vocoder",
+              "precision": "bf16"
+            },
+            {
+              "path": "vocoder.stages.0.resblock2.convs1.1",
+              "component": "vocoder",
+              "precision": "bf16"
+            },
+            {
+              "path": "vocoder.stages.0.resblock2.convs1.2",
+              "component": "vocoder",
+              "precision": "bf16"
+            },
+            {
+              "path": "vocoder.stages.0.resblock2.convs2.0",
+              "component": "vocoder",
+              "precision": "bf16"
+            },
+            {
+              "path": "vocoder.stages.0.resblock2.convs2.1",
+              "component": "vocoder",
+              "precision": "bf16"
+            },
+            {
+              "path": "vocoder.stages.0.resblock2.convs2.2",
+              "component": "vocoder",
+              "precision": "bf16"
+            },
+            {
+              "path": "vocoder.stages.1.ups.0",
+              "component": "vocoder",
+              "precision": "bf16"
+            },
+            {
+              "path": "vocoder.stages.1.resblock0.convs1.0",
+              "component": "vocoder",
+              "precision": "bf16"
+            },
+            {
+              "path": "vocoder.stages.1.resblock0.convs1.1",
+              "component": "vocoder",
+              "precision": "bf16"
+            },
+            {
+              "path": "vocoder.stages.1.resblock0.convs1.2",
+              "component": "vocoder",
+              "precision": "bf16"
+            },
+            {
+              "path": "vocoder.stages.1.resblock0.convs2.0",
+              "component": "vocoder",
+              "precision": "bf16"
+            },
+            {
+              "path": "vocoder.stages.1.resblock0.convs2.1",
+              "component": "vocoder",
+              "precision": "bf16"
+            },
+            {
+              "path": "vocoder.stages.1.resblock0.convs2.2",
+              "component": "vocoder",
+              "precision": "bf16"
+            },
+            {
+              "path": "vocoder.stages.1.resblock1.convs1.0",
+              "component": "vocoder",
+              "precision": "bf16"
+            },
+            {
+              "path": "vocoder.stages.1.resblock1.convs1.1",
+              "component": "vocoder",
+              "precision": "bf16"
+            },
+            {
+              "path": "vocoder.stages.1.resblock1.convs1.2",
+              "component": "vocoder",
+              "precision": "bf16"
+            },
+            {
+              "path": "vocoder.stages.1.resblock1.convs2.0",
+              "component": "vocoder",
+              "precision": "bf16"
+            },
+            {
+              "path": "vocoder.stages.1.resblock1.convs2.1",
+              "component": "vocoder",
+              "precision": "bf16"
+            },
+            {
+              "path": "vocoder.stages.1.resblock1.convs2.2",
+              "component": "vocoder",
+              "precision": "bf16"
+            },
+            {
+              "path": "vocoder.stages.1.resblock2.convs1.0",
+              "component": "vocoder",
+              "precision": "bf16"
+            },
+            {
+              "path": "vocoder.stages.1.resblock2.convs1.1",
+              "component": "vocoder",
+              "precision": "bf16"
+            },
+            {
+              "path": "vocoder.stages.1.resblock2.convs1.2",
+              "component": "vocoder",
+              "precision": "bf16"
+            },
+            {
+              "path": "vocoder.stages.1.resblock2.convs2.0",
+              "component": "vocoder",
+              "precision": "bf16"
+            },
+            {
+              "path": "vocoder.stages.1.resblock2.convs2.1",
+              "component": "vocoder",
+              "precision": "bf16"
+            },
+            {
+              "path": "vocoder.stages.1.resblock2.convs2.2",
+              "component": "vocoder",
+              "precision": "bf16"
+            },
+            {
+              "path": "vocoder.stages.2.ups.0",
+              "component": "vocoder",
+              "precision": "fp8"
+            },
+            {
+              "path": "vocoder.stages.2.resblock0.convs1.0",
+              "component": "vocoder",
+              "precision": "fp8"
+            },
+            {
+              "path": "vocoder.stages.2.resblock0.convs1.1",
+              "component": "vocoder",
+              "precision": "fp8"
+            },
+            {
+              "path": "vocoder.stages.2.resblock0.convs1.2",
+              "component": "vocoder",
+              "precision": "fp8"
+            },
+            {
+              "path": "vocoder.stages.2.resblock0.convs2.0",
+              "component": "vocoder",
+              "precision": "fp8"
+            },
+            {
+              "path": "vocoder.stages.2.resblock0.convs2.1",
+              "component": "vocoder",
+              "precision": "fp8"
+            },
+            {
+              "path": "vocoder.stages.2.resblock0.convs2.2",
+              "component": "vocoder",
+              "precision": "fp8"
+            },
+            {
+              "path": "vocoder.stages.2.resblock1.convs1.0",
+              "component": "vocoder",
+              "precision": "fp8"
+            },
+            {
+              "path": "vocoder.stages.2.resblock1.convs1.1",
+              "component": "vocoder",
+              "precision": "fp8"
+            },
+            {
+              "path": "vocoder.stages.2.resblock1.convs1.2",
+              "component": "vocoder",
+              "precision": "fp8"
+            },
+            {
+              "path": "vocoder.stages.2.resblock1.convs2.0",
+              "component": "vocoder",
+              "precision": "fp8"
+            },
+            {
+              "path": "vocoder.stages.2.resblock1.convs2.1",
+              "component": "vocoder",
+              "precision": "fp8"
+            },
+            {
+              "path": "vocoder.stages.2.resblock1.convs2.2",
+              "component": "vocoder",
+              "precision": "fp8"
+            },
+            {
+              "path": "vocoder.stages.2.resblock2.convs1.0",
+              "component": "vocoder",
+              "precision": "fp8"
+            },
+            {
+              "path": "vocoder.stages.2.resblock2.convs1.1",
+              "component": "vocoder",
+              "precision": "fp8"
+            },
+            {
+              "path": "vocoder.stages.2.resblock2.convs1.2",
+              "component": "vocoder",
+              "precision": "fp8"
+            },
+            {
+              "path": "vocoder.stages.2.resblock2.convs2.0",
+              "component": "vocoder",
+              "precision": "fp8"
+            },
+            {
+              "path": "vocoder.stages.2.resblock2.convs2.1",
+              "component": "vocoder",
+              "precision": "fp8"
+            },
+            {
+              "path": "vocoder.stages.2.resblock2.convs2.2",
+              "component": "vocoder",
+              "precision": "fp8"
+            },
+            {
+              "path": "vocoder.stages.3.ups.0",
+              "component": "vocoder",
+              "precision": "fp8"
+            },
+            {
+              "path": "vocoder.stages.3.resblock0.convs1.0",
+              "component": "vocoder",
+              "precision": "fp8"
+            },
+            {
+              "path": "vocoder.stages.3.resblock0.convs1.1",
+              "component": "vocoder",
+              "precision": "fp8"
+            },
+            {
+              "path": "vocoder.stages.3.resblock0.convs1.2",
+              "component": "vocoder",
+              "precision": "fp8"
+            },
+            {
+              "path": "vocoder.stages.3.resblock0.convs2.0",
+              "component": "vocoder",
+              "precision": "fp8"
+            },
+            {
+              "path": "vocoder.stages.3.resblock0.convs2.1",
+              "component": "vocoder",
+              "precision": "fp8"
+            },
+            {
+              "path": "vocoder.stages.3.resblock0.convs2.2",
+              "component": "vocoder",
+              "precision": "fp8"
+            },
+            {
+              "path": "vocoder.stages.3.resblock1.convs1.0",
+              "component": "vocoder",
+              "precision": "fp8"
+            },
+            {
+              "path": "vocoder.stages.3.resblock1.convs1.1",
+              "component": "vocoder",
+              "precision": "fp8"
+            },
+            {
+              "path": "vocoder.stages.3.resblock1.convs1.2",
+              "component": "vocoder",
+              "precision": "fp8"
+            },
+            {
+              "path": "vocoder.stages.3.resblock1.convs2.0",
+              "component": "vocoder",
+              "precision": "fp8"
+            },
+            {
+              "path": "vocoder.stages.3.resblock1.convs2.1",
+              "component": "vocoder",
+              "precision": "fp8"
+            },
+            {
+              "path": "vocoder.stages.3.resblock1.convs2.2",
+              "component": "vocoder",
+              "precision": "fp8"
+            },
+            {
+              "path": "vocoder.stages.3.resblock2.convs1.0",
+              "component": "vocoder",
+              "precision": "fp8"
+            },
+            {
+              "path": "vocoder.stages.3.resblock2.convs1.1",
+              "component": "vocoder",
+              "precision": "fp8"
+            },
+            {
+              "path": "vocoder.stages.3.resblock2.convs1.2",
+              "component": "vocoder",
+              "precision": "fp8"
+            },
+            {
+              "path": "vocoder.stages.3.resblock2.convs2.0",
+              "component": "vocoder",
+              "precision": "fp8"
+            },
+            {
+              "path": "vocoder.stages.3.resblock2.convs2.1",
+              "component": "vocoder",
+              "precision": "fp8"
+            },
+            {
+              "path": "vocoder.stages.3.resblock2.convs2.2",
+              "component": "vocoder",
+              "precision": "fp8"
+            },
+            {
+              "path": "vocoder.stages.4.ups.0",
+              "component": "vocoder",
+              "precision": "fp8"
+            },
+            {
+              "path": "vocoder.stages.4.resblock0.convs1.0",
+              "component": "vocoder",
+              "precision": "fp8"
+            },
+            {
+              "path": "vocoder.stages.4.resblock0.convs1.1",
+              "component": "vocoder",
+              "precision": "fp8"
+            },
+            {
+              "path": "vocoder.stages.4.resblock0.convs1.2",
+              "component": "vocoder",
+              "precision": "fp8"
+            },
+            {
+              "path": "vocoder.stages.4.resblock0.convs2.0",
+              "component": "vocoder",
+              "precision": "fp8"
+            },
+            {
+              "path": "vocoder.stages.4.resblock0.convs2.1",
+              "component": "vocoder",
+              "precision": "fp8"
+            },
+            {
+              "path": "vocoder.stages.4.resblock0.convs2.2",
+              "component": "vocoder",
+              "precision": "fp8"
+            },
+            {
+              "path": "vocoder.stages.4.resblock1.convs1.0",
+              "component": "vocoder",
+              "precision": "fp8"
+            },
+            {
+              "path": "vocoder.stages.4.resblock1.convs1.1",
+              "component": "vocoder",
+              "precision": "fp8"
+            },
+            {
+              "path": "vocoder.stages.4.resblock1.convs1.2",
+              "component": "vocoder",
+              "precision": "fp8"
+            },
+            {
+              "path": "vocoder.stages.4.resblock1.convs2.0",
+              "component": "vocoder",
+              "precision": "fp8"
+            },
+            {
+              "path": "vocoder.stages.4.resblock1.convs2.1",
+              "component": "vocoder",
+              "precision": "fp8"
+            },
+            {
+              "path": "vocoder.stages.4.resblock1.convs2.2",
+              "component": "vocoder",
+              "precision": "fp8"
+            },
+            {
+              "path": "vocoder.stages.4.resblock2.convs1.0",
+              "component": "vocoder",
+              "precision": "fp8"
+            },
+            {
+              "path": "vocoder.stages.4.resblock2.convs1.1",
+              "component": "vocoder",
+              "precision": "fp8"
+            },
+            {
+              "path": "vocoder.stages.4.resblock2.convs1.2",
+              "component": "vocoder",
+              "precision": "fp8"
+            },
+            {
+              "path": "vocoder.stages.4.resblock2.convs2.0",
+              "component": "vocoder",
+              "precision": "fp8"
+            },
+            {
+              "path": "vocoder.stages.4.resblock2.convs2.1",
+              "component": "vocoder",
+              "precision": "fp8"
+            },
+            {
+              "path": "vocoder.stages.4.resblock2.convs2.2",
+              "component": "vocoder",
+              "precision": "fp8"
+            },
+            {
+              "path": "vocoder.stages.5.ups.0",
+              "component": "vocoder",
+              "precision": "fp8"
+            },
+            {
+              "path": "vocoder.stages.5.resblock0.convs1.0",
+              "component": "vocoder",
+              "precision": "fp8"
+            },
+            {
+              "path": "vocoder.stages.5.resblock0.convs1.1",
+              "component": "vocoder",
+              "precision": "fp8"
+            },
+            {
+              "path": "vocoder.stages.5.resblock0.convs1.2",
+              "component": "vocoder",
+              "precision": "fp8"
+            },
+            {
+              "path": "vocoder.stages.5.resblock0.convs2.0",
+              "component": "vocoder",
+              "precision": "fp8"
+            },
+            {
+              "path": "vocoder.stages.5.resblock0.convs2.1",
+              "component": "vocoder",
+              "precision": "fp8"
+            },
+            {
+              "path": "vocoder.stages.5.resblock0.convs2.2",
+              "component": "vocoder",
+              "precision": "fp8"
+            },
+            {
+              "path": "vocoder.stages.5.resblock1.convs1.0",
+              "component": "vocoder",
+              "precision": "fp8"
+            },
+            {
+              "path": "vocoder.stages.5.resblock1.convs1.1",
+              "component": "vocoder",
+              "precision": "fp8"
+            },
+            {
+              "path": "vocoder.stages.5.resblock1.convs1.2",
+              "component": "vocoder",
+              "precision": "fp8"
+            },
+            {
+              "path": "vocoder.stages.5.resblock1.convs2.0",
+              "component": "vocoder",
+              "precision": "fp8"
+            },
+            {
+              "path": "vocoder.stages.5.resblock1.convs2.1",
+              "component": "vocoder",
+              "precision": "fp8"
+            },
+            {
+              "path": "vocoder.stages.5.resblock1.convs2.2",
+              "component": "vocoder",
+              "precision": "fp8"
+            },
+            {
+              "path": "vocoder.stages.5.resblock2.convs1.0",
+              "component": "vocoder",
+              "precision": "fp8"
+            },
+            {
+              "path": "vocoder.stages.5.resblock2.convs1.1",
+              "component": "vocoder",
+              "precision": "fp8"
+            },
+            {
+              "path": "vocoder.stages.5.resblock2.convs1.2",
+              "component": "vocoder",
+              "precision": "fp8"
+            },
+            {
+              "path": "vocoder.stages.5.resblock2.convs2.0",
+              "component": "vocoder",
+              "precision": "fp8"
+            },
+            {
+              "path": "vocoder.stages.5.resblock2.convs2.1",
+              "component": "vocoder",
+              "precision": "fp8"
+            },
+            {
+              "path": "vocoder.stages.5.resblock2.convs2.2",
+              "component": "vocoder",
+              "precision": "fp8"
+            },
+            {
+              "path": "vocoder.conv_pre",
+              "component": "vocoder",
+              "precision": "bf16"
+            },
+            {
+              "path": "vocoder.conv_post",
+              "component": "vocoder",
+              "precision": "bf16"
+            }
+          ]
+        },
+        "role_specs_sha256": "17a8468a619c3468968312c424be8b7270e2e3b478e5e54d1be7653c12730607"
+      }
+    }
+  },
+  "measurement_limits": "provisional10waves during parallel otherGPU tasks;formal5/30/15 parentexclusivewindow pending"
+}

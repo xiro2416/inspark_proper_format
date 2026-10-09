@@ -1,0 +1,242 @@
+{
+  "decision": "do_not_reuse_AR_final_hidden_under_current_contract",
+  "scope": "real B32 fullwave per-active-round tokens/positions/committed-only logical mapping; diagnostic tracing overhead excluded from performance claims",
+  "AR_and_latent_embedding_modules_same_object": true,
+  "all_required_speech_positions_mapped": true,
+  "mapped_positions": 1019,
+  "equal_embeddings": 0,
+  "mismatching_embeddings": 1019,
+  "source_eager_AR_contract": "ARCore._step first_position=past_length+1-mel_length;StreamingCore setsmel_length=prefix_length-1 andprefix containsBOS, hencefirstspeechposition2;Native matches unchanged eager",
+  "upstream_generate_contract": "GPT2InferenceModel cached_mel_emb excludesBOS; first1tokenforward attentionlength=cached+2;get_fixed_embedding(attentionlength-cached)=2",
+  "latent_contract": "BOS0;codes[0:N-1] excludingfinalcode embeddedpositions1..N-1;transformerln_f followedgpt.final_norm;differentembedding cannot be explained by float operation order",
+  "first_AR_position": [
+    2
+  ],
+  "first_latent_speech_position": 1,
+  "actual_original_eager_inputs_same_prefix": [
+    {
+      "request": 0,
+      "actual_cached_mel_emb_length": 37,
+      "actual_attention_mask_length": 39,
+      "actual_first_speech_position": 2,
+      "first_input_embedding_equals_native_position2": true
+    },
+    {
+      "request": 1,
+      "actual_cached_mel_emb_length": 40,
+      "actual_attention_mask_length": 42,
+      "actual_first_speech_position": 2,
+      "first_input_embedding_equals_native_position2": true
+    },
+    {
+      "request": 2,
+      "actual_cached_mel_emb_length": 40,
+      "actual_attention_mask_length": 42,
+      "actual_first_speech_position": 2,
+      "first_input_embedding_equals_native_position2": true
+    },
+    {
+      "request": 3,
+      "actual_cached_mel_emb_length": 37,
+      "actual_attention_mask_length": 39,
+      "actual_first_speech_position": 2,
+      "first_input_embedding_equals_native_position2": true
+    },
+    {
+      "request": 4,
+      "actual_cached_mel_emb_length": 37,
+      "actual_attention_mask_length": 39,
+      "actual_first_speech_position": 2,
+      "first_input_embedding_equals_native_position2": true
+    },
+    {
+      "request": 5,
+      "actual_cached_mel_emb_length": 40,
+      "actual_attention_mask_length": 42,
+      "actual_first_speech_position": 2,
+      "first_input_embedding_equals_native_position2": true
+    },
+    {
+      "request": 6,
+      "actual_cached_mel_emb_length": 37,
+      "actual_attention_mask_length": 39,
+      "actual_first_speech_position": 2,
+      "first_input_embedding_equals_native_position2": true
+    },
+    {
+      "request": 7,
+      "actual_cached_mel_emb_length": 40,
+      "actual_attention_mask_length": 42,
+      "actual_first_speech_position": 2,
+      "first_input_embedding_equals_native_position2": true
+    },
+    {
+      "request": 8,
+      "actual_cached_mel_emb_length": 40,
+      "actual_attention_mask_length": 42,
+      "actual_first_speech_position": 2,
+      "first_input_embedding_equals_native_position2": true
+    },
+    {
+      "request": 9,
+      "actual_cached_mel_emb_length": 37,
+      "actual_attention_mask_length": 39,
+      "actual_first_speech_position": 2,
+      "first_input_embedding_equals_native_position2": true
+    },
+    {
+      "request": 10,
+      "actual_cached_mel_emb_length": 37,
+      "actual_attention_mask_length": 39,
+      "actual_first_speech_position": 2,
+      "first_input_embedding_equals_native_position2": true
+    },
+    {
+      "request": 11,
+      "actual_cached_mel_emb_length": 40,
+      "actual_attention_mask_length": 42,
+      "actual_first_speech_position": 2,
+      "first_input_embedding_equals_native_position2": true
+    },
+    {
+      "request": 12,
+      "actual_cached_mel_emb_length": 37,
+      "actual_attention_mask_length": 39,
+      "actual_first_speech_position": 2,
+      "first_input_embedding_equals_native_position2": true
+    },
+    {
+      "request": 13,
+      "actual_cached_mel_emb_length": 37,
+      "actual_attention_mask_length": 39,
+      "actual_first_speech_position": 2,
+      "first_input_embedding_equals_native_position2": true
+    },
+    {
+      "request": 14,
+      "actual_cached_mel_emb_length": 40,
+      "actual_attention_mask_length": 42,
+      "actual_first_speech_position": 2,
+      "first_input_embedding_equals_native_position2": true
+    },
+    {
+      "request": 15,
+      "actual_cached_mel_emb_length": 37,
+      "actual_attention_mask_length": 39,
+      "actual_first_speech_position": 2,
+      "first_input_embedding_equals_native_position2": true
+    },
+    {
+      "request": 16,
+      "actual_cached_mel_emb_length": 37,
+      "actual_attention_mask_length": 39,
+      "actual_first_speech_position": 2,
+      "first_input_embedding_equals_native_position2": true
+    },
+    {
+      "request": 17,
+      "actual_cached_mel_emb_length": 40,
+      "actual_attention_mask_length": 42,
+      "actual_first_speech_position": 2,
+      "first_input_embedding_equals_native_position2": true
+    },
+    {
+      "request": 18,
+      "actual_cached_mel_emb_length": 37,
+      "actual_attention_mask_length": 39,
+      "actual_first_speech_position": 2,
+      "first_input_embedding_equals_native_position2": true
+    },
+    {
+      "request": 19,
+      "actual_cached_mel_emb_length": 37,
+      "actual_attention_mask_length": 39,
+      "actual_first_speech_position": 2,
+      "first_input_embedding_equals_native_position2": true
+    },
+    {
+      "request": 20,
+      "actual_cached_mel_emb_length": 40,
+      "actual_attention_mask_length": 42,
+      "actual_first_speech_position": 2,
+      "first_input_embedding_equals_native_position2": true
+    },
+    {
+      "request": 21,
+      "actual_cached_mel_emb_length": 37,
+      "actual_attention_mask_length": 39,
+      "actual_first_speech_position": 2,
+      "first_input_embedding_equals_native_position2": true
+    },
+    {
+      "request": 22,
+      "actual_cached_mel_emb_length": 37,
+      "actual_attention_mask_length": 39,
+      "actual_first_speech_position": 2,
+      "first_input_embedding_equals_native_position2": true
+    },
+    {
+      "request": 23,
+      "actual_cached_mel_emb_length": 40,
+      "actual_attention_mask_length": 42,
+      "actual_first_speech_position": 2,
+      "first_input_embedding_equals_native_position2": true
+    },
+    {
+      "request": 24,
+      "actual_cached_mel_emb_length": 37,
+      "actual_attention_mask_length": 39,
+      "actual_first_speech_position": 2,
+      "first_input_embedding_equals_native_position2": true
+    },
+    {
+      "request": 25,
+      "actual_cached_mel_emb_length": 37,
+      "actual_attention_mask_length": 39,
+      "actual_first_speech_position": 2,
+      "first_input_embedding_equals_native_position2": true
+    },
+    {
+      "request": 26,
+      "actual_cached_mel_emb_length": 40,
+      "actual_attention_mask_length": 42,
+      "actual_first_speech_position": 2,
+      "first_input_embedding_equals_native_position2": true
+    },
+    {
+      "request": 27,
+      "actual_cached_mel_emb_length": 37,
+      "actual_attention_mask_length": 39,
+      "actual_first_speech_position": 2,
+      "first_input_embedding_equals_native_position2": true
+    },
+    {
+      "request": 28,
+      "actual_cached_mel_emb_length": 37,
+      "actual_attention_mask_length": 39,
+      "actual_first_speech_position": 2,
+      "first_input_embedding_equals_native_position2": true
+    },
+    {
+      "request": 29,
+      "actual_cached_mel_emb_length": 40,
+      "actual_attention_mask_length": 42,
+      "actual_first_speech_position": 2,
+      "first_input_embedding_equals_native_position2": true
+    },
+    {
+      "request": 30,
+      "actual_cached_mel_emb_length": 37,
+      "actual_attention_mask_length": 39,
+      "actual_first_speech_position": 2,
+      "first_input_embedding_equals_native_position2": true
+    },
+    {
+      "request": 31,
+      "actual_cached_mel_emb_length": 37,
+      "actual_attention_mask_length": 39,
+      "actual_first_speech_position": 2,
+      "first_input_embedding_equals_native_position2": true
+    }
+  ]
+}

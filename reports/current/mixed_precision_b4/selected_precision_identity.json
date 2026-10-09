@@ -1,0 +1,41 @@
+{
+  "global_precision_counts": {
+    "bf16": 90,
+    "fp8": 164,
+    "nvfp4": 63
+  },
+  "calibration": "/workspace/inspark_mixed_b4/artifacts/mixed_b4/optimization/ar_fp8/target_only_calibration.json",
+  "calibration_sha256": "34d1ea37b136ac8de7afee8002b1905b5f10b27492cd31fbe3c1964549f4e9df",
+  "component_calibrations": {
+    "target": {
+      "path": "/workspace/inspark_mixed_b4/artifacts/mixed_b4/optimization/ar_fp8/calibration.json",
+      "sha256": "acf2705676ce405abaa9fa414afb010cb38d3791c232e5770e12b1aa88bc3c71"
+    },
+    "draft": {
+      "path": "/workspace/inspark_mixed_b4/artifacts/mixed_b4/calibration.json",
+      "sha256": "c568cbebe6e26b31169c57a988db84e2be16e38abd02daa02153c43028e6c4e0"
+    },
+    "cfm": {
+      "path": "/workspace/inspark_mixed_b4/artifacts/mixed_b4/calibration.json",
+      "sha256": "c568cbebe6e26b31169c57a988db84e2be16e38abd02daa02153c43028e6c4e0"
+    },
+    "vocoder": {
+      "path": "/workspace/inspark_mixed_b4/artifacts/mixed_b4/calibration.json",
+      "sha256": "c568cbebe6e26b31169c57a988db84e2be16e38abd02daa02153c43028e6c4e0"
+    }
+  },
+  "component_schemes": {
+    "target": "nvfp4_fp8",
+    "draft": "nvfp4_fp8",
+    "cfm": "nvfp4_fp8",
+    "vocoder": "nvfp4_fp8"
+  },
+  "actual_target_weight_storage_required": "FP8 canonical GEMM [out,in] and frozen scales; old135F4 packed Target weights are not this map",
+  "protected90_unchanged": true,
+  "model_tensor_hashes": {
+    "target": "d5e6126f86fca5a8de05fb7a3036aeecc459749d31e049ea495499c8b533aeb5",
+    "draft": "7965660f2dedc03c6713c7af19e75631dec5973c76bf04ca6b248862435bbcb2",
+    "cfm": "716c3ca945eb3b886421b14c34f456967ea37f7a93d96c385a13324d1c291dbe",
+    "vocoder": "1ae329b51eb3602c4e986fcf7e228d30a22a440deabb7d5f4d6a58c5fc9889fb"
+  }
+}

@@ -1,0 +1,2181 @@
+{
+  "scope": "inherited FP8-QDQ representation; actual deconv FP32 math in both B4 and B64, not all FP8 roles native FP8 kernels",
+  "layers": [
+    {
+      "logical_role": "vocoder.stages.2.ups.0",
+      "spec": {
+        "precision": "fp8",
+        "alpha": 1.0,
+        "smoothing_source": "none",
+        "input_channel_axis": 1,
+        "weight_input_axis": 0,
+        "weight_axis": 1,
+        "input_scale": 0.012686272816998618,
+        "weight_scale": [
+          0.00025103948428295553,
+          0.00013987545389682055,
+          0.0001522133534308523,
+          0.00031801944714970887,
+          0.00013160842354409397,
+          0.00014906658907420933,
+          0.00013589431182481349,
+          0.00013566386769525707,
+          0.00025307462783530354,
+          0.0002616317360661924,
+          0.00016783968021627516,
+          0.0003795399679802358,
+          0.00016097805928438902,
+          0.0001171892654383555,
+          0.00016263837460428476,
+          0.0001745914778439328,
+          0.0001614656503079459,
+          0.00022070613340474665,
+          0.00020101737754885107,
+          0.00015756888024043292,
+          0.00012292549945414066,
+          0.00012007953046122566,
+          0.00013260147534310818,
+          0.00014726410154253244,
+          0.00014547746104653925,
+          0.00012527235958259553,
+          0.00021208662656135857,
+          0.0001847168168751523,
+          0.00015533938130829483,
+          0.00015284008986782283,
+          0.00028686810401268303,
+          0.00015853159129619598,
+          0.00018379850371275097,
+          0.00035866114194504917,
+          0.00019175831403117627,
+          0.00015601459017489105,
+          0.000153321772813797,
+          0.00017273216508328915,
+          0.00014795585593674332,
+          0.0001254855451406911,
+          0.00022509040718432516,
+          0.00041707040509209037,
+          0.00012741460523102432,
+          0.00013099871284794062,
+          0.0001189484100905247,
+          0.0001223257277160883,
+          0.00016564119141548872,
+          0.00016557742492295802,
+          0.00017490974278189242,
+          0.0001577880757395178,
+          0.00018596141308080405,
+          0.00011012958566425368,
+          0.0001226252206834033,
+          0.00011937725503230467,
+          9.83685749815777e-05,
+          0.00010261670831823722,
+          0.00016398866137024015,
+          0.0002481222036294639,
+          0.0002291899436386302,
+          0.00016595763736404479,
+          0.00032075223862193525,
+          0.00013468480028677732,
+          0.00011624167382251471,
+          0.00015443387383129448,
+          0.00018921647279057652,
+          0.00012846043682657182,
+          0.00017744609795045108,
+          0.00012684709508903325,
+          0.0002075129741569981,
+          0.00010207910236204043,
+          0.00025386791094206274,
+          0.00012700969818979502,
+          0.00018158918828703463,
+          0.00011668516526697204,
+          0.00014017720241099596,
+          0.00016009321552701294,
+          0.00013672591012436897,
+          8.156617695931345e-05,
+          0.0002104673330904916,
+          0.0001943656534422189,
+          0.0001187068410217762,
+          0.00015830958727747202,
+          0.0001867798564489931,
+          0.0001628273312235251,
+          0.00013856394798494875,
+          0.0002056416851701215,
+          0.00010673084761947393,
+          0.00013511512952391058,
+          0.00018301352974958718,
+          0.00013456550368573517,
+          0.00012941514432895929,
+          0.00011846645793411881,
+          0.0001675363164395094,
+          0.00019966097897849977,
+          0.00020892193424515426,
+          0.00015858224651310593,
+          0.0001557718642288819,
+          0.00018419370462652296,
+          0.000296353071462363,
+          0.000126222352264449,
+          0.00020336343732196838,
+          0.00020983362628612667,
+          0.00020473111362662166,
+          0.00012055625120410696,
+          0.0001921783696161583,
+          0.00030152019462548196,
+          0.00029495012131519616,
+          0.00018211490532848984,
+          0.00010175398347200826,
+          0.00013044934894423932,
+          0.00019671177142299712,
+          0.00020605786994565278,
+          0.00012318220979068428,
+          0.0001283398742089048,
+          0.00012120377505198121,
+          0.0001764492626534775,
+          0.0004306159389670938,
+          0.00023986899759620428,
+          0.000101818899565842,
+          0.00011316087329760194,
+          0.00010053560981759802,
+          0.00010832514817593619,
+          0.00010515329631743953,
+          0.0001304410834563896,
+          0.00020663079340010881,
+          0.00011717042798409238,
+          0.00019569041614886373,
+          0.00012788164895027876,
+          0.00036754016764461994,
+          0.00014084541180636734,
+          0.00016185919230338186,
+          0.00028587368433363736,
+          0.00028590974397957325,
+          0.0001437905739294365,
+          0.00013730202044826,
+          0.00015480157162528485,
+          0.000123849677038379,
+          0.00018734487821348011,
+          0.00013810516975354403,
+          0.00013713420776184648,
+          0.00027390976902097464,
+          0.00014148178161121905,
+          0.00011066342267440632,
+          0.0001391383120790124,
+          0.00011954222281929106,
+          0.0001349739177385345,
+          0.00017786980606615543,
+          0.00019485768279992044,
+          0.00011486098082968965,
+          0.0001256586838280782,
+          0.0001241063728230074,
+          0.00014075179933570325,
+          0.0001428914547432214,
+          0.00021945063781458884,
+          0.0002364416141062975,
+          0.00015421734133269638,
+          0.00013700997806154191,
+          0.00017591050709597766,
+          9.955903806257993e-05,
+          0.00025954845477826893,
+          0.00011422148236306384,
+          9.457317355554551e-05,
+          0.00012180255725979805,
+          0.00013014725118409842,
+          0.00012938817963004112,
+          0.00023713104019407183,
+          0.0001529025612398982,
+          0.00012923193571623415,
+          0.00012592288840096444,
+          0.00016368507931474596,
+          0.00011567228648345917,
+          0.00018422782886773348,
+          0.00017686383216641843,
+          0.0001725339243421331,
+          0.0001549305161461234,
+          0.00012418195547070354,
+          0.00014936676598154008,
+          0.00021940273290965706,
+          0.00014242311590351164,
+          0.00014577231195289642,
+          0.00022229793830774724,
+          0.00011523605644470081,
+          0.00016861663607414812,
+          0.0001694971288088709,
+          0.00011757069296436384,
+          0.00017892774485517293,
+          0.0001241324789589271,
+          0.0001513012539362535,
+          0.0001441652129869908,
+          0.00013284708256833255,
+          0.00012718571815639734,
+          0.00016952406440395862
+        ],
+        "calibration_calls": 16,
+        "calibration_elements": 40894464
+      },
+      "actual": {
+        "b4": [
+          {
+            "Name": "/ups.2.0/ConvTranspose_myl0_149",
+            "LayerType": "deconv",
+            "Inputs": [
+              {
+                "Name": "/ups.2.0/ConvTranspose_output.1_151_myl0",
+                "Dimensions": [
+                  4,
+                  384,
+                  832,
+                  1
+                ],
+                "Strides": [
+                  319488,
+                  1,
+                  384,
+                  384
+                ],
+                "StrideOrder": [
+                  3,
+                  0,
+                  2,
+                  1
+                ],
+                "Datatype": "Float",
+                "Format": "(NHWC) Channel major format"
+              },
+              {
+                "Name": "/ups.2.0/ConvTranspose_output.1_150_myl0",
+                "Dimensions": [
+                  384,
+                  192,
+                  4,
+                  1
+                ],
+                "Strides": [
+                  768,
+                  1,
+                  192,
+                  192
+                ],
+                "StrideOrder": [
+                  3,
+                  0,
+                  2,
+                  1
+                ],
+                "Datatype": "Float",
+                "Format": "(NHWC) Channel major format"
+              }
+            ],
+            "Constants": [
+              {
+                "Name": "__mye245016_const_myl0",
+                "Dimensions": [
+                  1
+                ],
+                "Strides": [
+                  1
+                ],
+                "StrideOrder": [
+                  0
+                ],
+                "Datatype": "Float",
+                "Format": "(Linear) Row major linear format"
+              },
+              {
+                "Name": "__mye245020_const_myl0",
+                "Dimensions": [
+                  1
+                ],
+                "Strides": [
+                  1
+                ],
+                "StrideOrder": [
+                  0
+                ],
+                "Datatype": "Float",
+                "Format": "(Linear) Row major linear format"
+              },
+              {
+                "Name": "__mye237563dconst_myl0",
+                "Dimensions": [
+                  1,
+                  192,
+                  1,
+                  1
+                ],
+                "Strides": [
+                  192,
+                  1,
+                  192,
+                  192
+                ],
+                "StrideOrder": [
+                  3,
+                  0,
+                  2,
+                  1
+                ],
+                "Datatype": "Float",
+                "Format": "(NHWC) Channel major format"
+              }
+            ],
+            "Outputs": [
+              {
+                "Name": "/ups.2.0/ConvTranspose_output.1_myl0",
+                "Dimensions": [
+                  4,
+                  192,
+                  1664,
+                  1
+                ],
+                "Strides": [
+                  319488,
+                  1,
+                  192,
+                  192
+                ],
+                "StrideOrder": [
+                  3,
+                  0,
+                  2,
+                  1
+                ],
+                "Datatype": "Float",
+                "Format": "(NHWC) Channel major format"
+              }
+            ],
+            "TacticName": "sm70_xmma_deconv_implicit_gemm_indexed_f32f32_f32f32_f32_nhwckrsc_nhwc_tilesize64x64x8_stage1_warpsize1x4x1_g1_ffma_strided_aligna4_alignc4",
+            "StreamId": 0,
+            "Metadata": "[ONNX Layer: /ups.2.0/ConvTranspose]"
+          }
+        ],
+        "b4_inspector_sha256": "980c45ff9ef8678d344cb6536fb12a00a67565c89479ee84e93049aeff5445d4",
+        "source_b64": [
+          {
+            "Name": "l2tc_t0_/ups.2.0/ConvTranspose__mye236127_myl0_199",
+            "LayerType": "deconv",
+            "Inputs": [
+              {
+                "Name": "l2tc_t0_/ups.2.0/ConvTranspose_output.1_alias___mye236116__mye242876_203_myl0",
+                "Dimensions": [
+                  32,
+                  384,
+                  832,
+                  1
+                ],
+                "Strides": [
+                  319488,
+                  1,
+                  384,
+                  384
+                ],
+                "StrideOrder": [
+                  3,
+                  0,
+                  2,
+                  1
+                ],
+                "Datatype": "Float",
+                "Format": "(NHWC) Channel major format"
+              },
+              {
+                "Name": "ONNXTRT_unsqueezeTensor_452_reshape_output.1_myl0",
+                "Dimensions": [
+                  384,
+                  192,
+                  4,
+                  1
+                ],
+                "Strides": [
+                  768,
+                  1,
+                  192,
+                  192
+                ],
+                "StrideOrder": [
+                  3,
+                  0,
+                  2,
+                  1
+                ],
+                "Datatype": "Float",
+                "Format": "(NHWC) Channel major format"
+              }
+            ],
+            "Constants": [
+              {
+                "Name": "__mye250649_const_myl0",
+                "Dimensions": [
+                  1
+                ],
+                "Strides": [
+                  1
+                ],
+                "StrideOrder": [
+                  0
+                ],
+                "Datatype": "Float",
+                "Format": "(Linear) Row major linear format"
+              },
+              {
+                "Name": "__mye250653_const_myl0",
+                "Dimensions": [
+                  1
+                ],
+                "Strides": [
+                  1
+                ],
+                "StrideOrder": [
+                  0
+                ],
+                "Datatype": "Float",
+                "Format": "(Linear) Row major linear format"
+              },
+              {
+                "Name": "__mye240807dconst_myl0",
+                "Dimensions": [
+                  1,
+                  192,
+                  1,
+                  1
+                ],
+                "Strides": [
+                  192,
+                  1,
+                  192,
+                  192
+                ],
+                "StrideOrder": [
+                  3,
+                  0,
+                  2,
+                  1
+                ],
+                "Datatype": "Float",
+                "Format": "(NHWC) Channel major format"
+              }
+            ],
+            "Outputs": [
+              {
+                "Name": "/ups.2.0/ConvTranspose_output.1_myl0",
+                "Dimensions": [
+                  32,
+                  192,
+                  1664,
+                  1
+                ],
+                "Strides": [
+                  319488,
+                  1,
+                  192,
+                  192
+                ],
+                "StrideOrder": [
+                  3,
+                  0,
+                  2,
+                  1
+                ],
+                "Datatype": "Float",
+                "Format": "(NHWC) Channel major format"
+              }
+            ],
+            "TacticName": "sm70_xmma_deconv_implicit_gemm_indexed_f32f32_f32f32_f32_nhwckrsc_nhwc_tilesize128x64x8_stage1_warpsize2x2x1_g1_ffma_strided_aligna4_alignc4",
+            "StreamId": 0,
+            "Metadata": "[ONNX Layer: /ups.2.0/ConvTranspose]"
+          },
+          {
+            "Name": "l2tc_t1_/ups.2.0/ConvTranspose__mye236150_myl0_201",
+            "LayerType": "deconv",
+            "Inputs": [
+              {
+                "Name": "/ups.2.0/ConvTranspose_output.1__mye242874_205_myl0",
+                "Dimensions": [
+                  32,
+                  384,
+                  832,
+                  1
+                ],
+                "Strides": [
+                  319488,
+                  1,
+                  384,
+                  384
+                ],
+                "StrideOrder": [
+                  3,
+                  0,
+                  2,
+                  1
+                ],
+                "Datatype": "Float",
+                "Format": "(NHWC) Channel major format"
+              },
+              {
+                "Name": "ONNXTRT_unsqueezeTensor_452_reshape_output.1_myl0",
+                "Dimensions": [
+                  384,
+                  192,
+                  4,
+                  1
+                ],
+                "Strides": [
+                  768,
+                  1,
+                  192,
+                  192
+                ],
+                "StrideOrder": [
+                  3,
+                  0,
+                  2,
+                  1
+                ],
+                "Datatype": "Float",
+                "Format": "(NHWC) Channel major format"
+              }
+            ],
+            "Constants": [
+              {
+                "Name": "__mye250649_const_myl0",
+                "Dimensions": [
+                  1
+                ],
+                "Strides": [
+                  1
+                ],
+                "StrideOrder": [
+                  0
+                ],
+                "Datatype": "Float",
+                "Format": "(Linear) Row major linear format"
+              },
+              {
+                "Name": "__mye250653_const_myl0",
+                "Dimensions": [
+                  1
+                ],
+                "Strides": [
+                  1
+                ],
+                "StrideOrder": [
+                  0
+                ],
+                "Datatype": "Float",
+                "Format": "(Linear) Row major linear format"
+              },
+              {
+                "Name": "__mye240807dconst_myl0",
+                "Dimensions": [
+                  1,
+                  192,
+                  1,
+                  1
+                ],
+                "Strides": [
+                  192,
+                  1,
+                  192,
+                  192
+                ],
+                "StrideOrder": [
+                  3,
+                  0,
+                  2,
+                  1
+                ],
+                "Datatype": "Float",
+                "Format": "(NHWC) Channel major format"
+              }
+            ],
+            "Outputs": [
+              {
+                "Name": "/ups.2.0/ConvTranspose_output.1_myl0",
+                "Dimensions": [
+                  32,
+                  192,
+                  1664,
+                  1
+                ],
+                "Strides": [
+                  319488,
+                  1,
+                  192,
+                  192
+                ],
+                "StrideOrder": [
+                  3,
+                  0,
+                  2,
+                  1
+                ],
+                "Datatype": "Float",
+                "Format": "(NHWC) Channel major format"
+              }
+            ],
+            "TacticName": "sm70_xmma_deconv_implicit_gemm_indexed_f32f32_f32f32_f32_nhwckrsc_nhwc_tilesize128x64x8_stage1_warpsize2x2x1_g1_ffma_strided_aligna4_alignc4",
+            "StreamId": 0,
+            "Metadata": "[ONNX Layer: /ups.2.0/ConvTranspose]"
+          }
+        ],
+        "source_b64_inspector_sha256": "0ebc8501c1b8cca8bc0a8904d6cceae2f49e010bd41eda43e46dea5b2698351f"
+      },
+      "onnx": [
+        {
+          "node": "/ups.2.0/ConvTranspose",
+          "op": "ConvTranspose",
+          "attrs": {
+            "dilations": [
+              1
+            ],
+            "group": 1,
+            "kernel_shape": [
+              4
+            ],
+            "pads": [
+              1,
+              1
+            ],
+            "strides": [
+              2
+            ]
+          },
+          "inputs": [
+            {
+              "input": "/ups.2.0/DequantizeLinear_output_0",
+              "producer_op": "DequantizeLinear",
+              "producer_name": "/ups.2.0/DequantizeLinear",
+              "producer_attrs": {
+                "axis": 0
+              },
+              "producer_input_initializers": [
+                {
+                  "name": "ups.2.0.input_scale",
+                  "dtype": "FLOAT",
+                  "dims": []
+                },
+                {
+                  "name": "ups.2.0.input_zero",
+                  "dtype": "FLOAT8E4M3FN",
+                  "dims": []
+                }
+              ]
+            },
+            {
+              "input": "/ups.2.0/DequantizeLinear_1_output_0",
+              "producer_op": "DequantizeLinear",
+              "producer_name": "/ups.2.0/DequantizeLinear_1",
+              "producer_attrs": {
+                "axis": 1
+              },
+              "producer_input_initializers": [
+                {
+                  "name": "ups.2.0.weight_scale",
+                  "dtype": "FLOAT",
+                  "dims": [
+                    192
+                  ]
+                },
+                {
+                  "name": "ups.2.0.weight_zero",
+                  "dtype": "FLOAT8E4M3FN",
+                  "dims": [
+                    192
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "logical_role": "vocoder.stages.3.ups.0",
+      "spec": {
+        "precision": "fp8",
+        "alpha": 1.0,
+        "smoothing_source": "none",
+        "input_channel_axis": 1,
+        "weight_input_axis": 0,
+        "weight_axis": 1,
+        "input_scale": 0.01314660906791687,
+        "weight_scale": [
+          0.00017735050641931593,
+          0.00012472191883716732,
+          0.00011704714415827766,
+          0.00012676916958298534,
+          7.885995728429407e-05,
+          0.0002745102974586189,
+          0.0003240933583583683,
+          0.00012627548130694777,
+          0.00012875490938313305,
+          0.00012122393673053011,
+          0.00014658391592092812,
+          0.00013008899986743927,
+          0.00017462387040723115,
+          0.00015990459360182285,
+          0.00013755534018855542,
+          0.0001287301565753296,
+          0.00020286817743908614,
+          0.00018867237668018788,
+          0.00017336888413410634,
+          9.610439883545041e-05,
+          0.00010564632248133421,
+          0.00017239329463336617,
+          0.00014658048166893423,
+          0.00012641891953535378,
+          0.000140028860187158,
+          0.00018416850070934743,
+          0.00017301920161116868,
+          0.00011970582272624597,
+          9.328861051471904e-05,
+          0.00015006132889539003,
+          0.00019589465227909386,
+          0.00016915742889977992,
+          0.00017636689881328493,
+          0.00010379275045124814,
+          0.00016476558812428266,
+          0.0001490084978286177,
+          0.00020140920241829008,
+          0.00026674981927499175,
+          0.00010491754073882475,
+          0.00018702803936321288,
+          8.682430780027062e-05,
+          0.00011960242409259081,
+          0.000202677067136392,
+          0.00014410268340725452,
+          0.00013729829515796155,
+          0.00013102407683618367,
+          0.00013224376016296446,
+          9.873956150840968e-05,
+          0.00016229755419772118,
+          0.00030034969677217305,
+          0.00011118689144495875,
+          0.00014926194853615016,
+          0.00015161278133746237,
+          0.0001031450301525183,
+          0.00016454282740596682,
+          0.00022734436788596213,
+          0.00014174474927131087,
+          0.0001502627565059811,
+          0.00013830761599820107,
+          0.00013933867739979178,
+          0.00014187174383550882,
+          0.00016550059081055224,
+          9.874765964923427e-05,
+          0.00014525896403938532,
+          0.00011447501310613006,
+          0.0001946909906109795,
+          0.00011422277020756155,
+          0.00010877054592128843,
+          0.0002766783582046628,
+          0.0001193466450786218,
+          0.00013756027328781784,
+          0.00012711861927527934,
+          0.0001307551865465939,
+          0.00012423306179698557,
+          0.00012079684529453516,
+          0.00013440774637274444,
+          0.0002198492147726938,
+          0.00014918540546204895,
+          0.0001008157996693626,
+          9.753376798471436e-05,
+          0.0001357351866317913,
+          0.00013021256017964333,
+          0.00011786272807512432,
+          0.00012537887960206717,
+          0.0001223295257659629,
+          0.0001625182048883289,
+          0.00012590103142429143,
+          0.00010322329035261646,
+          0.00013838280574418604,
+          0.0001324283512076363,
+          0.00014803113299421966,
+          0.00011157526023453102,
+          0.00019202804833184928,
+          8.713545685168356e-05,
+          0.00013457461318466812,
+          0.0003447112103458494
+        ],
+        "calibration_calls": 16,
+        "calibration_elements": 40894464
+      },
+      "actual": {
+        "b4": [
+          {
+            "Name": "/ups.3.0/ConvTranspose_myl0_222",
+            "LayerType": "deconv",
+            "Inputs": [
+              {
+                "Name": "/ups.3.0/ConvTranspose_output.1_224_myl0",
+                "Dimensions": [
+                  4,
+                  192,
+                  1664,
+                  1
+                ],
+                "Strides": [
+                  319488,
+                  1,
+                  192,
+                  192
+                ],
+                "StrideOrder": [
+                  3,
+                  0,
+                  2,
+                  1
+                ],
+                "Datatype": "Float",
+                "Format": "(NHWC) Channel major format"
+              },
+              {
+                "Name": "/ups.3.0/ConvTranspose_output.1_223_myl0",
+                "Dimensions": [
+                  192,
+                  96,
+                  4,
+                  1
+                ],
+                "Strides": [
+                  384,
+                  1,
+                  96,
+                  96
+                ],
+                "StrideOrder": [
+                  3,
+                  0,
+                  2,
+                  1
+                ],
+                "Datatype": "Float",
+                "Format": "(NHWC) Channel major format"
+              }
+            ],
+            "Constants": [
+              {
+                "Name": "__mye245016_const_myl0",
+                "Dimensions": [
+                  1
+                ],
+                "Strides": [
+                  1
+                ],
+                "StrideOrder": [
+                  0
+                ],
+                "Datatype": "Float",
+                "Format": "(Linear) Row major linear format"
+              },
+              {
+                "Name": "__mye245020_const_myl0",
+                "Dimensions": [
+                  1
+                ],
+                "Strides": [
+                  1
+                ],
+                "StrideOrder": [
+                  0
+                ],
+                "Datatype": "Float",
+                "Format": "(Linear) Row major linear format"
+              },
+              {
+                "Name": "__mye237928dconst_myl0",
+                "Dimensions": [
+                  1,
+                  96,
+                  1,
+                  1
+                ],
+                "Strides": [
+                  96,
+                  1,
+                  96,
+                  96
+                ],
+                "StrideOrder": [
+                  3,
+                  0,
+                  2,
+                  1
+                ],
+                "Datatype": "Float",
+                "Format": "(NHWC) Channel major format"
+              }
+            ],
+            "Outputs": [
+              {
+                "Name": "/ups.3.0/ConvTranspose_output.1_myl0",
+                "Dimensions": [
+                  4,
+                  96,
+                  3328,
+                  1
+                ],
+                "Strides": [
+                  319488,
+                  1,
+                  96,
+                  96
+                ],
+                "StrideOrder": [
+                  3,
+                  0,
+                  2,
+                  1
+                ],
+                "Datatype": "Float",
+                "Format": "(NHWC) Channel major format"
+              }
+            ],
+            "TacticName": "sm70_xmma_deconv_implicit_gemm_indexed_f32f32_f32f32_f32_nhwckrsc_nhwc_tilesize64x32x8_stage1_warpsize1x2x1_g1_ffma_strided_aligna4_alignc4",
+            "StreamId": 0,
+            "Metadata": "[ONNX Layer: /ups.3.0/ConvTranspose]"
+          }
+        ],
+        "b4_inspector_sha256": "980c45ff9ef8678d344cb6536fb12a00a67565c89479ee84e93049aeff5445d4",
+        "source_b64": [
+          {
+            "Name": "/ups.3.0/ConvTranspose_myl0_286",
+            "LayerType": "deconv",
+            "Inputs": [
+              {
+                "Name": "/ups.3.0/ConvTranspose_output.1_289_myl0",
+                "Dimensions": [
+                  64,
+                  192,
+                  1664,
+                  1
+                ],
+                "Strides": [
+                  319488,
+                  1,
+                  192,
+                  192
+                ],
+                "StrideOrder": [
+                  3,
+                  0,
+                  2,
+                  1
+                ],
+                "Datatype": "Float",
+                "Format": "(NHWC) Channel major format"
+              },
+              {
+                "Name": "/ups.3.0/ConvTranspose_output.1_290_myl0",
+                "Dimensions": [
+                  192,
+                  96,
+                  4,
+                  1
+                ],
+                "Strides": [
+                  384,
+                  1,
+                  96,
+                  96
+                ],
+                "StrideOrder": [
+                  3,
+                  0,
+                  2,
+                  1
+                ],
+                "Datatype": "Float",
+                "Format": "(NHWC) Channel major format"
+              }
+            ],
+            "Constants": [
+              {
+                "Name": "__mye250649_const_myl0",
+                "Dimensions": [
+                  1
+                ],
+                "Strides": [
+                  1
+                ],
+                "StrideOrder": [
+                  0
+                ],
+                "Datatype": "Float",
+                "Format": "(Linear) Row major linear format"
+              },
+              {
+                "Name": "__mye250653_const_myl0",
+                "Dimensions": [
+                  1
+                ],
+                "Strides": [
+                  1
+                ],
+                "StrideOrder": [
+                  0
+                ],
+                "Datatype": "Float",
+                "Format": "(Linear) Row major linear format"
+              },
+              {
+                "Name": "__mye241172dconst_myl0",
+                "Dimensions": [
+                  1,
+                  96,
+                  1,
+                  1
+                ],
+                "Strides": [
+                  96,
+                  1,
+                  96,
+                  96
+                ],
+                "StrideOrder": [
+                  3,
+                  0,
+                  2,
+                  1
+                ],
+                "Datatype": "Float",
+                "Format": "(NHWC) Channel major format"
+              }
+            ],
+            "Outputs": [
+              {
+                "Name": "/ups.3.0/ConvTranspose_output.1_myl0",
+                "Dimensions": [
+                  64,
+                  96,
+                  3328,
+                  1
+                ],
+                "Strides": [
+                  319488,
+                  1,
+                  96,
+                  96
+                ],
+                "StrideOrder": [
+                  3,
+                  0,
+                  2,
+                  1
+                ],
+                "Datatype": "Float",
+                "Format": "(NHWC) Channel major format"
+              }
+            ],
+            "TacticName": "sm80_xmma_deconv_implicit_gemm_indexed_f32f32_f32f32_f32_nhwckrsc_nhwc_tilesize64x128x8_stage3_warpsize1x4x1_g1_ffma_strided_aligna4_alignc4",
+            "StreamId": 0,
+            "Metadata": "[ONNX Layer: /ups.3.0/ConvTranspose]"
+          }
+        ],
+        "source_b64_inspector_sha256": "0ebc8501c1b8cca8bc0a8904d6cceae2f49e010bd41eda43e46dea5b2698351f"
+      },
+      "onnx": [
+        {
+          "node": "/ups.3.0/ConvTranspose",
+          "op": "ConvTranspose",
+          "attrs": {
+            "dilations": [
+              1
+            ],
+            "group": 1,
+            "kernel_shape": [
+              4
+            ],
+            "pads": [
+              1,
+              1
+            ],
+            "strides": [
+              2
+            ]
+          },
+          "inputs": [
+            {
+              "input": "/ups.3.0/DequantizeLinear_output_0",
+              "producer_op": "DequantizeLinear",
+              "producer_name": "/ups.3.0/DequantizeLinear",
+              "producer_attrs": {
+                "axis": 0
+              },
+              "producer_input_initializers": [
+                {
+                  "name": "ups.3.0.input_scale",
+                  "dtype": "FLOAT",
+                  "dims": []
+                }
+              ]
+            },
+            {
+              "input": "/ups.3.0/DequantizeLinear_1_output_0",
+              "producer_op": "DequantizeLinear",
+              "producer_name": "/ups.3.0/DequantizeLinear_1",
+              "producer_attrs": {
+                "axis": 1
+              },
+              "producer_input_initializers": [
+                {
+                  "name": "ups.3.0.weight_scale",
+                  "dtype": "FLOAT",
+                  "dims": [
+                    96
+                  ]
+                },
+                {
+                  "name": "ups.3.0.weight_zero",
+                  "dtype": "FLOAT8E4M3FN",
+                  "dims": [
+                    96
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "logical_role": "vocoder.stages.4.ups.0",
+      "spec": {
+        "precision": "fp8",
+        "alpha": 1.0,
+        "smoothing_source": "none",
+        "input_channel_axis": 1,
+        "weight_input_axis": 0,
+        "weight_axis": 1,
+        "input_scale": 0.011486165225505829,
+        "weight_scale": [
+          0.00017477339133620262,
+          7.5164032750763e-05,
+          5.58710380573757e-05,
+          0.00011255184654146433,
+          6.6689848608803e-05,
+          7.849634857848287e-05,
+          5.643663098453544e-05,
+          7.221171836135909e-05,
+          7.997713692020625e-05,
+          7.225038280012086e-05,
+          5.989400597172789e-05,
+          6.600276537938043e-05,
+          4.855162478634156e-05,
+          7.823474879842252e-05,
+          5.953834988758899e-05,
+          6.134864815976471e-05,
+          0.00010183231643168256,
+          7.838899182388559e-05,
+          8.134856761898845e-05,
+          6.47267879685387e-05,
+          0.00013984364341013134,
+          0.0001316140842391178,
+          7.036410534055904e-05,
+          9.608367690816522e-05,
+          6.562827911693603e-05,
+          0.00010209877655142918,
+          7.563165127066895e-05,
+          6.755250797141343e-05,
+          5.7143071899190545e-05,
+          6.525844219140708e-05,
+          7.639532122993842e-05,
+          7.920964708318934e-05,
+          6.532864790642634e-05,
+          5.824945037602447e-05,
+          6.597257743123919e-05,
+          0.00012571728439070284,
+          8.287040691357106e-05,
+          0.00010909292905125767,
+          7.415994332404807e-05,
+          4.1520157537888736e-05,
+          0.00013436436711344868,
+          6.909709918545559e-05,
+          5.776302350568585e-05,
+          6.582790956599638e-05,
+          6.902505992911756e-05,
+          5.091236744192429e-05,
+          8.35063328850083e-05,
+          7.086786354193464e-05
+        ],
+        "calibration_calls": 16,
+        "calibration_elements": 40894464
+      },
+      "actual": {
+        "b4": [
+          {
+            "Name": "/ups.4.0/ConvTranspose_myl0_295",
+            "LayerType": "deconv",
+            "Inputs": [
+              {
+                "Name": "/ups.4.0/ConvTranspose_output.1_297_myl0",
+                "Dimensions": [
+                  4,
+                  96,
+                  3328,
+                  1
+                ],
+                "Strides": [
+                  319488,
+                  1,
+                  96,
+                  96
+                ],
+                "StrideOrder": [
+                  3,
+                  0,
+                  2,
+                  1
+                ],
+                "Datatype": "Float",
+                "Format": "(NHWC) Channel major format"
+              },
+              {
+                "Name": "/ups.4.0/ConvTranspose_output.1_296_myl0",
+                "Dimensions": [
+                  96,
+                  48,
+                  4,
+                  1
+                ],
+                "Strides": [
+                  192,
+                  1,
+                  48,
+                  48
+                ],
+                "StrideOrder": [
+                  3,
+                  0,
+                  2,
+                  1
+                ],
+                "Datatype": "Float",
+                "Format": "(NHWC) Channel major format"
+              }
+            ],
+            "Constants": [
+              {
+                "Name": "__mye245016_const_myl0",
+                "Dimensions": [
+                  1
+                ],
+                "Strides": [
+                  1
+                ],
+                "StrideOrder": [
+                  0
+                ],
+                "Datatype": "Float",
+                "Format": "(Linear) Row major linear format"
+              },
+              {
+                "Name": "__mye245020_const_myl0",
+                "Dimensions": [
+                  1
+                ],
+                "Strides": [
+                  1
+                ],
+                "StrideOrder": [
+                  0
+                ],
+                "Datatype": "Float",
+                "Format": "(Linear) Row major linear format"
+              },
+              {
+                "Name": "__mye238293dconst_myl0",
+                "Dimensions": [
+                  1,
+                  48,
+                  1,
+                  1
+                ],
+                "Strides": [
+                  48,
+                  1,
+                  48,
+                  48
+                ],
+                "StrideOrder": [
+                  3,
+                  0,
+                  2,
+                  1
+                ],
+                "Datatype": "Float",
+                "Format": "(NHWC) Channel major format"
+              }
+            ],
+            "Outputs": [
+              {
+                "Name": "/ups.4.0/ConvTranspose_output.1_myl0",
+                "Dimensions": [
+                  4,
+                  48,
+                  6656,
+                  1
+                ],
+                "Strides": [
+                  319488,
+                  1,
+                  48,
+                  48
+                ],
+                "StrideOrder": [
+                  3,
+                  0,
+                  2,
+                  1
+                ],
+                "Datatype": "Float",
+                "Format": "(NHWC) Channel major format"
+              }
+            ],
+            "TacticName": "sm70_xmma_deconv_implicit_gemm_indexed_f32f32_f32f32_f32_nhwckrsc_nhwc_tilesize64x64x8_stage1_warpsize1x4x1_g1_ffma_strided_aligna4_alignc4",
+            "StreamId": 0,
+            "Metadata": "[ONNX Layer: /ups.4.0/ConvTranspose]"
+          }
+        ],
+        "b4_inspector_sha256": "980c45ff9ef8678d344cb6536fb12a00a67565c89479ee84e93049aeff5445d4",
+        "source_b64": [
+          {
+            "Name": "l2tc_t0_/ups.4.0/ConvTranspose__mye236777_myl0_372",
+            "LayerType": "deconv",
+            "Inputs": [
+              {
+                "Name": "l2tc_t0_/ups.4.0/ConvTranspose_output.1_alias___mye236766__mye242872_375_myl0",
+                "Dimensions": [
+                  32,
+                  96,
+                  3328,
+                  1
+                ],
+                "Strides": [
+                  319488,
+                  1,
+                  96,
+                  96
+                ],
+                "StrideOrder": [
+                  3,
+                  0,
+                  2,
+                  1
+                ],
+                "Datatype": "Float",
+                "Format": "(NHWC) Channel major format"
+              },
+              {
+                "Name": "ONNXTRT_unsqueezeTensor_684_reshape_output.1_myl0",
+                "Dimensions": [
+                  96,
+                  48,
+                  4,
+                  1
+                ],
+                "Strides": [
+                  192,
+                  1,
+                  48,
+                  48
+                ],
+                "StrideOrder": [
+                  3,
+                  0,
+                  2,
+                  1
+                ],
+                "Datatype": "Float",
+                "Format": "(NHWC) Channel major format"
+              }
+            ],
+            "Constants": [
+              {
+                "Name": "__mye250649_const_myl0",
+                "Dimensions": [
+                  1
+                ],
+                "Strides": [
+                  1
+                ],
+                "StrideOrder": [
+                  0
+                ],
+                "Datatype": "Float",
+                "Format": "(Linear) Row major linear format"
+              },
+              {
+                "Name": "__mye250653_const_myl0",
+                "Dimensions": [
+                  1
+                ],
+                "Strides": [
+                  1
+                ],
+                "StrideOrder": [
+                  0
+                ],
+                "Datatype": "Float",
+                "Format": "(Linear) Row major linear format"
+              },
+              {
+                "Name": "__mye241537dconst_myl0",
+                "Dimensions": [
+                  1,
+                  48,
+                  1,
+                  1
+                ],
+                "Strides": [
+                  48,
+                  1,
+                  48,
+                  48
+                ],
+                "StrideOrder": [
+                  3,
+                  0,
+                  2,
+                  1
+                ],
+                "Datatype": "Float",
+                "Format": "(NHWC) Channel major format"
+              }
+            ],
+            "Outputs": [
+              {
+                "Name": "/ups.4.0/ConvTranspose_output.1_myl0",
+                "Dimensions": [
+                  32,
+                  48,
+                  6656,
+                  1
+                ],
+                "Strides": [
+                  319488,
+                  1,
+                  48,
+                  48
+                ],
+                "StrideOrder": [
+                  3,
+                  0,
+                  2,
+                  1
+                ],
+                "Datatype": "Float",
+                "Format": "(NHWC) Channel major format"
+              }
+            ],
+            "TacticName": "sm70_xmma_deconv_implicit_gemm_indexed_f32f32_f32f32_f32_nhwckrsc_nhwc_tilesize128x64x8_stage1_warpsize2x2x1_g1_ffma_strided_aligna4_alignc4",
+            "StreamId": 0,
+            "Metadata": "[ONNX Layer: /ups.4.0/ConvTranspose]"
+          },
+          {
+            "Name": "l2tc_t1_/ups.4.0/ConvTranspose__mye236800_myl0_374",
+            "LayerType": "deconv",
+            "Inputs": [
+              {
+                "Name": "/ups.4.0/ConvTranspose_output.1__mye242870_377_myl0",
+                "Dimensions": [
+                  32,
+                  96,
+                  3328,
+                  1
+                ],
+                "Strides": [
+                  319488,
+                  1,
+                  96,
+                  96
+                ],
+                "StrideOrder": [
+                  3,
+                  0,
+                  2,
+                  1
+                ],
+                "Datatype": "Float",
+                "Format": "(NHWC) Channel major format"
+              },
+              {
+                "Name": "ONNXTRT_unsqueezeTensor_684_reshape_output.1_myl0",
+                "Dimensions": [
+                  96,
+                  48,
+                  4,
+                  1
+                ],
+                "Strides": [
+                  192,
+                  1,
+                  48,
+                  48
+                ],
+                "StrideOrder": [
+                  3,
+                  0,
+                  2,
+                  1
+                ],
+                "Datatype": "Float",
+                "Format": "(NHWC) Channel major format"
+              }
+            ],
+            "Constants": [
+              {
+                "Name": "__mye250649_const_myl0",
+                "Dimensions": [
+                  1
+                ],
+                "Strides": [
+                  1
+                ],
+                "StrideOrder": [
+                  0
+                ],
+                "Datatype": "Float",
+                "Format": "(Linear) Row major linear format"
+              },
+              {
+                "Name": "__mye250653_const_myl0",
+                "Dimensions": [
+                  1
+                ],
+                "Strides": [
+                  1
+                ],
+                "StrideOrder": [
+                  0
+                ],
+                "Datatype": "Float",
+                "Format": "(Linear) Row major linear format"
+              },
+              {
+                "Name": "__mye241537dconst_myl0",
+                "Dimensions": [
+                  1,
+                  48,
+                  1,
+                  1
+                ],
+                "Strides": [
+                  48,
+                  1,
+                  48,
+                  48
+                ],
+                "StrideOrder": [
+                  3,
+                  0,
+                  2,
+                  1
+                ],
+                "Datatype": "Float",
+                "Format": "(NHWC) Channel major format"
+              }
+            ],
+            "Outputs": [
+              {
+                "Name": "/ups.4.0/ConvTranspose_output.1_myl0",
+                "Dimensions": [
+                  32,
+                  48,
+                  6656,
+                  1
+                ],
+                "Strides": [
+                  319488,
+                  1,
+                  48,
+                  48
+                ],
+                "StrideOrder": [
+                  3,
+                  0,
+                  2,
+                  1
+                ],
+                "Datatype": "Float",
+                "Format": "(NHWC) Channel major format"
+              }
+            ],
+            "TacticName": "sm70_xmma_deconv_implicit_gemm_indexed_f32f32_f32f32_f32_nhwckrsc_nhwc_tilesize128x64x8_stage1_warpsize2x2x1_g1_ffma_strided_aligna4_alignc4",
+            "StreamId": 0,
+            "Metadata": "[ONNX Layer: /ups.4.0/ConvTranspose]"
+          }
+        ],
+        "source_b64_inspector_sha256": "0ebc8501c1b8cca8bc0a8904d6cceae2f49e010bd41eda43e46dea5b2698351f"
+      },
+      "onnx": [
+        {
+          "node": "/ups.4.0/ConvTranspose",
+          "op": "ConvTranspose",
+          "attrs": {
+            "dilations": [
+              1
+            ],
+            "group": 1,
+            "kernel_shape": [
+              4
+            ],
+            "pads": [
+              1,
+              1
+            ],
+            "strides": [
+              2
+            ]
+          },
+          "inputs": [
+            {
+              "input": "/ups.4.0/DequantizeLinear_output_0",
+              "producer_op": "DequantizeLinear",
+              "producer_name": "/ups.4.0/DequantizeLinear",
+              "producer_attrs": {
+                "axis": 0
+              },
+              "producer_input_initializers": [
+                {
+                  "name": "ups.4.0.input_scale",
+                  "dtype": "FLOAT",
+                  "dims": []
+                }
+              ]
+            },
+            {
+              "input": "/ups.4.0/DequantizeLinear_1_output_0",
+              "producer_op": "DequantizeLinear",
+              "producer_name": "/ups.4.0/DequantizeLinear_1",
+              "producer_attrs": {
+                "axis": 1
+              },
+              "producer_input_initializers": [
+                {
+                  "name": "ups.4.0.weight_scale",
+                  "dtype": "FLOAT",
+                  "dims": [
+                    48
+                  ]
+                },
+                {
+                  "name": "ups.4.0.weight_zero",
+                  "dtype": "FLOAT8E4M3FN",
+                  "dims": [
+                    48
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "logical_role": "vocoder.stages.5.ups.0",
+      "spec": {
+        "precision": "fp8",
+        "alpha": 1.0,
+        "smoothing_source": "none",
+        "input_channel_axis": 1,
+        "weight_input_axis": 0,
+        "weight_axis": 1,
+        "input_scale": 0.006435100521360125,
+        "weight_scale": [
+          0.0001257119292858988,
+          0.00011903068661922589,
+          8.553596853744239e-05,
+          9.116587898461148e-05,
+          8.69134601089172e-05,
+          8.003004768397659e-05,
+          0.00011768905824283138,
+          0.0001527251151856035,
+          0.00016733691154513508,
+          0.00014621285663452,
+          0.0001991359022213146,
+          0.0001542642421554774,
+          0.00011849660222651437,
+          0.0001209335750900209,
+          0.00012992453412152827,
+          0.00015242908557411283,
+          0.00010410309914732352,
+          0.000138624498504214,
+          9.214632882503793e-05,
+          0.00012004237942164764,
+          0.00010011594713432714,
+          0.00011280303442617878,
+          8.867168799042702e-05,
+          9.312735346611589e-05
+        ],
+        "calibration_calls": 16,
+        "calibration_elements": 40894464
+      },
+      "actual": {
+        "b4": [
+          {
+            "Name": "/ups.5.0/ConvTranspose_myl0_368",
+            "LayerType": "deconv",
+            "Inputs": [
+              {
+                "Name": "/ups.5.0/ConvTranspose_output.1_370_myl0",
+                "Dimensions": [
+                  4,
+                  48,
+                  6656,
+                  1
+                ],
+                "Strides": [
+                  319488,
+                  1,
+                  48,
+                  48
+                ],
+                "StrideOrder": [
+                  3,
+                  0,
+                  2,
+                  1
+                ],
+                "Datatype": "Float",
+                "Format": "(NHWC) Channel major format"
+              },
+              {
+                "Name": "/ups.5.0/ConvTranspose_output.1_369_myl0",
+                "Dimensions": [
+                  48,
+                  24,
+                  4,
+                  1
+                ],
+                "Strides": [
+                  96,
+                  1,
+                  24,
+                  24
+                ],
+                "StrideOrder": [
+                  3,
+                  0,
+                  2,
+                  1
+                ],
+                "Datatype": "Float",
+                "Format": "(NHWC) Channel major format"
+              }
+            ],
+            "Constants": [
+              {
+                "Name": "__mye245016_const_myl0",
+                "Dimensions": [
+                  1
+                ],
+                "Strides": [
+                  1
+                ],
+                "StrideOrder": [
+                  0
+                ],
+                "Datatype": "Float",
+                "Format": "(Linear) Row major linear format"
+              },
+              {
+                "Name": "__mye245020_const_myl0",
+                "Dimensions": [
+                  1
+                ],
+                "Strides": [
+                  1
+                ],
+                "StrideOrder": [
+                  0
+                ],
+                "Datatype": "Float",
+                "Format": "(Linear) Row major linear format"
+              },
+              {
+                "Name": "__mye238658dconst_myl0",
+                "Dimensions": [
+                  1,
+                  24,
+                  1,
+                  1
+                ],
+                "Strides": [
+                  24,
+                  1,
+                  24,
+                  24
+                ],
+                "StrideOrder": [
+                  3,
+                  0,
+                  2,
+                  1
+                ],
+                "Datatype": "Float",
+                "Format": "(NHWC) Channel major format"
+              }
+            ],
+            "Outputs": [
+              {
+                "Name": "/ups.5.0/ConvTranspose_output.1_myl0",
+                "Dimensions": [
+                  4,
+                  24,
+                  13312,
+                  1
+                ],
+                "Strides": [
+                  319488,
+                  1,
+                  24,
+                  24
+                ],
+                "StrideOrder": [
+                  3,
+                  0,
+                  2,
+                  1
+                ],
+                "Datatype": "Float",
+                "Format": "(NHWC) Channel major format"
+              }
+            ],
+            "TacticName": "sm70_xmma_deconv_implicit_gemm_indexed_f32f32_f32f32_f32_nhwckrsc_nhwc_tilesize128x32x8_stage1_warpsize2x2x1_g1_ffma_strided_aligna4_alignc4",
+            "StreamId": 0,
+            "Metadata": "[ONNX Layer: /ups.5.0/ConvTranspose]"
+          }
+        ],
+        "b4_inspector_sha256": "980c45ff9ef8678d344cb6536fb12a00a67565c89479ee84e93049aeff5445d4",
+        "source_b64": [
+          {
+            "Name": "l2tc_t0_/ups.5.0/ConvTranspose__mye237127_myl0_460",
+            "LayerType": "deconv",
+            "Inputs": [
+              {
+                "Name": "l2tc_t0_/ups.5.0/ConvTranspose_output.1_alias___mye237116__mye242868_462_myl0",
+                "Dimensions": [
+                  32,
+                  48,
+                  6656,
+                  1
+                ],
+                "Strides": [
+                  319488,
+                  1,
+                  48,
+                  48
+                ],
+                "StrideOrder": [
+                  3,
+                  0,
+                  2,
+                  1
+                ],
+                "Datatype": "Float",
+                "Format": "(NHWC) Channel major format"
+              },
+              {
+                "Name": "ONNXTRT_unsqueezeTensor_800_reshape_output.1_myl0",
+                "Dimensions": [
+                  48,
+                  24,
+                  4,
+                  1
+                ],
+                "Strides": [
+                  96,
+                  1,
+                  24,
+                  24
+                ],
+                "StrideOrder": [
+                  3,
+                  0,
+                  2,
+                  1
+                ],
+                "Datatype": "Float",
+                "Format": "(NHWC) Channel major format"
+              }
+            ],
+            "Constants": [
+              {
+                "Name": "__mye250649_const_myl0",
+                "Dimensions": [
+                  1
+                ],
+                "Strides": [
+                  1
+                ],
+                "StrideOrder": [
+                  0
+                ],
+                "Datatype": "Float",
+                "Format": "(Linear) Row major linear format"
+              },
+              {
+                "Name": "__mye250653_const_myl0",
+                "Dimensions": [
+                  1
+                ],
+                "Strides": [
+                  1
+                ],
+                "StrideOrder": [
+                  0
+                ],
+                "Datatype": "Float",
+                "Format": "(Linear) Row major linear format"
+              },
+              {
+                "Name": "__mye241902dconst_myl0",
+                "Dimensions": [
+                  1,
+                  24,
+                  1,
+                  1
+                ],
+                "Strides": [
+                  24,
+                  1,
+                  24,
+                  24
+                ],
+                "StrideOrder": [
+                  3,
+                  0,
+                  2,
+                  1
+                ],
+                "Datatype": "Float",
+                "Format": "(NHWC) Channel major format"
+              }
+            ],
+            "Outputs": [
+              {
+                "Name": "/ups.5.0/ConvTranspose_output.1_myl0",
+                "Dimensions": [
+                  32,
+                  24,
+                  13312,
+                  1
+                ],
+                "Strides": [
+                  319488,
+                  1,
+                  24,
+                  24
+                ],
+                "StrideOrder": [
+                  3,
+                  0,
+                  2,
+                  1
+                ],
+                "Datatype": "Float",
+                "Format": "(NHWC) Channel major format"
+              }
+            ],
+            "TacticName": "sm70_xmma_deconv_implicit_gemm_indexed_f32f32_f32f32_f32_nhwckrsc_nhwc_tilesize128x32x8_stage1_warpsize2x2x1_g1_ffma_strided_aligna4_alignc4",
+            "StreamId": 0,
+            "Metadata": "[ONNX Layer: /ups.5.0/ConvTranspose]"
+          },
+          {
+            "Name": "l2tc_t1_/ups.5.0/ConvTranspose__mye237150_myl0_462",
+            "LayerType": "deconv",
+            "Inputs": [
+              {
+                "Name": "/ups.5.0/ConvTranspose_output.1__mye242866_464_myl0",
+                "Dimensions": [
+                  32,
+                  48,
+                  6656,
+                  1
+                ],
+                "Strides": [
+                  319488,
+                  1,
+                  48,
+                  48
+                ],
+                "StrideOrder": [
+                  3,
+                  0,
+                  2,
+                  1
+                ],
+                "Datatype": "Float",
+                "Format": "(NHWC) Channel major format"
+              },
+              {
+                "Name": "ONNXTRT_unsqueezeTensor_800_reshape_output.1_myl0",
+                "Dimensions": [
+                  48,
+                  24,
+                  4,
+                  1
+                ],
+                "Strides": [
+                  96,
+                  1,
+                  24,
+                  24
+                ],
+                "StrideOrder": [
+                  3,
+                  0,
+                  2,
+                  1
+                ],
+                "Datatype": "Float",
+                "Format": "(NHWC) Channel major format"
+              }
+            ],
+            "Constants": [
+              {
+                "Name": "__mye250649_const_myl0",
+                "Dimensions": [
+                  1
+                ],
+                "Strides": [
+                  1
+                ],
+                "StrideOrder": [
+                  0
+                ],
+                "Datatype": "Float",
+                "Format": "(Linear) Row major linear format"
+              },
+              {
+                "Name": "__mye250653_const_myl0",
+                "Dimensions": [
+                  1
+                ],
+                "Strides": [
+                  1
+                ],
+                "StrideOrder": [
+                  0
+                ],
+                "Datatype": "Float",
+                "Format": "(Linear) Row major linear format"
+              },
+              {
+                "Name": "__mye241902dconst_myl0",
+                "Dimensions": [
+                  1,
+                  24,
+                  1,
+                  1
+                ],
+                "Strides": [
+                  24,
+                  1,
+                  24,
+                  24
+                ],
+                "StrideOrder": [
+                  3,
+                  0,
+                  2,
+                  1
+                ],
+                "Datatype": "Float",
+                "Format": "(NHWC) Channel major format"
+              }
+            ],
+            "Outputs": [
+              {
+                "Name": "/ups.5.0/ConvTranspose_output.1_myl0",
+                "Dimensions": [
+                  32,
+                  24,
+                  13312,
+                  1
+                ],
+                "Strides": [
+                  319488,
+                  1,
+                  24,
+                  24
+                ],
+                "StrideOrder": [
+                  3,
+                  0,
+                  2,
+                  1
+                ],
+                "Datatype": "Float",
+                "Format": "(NHWC) Channel major format"
+              }
+            ],
+            "TacticName": "sm70_xmma_deconv_implicit_gemm_indexed_f32f32_f32f32_f32_nhwckrsc_nhwc_tilesize128x32x8_stage1_warpsize2x2x1_g1_ffma_strided_aligna4_alignc4",
+            "StreamId": 0,
+            "Metadata": "[ONNX Layer: /ups.5.0/ConvTranspose]"
+          }
+        ],
+        "source_b64_inspector_sha256": "0ebc8501c1b8cca8bc0a8904d6cceae2f49e010bd41eda43e46dea5b2698351f"
+      },
+      "onnx": [
+        {
+          "node": "/ups.5.0/ConvTranspose",
+          "op": "ConvTranspose",
+          "attrs": {
+            "dilations": [
+              1
+            ],
+            "group": 1,
+            "kernel_shape": [
+              4
+            ],
+            "pads": [
+              1,
+              1
+            ],
+            "strides": [
+              2
+            ]
+          },
+          "inputs": [
+            {
+              "input": "/ups.5.0/DequantizeLinear_output_0",
+              "producer_op": "DequantizeLinear",
+              "producer_name": "/ups.5.0/DequantizeLinear",
+              "producer_attrs": {
+                "axis": 0
+              },
+              "producer_input_initializers": [
+                {
+                  "name": "ups.5.0.input_scale",
+                  "dtype": "FLOAT",
+                  "dims": []
+                }
+              ]
+            },
+            {
+              "input": "/ups.5.0/DequantizeLinear_1_output_0",
+              "producer_op": "DequantizeLinear",
+              "producer_name": "/ups.5.0/DequantizeLinear_1",
+              "producer_attrs": {
+                "axis": 1
+              },
+              "producer_input_initializers": [
+                {
+                  "name": "ups.5.0.weight_scale",
+                  "dtype": "FLOAT",
+                  "dims": [
+                    24
+                  ]
+                },
+                {
+                  "name": "ups.5.0.weight_zero",
+                  "dtype": "FLOAT8E4M3FN",
+                  "dims": [
+                    24
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

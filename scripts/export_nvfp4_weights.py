@@ -24,7 +24,7 @@ def main():
                 state[key]=(w/scale.reshape(broadcast)).clamp(-448,448).to(torch.float8_e4m3fn).contiguous()
                 state[key+'.weight_scale']=scale
                 state[key+'.input_scale']=torch.tensor(spec['input_scale'],dtype=torch.float32)
-                roles[role]=dict(spec,state_key=key,original_shape=list(w.shape),stored_layout=('original convolution layout' if w.ndim==3 else 'canonical GEMM out,in'),storage_dtype='float8_e4m3fn',weight_norm_folded=True)
+                roles[role]=dict(spec,state_key=key,original_shape=list(w.shape),stored_layout=('original convolution layout' if w.ndim==3 else 'canonical GEMM out,in'),transpose_linear_from_checkpoint=component=='target',storage_dtype='float8_e4m3fn',weight_norm_folded=True)
                 continue
             transpose=w.ndim==3 and spec['weight_input_axis']==0
             if transpose:w=w.transpose(0,1).flip(-1).contiguous()

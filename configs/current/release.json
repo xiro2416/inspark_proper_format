@@ -61,6 +61,48 @@
       "path": "artifacts/current_release/deployments/nvfp4_fp8_b128.json",
       "engine_revision": "e631a08b313fc66f8638a19698d53f91c7406689",
       "engine_prefix": "engines/rtx6000d_sm120/draft900_cfm800_nvfp4_fp8/b128"
+    },
+    "nvfp4_fp8_b4": {
+      "precision": "nvfp4_fp8",
+      "batch": 4,
+      "path": "artifacts/current_release/deployments/nvfp4_fp8_b4.json",
+      "engine_revision": "1d1a9ca24b998c14aba3c59db9b119231ff70895",
+      "engine_prefix": "engines/rtx6000d_sm120/draft900_cfm800_nvfp4_fp8/b4",
+      "quantized_weights_prefix": "nvfp4_fp8/b4",
+      "quantized_weights_revision": "1d1a9ca24b998c14aba3c59db9b119231ff70895",
+      "precision_roles": {
+        "bf16": 90,
+        "nvfp4": 63,
+        "fp8": 164
+      }
+    },
+    "nvfp4_fp8_b16": {
+      "precision": "nvfp4_fp8",
+      "batch": 16,
+      "path": "artifacts/current_release/deployments/nvfp4_fp8_b16.json",
+      "engine_revision": "1d1a9ca24b998c14aba3c59db9b119231ff70895",
+      "engine_prefix": "engines/rtx6000d_sm120/draft900_cfm800_nvfp4_fp8/b16",
+      "quantized_weights_prefix": "nvfp4_fp8",
+      "quantized_weights_revision": "1d1a9ca24b998c14aba3c59db9b119231ff70895",
+      "precision_roles": {
+        "bf16": 90,
+        "nvfp4": 135,
+        "fp8": 92
+      }
+    },
+    "nvfp4_fp8_b32": {
+      "precision": "nvfp4_fp8",
+      "batch": 32,
+      "path": "artifacts/current_release/deployments/nvfp4_fp8_b32.json",
+      "engine_revision": "1d1a9ca24b998c14aba3c59db9b119231ff70895",
+      "engine_prefix": "engines/rtx6000d_sm120/draft900_cfm800_nvfp4_fp8/b32",
+      "quantized_weights_prefix": "nvfp4_fp8",
+      "quantized_weights_revision": "1d1a9ca24b998c14aba3c59db9b119231ff70895",
+      "precision_roles": {
+        "bf16": 90,
+        "nvfp4": 135,
+        "fp8": 92
+      }
     }
   },
   "weights": {

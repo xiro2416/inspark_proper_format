@@ -1,0 +1,483 @@
+{
+  "phase": "migration_complete",
+  "scope": "B16 mixed NVFP4-GEMM/FP8-Conv with90BF16 protections",
+  "gpu": 5,
+  "source_batch": 64,
+  "source_checkpoints_unchanged": true,
+  "calibration_unchanged": true,
+  "recipe_role_counts": {
+    "bf16": 90,
+    "nvfp4": 135,
+    "fp8": 92
+  },
+  "migration_diagnostic_measurement": {
+    "warmups": 3,
+    "waves": 10,
+    "power_seconds": 0,
+    "concurrent_other_agents": true,
+    "exclusive_final_measurement_pending": true,
+    "postadmission_ms": {
+      "n": 10,
+      "p50": 106.96212621405721,
+      "p95": 115.14537604525685,
+      "p99": 116.50444531813264,
+      "mean": 107.92792374268174,
+      "min": 99.6864689514041,
+      "max": 116.84421263635159
+    },
+    "admission_ms": {
+      "n": 10,
+      "p50": 108.11142390593886,
+      "p95": 116.18805974721909,
+      "p99": 117.54177868366241,
+      "mean": 109.01841446757317,
+      "min": 100.70008132606745,
+      "max": 117.88020841777325
+    },
+    "board_lifecycle": {
+      "samples": 2282,
+      "sample_interval_ms": 20,
+      "memory_mib": {
+        "n": 2282,
+        "p50": 8111.0,
+        "p95": 14051.0,
+        "p99": 14075.0,
+        "mean": 7194.30981595092,
+        "min": 0.0,
+        "max": 14075.0
+      },
+      "scope": "sampled whole process: model/reference preparation, deployment/capture, warmup, measured waves, power and teardown",
+      "note": "NVML sampled peak; may miss allocations shorter than20ms; Torch allocator peaks are reported separately"
+    },
+    "acceptance_rate": 0.389062175088376,
+    "rounds": {
+      "n": 160,
+      "p50": 8.0,
+      "p95": 12.0,
+      "p99": 13.0,
+      "mean": 8.5875,
+      "min": 6.0,
+      "max": 15.0
+    },
+    "kv_at_head": {
+      "n": 160,
+      "p50": 71.0,
+      "p95": 76.0,
+      "p99": 77.0,
+      "mean": 71.23125,
+      "min": 64.0,
+      "max": 78.0
+    }
+  },
+  "fallbacks": {
+    "device_round_fallbacks": 0,
+    "native_cfm_fallbacks": 0,
+    "native_vocoder_fallbacks": 0
+  },
+  "native_coverage": [
+    {
+      "component": "target",
+      "batch": 16,
+      "engine_sha256": "57440763cdb9176f9eb473056bb4380cc0e1050e0d1394b5b8b7ba955aeadd9d",
+      "native_fp4_gemms": 72,
+      "native_fp8_conv_implementation_layers": 0,
+      "fp32_fir_plugins": 0,
+      "tiling": "full",
+      "actual_aux_streams": 0
+    },
+    {
+      "component": "draft",
+      "batch": 16,
+      "engine_sha256": "a5bc30575b87779084e30c218bce629868fe5960805af822e455bb3b2cb38684",
+      "native_fp4_gemms": 12,
+      "native_fp8_conv_implementation_layers": 0,
+      "fp32_fir_plugins": 0,
+      "tiling": "full",
+      "actual_aux_streams": 0
+    },
+    {
+      "component": "context",
+      "batch": 16,
+      "engine_sha256": "ab6d158ae8351afb5ef0339e311bcec06d1a0fd42e5553ba4a656002ff2e0eff",
+      "native_fp4_gemms": 4,
+      "native_fp8_conv_implementation_layers": 0,
+      "fp32_fir_plugins": 0,
+      "tiling": "full",
+      "actual_aux_streams": 0
+    },
+    {
+      "component": "prefill",
+      "batch": 16,
+      "engine_sha256": "b81a8e1eab529e5ccedfdccaf2653ab1a6da8fe62c26edae47bbca1886f6a6ff",
+      "native_fp4_gemms": 72,
+      "native_fp8_conv_implementation_layers": 0,
+      "fp32_fir_plugins": 0,
+      "tiling": "full",
+      "actual_aux_streams": 0
+    },
+    {
+      "component": "latent",
+      "batch": 16,
+      "engine_sha256": "688e7ba13df80e1c643834e3bc2b5c9005aa0d2ed7e91ee59f75c0dda2d91e0c",
+      "native_fp4_gemms": 72,
+      "native_fp8_conv_implementation_layers": 0,
+      "fp32_fir_plugins": 0,
+      "tiling": "full",
+      "actual_aux_streams": 0
+    },
+    {
+      "component": "latent_suffix",
+      "batch": 16,
+      "engine_sha256": "20aeabf88d6805ace009e1f4364e41e998d8e5c5fc4999de35f21f50417258d7",
+      "native_fp4_gemms": 72,
+      "native_fp8_conv_implementation_layers": 0,
+      "fp32_fir_plugins": 0,
+      "tiling": "full",
+      "actual_aux_streams": 0
+    },
+    {
+      "component": "cfm",
+      "batch": 16,
+      "engine_sha256": "ed60a7ff2899d3b56da214200d45ded3f17ccb8cb29ef4a7742f3ddd39878524",
+      "native_fp4_gemms": 168,
+      "native_fp8_conv_implementation_layers": 64,
+      "fp32_fir_plugins": 0,
+      "tiling": "full",
+      "actual_aux_streams": 0
+    },
+    {
+      "component": "vocoder",
+      "batch": 16,
+      "engine_sha256": "7c2dfd86d34326ca01e9acccb9ea4666fec1c4ea52ae2c52248e8261cb4ad45c",
+      "native_fp4_gemms": 0,
+      "native_fp8_conv_implementation_layers": 72,
+      "fp32_fir_plugins": 109,
+      "tiling": "full",
+      "actual_aux_streams": 0
+    }
+  ],
+  "deconv_fp32_precision_gap": [
+    {
+      "role": "vocoder.stages.2.ups.0",
+      "declared_recipe_precision": "fp8",
+      "actual_tactic": "sm70_xmma_deconv_implicit_gemm_indexed_f32f32_f32f32_f32_nhwckrsc_nhwc_tilesize128x64x8_stage1_warpsize2x2x1_g1_ffma_strided_aligna4_alignc4",
+      "actual_inputs": [
+        {
+          "Name": "/ups.2.0/ConvTranspose_output.1_151_myl0",
+          "Dimensions": [
+            16,
+            384,
+            832,
+            1
+          ],
+          "Strides": [
+            319488,
+            1,
+            384,
+            384
+          ],
+          "StrideOrder": [
+            3,
+            0,
+            2,
+            1
+          ],
+          "Datatype": "Float",
+          "Format": "(NHWC) Channel major format"
+        },
+        {
+          "Name": "/ups.2.0/ConvTranspose_output.1_150_myl0",
+          "Dimensions": [
+            384,
+            192,
+            4,
+            1
+          ],
+          "Strides": [
+            768,
+            1,
+            192,
+            192
+          ],
+          "StrideOrder": [
+            3,
+            0,
+            2,
+            1
+          ],
+          "Datatype": "Float",
+          "Format": "(NHWC) Channel major format"
+        }
+      ],
+      "actual_outputs": [
+        {
+          "Name": "/ups.2.0/ConvTranspose_output.1_myl0",
+          "Dimensions": [
+            16,
+            192,
+            1664,
+            1
+          ],
+          "Strides": [
+            319488,
+            1,
+            192,
+            192
+          ],
+          "StrideOrder": [
+            3,
+            0,
+            2,
+            1
+          ],
+          "Datatype": "Float",
+          "Format": "(NHWC) Channel major format"
+        }
+      ],
+      "same_source_gap": true
+    },
+    {
+      "role": "vocoder.stages.3.ups.0",
+      "declared_recipe_precision": "fp8",
+      "actual_tactic": "sm70_xmma_deconv_implicit_gemm_indexed_f32f32_f32f32_f32_nhwckrsc_nhwc_tilesize64x32x8_stage1_warpsize1x2x1_g1_ffma_strided_aligna4_alignc4",
+      "actual_inputs": [
+        {
+          "Name": "/ups.3.0/ConvTranspose_output.1_224_myl0",
+          "Dimensions": [
+            16,
+            192,
+            1664,
+            1
+          ],
+          "Strides": [
+            319488,
+            1,
+            192,
+            192
+          ],
+          "StrideOrder": [
+            3,
+            0,
+            2,
+            1
+          ],
+          "Datatype": "Float",
+          "Format": "(NHWC) Channel major format"
+        },
+        {
+          "Name": "/ups.3.0/ConvTranspose_output.1_223_myl0",
+          "Dimensions": [
+            192,
+            96,
+            4,
+            1
+          ],
+          "Strides": [
+            384,
+            1,
+            96,
+            96
+          ],
+          "StrideOrder": [
+            3,
+            0,
+            2,
+            1
+          ],
+          "Datatype": "Float",
+          "Format": "(NHWC) Channel major format"
+        }
+      ],
+      "actual_outputs": [
+        {
+          "Name": "/ups.3.0/ConvTranspose_output.1_myl0",
+          "Dimensions": [
+            16,
+            96,
+            3328,
+            1
+          ],
+          "Strides": [
+            319488,
+            1,
+            96,
+            96
+          ],
+          "StrideOrder": [
+            3,
+            0,
+            2,
+            1
+          ],
+          "Datatype": "Float",
+          "Format": "(NHWC) Channel major format"
+        }
+      ],
+      "same_source_gap": true
+    },
+    {
+      "role": "vocoder.stages.4.ups.0",
+      "declared_recipe_precision": "fp8",
+      "actual_tactic": "sm70_xmma_deconv_implicit_gemm_indexed_f32f32_f32f32_f32_nhwckrsc_nhwc_tilesize128x64x8_stage1_warpsize2x2x1_g1_ffma_strided_aligna4_alignc4",
+      "actual_inputs": [
+        {
+          "Name": "/ups.4.0/ConvTranspose_output.1_297_myl0",
+          "Dimensions": [
+            16,
+            96,
+            3328,
+            1
+          ],
+          "Strides": [
+            319488,
+            1,
+            96,
+            96
+          ],
+          "StrideOrder": [
+            3,
+            0,
+            2,
+            1
+          ],
+          "Datatype": "Float",
+          "Format": "(NHWC) Channel major format"
+        },
+        {
+          "Name": "/ups.4.0/ConvTranspose_output.1_296_myl0",
+          "Dimensions": [
+            96,
+            48,
+            4,
+            1
+          ],
+          "Strides": [
+            192,
+            1,
+            48,
+            48
+          ],
+          "StrideOrder": [
+            3,
+            0,
+            2,
+            1
+          ],
+          "Datatype": "Float",
+          "Format": "(NHWC) Channel major format"
+        }
+      ],
+      "actual_outputs": [
+        {
+          "Name": "/ups.4.0/ConvTranspose_output.1_myl0",
+          "Dimensions": [
+            16,
+            48,
+            6656,
+            1
+          ],
+          "Strides": [
+            319488,
+            1,
+            48,
+            48
+          ],
+          "StrideOrder": [
+            3,
+            0,
+            2,
+            1
+          ],
+          "Datatype": "Float",
+          "Format": "(NHWC) Channel major format"
+        }
+      ],
+      "same_source_gap": true
+    },
+    {
+      "role": "vocoder.stages.5.ups.0",
+      "declared_recipe_precision": "fp8",
+      "actual_tactic": "sm70_xmma_deconv_implicit_gemm_indexed_f32f32_f32f32_f32_nhwckrsc_nhwc_tilesize128x32x8_stage1_warpsize2x2x1_g1_ffma_strided_aligna4_alignc4",
+      "actual_inputs": [
+        {
+          "Name": "/ups.5.0/ConvTranspose_output.1_370_myl0",
+          "Dimensions": [
+            16,
+            48,
+            6656,
+            1
+          ],
+          "Strides": [
+            319488,
+            1,
+            48,
+            48
+          ],
+          "StrideOrder": [
+            3,
+            0,
+            2,
+            1
+          ],
+          "Datatype": "Float",
+          "Format": "(NHWC) Channel major format"
+        },
+        {
+          "Name": "/ups.5.0/ConvTranspose_output.1_369_myl0",
+          "Dimensions": [
+            48,
+            24,
+            4,
+            1
+          ],
+          "Strides": [
+            96,
+            1,
+            24,
+            24
+          ],
+          "StrideOrder": [
+            3,
+            0,
+            2,
+            1
+          ],
+          "Datatype": "Float",
+          "Format": "(NHWC) Channel major format"
+        }
+      ],
+      "actual_outputs": [
+        {
+          "Name": "/ups.5.0/ConvTranspose_output.1_myl0",
+          "Dimensions": [
+            16,
+            24,
+            13312,
+            1
+          ],
+          "Strides": [
+            319488,
+            1,
+            24,
+            24
+          ],
+          "StrideOrder": [
+            3,
+            0,
+            2,
+            1
+          ],
+          "Datatype": "Float",
+          "Format": "(NHWC) Channel major format"
+        }
+      ],
+      "same_source_gap": true
+    }
+  ],
+  "waveform_diagnostics": {
+    "unique_pcm_rows": 16,
+    "saturated_fraction": 0.0,
+    "unique_reference_rows": 16
+  },
+  "next": "Wait until all3 migration pass and parent releases phase2; no GPU work running"
+}

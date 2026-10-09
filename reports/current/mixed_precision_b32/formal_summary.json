@@ -1,0 +1,47 @@
+{
+  "status": "exclusive_final_validated_GPU_released",
+  "batch": 32,
+  "gpu": 6,
+  "gain_p50_percent": 3.69348546684004,
+  "baseline_p50_ms": 161.69137228280306,
+  "selected_p50_ms": 155.7193249464035,
+  "state_identity_matching_requests": 960,
+  "state_identity_fields": [
+    "case_id",
+    "voice_id",
+    "seed",
+    "rounds",
+    "accepted",
+    "accepted_tokens",
+    "code_sha256",
+    "generated_codes",
+    "eos",
+    "kv_at_head"
+  ],
+  "outliers": {
+    "baseline": {
+      "definition": "value>P95*1.10;no samples removed",
+      "latency_threshold_ms": 184.67010816093537,
+      "latency_count": 0,
+      "latency_samples": [],
+      "power_threshold_W": 512.4350000000001,
+      "power_count": 0,
+      "power_samples": []
+    },
+    "selected": {
+      "definition": "value>P95*1.10;no samples removed",
+      "latency_threshold_ms": 174.59972489625216,
+      "latency_count": 0,
+      "latency_samples": [],
+      "power_threshold_W": 527.131,
+      "power_count": 0,
+      "power_samples": []
+    }
+  },
+  "actual_native_coverage_file": "/workspace/inspark_mixed_b32/artifacts/mixed_b32/selected_native_coverage.json",
+  "selected_deployment": "/workspace/inspark_mixed_b32/artifacts/mixed_b32/selected_deployment.json",
+  "config": "/workspace/inspark_mixed_b32/artifacts/mixed_b32/runtime.yaml",
+  "backup_baseline": "/workspace/inspark_mixed_b32/artifacts/mixed_b32/deployment.json",
+  "selected_deployment_sha256_final_status_only_update": "d1039d9b229cfc71a646a5d24a57d2147f09287cad9ad1cf74a2853f4c4f4179",
+  "publication": "parent_only;not_uploaded_by_worker"
+}
