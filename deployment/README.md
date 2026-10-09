@@ -68,3 +68,5 @@ source deployment/native_env.sh
 公开报告仅包含汇总指标。逐请求记录与验证清单在私有 HF 包中，下载后按原 `deployment/**/history` 路径恢复。
 
 [B64 就绪流水线](ready_pipeline/README.md) 是显式启用的首包实验，默认 C；需要 `on_chunk` 即时发布才能提前交付。它未改变生产 Pool 默认调度。
+
+同目录的历史候选配置用于重建与诊断；运行资产包只包含八档 `*_selected.json` 选择所需的 engine。候选使用 `bundle://` 路径，不表示其 engine 已随包分发。
